@@ -38,9 +38,14 @@ namespace SlaughterHouseLib
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public static string ToFormat2Decimal(this double a)
+        public static string ToFormat2Decimal(this decimal a)
         {
-            return a.ToString("#.##");
+            return String.Format("{0: #,##0.00}", a);
+        }
+
+        public static string ToFormat2Double(this double a)
+        {
+            return String.Format("{0: #,##0.00}", a);
         }
         public static string ToDateFormat(this DateTime a)
         {

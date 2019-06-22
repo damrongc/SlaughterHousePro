@@ -26,17 +26,6 @@ namespace SlaughterHouseServer
         private void Btn_Click(object sender, EventArgs e)
         {
             var btn = (Button)sender;
-            //foreach (Control ctrl in plMenu.Controls)
-            //{
-            //    if (ctrl is Button)
-            //    {
-            //        ctrl.BackColor = System.Drawing.ColorTranslator.FromHtml("#27212A");
-            //    }
-            //}
-
-            //btn.BackColor = System.Drawing.ColorTranslator.FromHtml("#429ADF");
-
-
             switch (btn.Name)
             {
                 case "BtnFarm":
@@ -46,8 +35,6 @@ namespace SlaughterHouseServer
                     AddFormToContainer(new Form_Receive());
                     break;
             }
-
-
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -61,16 +48,12 @@ namespace SlaughterHouseServer
             {
                 var frm = plContainer.Controls[0] as Form;
                 frm.Close();
-                //this.plContainer.Controls.RemoveAt(0);
             }
-
             Form fh = form as Form;
             fh.TopLevel = false;
             fh.AutoScroll = true;
             fh.Dock = DockStyle.Fill;
             fh.FormBorderStyle = FormBorderStyle.None;
-            //fh.Size = this.ClientSize;
-
 
             plContainer.Controls.Add(fh);
 

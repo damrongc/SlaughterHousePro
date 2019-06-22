@@ -131,13 +131,10 @@ namespace SlaughterHouseServer
                 dtpReceiveDate.Enabled = false;
                 BtnSaveAndNew.Visible = false;
             }
-
-
         }
 
         private void LoadFarm()
         {
-
             var coll = FarmController.GetAllFarms();
             cboFarm.DisplayMember = "FarmName";
             cboFarm.ValueMember = "FarmCode";
@@ -146,13 +143,10 @@ namespace SlaughterHouseServer
 
         private void LoadBreeder()
         {
-
             var coll = BreederController.GetAllBreeders();
             cboBreeder.DisplayMember = "BreederName";
             cboBreeder.ValueMember = "BreederCode";
             cboBreeder.DataSource = coll;
-
-
         }
 
         private void BtnSaveAndClose_Click(object sender, EventArgs e)
