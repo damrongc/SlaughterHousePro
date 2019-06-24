@@ -5,9 +5,9 @@ namespace SlaughterHouseLib.Models
     public class ReceiveItem
     {
         public string ReceiveNo { get; set; }
-        //public string QueueNo { get; set; }
+        public string ProductCode { get; set; }
         public int Seq { get; set; }
-        //public Product Product { get; set; }
+
         public string SexFlag { get; set; }
         public int ReceiveQty { get; set; }
         public decimal ReceiveWgh { get; set; }

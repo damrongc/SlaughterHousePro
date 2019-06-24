@@ -22,8 +22,6 @@ namespace SlaughterHouseLib.Models
 
     public static class FarmController
     {
-
-
         public static object GetAllFarms(string keyword)
         {
             try
@@ -79,9 +77,9 @@ namespace SlaughterHouseLib.Models
                                     Address = p.Field<string>("address"),
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
-                                    CreateBy = p.Field<string>("create_by"),
-                                    ModifiedAt = p.Field<DateTime>("modified_at"),
-                                    ModifiedBy = p.Field<string>("modified_by"),
+                                    CreateBy = p.Field<string>("create_by"), 
+                                    ModifiedAt = DateTime.Now != null ? DateTime.Now  : DateTime.Now.AddDays(5),
+                                    ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
                                 }).ToList();
 
                     //GetData(ds.Tables[0]);
@@ -94,7 +92,6 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-
         public static List<Farm> GetAllFarms()
         {
             try
@@ -134,7 +131,6 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-
         public static Farm GetFarm(string farm_code)
         {
             try
@@ -159,7 +155,6 @@ namespace SlaughterHouseLib.Models
                     {
                         return new Farm
                         {
-
                             FarmCode = ds.Tables[0].Rows[0]["farm_code"].ToString(),
                             FarmName = ds.Tables[0].Rows[0]["farm_name"].ToString(),
                             Address = ds.Tables[0].Rows[0]["address"].ToString(),
