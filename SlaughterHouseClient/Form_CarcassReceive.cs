@@ -5,17 +5,16 @@ using System.Windows.Forms;
 
 namespace SlaughterHouseClient
 {
-    public partial class Form_SwineReceive : Form
+    public partial class Form_CarcassReceive : Form
     {
-        private string productCode = "P001";
-        private string sexFlag = "F";
+        private string productCode = "P002";
         private bool isStart = false;
         private Receive receive;
 
         const string CHOOSE_QUEUE = "กรุณาเลือกคิว";
         const string START_WAITING = "กรุณาเริ่มชั่ง";
         const string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
-        public Form_SwineReceive()
+        public Form_CarcassReceive()
         {
             InitializeComponent();
         }
@@ -33,7 +32,7 @@ namespace SlaughterHouseClient
 
         private void btnReceiveNo_Click(object sender, EventArgs e)
         {
-            var frm = new Form_Receive(0);
+            var frm = new Form_Receive(1);
 
             if (frm.ShowDialog() == DialogResult.OK)
             {
@@ -47,49 +46,18 @@ namespace SlaughterHouseClient
             lblMessage.Text = WEIGHT_WAITING;
         }
 
-        private void btnFemale_Click(object sender, EventArgs e)
-        {
-            if (isStart)
-                return;
-            sexFlag = "F";
-            btnFemale.BackColor = System.Drawing.ColorTranslator.FromHtml("#459CDB");
-            btnMale.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
-            btnUndified.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
-        }
-
-        private void btnMale_Click(object sender, EventArgs e)
-        {
-            if (isStart)
-                return;
-            sexFlag = "M";
-            btnFemale.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
-            btnMale.BackColor = System.Drawing.ColorTranslator.FromHtml("#459CDB");
-            btnUndified.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
-
-        }
-
-        private void btnUndified_Click(object sender, EventArgs e)
-        {
-            if (isStart)
-                return;
-            sexFlag = "NA";
-            btnFemale.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
-            btnMale.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
-            btnUndified.BackColor = System.Drawing.ColorTranslator.FromHtml("#459CDB");
-
-        }
 
         private void LoadData(string receiveNo)
         {
-            receive = ReceiveController.GetReceive(receiveNo);
+            receive = ReceiveController.GetReceive(receiveNo, this.productCode);
             lblReceiveNo.Text = receive.ReceiveNo;
             lblFarm.Text = receive.Farm.FarmName;
             lblBreeder.Text = receive.Breeder.BreederName;
             lblTruckNo.Text = receive.TruckNo;
             lblQueueNo.Text = receive.QueueNo.ToString();
-            lblFarmQty.Text = receive.FarmQty.ToString();
-            lblFactoryQty.Text = receive.FactoryQty.ToString();
-            lblFactoryWgh.Text = receive.FactoryWgh.ToFormat2Decimal();
+            lblSwineQty.Text = receive.FarmQty.ToString();
+            lblStockQty.Text = receive.FactoryQty.ToString();
+            lblStockWgh.Text = receive.FactoryWgh.ToFormat2Decimal();
             lblRemainQty.Text = (receive.FarmQty - receive.FactoryQty).ToString();
             lblMessage.Text = START_WAITING;
         }
@@ -98,7 +66,7 @@ namespace SlaughterHouseClient
         {
             try
             {
-                //StockController.InsertStockSwineReceive(receive.ReceiveNo);
+
                 var ret = SaveData();
                 if (ret)
                 {
@@ -121,7 +89,7 @@ namespace SlaughterHouseClient
                 {
                     ReceiveNo = receive.ReceiveNo,
                     ProductCode = this.productCode,
-                    SexFlag = sexFlag,
+                    SexFlag = "",
                     ReceiveQty = 1,
                     ReceiveWgh = lblWeight.Text.ToDecimal(),
                     CreateBy = "Auto"

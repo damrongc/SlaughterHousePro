@@ -55,6 +55,12 @@
     <Compile Include="Form_Receive.Designer.cs">
       <DependentUpon>Form_Receive.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_CarcassReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_CarcassReceive.Designer.cs">
+      <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_SwineReceive.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,9 @@
     <Compile Include="SerialSettings.cs" />
     <EmbeddedResource Include="Form_Receive.resx">
       <DependentUpon>Form_Receive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_CarcassReceive.resx">
+      <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_SwineReceive.resx">
       <DependentUpon>Form_SwineReceive.cs</DependentUpon>

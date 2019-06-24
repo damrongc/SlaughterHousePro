@@ -37,7 +37,8 @@ namespace SlaughterHouseServer
         {
             for (int i = 0; i < gv.Rows.Count; i++)
             {
-                string status = gv.Rows[i].Cells[13].Value.ToString();
+
+                string status = gv.Rows[i].Cells[15].Value.ToString();
                 switch (status)
                 {
                     //case "New":
@@ -45,13 +46,17 @@ namespace SlaughterHouseServer
                     //    gv.Rows[i].Cells[13].Style.BackColor = ColorTranslator.FromHtml("#00A8E6");
 
                     //break;
+                    //case 1:
+                    //    gv.Rows[i].Cells[15].Style.ForeColor = Color.Black;
+                    //    gv.Rows[i].Cells[15].Style.BackColor = Color.Yellow;
+                    //    break;
                     case "In Process":
-                        gv.Rows[i].Cells[13].Style.ForeColor = Color.Black;
-                        gv.Rows[i].Cells[13].Style.BackColor = Color.Yellow;
+                        gv.Rows[i].Cells[15].Style.ForeColor = Color.Black;
+                        gv.Rows[i].Cells[15].Style.BackColor = Color.Yellow;
                         break;
-                    case "Finish":
-                        gv.Rows[i].Cells[13].Style.ForeColor = Color.White;
-                        gv.Rows[i].Cells[13].Style.BackColor = Color.Lime;
+                    case "Close":
+                        gv.Rows[i].Cells[15].Style.ForeColor = Color.White;
+                        gv.Rows[i].Cells[15].Style.BackColor = ColorTranslator.FromHtml("#219653");
                         break;
 
                 }
@@ -68,15 +73,30 @@ namespace SlaughterHouseServer
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-                    string receiveNo = gv.Rows[e.RowIndex].Cells[1].Value.ToString();
-                    var frm = new Form_ReceiveAddEdit
+                    string receiveNo = gv.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                    switch (senderGrid.Columns[e.ColumnIndex].Name)
                     {
-                        receiveNo = receiveNo
-                    };
-                    if (frm.ShowDialog() == DialogResult.OK)
-                    {
-                        LoadReceive();
+
+                        case "Edit":
+                            var frm = new Form_ReceiveAddEdit
+                            {
+                                receiveNo = receiveNo
+                            };
+                            if (frm.ShowDialog() == DialogResult.OK)
+                            {
+                                LoadReceive();
+                            }
+                            break;
+                        case "Print":
+
+                            break;
+                        case "Close":
+                            StockController.InsertStockSwineReceive(receiveNo);
+                            MessageBox.Show("ปิดคิว เรียบร้อยแล้ว", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            break;
                     }
+
                 }
             }
             catch (Exception ex)
@@ -120,43 +140,30 @@ namespace SlaughterHouseServer
             var coll = ReceiveController.GetAllReceives(dtpReceiveDate.Value, cboFarm.SelectedValue.ToString());
             gv.DataSource = coll;
 
-            //ReceiveNo = p.Field<string>("receive_no"),
-            //ReceiveDate = p.Field<DateTime>("receive_date"),
-            //TransportDocNo = p.Field<string>("transport_doc_no"),
-            //TruckNo = p.Field<string>("truck_no"),
-            //FarmName = p.Field<string>("farm_name"),
-            //CoopNo = p.Field<string>("coop_no"),
-            //QueueNo = p.Field<int>("queue_no"),
-            //BreederName = p.Field<string>("breeder_name"),
-            //FarmQty = p.Field<int>("farm_qty"),
-            //FarmWgh = p.Field<decimal>("farm_wgh"),
-            //ReceiveFlag = p.Field<int>("receive_flag"),
-            //CreateAt = p.Field<DateTime>("create_at"),
-
-            gv.Columns[1].HeaderText = "เลขที่ใบรับ";
-            gv.Columns[2].HeaderText = "วันที่รับ";
-            gv.Columns[3].HeaderText = "เลขที่ใบส่ง";
-            gv.Columns[4].HeaderText = "ทะเบียนรถ";
-            gv.Columns[5].HeaderText = "ฟาร์ม";
-            gv.Columns[6].HeaderText = "เล้า";
-            gv.Columns[7].HeaderText = "คิวที่";
-            gv.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            gv.Columns[8].HeaderText = "ประเภท";
-
-            gv.Columns[9].HeaderText = "จำนวนฟาร์ม";
+            gv.Columns[3].HeaderText = "เลขที่ใบรับ";
+            gv.Columns[4].HeaderText = "วันที่รับ";
+            gv.Columns[5].HeaderText = "เลขที่ใบส่ง";
+            gv.Columns[6].HeaderText = "ทะเบียนรถ";
+            gv.Columns[7].HeaderText = "ฟาร์ม";
+            gv.Columns[8].HeaderText = "เล้า";
+            gv.Columns[9].HeaderText = "คิวที่";
             gv.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[10].HeaderText = "น้ำหนักฟาร์ม";
-            gv.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            gv.Columns[11].HeaderText = "จำนวนรับ";
+            gv.Columns[10].HeaderText = "ประเภท";
+
+            gv.Columns[11].HeaderText = "จำนวนฟาร์ม";
             gv.Columns[11].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[12].HeaderText = "น้ำหนักรับ";
+            gv.Columns[12].HeaderText = "น้ำหนักฟาร์ม";
             gv.Columns[12].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+            gv.Columns[13].HeaderText = "จำนวนรับ";
+            gv.Columns[13].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[14].HeaderText = "น้ำหนักรับ";
+            gv.Columns[14].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            gv.Columns[13].HeaderText = "สถานะ";
-            gv.Columns[14].HeaderText = "วันเวลาสร้าง";
+
+            gv.Columns[15].HeaderText = "สถานะ";
+            gv.Columns[16].HeaderText = "วันเวลาสร้าง";
         }
     }
 }

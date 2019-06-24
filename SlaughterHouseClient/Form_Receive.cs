@@ -2,16 +2,19 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-
 namespace SlaughterHouseClient
 {
     public partial class Form_Receive : Form
     {
+        int receiveFlag { get; set; }
         public string receiveNo { get; set; }
-        public Form_Receive()
+        public Form_Receive(int _receiveFlag)
         {
             InitializeComponent();
             Load += Form_Receive_Load;
+
+            this.receiveFlag = _receiveFlag;
+
             UserSettingsComponent();
 
         }
@@ -61,7 +64,13 @@ namespace SlaughterHouseClient
         private void LoadData()
         {
             //var farmCtrl = new FarmController();
-            var coll = ReceiveController.GetAllReceives();
+            var coll = ReceiveController.GetAllReceives(this.receiveFlag);
+            //var coll =from p in receives
+            //          select new
+            //          {
+
+            //          }
+
             gv.DataSource = coll;
 
             gv.Columns[1].HeaderText = "เลขที่ใบรับ";
@@ -75,9 +84,9 @@ namespace SlaughterHouseClient
 
             gv.Columns[8].HeaderText = "ประเภท";
 
-            gv.Columns[9].HeaderText = "จำนวนฟาร์ม";
+            gv.Columns[9].HeaderText = "จำนวน";
             gv.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[10].HeaderText = "น้ำหนักฟาร์ม";
+            gv.Columns[10].HeaderText = "น้ำหนัก";
             gv.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             //gv.Columns[11].HeaderText = "จำนวนรับ";

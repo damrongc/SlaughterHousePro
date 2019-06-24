@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseClient
 {
-    partial class Form_SwineReceive
+    partial class Form_CarcassReceive
     {
         /// <summary>
         /// Required designer variable.
@@ -28,15 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_SwineReceive));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_CarcassReceive));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblCurrentDatetime = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnFemale = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnUndified = new System.Windows.Forms.Button();
-            this.btnMale = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
             this.lblWeight = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,13 +48,13 @@
             this.lblQueueNo = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
-            this.lblFarmQty = new System.Windows.Forms.Label();
+            this.lblSwineQty = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.lblRemainQty = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.lblFactoryQty = new System.Windows.Forms.Label();
+            this.lblStockQty = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.lblFactoryWgh = new System.Windows.Forms.Label();
+            this.lblStockWgh = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
@@ -117,53 +113,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 41);
+            this.label1.Size = new System.Drawing.Size(114, 41);
             this.label1.TabIndex = 0;
-            this.label1.Text = "รับหมูเป็น";
-            // 
-            // btnFemale
-            // 
-            this.btnFemale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
-            this.btnFemale.Font = new System.Drawing.Font("Kanit", 16F);
-            this.btnFemale.Location = new System.Drawing.Point(415, 370);
-            this.btnFemale.Name = "btnFemale";
-            this.btnFemale.Size = new System.Drawing.Size(146, 43);
-            this.btnFemale.TabIndex = 1;
-            this.btnFemale.Text = "เมีย";
-            this.btnFemale.UseVisualStyleBackColor = false;
-            this.btnFemale.Click += new System.EventHandler(this.btnFemale_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label2.Location = new System.Drawing.Point(409, 334);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 33);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "เพศ";
-            // 
-            // btnUndified
-            // 
-            this.btnUndified.Font = new System.Drawing.Font("Kanit", 16F);
-            this.btnUndified.Location = new System.Drawing.Point(719, 370);
-            this.btnUndified.Name = "btnUndified";
-            this.btnUndified.Size = new System.Drawing.Size(146, 43);
-            this.btnUndified.TabIndex = 3;
-            this.btnUndified.Text = "ไม่ระบุ";
-            this.btnUndified.UseVisualStyleBackColor = true;
-            this.btnUndified.Click += new System.EventHandler(this.btnUndified_Click);
-            // 
-            // btnMale
-            // 
-            this.btnMale.Font = new System.Drawing.Font("Kanit", 16F);
-            this.btnMale.Location = new System.Drawing.Point(567, 370);
-            this.btnMale.Name = "btnMale";
-            this.btnMale.Size = new System.Drawing.Size(146, 43);
-            this.btnMale.TabIndex = 4;
-            this.btnMale.Text = "ผู้";
-            this.btnMale.UseVisualStyleBackColor = true;
-            this.btnMale.Click += new System.EventHandler(this.btnMale_Click);
+            this.label1.Text = "รับหมูซีก";
             // 
             // dragControl1
             // 
@@ -332,19 +284,19 @@
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // lblFarmQty
+            // lblSwineQty
             // 
-            this.lblFarmQty.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblFarmQty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblFarmQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblFarmQty.Font = new System.Drawing.Font("Kanit", 50F);
-            this.lblFarmQty.ForeColor = System.Drawing.Color.Black;
-            this.lblFarmQty.Location = new System.Drawing.Point(19, 521);
-            this.lblFarmQty.Name = "lblFarmQty";
-            this.lblFarmQty.Size = new System.Drawing.Size(175, 97);
-            this.lblFarmQty.TabIndex = 20;
-            this.lblFarmQty.Text = "0";
-            this.lblFarmQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblSwineQty.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblSwineQty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSwineQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblSwineQty.Font = new System.Drawing.Font("Kanit", 50F);
+            this.lblSwineQty.ForeColor = System.Drawing.Color.Black;
+            this.lblSwineQty.Location = new System.Drawing.Point(19, 521);
+            this.lblSwineQty.Name = "lblSwineQty";
+            this.lblSwineQty.Size = new System.Drawing.Size(175, 97);
+            this.lblSwineQty.TabIndex = 20;
+            this.lblSwineQty.Text = "0";
+            this.lblSwineQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label16
             // 
@@ -352,9 +304,9 @@
             this.label16.Font = new System.Drawing.Font("Kanit", 16F);
             this.label16.Location = new System.Drawing.Point(13, 488);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(147, 33);
+            this.label16.Size = new System.Drawing.Size(177, 33);
             this.label16.TabIndex = 19;
-            this.label16.Text = "จำนวน (ฟาร์ม)";
+            this.label16.Text = "จำนวน (เป้าหมาย)";
             // 
             // lblRemainQty
             // 
@@ -380,19 +332,19 @@
             this.label18.TabIndex = 21;
             this.label18.Text = "จำนวน (รอชั่ง)";
             // 
-            // lblFactoryQty
+            // lblStockQty
             // 
-            this.lblFactoryQty.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblFactoryQty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblFactoryQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblFactoryQty.Font = new System.Drawing.Font("Kanit", 50F);
-            this.lblFactoryQty.ForeColor = System.Drawing.Color.Black;
-            this.lblFactoryQty.Location = new System.Drawing.Point(407, 521);
-            this.lblFactoryQty.Name = "lblFactoryQty";
-            this.lblFactoryQty.Size = new System.Drawing.Size(175, 97);
-            this.lblFactoryQty.TabIndex = 24;
-            this.lblFactoryQty.Text = "0";
-            this.lblFactoryQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblStockQty.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblStockQty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblStockQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblStockQty.Font = new System.Drawing.Font("Kanit", 50F);
+            this.lblStockQty.ForeColor = System.Drawing.Color.Black;
+            this.lblStockQty.Location = new System.Drawing.Point(407, 521);
+            this.lblStockQty.Name = "lblStockQty";
+            this.lblStockQty.Size = new System.Drawing.Size(175, 97);
+            this.lblStockQty.TabIndex = 24;
+            this.lblStockQty.Text = "0";
+            this.lblStockQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label20
             // 
@@ -404,19 +356,19 @@
             this.label20.TabIndex = 23;
             this.label20.Text = "จำนวน (ชั่งแล้ว)";
             // 
-            // lblFactoryWgh
+            // lblStockWgh
             // 
-            this.lblFactoryWgh.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblFactoryWgh.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblFactoryWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblFactoryWgh.Font = new System.Drawing.Font("Kanit", 50F);
-            this.lblFactoryWgh.ForeColor = System.Drawing.Color.Black;
-            this.lblFactoryWgh.Location = new System.Drawing.Point(588, 521);
-            this.lblFactoryWgh.Name = "lblFactoryWgh";
-            this.lblFactoryWgh.Size = new System.Drawing.Size(332, 97);
-            this.lblFactoryWgh.TabIndex = 26;
-            this.lblFactoryWgh.Text = "0.00";
-            this.lblFactoryWgh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblStockWgh.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblStockWgh.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblStockWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblStockWgh.Font = new System.Drawing.Font("Kanit", 50F);
+            this.lblStockWgh.ForeColor = System.Drawing.Color.Black;
+            this.lblStockWgh.Location = new System.Drawing.Point(588, 521);
+            this.lblStockWgh.Name = "lblStockWgh";
+            this.lblStockWgh.Size = new System.Drawing.Size(332, 97);
+            this.lblStockWgh.TabIndex = 26;
+            this.lblStockWgh.Text = "0.00";
+            this.lblStockWgh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label22
             // 
@@ -456,20 +408,20 @@
             this.lblMessage.Text = "Message";
             this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Form_SwineReceive
+            // Form_CarcassReceive
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(934, 681);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.btnStop);
-            this.Controls.Add(this.lblFactoryWgh);
+            this.Controls.Add(this.lblStockWgh);
             this.Controls.Add(this.label22);
-            this.Controls.Add(this.lblFactoryQty);
+            this.Controls.Add(this.lblStockQty);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.lblRemainQty);
             this.Controls.Add(this.label18);
-            this.Controls.Add(this.lblFarmQty);
+            this.Controls.Add(this.lblSwineQty);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblQueueNo);
@@ -485,16 +437,12 @@
             this.Controls.Add(this.btnReceiveNo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblWeight);
-            this.Controls.Add(this.btnMale);
-            this.Controls.Add(this.btnUndified);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnFemale);
             this.Controls.Add(this.panelHeader);
             this.Font = new System.Drawing.Font("Kanit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_SwineReceive";
+            this.Name = "Form_CarcassReceive";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รับหมูเป็น";
             this.Load += new System.EventHandler(this.Form_SwineReceive_Load);
@@ -509,10 +457,6 @@
 
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnFemale;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnUndified;
-        private System.Windows.Forms.Button btnMale;
         private DragControl dragControl1;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblWeight;
@@ -529,13 +473,13 @@
         private System.Windows.Forms.Label lblQueueNo;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Label lblFarmQty;
+        private System.Windows.Forms.Label lblSwineQty;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label lblRemainQty;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label lblFactoryQty;
+        private System.Windows.Forms.Label lblStockQty;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label lblFactoryWgh;
+        private System.Windows.Forms.Label lblStockWgh;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lblCurrentDatetime;
         private System.Windows.Forms.Button btnStop;
