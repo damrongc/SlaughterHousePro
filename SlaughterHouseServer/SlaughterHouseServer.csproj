@@ -63,17 +63,17 @@
     <Compile Include="Form_CustomerAddEdit.Designer.cs">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Receive.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Receive.Designer.cs">
-      <DependentUpon>Form_Receive.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form_Farm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_Farm.Designer.cs">
       <DependentUpon>Form_Farm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Receive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Receive.Designer.cs">
+      <DependentUpon>Form_Receive.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_FarmAddEdit.cs">
       <SubType>Form</SubType>
@@ -101,11 +101,11 @@
     <EmbeddedResource Include="Form_CustomerAddEdit.resx">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Receive.resx">
-      <DependentUpon>Form_Receive.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form_Farm.resx">
       <DependentUpon>Form_Farm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Receive.resx">
+      <DependentUpon>Form_Receive.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_FarmAddEdit.resx">
       <DependentUpon>Form_FarmAddEdit.cs</DependentUpon>

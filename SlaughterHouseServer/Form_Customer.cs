@@ -15,7 +15,6 @@ namespace SlaughterHouseServer
 
         private void UserSettingsComponent()
         {
-
             BtnAdd.Click += BtnAdd_Click;
             BtnSearch.Click += BtnSearch_Click;
             gv.CellContentClick += Gv_CellContentClick;
@@ -27,9 +26,6 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
-
-
-
             Populate();
         }
 
@@ -41,10 +37,10 @@ namespace SlaughterHouseServer
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-                    string farmCode = gv.Rows[e.RowIndex].Cells[1].Value.ToString();
-                    var frm = new Form_FarmAddEdit
+                    string customerCode = gv.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    var frm = new Form_CustomerAddEdit 
                     {
-                        farmCode = farmCode
+                        customerCode = customerCode
                     };
                     if (frm.ShowDialog() == DialogResult.OK)
                     {
@@ -66,9 +62,9 @@ namespace SlaughterHouseServer
 
         private void BtnAdd_Click(object sender, System.EventArgs e)
         {
-            var frm = new Form_FarmAddEdit
+            var frm = new Form_CustomerAddEdit 
             {
-                farmCode = ""
+                customerCode = ""
             };
             if (frm.ShowDialog() == DialogResult.OK)
             {
@@ -78,7 +74,6 @@ namespace SlaughterHouseServer
 
         private void Populate()
         {
-
             var coll = CustomerController.GetAllCustomers(TxtFilter.Text.Trim());
             gv.DataSource = coll;
 

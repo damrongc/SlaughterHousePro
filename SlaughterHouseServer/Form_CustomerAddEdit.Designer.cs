@@ -38,6 +38,8 @@
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.BtnSave = new System.Windows.Forms.Button();
             this.BtnSaveAndNew = new System.Windows.Forms.Button();
+            this.txtShipTo = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -107,7 +109,7 @@
             this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
             this.BtnSave.FlatAppearance.BorderSize = 0;
             this.BtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSave.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -124,7 +126,7 @@
             this.BtnSaveAndNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(160)))), ((int)(((byte)(93)))));
             this.BtnSaveAndNew.FlatAppearance.BorderSize = 0;
             this.BtnSaveAndNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSaveAndNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSaveAndNew.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -137,10 +139,29 @@
             this.BtnSaveAndNew.UseVisualStyleBackColor = false;
             this.BtnSaveAndNew.Click += new System.EventHandler(this.BtnSaveAndNew_Click);
             // 
+            // txtShipTo
+            // 
+            this.txtShipTo.Location = new System.Drawing.Point(145, 251);
+            this.txtShipTo.MaxLength = 10;
+            this.txtShipTo.Name = "txtShipTo";
+            this.txtShipTo.Size = new System.Drawing.Size(215, 29);
+            this.txtShipTo.TabIndex = 27;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(50, 254);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(119, 24);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "สถานที่ส่งสินค้า";
+            // 
             // Form_CustomerAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(705, 506);
+            this.Controls.Add(this.txtShipTo);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.BtnSaveAndNew);
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.chkActive);
@@ -150,7 +171,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtCustomerCode);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -173,5 +194,7 @@
         private System.Windows.Forms.CheckBox chkActive;
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.Button BtnSaveAndNew;
+        private System.Windows.Forms.TextBox txtShipTo;
+        private System.Windows.Forms.Label label4;
     }
 }
