@@ -84,11 +84,11 @@ namespace SlaughterHouseServer
 
             gv.Columns[1].HeaderText = "รหัสหน่วย";
             gv.Columns[2].HeaderText = "ชื่อหน่วย"; 
-            gv.Columns[4].HeaderText = "ใช้งาน";
-            gv.Columns[5].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[6].HeaderText = "ผู้สร้าง";
-            gv.Columns[7].HeaderText = "วันเวลาแก้ไข";
-            gv.Columns[8].HeaderText = "ผู้แก้ไข";
+            gv.Columns[3].HeaderText = "ใช้งาน";
+            gv.Columns[4].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[5].HeaderText = "ผู้สร้าง";
+            gv.Columns[6].HeaderText = "วันเวลาแก้ไข";
+            gv.Columns[7].HeaderText = "ผู้แก้ไข";
         }
     }
 }

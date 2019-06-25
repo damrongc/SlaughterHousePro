@@ -11,8 +11,8 @@ namespace SlaughterHouseServer
         {
             InitializeComponent();
 
-            txtUnitCode.KeyDown += TxtUnitCode_KeyDown; 
-            //txtAddress.KeyDown += TxtAddress_KeyDown;
+            txtUnitCode.KeyDown += TxtUnitCode_KeyDown;
+            txtUnitName.KeyDown += TxtUnitName_KeyDown;
             this.Load += Form_UnitAddEdit_Load;
             this.Shown += Form_UnitAddEdit_Shown;
         }
@@ -43,7 +43,7 @@ namespace SlaughterHouseServer
             }
         }
 
-        private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
+        private void TxtUnitName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -67,14 +67,13 @@ namespace SlaughterHouseServer
                 {
                     var unit = new Unit
                     {
-                        UnitCode = Convert.ToInt32(txtUnitCode.Text),
+                        //UnitCode = Convert.ToInt32(txtUnitCode.Text),
                         UnitName = txtUnitName.Text.Trim(),
                         Active = chkActive.Checked,
                         CreateBy = "system",
                     };
                     UnitController.Insert(unit);
                     MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 }
                 else
                 {
@@ -107,7 +106,7 @@ namespace SlaughterHouseServer
 
                 var unit = new Unit
                 {
-                    UnitCode = Convert.ToInt32(txtUnitCode.Text),
+                    //UnitCode = Convert.ToInt32(txtUnitCode.Text),
                     UnitName = txtUnitName.Text.Trim(),
                     Active = chkActive.Checked,
                     CreateBy = "system",
@@ -127,6 +126,15 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
- 
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form_UnitAddEdit_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

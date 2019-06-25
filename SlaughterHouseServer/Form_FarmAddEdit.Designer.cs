@@ -43,9 +43,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 25);
+            this.label1.Location = new System.Drawing.Point(54, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 29);
+            this.label1.Size = new System.Drawing.Size(78, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "รหัสฟาร์ม";
             // 
@@ -54,22 +54,22 @@
             this.txtFarmCode.Location = new System.Drawing.Point(145, 22);
             this.txtFarmCode.MaxLength = 10;
             this.txtFarmCode.Name = "txtFarmCode";
-            this.txtFarmCode.Size = new System.Drawing.Size(215, 36);
+            this.txtFarmCode.Size = new System.Drawing.Size(215, 29);
             this.txtFarmCode.TabIndex = 1;
             // 
             // txtFarmName
             // 
             this.txtFarmName.Location = new System.Drawing.Point(145, 64);
             this.txtFarmName.Name = "txtFarmName";
-            this.txtFarmName.Size = new System.Drawing.Size(529, 36);
+            this.txtFarmName.Size = new System.Drawing.Size(529, 29);
             this.txtFarmName.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(61, 67);
+            this.label2.Location = new System.Drawing.Point(63, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 29);
+            this.label2.Size = new System.Drawing.Size(69, 24);
             this.label2.TabIndex = 2;
             this.label2.Text = "ชื่อฟาร์ม";
             // 
@@ -84,9 +84,9 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(93, 106);
+            this.label3.Location = new System.Drawing.Point(91, 106);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 29);
+            this.label3.Size = new System.Drawing.Size(41, 24);
             this.label3.TabIndex = 4;
             this.label3.Text = "ที่อยู่";
             // 
@@ -97,7 +97,7 @@
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkActive.Location = new System.Drawing.Point(145, 245);
             this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(79, 33);
+            this.chkActive.Size = new System.Drawing.Size(76, 28);
             this.chkActive.TabIndex = 6;
             this.chkActive.Text = "ใช้งาน";
             this.chkActive.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
             this.BtnSave.FlatAppearance.BorderSize = 0;
             this.BtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSave.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -124,7 +124,7 @@
             this.BtnSaveAndNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(160)))), ((int)(((byte)(93)))));
             this.BtnSaveAndNew.FlatAppearance.BorderSize = 0;
             this.BtnSaveAndNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSaveAndNew.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSaveAndNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -150,7 +150,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtFarmCode);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

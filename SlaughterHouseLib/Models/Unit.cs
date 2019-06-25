@@ -54,7 +54,7 @@ namespace SlaughterHouseLib.Models
                     var coll = (from p in ds.Tables[0].AsEnumerable()
                                 select new
                                 {
-                                    UnitCode = p.Field<string>("Unit_code"),
+                                    UnitCode = p.Field<Int32>("Unit_code"),
                                     UnitName = p.Field<string>("Unit_name"),
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
@@ -114,7 +114,7 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("select * from Unit");
+                    sb.Append("select * from unit_of_measurement");
                     sb.Append(" where Unit_code = @Unit_code");
 
                     var cmd = new MySqlCommand(sb.ToString(), conn);
@@ -155,16 +155,16 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sql = @"INSERT INTO unit_of_measurement
-                                (Unit_code,
+                                (
                                 Unit_name, 
                                 active,
                                 create_by)
-                                VALUES(@Unit_code,
+                                VALUES(
                                 @Unit_name, 
                                 @active,
                                 @create_by)";
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("Unit_code", Unit.UnitCode);
+                    //cmd.Parameters.AddWithValue("Unit_code", Unit.UnitCode);
                     cmd.Parameters.AddWithValue("Unit_name", Unit.UnitName); 
                     cmd.Parameters.AddWithValue("active", Unit.Active);
                     cmd.Parameters.AddWithValue("create_by", Unit.CreateBy);

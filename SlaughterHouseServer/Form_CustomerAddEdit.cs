@@ -13,6 +13,10 @@ namespace SlaughterHouseServer
             txtCustomerCode.KeyDown += TxtCustomerCode_KeyDown;
             txtCustomerName.KeyDown += TxtCustomerName_KeyDown;
             //txtAddress.KeyDown += TxtAddress_KeyDown;
+            txtShipTo.KeyDown += TxtShipTo_KeyDown;
+            txtTaxId.KeyDown += TxtTaxId_KeyDown;
+            txtContactNo.KeyDown += TxtContactNo_KeyDown;
+
             this.Load += Form_CustomerAddEdit_Load;
             this.Shown += Form_CustomerAddEdit_Shown;
         }
@@ -43,12 +47,33 @@ namespace SlaughterHouseServer
                 }
             }
         }
+        private void TxtContactNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnSaveAndNew.Focus();
+            }
+        }
+        private void TxtTaxId_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtContactNo.Focus();
+            }
+        }
+        private void TxtShipTo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtTaxId.Focus();
+            }
+        }
 
         private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                BtnSaveAndNew.Focus();
+                txtShipTo.Focus();
             }
         }
 
@@ -79,6 +104,9 @@ namespace SlaughterHouseServer
                         CustomerCode = txtCustomerCode.Text.Trim(),
                         CustomerName = txtCustomerName.Text.Trim(),
                         Address = txtAddress.Text.Trim(),
+                        ShipTo = txtShipTo.Text.Trim(),
+                        TaxId = txtTaxId.Text.Trim(),
+                        ContactNo = txtContactNo.Text.Trim(),
                         Active = chkActive.Checked,
                         CreateBy = "system",
                     };
@@ -93,6 +121,9 @@ namespace SlaughterHouseServer
                         CustomerCode = txtCustomerCode.Text.Trim(),
                         CustomerName = txtCustomerName.Text.Trim(),
                         Address = txtAddress.Text.Trim(),
+                        ShipTo = txtShipTo.Text.Trim(),
+                        TaxId = txtTaxId.Text.Trim(),
+                        ContactNo = txtContactNo.Text.Trim(),
                         Active = chkActive.Checked,
                         ModifiedBy = "system",
                     };
@@ -121,6 +152,9 @@ namespace SlaughterHouseServer
                     CustomerCode = txtCustomerCode.Text.Trim(),
                     CustomerName = txtCustomerName.Text.Trim(),
                     Address = txtAddress.Text.Trim(),
+                    ShipTo = txtShipTo.Text.Trim(),
+                    TaxId = txtTaxId.Text.Trim(),
+                    ContactNo = txtContactNo.Text.Trim(),
                     Active = chkActive.Checked,
                     CreateBy = "system",
                 };
@@ -131,6 +165,9 @@ namespace SlaughterHouseServer
                 txtCustomerCode.Focus();
                 txtCustomerName.Text = "";
                 txtAddress.Text = "";
+                txtShipTo.Text = "";
+                txtTaxId.Text = "";
+                txtContactNo.Text = "";
                 chkActive.Checked = true;
 
             }
@@ -141,6 +178,29 @@ namespace SlaughterHouseServer
             }
         }
 
+        private void label2_Click(object sender, System.EventArgs e)
+        {
 
+        }
+
+        private void label3_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void chkActive_CheckedChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void txtContactNo_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
