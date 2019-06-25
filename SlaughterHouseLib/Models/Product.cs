@@ -71,6 +71,9 @@ namespace SlaughterHouseLib.Models
                                     UnitWghName = p.Field<string>("unit_of_wgh"),
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
+                                    CreateBy = p.Field<string>("create_by"),
+                                    ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
+                                    ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
                                 }).ToList();
 
                     return coll;
@@ -146,7 +149,6 @@ namespace SlaughterHouseLib.Models
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
