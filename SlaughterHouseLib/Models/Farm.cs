@@ -78,7 +78,7 @@ namespace SlaughterHouseLib.Models
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"), 
-                                    ModifiedAt = DateTime.Now != null ? DateTime.Now  : DateTime.Now.AddDays(5),
+                                    ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
                                     ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
                                 }).ToList();
 
@@ -255,9 +255,6 @@ namespace SlaughterHouseLib.Models
 
         //    return coll;
         //}
-
-
-
-
+ 
     }
 }
