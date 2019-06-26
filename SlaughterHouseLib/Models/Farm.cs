@@ -78,7 +78,7 @@ namespace SlaughterHouseLib.Models
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
-                                    ModifiedAt = p.Field<DateTime?>("modified_at") == null ? null : p.Field<DateTime?>("modified_at"),
+                                    ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
                                     ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
                                 }).ToList();
 
@@ -96,7 +96,6 @@ namespace SlaughterHouseLib.Models
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -108,8 +107,6 @@ namespace SlaughterHouseLib.Models
 
                     var ds = new DataSet();
                     da.Fill(ds);
-
-
 
                     var farms = new List<Farm>();
                     foreach (DataRow row in ds.Tables[0].Rows)
@@ -127,7 +124,6 @@ namespace SlaughterHouseLib.Models
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -135,7 +131,6 @@ namespace SlaughterHouseLib.Models
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -178,7 +173,6 @@ namespace SlaughterHouseLib.Models
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -205,7 +199,6 @@ namespace SlaughterHouseLib.Models
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -235,7 +228,6 @@ namespace SlaughterHouseLib.Models
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -255,9 +247,6 @@ namespace SlaughterHouseLib.Models
 
         //    return coll;
         //}
-
-
-
 
     }
 }
