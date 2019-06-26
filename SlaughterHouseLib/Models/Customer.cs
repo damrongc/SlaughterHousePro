@@ -172,11 +172,11 @@ namespace SlaughterHouseLib.Models
                                 INTO customer (
                                     customer_code, customer_name, address, 
                                     ship_to, tax_id, contact_no, 
-                                    active, create_at, create_by 
+                                    active, create_by 
                                 )
                                 VALUES (@customer_code, @customer_name, @address, 
                                     @ship_to, @tax_id, @contact_no, 
-                                    @active, @create_at, @create_by )";
+                                    @active, @create_by )";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customer.CustomerCode);
                     cmd.Parameters.AddWithValue("customer_name", customer.CustomerName);
