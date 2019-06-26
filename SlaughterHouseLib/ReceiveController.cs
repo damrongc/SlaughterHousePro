@@ -446,47 +446,6 @@ namespace SlaughterHouseLib
             }
         }
 
-        //public static bool Update(Receive receive)
-        //{
-        //    try
-        //    {
-        //        using (var conn = new MySqlConnection(Globals.CONN_STR))
-        //        {
-        //            conn.Open();
-        //            var sql = @"UPDATE receives SET 
-        //                        transport_doc_no=@transport_doc_no,
-        //                        truck_no=@truck_no,
-        //                        farm_code=@farm_code,
-        //                        coop_no=@coop_no,
-        //                        breeder_code=@breeder_code,
-        //                        farm_qty=@farm_qty,
-        //                        farm_wgh=@farm_wgh,
-        //                        receive_flag=@receive_flag,
-        //                        modified_at=CURRENT_TIMESTAMP,
-        //                        modified_by=@modified_by
-        //                        WHERE receive_no=@receive_no";
-        //            var cmd = new MySqlCommand(sql, conn);
-        //            cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
-        //            cmd.Parameters.AddWithValue("transport_doc_no", receive.TransportDocNo);
-        //            cmd.Parameters.AddWithValue("truck_no", receive.TruckNo);
-        //            cmd.Parameters.AddWithValue("farm_code", receive.Farm.FarmCode);
-        //            cmd.Parameters.AddWithValue("coop_no", receive.CoopNo);
-        //            cmd.Parameters.AddWithValue("breeder_code", receive.Breeder.BreederCode);
-        //            cmd.Parameters.AddWithValue("farm_qty", receive.FarmQty);
-        //            cmd.Parameters.AddWithValue("farm_wgh", receive.FarmWgh);
-        //            cmd.Parameters.AddWithValue("receive_flag", receive.ReceiveFlag);
-        //            cmd.Parameters.AddWithValue("modified_by", receive.ModifiedBy);
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //        return true;
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-
         public static bool Delete(string receiveNo)
         {
             //MySqlTransaction tr = null;

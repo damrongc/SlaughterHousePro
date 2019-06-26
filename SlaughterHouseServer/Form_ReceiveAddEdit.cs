@@ -32,7 +32,6 @@ namespace SlaughterHouseServer
         {
             LoadFarm();
             LoadBreeder();
-
             LoadData();
         }
         private void Form_Shown(object sender, EventArgs e)

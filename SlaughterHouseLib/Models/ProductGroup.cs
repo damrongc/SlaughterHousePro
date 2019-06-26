@@ -1,8 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+
 
 namespace SlaughterHouseLib.Models
 {
@@ -18,10 +20,10 @@ namespace SlaughterHouseLib.Models
 
     }
 
-    public class ProductGroupController
+    public static class ProductGroupController
     {
 
-        public object GetAllProudctGroups(string keyword)
+        public static object GetAllProudctGroups(string keyword)
         {
             try
             {
@@ -58,6 +60,9 @@ namespace SlaughterHouseLib.Models
                                     ProductGroupName = p.Field<string>("product_group_name"),
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
+                                    CreateBy = p.Field<string>("create_by"),
+                                    ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
+                                    ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
                                 }).ToList();
 
                     return coll;
@@ -69,7 +74,42 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public ProductGroup GetProudctGroup(string product_group_code)
+        public static List<ProductGroup> GetAllProudctGroups()
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sb = new StringBuilder();
+                    sb.Append("SELECT * FROM product_group WHERE active=1");
+                    sb.Append(" ORDER BY product_group_code ASC");
+                    var cmd = new MySqlCommand(sb.ToString(), conn);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    var productgroups = new List<ProductGroup>();
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        productgroups.Add(new ProductGroup
+                        {
+                            ProductGroupCode = Convert.ToInt32(row["product_group_code"]),
+                            ProductGroupName = row["product_group_name"].ToString()
+
+                        });
+                    }
+
+                    return productgroups;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static ProductGroup GetProductGroup(string product_group_code)
         {
             try
             {
@@ -93,7 +133,6 @@ namespace SlaughterHouseLib.Models
                     {
                         return new ProductGroup
                         {
-
                             ProductGroupCode = (int)ds.Tables[0].Rows[0]["product_group_code"],
                             ProductGroupName = ds.Tables[0].Rows[0]["product_group_name"].ToString(),
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
@@ -108,11 +147,10 @@ namespace SlaughterHouseLib.Models
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
-        public bool Insert(ProductGroup productGroup)
+        public static bool Insert(ProductGroup productGroup)
         {
             try
             {
@@ -144,7 +182,7 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public bool Update(ProductGroup productGroup)
+        public static bool Update(ProductGroup productGroup)
         {
             try
             {
@@ -172,11 +210,6 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-
-
-
-
-
     }
 
 }

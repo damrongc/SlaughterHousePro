@@ -34,6 +34,12 @@ namespace SlaughterHouseServer
                 case "BtnCustomer":
                     AddFormToContainer(new Form_Customer());
                     break;
+                case "BtnProduct":
+                    AddFormToContainer(new Form_Product());
+                    break;
+                case "BtnProductGroup":
+                    AddFormToContainer(new Form_ProductGroup());
+                    break;
                 case "BtnUnit":
                     AddFormToContainer(new Form_Unit());
                     break;

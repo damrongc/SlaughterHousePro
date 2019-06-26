@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -33,11 +34,11 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("select a.product_code,a.product_name,a.active");
-                    sb.Append(" ,a.create_at");
+                    sb.Append("select a.product_code,a.product_name");
                     sb.Append(" ,b.product_group_name");
-                    sb.Append(" ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_qty) unit_of_qty");
-                    sb.Append(" ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_wgh) unit_of_wgh");
+                    sb.Append(" ,unit_of_qty ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_qty) as unit_name_of_qty");
+                    sb.Append(" ,unit_of_weight ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_weight) as unit_name_of_wgh");
+                    sb.Append(" ,a.active,a.create_at, a.create_by, a.modified_at, a.modified_by");
                     sb.Append(" from product a,product_group b");
                     sb.Append(" where a.product_group_code=b.product_group_code");
 
@@ -67,8 +68,8 @@ namespace SlaughterHouseLib.Models
                                     ProductCode = p.Field<string>("product_code"),
                                     ProductName = p.Field<string>("product_name"),
                                     ProductGroupName = p.Field<string>("product_group_name"),
-                                    UnitQtyName = p.Field<string>("unit_of_qty"),
-                                    UnitWghName = p.Field<string>("unit_of_wgh"),
+                                    UnitQtyName = p.Field<string>("unit_name_of_qty"),
+                                    UnitWghName = p.Field<string>("unit_name_of_wgh"),
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
@@ -85,11 +86,44 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
+        public static List<Product> GetAllProducts()
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sb = new StringBuilder();
+                    sb.Append("SELECT * FROM product WHERE active=1");
+                    sb.Append(" ORDER BY product_code ASC");
+                    var cmd = new MySqlCommand(sb.ToString(), conn);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    var products = new List<Product>();
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        products.Add(new Product
+                        {
+                            ProductCode = row["product_code"].ToString(),
+                            ProductName = row["product_name"].ToString()
+                        });
+                    }
+
+                    return products;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public static Product GetProduct(string product_code)
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -121,12 +155,12 @@ namespace SlaughterHouseLib.Models
                             UnitOfQty = new Unit
                             {
                                 UnitCode = (int)ds.Tables[0].Rows[0]["unit_of_qty"],
-                                UnitName = ds.Tables[0].Rows[0]["unit_name"].ToString(),
+                                //UnitName = ds.Tables[0].Rows[0]["unit_name"].ToString(),
                             },
                             UnitOfWgh = new Unit
                             {
-                                UnitCode = (int)ds.Tables[0].Rows[0]["unit_of_wgh"],
-                                UnitName = ds.Tables[0].Rows[0]["unit_name"].ToString(),
+                                UnitCode = (int)ds.Tables[0].Rows[0]["unit_of_weight"],
+                                //UnitName = ds.Tables[0].Rows[0]["unit_name"].ToString(),
                             },
 
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
@@ -157,7 +191,7 @@ namespace SlaughterHouseLib.Models
                                 product_name,
                                 product_group_code,
                                 unit_of_qty,
-                                unit_of_wgh,
+                                unit_of_weight,
                                 active,
                                 create_by)
                                 VALUES(@product_code,
@@ -196,7 +230,7 @@ namespace SlaughterHouseLib.Models
                                 SET product_name=@product_name,
                                 product_group_code=@product_group_code,
                                 unit_of_qty=@unit_of_qty,
-                                unit_of_wgh=@unit_of_wgh,
+                                unit_of_weight=@unit_of_wgh,
                                 active=@active,
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by

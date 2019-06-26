@@ -43,6 +43,9 @@ namespace SlaughterHouseServer
                     txtCustomerCode.Enabled = false;
                     txtCustomerName.Text = customer.CustomerName;
                     txtAddress.Text = customer.Address;
+                    txtShipTo.Text = customer.ShipTo;
+                    txtTaxId.Text = customer.TaxId;
+                    txtContactNo.Text = customer.ContactNo;
                     chkActive.Checked = customer.Active;
                 }
             }
