@@ -51,10 +51,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.dtpReceiveDate = new System.Windows.Forms.DateTimePicker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnSaveAndClose
@@ -66,7 +62,7 @@
             this.BtnSaveAndClose.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndClose.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndClose.Image")));
             this.BtnSaveAndClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndClose.Location = new System.Drawing.Point(752, 684);
+            this.BtnSaveAndClose.Location = new System.Drawing.Point(634, 434);
             this.BtnSaveAndClose.Name = "BtnSaveAndClose";
             this.BtnSaveAndClose.Size = new System.Drawing.Size(145, 36);
             this.BtnSaveAndClose.TabIndex = 15;
@@ -80,7 +76,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(86, 226);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 24);
+            this.label3.Size = new System.Drawing.Size(95, 29);
             this.label3.TabIndex = 12;
             this.label3.Text = "ทะเบียนรถ:";
             // 
@@ -89,7 +85,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(122, 140);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 24);
+            this.label2.Size = new System.Drawing.Size(59, 29);
             this.label2.TabIndex = 10;
             this.label2.Text = "ฟาร์ม:";
             // 
@@ -97,7 +93,7 @@
             // 
             this.txtTransportNo.Location = new System.Drawing.Point(187, 95);
             this.txtTransportNo.Name = "txtTransportNo";
-            this.txtTransportNo.Size = new System.Drawing.Size(215, 29);
+            this.txtTransportNo.Size = new System.Drawing.Size(215, 36);
             this.txtTransportNo.TabIndex = 9;
             // 
             // label1
@@ -105,7 +101,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(85, 98);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 24);
+            this.label1.Size = new System.Drawing.Size(96, 29);
             this.label1.TabIndex = 8;
             this.label1.Text = "เลขที่ใบส่ง:";
             // 
@@ -114,7 +110,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(140, 268);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 24);
+            this.label4.Size = new System.Drawing.Size(41, 29);
             this.label4.TabIndex = 16;
             this.label4.Text = "เล้า:";
             // 
@@ -123,7 +119,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(72, 310);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(105, 24);
+            this.label5.Size = new System.Drawing.Size(109, 29);
             this.label5.TabIndex = 17;
             this.label5.Text = "จำนวนฟาร์ม:";
             // 
@@ -132,7 +128,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(69, 352);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(110, 24);
+            this.label6.Size = new System.Drawing.Size(112, 29);
             this.label6.TabIndex = 18;
             this.label6.Text = "น้ำหนักฟาร์ม:";
             // 
@@ -141,7 +137,7 @@
             this.txtTruckNo.Location = new System.Drawing.Point(187, 223);
             this.txtTruckNo.MaxLength = 10;
             this.txtTruckNo.Name = "txtTruckNo";
-            this.txtTruckNo.Size = new System.Drawing.Size(215, 29);
+            this.txtTruckNo.Size = new System.Drawing.Size(215, 36);
             this.txtTruckNo.TabIndex = 19;
             // 
             // txtFarmWgh
@@ -149,7 +145,7 @@
             this.txtFarmWgh.Location = new System.Drawing.Point(187, 349);
             this.txtFarmWgh.MaxLength = 10;
             this.txtFarmWgh.Name = "txtFarmWgh";
-            this.txtFarmWgh.Size = new System.Drawing.Size(215, 29);
+            this.txtFarmWgh.Size = new System.Drawing.Size(215, 36);
             this.txtFarmWgh.TabIndex = 20;
             this.txtFarmWgh.Text = "0";
             this.txtFarmWgh.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -159,7 +155,7 @@
             this.txtCoopNo.Location = new System.Drawing.Point(187, 265);
             this.txtCoopNo.MaxLength = 5;
             this.txtCoopNo.Name = "txtCoopNo";
-            this.txtCoopNo.Size = new System.Drawing.Size(215, 29);
+            this.txtCoopNo.Size = new System.Drawing.Size(215, 36);
             this.txtCoopNo.TabIndex = 21;
             // 
             // txtFarmQty
@@ -167,7 +163,7 @@
             this.txtFarmQty.Location = new System.Drawing.Point(187, 307);
             this.txtFarmQty.MaxLength = 5;
             this.txtFarmQty.Name = "txtFarmQty";
-            this.txtFarmQty.Size = new System.Drawing.Size(215, 29);
+            this.txtFarmQty.Size = new System.Drawing.Size(215, 36);
             this.txtFarmQty.TabIndex = 22;
             this.txtFarmQty.Text = "0";
             this.txtFarmQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -177,7 +173,7 @@
             this.cboFarm.FormattingEnabled = true;
             this.cboFarm.Location = new System.Drawing.Point(187, 137);
             this.cboFarm.Name = "cboFarm";
-            this.cboFarm.Size = new System.Drawing.Size(592, 32);
+            this.cboFarm.Size = new System.Drawing.Size(592, 37);
             this.cboFarm.TabIndex = 23;
             // 
             // BtnSaveAndNew
@@ -189,7 +185,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(544, 684);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(426, 434);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 24;
@@ -203,7 +199,7 @@
             this.cboBreeder.FormattingEnabled = true;
             this.cboBreeder.Location = new System.Drawing.Point(187, 180);
             this.cboBreeder.Name = "cboBreeder";
-            this.cboBreeder.Size = new System.Drawing.Size(215, 32);
+            this.cboBreeder.Size = new System.Drawing.Size(215, 37);
             this.cboBreeder.TabIndex = 26;
             // 
             // label7
@@ -211,7 +207,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(108, 183);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 24);
+            this.label7.Size = new System.Drawing.Size(73, 29);
             this.label7.TabIndex = 25;
             this.label7.Text = "ประเภท:";
             // 
@@ -220,7 +216,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(408, 310);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 24);
+            this.label8.Size = new System.Drawing.Size(34, 29);
             this.label8.TabIndex = 27;
             this.label8.Text = "ตัว";
             // 
@@ -229,7 +225,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(408, 352);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 24);
+            this.label9.Size = new System.Drawing.Size(75, 29);
             this.label9.TabIndex = 28;
             this.label9.Text = "กิโลกรัม";
             // 
@@ -237,7 +233,7 @@
             // 
             this.txtReciveNo.Location = new System.Drawing.Point(187, 12);
             this.txtReciveNo.Name = "txtReciveNo";
-            this.txtReciveNo.Size = new System.Drawing.Size(215, 29);
+            this.txtReciveNo.Size = new System.Drawing.Size(215, 36);
             this.txtReciveNo.TabIndex = 30;
             // 
             // label10
@@ -245,7 +241,7 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(85, 15);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(89, 24);
+            this.label10.Size = new System.Drawing.Size(95, 29);
             this.label10.TabIndex = 29;
             this.label10.Text = "เลขที่ใบรับ:";
             // 
@@ -254,7 +250,7 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(108, 60);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(67, 24);
+            this.label11.Size = new System.Drawing.Size(69, 29);
             this.label11.TabIndex = 31;
             this.label11.Text = "วันที่รับ:";
             // 
@@ -265,32 +261,13 @@
             this.dtpReceiveDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpReceiveDate.Location = new System.Drawing.Point(187, 56);
             this.dtpReceiveDate.Name = "dtpReceiveDate";
-            this.dtpReceiveDate.Size = new System.Drawing.Size(215, 29);
+            this.dtpReceiveDate.Size = new System.Drawing.Size(215, 36);
             this.dtpReceiveDate.TabIndex = 32;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 28);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(879, 235);
-            this.dataGridView1.TabIndex = 33;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 397);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(892, 269);
-            this.groupBox1.TabIndex = 34;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Detail";
             // 
             // Form_ReceiveAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(916, 732);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(807, 482);
             this.Controls.Add(this.dtpReceiveDate);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtReciveNo);
@@ -320,8 +297,6 @@
             this.Name = "Form_ReceiveAddEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form_ReceiveAddEdit";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,7 +326,5 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DateTimePicker dtpReceiveDate;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

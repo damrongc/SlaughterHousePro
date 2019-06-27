@@ -37,7 +37,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append("select a.product_code,a.product_name");
                     sb.Append(" ,b.product_group_name");
                     sb.Append(" ,unit_of_qty ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_qty) as unit_name_of_qty");
-                    sb.Append(" ,unit_of_weight ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_weight) as unit_name_of_wgh");
+                    sb.Append(" ,unit_of_wgh ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_wgh) as unit_name_of_wgh");
                     sb.Append(" ,a.active,a.create_at, a.create_by, a.modified_at, a.modified_by");
                     sb.Append(" from product a,product_group b");
                     sb.Append(" where a.product_group_code=b.product_group_code");
@@ -159,7 +159,7 @@ namespace SlaughterHouseLib.Models
                             },
                             UnitOfWgh = new Unit
                             {
-                                UnitCode = (int)ds.Tables[0].Rows[0]["unit_of_weight"],
+                                UnitCode = (int)ds.Tables[0].Rows[0]["unit_of_wgh"],
                                 //UnitName = ds.Tables[0].Rows[0]["unit_name"].ToString(),
                             },
 
@@ -191,7 +191,7 @@ namespace SlaughterHouseLib.Models
                                 product_name,
                                 product_group_code,
                                 unit_of_qty,
-                                unit_of_weight,
+                                unit_of_wgh,
                                 active,
                                 create_by)
                                 VALUES(@product_code,
@@ -230,7 +230,7 @@ namespace SlaughterHouseLib.Models
                                 SET product_name=@product_name,
                                 product_group_code=@product_group_code,
                                 unit_of_qty=@unit_of_qty,
-                                unit_of_weight=@unit_of_wgh,
+                                unit_of_wgh=@unit_of_wgh,
                                 active=@active,
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by
