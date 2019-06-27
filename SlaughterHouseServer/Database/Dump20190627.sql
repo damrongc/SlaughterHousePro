@@ -468,6 +468,7 @@ DROP TABLE IF EXISTS `stock`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `stock` (
   `stock_date` date NOT NULL,
+  `stock_no` varchar(15) NOT NULL,
   `stock_item` int(11) NOT NULL,
   `product_code` varchar(10) NOT NULL,
   `stock_qty` int(11) NOT NULL DEFAULT '0',
@@ -480,7 +481,7 @@ CREATE TABLE `stock` (
   `transaction_type` int(1) NOT NULL,
   `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `create_by` varchar(45) NOT NULL,
-  PRIMARY KEY (`stock_date`,`stock_item`,`product_code`)
+  PRIMARY KEY (`stock_date`, `stock_no`,`stock_item`,`product_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -490,9 +491,28 @@ CREATE TABLE `stock` (
 
 LOCK TABLES `stock` WRITE;
 /*!40000 ALTER TABLE `stock` DISABLE KEYS */;
-INSERT INTO `stock` VALUES ('2019-06-22',1,'P001',3,0.00,'REV','REV0000001','11917312206',1,0,1,'2019-06-22 20:47:27','system');
+INSERT INTO `stock` VALUES ('2019-06-22', 'STK0000001',1,'P001',3,0.00,'REV','REV0000001','11917312206',1,0,1,'2019-06-22 20:47:27','system');
 /*!40000 ALTER TABLE `stock` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `stock_item_running`
+--
+
+DROP TABLE IF EXISTS `stock_item_running`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `stock_item_running` ( 
+  `doc_no` varchar(15) NOT NULL,
+  `stock_no` varchar(15) NOT NULL,  
+  `stock_item` int(11) NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_by` varchar(45) NOT NULL,
+  `modified_at` datetime DEFAULT NULL,
+  `modified_by` varchar(45) DEFAULT NULL,  
+  PRIMARY KEY (`doc_no`, `stock_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `unit_of_measurement`
