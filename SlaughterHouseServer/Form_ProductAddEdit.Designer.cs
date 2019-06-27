@@ -49,7 +49,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(85, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 24);
+            this.label1.Size = new System.Drawing.Size(89, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "รหัสสินค้า";
             // 
@@ -58,14 +58,14 @@
             this.txtProductCode.Location = new System.Drawing.Point(178, 22);
             this.txtProductCode.MaxLength = 10;
             this.txtProductCode.Name = "txtProductCode";
-            this.txtProductCode.Size = new System.Drawing.Size(215, 29);
+            this.txtProductCode.Size = new System.Drawing.Size(215, 36);
             this.txtProductCode.TabIndex = 1;
             // 
             // txtProductName
             // 
             this.txtProductName.Location = new System.Drawing.Point(178, 64);
             this.txtProductName.Name = "txtProductName";
-            this.txtProductName.Size = new System.Drawing.Size(529, 29);
+            this.txtProductName.Size = new System.Drawing.Size(529, 36);
             this.txtProductName.TabIndex = 3;
             // 
             // label2
@@ -73,7 +73,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(94, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 24);
+            this.label2.Size = new System.Drawing.Size(78, 29);
             this.label2.TabIndex = 2;
             this.label2.Text = "ชื่อสินค้า";
             // 
@@ -82,9 +82,9 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(178, 245);
+            this.chkActive.Location = new System.Drawing.Point(178, 242);
             this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(76, 28);
+            this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 6;
             this.chkActive.Text = "ใช้งาน";
             this.chkActive.UseVisualStyleBackColor = true;
@@ -98,7 +98,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(459, 291);
+            this.BtnSave.Location = new System.Drawing.Point(492, 292);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -115,7 +115,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(145, 291);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(178, 292);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -129,7 +129,7 @@
             this.comboxProductGroup.FormattingEnabled = true;
             this.comboxProductGroup.Location = new System.Drawing.Point(178, 105);
             this.comboxProductGroup.Name = "comboxProductGroup";
-            this.comboxProductGroup.Size = new System.Drawing.Size(215, 32);
+            this.comboxProductGroup.Size = new System.Drawing.Size(215, 37);
             this.comboxProductGroup.TabIndex = 26;
             // 
             // labelProductGroup
@@ -137,7 +137,7 @@
             this.labelProductGroup.AutoSize = true;
             this.labelProductGroup.Location = new System.Drawing.Point(84, 109);
             this.labelProductGroup.Name = "labelProductGroup";
-            this.labelProductGroup.Size = new System.Drawing.Size(81, 24);
+            this.labelProductGroup.Size = new System.Drawing.Size(90, 29);
             this.labelProductGroup.TabIndex = 27;
             this.labelProductGroup.Text = "กลุ่มสินค้า";
             // 
@@ -146,7 +146,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(35, 152);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 24);
+            this.label3.Size = new System.Drawing.Size(137, 29);
             this.label3.TabIndex = 29;
             this.label3.Text = "หน่วยนับปริมาณ";
             // 
@@ -155,7 +155,7 @@
             this.comboxUnitQty.FormattingEnabled = true;
             this.comboxUnitQty.Location = new System.Drawing.Point(178, 148);
             this.comboxUnitQty.Name = "comboxUnitQty";
-            this.comboxUnitQty.Size = new System.Drawing.Size(215, 32);
+            this.comboxUnitQty.Size = new System.Drawing.Size(215, 37);
             this.comboxUnitQty.TabIndex = 28;
             // 
             // label4
@@ -163,7 +163,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(32, 196);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(133, 24);
+            this.label4.Size = new System.Drawing.Size(131, 29);
             this.label4.TabIndex = 31;
             this.label4.Text = "หน่วยนับน้ำหนัก";
             // 
@@ -172,7 +172,7 @@
             this.comboxUnitWgh.FormattingEnabled = true;
             this.comboxUnitWgh.Location = new System.Drawing.Point(178, 192);
             this.comboxUnitWgh.Name = "comboxUnitWgh";
-            this.comboxUnitWgh.Size = new System.Drawing.Size(215, 32);
+            this.comboxUnitWgh.Size = new System.Drawing.Size(215, 37);
             this.comboxUnitWgh.TabIndex = 30;
             // 
             // Form_ProductAddEdit

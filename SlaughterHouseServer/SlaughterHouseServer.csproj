@@ -87,6 +87,12 @@
     <Compile Include="Form_ProductGroupAddEdit.Designer.cs">
       <DependentUpon>Form_ProductGroupAddEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Order.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Order.Designer.cs">
+      <DependentUpon>Form_Order.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_UnitAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_ProductGroupAddEdit.resx">
       <DependentUpon>Form_ProductGroupAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Order.resx">
+      <DependentUpon>Form_Order.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_UnitAddEdit.resx">
       <DependentUpon>Form_UnitAddEdit.cs</DependentUpon>

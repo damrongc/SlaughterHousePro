@@ -51,7 +51,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(107, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 24);
+            this.label1.Size = new System.Drawing.Size(89, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "รหัสลูกค้า";
             // 
@@ -60,14 +60,14 @@
             this.txtCustomerCode.Location = new System.Drawing.Point(200, 22);
             this.txtCustomerCode.MaxLength = 10;
             this.txtCustomerCode.Name = "txtCustomerCode";
-            this.txtCustomerCode.Size = new System.Drawing.Size(215, 29);
+            this.txtCustomerCode.Size = new System.Drawing.Size(215, 36);
             this.txtCustomerCode.TabIndex = 1;
             // 
             // txtCustomerName
             // 
             this.txtCustomerName.Location = new System.Drawing.Point(200, 64);
             this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(529, 29);
+            this.txtCustomerName.Size = new System.Drawing.Size(529, 36);
             this.txtCustomerName.TabIndex = 3;
             // 
             // label2
@@ -75,7 +75,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(116, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 24);
+            this.label2.Size = new System.Drawing.Size(78, 29);
             this.label2.TabIndex = 2;
             this.label2.Text = "ชื่อลูกค้า";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -93,7 +93,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(143, 106);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 24);
+            this.label3.Size = new System.Drawing.Size(46, 29);
             this.label3.TabIndex = 4;
             this.label3.Text = "ที่อยู่";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -105,7 +105,7 @@
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkActive.Location = new System.Drawing.Point(200, 382);
             this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(76, 28);
+            this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 6;
             this.chkActive.Text = "ใช้งาน";
             this.chkActive.UseVisualStyleBackColor = true;
@@ -120,7 +120,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(459, 427);
+            this.BtnSave.Location = new System.Drawing.Point(514, 432);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -137,7 +137,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(145, 427);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(200, 432);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -148,54 +148,54 @@
             // 
             // txtShipTo
             // 
-            this.txtShipTo.Location = new System.Drawing.Point(200, 252);
-            this.txtShipTo.MaxLength = 10;
+            this.txtShipTo.Location = new System.Drawing.Point(200, 247);
+            this.txtShipTo.MaxLength = 80;
             this.txtShipTo.Name = "txtShipTo";
-            this.txtShipTo.Size = new System.Drawing.Size(215, 29);
+            this.txtShipTo.Size = new System.Drawing.Size(529, 36);
             this.txtShipTo.TabIndex = 27;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(65, 255);
+            this.label4.Location = new System.Drawing.Point(65, 250);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(119, 24);
+            this.label4.Size = new System.Drawing.Size(133, 29);
             this.label4.TabIndex = 26;
             this.label4.Text = "สถานที่ส่งสินค้า";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // txtTaxId
             // 
-            this.txtTaxId.Location = new System.Drawing.Point(200, 293);
+            this.txtTaxId.Location = new System.Drawing.Point(200, 290);
             this.txtTaxId.MaxLength = 13;
             this.txtTaxId.Name = "txtTaxId";
-            this.txtTaxId.Size = new System.Drawing.Size(215, 29);
+            this.txtTaxId.Size = new System.Drawing.Size(215, 36);
             this.txtTaxId.TabIndex = 29;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 296);
+            this.label5.Location = new System.Drawing.Point(20, 293);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(164, 24);
+            this.label5.Size = new System.Drawing.Size(182, 29);
             this.label5.TabIndex = 28;
             this.label5.Text = "เลขประจำตัวผู้เสียภาษี";
             // 
             // txtContactNo
             // 
-            this.txtContactNo.Location = new System.Drawing.Point(200, 336);
+            this.txtContactNo.Location = new System.Drawing.Point(200, 334);
             this.txtContactNo.MaxLength = 10;
             this.txtContactNo.Name = "txtContactNo";
-            this.txtContactNo.Size = new System.Drawing.Size(215, 29);
+            this.txtContactNo.Size = new System.Drawing.Size(215, 36);
             this.txtContactNo.TabIndex = 31;
             this.txtContactNo.TextChanged += new System.EventHandler(this.txtContactNo_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(99, 339);
+            this.label6.Location = new System.Drawing.Point(99, 337);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 24);
+            this.label6.Size = new System.Drawing.Size(99, 29);
             this.label6.TabIndex = 30;
             this.label6.Text = "เบอร์ติดต่อ";
             // 
