@@ -21,6 +21,7 @@ namespace SlaughterHouseServer
             BtnOrder.Click += Btn_Click;
             BtnIssue.Click += Btn_Click;
             BtnReceive.Click += Btn_Click;
+            BtnCarcass.Click += Btn_Click;
         }
 
         private void Btn_Click(object sender, EventArgs e)
@@ -45,6 +46,9 @@ namespace SlaughterHouseServer
                     break;
                 case "BtnReceive":
                     AddFormToContainer(new Form_Receive());
+                    break;
+                case "BtnCarcass":
+                    AddFormToContainer(new Form_ReceiveCarcass());
                     break;
             }
         }

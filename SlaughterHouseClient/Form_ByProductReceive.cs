@@ -5,16 +5,16 @@ using System.Windows.Forms;
 
 namespace SlaughterHouseClient
 {
-    public partial class Form_CarcassReceive : Form
+    public partial class Form_ByProductReceive : Form
     {
-        private string productCode = "P002";
+        private string productCode = "P003";
         private bool isStart = false;
         private Receive receive;
 
         const string CHOOSE_QUEUE = "กรุณาเลือกคิว";
         const string START_WAITING = "กรุณาเริ่มชั่ง";
         const string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
-        public Form_CarcassReceive()
+        public Form_ByProductReceive()
         {
             InitializeComponent();
         }

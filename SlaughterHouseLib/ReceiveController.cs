@@ -44,7 +44,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("receive_date", date.ToString("yyyy-MM-dd"));
 
                     if (!string.IsNullOrEmpty(farmCode))
-                        cmd.Parameters.AddWithValue("farmCode", farmCode);
+                        cmd.Parameters.AddWithValue("farm_code", farmCode);
                     if (!string.IsNullOrEmpty(transportNo))
                         cmd.Parameters.AddWithValue("transport_doc_no", transportNo);
 
@@ -562,8 +562,6 @@ namespace SlaughterHouseLib
                 conn.Open();
 
                 Receive receive = GetReceive(receiveItem.ReceiveNo);
-
-
                 var sql = @"SELECT max(seq) as seq,sum(receive_qty) as receive_qty
                                 FROM receive_item 
                                 WHERE receive_no=@receive_no
@@ -592,16 +590,6 @@ namespace SlaughterHouseLib
                 {
                     throw new Exception("ไม่สามารถรับสินค้าได้ เนื่องจากรับสินค้าครบแล้ว!");
                 }
-
-                //if (string.IsNullOrEmpty(seq))
-                //{
-                //    receiveItem.Seq = 1;
-                //}
-                //else
-                //{
-                //    receiveItem.Seq += seq.ToInt16() + 1;
-                //}
-
                 transaction = conn.BeginTransaction();
 
                 sql = @"INSERT INTO receive_item(
@@ -631,7 +619,6 @@ namespace SlaughterHouseLib
                 cmd.Parameters.AddWithValue("receive_no", receiveItem.ReceiveNo);
                 cmd.Parameters.AddWithValue("product_code", receiveItem.ProductCode);
                 cmd.Parameters.AddWithValue("seq", receiveItem.Seq);
-                //cmd.Parameters.AddWithValue("product_code", receiveItem.Product.ProductCode);
                 cmd.Parameters.AddWithValue("sex_flag", receiveItem.SexFlag);
                 cmd.Parameters.AddWithValue("receive_qty", receiveItem.ReceiveQty);
                 cmd.Parameters.AddWithValue("receive_wgh", receiveItem.ReceiveWgh);
@@ -641,7 +628,7 @@ namespace SlaughterHouseLib
 
                 if (receive.ReceiveFlag == 0)
                 {
-                    //Update FactoryQty,FactoryWgh
+                    //Update FactoryQty,FactoryWgh  เฉพาะการรับหมูเป็น
                     sql = @"UPDATE receives SET 
                             factory_qty=factory_qty + @factory_qty,
                             factory_wgh=factory_wgh + @factory_wgh
@@ -654,7 +641,29 @@ namespace SlaughterHouseLib
                     cmd.ExecuteNonQuery();
                 }
 
+                //Insert Stock
+                var plant = PlantController.GetPlant();
+                var stockItemRunning = StockItemRunningController.GetStockItem(receiveItem.ReceiveNo);
 
+                var stock = new Stock
+                {
+                    StockDate = plant.ProductionDate,
+                    StockNo = stockItemRunning.StockNo,
+                    StockItem = stockItemRunning.StockItem,
+                    ProductCode = receiveItem.ProductCode,
+                    RefDocumentNo = receive.ReceiveNo,
+                    RefDocumentType = "REV",
+                    LotNo = DocumentGenerate.GetSwineLotNo(plant.PlantId, plant.ProductionDate, receive.QueueNo),
+                    StockQty = receive.FactoryQty,
+                    StockWgh = receive.FactoryWgh,
+                    BarcodeNo = 0,
+                    TransactionType = 1,
+                    LocationCode = 1,
+                    CreateBy = "system",
+                };
+
+
+                StockController.InsertStock(stock, cmd);
                 // Commit the transaction.
                 transaction.Commit();
                 return true;
@@ -664,7 +673,8 @@ namespace SlaughterHouseLib
             }
             catch (Exception)
             {
-                transaction.Rollback();
+                if (transaction != null)
+                    transaction.Rollback();
                 throw;
             }
             finally

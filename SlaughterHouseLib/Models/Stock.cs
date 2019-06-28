@@ -5,6 +5,7 @@ namespace SlaughterHouseLib.Models
     public class Stock
     {
         public DateTime StockDate { get; set; }
+        public string StockNo { get; set; }
         public int StockItem { get; set; }
         public string ProductCode { get; set; }
         public int StockQty { get; set; }
