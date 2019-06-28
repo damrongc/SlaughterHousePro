@@ -50,6 +50,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Receive.cs" />
     <Compile Include="Models\Stock.cs" />
+    <Compile Include="Models\StockItemRunning.cs" />
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Models\ProductGroup.cs" />
     <Compile Include="Models\Location.cs" />

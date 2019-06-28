@@ -87,11 +87,19 @@
     <Compile Include="Form_ProductGroupAddEdit.Designer.cs">
       <DependentUpon>Form_ProductGroupAddEdit.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Form_ReceiveCarcass.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_ReceiveCarcass.Designer.cs">
       <DependentUpon>Form_ReceiveCarcass.cs</DependentUpon>
+=======
+    <Compile Include="Form_Order.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Order.Designer.cs">
+      <DependentUpon>Form_Order.cs</DependentUpon>
+>>>>>>> 954f906f38a8378f4078cf1c1537b1ec5240d462
     </Compile>
     <Compile Include="Form_UnitAddEdit.cs">
       <SubType>Form</SubType>
@@ -155,8 +163,13 @@
     <EmbeddedResource Include="Form_ProductGroupAddEdit.resx">
       <DependentUpon>Form_ProductGroupAddEdit.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Form_ReceiveCarcass.resx">
       <DependentUpon>Form_ReceiveCarcass.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Form_Order.resx">
+      <DependentUpon>Form_Order.cs</DependentUpon>
+>>>>>>> 954f906f38a8378f4078cf1c1537b1ec5240d462
     </EmbeddedResource>
     <EmbeddedResource Include="Form_UnitAddEdit.resx">
       <DependentUpon>Form_UnitAddEdit.cs</DependentUpon>

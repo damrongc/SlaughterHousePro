@@ -47,8 +47,13 @@ namespace SlaughterHouseServer
                 case "BtnReceive":
                     AddFormToContainer(new Form_Receive());
                     break;
+<<<<<<< HEAD
                 case "BtnCarcass":
                     AddFormToContainer(new Form_ReceiveCarcass());
+=======
+                case "BtnOrder":
+                    AddFormToContainer(new Form_Order ());
+>>>>>>> 954f906f38a8378f4078cf1c1537b1ec5240d462
                     break;
             }
         }
