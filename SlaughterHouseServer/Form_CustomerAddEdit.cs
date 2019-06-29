@@ -11,11 +11,13 @@ namespace SlaughterHouseServer
             InitializeComponent();
 
             txtCustomerCode.KeyDown += TxtCustomerCode_KeyDown;
-            txtCustomerName.KeyDown += TxtCustomerName_KeyDown;
-            //txtAddress.KeyDown += TxtAddress_KeyDown;
+            txtCustomerName.KeyDown += TxtCustomerName_KeyDown; 
             txtShipTo.KeyDown += TxtShipTo_KeyDown;
             txtTaxId.KeyDown += TxtTaxId_KeyDown;
             txtContactNo.KeyDown += TxtContactNo_KeyDown;
+
+            txtTaxId.KeyPress += TxtTaxId_KeyPress;
+            txtContactNo.KeyPress += TxtContactNo;
 
             this.Load += Form_CustomerAddEdit_Load;
             this.Shown += Form_CustomerAddEdit_Shown;
@@ -50,6 +52,22 @@ namespace SlaughterHouseServer
                 }
             }
         }
+        private void TxtTaxId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+        private void TxtContactNo(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
         private void TxtContactNo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -71,8 +89,7 @@ namespace SlaughterHouseServer
                 txtTaxId.Focus();
             }
         }
-
-        private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
+                private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {

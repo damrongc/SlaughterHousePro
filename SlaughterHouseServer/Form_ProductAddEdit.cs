@@ -12,7 +12,11 @@ namespace SlaughterHouseServer
 
             txtProductCode.KeyDown += TxtProductCode_KeyDown;
             txtProductName.KeyDown += TxtProductName_KeyDown;
-            //txtAddress.KeyDown += TxtAddress_KeyDown;
+
+            comboxProductGroup.KeyDown += ComboxProductGroup_KeyDown;
+            comboxUnitQty.KeyDown += ComboxUnitQty_KeyDown;
+            comboxUnitWgh.KeyDown += ComboxUnitWgh_KeyDown;
+             
             this.Load += Form_ProductAddEdit_Load;
             this.Shown += Form_ProductAddEdit_Shown;
         }
@@ -59,7 +63,7 @@ namespace SlaughterHouseServer
         {
             if (e.KeyCode == Keys.Enter)
             {
-                labelProductGroup.Focus();
+                comboxProductGroup.Focus();
             }
         }
 
@@ -68,6 +72,28 @@ namespace SlaughterHouseServer
             if (e.KeyCode == Keys.Enter)
             {
                 txtProductName.Focus();
+            }
+        }
+
+        private void ComboxProductGroup_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                comboxUnitQty.Focus();
+            }
+        }
+        private void ComboxUnitQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                comboxUnitWgh.Focus();
+            }
+        }
+        private void ComboxUnitWgh_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnSaveAndNew.Focus();
             }
         }
 
