@@ -9,28 +9,25 @@ namespace SlaughterHouseServer
         public string productCode { get; set; }
         public string productName{ get; set; }
         public int qty { get; set; }
-        public decimal wgh { get; set; }
-        public enum ProgramMode { Add, Edit }
-        public ProgramMode pgMode { get; set; }
+        public decimal wgh { get; set; } 
 
         public Form_OrderDetail()
         {
             InitializeComponent();
-
-            //txtFarmCode.KeyDown += TxtFarmCode_KeyDown;
-            //txtFarmName.KeyDown += TxtFarmName_KeyDown;
-            //txtAddress.KeyDown += TxtAddress_KeyDown;
+             
             this.Load += Form_Load;
             this.Shown += Form_Shown;
-            pgMode = ProgramMode.Add;
-        }
-
+            //KeyDown 
+            txtQty.KeyDown += TxtQty_KeyDown;
+            txtWgh.KeyDown += TxtWgh_KeyDown;
+            cboProduct.KeyDown += CboProduct_KeyDown;
+            //KeyPress
+            txtQty.KeyPress += TxtQty_KeyPress;
+            txtWgh.KeyPress += TxtWgh_KeyPress;
+        } 
         private void Form_Shown(object sender, System.EventArgs e)
         {
-            //txtFarmCode.Focus();
-            //if (!string.IsNullOrEmpty(this.orderNo))
-            //{
-            //    BtnSaveAndNew.Visible = false;
+           
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
@@ -42,7 +39,56 @@ namespace SlaughterHouseServer
                 txtWgh.Text = this.wgh.ToString(); 
             }
         }
-
+        private void CboProduct_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtQty.Focus();
+            }
+        }
+        private void TxtQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtWgh.Focus();
+            }
+        }
+        private void TxtWgh_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnAddOrderItem.Focus();
+            }
+        }
+        private void TxtQty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+        private void TxtWgh_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //// Verify that the pressed key isn't CTRL or any non-numeric digit
+            //if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            //{
+            //    e.Handled = true;
+            //} 
+            //// If you want, you can allow decimal (float) numbers
+            //if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            //{
+            //    e.Handled = true;
+            //}
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                if (e.KeyChar != 46)
+                {
+                    e.Handled = true;
+                    return;
+                } 
+            } 
+        }
         private void btnAddOrderItem_Click(object sender, System.EventArgs e)
         {
             try
@@ -61,8 +107,7 @@ namespace SlaughterHouseServer
             }
 
         }
-
-        private void LoadProduct()
+                private void LoadProduct()
         {
             var coll = ProductController.GetAllProducts();
             cboProduct.DisplayMember = "ProductName";
@@ -71,103 +116,4 @@ namespace SlaughterHouseServer
         }
     }
 }
-
-   
-
-    //private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
-    //{
-    //    if (e.KeyCode == Keys.Enter)
-    //    {
-    //        BtnSaveAndNew.Focus();
-    //    }
-    //}
-
-    //private void TxtFarmName_KeyDown(object sender, KeyEventArgs e)
-    //{
-    //    if (e.KeyCode == Keys.Enter)
-    //    {
-    //        txtAddress.Focus();
-    //    }
-    //}
-
-    //private void TxtFarmCode_KeyDown(object sender, KeyEventArgs e)
-    //{
-    //    if (e.KeyCode == Keys.Enter)
-    //    {
-    //        txtFarmName.Focus();
-    //    }
-    //}
-
-    //private void BtnSave_Click(object sender, System.EventArgs e)
-    //{
-    //    try
-    //    {
-    //        if (string.IsNullOrEmpty(this.farmCode))
-    //        {
-    //            var farm = new Farm
-    //            {
-    //                FarmCode = txtFarmCode.Text.Trim(),
-    //                FarmName = txtFarmName.Text.Trim(),
-    //                Address = txtAddress.Text.Trim(),
-    //                Active = chkActive.Checked,
-    //                CreateBy = "system",
-    //            };
-    //            FarmController.Insert(farm);
-    //            MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-    //        }
-    //        else
-    //        {
-    //            var farm = new Farm
-    //            {
-    //                FarmCode = txtFarmCode.Text.Trim(),
-    //                FarmName = txtFarmName.Text.Trim(),
-    //                Address = txtAddress.Text.Trim(),
-    //                Active = chkActive.Checked,
-    //                ModifiedBy = "system",
-    //            };
-    //            FarmController.Update(farm);
-    //            MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-    //        }
-
-    //        this.DialogResult = DialogResult.OK;
-    //        this.Close();
-    //    }
-    //    catch (System.Exception ex)
-    //    {
-
-    //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    //    }
-
-    //}
-
-    //private void BtnSaveAndNew_Click(object sender, System.EventArgs e)
-    //{
-    //    try
-    //    {
-
-    //        var farm = new Farm
-    //        {
-    //            FarmCode = txtFarmCode.Text.Trim(),
-    //            FarmName = txtFarmName.Text.Trim(),
-    //            Address = txtAddress.Text.Trim(),
-    //            Active = chkActive.Checked,
-    //            CreateBy = "system",
-    //        };
-    //        FarmController.Insert(farm);
-    //        MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-    //        txtFarmCode.Text = "";
-    //        txtFarmCode.Focus();
-    //        txtFarmName.Text = "";
-    //        txtAddress.Text = "";
-    //        chkActive.Checked = true;
-
-    //    }
-    //    catch (System.Exception ex)
-    //    {
-
-    //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    //    }
-    //}
-      
+ 

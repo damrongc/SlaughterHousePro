@@ -165,7 +165,6 @@ namespace SlaughterHouseLib.Models
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

@@ -76,6 +76,7 @@ namespace SlaughterHouseLib
                     var sql = @"SELECT order_no,
                                 order_date,
                                 customer_code,
+                                comments,
                                 order_flag, create_at
                                 FROM orders
                                 WHERE order_no =@order_no";
@@ -99,8 +100,7 @@ namespace SlaughterHouseLib
                             {
                                 CustomerCode = (string)ds.Tables[0].Rows[0]["customer_code"]
                             },
-
-
+                            Comments = (string)ds.Tables[0].Rows[0]["comments"],
                             OrderFlag = (int)ds.Tables[0].Rows[0]["order_flag"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
@@ -125,7 +125,7 @@ namespace SlaughterHouseLib
 
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
-
+                    order.OrderNo = DocumentGenerate.GetDocumentRunning("SO");
                     conn.Open();
                     tr = conn.BeginTransaction();
                     var sql = @"INSERT INTO orders
@@ -151,10 +151,9 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("order_flag", order.OrderFlag);
                     cmd.Parameters.AddWithValue("comments", order.Comments);
                     cmd.Parameters.AddWithValue("create_by", order.CreateBy);
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery(); 
 
-
-                    sql = @"NSERT INTO order_item
+                    sql = @"INSERT INTO order_item
                                 (order_no,
                                 product_code,
                                 seq,
@@ -193,13 +192,15 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        public static bool Update(Order Order)
+        public static bool Update(Order order)
         {
+            MySqlTransaction tr = null;
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
+                    tr = conn.BeginTransaction();
                     var sql = @"UPDATE orders
                                 SET order_date=@order_date,
                                 customer_code=@customer_code,
@@ -207,25 +208,66 @@ namespace SlaughterHouseLib
                                 comments=@comments,
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by
-                                WHERE order_code=@order_code";
-                    var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("order_code", Order.OrderNo);
-                    cmd.Parameters.AddWithValue("order_date", Order.OrderDate);
-                    cmd.Parameters.AddWithValue("customer_code", Order.Customer.CustomerCode);
-                    cmd.Parameters.AddWithValue("comments", Order.Comments);
-                    cmd.Parameters.AddWithValue("order_flag", Order.OrderFlag);
-                    cmd.Parameters.AddWithValue("modified_by", Order.ModifiedBy);
+                                WHERE order_no=@order_no"; 
+                    var cmd = new MySqlCommand(sql, conn)
+                    {
+                        Transaction = tr
+                    };
+                    cmd.Parameters.AddWithValue("order_no", order.OrderNo);
+                    cmd.Parameters.AddWithValue("order_date", order.OrderDate);
+                    cmd.Parameters.AddWithValue("customer_code", order.Customer.CustomerCode);
+                    cmd.Parameters.AddWithValue("comments", order.Comments);
+                    cmd.Parameters.AddWithValue("order_flag", order.OrderFlag);
+                    cmd.Parameters.AddWithValue("modified_by", order.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
+
+                    sql = @"Delete From order_item 
+                                WHERE order_no=@order_no";
+                    cmd = new MySqlCommand(sql, conn)
+                    {
+                        Transaction = tr
+                    };
+                    cmd.Parameters.AddWithValue("order_no", order.OrderNo);
+                    cmd.ExecuteNonQuery();
+
+                    sql = @"INSERT INTO order_item
+                                (order_no,
+                                product_code,
+                                seq,
+                                order_qty,
+                                order_wgh,
+                                create_by)
+                                VALUES(
+                                @order_no,
+                                @product_code,
+                                @seq,
+                                @order_qty,
+                                @order_wgh,
+                                @create_by)";
+
+                    foreach (var item in order.OrderItems)
+                    {
+                        cmd = new MySqlCommand(sql, conn)
+                        {
+                            Transaction = tr
+                        };
+                        cmd.Parameters.AddWithValue("order_no", order.OrderNo);
+                        cmd.Parameters.AddWithValue("product_code", item.Product.ProductCode);
+                        cmd.Parameters.AddWithValue("seq", item.Seq);
+                        cmd.Parameters.AddWithValue("order_qty", item.OrderQty);
+                        cmd.Parameters.AddWithValue("order_wgh", item.OrderWgh);
+                        cmd.Parameters.AddWithValue("create_by", order.CreateBy);
+                        cmd.ExecuteNonQuery();
+                    }
+                    tr.Commit();
                 }
                 return true;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
-
         public static bool Delete(string orderNo)
         {
             MySqlTransaction tr = null;
@@ -276,7 +318,6 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-
     }
     public static class OrderItemController
     {

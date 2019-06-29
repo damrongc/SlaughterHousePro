@@ -17,7 +17,6 @@ namespace SlaughterHouseServer
             InitializeComponent();
             UserSettingsComponent();
         }
-
         private void UserSettingsComponent()
         {
             btnAddOrderItem.Click += BtnAddOrderItem_Click;
@@ -34,9 +33,11 @@ namespace SlaughterHouseServer
 
             this.Load += Form_Load;
             this.Shown += Form_Shown;
-            
-        }
 
+            //KeyDown  
+            dtpOrderDate.KeyDown += DtpOrderDate_KeyDown;
+            cboCustomer.KeyDown += CboCustomer_KeyDown;
+        }
         private void Form_Shown(object sender, System.EventArgs e)
         {
             dtpOrderDate.Focus();
@@ -46,7 +47,21 @@ namespace SlaughterHouseServer
             LoadCustomer(); 
             LoadData();
         }
-#region Event Focus, KeyDown 
+        private void DtpOrderDate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cboCustomer.Focus();
+            }
+        }
+        private void CboCustomer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtComment.Focus();
+            }
+        } 
+        #region Event Focus, KeyDown 
         private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -67,7 +82,7 @@ namespace SlaughterHouseServer
         }
         #endregion
 
-        #region Event Click
+#region Event Click
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
@@ -91,12 +106,12 @@ namespace SlaughterHouseServer
                 SaveOrder();
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                orderNo = "";
                 txtOrderNo.Text = "";
                 txtOrderNo.Focus();
-                //txtFarmName.Text = "";
-                //txtComment.Text = "";
-                //chkActive.Checked = true;
-
+                cboCustomer.SelectedIndex = 0;
+                txtComment.Text = "";
+                LoadDetail();
             }
             catch (System.Exception ex)
             {
@@ -166,7 +181,7 @@ namespace SlaughterHouseServer
             }
             
         }
-            #endregion
+#endregion
 
         private void LoadData()
         {
@@ -180,30 +195,30 @@ namespace SlaughterHouseServer
                 txtComment.Text = order.Comments;
 
                 dtpOrderDate.Enabled = false;
-                BtnSaveAndNew.Visible = false;
-                LoadDetail();
+                BtnSaveAndNew.Visible = false; 
             }
-
+            LoadDetail();
         }
-
         private void LoadDetail()
         {
             //var orderItem = OrderItemController.GetOrderItems(orderNo);
             dtOrderItem = new DataTable("ORDER_ITEM");
             dtOrderItem = OrderItemController.GetOrderItems(orderNo);
-            if (dtOrderItem != null && dtOrderItem.Rows.Count > 0)
-            {
-                gv.DataSource = dtOrderItem;
-                gv.Columns[2].HeaderText = "ลำดับ";
-                gv.Columns[3].HeaderText = "รหัสสินค้า";
-                gv.Columns[4].HeaderText = "ชื่อสินค้า";
-                gv.Columns[5].HeaderText = "ปริมาณ";
-                gv.Columns[6].HeaderText = "น้้ำหนัก";
+         
+            gv.DataSource = dtOrderItem;
+            gv.Columns[2].HeaderText = "ลำดับ";
+            gv.Columns[3].HeaderText = "รหัสสินค้า";
+            gv.Columns[4].HeaderText = "ชื่อสินค้า";
+            gv.Columns[5].HeaderText = "ปริมาณ";
+            gv.Columns[6].HeaderText = "น้้ำหนัก";
 
-                gv.Columns[2].Visible = false;
-            }
+            gv.Columns[2].Visible = false;
+            //if (dtOrderItem != null && dtOrderItem.Rows.Count > 0)
+            //{
+            
+
+            //}
         }
-
         private void LoadCustomer()
         {
             var coll = CustomerController.GetAllCustomers();
@@ -211,39 +226,50 @@ namespace SlaughterHouseServer
             cboCustomer.ValueMember = "CustomerCode";
             cboCustomer.DataSource = coll;
         }
-
         private void SaveOrder()
         {
             try
             {
-                var order = new Order
-                {
-                    OrderNo = txtOrderNo.Text,
-                    OrderDate  = dtpOrderDate.Value, 
-                    Customer = new Customer
-                    {
-                        CustomerCode = cboCustomer.SelectedValue.ToString()
-                    },  
-                    Comments = txtComment.Text,
-                    CreateBy = "system"
-
-                };
-                 
-                var orderItems = new List<OrderItem>(); 
+                var orderItems = new List<OrderItem>();
+                int seq = 0;
                 foreach (DataRow row in dtOrderItem.Rows)
                 {
+                    seq++;
                     orderItems.Add(new OrderItem
                     {
                         OrderNo = txtOrderNo.Text,
-                        Seq = (int)row["seq"], 
+                        Seq = seq,
                         Product = new Product
                         {
-                            ProductCode = row["product_code"].ToString() ,
+                            ProductCode = row["product_code"].ToString(),
                             ProductName = row["product_name"].ToString(),
                         },
                         OrderQty = (int)row["order_qty"],
                         OrderWgh = (decimal)row["order_wgh"],
                     });
+                }
+
+                var order = new Order
+                {
+                    OrderNo = txtOrderNo.Text,
+                    OrderDate = dtpOrderDate.Value,
+                    Customer = new Customer
+                    {
+                        CustomerCode = cboCustomer.SelectedValue.ToString()
+                    },
+                    Comments = txtComment.Text,
+                    OrderFlag = 0,
+                    CreateBy = "system",
+                    ModifiedBy = "system",
+                    OrderItems = orderItems,
+                };
+
+                if (string.IsNullOrEmpty(txtOrderNo.Text)) 
+                {
+                    OrderController.Insert(order);
+                }
+                else{
+                    OrderController.Update (order);
                 }
                 //OrderController.InsertOrUpdate(order);
 

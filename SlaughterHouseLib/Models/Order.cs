@@ -15,7 +15,6 @@ namespace SlaughterHouseLib.Models
         public DateTime CreateAt { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
-
         public List<OrderItem> OrderItems { get; set; }
 
     }
