@@ -125,6 +125,8 @@ namespace SlaughterHouseLib
 
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
+
+
                     order.OrderNo = DocumentGenerate.GetDocumentRunning("SO");
                     conn.Open();
                     tr = conn.BeginTransaction();
@@ -201,7 +203,17 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     tr = conn.BeginTransaction();
-                    var sql = @"UPDATE orders
+                    var sql = @"SELECT order_flag FROM orders WHERE order_no=@order_no";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("order_no", order.OrderNo);
+                    var orderFlag = (int)cmd.ExecuteScalar();
+                    if (orderFlag > 0)
+                    {
+                        throw new Exception("ไม่สามารถยกเลิกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
+                    }
+
+
+                      sql = @"UPDATE orders
                                 SET order_date=@order_date,
                                 customer_code=@customer_code,
                                 order_flag=@order_flag,
@@ -209,7 +221,7 @@ namespace SlaughterHouseLib
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by
                                 WHERE order_no=@order_no"; 
-                    var cmd = new MySqlCommand(sql, conn)
+                      cmd = new MySqlCommand(sql, conn)
                     {
                         Transaction = tr
                     };
@@ -268,56 +280,56 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        public static bool Delete(string orderNo)
-        {
-            MySqlTransaction tr = null;
-            try
-            {
-                using (var conn = new MySqlConnection(Globals.CONN_STR))
-                {
-                    conn.Open();
-                    tr = conn.BeginTransaction();
+        //public static bool Delete(string orderNo)
+        //{
+        //    MySqlTransaction tr = null;
+        //    try
+        //    {
+        //        using (var conn = new MySqlConnection(Globals.CONN_STR))
+        //        {
+        //            conn.Open();
+        //            tr = conn.BeginTransaction();
 
-                    //Check Order Flag
-                    // 0 = New Create
-                    // 1 = Next State 
-                    var sql = @"SELECT order_flag FROM orders WHERE order_no=@order_no";
-                    var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("order_no", orderNo);
-                    var orderFlag = (int)cmd.ExecuteScalar();
-                    if (orderFlag > 0)
-                    {
-                        throw new Exception("ไม่สามารถยกเลิกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
-                    }
+        //            //Check Order Flag
+        //            // 0 = New Create
+        //            // 1 = Next State 
+        //            var sql = @"SELECT order_flag FROM orders WHERE order_no=@order_no";
+        //            var cmd = new MySqlCommand(sql, conn);
+        //            cmd.Parameters.AddWithValue("order_no", orderNo);
+        //            var orderFlag = (int)cmd.ExecuteScalar();
+        //            if (orderFlag > 0)
+        //            {
+        //                throw new Exception("ไม่สามารถยกเลิกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
+        //            }
 
-                    //Delete Order Item
-                    sql = @"DELETE FROM order_item WHERE order_no=@order_no";
-                    cmd = new MySqlCommand(sql, conn)
-                    {
-                        Transaction = tr
-                    };
-                    cmd.Parameters.AddWithValue("order_no", orderNo);
-                    cmd.ExecuteNonQuery();
+        //            //Delete Order Item
+        //            sql = @"DELETE FROM order_item WHERE order_no=@order_no";
+        //            cmd = new MySqlCommand(sql, conn)
+        //            {
+        //                Transaction = tr
+        //            };
+        //            cmd.Parameters.AddWithValue("order_no", orderNo);
+        //            cmd.ExecuteNonQuery();
 
-                    //Delete Order
-                    sql = @"DELETE FROM orders WHERE order_no=@order_no";
-                    cmd = new MySqlCommand(sql, conn)
-                    {
-                        Transaction = tr
-                    };
-                    cmd.Parameters.AddWithValue("order_no", orderNo);
-                    cmd.ExecuteNonQuery();
+        //            //Delete Order
+        //            sql = @"DELETE FROM orders WHERE order_no=@order_no";
+        //            cmd = new MySqlCommand(sql, conn)
+        //            {
+        //                Transaction = tr
+        //            };
+        //            cmd.Parameters.AddWithValue("order_no", orderNo);
+        //            cmd.ExecuteNonQuery();
 
-                    tr.Commit();
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                tr.Rollback();
-                throw;
-            }
-        }
+        //            tr.Commit();
+        //        }
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        tr.Rollback();
+        //        throw;
+        //    }
+        //}
     }
     public static class OrderItemController
     {
