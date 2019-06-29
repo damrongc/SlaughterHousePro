@@ -42,7 +42,7 @@
             // 
             this.txtUnitName.Location = new System.Drawing.Point(145, 65);
             this.txtUnitName.Name = "txtUnitName";
-            this.txtUnitName.Size = new System.Drawing.Size(529, 29);
+            this.txtUnitName.Size = new System.Drawing.Size(529, 36);
             this.txtUnitName.TabIndex = 3;
             // 
             // label2
@@ -50,7 +50,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(42, 68);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 24);
+            this.label2.Size = new System.Drawing.Size(100, 29);
             this.label2.TabIndex = 2;
             this.label2.Text = "ชื่อหน่วยนับ";
             // 
@@ -61,7 +61,7 @@
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkActive.Location = new System.Drawing.Point(145, 112);
             this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(76, 28);
+            this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 6;
             this.chkActive.Text = "ใช้งาน";
             this.chkActive.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             this.txtUnitCode.Location = new System.Drawing.Point(145, 22);
             this.txtUnitCode.MaxLength = 10;
             this.txtUnitCode.Name = "txtUnitCode";
-            this.txtUnitCode.Size = new System.Drawing.Size(215, 29);
+            this.txtUnitCode.Size = new System.Drawing.Size(215, 36);
             this.txtUnitCode.TabIndex = 27;
             // 
             // label1
@@ -115,7 +115,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(27, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 24);
+            this.label1.Size = new System.Drawing.Size(111, 29);
             this.label1.TabIndex = 26;
             this.label1.Text = "รหัสหนัวยนับ";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -137,7 +137,7 @@
             this.MinimizeBox = false;
             this.Name = "Form_UnitAddEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form_FarmAddEdit";
+            this.Text = "Form_UnitAddEdit";
             this.Load += new System.EventHandler(this.Form_UnitAddEdit_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();

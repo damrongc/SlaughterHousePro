@@ -9,14 +9,12 @@ using System.Text;
 namespace SlaughterHouseLib
 {
 
-    public class OrderController
+    public static class OrderController
     {
-
-        public object GetAllOrders(DateTime orderDate, string customerCode)
+        public static object GetAllOrders(DateTime orderDate, string customerCode = "")
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -37,6 +35,7 @@ namespace SlaughterHouseLib
                     sb.Append(" ORDER BY order_no ASC");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
                     cmd.Parameters.AddWithValue("order_date", orderDate.ToString("yyyy-MM-dd"));
+
 
                     if (!string.IsNullOrEmpty(customerCode))
                         cmd.Parameters.AddWithValue("customer_code", customerCode);
@@ -66,7 +65,7 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        public Order GetOrder(string orderNo)
+        public static Order GetOrder(string orderNo)
         {
             try
             {
@@ -77,7 +76,7 @@ namespace SlaughterHouseLib
                     var sql = @"SELECT order_no,
                                 order_date,
                                 customer_code,
-                                order_flag
+                                order_flag, create_at
                                 FROM orders
                                 WHERE order_no =@order_no";
 
@@ -118,7 +117,7 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        public bool Insert(Order order)
+        public static bool Insert(Order order)
         {
             MySqlTransaction tr = null;
             try
@@ -194,7 +193,7 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        public bool Update(Order Order)
+        public static bool Update(Order Order)
         {
             try
             {
@@ -227,7 +226,7 @@ namespace SlaughterHouseLib
             }
         }
 
-        public bool Delete(string orderNo)
+        public static bool Delete(string orderNo)
         {
             MySqlTransaction tr = null;
             try
@@ -279,29 +278,27 @@ namespace SlaughterHouseLib
         }
 
     }
-    public class OrderItemController
+    public static class OrderItemController
     {
-        public List<OrderItem> GetOrderItems(string orderNo)
+        public static DataTable GetOrderItems(string orderNo)
         {
             try
             {
-                var orderItems = new List<OrderItem>();
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"select a.order_no,
-                                a.seq,
+                    var sql = @"select a.seq,
                                 a.product_code,
+                                b.product_name,
                                 order_qty,
-                                order_wgh,
-                                unload_qty,
-                                unload_wgh,
-                                b.product_name
+                                order_wgh
                                 from order_item a,product b
                                 where a.product_code =b.product_code
-                                and order_no =@order_no
+                                and a.order_no =@order_no 
                                 order by seq asc";
-
+                    
+                                //unload_qty,
+                                //unload_wgh
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("order_no", orderNo);
@@ -310,27 +307,20 @@ namespace SlaughterHouseLib
                     var ds = new DataSet();
                     da.Fill(ds);
 
-                    foreach (DataRow item in ds.Tables[0].Rows)
-                    {
-                        orderItems.Add(new OrderItem
-                        {
-                            OrderNo = (string)item["order_no"],
-                            Seq = (int)item["seq"],
-                            Product = new Product
-                            {
-                                ProductCode = item["product_code"].ToString(),
-                                ProductName = item["product_name"].ToString(),
-                            },
-                            OrderQty = (int)item["order_qty"],
-                            OrderWgh = (decimal)item["order_wgh"],
-                            UnloadQty = (int)item["unload_qty"],
-                            UnloadWgh = (decimal)item["unload_wgh"],
-                        });
-                    }
-
+                    //var coll = (from p in ds.Tables[0].AsEnumerable()
+                    //            select new
+                    //            {
+                    //                OrderNo = p.Field<string>("order_no"),
+                    //                Seq = p.Field<int>("seq"),
+                    //                ProductCode = p.Field<string>("product_code"),
+                    //                ProductName = p.Field<string>("product_name"),
+                    //                OrderQty = p.Field<int>("order_qty"),
+                    //                OrderWgh = p.Field<decimal>("order_wgh"),
+                    //                UnloadQty = p.Field<int>("unload_qty"),
+                    //                UnloadWgh = p.Field<decimal>("unload_wgh"),
+                    //            }).ToList();
+                    return ds.Tables[0];
                 }
-
-                return orderItems;
             }
             catch (Exception)
             {

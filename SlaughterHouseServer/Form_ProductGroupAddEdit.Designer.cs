@@ -42,7 +42,7 @@
             // 
             this.txtProductGroupName.Location = new System.Drawing.Point(145, 65);
             this.txtProductGroupName.Name = "txtProductGroupName";
-            this.txtProductGroupName.Size = new System.Drawing.Size(529, 29);
+            this.txtProductGroupName.Size = new System.Drawing.Size(529, 36);
             this.txtProductGroupName.TabIndex = 3;
             // 
             // label2
@@ -50,9 +50,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(36, 68);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 24);
+            this.label2.Size = new System.Drawing.Size(112, 29);
             this.label2.TabIndex = 2;
-            this.label2.Text = "ชื่อกลุุ่มสินค้า"; 
+            this.label2.Text = "ชื่อกลุุ่มสินค้า";
             // 
             // chkActive
             // 
@@ -61,7 +61,7 @@
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkActive.Location = new System.Drawing.Point(145, 112);
             this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(76, 28);
+            this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 6;
             this.chkActive.Text = "ใช้งาน";
             this.chkActive.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             this.txtProductGroupCode.Location = new System.Drawing.Point(145, 22);
             this.txtProductGroupCode.MaxLength = 10;
             this.txtProductGroupCode.Name = "txtProductGroupCode";
-            this.txtProductGroupCode.Size = new System.Drawing.Size(215, 29);
+            this.txtProductGroupCode.Size = new System.Drawing.Size(215, 36);
             this.txtProductGroupCode.TabIndex = 27;
             // 
             // label1
@@ -115,9 +115,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(27, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 24);
+            this.label1.Size = new System.Drawing.Size(123, 29);
             this.label1.TabIndex = 26;
-            this.label1.Text = "รหัสกลุุ่มสินค้า"; 
+            this.label1.Text = "รหัสกลุุ่มสินค้า";
             // 
             // Form_ProductGroupAddEdit
             // 
@@ -136,7 +136,7 @@
             this.MinimizeBox = false;
             this.Name = "Form_ProductGroupAddEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form_FarmAddEdit"; 
+            this.Text = "Form_ProductGroupAddEdit";
             this.ResumeLayout(false);
             this.PerformLayout();
 

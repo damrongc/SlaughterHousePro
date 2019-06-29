@@ -33,6 +33,9 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.plMenu = new System.Windows.Forms.Panel();
+            this.BtnIssue = new System.Windows.Forms.Button();
+            this.BtnOrder = new System.Windows.Forms.Button();
+            this.BtnCarcass = new System.Windows.Forms.Button();
             this.BtnReceive = new System.Windows.Forms.Button();
             this.BtnUnit = new System.Windows.Forms.Button();
             this.BtnProductGroup = new System.Windows.Forms.Button();
@@ -42,9 +45,6 @@
             this.BtnFarm = new System.Windows.Forms.Button();
             this.plContainer = new System.Windows.Forms.Panel();
             this.dragControl1 = new DragControl();
-            this.BtnCarcass = new System.Windows.Forms.Button();
-            this.BtnIssue = new System.Windows.Forms.Button();
-            this.BtnOrder = new System.Windows.Forms.Button();
             this.plHeader.SuspendLayout();
             this.plMenu.SuspendLayout();
             this.SuspendLayout();
@@ -111,6 +111,66 @@
             this.plMenu.Name = "plMenu";
             this.plMenu.Size = new System.Drawing.Size(162, 746);
             this.plMenu.TabIndex = 9;
+            // 
+            // BtnIssue
+            // 
+            this.BtnIssue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnIssue.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnIssue.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.BtnIssue.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnIssue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnIssue.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnIssue.ForeColor = System.Drawing.Color.White;
+            this.BtnIssue.Image = ((System.Drawing.Image)(resources.GetObject("BtnIssue.Image")));
+            this.BtnIssue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnIssue.Location = new System.Drawing.Point(0, 480);
+            this.BtnIssue.Name = "BtnIssue";
+            this.BtnIssue.Size = new System.Drawing.Size(162, 60);
+            this.BtnIssue.TabIndex = 23;
+            this.BtnIssue.Text = "ใบสั่งผลิต";
+            this.BtnIssue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnIssue.UseVisualStyleBackColor = false;
+            // 
+            // BtnOrder
+            // 
+            this.BtnOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnOrder.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnOrder.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.BtnOrder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOrder.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnOrder.ForeColor = System.Drawing.Color.White;
+            this.BtnOrder.Image = ((System.Drawing.Image)(resources.GetObject("BtnOrder.Image")));
+            this.BtnOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnOrder.Location = new System.Drawing.Point(0, 420);
+            this.BtnOrder.Name = "BtnOrder";
+            this.BtnOrder.Size = new System.Drawing.Size(162, 60);
+            this.BtnOrder.TabIndex = 22;
+            this.BtnOrder.Text = "ใบสั่งขาย";
+            this.BtnOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnOrder.UseVisualStyleBackColor = false;
+            // 
+            // BtnCarcass
+            // 
+            this.BtnCarcass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnCarcass.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnCarcass.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.BtnCarcass.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnCarcass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnCarcass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCarcass.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCarcass.ForeColor = System.Drawing.Color.White;
+            this.BtnCarcass.Image = ((System.Drawing.Image)(resources.GetObject("BtnCarcass.Image")));
+            this.BtnCarcass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnCarcass.Location = new System.Drawing.Point(0, 360);
+            this.BtnCarcass.Name = "BtnCarcass";
+            this.BtnCarcass.Size = new System.Drawing.Size(162, 60);
+            this.BtnCarcass.TabIndex = 21;
+            this.BtnCarcass.Text = "รับหมูซีก";
+            this.BtnCarcass.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnCarcass.UseVisualStyleBackColor = false;
             // 
             // BtnReceive
             // 
@@ -263,66 +323,6 @@
             // dragControl1
             // 
             this.dragControl1.SelectControl = this.plHeader;
-            // 
-            // BtnCarcass
-            // 
-            this.BtnCarcass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnCarcass.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnCarcass.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.BtnCarcass.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnCarcass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnCarcass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCarcass.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCarcass.ForeColor = System.Drawing.Color.White;
-            this.BtnCarcass.Image = ((System.Drawing.Image)(resources.GetObject("BtnCarcass.Image")));
-            this.BtnCarcass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCarcass.Location = new System.Drawing.Point(0, 360);
-            this.BtnCarcass.Name = "BtnCarcass";
-            this.BtnCarcass.Size = new System.Drawing.Size(162, 60);
-            this.BtnCarcass.TabIndex = 21;
-            this.BtnCarcass.Text = "รับหมูซีก";
-            this.BtnCarcass.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnCarcass.UseVisualStyleBackColor = false;
-            // 
-            // BtnIssue
-            // 
-            this.BtnIssue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnIssue.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnIssue.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.BtnIssue.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnIssue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnIssue.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnIssue.ForeColor = System.Drawing.Color.White;
-            this.BtnIssue.Image = ((System.Drawing.Image)(resources.GetObject("BtnIssue.Image")));
-            this.BtnIssue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnIssue.Location = new System.Drawing.Point(0, 480);
-            this.BtnIssue.Name = "BtnIssue";
-            this.BtnIssue.Size = new System.Drawing.Size(162, 60);
-            this.BtnIssue.TabIndex = 23;
-            this.BtnIssue.Text = "เอกสารเบิก";
-            this.BtnIssue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnIssue.UseVisualStyleBackColor = false;
-            // 
-            // BtnOrder
-            // 
-            this.BtnOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnOrder.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnOrder.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.BtnOrder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOrder.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnOrder.ForeColor = System.Drawing.Color.White;
-            this.BtnOrder.Image = ((System.Drawing.Image)(resources.GetObject("BtnOrder.Image")));
-            this.BtnOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnOrder.Location = new System.Drawing.Point(0, 420);
-            this.BtnOrder.Name = "BtnOrder";
-            this.BtnOrder.Size = new System.Drawing.Size(162, 60);
-            this.BtnOrder.TabIndex = 22;
-            this.BtnOrder.Text = "เอกสารขาย";
-            this.BtnOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnOrder.UseVisualStyleBackColor = false;
             // 
             // Form_Main
             // 

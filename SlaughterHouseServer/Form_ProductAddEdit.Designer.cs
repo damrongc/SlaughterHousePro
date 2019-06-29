@@ -198,7 +198,7 @@
             this.MinimizeBox = false;
             this.Name = "Form_ProductAddEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form_FarmAddEdit";
+            this.Text = "Form_ProductAddEdit";
             this.ResumeLayout(false);
             this.PerformLayout();
 

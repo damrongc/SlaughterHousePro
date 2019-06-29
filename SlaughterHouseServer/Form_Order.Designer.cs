@@ -35,11 +35,10 @@
             this.gv = new System.Windows.Forms.DataGridView();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Print = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Close = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cboCustomer = new System.Windows.Forms.ComboBox();
-            this.dtpReceiveDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpOrderDate = new System.Windows.Forms.DateTimePicker();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -101,8 +100,7 @@
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Edit,
-            this.Print,
-            this.Close});
+            this.Print});
             this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv.Location = new System.Drawing.Point(6, 68);
             this.gv.Name = "gv";
@@ -124,13 +122,6 @@
             this.Print.Name = "Print";
             this.Print.Width = 58;
             // 
-            // Close
-            // 
-            this.Close.HeaderText = "จบคิว";
-            this.Close.Image = ((System.Drawing.Image)(resources.GetObject("Close.Image")));
-            this.Close.Name = "Close";
-            this.Close.Width = 63;
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.LightGray;
@@ -143,7 +134,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.cboCustomer);
-            this.panel2.Controls.Add(this.dtpReceiveDate);
+            this.panel2.Controls.Add(this.dtpOrderDate);
             this.panel2.Controls.Add(this.BtnSearch);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
@@ -162,14 +153,14 @@
             this.cboCustomer.Size = new System.Drawing.Size(382, 37);
             this.cboCustomer.TabIndex = 7;
             // 
-            // dtpReceiveDate
+            // dtpOrderDate
             // 
-            this.dtpReceiveDate.CustomFormat = "dd/MM/yyyy";
-            this.dtpReceiveDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpReceiveDate.Location = new System.Drawing.Point(281, 11);
-            this.dtpReceiveDate.Name = "dtpReceiveDate";
-            this.dtpReceiveDate.Size = new System.Drawing.Size(177, 36);
-            this.dtpReceiveDate.TabIndex = 6;
+            this.dtpOrderDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpOrderDate.Location = new System.Drawing.Point(281, 11);
+            this.dtpOrderDate.Name = "dtpOrderDate";
+            this.dtpOrderDate.Size = new System.Drawing.Size(177, 36);
+            this.dtpOrderDate.TabIndex = 6;
             // 
             // BtnSearch
             // 
@@ -226,10 +217,9 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView gv;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dtpReceiveDate;
+        private System.Windows.Forms.DateTimePicker dtpOrderDate;
         private System.Windows.Forms.ComboBox cboCustomer;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Print;
-        private System.Windows.Forms.DataGridViewImageColumn Close;
     }
 }
