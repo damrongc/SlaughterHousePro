@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ProductionOrder.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\ProductionOrderItem.cs" />
     <Compile Include="Models\Plant.cs" />
     <Compile Include="Models\ReceiveItem.cs" />
     <Compile Include="Models\OrderItem.cs" />
