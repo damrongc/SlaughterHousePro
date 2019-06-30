@@ -145,14 +145,14 @@ namespace SlaughterHouseServer
                             var frm = new Form_ProductionOrderDetail();
                             frm.poNo = txtPoNo.Text;
                             frm.productCode = dtPoItem.Rows[e.RowIndex]["product_code"].ToString();
-                            frm.qty = (int)dtPoItem.Rows[e.RowIndex]["order_qty"];
-                            frm.wgh = (decimal)dtPoItem.Rows[e.RowIndex]["order_wgh"];
+                            frm.qty = (int)dtPoItem.Rows[e.RowIndex]["po_qty"];
+                            frm.wgh = (decimal)dtPoItem.Rows[e.RowIndex]["po_wgh"];
                             if (frm.ShowDialog() == DialogResult.OK)
                             {
                                 dtPoItem.Rows[e.RowIndex]["product_code"] = frm.productCode;
                                 dtPoItem.Rows[e.RowIndex]["product_name"] = frm.productName;
-                                dtPoItem.Rows[e.RowIndex]["order_qty"] = frm.qty;
-                                dtPoItem.Rows[e.RowIndex]["order_wgh"] = frm.wgh;
+                                dtPoItem.Rows[e.RowIndex]["po_qty"] = frm.qty;
+                                dtPoItem.Rows[e.RowIndex]["po_wgh"] = frm.wgh;
                                 dtPoItem.AcceptChanges();
                                 gv.Refresh();
                             }
