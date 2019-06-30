@@ -63,6 +63,24 @@
     <Compile Include="Form_CustomerAddEdit.Designer.cs">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_ProductionOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductionOrder.Designer.cs">
+      <DependentUpon>Form_ProductionOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ProductionOrderAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductionOrderAddEdit.Designer.cs">
+      <DependentUpon>Form_ProductionOrderAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ProductionOrderDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductionOrderDetail.Designer.cs">
+      <DependentUpon>Form_ProductionOrderDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_OrderDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +178,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_CustomerAddEdit.resx">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProductionOrder.resx">
+      <DependentUpon>Form_ProductionOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProductionOrderAddEdit.resx">
+      <DependentUpon>Form_ProductionOrderAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProductionOrderDetail.resx">
+      <DependentUpon>Form_ProductionOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_OrderDetail.resx">
       <DependentUpon>Form_OrderDetail.cs</DependentUpon>

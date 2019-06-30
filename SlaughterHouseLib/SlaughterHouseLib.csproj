@@ -59,6 +59,7 @@
     <Compile Include="Models\Breeder.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="MyExtension.cs" />
+    <Compile Include="ProductionOrderController.cs" />
     <Compile Include="ReportController.cs" />
     <Compile Include="Models\Farm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

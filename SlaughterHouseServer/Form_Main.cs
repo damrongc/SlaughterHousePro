@@ -19,7 +19,7 @@ namespace SlaughterHouseServer
             BtnProductGroup.Click += Btn_Click;
             BtnUnit.Click += Btn_Click;
             BtnOrder.Click += Btn_Click;
-            BtnIssue.Click += Btn_Click;
+            BtnProductionOrder.Click += Btn_Click;
             BtnReceive.Click += Btn_Click;
             BtnCarcass.Click += Btn_Click;
         }
@@ -52,6 +52,9 @@ namespace SlaughterHouseServer
                     break;
                 case "BtnOrder":
                     AddFormToContainer(new Form_Order ()); 
+                    break;
+                case "BtnProductionOrder":
+                    AddFormToContainer(new Form_ProductionOrder());
                     break;
             }
         }

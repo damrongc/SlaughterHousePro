@@ -33,7 +33,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.plMenu = new System.Windows.Forms.Panel();
-            this.BtnIssue = new System.Windows.Forms.Button();
+            this.BtnProductionOrder = new System.Windows.Forms.Button();
             this.BtnOrder = new System.Windows.Forms.Button();
             this.BtnCarcass = new System.Windows.Forms.Button();
             this.BtnReceive = new System.Windows.Forms.Button();
@@ -88,14 +88,14 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(392, 41);
+            this.label1.Size = new System.Drawing.Size(488, 50);
             this.label1.TabIndex = 2;
             this.label1.Text = "ระบบบริหารจัดการโรงชำแหละสุกร";
             // 
             // plMenu
             // 
             this.plMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.plMenu.Controls.Add(this.BtnIssue);
+            this.plMenu.Controls.Add(this.BtnProductionOrder);
             this.plMenu.Controls.Add(this.BtnOrder);
             this.plMenu.Controls.Add(this.BtnCarcass);
             this.plMenu.Controls.Add(this.BtnReceive);
@@ -112,25 +112,25 @@
             this.plMenu.Size = new System.Drawing.Size(162, 746);
             this.plMenu.TabIndex = 9;
             // 
-            // BtnIssue
+            // BtnProductionOrder
             // 
-            this.BtnIssue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnIssue.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnIssue.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.BtnIssue.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnIssue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnIssue.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnIssue.ForeColor = System.Drawing.Color.White;
-            this.BtnIssue.Image = ((System.Drawing.Image)(resources.GetObject("BtnIssue.Image")));
-            this.BtnIssue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnIssue.Location = new System.Drawing.Point(0, 480);
-            this.BtnIssue.Name = "BtnIssue";
-            this.BtnIssue.Size = new System.Drawing.Size(162, 60);
-            this.BtnIssue.TabIndex = 23;
-            this.BtnIssue.Text = "ใบสั่งผลิต";
-            this.BtnIssue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnIssue.UseVisualStyleBackColor = false;
+            this.BtnProductionOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnProductionOrder.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnProductionOrder.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.BtnProductionOrder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnProductionOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnProductionOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnProductionOrder.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnProductionOrder.ForeColor = System.Drawing.Color.White;
+            this.BtnProductionOrder.Image = ((System.Drawing.Image)(resources.GetObject("BtnProductionOrder.Image")));
+            this.BtnProductionOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnProductionOrder.Location = new System.Drawing.Point(0, 480);
+            this.BtnProductionOrder.Name = "BtnProductionOrder";
+            this.BtnProductionOrder.Size = new System.Drawing.Size(162, 60);
+            this.BtnProductionOrder.TabIndex = 23;
+            this.BtnProductionOrder.Text = "ใบสั่งผลิต";
+            this.BtnProductionOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnProductionOrder.UseVisualStyleBackColor = false;
             // 
             // BtnOrder
             // 
@@ -359,7 +359,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button BtnFarm;
         private System.Windows.Forms.Panel plContainer;
-        private System.Windows.Forms.Button BtnIssue;
+        private System.Windows.Forms.Button BtnProductionOrder;
         private System.Windows.Forms.Button BtnOrder;
         private System.Windows.Forms.Button BtnCarcass;
     }
