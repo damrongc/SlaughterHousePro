@@ -609,6 +609,7 @@ DROP TABLE IF EXISTS `invoice`;
 CREATE TABLE `invoice` (
   `invoice_no` varchar(10) NOT NULL,
   `invoice_date` date NOT NULL,
+  `ref_document_no` varchar(10) NOT NULL,
   `customer_code` varchar(10) NOT NULL,
   `gross_amt` decimal(12,2) NOT NULL DEFAULT '0.00',
   `net_amt` decimal(12,2) NOT NULL DEFAULT '0.00',
@@ -650,3 +651,25 @@ CREATE TABLE `invoice_item` (
   PRIMARY KEY (`invoice_no`,`product_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+ 
+--
+-- Table structure for table `product_price`
+--
+
+DROP TABLE IF EXISTS `product_price`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `product_price` (
+  `product_code` varchar(10) NOT NULL, 
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `unit_price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `sale_unit_method` varchar(2) NOT NULL COMMENT 'Q/W,
+  `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_by` varchar(45) NOT NULL,
+  `modified_at` datetime DEFAULT NULL,
+  `modified_by` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`invoice_no`,`product_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
