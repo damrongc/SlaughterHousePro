@@ -45,6 +45,8 @@
             this.BtnFarm = new System.Windows.Forms.Button();
             this.plContainer = new System.Windows.Forms.Panel();
             this.dragControl1 = new DragControl();
+            this.BtnPriceList = new System.Windows.Forms.Button();
+            this.BtnInvoice = new System.Windows.Forms.Button();
             this.plHeader.SuspendLayout();
             this.plMenu.SuspendLayout();
             this.SuspendLayout();
@@ -88,13 +90,15 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(488, 50);
+            this.label1.Size = new System.Drawing.Size(392, 41);
             this.label1.TabIndex = 2;
             this.label1.Text = "ระบบบริหารจัดการโรงชำแหละสุกร";
             // 
             // plMenu
             // 
             this.plMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.plMenu.Controls.Add(this.BtnInvoice);
+            this.plMenu.Controls.Add(this.BtnPriceList);
             this.plMenu.Controls.Add(this.BtnProductionOrder);
             this.plMenu.Controls.Add(this.BtnOrder);
             this.plMenu.Controls.Add(this.BtnCarcass);
@@ -324,6 +328,46 @@
             // 
             this.dragControl1.SelectControl = this.plHeader;
             // 
+            // BtnPriceList
+            // 
+            this.BtnPriceList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnPriceList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnPriceList.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.BtnPriceList.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnPriceList.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnPriceList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnPriceList.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnPriceList.ForeColor = System.Drawing.Color.White;
+            this.BtnPriceList.Image = ((System.Drawing.Image)(resources.GetObject("BtnPriceList.Image")));
+            this.BtnPriceList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnPriceList.Location = new System.Drawing.Point(0, 540);
+            this.BtnPriceList.Name = "BtnPriceList";
+            this.BtnPriceList.Size = new System.Drawing.Size(162, 60);
+            this.BtnPriceList.TabIndex = 24;
+            this.BtnPriceList.Text = "ราคาประกาศ";
+            this.BtnPriceList.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnPriceList.UseVisualStyleBackColor = false;
+            // 
+            // BtnInvoice
+            // 
+            this.BtnInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnInvoice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnInvoice.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.BtnInvoice.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnInvoice.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnInvoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnInvoice.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnInvoice.ForeColor = System.Drawing.Color.White;
+            this.BtnInvoice.Image = ((System.Drawing.Image)(resources.GetObject("BtnInvoice.Image")));
+            this.BtnInvoice.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnInvoice.Location = new System.Drawing.Point(0, 600);
+            this.BtnInvoice.Name = "BtnInvoice";
+            this.BtnInvoice.Size = new System.Drawing.Size(162, 60);
+            this.BtnInvoice.TabIndex = 25;
+            this.BtnInvoice.Text = "ใบแจ้งหนี้";
+            this.BtnInvoice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnInvoice.UseVisualStyleBackColor = false;
+            // 
             // Form_Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -362,5 +406,7 @@
         private System.Windows.Forms.Button BtnProductionOrder;
         private System.Windows.Forms.Button BtnOrder;
         private System.Windows.Forms.Button BtnCarcass;
+        private System.Windows.Forms.Button BtnPriceList;
+        private System.Windows.Forms.Button BtnInvoice;
     }
 }

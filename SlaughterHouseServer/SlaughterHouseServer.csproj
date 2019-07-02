@@ -117,6 +117,12 @@
     <Compile Include="Form_ProductGroupAddEdit.Designer.cs">
       <DependentUpon>Form_ProductGroupAddEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_ProductPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductPrice.Designer.cs">
+      <DependentUpon>Form_ProductPrice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_ReceiveCarcass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_ProductGroupAddEdit.resx">
       <DependentUpon>Form_ProductGroupAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProductPrice.resx">
+      <DependentUpon>Form_ProductPrice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_ReceiveCarcass.resx">
       <DependentUpon>Form_ReceiveCarcass.cs</DependentUpon>

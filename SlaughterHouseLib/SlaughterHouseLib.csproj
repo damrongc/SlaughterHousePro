@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ProductPrice.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\InvoiceItem.cs" />
     <Compile Include="Models\ProductionOrder.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\ProductionOrderItem.cs" />

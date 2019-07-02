@@ -9,7 +9,6 @@ namespace SlaughterHouseLib.Models
         public Product Product { get; set; }
         public int OrderQty { get; set; }
         public decimal OrderWgh { get; set; }
-
         public int UnloadQty { get; set; }
         public decimal UnloadWgh { get; set; }
         public string CreateBy { get; set; }
@@ -17,6 +16,4 @@ namespace SlaughterHouseLib.Models
         public string ModifiedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
     }
-
-
 }

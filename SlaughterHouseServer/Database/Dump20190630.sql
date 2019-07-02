@@ -642,8 +642,6 @@ CREATE TABLE `invoice_item` (
   `vat_rate` decimal(12,2) NOT NULL DEFAULT '0.00',
   `vat_amt` decimal(12,2) NOT NULL DEFAULT '0.00',
   `net_amt` decimal(12,2) NOT NULL DEFAULT '0.00',
-  `invoice_flag` int(1) NOT NULL DEFAULT '0' COMMENT '0= Create\n1= Close',
-  `comments` varchar(200) NOT NULL,
   `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `create_by` varchar(45) NOT NULL,
   `modified_at` datetime DEFAULT NULL,

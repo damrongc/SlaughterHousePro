@@ -200,8 +200,7 @@ namespace SlaughterHouseServer
             LoadDetail();
         }
         private void LoadDetail()
-        {
-            //var orderItem = OrderItemController.GetOrderItems(orderNo);
+        { 
             dtOrderItem = new DataTable("ORDER_ITEM");
             dtOrderItem = OrderItemController.GetOrderItems(orderNo);
          
@@ -212,12 +211,7 @@ namespace SlaughterHouseServer
             gv.Columns[5].HeaderText = "ปริมาณ";
             gv.Columns[6].HeaderText = "น้้ำหนัก";
 
-            gv.Columns[2].Visible = false;
-            //if (dtOrderItem != null && dtOrderItem.Rows.Count > 0)
-            //{
-            
-
-            //}
+            gv.Columns[2].Visible = false;           
         }
         private void LoadCustomer()
         {
@@ -270,9 +264,7 @@ namespace SlaughterHouseServer
                 }
                 else{
                     OrderController.Update (order);
-                }
-                //OrderController.InsertOrUpdate(order);
-
+                } 
             }
             catch (Exception)
             {
