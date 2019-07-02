@@ -261,7 +261,7 @@ namespace SlaughterHouseServer
                     OrderFlag = 0,
                     CreateBy = "system",
                     ModifiedBy = "system",
-                    OrderItems = orderItems,
+                    OrderItems = orderItems
                 };
 
                 if (string.IsNullOrEmpty(txtOrderNo.Text)) 

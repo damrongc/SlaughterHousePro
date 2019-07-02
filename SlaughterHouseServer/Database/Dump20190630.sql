@@ -664,12 +664,12 @@ CREATE TABLE `product_price` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `unit_price` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `sale_unit_method` varchar(2) NOT NULL COMMENT 'Q/W,
+  `sale_unit_method` varchar(2) NOT NULL COMMENT 'Q/W',
   `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `create_by` varchar(45) NOT NULL,
   `modified_at` datetime DEFAULT NULL,
   `modified_by` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`invoice_no`,`product_code`)
+  PRIMARY KEY (`product_code`,`start_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
