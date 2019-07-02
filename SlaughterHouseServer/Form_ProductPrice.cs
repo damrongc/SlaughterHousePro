@@ -12,7 +12,7 @@ namespace SlaughterHouseServer
             InitializeComponent();
             UserSettingsComponent();
         }
-
+        
         private void UserSettingsComponent()
         {
             BtnAdd.Click += BtnAdd_Click;
@@ -102,7 +102,7 @@ namespace SlaughterHouseServer
         private void LoadOrder()
         {
             //var farmCtrl = new FarmController();
-            var coll = OrderController.GetAllOrders(dtpStartDate.Value, cboProduct.SelectedValue.ToString());
+            var coll = ProductPriceController.GetAllProductPrices(dtpStartDate.Value, cboProduct.SelectedValue.ToString());
             gv.DataSource = coll;
 
             gv.Columns[1].HeaderText = "รหัสสินค้า";
