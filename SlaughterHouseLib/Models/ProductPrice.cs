@@ -1,6 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -13,7 +12,7 @@ namespace SlaughterHouseLib.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int Day { get; set; }
-        public decimal UnitPrice { get; set; } 
+        public decimal UnitPrice { get; set; }
         public string SaleUnitMethod { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
@@ -32,7 +31,7 @@ namespace SlaughterHouseLib.Models
                     conn.Open();
                     var sb = new StringBuilder();
 
- 
+
 
                     sb.Append("SELECT a.product_code,");
                     sb.Append(" b.product_name,");
@@ -40,7 +39,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" a.end_date,");
                     sb.Append(" a.unit_price,");
                     sb.Append(" a.sale_unit_method,");
-                    sb.Append(" a.end_date - a.start_date as day,"); 
+                    sb.Append(" a.end_date - a.start_date as day,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by");
                     sb.Append(" FROM product_price a, product b");
@@ -94,40 +93,40 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" a.end_date,");
                     sb.Append(" a.unit_price,");
                     sb.Append(" a.sale_unit_method,");
-                    sb.Append(" a.end_date - a.start_date as day,"); 
+                    sb.Append(" a.end_date - a.start_date as day,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by");
                     sb.Append(" FROM product_price a, product b");
                     sb.Append(" WHERE a.product_code =b.product_code");
                     sb.Append(" AND a.start_date =@start_date");
-          
+
                     var cmd = new MySqlCommand(sb.ToString(), conn);
                     cmd.Parameters.AddWithValue("start_date", startDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("product_code", productCode);
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);
-                     
+
                     if (ds.Tables[0].Rows.Count > 0)
                     {
                         return new ProductPrice
                         {
-                            Product = new Product 
+                            Product = new Product
                             {
                                 ProductCode = (string)ds.Tables[0].Rows[0]["product_code"],
                                 ProductName = (string)ds.Tables[0].Rows[0]["product_name"],
-                            }, 
-                            StartDate == (DateTime)ds.Tables[0].Rows[0]["start_date"],
-                            EndDate == (DateTime)ds.Tables[0].Rows[0]["end_date"],
-                            UnitPrice  = (decimal)ds.Tables[0].Rows[0]["unit_price"],
-                            SaleUnitMethod = (string)ds.Tables[0].Rows[0]["sale_unit_method"], 
+                            },
+                            StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
+                            EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
+                            UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"],
+                            SaleUnitMethod = (string)ds.Tables[0].Rows[0]["sale_unit_method"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }
                     else
                     {
                         return null;
-                    } 
+                    }
                 }
             }
             catch (Exception)

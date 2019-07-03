@@ -1,0 +1,1147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SlaughterhouseModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="barcode">
+          <Key>
+            <PropertyRef Name="barcode_no" />
+          </Key>
+          <Property Name="barcode_no" Type="int" Nullable="false" />
+          <Property Name="product_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="qty" Type="int" Nullable="false" />
+          <Property Name="wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="breeder">
+          <Key>
+            <PropertyRef Name="breeder_code" />
+          </Key>
+          <Property Name="breeder_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="breeder_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customer_code" />
+          </Key>
+          <Property Name="customer_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="customer_name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ship_to" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="tax_id" Type="varchar" MaxLength="10" />
+          <Property Name="contact_no" Type="varchar" MaxLength="20" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="document_generate">
+          <Key>
+            <PropertyRef Name="document_type" />
+          </Key>
+          <Property Name="document_type" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="running" Type="int" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="farm">
+          <Key>
+            <PropertyRef Name="farm_code" />
+          </Key>
+          <Property Name="farm_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="farm_name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="location">
+          <Key>
+            <PropertyRef Name="location_code" />
+          </Key>
+          <Property Name="location_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="location_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="order_item">
+          <Key>
+            <PropertyRef Name="order_no" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="order_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="product_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="seq" Type="int" Nullable="false" />
+          <Property Name="order_qty" Type="int" Nullable="false" />
+          <Property Name="order_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="unload_qty" Type="int" Nullable="false" />
+          <Property Name="unload_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="order_no" />
+          </Key>
+          <Property Name="order_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="order_date" Type="date" Nullable="false" />
+          <Property Name="customer_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="order_flag" Type="int" Nullable="false" />
+          <Property Name="comments" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="plant">
+          <Key>
+            <PropertyRef Name="plant_id" />
+          </Key>
+          <Property Name="plant_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="production_date" Type="date" Nullable="false" />
+          <Property Name="plant_name" Type="varchar" MaxLength="100" />
+          <Property Name="address" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="product_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="product_name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="product_group_code" Type="int" Nullable="false" />
+          <Property Name="unit_of_qty" Type="int" Nullable="false" />
+          <Property Name="unit_of_wgh" Type="int" Nullable="false" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="product_group">
+          <Key>
+            <PropertyRef Name="product_group_code" />
+          </Key>
+          <Property Name="product_group_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_group_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="receive_item">
+          <Key>
+            <PropertyRef Name="receive_no" />
+            <PropertyRef Name="product_code" />
+            <PropertyRef Name="seq" />
+          </Key>
+          <Property Name="receive_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="product_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="seq" Type="int" Nullable="false" />
+          <Property Name="sex_flag" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="receive_qty" Type="int" Nullable="false" />
+          <Property Name="receive_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="receives">
+          <Key>
+            <PropertyRef Name="receive_no" />
+          </Key>
+          <Property Name="receive_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="receive_date" Type="date" Nullable="false" />
+          <Property Name="transport_doc_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="truck_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="farm_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="coop_no" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="breeder_code" Type="int" Nullable="false" />
+          <Property Name="queue_no" Type="int" Nullable="false" />
+          <Property Name="lot_no" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="farm_qty" Type="int" Nullable="false" />
+          <Property Name="farm_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="factory_qty" Type="int" Nullable="false" />
+          <Property Name="factory_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="receive_flag" Type="int" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="stock">
+          <Key>
+            <PropertyRef Name="stock_date" />
+            <PropertyRef Name="stock_no" />
+            <PropertyRef Name="stock_item" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="stock_date" Type="date" Nullable="false" />
+          <Property Name="stock_no" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="stock_item" Type="int" Nullable="false" />
+          <Property Name="product_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="stock_qty" Type="int" Nullable="false" />
+          <Property Name="stock_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ref_document_type" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ref_document_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="lot_no" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="location_code" Type="int" Nullable="false" />
+          <Property Name="barcode_no" Type="int" Nullable="false" />
+          <Property Name="transaction_type" Type="int" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stock_item_running">
+          <Key>
+            <PropertyRef Name="doc_no" />
+            <PropertyRef Name="stock_no" />
+          </Key>
+          <Property Name="doc_no" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="stock_no" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="stock_item" Type="int" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="unit_of_measurement">
+          <Key>
+            <PropertyRef Name="unit_code" />
+          </Key>
+          <Property Name="unit_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="unit_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <Association Name="fk_barcode_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="barcode" Type="Self.barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="barcode">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_breeder_01">
+          <End Role="breeder" Type="Self.breeder" Multiplicity="1" />
+          <End Role="receives" Type="Self.receives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="breeder">
+              <PropertyRef Name="breeder_code" />
+            </Principal>
+            <Dependent Role="receives">
+              <PropertyRef Name="breeder_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_farm_01">
+          <End Role="farm" Type="Self.farm" Multiplicity="1" />
+          <End Role="receives" Type="Self.receives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="farm">
+              <PropertyRef Name="farm_code" />
+            </Principal>
+            <Dependent Role="receives">
+              <PropertyRef Name="farm_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_customer">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customer_code" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="customer_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_orderitem">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="order_no" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="order_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_product_group">
+          <End Role="product_group" Type="Self.product_group" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product_group">
+              <PropertyRef Name="product_group_code" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="product_group_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_receives_01">
+          <End Role="receives" Type="Self.receives" Multiplicity="1" />
+          <End Role="receive_item" Type="Self.receive_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="receives">
+              <PropertyRef Name="receive_no" />
+            </Principal>
+            <Dependent Role="receive_item">
+              <PropertyRef Name="receive_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_receives_02">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="receive_item" Type="Self.receive_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="receive_item">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_unit_qty">
+          <End Role="unit_of_measurement" Type="Self.unit_of_measurement" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_of_measurement">
+              <PropertyRef Name="unit_code" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="unit_of_qty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_unit_wgh">
+          <End Role="unit_of_measurement" Type="Self.unit_of_measurement" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_of_measurement">
+              <PropertyRef Name="unit_code" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="unit_of_wgh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SlaughterhouseModelStoreContainer">
+          <EntitySet Name="barcode" EntityType="Self.barcode" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="breeder" EntityType="Self.breeder" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="document_generate" EntityType="Self.document_generate" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="farm" EntityType="Self.farm" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="location" EntityType="Self.location" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="order_item" EntityType="Self.order_item" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="plant" EntityType="Self.plant" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="product_group" EntityType="Self.product_group" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="receive_item" EntityType="Self.receive_item" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="receives" EntityType="Self.receives" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="stock" EntityType="Self.stock" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="stock_item_running" EntityType="Self.stock_item_running" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="unit_of_measurement" EntityType="Self.unit_of_measurement" Schema="slaughterhouse" store:Type="Tables" />
+          <AssociationSet Name="fk_barcode_product" Association="Self.fk_barcode_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="barcode" EntitySet="barcode" />
+          </AssociationSet>
+          <AssociationSet Name="fk_breeder_01" Association="Self.fk_breeder_01">
+            <End Role="breeder" EntitySet="breeder" />
+            <End Role="receives" EntitySet="receives" />
+          </AssociationSet>
+          <AssociationSet Name="fk_farm_01" Association="Self.fk_farm_01">
+            <End Role="farm" EntitySet="farm" />
+            <End Role="receives" EntitySet="receives" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_customer" Association="Self.fk_order_customer">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_orderitem" Association="Self.fk_order_orderitem">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_product" Association="Self.fk_order_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_group" Association="Self.fk_product_group">
+            <End Role="product_group" EntitySet="product_group" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="fk_receives_01" Association="Self.fk_receives_01">
+            <End Role="receives" EntitySet="receives" />
+            <End Role="receive_item" EntitySet="receive_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_receives_02" Association="Self.fk_receives_02">
+            <End Role="product" EntitySet="product" />
+            <End Role="receive_item" EntitySet="receive_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_unit_qty" Association="Self.fk_unit_qty">
+            <End Role="unit_of_measurement" EntitySet="unit_of_measurement" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="fk_unit_wgh" Association="Self.fk_unit_wgh">
+            <End Role="unit_of_measurement" EntitySet="unit_of_measurement" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SlaughterhouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SlaughterhouseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="barcodes" EntityType="SlaughterhouseModel.barcode" />
+          <EntitySet Name="breeders" EntityType="SlaughterhouseModel.breeder" />
+          <EntitySet Name="customers" EntityType="SlaughterhouseModel.customer" />
+          <EntitySet Name="document_generate" EntityType="SlaughterhouseModel.document_generate" />
+          <EntitySet Name="farms" EntityType="SlaughterhouseModel.farm" />
+          <EntitySet Name="locations" EntityType="SlaughterhouseModel.location" />
+          <EntitySet Name="order_item" EntityType="SlaughterhouseModel.order_item" />
+          <EntitySet Name="orders" EntityType="SlaughterhouseModel.order" />
+          <EntitySet Name="plants" EntityType="SlaughterhouseModel.plant" />
+          <EntitySet Name="products" EntityType="SlaughterhouseModel.product" />
+          <EntitySet Name="product_group" EntityType="SlaughterhouseModel.product_group" />
+          <EntitySet Name="receive_item" EntityType="SlaughterhouseModel.receive_item" />
+          <EntitySet Name="receives" EntityType="SlaughterhouseModel.receive" />
+          <EntitySet Name="stocks" EntityType="SlaughterhouseModel.stock" />
+          <EntitySet Name="stock_item_running" EntityType="SlaughterhouseModel.stock_item_running" />
+          <EntitySet Name="unit_of_measurement" EntityType="SlaughterhouseModel.unit_of_measurement" />
+          <AssociationSet Name="fk_barcode_product" Association="SlaughterhouseModel.fk_barcode_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="barcode" EntitySet="barcodes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_breeder_01" Association="SlaughterhouseModel.fk_breeder_01">
+            <End Role="breeder" EntitySet="breeders" />
+            <End Role="receive" EntitySet="receives" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_customer" Association="SlaughterhouseModel.fk_order_customer">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="order" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_farm_01" Association="SlaughterhouseModel.fk_farm_01">
+            <End Role="farm" EntitySet="farms" />
+            <End Role="receive" EntitySet="receives" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_orderitem" Association="SlaughterhouseModel.fk_order_orderitem">
+            <End Role="order" EntitySet="orders" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_product" Association="SlaughterhouseModel.fk_order_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_group" Association="SlaughterhouseModel.fk_product_group">
+            <End Role="product_group" EntitySet="product_group" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_receives_02" Association="SlaughterhouseModel.fk_receives_02">
+            <End Role="product" EntitySet="products" />
+            <End Role="receive_item" EntitySet="receive_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_unit_qty" Association="SlaughterhouseModel.fk_unit_qty">
+            <End Role="unit_of_measurement" EntitySet="unit_of_measurement" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_unit_wgh" Association="SlaughterhouseModel.fk_unit_wgh">
+            <End Role="unit_of_measurement" EntitySet="unit_of_measurement" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_receives_01" Association="SlaughterhouseModel.fk_receives_01">
+            <End Role="receive" EntitySet="receives" />
+            <End Role="receive_item" EntitySet="receive_item" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="barcode">
+          <Key>
+            <PropertyRef Name="barcode_no" />
+          </Key>
+          <Property Name="barcode_no" Type="Int32" Nullable="false" />
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="qty" Type="Int32" Nullable="false" />
+          <Property Name="wgh" Type="Decimal" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="product" Relationship="SlaughterhouseModel.fk_barcode_product" FromRole="barcode" ToRole="product" />
+        </EntityType>
+        <EntityType Name="breeder">
+          <Key>
+            <PropertyRef Name="breeder_code" />
+          </Key>
+          <Property Name="breeder_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="breeder_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="receives" Relationship="SlaughterhouseModel.fk_breeder_01" FromRole="breeder" ToRole="receive" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customer_code" />
+          </Key>
+          <Property Name="customer_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="customer_name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ship_to" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="tax_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="contact_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="orders" Relationship="SlaughterhouseModel.fk_order_customer" FromRole="customer" ToRole="order" />
+        </EntityType>
+        <EntityType Name="document_generate">
+          <Key>
+            <PropertyRef Name="document_type" />
+          </Key>
+          <Property Name="document_type" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="running" Type="Int32" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="farm">
+          <Key>
+            <PropertyRef Name="farm_code" />
+          </Key>
+          <Property Name="farm_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="farm_name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="receives" Relationship="SlaughterhouseModel.fk_farm_01" FromRole="farm" ToRole="receive" />
+        </EntityType>
+        <EntityType Name="location">
+          <Key>
+            <PropertyRef Name="location_code" />
+          </Key>
+          <Property Name="location_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="location_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="order_item">
+          <Key>
+            <PropertyRef Name="order_no" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="order_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="seq" Type="Int32" Nullable="false" />
+          <Property Name="order_qty" Type="Int32" Nullable="false" />
+          <Property Name="order_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="unload_qty" Type="Int32" Nullable="false" />
+          <Property Name="unload_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="order" Relationship="SlaughterhouseModel.fk_order_orderitem" FromRole="order_item" ToRole="order" />
+          <NavigationProperty Name="product" Relationship="SlaughterhouseModel.fk_order_product" FromRole="order_item" ToRole="product" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="order_no" />
+          </Key>
+          <Property Name="order_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="order_date" Type="DateTime" Nullable="false" />
+          <Property Name="customer_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="order_flag" Type="Int32" Nullable="false" />
+          <Property Name="comments" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="customer" Relationship="SlaughterhouseModel.fk_order_customer" FromRole="order" ToRole="customer" />
+          <NavigationProperty Name="order_item" Relationship="SlaughterhouseModel.fk_order_orderitem" FromRole="order" ToRole="order_item" />
+        </EntityType>
+        <EntityType Name="plant">
+          <Key>
+            <PropertyRef Name="plant_id" />
+          </Key>
+          <Property Name="plant_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="production_date" Type="DateTime" Nullable="false" />
+          <Property Name="plant_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="product_name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="product_group_code" Type="Int32" Nullable="false" />
+          <Property Name="unit_of_qty" Type="Int32" Nullable="false" />
+          <Property Name="unit_of_wgh" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="barcodes" Relationship="SlaughterhouseModel.fk_barcode_product" FromRole="product" ToRole="barcode" />
+          <NavigationProperty Name="order_item" Relationship="SlaughterhouseModel.fk_order_product" FromRole="product" ToRole="order_item" />
+          <NavigationProperty Name="product_group" Relationship="SlaughterhouseModel.fk_product_group" FromRole="product" ToRole="product_group" />
+          <NavigationProperty Name="receive_item" Relationship="SlaughterhouseModel.fk_receives_02" FromRole="product" ToRole="receive_item" />
+          <NavigationProperty Name="unit_of_measurement" Relationship="SlaughterhouseModel.fk_unit_qty" FromRole="product" ToRole="unit_of_measurement" />
+          <NavigationProperty Name="unit_of_measurement1" Relationship="SlaughterhouseModel.fk_unit_wgh" FromRole="product" ToRole="unit_of_measurement" />
+        </EntityType>
+        <EntityType Name="product_group">
+          <Key>
+            <PropertyRef Name="product_group_code" />
+          </Key>
+          <Property Name="product_group_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_group_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="products" Relationship="SlaughterhouseModel.fk_product_group" FromRole="product_group" ToRole="product" />
+        </EntityType>
+        <EntityType Name="receive_item">
+          <Key>
+            <PropertyRef Name="receive_no" />
+            <PropertyRef Name="product_code" />
+            <PropertyRef Name="seq" />
+          </Key>
+          <Property Name="receive_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="seq" Type="Int32" Nullable="false" />
+          <Property Name="sex_flag" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="receive_qty" Type="Int32" Nullable="false" />
+          <Property Name="receive_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="product" Relationship="SlaughterhouseModel.fk_receives_02" FromRole="receive_item" ToRole="product" />
+          <NavigationProperty Name="receive" Relationship="SlaughterhouseModel.fk_receives_01" FromRole="receive_item" ToRole="receive" />
+        </EntityType>
+        <EntityType Name="receive">
+          <Key>
+            <PropertyRef Name="receive_no" />
+          </Key>
+          <Property Name="receive_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="receive_date" Type="DateTime" Nullable="false" />
+          <Property Name="transport_doc_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="truck_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="farm_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="coop_no" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="breeder_code" Type="Int32" Nullable="false" />
+          <Property Name="queue_no" Type="Int32" Nullable="false" />
+          <Property Name="lot_no" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="farm_qty" Type="Int32" Nullable="false" />
+          <Property Name="farm_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="factory_qty" Type="Int32" Nullable="false" />
+          <Property Name="factory_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="receive_flag" Type="Int32" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="breeder" Relationship="SlaughterhouseModel.fk_breeder_01" FromRole="receive" ToRole="breeder" />
+          <NavigationProperty Name="farm" Relationship="SlaughterhouseModel.fk_farm_01" FromRole="receive" ToRole="farm" />
+          <NavigationProperty Name="receive_item" Relationship="SlaughterhouseModel.fk_receives_01" FromRole="receive" ToRole="receive_item" />
+        </EntityType>
+        <EntityType Name="stock">
+          <Key>
+            <PropertyRef Name="stock_date" />
+            <PropertyRef Name="stock_no" />
+            <PropertyRef Name="stock_item" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="stock_date" Type="DateTime" Nullable="false" />
+          <Property Name="stock_no" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="stock_item" Type="Int32" Nullable="false" />
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="stock_qty" Type="Int32" Nullable="false" />
+          <Property Name="stock_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="ref_document_type" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ref_document_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="lot_no" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="location_code" Type="Int32" Nullable="false" />
+          <Property Name="barcode_no" Type="Int32" Nullable="false" />
+          <Property Name="transaction_type" Type="Int32" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="stock_item_running">
+          <Key>
+            <PropertyRef Name="doc_no" />
+            <PropertyRef Name="stock_no" />
+          </Key>
+          <Property Name="doc_no" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="stock_no" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="stock_item" Type="Int32" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="unit_of_measurement">
+          <Key>
+            <PropertyRef Name="unit_code" />
+          </Key>
+          <Property Name="unit_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="unit_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="products" Relationship="SlaughterhouseModel.fk_unit_qty" FromRole="unit_of_measurement" ToRole="product" />
+          <NavigationProperty Name="products1" Relationship="SlaughterhouseModel.fk_unit_wgh" FromRole="unit_of_measurement" ToRole="product" />
+        </EntityType>
+        <Association Name="fk_barcode_product">
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.barcode" Role="barcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="barcode">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_breeder_01">
+          <End Type="SlaughterhouseModel.breeder" Role="breeder" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.receive" Role="receive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="breeder">
+              <PropertyRef Name="breeder_code" />
+            </Principal>
+            <Dependent Role="receive">
+              <PropertyRef Name="breeder_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_customer">
+          <End Type="SlaughterhouseModel.customer" Role="customer" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.order" Role="order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customer_code" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="customer_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_farm_01">
+          <End Type="SlaughterhouseModel.farm" Role="farm" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.receive" Role="receive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="farm">
+              <PropertyRef Name="farm_code" />
+            </Principal>
+            <Dependent Role="receive">
+              <PropertyRef Name="farm_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_orderitem">
+          <End Type="SlaughterhouseModel.order" Role="order" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.order_item" Role="order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="order_no" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="order_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_product">
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.order_item" Role="order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_product_group">
+          <End Type="SlaughterhouseModel.product_group" Role="product_group" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product_group">
+              <PropertyRef Name="product_group_code" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="product_group_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_receives_02">
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.receive_item" Role="receive_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="receive_item">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_unit_qty">
+          <End Type="SlaughterhouseModel.unit_of_measurement" Role="unit_of_measurement" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_of_measurement">
+              <PropertyRef Name="unit_code" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="unit_of_qty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_unit_wgh">
+          <End Type="SlaughterhouseModel.unit_of_measurement" Role="unit_of_measurement" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_of_measurement">
+              <PropertyRef Name="unit_code" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="unit_of_wgh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_receives_01">
+          <End Type="SlaughterhouseModel.receive" Role="receive" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.receive_item" Role="receive_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="receive">
+              <PropertyRef Name="receive_no" />
+            </Principal>
+            <Dependent Role="receive_item">
+              <PropertyRef Name="receive_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SlaughterhouseModelStoreContainer" CdmEntityContainer="SlaughterhouseEntities">
+          <EntitySetMapping Name="barcodes">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.barcode">
+              <MappingFragment StoreEntitySet="barcode">
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="wgh" ColumnName="wgh" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="barcode_no" ColumnName="barcode_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="breeders">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.breeder">
+              <MappingFragment StoreEntitySet="breeder">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="breeder_name" ColumnName="breeder_name" />
+                <ScalarProperty Name="breeder_code" ColumnName="breeder_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+                <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+                <ScalarProperty Name="ship_to" ColumnName="ship_to" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="customer_code" ColumnName="customer_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="document_generate">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.document_generate">
+              <MappingFragment StoreEntitySet="document_generate">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="running" ColumnName="running" />
+                <ScalarProperty Name="document_type" ColumnName="document_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="farms">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.farm">
+              <MappingFragment StoreEntitySet="farm">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="farm_name" ColumnName="farm_name" />
+                <ScalarProperty Name="farm_code" ColumnName="farm_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="locations">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.location">
+              <MappingFragment StoreEntitySet="location">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="location_name" ColumnName="location_name" />
+                <ScalarProperty Name="location_code" ColumnName="location_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_item">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.order_item">
+              <MappingFragment StoreEntitySet="order_item">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="unload_wgh" ColumnName="unload_wgh" />
+                <ScalarProperty Name="unload_qty" ColumnName="unload_qty" />
+                <ScalarProperty Name="order_wgh" ColumnName="order_wgh" />
+                <ScalarProperty Name="order_qty" ColumnName="order_qty" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="order_no" ColumnName="order_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="order_flag" ColumnName="order_flag" />
+                <ScalarProperty Name="customer_code" ColumnName="customer_code" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="order_no" ColumnName="order_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plants">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.plant">
+              <MappingFragment StoreEntitySet="plant">
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="plant_name" ColumnName="plant_name" />
+                <ScalarProperty Name="production_date" ColumnName="production_date" />
+                <ScalarProperty Name="plant_id" ColumnName="plant_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="unit_of_wgh" ColumnName="unit_of_wgh" />
+                <ScalarProperty Name="unit_of_qty" ColumnName="unit_of_qty" />
+                <ScalarProperty Name="product_group_code" ColumnName="product_group_code" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product_group">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.product_group">
+              <MappingFragment StoreEntitySet="product_group">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="product_group_name" ColumnName="product_group_name" />
+                <ScalarProperty Name="product_group_code" ColumnName="product_group_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="receive_item">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.receive_item">
+              <MappingFragment StoreEntitySet="receive_item">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="receive_wgh" ColumnName="receive_wgh" />
+                <ScalarProperty Name="receive_qty" ColumnName="receive_qty" />
+                <ScalarProperty Name="sex_flag" ColumnName="sex_flag" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="receive_no" ColumnName="receive_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="receives">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.receive">
+              <MappingFragment StoreEntitySet="receives">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="receive_flag" ColumnName="receive_flag" />
+                <ScalarProperty Name="factory_wgh" ColumnName="factory_wgh" />
+                <ScalarProperty Name="factory_qty" ColumnName="factory_qty" />
+                <ScalarProperty Name="farm_wgh" ColumnName="farm_wgh" />
+                <ScalarProperty Name="farm_qty" ColumnName="farm_qty" />
+                <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+                <ScalarProperty Name="queue_no" ColumnName="queue_no" />
+                <ScalarProperty Name="breeder_code" ColumnName="breeder_code" />
+                <ScalarProperty Name="coop_no" ColumnName="coop_no" />
+                <ScalarProperty Name="farm_code" ColumnName="farm_code" />
+                <ScalarProperty Name="truck_no" ColumnName="truck_no" />
+                <ScalarProperty Name="transport_doc_no" ColumnName="transport_doc_no" />
+                <ScalarProperty Name="receive_date" ColumnName="receive_date" />
+                <ScalarProperty Name="receive_no" ColumnName="receive_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stocks">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.stock">
+              <MappingFragment StoreEntitySet="stock">
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="transaction_type" ColumnName="transaction_type" />
+                <ScalarProperty Name="barcode_no" ColumnName="barcode_no" />
+                <ScalarProperty Name="location_code" ColumnName="location_code" />
+                <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+                <ScalarProperty Name="ref_document_no" ColumnName="ref_document_no" />
+                <ScalarProperty Name="ref_document_type" ColumnName="ref_document_type" />
+                <ScalarProperty Name="stock_wgh" ColumnName="stock_wgh" />
+                <ScalarProperty Name="stock_qty" ColumnName="stock_qty" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="stock_item" ColumnName="stock_item" />
+                <ScalarProperty Name="stock_no" ColumnName="stock_no" />
+                <ScalarProperty Name="stock_date" ColumnName="stock_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stock_item_running">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.stock_item_running">
+              <MappingFragment StoreEntitySet="stock_item_running">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="stock_item" ColumnName="stock_item" />
+                <ScalarProperty Name="stock_no" ColumnName="stock_no" />
+                <ScalarProperty Name="doc_no" ColumnName="doc_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="unit_of_measurement">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.unit_of_measurement">
+              <MappingFragment StoreEntitySet="unit_of_measurement">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

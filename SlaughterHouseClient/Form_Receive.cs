@@ -63,13 +63,7 @@ namespace SlaughterHouseClient
 
         private void LoadData()
         {
-            //var farmCtrl = new FarmController();
             var coll = ReceiveController.GetAllReceives(this.receiveFlag);
-            //var coll =from p in receives
-            //          select new
-            //          {
-
-            //          }
 
             gv.DataSource = coll;
 

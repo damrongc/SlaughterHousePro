@@ -685,6 +685,108 @@ namespace SlaughterHouseLib
 
         }
 
+        public static bool ReceiveCarcass(Receive receive)
+        {
+            var conn = new MySqlConnection(Globals.CONN_STR);
+            MySqlTransaction transaction = null;
+            try
+            {
+
+                conn.Open();
+
+
+                var sql = @"SELECT max(seq) as seq,sum(receive_qty) as receive_qty
+                                FROM receive_item 
+                                WHERE receive_no=@receive_no
+                                AND product_code=@product_code
+                                GROUP BY receive_no,product_code";
+                var cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
+                cmd.Parameters.AddWithValue("product_code", receive.ReceiveItems[0].ProductCode);
+                var da = new MySqlDataAdapter(cmd);
+                var ds = new DataSet();
+                da.Fill(ds);
+
+                var sumReceiveQty = 0;
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    receive.ReceiveItems[0].Seq = 1;
+                }
+                else
+                {
+                    sumReceiveQty = ds.Tables[0].Rows[0]["receive_qty"].ToString().ToInt16();
+                    receive.ReceiveItems[0].Seq += ds.Tables[0].Rows[0]["seq"].ToString().ToInt16() + 1;
+                }
+                var remainQty = receive.FactoryQty - sumReceiveQty;
+                if (remainQty == 0)
+                {
+                    throw new Exception("ไม่สามารถรับสินค้าได้ เนื่องจากรับสินค้าครบแล้ว!");
+                }
+                transaction = conn.BeginTransaction();
+                cmd = new MySqlCommand()
+                {
+                    Connection = conn,
+                    CommandText = sql,
+                    Transaction = transaction
+                };
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
+                cmd.Parameters.AddWithValue("product_code", receive.ReceiveItems[0].ProductCode);
+                cmd.Parameters.AddWithValue("seq", receive.ReceiveItems[0].Seq);
+                cmd.Parameters.AddWithValue("sex_flag", receive.ReceiveItems[0].SexFlag);
+                cmd.Parameters.AddWithValue("receive_qty", receive.ReceiveItems[0].ReceiveQty);
+                cmd.Parameters.AddWithValue("receive_wgh", receive.ReceiveItems[0].ReceiveWgh);
+                cmd.Parameters.AddWithValue("create_by", receive.ReceiveItems[0].CreateBy);
+                cmd.ExecuteNonQuery();
+
+
+
+                //Insert Stock
+                var plant = PlantController.GetPlant();
+                var stockItemRunning = StockItemRunningController.GetStockItem(receive.ReceiveNo);
+
+                var stock = new Stock
+                {
+                    StockDate = plant.ProductionDate,
+                    StockNo = stockItemRunning.StockNo,
+                    StockItem = stockItemRunning.StockItem,
+                    ProductCode = receive.ReceiveItems[0].ProductCode,
+                    RefDocumentNo = receive.ReceiveNo,
+                    RefDocumentType = "REV",
+                    LotNo = DocumentGenerate.GetSwineLotNo(plant.PlantId, plant.ProductionDate, receive.QueueNo),
+                    StockQty = receive.FactoryQty,
+                    StockWgh = receive.FactoryWgh,
+                    BarcodeNo = 0,
+                    TransactionType = 1,
+                    LocationCode = 2,
+                    CreateBy = "system",
+                };
+
+
+                StockController.InsertStock(stock, cmd);
+                // Commit the transaction.
+                transaction.Commit();
+                return true;
+
+
+
+            }
+            catch (Exception)
+            {
+                if (transaction != null)
+                    transaction.Rollback();
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+            }
+
+        }
+
     }
 
 

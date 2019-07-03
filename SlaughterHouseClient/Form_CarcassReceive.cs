@@ -1,6 +1,7 @@
 ﻿using SlaughterHouseLib;
 using SlaughterHouseLib.Models;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SlaughterHouseClient
@@ -84,16 +85,23 @@ namespace SlaughterHouseClient
         {
             try
             {
-                ReceiveItem receiveItem = new ReceiveItem
+
+                receive.ReceiveItems = new List<ReceiveItem>
                 {
-                    ReceiveNo = receive.ReceiveNo,
-                    ProductCode = this.productCode,
-                    SexFlag = "",
-                    ReceiveQty = 1,
-                    ReceiveWgh = lblWeight.Text.ToDecimal(),
-                    CreateBy = "Auto"
+                    new ReceiveItem
+                    {
+                        ReceiveNo = receive.ReceiveNo,
+                        ProductCode = this.productCode,
+                        SexFlag = "",
+                        ReceiveQty = 1,
+                        ReceiveWgh = lblWeight.Text.ToDecimal(),
+                        CreateBy = "Auto"
+                    }
+
                 };
-                return ReceiveController.InsertItem(receiveItem);
+
+
+                return ReceiveController.ReceiveCarcass(receive);
             }
             catch (Exception)
             {

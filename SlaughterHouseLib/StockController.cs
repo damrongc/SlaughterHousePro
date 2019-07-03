@@ -284,8 +284,6 @@ namespace SlaughterHouseLib
                     cmd.ExecuteNonQuery();
                 }
 
-
-
                 return true;
 
             }
