@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
     public partial class Form_ProductPrice : Form
-    {
+    { 
         public Form_ProductPrice()
         {
             InitializeComponent();
@@ -27,7 +27,7 @@ namespace SlaughterHouseServer
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
              
-            LoadCustomer();
+            LoadProduct();
             LoadOrder();
         }
 
@@ -44,16 +44,18 @@ namespace SlaughterHouseServer
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-                    string orderNo = gv.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    string productCode = gv.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    DateTime startDate = (DateTime)gv.Rows[e.RowIndex].Cells[3].Value;
 
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
                     {
 
                         case "Edit":
-                            var frm = new Form_OrderAddEdit
+                            var frm = new Form_ProductPriceAddEdit
                             {
-                                orderNo = orderNo
-                            };
+                                productCode = productCode,
+                                startDate = startDate
+                            }; 
                             if (frm.ShowDialog() == DialogResult.OK)
                             {
                                 LoadOrder();
@@ -78,14 +80,14 @@ namespace SlaughterHouseServer
 
         private void BtnAdd_Click(object sender, System.EventArgs e)
         {
-            var frm = new Form_OrderAddEdit();
+            var frm = new Form_ProductPriceAddEdit();
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 LoadOrder();
             }
         }
 
-        private void LoadCustomer()
+        private void LoadProduct()
         {
 
             var coll = ProductController.GetAllProducts();
@@ -94,10 +96,11 @@ namespace SlaughterHouseServer
                 ProductCode  = "",
                 ProductName  = "--เลือก--"
             });
-            cboProduct.DisplayMember = "ProductCode";
-            cboProduct.ValueMember = "ProductName";
+            cboProduct.DisplayMember = "ProductName";
+            cboProduct.ValueMember = "ProductCode";
             cboProduct.DataSource = coll;
         }
+
 
         private void LoadOrder()
         {
@@ -112,8 +115,11 @@ namespace SlaughterHouseServer
             gv.Columns[5].HeaderText = "ราคาต่อหน่วย"; 
             gv.Columns[6].HeaderText = "หน่วยคำนวณขาย";
             gv.Columns[7].HeaderText = "จำนวนวัน";
-
+            gv.Columns[8].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[9].HeaderText = "ผู้สร้าง";
             gv.Columns[7].Visible = false;
         }
+
+     
     }
 }  

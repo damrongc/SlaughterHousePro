@@ -197,30 +197,6 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void label2_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void chkActive_CheckedChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void txtContactNo_TextChanged(object sender, System.EventArgs e)
-        {
-
-        }
+         
     }
 }

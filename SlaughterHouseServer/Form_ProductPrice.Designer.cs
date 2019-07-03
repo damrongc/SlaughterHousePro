@@ -33,13 +33,13 @@
             this.BtnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cboProduct = new System.Windows.Forms.ComboBox();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
@@ -105,6 +105,13 @@
             this.gv.RowHeadersWidth = 10;
             this.gv.Size = new System.Drawing.Size(1368, 656);
             this.gv.TabIndex = 8;
+            // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "แก้ไข";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.Name = "Edit";
+            this.Edit.Width = 58;
             // 
             // panel3
             // 
@@ -172,13 +179,6 @@
             this.label2.Size = new System.Drawing.Size(59, 29);
             this.label2.TabIndex = 5;
             this.label2.Text = "สินค้า:";
-            // 
-            // Edit
-            // 
-            this.Edit.HeaderText = "แก้ไข";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.Name = "Edit";
-            this.Edit.Width = 58;
             // 
             // Form_ProductPrice
             // 

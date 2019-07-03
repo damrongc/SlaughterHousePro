@@ -111,6 +111,7 @@ namespace SlaughterHouseServer
                 txtOrderNo.Focus();
                 cboCustomer.SelectedIndex = 0;
                 txtComment.Text = "";
+                chkActive.Checked = true;
                 LoadDetail();
             }
             catch (System.Exception ex)
@@ -193,7 +194,7 @@ namespace SlaughterHouseServer
                 dtpOrderDate.Value = order.OrderDate;
                 cboCustomer.SelectedValue = order.Customer.CustomerCode;
                 txtComment.Text = order.Comments;
-
+                chkActive.Checked = order.Active;
                 dtpOrderDate.Enabled = false;
                 BtnSaveAndNew.Visible = false; 
             }
@@ -253,6 +254,7 @@ namespace SlaughterHouseServer
                     },
                     Comments = txtComment.Text,
                     OrderFlag = 0,
+                    Active = chkActive.Checked,
                     CreateBy = "system",
                     ModifiedBy = "system",
                     OrderItems = orderItems

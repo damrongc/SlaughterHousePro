@@ -91,12 +91,11 @@ namespace SlaughterHouseServer
             var coll = ProductionOrderController.GetAllProductionOrders(dtpPoDate.Value );
             gv.DataSource = coll;
 
-            gv.Columns[2].HeaderText = "เลขที่ใบสั่งขาย";
-            gv.Columns[3].HeaderText = "วันที่สั่งขาย"; 
-            gv.Columns[4].HeaderText = "ความคิดเห็น"; 
-            gv.Columns[6].HeaderText = "วันเวลาสร้าง";
-
-            gv.Columns[5].Visible = false;
+            gv.Columns[2].HeaderText = "เลขที่ใบเบิก";
+            gv.Columns[3].HeaderText = "วันที่เบิก"; 
+            gv.Columns[4].HeaderText = "ใช้งาน";
+            gv.Columns[5].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[6].HeaderText = "ผู้สร้าง";
         }
          
     }

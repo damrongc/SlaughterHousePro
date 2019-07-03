@@ -37,13 +37,14 @@
             this.BtnSaveAndNew = new System.Windows.Forms.Button();
             this.dtpPoDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
-            this.btnAddPoItem = new System.Windows.Forms.Button();
+            this.chkActive = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.gv = new System.Windows.Forms.DataGridView();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Del = new System.Windows.Forms.DataGridViewImageColumn();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.gv = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnAddPoItem = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
@@ -92,7 +93,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(730, 535);
+            this.BtnSave.Location = new System.Drawing.Point(730, 569);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -109,7 +110,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(521, 535);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(521, 569);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -137,30 +138,40 @@
             this.label11.TabIndex = 33;
             this.label11.Text = "วันที่:";
             // 
-            // btnAddPoItem
+            // chkActive
             // 
-            this.btnAddPoItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(160)))), ((int)(((byte)(93)))));
-            this.btnAddPoItem.FlatAppearance.BorderSize = 0;
-            this.btnAddPoItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddPoItem.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddPoItem.ForeColor = System.Drawing.Color.White;
-            this.btnAddPoItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPoItem.Image")));
-            this.btnAddPoItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddPoItem.Location = new System.Drawing.Point(846, 0);
-            this.btnAddPoItem.Name = "btnAddPoItem";
-            this.btnAddPoItem.Size = new System.Drawing.Size(87, 36);
-            this.btnAddPoItem.TabIndex = 39;
-            this.btnAddPoItem.Text = "เพิ่ม";
-            this.btnAddPoItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddPoItem.UseVisualStyleBackColor = false;
+            this.chkActive.AutoSize = true;
+            this.chkActive.Checked = true;
+            this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkActive.Location = new System.Drawing.Point(182, 248);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Size = new System.Drawing.Size(79, 33);
+            this.chkActive.TabIndex = 47;
+            this.chkActive.Text = "ใช้งาน";
+            this.chkActive.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.gv);
-            this.panel2.Location = new System.Drawing.Point(12, 290);
+            this.panel2.Location = new System.Drawing.Point(12, 324);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(933, 211);
             this.panel2.TabIndex = 43;
+            // 
+            // Del
+            // 
+            this.Del.HeaderText = "ลบ";
+            this.Del.Image = ((System.Drawing.Image)(resources.GetObject("Del.Image")));
+            this.Del.Name = "Del";
+            this.Del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Del.Width = 42;
+            // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "แก้ไข";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.Name = "Edit";
+            this.Edit.Width = 58;
             // 
             // gv
             // 
@@ -183,20 +194,33 @@
             this.gv.Size = new System.Drawing.Size(933, 211);
             this.gv.TabIndex = 43;
             // 
-            // Edit
+            // panel1
             // 
-            this.Edit.HeaderText = "แก้ไข";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.Name = "Edit";
-            this.Edit.Width = 58;
+            this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btnAddPoItem);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Location = new System.Drawing.Point(12, 287);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(933, 36);
+            this.panel1.TabIndex = 45;
             // 
-            // Del
+            // btnAddPoItem
             // 
-            this.Del.HeaderText = "ลบ";
-            this.Del.Image = ((System.Drawing.Image)(resources.GetObject("Del.Image")));
-            this.Del.Name = "Del";
-            this.Del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Del.Width = 42;
+            this.btnAddPoItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(160)))), ((int)(((byte)(93)))));
+            this.btnAddPoItem.FlatAppearance.BorderSize = 0;
+            this.btnAddPoItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddPoItem.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPoItem.ForeColor = System.Drawing.Color.White;
+            this.btnAddPoItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPoItem.Image")));
+            this.btnAddPoItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddPoItem.Location = new System.Drawing.Point(846, 0);
+            this.btnAddPoItem.Name = "btnAddPoItem";
+            this.btnAddPoItem.Size = new System.Drawing.Size(87, 36);
+            this.btnAddPoItem.TabIndex = 39;
+            this.btnAddPoItem.Text = "เพิ่ม";
+            this.btnAddPoItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAddPoItem.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
@@ -207,21 +231,11 @@
             this.label2.TabIndex = 44;
             this.label2.Text = "รายละเอียดใบสั่งขาย";
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.btnAddPoItem);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(12, 253);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(933, 36);
-            this.panel1.TabIndex = 45;
-            // 
             // Form_ProductionOrderAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(957, 585);
+            this.ClientSize = new System.Drawing.Size(957, 628);
+            this.Controls.Add(this.chkActive);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.dtpPoDate);
@@ -258,12 +272,13 @@
         private System.Windows.Forms.Button BtnSaveAndNew;
         private System.Windows.Forms.DateTimePicker dtpPoDate;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button btnAddPoItem;
+        private System.Windows.Forms.CheckBox chkActive;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView gv;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Del;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnAddPoItem;
+        private System.Windows.Forms.Label label2;
     }
 }

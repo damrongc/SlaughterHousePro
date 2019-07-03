@@ -42,10 +42,11 @@
             this.btnAddOrderItem = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Del = new System.Windows.Forms.DataGridViewImageColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chkActive = new System.Windows.Forms.CheckBox();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Del = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
@@ -94,7 +95,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(730, 578);
+            this.BtnSave.Location = new System.Drawing.Point(730, 611);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -111,7 +112,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(521, 578);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(521, 611);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -176,7 +177,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.gv);
-            this.panel2.Location = new System.Drawing.Point(12, 333);
+            this.panel2.Location = new System.Drawing.Point(12, 366);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(933, 211);
             this.panel2.TabIndex = 43;
@@ -202,21 +203,6 @@
             this.gv.Size = new System.Drawing.Size(933, 211);
             this.gv.TabIndex = 43;
             // 
-            // Edit
-            // 
-            this.Edit.HeaderText = "แก้ไข";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.Name = "Edit";
-            this.Edit.Width = 58;
-            // 
-            // Del
-            // 
-            this.Del.HeaderText = "ลบ";
-            this.Del.Image = ((System.Drawing.Image)(resources.GetObject("Del.Image")));
-            this.Del.Name = "Del";
-            this.Del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Del.Width = 42;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -232,15 +218,43 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btnAddOrderItem);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(12, 296);
+            this.panel1.Location = new System.Drawing.Point(12, 329);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(933, 36);
             this.panel1.TabIndex = 45;
             // 
+            // chkActive
+            // 
+            this.chkActive.AutoSize = true;
+            this.chkActive.Checked = true;
+            this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkActive.Location = new System.Drawing.Point(182, 289);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Size = new System.Drawing.Size(79, 33);
+            this.chkActive.TabIndex = 46;
+            this.chkActive.Text = "ใช้งาน";
+            this.chkActive.UseVisualStyleBackColor = true;
+            // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "แก้ไข";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.Name = "Edit";
+            this.Edit.Width = 58;
+            // 
+            // Del
+            // 
+            this.Del.HeaderText = "ลบ";
+            this.Del.Image = ((System.Drawing.Image)(resources.GetObject("Del.Image")));
+            this.Del.Name = "Del";
+            this.Del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Del.Width = 42;
+            // 
             // Form_OrderAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(957, 629);
+            this.ClientSize = new System.Drawing.Size(957, 661);
+            this.Controls.Add(this.chkActive);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.cboCustomer);
@@ -284,9 +298,10 @@
         private System.Windows.Forms.Button btnAddOrderItem;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView gv;
-        private System.Windows.Forms.DataGridViewImageColumn Edit;
-        private System.Windows.Forms.DataGridViewImageColumn Del;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridViewImageColumn Edit;
+        private System.Windows.Forms.DataGridViewImageColumn Del;
+        private System.Windows.Forms.CheckBox chkActive;
     }
 }

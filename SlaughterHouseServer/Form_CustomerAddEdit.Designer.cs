@@ -78,7 +78,6 @@
             this.label2.Size = new System.Drawing.Size(78, 29);
             this.label2.TabIndex = 2;
             this.label2.Text = "ชื่อลูกค้า";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtAddress
             // 
@@ -96,7 +95,6 @@
             this.label3.Size = new System.Drawing.Size(46, 29);
             this.label3.TabIndex = 4;
             this.label3.Text = "ที่อยู่";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // chkActive
             // 
@@ -109,7 +107,6 @@
             this.chkActive.TabIndex = 6;
             this.chkActive.Text = "ใช้งาน";
             this.chkActive.UseVisualStyleBackColor = true;
-            this.chkActive.CheckedChanged += new System.EventHandler(this.chkActive_CheckedChanged);
             // 
             // BtnSave
             // 
@@ -162,7 +159,6 @@
             this.label4.Size = new System.Drawing.Size(133, 29);
             this.label4.TabIndex = 26;
             this.label4.Text = "สถานที่ส่งสินค้า";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // txtTaxId
             // 
@@ -188,7 +184,6 @@
             this.txtContactNo.Name = "txtContactNo";
             this.txtContactNo.Size = new System.Drawing.Size(215, 36);
             this.txtContactNo.TabIndex = 31;
-            this.txtContactNo.TextChanged += new System.EventHandler(this.txtContactNo_TextChanged);
             // 
             // label6
             // 

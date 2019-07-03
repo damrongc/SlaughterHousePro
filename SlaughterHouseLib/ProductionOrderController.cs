@@ -23,6 +23,7 @@ namespace SlaughterHouseLib
                     sb.Append(" a.po_date,"); 
                     sb.Append(" a.po_flag,");
                     sb.Append(" a.comments,");
+                    sb.Append(" a.active,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by"); 
                     sb.Append(" FROM production_order a");
@@ -41,9 +42,11 @@ namespace SlaughterHouseLib
                                 {
                                     PoNo = p.Field<string>("po_no"),
                                     PoDate = p.Field<DateTime>("po_date"),
-                                    Comments = p.Field<string>("comments"),
-                                    PoFlag = p.Field<int>("po_flag"),
+                                    //Comments = p.Field<string>("comments"),
+                                    //PoFlag = p.Field<int>("po_flag"),
+                                    Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
+                                    CreateBy = p.Field<string>("create_by"), 
                                 }).ToList();
                     return coll;
                 }
@@ -65,7 +68,7 @@ namespace SlaughterHouseLib
                     var sql = @"SELECT po_no,
                                 po_date, 
                                 comments,
-                                po_flag, create_at
+                                po_flag, active, create_at
                                 FROM production_order 
                                 WHERE po_no =@po_no";
 
@@ -86,6 +89,7 @@ namespace SlaughterHouseLib
                             PoDate = (DateTime)ds.Tables[0].Rows[0]["po_date"], 
                             Comments = (string)ds.Tables[0].Rows[0]["comments"],
                             PoFlag = (int)ds.Tables[0].Rows[0]["po_flag"],
+                            Active = (bool)ds.Tables[0].Rows[0]["active"], 
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }
@@ -118,12 +122,14 @@ namespace SlaughterHouseLib
                                 (po_no,
                                 po_date, 
                                 po_flag,
+                                active,
                                 comments,
                                 create_by)
                                 VALUES(@po_no,
                                 @po_date, 
                                 @po_flag,
                                 @comments,
+                                @active,
                                 @create_by)";
                     var cmd = new MySqlCommand(sql, conn)
                     {
@@ -132,6 +138,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("po_no", po.PoNo);
                     cmd.Parameters.AddWithValue("po_date", po.PoDate); 
                     cmd.Parameters.AddWithValue("po_flag", po.PoFlag);
+                    cmd.Parameters.AddWithValue("active", po.Active);
                     cmd.Parameters.AddWithValue("comments", po.Comments);
                     cmd.Parameters.AddWithValue("create_by", po.CreateBy);
                     cmd.ExecuteNonQuery(); 
@@ -198,6 +205,7 @@ namespace SlaughterHouseLib
                                 SET po_date=@po_date, 
                                 po_flag=@po_flag,
                                 comments=@comments,
+                                active=@active,
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by
                                 WHERE po_no=@po_no"; 
@@ -209,6 +217,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("po_date", po.PoDate);
                     cmd.Parameters.AddWithValue("comments", po.Comments);
                     cmd.Parameters.AddWithValue("po_flag", po.PoFlag);
+                    cmd.Parameters.AddWithValue("active", po.Active);
                     cmd.Parameters.AddWithValue("modified_by", po.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
 

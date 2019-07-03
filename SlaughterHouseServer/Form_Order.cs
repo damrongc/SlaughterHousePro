@@ -108,10 +108,10 @@ namespace SlaughterHouseServer
             gv.Columns[2].HeaderText = "เลขที่ใบสั่งขาย";
             gv.Columns[3].HeaderText = "วันที่สั่งขาย";
             gv.Columns[4].HeaderText = "ลูกค้า";
-            gv.Columns[5].HeaderText = "ความคิดเห็น"; 
-            gv.Columns[7].HeaderText = "วันเวลาสร้าง";
-
-            gv.Columns[6].Visible = false;
+            gv.Columns[5].HeaderText = "ใช้งาน";
+            gv.Columns[6].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[7].HeaderText = "ผู้สร้าง";
+            
         }
     }
-}  
+}

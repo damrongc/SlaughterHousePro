@@ -102,6 +102,7 @@ namespace SlaughterHouseServer
                 txtPoNo.Text = "";
                 txtPoNo.Focus(); 
                 txtComment.Text = "";
+                chkActive.Checked = true;
                 LoadDetail();
             }
             catch (System.Exception ex)
@@ -183,6 +184,7 @@ namespace SlaughterHouseServer
                 txtPoNo.Text = po.PoNo;
                 dtpPoDate.Value = po.PoDate ;
                 txtComment.Text = po.Comments;
+                chkActive.Checked = po.Active;
                 dtpPoDate.Enabled = false;
                 BtnSaveAndNew.Visible = false; 
             }
@@ -237,6 +239,7 @@ namespace SlaughterHouseServer
                     PoDate  = dtpPoDate.Value, 
                     Comments = txtComment.Text,
                     PoFlag  = 0,
+                    Active = chkActive.Checked,
                     CreateBy = "system",
                     ModifiedBy = "system",
                     ProductionOrderItem = poItems,

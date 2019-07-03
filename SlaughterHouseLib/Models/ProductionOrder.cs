@@ -10,6 +10,7 @@ namespace SlaughterHouseLib.Models
         public DateTime PoDate { get; set; }
         public int PoFlag { get; set; }
         public string Comments { get; set; }
+        public bool Active { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
         public string ModifiedBy { get; set; }

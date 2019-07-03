@@ -24,6 +24,7 @@ namespace SlaughterHouseLib
                     sb.Append(" a.customer_code,");
                     sb.Append(" a.order_flag,");
                     sb.Append(" a.comments,");
+                    sb.Append(" a.active,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by,");
                     sb.Append(" b.customer_name");
@@ -51,9 +52,11 @@ namespace SlaughterHouseLib
                                     OrderNo = p.Field<string>("order_no"),
                                     OrderDate = p.Field<DateTime>("order_date"),
                                     CustomerName = p.Field<string>("customer_name"),
-                                    Comments = p.Field<string>("comments"),
-                                    OrderFlag = p.Field<int>("order_flag"),
+                                    //Comments = p.Field<string>("comments"),
+                                    //OrderFlag = p.Field<int>("order_flag"),
+                                    Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
+                                    CreateBy = p.Field<string>("create_by"),
                                 }).ToList();
 
                     return coll;
@@ -77,7 +80,9 @@ namespace SlaughterHouseLib
                                 order_date,
                                 customer_code,
                                 comments,
-                                order_flag, create_at
+                                order_flag, 
+                                active,
+                                create_at
                                 FROM orders
                                 WHERE order_no =@order_no";
 
@@ -102,6 +107,7 @@ namespace SlaughterHouseLib
                             },
                             Comments = (string)ds.Tables[0].Rows[0]["comments"],
                             OrderFlag = (int)ds.Tables[0].Rows[0]["order_flag"],
+                            Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }
@@ -136,12 +142,14 @@ namespace SlaughterHouseLib
                                 customer_code,
                                 order_flag,
                                 comments,
+                                active,
                                 create_by)
                                 VALUES(@order_no,
                                 @order_date,
                                 @customer_code,
                                 @order_flag,
                                 @comments,
+                                @active,
                                 @create_by)";
                     var cmd = new MySqlCommand(sql, conn)
                     {
@@ -152,6 +160,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("customer_code", order.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("order_flag", order.OrderFlag);
                     cmd.Parameters.AddWithValue("comments", order.Comments);
+                    cmd.Parameters.AddWithValue("active", order.Active);
                     cmd.Parameters.AddWithValue("create_by", order.CreateBy);
                     cmd.ExecuteNonQuery(); 
 
@@ -181,6 +190,7 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("seq", item.Seq);
                         cmd.Parameters.AddWithValue("order_qty", item.OrderQty);
                         cmd.Parameters.AddWithValue("order_wgh", item.OrderWgh);
+                        cmd.Parameters.AddWithValue("active", order.Active); 
                         cmd.Parameters.AddWithValue("create_by", order.CreateBy);
                         cmd.ExecuteNonQuery();
                     }
@@ -218,6 +228,7 @@ namespace SlaughterHouseLib
                                 customer_code=@customer_code,
                                 order_flag=@order_flag,
                                 comments=@comments,
+                                active=@active,
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by
                                 WHERE order_no=@order_no"; 
@@ -228,8 +239,9 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("order_no", order.OrderNo);
                     cmd.Parameters.AddWithValue("order_date", order.OrderDate);
                     cmd.Parameters.AddWithValue("customer_code", order.Customer.CustomerCode);
-                    cmd.Parameters.AddWithValue("comments", order.Comments);
                     cmd.Parameters.AddWithValue("order_flag", order.OrderFlag);
+                    cmd.Parameters.AddWithValue("comments", order.Comments);
+                    cmd.Parameters.AddWithValue("active", order.Active); 
                     cmd.Parameters.AddWithValue("modified_by", order.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
 
