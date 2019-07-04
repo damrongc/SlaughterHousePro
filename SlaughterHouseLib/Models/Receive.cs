@@ -15,6 +15,7 @@ namespace SlaughterHouseLib.Models
         public Breeder Breeder { get; set; }
 
         public int QueueNo { get; set; }
+        public string LotNo { get; set; }
         public int FarmQty { get; set; }
         public decimal FarmWgh { get; set; }
 

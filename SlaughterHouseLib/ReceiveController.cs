@@ -310,6 +310,7 @@ namespace SlaughterHouseLib
         {
             try
             {
+                var plant = PlantController.GetPlant();
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -318,7 +319,8 @@ namespace SlaughterHouseLib
                         //ADD NEW
                         var sql = @"SELECT MAX(queue_no)
                                     FROM receives 
-                                    WHERE receive_date=@receive_date";
+                                    WHERE receive_date=@receive_date
+                                    GROUP BY receive_no";
 
                         var cmd = new MySqlCommand(sql, conn);
                         cmd.Parameters.AddWithValue("receive_date", receive.ReceiveDate.ToString("yyyy/MM/dd"));
@@ -328,9 +330,8 @@ namespace SlaughterHouseLib
                         else
                             receive.QueueNo = queue_no.ToString().ToInt16() + 1;
 
-
                         receive.ReceiveNo = DocumentGenerate.GetDocumentRunning("REV");
-                        receive.ReceiveDate = DateTime.Today;
+                        receive.LotNo = DocumentGenerate.GetSwineLotNo(plant.PlantId, receive.ReceiveDate, receive.QueueNo);
 
 
                         sql = @"INSERT INTO receives(
@@ -342,6 +343,7 @@ namespace SlaughterHouseLib
                                 coop_no,
                                 breeder_code,
                                 queue_no,
+                                lot_no,
                                 farm_qty,
                                 farm_wgh,
                                 receive_flag,
@@ -355,6 +357,7 @@ namespace SlaughterHouseLib
                                 @coop_no,
                                 @breeder_code,
                                 @queue_no,
+                                @lot_no,
                                 @farm_qty,
                                 @farm_wgh,
                                 @receive_flag,
@@ -368,6 +371,7 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("coop_no", receive.CoopNo);
                         cmd.Parameters.AddWithValue("breeder_code", receive.Breeder.BreederCode);
                         cmd.Parameters.AddWithValue("queue_no", receive.QueueNo);
+                        cmd.Parameters.AddWithValue("lot_no", receive.LotNo);
                         cmd.Parameters.AddWithValue("farm_qty", receive.FarmQty);
                         cmd.Parameters.AddWithValue("farm_wgh", receive.FarmWgh);
                         cmd.Parameters.AddWithValue("receive_flag", receive.ReceiveFlag);
@@ -786,6 +790,39 @@ namespace SlaughterHouseLib
             }
 
         }
+
+
+        public static bool CloseFlagSwineReceive(string receiveNo, string modifiedBy)
+        {
+
+
+            try
+            {
+
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"UPDATE receives SET 
+                                receive_flag=1,
+                                modified_at=CURRENT_TIMESTAMP,
+                                modified_by=@modified_by
+                                WHERE receive_no=@receive_no";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("receive_no", receiveNo);
+                    cmd.Parameters.AddWithValue("modified_by", modifiedBy);
+                    cmd.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
 
     }
 

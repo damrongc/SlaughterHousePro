@@ -30,12 +30,17 @@ namespace SlaughterHouseClient
         public DbSet<customer> customers { get; set; }
         public DbSet<document_generate> document_generate { get; set; }
         public DbSet<farm> farms { get; set; }
+        public DbSet<invoice> invoices { get; set; }
+        public DbSet<invoice_item> invoice_item { get; set; }
         public DbSet<location> locations { get; set; }
         public DbSet<order_item> order_item { get; set; }
         public DbSet<order> orders { get; set; }
         public DbSet<plant> plants { get; set; }
         public DbSet<product> products { get; set; }
         public DbSet<product_group> product_group { get; set; }
+        public DbSet<product_price> product_price { get; set; }
+        public DbSet<production_order> production_order { get; set; }
+        public DbSet<production_order_item> production_order_item { get; set; }
         public DbSet<receive_item> receive_item { get; set; }
         public DbSet<receive> receives { get; set; }
         public DbSet<stock> stocks { get; set; }

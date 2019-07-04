@@ -14,13 +14,13 @@ namespace SlaughterHouseLib
         {
             return double.Parse(a);
         }
-        public static Int16 ToInt16(this string a)
+        public static short ToInt16(this string a)
         {
-            return Int16.Parse(a);
+            return short.Parse(a);
         }
-        public static Int32 ToInt32(this string a)
+        public static int ToInt32(this string a)
         {
-            return Int32.Parse(a);
+            return int.Parse(a);
         }
 
         public static long ToLong(this string a)
@@ -40,12 +40,16 @@ namespace SlaughterHouseLib
         /// <returns></returns>
         public static string ToFormat2Decimal(this decimal a)
         {
-            return String.Format("{0: #,##0.00}", a);
+            return string.Format("{0: #,##0.00}", a);
         }
 
         public static string ToFormat2Double(this double a)
         {
-            return String.Format("{0: #,##0.00}", a);
+            return string.Format("{0: #,##0.00}", a);
+        }
+        public static string ToComma(this int a)
+        {
+            return string.Format("{0: #,##0}", a);
         }
         public static string ToDateFormat(this DateTime a)
         {

@@ -33,6 +33,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data.Entity.EF5, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.8\Assemblies\v4.5\MySql.Data.Entity.EF5.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.8\Assemblies\v4.5\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Fabric.Plugin, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.8\Assemblies\v4.5\MySql.Fabric.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Web, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.8\Assemblies\v4.5\MySql.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
@@ -55,8 +71,15 @@
     <Compile Include="breeder.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="constants.cs" />
     <Compile Include="customer.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomMessageBox.Designer.cs">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </Compile>
     <Compile Include="document_generate.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
@@ -67,11 +90,12 @@
     <Compile Include="farm.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Form_ByProductReceive.cs">
+    <Compile Include="FormAnimator.cs" />
+    <Compile Include="Form_CarcassReceive.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_ByProductReceive.Designer.cs">
-      <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
+    <Compile Include="Form_CarcassReceive.Designer.cs">
+      <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Receive.cs">
       <SubType>Form</SubType>
@@ -79,21 +103,22 @@
     <Compile Include="Form_Receive.Designer.cs">
       <DependentUpon>Form_Receive.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_CarcassReceive.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_CarcassReceive.Designer.cs">
-      <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form_SwineReceive.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_SwineReceive.Designer.cs">
       <DependentUpon>Form_SwineReceive.cs</DependentUpon>
     </Compile>
+    <Compile Include="invoice.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="invoice_item.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="location.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MyExtension.cs" />
     <Compile Include="MyModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -109,6 +134,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="Notification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Notification.designer.cs">
+      <DependentUpon>Notification.cs</DependentUpon>
+    </Compile>
     <Compile Include="order.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -121,7 +153,16 @@
     <Compile Include="product.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="production_order.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="production_order_item.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="product_group.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="product_price.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -143,17 +184,20 @@
     <Compile Include="unit_of_measurement.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form_ByProductReceive.resx">
-      <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Receive.resx">
-      <DependentUpon>Form_Receive.cs</DependentUpon>
+    <EmbeddedResource Include="CustomMessageBox.resx">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_CarcassReceive.resx">
       <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_Receive.resx">
+      <DependentUpon>Form_Receive.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_SwineReceive.resx">
       <DependentUpon>Form_SwineReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Notification.resx">
+      <DependentUpon>Notification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -185,12 +229,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SlaughterHouseLib\SlaughterHouseLib.csproj">
-      <Project>{2cf06e33-7fa0-4347-be7d-04396863dafe}</Project>
-      <Name>SlaughterHouseLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="MyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MyModel.edmx</DependentUpon>
@@ -201,10 +239,18 @@
       <DependentUpon>MyModel.edmx</DependentUpon>
       <LastGenOutput>MyModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Sounds\cityscape.wav" />
+    <Content Include="Sounds\festival.wav" />
+    <Content Include="Sounds\garden.wav" />
+    <Content Include="Sounds\heritage.wav" />
+    <Content Include="Sounds\landscape.wav" />
+    <Content Include="Sounds\normal.wav" />
+    <Content Include="Sounds\savanna.wav" />
+    <Content Include="Sounds\sonata.wav" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EntityFramework">
-      <Version>5.0.0</Version>
+      <Version>6.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

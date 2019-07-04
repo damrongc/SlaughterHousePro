@@ -12,17 +12,23 @@ namespace SlaughterHouseClient
     using System;
     using System.Collections.Generic;
     
-    public partial class order
+    public partial class invoice
     {
-        public order()
+        public invoice()
         {
-            this.order_item = new HashSet<order_item>();
+            this.invoice_item = new HashSet<invoice_item>();
         }
     
-        public string order_no { get; set; }
-        public System.DateTime order_date { get; set; }
+        public string invoice_no { get; set; }
+        public System.DateTime invoice_date { get; set; }
+        public string ref_document_no { get; set; }
         public string customer_code { get; set; }
-        public int order_flag { get; set; }
+        public decimal gross_amt { get; set; }
+        public decimal discount { get; set; }
+        public decimal vat_rate { get; set; }
+        public decimal vat_amt { get; set; }
+        public decimal net_amt { get; set; }
+        public int invoice_flag { get; set; }
         public string comments { get; set; }
         public bool active { get; set; }
         public System.DateTime create_at { get; set; }
@@ -30,7 +36,6 @@ namespace SlaughterHouseClient
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
     
-        public virtual customer customer { get; set; }
-        public virtual ICollection<order_item> order_item { get; set; }
+        public virtual ICollection<invoice_item> invoice_item { get; set; }
     }
 }

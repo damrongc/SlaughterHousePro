@@ -174,8 +174,6 @@ namespace SlaughterHouseLib
             }
 
         }
-
-
         public static bool InsertStock(Stock stock, MySqlCommand cmd)
         {
 

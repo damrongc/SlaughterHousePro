@@ -28,6 +28,8 @@ namespace SlaughterHouseServer
             txtFarmWgh.KeyDown += TxtFarmWgh_KeyDown;
         }
 
+
+
         private void Form_Load(object sender, EventArgs e)
         {
             LoadFarm();
@@ -37,6 +39,7 @@ namespace SlaughterHouseServer
         private void Form_Shown(object sender, EventArgs e)
         {
             txtTransportNo.Focus();
+            txtTransportNo.CharacterCasing = CharacterCasing.Upper;
         }
 
 

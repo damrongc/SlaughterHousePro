@@ -92,8 +92,10 @@ namespace SlaughterHouseServer
 
                             break;
                         case "Close":
-                            StockController.InsertStockSwineReceive(receiveNo);
+                            ReceiveController.CloseFlagSwineReceive(receiveNo, "system");
+                            //StockController.InsertStockSwineReceive(receiveNo);
                             MessageBox.Show("ปิดคิว เรียบร้อยแล้ว", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadReceive();
                             break;
                     }
 

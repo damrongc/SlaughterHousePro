@@ -12,17 +12,16 @@ namespace SlaughterHouseClient
     using System;
     using System.Collections.Generic;
     
-    public partial class order
+    public partial class production_order
     {
-        public order()
+        public production_order()
         {
-            this.order_item = new HashSet<order_item>();
+            this.production_order_item = new HashSet<production_order_item>();
         }
     
-        public string order_no { get; set; }
-        public System.DateTime order_date { get; set; }
-        public string customer_code { get; set; }
-        public int order_flag { get; set; }
+        public string po_no { get; set; }
+        public System.DateTime po_date { get; set; }
+        public int po_flag { get; set; }
         public string comments { get; set; }
         public bool active { get; set; }
         public System.DateTime create_at { get; set; }
@@ -30,7 +29,6 @@ namespace SlaughterHouseClient
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
     
-        public virtual customer customer { get; set; }
-        public virtual ICollection<order_item> order_item { get; set; }
+        public virtual ICollection<production_order_item> production_order_item { get; set; }
     }
 }

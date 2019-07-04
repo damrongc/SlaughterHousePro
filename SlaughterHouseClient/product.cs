@@ -17,8 +17,11 @@ namespace SlaughterHouseClient
         public product()
         {
             this.barcodes = new HashSet<barcode>();
+            this.invoice_item = new HashSet<invoice_item>();
             this.order_item = new HashSet<order_item>();
+            this.production_order_item = new HashSet<production_order_item>();
             this.receive_item = new HashSet<receive_item>();
+            this.stocks = new HashSet<stock>();
         }
     
         public string product_code { get; set; }
@@ -33,9 +36,12 @@ namespace SlaughterHouseClient
         public string modified_by { get; set; }
     
         public virtual ICollection<barcode> barcodes { get; set; }
+        public virtual ICollection<invoice_item> invoice_item { get; set; }
         public virtual ICollection<order_item> order_item { get; set; }
+        public virtual ICollection<production_order_item> production_order_item { get; set; }
         public virtual product_group product_group { get; set; }
         public virtual ICollection<receive_item> receive_item { get; set; }
+        public virtual ICollection<stock> stocks { get; set; }
         public virtual unit_of_measurement unit_of_measurement { get; set; }
         public virtual unit_of_measurement unit_of_measurement1 { get; set; }
     }

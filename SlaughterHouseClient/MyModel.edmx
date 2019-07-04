@@ -68,6 +68,45 @@
           <Property Name="modified_at" Type="datetime" Precision="0" />
           <Property Name="modified_by" Type="varchar" MaxLength="45" />
         </EntityType>
+        <EntityType Name="invoice">
+          <Key>
+            <PropertyRef Name="invoice_no" />
+          </Key>
+          <Property Name="invoice_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="invoice_date" Type="date" Nullable="false" />
+          <Property Name="ref_document_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="customer_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="gross_amt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="discount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="vat_rate" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="vat_amt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="net_amt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="invoice_flag" Type="int" Nullable="false" />
+          <Property Name="comments" Type="varchar" MaxLength="200" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="invoice_item">
+          <Key>
+            <PropertyRef Name="invoice_no" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="invoice_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="product_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="seq" Type="int" Nullable="false" />
+          <Property Name="qty" Type="int" Nullable="false" />
+          <Property Name="wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="unit_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="gross_amt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="net_amt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
         <EntityType Name="location">
           <Key>
             <PropertyRef Name="location_code" />
@@ -106,6 +145,7 @@
           <Property Name="customer_code" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="order_flag" Type="int" Nullable="false" />
           <Property Name="comments" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="active" Type="bool" Nullable="false" />
           <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="modified_at" Type="datetime" Precision="0" />
@@ -142,6 +182,52 @@
           <Property Name="product_group_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="product_group_name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="product_price">
+          <Key>
+            <PropertyRef Name="product_code" />
+            <PropertyRef Name="start_date" />
+          </Key>
+          <Property Name="product_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="start_date" Type="date" Nullable="false" />
+          <Property Name="end_date" Type="date" Nullable="false" />
+          <Property Name="unit_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="sale_unit_method" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="production_order">
+          <Key>
+            <PropertyRef Name="po_no" />
+          </Key>
+          <Property Name="po_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="po_date" Type="date" Nullable="false" />
+          <Property Name="po_flag" Type="int" Nullable="false" />
+          <Property Name="comments" Type="varchar" MaxLength="200" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="production_order_item">
+          <Key>
+            <PropertyRef Name="po_no" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="po_no" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="product_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="seq" Type="int" Nullable="false" />
+          <Property Name="po_qty" Type="int" Nullable="false" />
+          <Property Name="po_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="unload_qty" Type="int" Nullable="false" />
+          <Property Name="unload_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="modified_at" Type="datetime" Precision="0" />
@@ -270,6 +356,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_invitem_inv">
+          <End Role="invoice" Type="Self.invoice" Multiplicity="1" />
+          <End Role="invoice_item" Type="Self.invoice_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoice">
+              <PropertyRef Name="invoice_no" />
+            </Principal>
+            <Dependent Role="invoice_item">
+              <PropertyRef Name="invoice_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_invitem_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="invoice_item" Type="Self.invoice_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="invoice_item">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_order_customer">
           <End Role="customer" Type="Self.customer" Multiplicity="1" />
           <End Role="orders" Type="Self.orders" Multiplicity="*" />
@@ -302,6 +412,30 @@
               <PropertyRef Name="product_code" />
             </Principal>
             <Dependent Role="order_item">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_porderitem_order">
+          <End Role="production_order" Type="Self.production_order" Multiplicity="1" />
+          <End Role="production_order_item" Type="Self.production_order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="production_order">
+              <PropertyRef Name="po_no" />
+            </Principal>
+            <Dependent Role="production_order_item">
+              <PropertyRef Name="po_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_porderitem_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="production_order_item" Type="Self.production_order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="production_order_item">
               <PropertyRef Name="product_code" />
             </Dependent>
           </ReferentialConstraint>
@@ -342,6 +476,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_stock_location">
+          <End Role="location" Type="Self.location" Multiplicity="1" />
+          <End Role="stock" Type="Self.stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location">
+              <PropertyRef Name="location_code" />
+            </Principal>
+            <Dependent Role="stock">
+              <PropertyRef Name="location_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_stock_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="stock" Type="Self.stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="stock">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_unit_qty">
           <End Role="unit_of_measurement" Type="Self.unit_of_measurement" Multiplicity="1" />
           <End Role="product" Type="Self.product" Multiplicity="*" />
@@ -372,12 +530,17 @@
           <EntitySet Name="customer" EntityType="Self.customer" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="document_generate" EntityType="Self.document_generate" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="farm" EntityType="Self.farm" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="invoice" EntityType="Self.invoice" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="invoice_item" EntityType="Self.invoice_item" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="location" EntityType="Self.location" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="order_item" EntityType="Self.order_item" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="plant" EntityType="Self.plant" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="product_group" EntityType="Self.product_group" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="product_price" EntityType="Self.product_price" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="production_order" EntityType="Self.production_order" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="production_order_item" EntityType="Self.production_order_item" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="receive_item" EntityType="Self.receive_item" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="receives" EntityType="Self.receives" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="stock" EntityType="Self.stock" Schema="slaughterhouse" store:Type="Tables" />
@@ -395,6 +558,14 @@
             <End Role="farm" EntitySet="farm" />
             <End Role="receives" EntitySet="receives" />
           </AssociationSet>
+          <AssociationSet Name="fk_invitem_inv" Association="Self.fk_invitem_inv">
+            <End Role="invoice" EntitySet="invoice" />
+            <End Role="invoice_item" EntitySet="invoice_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_invitem_product" Association="Self.fk_invitem_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="invoice_item" EntitySet="invoice_item" />
+          </AssociationSet>
           <AssociationSet Name="fk_order_customer" Association="Self.fk_order_customer">
             <End Role="customer" EntitySet="customer" />
             <End Role="orders" EntitySet="orders" />
@@ -407,6 +578,14 @@
             <End Role="product" EntitySet="product" />
             <End Role="order_item" EntitySet="order_item" />
           </AssociationSet>
+          <AssociationSet Name="fk_porderitem_order" Association="Self.fk_porderitem_order">
+            <End Role="production_order" EntitySet="production_order" />
+            <End Role="production_order_item" EntitySet="production_order_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_porderitem_product" Association="Self.fk_porderitem_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="production_order_item" EntitySet="production_order_item" />
+          </AssociationSet>
           <AssociationSet Name="fk_product_group" Association="Self.fk_product_group">
             <End Role="product_group" EntitySet="product_group" />
             <End Role="product" EntitySet="product" />
@@ -418,6 +597,14 @@
           <AssociationSet Name="fk_receives_02" Association="Self.fk_receives_02">
             <End Role="product" EntitySet="product" />
             <End Role="receive_item" EntitySet="receive_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_stock_location" Association="Self.fk_stock_location">
+            <End Role="location" EntitySet="location" />
+            <End Role="stock" EntitySet="stock" />
+          </AssociationSet>
+          <AssociationSet Name="fk_stock_product" Association="Self.fk_stock_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="stock" EntitySet="stock" />
           </AssociationSet>
           <AssociationSet Name="fk_unit_qty" Association="Self.fk_unit_qty">
             <End Role="unit_of_measurement" EntitySet="unit_of_measurement" />
@@ -438,12 +625,17 @@
           <EntitySet Name="customers" EntityType="SlaughterhouseModel.customer" />
           <EntitySet Name="document_generate" EntityType="SlaughterhouseModel.document_generate" />
           <EntitySet Name="farms" EntityType="SlaughterhouseModel.farm" />
+          <EntitySet Name="invoices" EntityType="SlaughterhouseModel.invoice" />
+          <EntitySet Name="invoice_item" EntityType="SlaughterhouseModel.invoice_item" />
           <EntitySet Name="locations" EntityType="SlaughterhouseModel.location" />
           <EntitySet Name="order_item" EntityType="SlaughterhouseModel.order_item" />
           <EntitySet Name="orders" EntityType="SlaughterhouseModel.order" />
           <EntitySet Name="plants" EntityType="SlaughterhouseModel.plant" />
           <EntitySet Name="products" EntityType="SlaughterhouseModel.product" />
           <EntitySet Name="product_group" EntityType="SlaughterhouseModel.product_group" />
+          <EntitySet Name="product_price" EntityType="SlaughterhouseModel.product_price" />
+          <EntitySet Name="production_order" EntityType="SlaughterhouseModel.production_order" />
+          <EntitySet Name="production_order_item" EntityType="SlaughterhouseModel.production_order_item" />
           <EntitySet Name="receive_item" EntityType="SlaughterhouseModel.receive_item" />
           <EntitySet Name="receives" EntityType="SlaughterhouseModel.receive" />
           <EntitySet Name="stocks" EntityType="SlaughterhouseModel.stock" />
@@ -465,6 +657,18 @@
             <End Role="farm" EntitySet="farms" />
             <End Role="receive" EntitySet="receives" />
           </AssociationSet>
+          <AssociationSet Name="fk_invitem_inv" Association="SlaughterhouseModel.fk_invitem_inv">
+            <End Role="invoice" EntitySet="invoices" />
+            <End Role="invoice_item" EntitySet="invoice_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_invitem_product" Association="SlaughterhouseModel.fk_invitem_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="invoice_item" EntitySet="invoice_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_stock_location" Association="SlaughterhouseModel.fk_stock_location">
+            <End Role="location" EntitySet="locations" />
+            <End Role="stock" EntitySet="stocks" />
+          </AssociationSet>
           <AssociationSet Name="fk_order_orderitem" Association="SlaughterhouseModel.fk_order_orderitem">
             <End Role="order" EntitySet="orders" />
             <End Role="order_item" EntitySet="order_item" />
@@ -472,6 +676,10 @@
           <AssociationSet Name="fk_order_product" Association="SlaughterhouseModel.fk_order_product">
             <End Role="product" EntitySet="products" />
             <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_porderitem_product" Association="SlaughterhouseModel.fk_porderitem_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="production_order_item" EntitySet="production_order_item" />
           </AssociationSet>
           <AssociationSet Name="fk_product_group" Association="SlaughterhouseModel.fk_product_group">
             <End Role="product_group" EntitySet="product_group" />
@@ -481,6 +689,10 @@
             <End Role="product" EntitySet="products" />
             <End Role="receive_item" EntitySet="receive_item" />
           </AssociationSet>
+          <AssociationSet Name="fk_stock_product" Association="SlaughterhouseModel.fk_stock_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="stock" EntitySet="stocks" />
+          </AssociationSet>
           <AssociationSet Name="fk_unit_qty" Association="SlaughterhouseModel.fk_unit_qty">
             <End Role="unit_of_measurement" EntitySet="unit_of_measurement" />
             <End Role="product" EntitySet="products" />
@@ -488,6 +700,10 @@
           <AssociationSet Name="fk_unit_wgh" Association="SlaughterhouseModel.fk_unit_wgh">
             <End Role="unit_of_measurement" EntitySet="unit_of_measurement" />
             <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_porderitem_order" Association="SlaughterhouseModel.fk_porderitem_order">
+            <End Role="production_order" EntitySet="production_order" />
+            <End Role="production_order_item" EntitySet="production_order_item" />
           </AssociationSet>
           <AssociationSet Name="fk_receives_01" Association="SlaughterhouseModel.fk_receives_01">
             <End Role="receive" EntitySet="receives" />
@@ -561,6 +777,48 @@
           <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="receives" Relationship="SlaughterhouseModel.fk_farm_01" FromRole="farm" ToRole="receive" />
         </EntityType>
+        <EntityType Name="invoice">
+          <Key>
+            <PropertyRef Name="invoice_no" />
+          </Key>
+          <Property Name="invoice_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="invoice_date" Type="DateTime" Nullable="false" />
+          <Property Name="ref_document_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="customer_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="gross_amt" Type="Decimal" Nullable="false" />
+          <Property Name="discount" Type="Decimal" Nullable="false" />
+          <Property Name="vat_rate" Type="Decimal" Nullable="false" />
+          <Property Name="vat_amt" Type="Decimal" Nullable="false" />
+          <Property Name="net_amt" Type="Decimal" Nullable="false" />
+          <Property Name="invoice_flag" Type="Int32" Nullable="false" />
+          <Property Name="comments" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="invoice_item" Relationship="SlaughterhouseModel.fk_invitem_inv" FromRole="invoice" ToRole="invoice_item" />
+        </EntityType>
+        <EntityType Name="invoice_item">
+          <Key>
+            <PropertyRef Name="invoice_no" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="invoice_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="seq" Type="Int32" Nullable="false" />
+          <Property Name="qty" Type="Int32" Nullable="false" />
+          <Property Name="wgh" Type="Decimal" Nullable="false" />
+          <Property Name="unit_price" Type="Decimal" Nullable="false" />
+          <Property Name="gross_amt" Type="Decimal" Nullable="false" />
+          <Property Name="net_amt" Type="Decimal" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="invoice" Relationship="SlaughterhouseModel.fk_invitem_inv" FromRole="invoice_item" ToRole="invoice" />
+          <NavigationProperty Name="product" Relationship="SlaughterhouseModel.fk_invitem_product" FromRole="invoice_item" ToRole="product" />
+        </EntityType>
         <EntityType Name="location">
           <Key>
             <PropertyRef Name="location_code" />
@@ -572,6 +830,7 @@
           <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="modified_at" Type="DateTime" />
           <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="stocks" Relationship="SlaughterhouseModel.fk_stock_location" FromRole="location" ToRole="stock" />
         </EntityType>
         <EntityType Name="order_item">
           <Key>
@@ -601,6 +860,7 @@
           <Property Name="customer_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="order_flag" Type="Int32" Nullable="false" />
           <Property Name="comments" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
           <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="modified_at" Type="DateTime" />
@@ -632,9 +892,12 @@
           <Property Name="modified_at" Type="DateTime" />
           <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="barcodes" Relationship="SlaughterhouseModel.fk_barcode_product" FromRole="product" ToRole="barcode" />
+          <NavigationProperty Name="invoice_item" Relationship="SlaughterhouseModel.fk_invitem_product" FromRole="product" ToRole="invoice_item" />
           <NavigationProperty Name="order_item" Relationship="SlaughterhouseModel.fk_order_product" FromRole="product" ToRole="order_item" />
+          <NavigationProperty Name="production_order_item" Relationship="SlaughterhouseModel.fk_porderitem_product" FromRole="product" ToRole="production_order_item" />
           <NavigationProperty Name="product_group" Relationship="SlaughterhouseModel.fk_product_group" FromRole="product" ToRole="product_group" />
           <NavigationProperty Name="receive_item" Relationship="SlaughterhouseModel.fk_receives_02" FromRole="product" ToRole="receive_item" />
+          <NavigationProperty Name="stocks" Relationship="SlaughterhouseModel.fk_stock_product" FromRole="product" ToRole="stock" />
           <NavigationProperty Name="unit_of_measurement" Relationship="SlaughterhouseModel.fk_unit_qty" FromRole="product" ToRole="unit_of_measurement" />
           <NavigationProperty Name="unit_of_measurement1" Relationship="SlaughterhouseModel.fk_unit_wgh" FromRole="product" ToRole="unit_of_measurement" />
         </EntityType>
@@ -650,6 +913,55 @@
           <Property Name="modified_at" Type="DateTime" />
           <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="products" Relationship="SlaughterhouseModel.fk_product_group" FromRole="product_group" ToRole="product" />
+        </EntityType>
+        <EntityType Name="product_price">
+          <Key>
+            <PropertyRef Name="product_code" />
+            <PropertyRef Name="start_date" />
+          </Key>
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" />
+          <Property Name="unit_price" Type="Decimal" Nullable="false" />
+          <Property Name="sale_unit_method" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="production_order">
+          <Key>
+            <PropertyRef Name="po_no" />
+          </Key>
+          <Property Name="po_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="po_date" Type="DateTime" Nullable="false" />
+          <Property Name="po_flag" Type="Int32" Nullable="false" />
+          <Property Name="comments" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="production_order_item" Relationship="SlaughterhouseModel.fk_porderitem_order" FromRole="production_order" ToRole="production_order_item" />
+        </EntityType>
+        <EntityType Name="production_order_item">
+          <Key>
+            <PropertyRef Name="po_no" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="po_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="seq" Type="Int32" Nullable="false" />
+          <Property Name="po_qty" Type="Int32" Nullable="false" />
+          <Property Name="po_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="unload_qty" Type="Int32" Nullable="false" />
+          <Property Name="unload_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="product" Relationship="SlaughterhouseModel.fk_porderitem_product" FromRole="production_order_item" ToRole="product" />
+          <NavigationProperty Name="production_order" Relationship="SlaughterhouseModel.fk_porderitem_order" FromRole="production_order_item" ToRole="production_order" />
         </EntityType>
         <EntityType Name="receive_item">
           <Key>
@@ -717,6 +1029,8 @@
           <Property Name="transaction_type" Type="Int32" Nullable="false" />
           <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="location" Relationship="SlaughterhouseModel.fk_stock_location" FromRole="stock" ToRole="location" />
+          <NavigationProperty Name="product" Relationship="SlaughterhouseModel.fk_stock_product" FromRole="stock" ToRole="product" />
         </EntityType>
         <EntityType Name="stock_item_running">
           <Key>
@@ -793,6 +1107,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_invitem_inv">
+          <End Type="SlaughterhouseModel.invoice" Role="invoice" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.invoice_item" Role="invoice_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoice">
+              <PropertyRef Name="invoice_no" />
+            </Principal>
+            <Dependent Role="invoice_item">
+              <PropertyRef Name="invoice_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_invitem_product">
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.invoice_item" Role="invoice_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="invoice_item">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_stock_location">
+          <End Type="SlaughterhouseModel.location" Role="location" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.stock" Role="stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location">
+              <PropertyRef Name="location_code" />
+            </Principal>
+            <Dependent Role="stock">
+              <PropertyRef Name="location_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_order_orderitem">
           <End Type="SlaughterhouseModel.order" Role="order" Multiplicity="1" />
           <End Type="SlaughterhouseModel.order_item" Role="order_item" Multiplicity="*" />
@@ -813,6 +1163,18 @@
               <PropertyRef Name="product_code" />
             </Principal>
             <Dependent Role="order_item">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_porderitem_product">
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.production_order_item" Role="production_order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="production_order_item">
               <PropertyRef Name="product_code" />
             </Dependent>
           </ReferentialConstraint>
@@ -841,6 +1203,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_stock_product">
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.stock" Role="stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="stock">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_unit_qty">
           <End Type="SlaughterhouseModel.unit_of_measurement" Role="unit_of_measurement" Multiplicity="1" />
           <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="*" />
@@ -862,6 +1236,18 @@
             </Principal>
             <Dependent Role="product">
               <PropertyRef Name="unit_of_wgh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_porderitem_order">
+          <End Type="SlaughterhouseModel.production_order" Role="production_order" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.production_order_item" Role="production_order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="production_order">
+              <PropertyRef Name="po_no" />
+            </Principal>
+            <Dependent Role="production_order_item">
+              <PropertyRef Name="po_no" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -951,6 +1337,46 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="invoices">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.invoice">
+              <MappingFragment StoreEntitySet="invoice">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="invoice_flag" ColumnName="invoice_flag" />
+                <ScalarProperty Name="net_amt" ColumnName="net_amt" />
+                <ScalarProperty Name="vat_amt" ColumnName="vat_amt" />
+                <ScalarProperty Name="vat_rate" ColumnName="vat_rate" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="gross_amt" ColumnName="gross_amt" />
+                <ScalarProperty Name="customer_code" ColumnName="customer_code" />
+                <ScalarProperty Name="ref_document_no" ColumnName="ref_document_no" />
+                <ScalarProperty Name="invoice_date" ColumnName="invoice_date" />
+                <ScalarProperty Name="invoice_no" ColumnName="invoice_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoice_item">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.invoice_item">
+              <MappingFragment StoreEntitySet="invoice_item">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="net_amt" ColumnName="net_amt" />
+                <ScalarProperty Name="gross_amt" ColumnName="gross_amt" />
+                <ScalarProperty Name="unit_price" ColumnName="unit_price" />
+                <ScalarProperty Name="wgh" ColumnName="wgh" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="invoice_no" ColumnName="invoice_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="locations">
             <EntityTypeMapping TypeName="SlaughterhouseModel.location">
               <MappingFragment StoreEntitySet="location">
@@ -988,6 +1414,7 @@
                 <ScalarProperty Name="modified_at" ColumnName="modified_at" />
                 <ScalarProperty Name="create_by" ColumnName="create_by" />
                 <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="comments" ColumnName="comments" />
                 <ScalarProperty Name="order_flag" ColumnName="order_flag" />
                 <ScalarProperty Name="customer_code" ColumnName="customer_code" />
@@ -1032,6 +1459,53 @@
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="product_group_name" ColumnName="product_group_name" />
                 <ScalarProperty Name="product_group_code" ColumnName="product_group_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product_price">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.product_price">
+              <MappingFragment StoreEntitySet="product_price">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="sale_unit_method" ColumnName="sale_unit_method" />
+                <ScalarProperty Name="unit_price" ColumnName="unit_price" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="production_order">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.production_order">
+              <MappingFragment StoreEntitySet="production_order">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="po_flag" ColumnName="po_flag" />
+                <ScalarProperty Name="po_date" ColumnName="po_date" />
+                <ScalarProperty Name="po_no" ColumnName="po_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="production_order_item">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.production_order_item">
+              <MappingFragment StoreEntitySet="production_order_item">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="unload_wgh" ColumnName="unload_wgh" />
+                <ScalarProperty Name="unload_qty" ColumnName="unload_qty" />
+                <ScalarProperty Name="po_wgh" ColumnName="po_wgh" />
+                <ScalarProperty Name="po_qty" ColumnName="po_qty" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="po_no" ColumnName="po_no" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

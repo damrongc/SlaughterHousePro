@@ -12,24 +12,22 @@ namespace SlaughterHouseClient
     using System;
     using System.Collections.Generic;
     
-    public partial class stock
+    public partial class invoice_item
     {
-        public System.DateTime stock_date { get; set; }
-        public string stock_no { get; set; }
-        public int stock_item { get; set; }
+        public string invoice_no { get; set; }
         public string product_code { get; set; }
-        public int stock_qty { get; set; }
-        public decimal stock_wgh { get; set; }
-        public string ref_document_type { get; set; }
-        public string ref_document_no { get; set; }
-        public string lot_no { get; set; }
-        public int location_code { get; set; }
-        public int barcode_no { get; set; }
-        public int transaction_type { get; set; }
+        public int seq { get; set; }
+        public int qty { get; set; }
+        public decimal wgh { get; set; }
+        public decimal unit_price { get; set; }
+        public decimal gross_amt { get; set; }
+        public decimal net_amt { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
+        public Nullable<System.DateTime> modified_at { get; set; }
+        public string modified_by { get; set; }
     
-        public virtual location location { get; set; }
+        public virtual invoice invoice { get; set; }
         public virtual product product { get; set; }
     }
 }

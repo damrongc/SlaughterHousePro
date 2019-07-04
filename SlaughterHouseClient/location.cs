@@ -14,6 +14,11 @@ namespace SlaughterHouseClient
     
     public partial class location
     {
+        public location()
+        {
+            this.stocks = new HashSet<stock>();
+        }
+    
         public int location_code { get; set; }
         public string location_name { get; set; }
         public bool active { get; set; }
@@ -21,5 +26,7 @@ namespace SlaughterHouseClient
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
+    
+        public virtual ICollection<stock> stocks { get; set; }
     }
 }
