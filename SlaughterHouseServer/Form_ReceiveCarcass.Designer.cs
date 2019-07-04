@@ -39,7 +39,7 @@
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.Print = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Close = new System.Windows.Forms.DataGridViewImageColumn();
+            this.CloseFlag = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
@@ -82,7 +82,7 @@
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Print,
-            this.Close});
+            this.CloseFlag});
             this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv.Location = new System.Drawing.Point(6, 68);
             this.gv.Name = "gv";
@@ -163,12 +163,12 @@
             this.Print.Name = "Print";
             this.Print.Width = 58;
             // 
-            // Close
+            // CloseFlag
             // 
-            this.Close.HeaderText = "จบคิว";
-            this.Close.Image = ((System.Drawing.Image)(resources.GetObject("Close.Image")));
-            this.Close.Name = "Close";
-            this.Close.Width = 63;
+            this.CloseFlag.HeaderText = "จบคิว";
+            this.CloseFlag.Image = ((System.Drawing.Image)(resources.GetObject("CloseFlag.Image")));
+            this.CloseFlag.Name = "CloseFlag";
+            this.CloseFlag.Width = 63;
             // 
             // Form_ReceiveCarcass
             // 
@@ -200,6 +200,6 @@
         private System.Windows.Forms.DateTimePicker dtpReceiveDate;
         private System.Windows.Forms.ComboBox cboFarm;
         private System.Windows.Forms.DataGridViewImageColumn Print;
-        private System.Windows.Forms.DataGridViewImageColumn Close;
+        private System.Windows.Forms.DataGridViewImageColumn CloseFlag;
     }
 }

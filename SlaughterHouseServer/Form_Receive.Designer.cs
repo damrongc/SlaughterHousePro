@@ -33,15 +33,15 @@
             this.BtnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Print = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Close = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cboFarm = new System.Windows.Forms.ComboBox();
             this.dtpReceiveDate = new System.Windows.Forms.DateTimePicker();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Print = new System.Windows.Forms.DataGridViewImageColumn();
+            this.CloseFlag = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
@@ -102,34 +102,13 @@
             this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Edit,
             this.Print,
-            this.Close});
+            this.CloseFlag});
             this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv.Location = new System.Drawing.Point(6, 68);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
             this.gv.Size = new System.Drawing.Size(1368, 656);
             this.gv.TabIndex = 8;
-            // 
-            // Edit
-            // 
-            this.Edit.HeaderText = "แก้ไข";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.Name = "Edit";
-            this.Edit.Width = 58;
-            // 
-            // Print
-            // 
-            this.Print.HeaderText = "พิมพ์";
-            this.Print.Image = ((System.Drawing.Image)(resources.GetObject("Print.Image")));
-            this.Print.Name = "Print";
-            this.Print.Width = 58;
-            // 
-            // Close
-            // 
-            this.Close.HeaderText = "จบคิว";
-            this.Close.Image = ((System.Drawing.Image)(resources.GetObject("Close.Image")));
-            this.Close.Name = "Close";
-            this.Close.Width = 63;
             // 
             // panel3
             // 
@@ -198,6 +177,27 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "ฟาร์ม:";
             // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "แก้ไข";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.Name = "Edit";
+            this.Edit.Width = 58;
+            // 
+            // Print
+            // 
+            this.Print.HeaderText = "พิมพ์";
+            this.Print.Image = ((System.Drawing.Image)(resources.GetObject("Print.Image")));
+            this.Print.Name = "Print";
+            this.Print.Width = 58;
+            // 
+            // CloseFlag
+            // 
+            this.CloseFlag.HeaderText = "จบคิว";
+            this.CloseFlag.Image = ((System.Drawing.Image)(resources.GetObject("CloseFlag.Image")));
+            this.CloseFlag.Name = "CloseFlag";
+            this.CloseFlag.Width = 63;
+            // 
             // Form_Receive
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -230,6 +230,6 @@
         private System.Windows.Forms.ComboBox cboFarm;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Print;
-        private System.Windows.Forms.DataGridViewImageColumn Close;
+        private System.Windows.Forms.DataGridViewImageColumn CloseFlag;
     }
 }

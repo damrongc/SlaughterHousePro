@@ -162,10 +162,10 @@
         VkQB5wAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="Close.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="CloseFlag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="Close.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="CloseFlag.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAA35JREFUSEu9
         Vk1sTFEUfqi/kEj8p52ZNy0WQkSQWCFCSERK2EhEBF1YkIiVNsFEoiptZ96baUOTlrARDRsiJCIsmrIg

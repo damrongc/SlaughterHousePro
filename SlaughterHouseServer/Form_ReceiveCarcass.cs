@@ -71,7 +71,7 @@ namespace SlaughterHouseServer
                         case "Print":
 
                             break;
-                        case "Close":
+                        case "CloseFlag":
                             StockController.InsertStockSwineReceive(receiveNo);
                             MessageBox.Show("ปิดคิว เรียบร้อยแล้ว", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
