@@ -123,6 +123,65 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+        public static object GetOrderMakeInvoice(DateTime orderDate, string customerCode = "")
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sb = new StringBuilder();
+                    sb.Append("SELECT a.order_no,");
+                    sb.Append(" a.order_date, sk.stock_no, ");
+                    sb.Append(" a.customer_code,");
+                    sb.Append(" a.order_flag,");
+                    sb.Append(" a.comments,");
+                    sb.Append(" a.active,");
+                    sb.Append(" a.create_at,");
+                    sb.Append(" a.create_by,");
+                    sb.Append(" b.customer_name");
+                    sb.Append(" FROM orders a, customer b, stock sk ");
+                    sb.Append(" WHERE a.customer_code =b.customer_code");
+                    sb.Append(" AND a.order_date =@order_date");
+                    sb.Append(" AND a.order_no = sk.ref_document_no");
+                    sb.Append(" AND sk.ref_document_Type ='SO' ");
+                    if (!string.IsNullOrEmpty(customerCode))
+                        sb.Append(" AND a.customer_code =@customer_code");
+                    sb.Append(" ORDER BY order_no ASC");
+                    var cmd = new MySqlCommand(sb.ToString(), conn);
+                    cmd.Parameters.AddWithValue("order_date", orderDate.ToString("yyyy-MM-dd"));
+
+
+                    if (!string.IsNullOrEmpty(customerCode))
+                        cmd.Parameters.AddWithValue("customer_code", customerCode);
+
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    var coll = (from p in ds.Tables[0].AsEnumerable()
+                                select new
+                                {
+                                    OrderNo = p.Field<string>("order_no"),
+                                    OrderDate = p.Field<DateTime>("order_date"),
+                                    CustomerName = p.Field<string>("customer_name"),
+                                    //Comments = p.Field<string>("comments"),
+                                    //OrderFlag = p.Field<int>("order_flag"),
+                                    Active = p.Field<bool>("active"),
+                                    CreateAt = p.Field<DateTime>("create_at"),
+                                    CreateBy = p.Field<string>("create_by"),
+                                }).ToList();
+
+                    return coll;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public static bool Insert(Order order)
         {
             MySqlTransaction tr = null;
