@@ -36,6 +36,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gvDt = new System.Windows.Forms.DataGridView();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
@@ -118,12 +119,21 @@
             this.gvDt.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvDt.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewImageColumn1});
             this.gvDt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvDt.Location = new System.Drawing.Point(3, 32);
             this.gvDt.Name = "gvDt";
             this.gvDt.RowHeadersWidth = 10;
             this.gvDt.Size = new System.Drawing.Size(365, 404);
             this.gvDt.TabIndex = 44;
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.HeaderText = "เลือก";
+            this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.Width = 59;
             // 
             // Form_InvoiceNew
             // 
@@ -157,5 +167,6 @@
         private System.Windows.Forms.DataGridViewImageColumn Select;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView gvDt;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
     }
 }

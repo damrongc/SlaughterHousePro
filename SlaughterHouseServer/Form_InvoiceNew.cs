@@ -30,7 +30,16 @@ namespace SlaughterHouseServer
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
 
-            this.Load += Form_Load;
+            gvDt.ReadOnly = true;
+            gvDt.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            gvDt.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
+            gvDt.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
+            gvDt.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            gvDt.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            gvDt.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
+            gvDt.EnableHeadersVisualStyles = false;
+                
+                this.Load += Form_Load;
             this.Shown += Form_Shown;
         }
         private void Form_Shown(object sender, System.EventArgs e)
