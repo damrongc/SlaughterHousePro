@@ -19,7 +19,7 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT a.Invoice_No, a.Invoice_date"); 
+                    sb.Append("SELECT a.Invoice_No, a.Invoice_date,"); 
                     sb.Append(" a.Ref_Document_No, a.customer_code,");
                     sb.Append(" a.Gross_Amt, a.Discount,");
                     sb.Append(" a.Vat_Rate, a.Vat_Amt,");

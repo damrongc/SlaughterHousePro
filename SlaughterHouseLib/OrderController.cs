@@ -131,7 +131,7 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT a.order_no,");
+                    sb.Append("SELECT distinct a.order_no,");
                     sb.Append(" a.order_date, sk.stock_no, ");
                     sb.Append(" a.customer_code,");
                     sb.Append(" a.order_flag,");
@@ -172,7 +172,6 @@ namespace SlaughterHouseLib
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
                                 }).ToList();
-
                     return coll;
                 }
             }
@@ -452,5 +451,41 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+        public static DataTable GetOrderItemsMapStock(string orderNo)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"select sk.stock_item, 
+                                b.product_name,
+                                sk.stock_qty,
+                                sk.stock_wgh
+                                from order_item a,product b, stock sk 
+                                where a.product_code =b.product_code
+                                and a.order_no =@order_no 
+                                and a.order_no = sk.ref_document_no 
+                                and a.product_code = sk.product_code 
+                                and sk.ref_document_type ='SO'  
+                                order by sk.stock_item asc";
+                     
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("order_no", orderNo);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                     
+                    return ds.Tables[0];
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

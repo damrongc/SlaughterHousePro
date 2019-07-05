@@ -62,7 +62,7 @@ namespace SlaughterHouseServer
                     AddFormToContainer(new Form_ProductPrice());
                     break;
                 case "BtnInvoice":
-                    AddFormToContainer(new Form_ProductionOrder());
+                    AddFormToContainer(new Form_Invoice());
                     break;
             }
         }
