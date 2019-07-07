@@ -38,7 +38,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cboCustomer = new System.Windows.Forms.ComboBox();
-            this.dtpOrderDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpRequestDate = new System.Windows.Forms.DateTimePicker();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -134,7 +134,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.cboCustomer);
-            this.panel2.Controls.Add(this.dtpOrderDate);
+            this.panel2.Controls.Add(this.dtpRequestDate);
             this.panel2.Controls.Add(this.BtnSearch);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
@@ -153,14 +153,14 @@
             this.cboCustomer.Size = new System.Drawing.Size(382, 37);
             this.cboCustomer.TabIndex = 7;
             // 
-            // dtpOrderDate
+            // dtpRequestDate
             // 
-            this.dtpOrderDate.CustomFormat = "dd/MM/yyyy";
-            this.dtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpOrderDate.Location = new System.Drawing.Point(281, 11);
-            this.dtpOrderDate.Name = "dtpOrderDate";
-            this.dtpOrderDate.Size = new System.Drawing.Size(177, 36);
-            this.dtpOrderDate.TabIndex = 6;
+            this.dtpRequestDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpRequestDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpRequestDate.Location = new System.Drawing.Point(281, 11);
+            this.dtpRequestDate.Name = "dtpRequestDate";
+            this.dtpRequestDate.Size = new System.Drawing.Size(177, 36);
+            this.dtpRequestDate.TabIndex = 6;
             // 
             // BtnSearch
             // 
@@ -217,7 +217,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView gv;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dtpOrderDate;
+        private System.Windows.Forms.DateTimePicker dtpRequestDate;
         private System.Windows.Forms.ComboBox cboCustomer;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Print;

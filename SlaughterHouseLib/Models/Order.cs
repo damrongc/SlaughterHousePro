@@ -6,7 +6,7 @@ namespace SlaughterHouseLib.Models
     public class Order
     {
         public string OrderNo { get; set; }
-        public DateTime OrderDate { get; set; }
+        public DateTime RequestDate { get; set; } 
         public Customer Customer { get; set; }
         public int OrderFlag { get; set; }
         public string Comments { get; set; }

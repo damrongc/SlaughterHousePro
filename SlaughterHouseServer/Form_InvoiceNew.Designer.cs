@@ -34,6 +34,7 @@
             this.Select = new System.Windows.Forms.DataGridViewImageColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BtnRefresh = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gvDt = new System.Windows.Forms.DataGridView();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -92,11 +93,29 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.BtnRefresh);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1002, 35);
             this.panel1.TabIndex = 45;
+            // 
+            // BtnRefresh
+            // 
+            this.BtnRefresh.BackColor = System.Drawing.Color.White;
+            this.BtnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnRefresh.FlatAppearance.BorderSize = 0;
+            this.BtnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRefresh.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnRefresh.ForeColor = System.Drawing.Color.White;
+            this.BtnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("BtnRefresh.Image")));
+            this.BtnRefresh.Location = new System.Drawing.Point(946, -2);
+            this.BtnRefresh.Name = "BtnRefresh";
+            this.BtnRefresh.Size = new System.Drawing.Size(54, 36);
+            this.BtnRefresh.TabIndex = 44;
+            this.BtnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnRefresh.UseVisualStyleBackColor = false;
+            this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
             // 
             // groupBox1
             // 
@@ -168,5 +187,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView gvDt;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
+        private System.Windows.Forms.Button BtnRefresh;
     }
 }

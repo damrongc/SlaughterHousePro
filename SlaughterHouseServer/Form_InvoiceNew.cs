@@ -10,7 +10,7 @@ namespace SlaughterHouseServer
     public partial class Form_InvoiceNew : Form
     {
         public string orderNo { get; set; }
-        public DateTime orderDate { get; set; }
+        public DateTime requestDate { get; set; }
         public string customerCode { get; set; }
          
         public Form_InvoiceNew()
@@ -38,8 +38,9 @@ namespace SlaughterHouseServer
             gvDt.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gvDt.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gvDt.EnableHeadersVisualStyles = false;
-                
-                this.Load += Form_Load;
+             
+            //BtnRefresh.Click += BtnRefresh_Click;
+            this.Load += Form_Load;
             this.Shown += Form_Shown;
         }
         private void Form_Shown(object sender, System.EventArgs e)
@@ -50,10 +51,34 @@ namespace SlaughterHouseServer
         { 
             LoadData();
         }
-        
 
-#region Event Click
-        
+
+        #region Event Click
+
+        //private void BtnRefresh_Click(object sender, KeyEventArgs e)
+        //{
+        //    try
+        //    {
+        //        LoadData();
+        //    }
+        //    catch (System.Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
+        private void BtnRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadData();
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -62,10 +87,8 @@ namespace SlaughterHouseServer
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
                     {
-
                         case "Select":
                             try
                             {
@@ -76,12 +99,25 @@ namespace SlaughterHouseServer
                             }
                             catch (System.Exception ex)
                             {
-
                                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                             break; 
+                    } 
+                }
+                else
+                {
+                    try
+                    {
+                        if (gv.Rows.Count > 0)
+                        {
+                            LoadDataDetail();
+                        }
                     }
+                    catch (System.Exception ex)
+                    {
 
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    } 
                 }
             }
             catch (Exception ex)
@@ -94,29 +130,34 @@ namespace SlaughterHouseServer
 
         private void LoadData()
         {
-            var coll = OrderController.GetOrderMakeInvoice(this.orderDate, this.customerCode);
+            var coll = OrderController.GetOrderReadyToSell(this.requestDate, this.customerCode);
             gv.DataSource = coll;
 
             gv.Columns[2].HeaderText = "เลขที่ใบสั่งขาย";
-            gv.Columns[3].HeaderText = "วันที่สั่งขาย";
+            gv.Columns[3].HeaderText = "วันที่ต้องการสินค้า";
             gv.Columns[4].HeaderText = "ลูกค้า";
             gv.Columns[5].HeaderText = "ใช้งาน";
             gv.Columns[6].HeaderText = "ผู้สร้าง";
 
             gv.Columns[5].Visible = false;
-            LoadSoStock();
+            if (gv.Rows.Count > 0)
+            {
+                LoadDataDetail();
+            }
+            
         }
-        private void LoadSoStock()
-        {
-
-            var coll = OrderItemController.GetOrderItemsMapStock(gv.Rows[gv.CurrentCell.RowIndex].Cells[1].Value.ToString());
-            gvDt.DataSource = coll;
-
-            gvDt.Columns[1].HeaderText = "สินค้า";
-            gvDt.Columns[2].HeaderText = "ปริมาณ";
-            gvDt.Columns[3].HeaderText = "น้ำหนัก"; 
+        private void LoadDataDetail()
+        { 
+            DataTable d = new DataTable();
+           
+            d = OrderItemController.GetOrderItemReadyToSell(gv.Rows[gv.CurrentCell.RowIndex].Cells[1].Value.ToString());
+            gvDt.DataSource = d;
+            gvDt.Columns[1].HeaderText = "ลำดับ"; 
+            gvDt.Columns[2].HeaderText = "สินค้า";
+            gvDt.Columns[3].HeaderText = "ปริมาณ";
+            gvDt.Columns[4].HeaderText = "น้ำหนัก"; 
             gvDt.Columns[0].Visible = false;
-        }
+        } 
     }
 }
  

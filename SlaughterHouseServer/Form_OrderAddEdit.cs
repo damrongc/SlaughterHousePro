@@ -35,19 +35,19 @@ namespace SlaughterHouseServer
             this.Shown += Form_Shown;
 
             //KeyDown  
-            dtpOrderDate.KeyDown += DtpOrderDate_KeyDown;
+            dtpRequestDate.KeyDown += DtpRequestDate_KeyDown;
             cboCustomer.KeyDown += CboCustomer_KeyDown;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
-            dtpOrderDate.Focus();
+            dtpRequestDate.Focus();
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
             LoadCustomer(); 
             LoadData();
         }
-        private void DtpOrderDate_KeyDown(object sender, KeyEventArgs e)
+        private void DtpRequestDate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -191,11 +191,11 @@ namespace SlaughterHouseServer
             if (order != null)
             {
                 txtOrderNo.Text = order.OrderNo;
-                dtpOrderDate.Value = order.OrderDate;
+                dtpRequestDate.Value = order.RequestDate;
                 cboCustomer.SelectedValue = order.Customer.CustomerCode;
                 txtComment.Text = order.Comments;
                 chkActive.Checked = order.Active;
-                dtpOrderDate.Enabled = false;
+                dtpRequestDate.Enabled = false;
                 BtnSaveAndNew.Visible = false; 
             }
             LoadDetail();
@@ -247,7 +247,7 @@ namespace SlaughterHouseServer
                 var order = new Order
                 {
                     OrderNo = txtOrderNo.Text,
-                    OrderDate = dtpOrderDate.Value,
+                    RequestDate = dtpRequestDate.Value,
                     Customer = new Customer
                     {
                         CustomerCode = cboCustomer.SelectedValue.ToString()

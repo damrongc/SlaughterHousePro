@@ -88,7 +88,7 @@ namespace SlaughterHouseServer
         private void BtnRefSo_Click(object sender, System.EventArgs e)
         {
             var frmNew = new Form_InvoiceNew();
-            frmNew.orderDate = dtpInvoiceDate.Value;
+            frmNew.requestDate = dtpInvoiceDate.Value;
             if (frmNew.ShowDialog() == DialogResult.OK)
             {
                 var frm = new Form_InvoiceAddEdit
@@ -124,11 +124,14 @@ namespace SlaughterHouseServer
 
             gv.Columns[2].HeaderText = "เลขที่ใบแจ้งหนี้";
             gv.Columns[3].HeaderText = "วันที่แจ้งหนี้";
-            gv.Columns[4].HeaderText = "ลูกค้า";
-            gv.Columns[5].HeaderText = "ใช้งาน";
-            gv.Columns[6].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[7].HeaderText = "ผู้สร้าง";
-            
+            gv.Columns[4].HeaderText = "เลขที่ใบสั่งขาย";
+            gv.Columns[5].HeaderText = "ลูกค้า";
+            gv.Columns[6].HeaderText = "ราคาสุทธิ";
+            gv.Columns[7].HeaderText = "ใช้งาน";
+            gv.Columns[8].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[9].HeaderText = "ผู้สร้าง";
+
+            gv.Columns[7].Visible = false;
         }
  
     }

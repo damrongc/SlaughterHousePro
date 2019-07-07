@@ -10,7 +10,8 @@ namespace SlaughterHouseServer
     public partial class Form_InvoiceAddEdit : Form
     {
         public string orderNo { get; set; }
-        DataTable dtOrderItem;
+        public string invoiceNo { get; set; }
+        DataTable dtInvoiceItem;
 
         public Form_InvoiceAddEdit()
         {
@@ -34,10 +35,42 @@ namespace SlaughterHouseServer
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
+            chkVatFlag.CheckedChanged += ChkVatFlag_CheckedChanged;
+
             //KeyDown  
-            dtpInvoiceDate.KeyDown += DtpOrderDate_KeyDown;
+            dtpInvoiceDate.KeyDown += DtpRequestDate_KeyDown;
             cboCustomer.KeyDown += CboCustomer_KeyDown;
+
+            cboCustomer.Enabled = false;
+            dtpInvoiceDate.Enabled = false;
+            txtOrderNo.Enabled = false;
+            txtInvoiceNo.Enabled = false;
+            BtnSaveAndNew.Visible = false;
+            txtGrossAmt.Enabled = false;
+            txtBeforeVat.Enabled = false;
+            txtVatAmt.Enabled = false;
+            txtNetAmt.Enabled = false;
+
+            txtVatAmt.Text = 0.ToString();
+            txtVatRate.Text = 0.ToString();
+            txtGrossAmt.Text = 0.ToString();
+            txtBeforeVat.Text = 0.ToString();
+            txtDiscount.Text = 0.ToString();
+            txtNetAmt.Text = 0.ToString();
         }
+
+        private void ChkVatFlag_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkVatFlag.Checked == true )
+            {
+                txtVatRate.Text = 7.ToString();
+            }
+            else
+            {
+                txtVatRate.Text = 0.ToString();
+            }
+        }
+
         private void Form_Shown(object sender, System.EventArgs e)
         {
             dtpInvoiceDate.Focus();
@@ -47,7 +80,9 @@ namespace SlaughterHouseServer
             LoadCustomer(); 
             LoadData();
         }
-        private void DtpOrderDate_KeyDown(object sender, KeyEventArgs e)
+
+
+        private void DtpRequestDate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -149,27 +184,27 @@ namespace SlaughterHouseServer
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
                     {
 
-                        case "Edit":
-                            var frm = new Form_OrderDetail();
-                            frm.orderNo = txtInvoiceNo.Text;
-                            frm.productCode = dtOrderItem.Rows[e.RowIndex]["product_code"].ToString();
-                            frm.qty = (int)dtOrderItem.Rows[e.RowIndex]["order_qty"];
-                            frm.wgh = (decimal)dtOrderItem.Rows[e.RowIndex]["order_wgh"];
-                            if (frm.ShowDialog() == DialogResult.OK)
-                            {
-                                dtOrderItem.Rows[e.RowIndex]["product_code"] = frm.productCode;
-                                dtOrderItem.Rows[e.RowIndex]["product_name"] = frm.productName;
-                                dtOrderItem.Rows[e.RowIndex]["order_qty"] = frm.qty;
-                                dtOrderItem.Rows[e.RowIndex]["order_wgh"] = frm.wgh;
-                                dtOrderItem.AcceptChanges();
-                                gv.Refresh();
-                            }
-                            break;
-                        case "Del":
-                            dtOrderItem.Rows[e.RowIndex].Delete();
-                            dtOrderItem.AcceptChanges();
-                            gv.Refresh(); 
-                            break;
+                        //case "Edit":
+                        //    var frm = new Form_OrderDetail();
+                        //    frm.orderNo = txtInvoiceNo.Text;
+                        //    frm.productCode = dtOrderItem.Rows[e.RowIndex]["product_code"].ToString();
+                        //    frm.qty = (int)dtOrderItem.Rows[e.RowIndex]["order_qty"];
+                        //    frm.wgh = (decimal)dtOrderItem.Rows[e.RowIndex]["order_wgh"];
+                        //    if (frm.ShowDialog() == DialogResult.OK)
+                        //    {
+                        //        dtOrderItem.Rows[e.RowIndex]["product_code"] = frm.productCode;
+                        //        dtOrderItem.Rows[e.RowIndex]["product_name"] = frm.productName;
+                        //        dtOrderItem.Rows[e.RowIndex]["order_qty"] = frm.qty;
+                        //        dtOrderItem.Rows[e.RowIndex]["order_wgh"] = frm.wgh;
+                        //        dtOrderItem.AcceptChanges();
+                        //        gv.Refresh();
+                        //    }
+                        //    break;
+                        //case "Del":
+                        //    dtOrderItem.Rows[e.RowIndex].Delete();
+                        //    dtOrderItem.AcceptChanges();
+                        //    gv.Refresh(); 
+                        //    break;
                     }
 
                 }
@@ -184,33 +219,60 @@ namespace SlaughterHouseServer
 
         private void LoadData()
         {
-            txtInvoiceNo.Enabled = false;
-            //Order order = InvoiceController.GetInvoice(this.orderNo);
-            //if (order != null)
-            //{
-            //    txtInvoiceNo.Text = order.OrderNo;
-            //    dtpInvoiceDate.Value = order.OrderDate;
-            //    cboCustomer.SelectedValue = order.Customer.CustomerCode;
-            //    txtComment.Text = order.Comments;
-            //    chkActive.Checked = order.Active;
-            //    dtpInvoiceDate.Enabled = false;
-            //    BtnSaveAndNew.Visible = false; 
-            //}
-            //LoadDetail();
+            txtOrderNo .Text  = this.orderNo;
+
+            if (String.IsNullOrEmpty(this.invoiceNo))
+            {
+                Order order = OrderController.GetOrder(this.orderNo);
+                if (order != null)
+                {
+                    txtInvoiceNo.Text = "";
+                    dtpInvoiceDate.Value = order.RequestDate;
+                    cboCustomer.SelectedValue = order.Customer.CustomerCode;
+                    txtComment.Text = "";
+                    chkActive.Checked = order.Active; 
+                }
+            }
+            else
+            {
+                Invoice invoice = InvoiceController.GetInvoice(this.orderNo);
+                if (invoice != null)
+                {
+                    txtInvoiceNo.Text = invoice.InvoiceNo ;
+                    dtpInvoiceDate.Value = invoice.InvoiceDate;
+                    cboCustomer.SelectedValue = invoice.Customer.CustomerCode;
+                    txtComment.Text = invoice.Comments;
+                    chkActive.Checked = invoice.Active; 
+                }
+            }
+               
+            
+            LoadDetail();
         }
         private void LoadDetail()
-        { 
-            dtOrderItem = new DataTable("ORDER_ITEM");
-            dtOrderItem = OrderItemController.GetOrderItems(orderNo);
-         
-            gv.DataSource = dtOrderItem;
-            gv.Columns[2].HeaderText = "ลำดับ";
-            gv.Columns[3].HeaderText = "รหัสสินค้า";
-            gv.Columns[4].HeaderText = "ชื่อสินค้า";
-            gv.Columns[5].HeaderText = "ปริมาณ";
-            gv.Columns[6].HeaderText = "น้้ำหนัก";
+        {
+            if (String.IsNullOrEmpty(this.invoiceNo))
+            {
+                dtInvoiceItem = new DataTable("INVOICE_ITEM");
+                dtInvoiceItem = OrderItemController.GetOrderItemReadyToSell(this.orderNo);
+                
+            }
+            else
+            {
 
-            gv.Columns[2].Visible = false;           
+            }
+            gv.DataSource = dtInvoiceItem;
+            gv.Columns[0].HeaderText = "ลำดับ";
+            gv.Columns[1].HeaderText = "รหัสสินค้า";
+            gv.Columns[2].HeaderText = "ชื่อสินค้า";
+            gv.Columns[3].HeaderText = "ปริมาณ";
+            gv.Columns[4].HeaderText = "น้้ำหนัก";
+            gv.Columns[5].HeaderText = "ราคาต่อหน่วย";
+            gv.Columns[6].HeaderText = "ราคา";
+             
+
+            gv.Columns[0].Visible = false;           
+            gv.Columns[1].Visible = false;
         }
         private void LoadCustomer()
         {
@@ -225,27 +287,27 @@ namespace SlaughterHouseServer
             {
                 var orderItems = new List<OrderItem>();
                 int seq = 0;
-                foreach (DataRow row in dtOrderItem.Rows)
-                {
-                    seq++;
-                    orderItems.Add(new OrderItem
-                    {
-                        OrderNo = txtInvoiceNo.Text,
-                        Seq = seq,
-                        Product = new Product
-                        {
-                            ProductCode = row["product_code"].ToString(),
-                            ProductName = row["product_name"].ToString(),
-                        },
-                        OrderQty = (int)row["order_qty"],
-                        OrderWgh = (decimal)row["order_wgh"],
-                    });
-                }
+                //foreach (DataRow row in dtOrderItem.Rows)
+                //{
+                //    seq++;
+                //    orderItems.Add(new OrderItem
+                //    {
+                //        OrderNo = txtInvoiceNo.Text,
+                //        Seq = seq,
+                //        Product = new Product
+                //        {
+                //            ProductCode = row["product_code"].ToString(),
+                //            ProductName = row["product_name"].ToString(),
+                //        },
+                //        OrderQty = (int)row["order_qty"],
+                //        OrderWgh = (decimal)row["order_wgh"],
+                //    });
+                //}
 
                 var order = new Order
                 {
                     OrderNo = txtInvoiceNo.Text,
-                    OrderDate = dtpInvoiceDate.Value,
+                    RequestDate = dtpInvoiceDate.Value,
                     Customer = new Customer
                     {
                         CustomerCode = cboCustomer.SelectedValue.ToString()

@@ -24,7 +24,7 @@ namespace SlaughterHouseServer
             this.Shown += Form_Shown;
 
             //KeyDown  
-            dtpStartDate.KeyDown += DtpOrderDate_KeyDown;
+            dtpStartDate.KeyDown += DtpStartDate_KeyDown;
             cboProduct.KeyDown += CboProduct_KeyDown;
         }
         private void Form_Shown(object sender, System.EventArgs e)
@@ -36,7 +36,7 @@ namespace SlaughterHouseServer
             LoadProduct(); 
             LoadData();
         }
-        private void DtpOrderDate_KeyDown(object sender, KeyEventArgs e)
+        private void DtpStartDate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {

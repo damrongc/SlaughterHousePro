@@ -35,18 +35,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.BtnSave = new System.Windows.Forms.Button();
             this.BtnSaveAndNew = new System.Windows.Forms.Button();
-            this.dtpOrderDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpRequestDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.cboCustomer = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnAddOrderItem = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Del = new System.Windows.Forms.DataGridViewImageColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.chkActive = new System.Windows.Forms.CheckBox();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Del = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
@@ -121,24 +121,24 @@
             this.BtnSaveAndNew.UseVisualStyleBackColor = false;
             this.BtnSaveAndNew.Click += new System.EventHandler(this.BtnSaveAndNew_Click);
             // 
-            // dtpOrderDate
+            // dtpRequestDate
             // 
-            this.dtpOrderDate.CustomFormat = "dd/MM/yyyy";
-            this.dtpOrderDate.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpOrderDate.Location = new System.Drawing.Point(182, 64);
-            this.dtpOrderDate.Name = "dtpOrderDate";
-            this.dtpOrderDate.Size = new System.Drawing.Size(215, 36);
-            this.dtpOrderDate.TabIndex = 34;
+            this.dtpRequestDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpRequestDate.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpRequestDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpRequestDate.Location = new System.Drawing.Point(182, 64);
+            this.dtpRequestDate.Name = "dtpRequestDate";
+            this.dtpRequestDate.Size = new System.Drawing.Size(215, 36);
+            this.dtpRequestDate.TabIndex = 34;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(133, 68);
+            this.label11.Location = new System.Drawing.Point(26, 68);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 29);
+            this.label11.Size = new System.Drawing.Size(154, 29);
             this.label11.TabIndex = 33;
-            this.label11.Text = "วันที่:";
+            this.label11.Text = "วันที่ต้องการสินค้า:";
             // 
             // cboCustomer
             // 
@@ -203,6 +203,21 @@
             this.gv.Size = new System.Drawing.Size(933, 211);
             this.gv.TabIndex = 43;
             // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "แก้ไข";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.Name = "Edit";
+            this.Edit.Width = 58;
+            // 
+            // Del
+            // 
+            this.Del.HeaderText = "ลบ";
+            this.Del.Image = ((System.Drawing.Image)(resources.GetObject("Del.Image")));
+            this.Del.Name = "Del";
+            this.Del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Del.Width = 42;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -235,21 +250,6 @@
             this.chkActive.Text = "ใช้งาน";
             this.chkActive.UseVisualStyleBackColor = true;
             // 
-            // Edit
-            // 
-            this.Edit.HeaderText = "แก้ไข";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.Name = "Edit";
-            this.Edit.Width = 58;
-            // 
-            // Del
-            // 
-            this.Del.HeaderText = "ลบ";
-            this.Del.Image = ((System.Drawing.Image)(resources.GetObject("Del.Image")));
-            this.Del.Name = "Del";
-            this.Del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Del.Width = 42;
-            // 
             // Form_OrderAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -259,7 +259,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.cboCustomer);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.dtpOrderDate);
+            this.Controls.Add(this.dtpRequestDate);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.BtnSaveAndNew);
             this.Controls.Add(this.BtnSave);
@@ -291,7 +291,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.Button BtnSaveAndNew;
-        private System.Windows.Forms.DateTimePicker dtpOrderDate;
+        private System.Windows.Forms.DateTimePicker dtpRequestDate;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cboCustomer;
         private System.Windows.Forms.Label label4;

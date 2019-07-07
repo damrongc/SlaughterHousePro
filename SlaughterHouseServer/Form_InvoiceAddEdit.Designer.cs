@@ -46,18 +46,18 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtGrossAmt = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textDiscount = new System.Windows.Forms.TextBox();
+            this.txtDiscount = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBeforeVat = new System.Windows.Forms.TextBox();
+            this.txtBeforeVat = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtComment = new System.Windows.Forms.TextBox();
-            this.textNetAmt = new System.Windows.Forms.TextBox();
+            this.txtNetAmt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textVatAmt = new System.Windows.Forms.TextBox();
+            this.txtVatAmt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textVatRate = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.txtVatRate = new System.Windows.Forms.TextBox();
+            this.chkVatFlag = new System.Windows.Forms.CheckBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
@@ -193,7 +193,7 @@
             this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(12, 107);
+            this.panel1.Location = new System.Drawing.Point(12, 108);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(933, 36);
             this.panel1.TabIndex = 45;
@@ -234,6 +234,7 @@
             this.txtGrossAmt.Name = "txtGrossAmt";
             this.txtGrossAmt.Size = new System.Drawing.Size(159, 36);
             this.txtGrossAmt.TabIndex = 50;
+            this.txtGrossAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
             // 
@@ -244,13 +245,14 @@
             this.label6.TabIndex = 49;
             this.label6.Text = "ยอดเงินรวม:";
             // 
-            // textDiscount
+            // txtDiscount
             // 
-            this.textDiscount.Location = new System.Drawing.Point(787, 411);
-            this.textDiscount.MaxLength = 10;
-            this.textDiscount.Name = "textDiscount";
-            this.textDiscount.Size = new System.Drawing.Size(159, 36);
-            this.textDiscount.TabIndex = 52;
+            this.txtDiscount.Location = new System.Drawing.Point(787, 411);
+            this.txtDiscount.MaxLength = 10;
+            this.txtDiscount.Name = "txtDiscount";
+            this.txtDiscount.Size = new System.Drawing.Size(159, 36);
+            this.txtDiscount.TabIndex = 52;
+            this.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label7
             // 
@@ -261,13 +263,14 @@
             this.label7.TabIndex = 51;
             this.label7.Text = "ส่วนลด:";
             // 
-            // textBeforeVat
+            // txtBeforeVat
             // 
-            this.textBeforeVat.Location = new System.Drawing.Point(787, 453);
-            this.textBeforeVat.MaxLength = 10;
-            this.textBeforeVat.Name = "textBeforeVat";
-            this.textBeforeVat.Size = new System.Drawing.Size(159, 36);
-            this.textBeforeVat.TabIndex = 54;
+            this.txtBeforeVat.Location = new System.Drawing.Point(787, 453);
+            this.txtBeforeVat.MaxLength = 10;
+            this.txtBeforeVat.Name = "txtBeforeVat";
+            this.txtBeforeVat.Size = new System.Drawing.Size(159, 36);
+            this.txtBeforeVat.TabIndex = 54;
+            this.txtBeforeVat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label8
             // 
@@ -297,13 +300,14 @@
             this.txtComment.Size = new System.Drawing.Size(405, 128);
             this.txtComment.TabIndex = 6;
             // 
-            // textNetAmt
+            // txtNetAmt
             // 
-            this.textNetAmt.Location = new System.Drawing.Point(787, 538);
-            this.textNetAmt.MaxLength = 10;
-            this.textNetAmt.Name = "textNetAmt";
-            this.textNetAmt.Size = new System.Drawing.Size(159, 36);
-            this.textNetAmt.TabIndex = 59;
+            this.txtNetAmt.Location = new System.Drawing.Point(787, 538);
+            this.txtNetAmt.MaxLength = 10;
+            this.txtNetAmt.Name = "txtNetAmt";
+            this.txtNetAmt.Size = new System.Drawing.Size(159, 36);
+            this.txtNetAmt.TabIndex = 59;
+            this.txtNetAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
@@ -314,13 +318,14 @@
             this.label3.TabIndex = 58;
             this.label3.Text = "ยอดเงินสุทธิ:";
             // 
-            // textVatAmt
+            // txtVatAmt
             // 
-            this.textVatAmt.Location = new System.Drawing.Point(787, 496);
-            this.textVatAmt.MaxLength = 10;
-            this.textVatAmt.Name = "textVatAmt";
-            this.textVatAmt.Size = new System.Drawing.Size(159, 36);
-            this.textVatAmt.TabIndex = 57;
+            this.txtVatAmt.Location = new System.Drawing.Point(787, 496);
+            this.txtVatAmt.MaxLength = 10;
+            this.txtVatAmt.Name = "txtVatAmt";
+            this.txtVatAmt.Size = new System.Drawing.Size(159, 36);
+            this.txtVatAmt.TabIndex = 57;
+            this.txtVatAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label9
             // 
@@ -331,38 +336,39 @@
             this.label9.TabIndex = 56;
             this.label9.Text = "ยอดเงินภาษี:";
             // 
-            // textVatRate
+            // txtVatRate
             // 
-            this.textVatRate.Location = new System.Drawing.Point(616, 496);
-            this.textVatRate.MaxLength = 10;
-            this.textVatRate.Name = "textVatRate";
-            this.textVatRate.Size = new System.Drawing.Size(44, 36);
-            this.textVatRate.TabIndex = 61;
+            this.txtVatRate.Location = new System.Drawing.Point(616, 496);
+            this.txtVatRate.MaxLength = 10;
+            this.txtVatRate.Name = "txtVatRate";
+            this.txtVatRate.Size = new System.Drawing.Size(44, 36);
+            this.txtVatRate.TabIndex = 61;
+            this.txtVatRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // checkBox1
+            // chkVatFlag
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(546, 498);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(64, 33);
-            this.checkBox1.TabIndex = 62;
-            this.checkBox1.Text = "ภาษี";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkVatFlag.AutoSize = true;
+            this.chkVatFlag.Location = new System.Drawing.Point(546, 498);
+            this.chkVatFlag.Name = "chkVatFlag";
+            this.chkVatFlag.Size = new System.Drawing.Size(64, 33);
+            this.chkVatFlag.TabIndex = 62;
+            this.chkVatFlag.Text = "ภาษี";
+            this.chkVatFlag.UseVisualStyleBackColor = true;
             // 
             // Form_InvoiceAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(957, 678);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textVatRate);
-            this.Controls.Add(this.textNetAmt);
+            this.Controls.Add(this.chkVatFlag);
+            this.Controls.Add(this.txtVatRate);
+            this.Controls.Add(this.txtNetAmt);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textVatAmt);
+            this.Controls.Add(this.txtVatAmt);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.textBeforeVat);
+            this.Controls.Add(this.txtBeforeVat);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textDiscount);
+            this.Controls.Add(this.txtDiscount);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtGrossAmt);
             this.Controls.Add(this.label6);
@@ -416,17 +422,17 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtGrossAmt;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textDiscount;
+        private System.Windows.Forms.TextBox txtDiscount;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBeforeVat;
+        private System.Windows.Forms.TextBox txtBeforeVat;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtComment;
-        private System.Windows.Forms.TextBox textNetAmt;
+        private System.Windows.Forms.TextBox txtNetAmt;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textVatAmt;
+        private System.Windows.Forms.TextBox txtVatAmt;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textVatRate;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox txtVatRate;
+        private System.Windows.Forms.CheckBox chkVatFlag;
     }
 }

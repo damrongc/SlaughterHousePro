@@ -102,11 +102,11 @@ namespace SlaughterHouseServer
         private void LoadOrder()
         {
             //var farmCtrl = new FarmController();
-            var coll = OrderController.GetAllOrders(dtpOrderDate.Value, cboCustomer.SelectedValue.ToString());
+            var coll = OrderController.GetAllOrders(dtpRequestDate.Value, cboCustomer.SelectedValue.ToString());
             gv.DataSource = coll;
 
             gv.Columns[2].HeaderText = "เลขที่ใบสั่งขาย";
-            gv.Columns[3].HeaderText = "วันที่สั่งขาย";
+            gv.Columns[3].HeaderText = "วันที่ต้องการสินค้า";
             gv.Columns[4].HeaderText = "ลูกค้า";
             gv.Columns[5].HeaderText = "ใช้งาน";
             gv.Columns[6].HeaderText = "วันเวลาสร้าง";

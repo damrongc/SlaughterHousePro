@@ -120,6 +120,9 @@
   <metadata name="Select.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Select.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Select.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -133,6 +136,23 @@
         AqDwOrcAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="BtnRefresh.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAAg9JREFUSEvt
+        lklrFFEUhVvdqHHYGJXQQzmAG9FdVHoRURSim6xFyCa9MKILp4VECFmpGaq6wIWEYBDF4Q8JruKwFicc
+        SOvxuy+3N7Grq0AxCH3g8Khb597T7/Wrd1+ph7XDc23Yk+pwtanRWlPXKrGuMJ6rNHWwJK1z1Z9j17T6
+        KHyrmugtVCdWEr2qJZrov6ctljMwox3VWIu1WGOhSFGQVKfgay/8gdnNMzYoNAzPMssLzHCB2DvTmHE5
+        0ZEoVhRyMPVS+aDYCEnf4DK8uz/VNn/1Gw7c0VbTwBb8ChuwuGGU6qgnfmRWJz2cC2Z9IuSs/NBihuU5
+        bUL8EraKmtkSwuNG/svr5P10w4cuyQbiSyZmo8x6KBcUngwGq4j5Y5dkg+Q6wie7U/V7KBc2s2C6irYP
+        XNJDD/8zwpHWYYvb1ndJLvZNa6d9WuTVPZQNRM86fcRm6pJcYDZnORzm4x7KBoUfubhVndXl9pEFI5d0
+        Bbmn4A/4InqgjR7OBoaLwTCmSzT1vpxqyF/lopLqNLmf4BfO5EEPd0fbkGUZZ/wOlzGf6tae9t7WdlZk
+        Bm1oT9Yr/VU+2oa2hCQes6Zqz/AzfErsIgf7GcZhnhvegK0lrXR+crxUMZAwZqZ2TbDngfvazNLeILZk
+        RTP4BrObpg1F/gomtT5cohKdZ7mv2kWKHzLKleKQXbBc1cO/Rqn0C6TLoD36SitJAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <metadata name="dataGridViewImageColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="dataGridViewImageColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

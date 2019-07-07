@@ -11,7 +11,7 @@ namespace SlaughterHouseLib
 
     public static class OrderController
     {
-        public static object GetAllOrders(DateTime orderDate, string customerCode = "")
+        public static object GetAllOrders(DateTime requestDate, string customerCode = "")
         {
             try
             {
@@ -35,7 +35,7 @@ namespace SlaughterHouseLib
                         sb.Append(" AND a.customer_code =@customer_code");
                     sb.Append(" ORDER BY order_no ASC");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
-                    cmd.Parameters.AddWithValue("order_date", orderDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("order_date", requestDate.ToString("yyyy-MM-dd"));
 
 
                     if (!string.IsNullOrEmpty(customerCode))
@@ -50,7 +50,7 @@ namespace SlaughterHouseLib
                                 select new
                                 {
                                     OrderNo = p.Field<string>("order_no"),
-                                    OrderDate = p.Field<DateTime>("order_date"),
+                                    RequestDate =  p.Field<DateTime>("order_date"),
                                     CustomerName = p.Field<string>("customer_name"),
                                     //Comments = p.Field<string>("comments"),
                                     //OrderFlag = p.Field<int>("order_flag"),
@@ -100,7 +100,7 @@ namespace SlaughterHouseLib
                         {
 
                             OrderNo = (string)ds.Tables[0].Rows[0]["order_no"],
-                            OrderDate = (DateTime)ds.Tables[0].Rows[0]["order_date"],
+                            RequestDate =  (DateTime)ds.Tables[0].Rows[0]["order_date"],
                             Customer = new Customer
                             {
                                 CustomerCode = (string)ds.Tables[0].Rows[0]["customer_code"]
@@ -123,7 +123,7 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        public static object GetOrderMakeInvoice(DateTime orderDate, string customerCode = "")
+        public static object GetOrderReadyToSell(DateTime requestDate, string customerCode = "")
         {
             try
             {
@@ -144,12 +144,13 @@ namespace SlaughterHouseLib
                     sb.Append(" WHERE a.customer_code =b.customer_code");
                     sb.Append(" AND a.order_date =@order_date");
                     sb.Append(" AND a.order_no = sk.ref_document_no");
+                    sb.Append(" AND a.order_flag = 1");
                     sb.Append(" AND sk.ref_document_Type ='SO' ");
                     if (!string.IsNullOrEmpty(customerCode))
                         sb.Append(" AND a.customer_code =@customer_code");
                     sb.Append(" ORDER BY order_no ASC");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
-                    cmd.Parameters.AddWithValue("order_date", orderDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("order_date", requestDate.ToString("yyyy-MM-dd"));
 
 
                     if (!string.IsNullOrEmpty(customerCode))
@@ -164,7 +165,7 @@ namespace SlaughterHouseLib
                                 select new
                                 {
                                     OrderNo = p.Field<string>("order_no"),
-                                    OrderDate = p.Field<DateTime>("order_date"),
+                                    RequestDate =  p.Field<DateTime>("order_date"),
                                     CustomerName = p.Field<string>("customer_name"),
                                     //Comments = p.Field<string>("comments"),
                                     //OrderFlag = p.Field<int>("order_flag"),
@@ -214,7 +215,7 @@ namespace SlaughterHouseLib
                         Transaction = tr
                     };
                     cmd.Parameters.AddWithValue("order_no", order.OrderNo);
-                    cmd.Parameters.AddWithValue("order_date", order.OrderDate);
+                    cmd.Parameters.AddWithValue("order_date", order.RequestDate);
                     cmd.Parameters.AddWithValue("customer_code", order.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("order_flag", order.OrderFlag);
                     cmd.Parameters.AddWithValue("comments", order.Comments);
@@ -295,7 +296,7 @@ namespace SlaughterHouseLib
                         Transaction = tr
                     };
                     cmd.Parameters.AddWithValue("order_no", order.OrderNo);
-                    cmd.Parameters.AddWithValue("order_date", order.OrderDate);
+                    cmd.Parameters.AddWithValue("order_date", order.RequestDate);
                     cmd.Parameters.AddWithValue("customer_code", order.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("order_flag", order.OrderFlag);
                     cmd.Parameters.AddWithValue("comments", order.Comments);
@@ -451,17 +452,19 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        public static DataTable GetOrderItemsMapStock(string orderNo)
+        public static DataTable GetOrderItemReadyToSell(string orderNo)
         {
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"select sk.stock_item, 
+                    var sql = @"select sk.stock_item as seq, 
+                                sk.product_code, 
                                 b.product_name,
                                 sk.stock_qty,
-                                sk.stock_wgh
+                                sk.stock_wgh,
+                                0 as unit_price, 0 as gross_amt
                                 from order_item a,product b, stock sk 
                                 where a.product_code =b.product_code
                                 and a.order_no =@order_no 
