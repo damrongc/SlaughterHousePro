@@ -38,8 +38,8 @@
             this.cboProduct = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rdbQty = new System.Windows.Forms.RadioButton();
             this.rdbWgh = new System.Windows.Forms.RadioButton();
+            this.rdbQty = new System.Windows.Forms.RadioButton();
             this.txtUnitPrice = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -144,27 +144,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "หน่วยคำนวณ";
             // 
-            // rdbQty
-            // 
-            this.rdbQty.AutoSize = true;
-            this.rdbQty.Location = new System.Drawing.Point(28, 35);
-            this.rdbQty.Name = "rdbQty";
-            this.rdbQty.Size = new System.Drawing.Size(60, 33);
-            this.rdbQty.TabIndex = 0;
-            this.rdbQty.TabStop = true;
-            this.rdbQty.Text = "Qty";
-            this.rdbQty.UseVisualStyleBackColor = true;
-            // 
             // rdbWgh
             // 
             this.rdbWgh.AutoSize = true;
             this.rdbWgh.Location = new System.Drawing.Point(112, 35);
             this.rdbWgh.Name = "rdbWgh";
-            this.rdbWgh.Size = new System.Drawing.Size(69, 33);
+            this.rdbWgh.Size = new System.Drawing.Size(84, 33);
             this.rdbWgh.TabIndex = 1;
             this.rdbWgh.TabStop = true;
-            this.rdbWgh.Text = "Wgh";
+            this.rdbWgh.Text = "น้ำหนัก";
             this.rdbWgh.UseVisualStyleBackColor = true;
+            // 
+            // rdbQty
+            // 
+            this.rdbQty.AutoSize = true;
+            this.rdbQty.Location = new System.Drawing.Point(12, 35);
+            this.rdbQty.Name = "rdbQty";
+            this.rdbQty.Size = new System.Drawing.Size(90, 33);
+            this.rdbQty.TabIndex = 0;
+            this.rdbQty.TabStop = true;
+            this.rdbQty.Text = "ปริมาณ";
+            this.rdbQty.UseVisualStyleBackColor = true;
             // 
             // txtUnitPrice
             // 

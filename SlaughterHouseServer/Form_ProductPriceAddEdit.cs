@@ -1,9 +1,5 @@
-﻿using SlaughterHouseLib;
-using SlaughterHouseLib.Models;
+﻿using SlaughterHouseLib.Models;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
@@ -18,8 +14,8 @@ namespace SlaughterHouseServer
             UserSettingsComponent();
         }
         private void UserSettingsComponent()
-        {  
-          
+        {
+
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
@@ -33,7 +29,7 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
-            LoadProduct(); 
+            LoadProduct();
             LoadData();
         }
         private void DtpStartDate_KeyDown(object sender, KeyEventArgs e)
@@ -59,14 +55,14 @@ namespace SlaughterHouseServer
                 BtnSaveAndNew.Focus();
             }
         }
- 
+
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
 
         }
         #endregion
 
-#region Event Click
+        #region Event Click
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
@@ -119,15 +115,15 @@ namespace SlaughterHouseServer
         {
             if (productCode != null)
             {
-                cboProduct.Enabled = false; 
+                cboProduct.Enabled = false;
             }
-            ProductPrice productPrice = ProductPriceController.GetProductPrice(this.productCode, this.startDate  );
+            ProductPrice productPrice = ProductPriceController.GetProductPrice(this.productCode, this.startDate);
             if (productPrice != null)
             {
-                
-                cboProduct.SelectedValue = productPrice.Product.ProductCode ;
-                txtUnitPrice.Text =  productPrice.UnitPrice.ToString();
-                txtDay.Text =  productPrice.Day.ToString();
+
+                cboProduct.SelectedValue = productPrice.Product.ProductCode;
+                txtUnitPrice.Text = productPrice.UnitPrice.ToString();
+                txtDay.Text = productPrice.Day.ToString();
                 if (productPrice.SaleUnitMethod.ToUpper() == "Q")
                 {
                     rdbQty.Checked = true;
@@ -138,10 +134,10 @@ namespace SlaughterHouseServer
                 }
                 dtpStartDate.Value = productPrice.StartDate;
                 dtpStartDate.Enabled = false;
-                BtnSaveAndNew.Visible = false; 
+                BtnSaveAndNew.Visible = false;
             }
         }
-      
+
         private void SaveProductPrice()
         {
             try
@@ -154,11 +150,11 @@ namespace SlaughterHouseServer
                         ProductCode = cboProduct.SelectedValue.ToString()
                     },
                     StartDate = dtpStartDate.Value,
-                    EndDate = (DateTime)dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
+                    EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
                     Day = Convert.ToInt16(txtDay.Text),
 
                     UnitPrice = Convert.ToDecimal(txtUnitPrice.Text),
-                    SaleUnitMethod = vSaleUnitMethod, 
+                    SaleUnitMethod = vSaleUnitMethod,
                     CreateBy = "system",
                     ModifiedBy = "system"
                 };
