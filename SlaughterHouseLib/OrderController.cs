@@ -278,7 +278,7 @@ namespace SlaughterHouseLib
                     var orderFlag = (int)cmd.ExecuteScalar();
                     if (orderFlag > 0)
                     {
-                        throw new Exception("ไม่สามารถยกเลิกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
+                        throw new Exception("ไม่สามารถบันทึกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
                     }
 
 
@@ -448,13 +448,12 @@ namespace SlaughterHouseLib
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
         //public static DataTable GetOrderItemReadyToSell(string orderNo, DateTime? invoiceDate = null, bool flagReadPrice = false)
-                public static DataTable GetOrderItemReadyToSell(string orderNo)
+     public static DataTable GetOrderItemReadyToSell(string orderNo)
         {
             try
             {
@@ -462,7 +461,6 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = ""; 
-                   
                         sql = @"select sk.stock_item as seq, 
                                 sk.product_code, 
                                 b.product_name,

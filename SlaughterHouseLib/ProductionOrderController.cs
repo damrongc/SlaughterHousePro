@@ -197,7 +197,7 @@ namespace SlaughterHouseLib
                     var orderFlag = (int)cmd.ExecuteScalar();
                     if (orderFlag > 0)
                     {
-                        throw new Exception("ไม่สามารถยกเลิกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
+                        throw new Exception("ไม่สามารถบันทึกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
                     }
 
 

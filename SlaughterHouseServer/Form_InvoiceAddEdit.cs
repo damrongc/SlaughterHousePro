@@ -12,7 +12,6 @@ namespace SlaughterHouseServer
         public string orderNo { get; set; }
         public string invoiceNo { get; set; }
         DataTable dtInvoiceItem;
-
         public Form_InvoiceAddEdit()
         {
             InitializeComponent();
@@ -36,6 +35,8 @@ namespace SlaughterHouseServer
             this.Shown += Form_Shown;
 
             chkVatFlag.CheckedChanged += ChkVatFlag_CheckedChanged;
+            txtDiscount.TextChanged += TxtDiscount_TextChanged;
+            txtVatRate.TextChanged += TxtVatRate_TextChanged;
 
             //KeyDown  
             dtpInvoiceDate.KeyDown += DtpRequestDate_KeyDown;
@@ -58,6 +59,31 @@ namespace SlaughterHouseServer
             txtDiscount.Text = 0.ToString();
             txtNetAmt.Text = 0.ToString();
         }
+
+        private void TxtVatRate_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Calculate_Total();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void TxtDiscount_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Calculate_Total();
+            }
+            catch
+            {
+
+            } 
+        }
+
         private void ChkVatFlag_CheckedChanged(object sender, EventArgs e)
         {
             if (chkVatFlag.Checked == true )
@@ -68,6 +94,7 @@ namespace SlaughterHouseServer
             {
                 txtVatRate.Text = 0.ToString();
             }
+            Calculate_Total();
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
@@ -112,13 +139,12 @@ namespace SlaughterHouseServer
 
         }
         #endregion
-
 #region Event Click
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
             {
-                SaveOrder();
+                SaveInvoice();
                 MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -134,7 +160,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-                SaveOrder();
+                SaveInvoice();
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 orderNo = "";
@@ -212,7 +238,6 @@ namespace SlaughterHouseServer
             
         }
 #endregion
-
         private void LoadData()
         {
             txtOrderNo .Text  = this.orderNo;
@@ -257,8 +282,19 @@ namespace SlaughterHouseServer
                         productPrice = ProductPriceController.GetPriceList(dtInvoiceItem.Rows[i]["product_code"].ToString(), dtpInvoiceDate.Value);
                         dtInvoiceItem.Rows[i]["unit_price"] = productPrice.UnitPrice;
                         dtInvoiceItem.Rows[i]["sale_unit_method"] = productPrice.SaleUnitMethod;
+                        if (dtInvoiceItem.Rows[i]["sale_unit_method"].ToString() == "Q")
+                        {
+                            dtInvoiceItem.Rows[i]["gross_amt"] = Convert.ToDecimal(dtInvoiceItem.Rows[i]["unit_price"]) * Convert.ToDecimal(dtInvoiceItem.Rows[i]["stock_qty"]);
+                        }
+                        else
+                        {
+                            dtInvoiceItem.Rows[i]["gross_amt"] = Convert.ToDecimal(dtInvoiceItem.Rows[i]["unit_price"]) * Convert.ToDecimal(dtInvoiceItem.Rows[i]["stock_wgh"]);
+                        }
                     }
+                    dtInvoiceItem.AcceptChanges();
+                    gv.Refresh();
                 }
+                Calculate_Total();
             }
             else
             {
@@ -277,11 +313,29 @@ namespace SlaughterHouseServer
             gv.Columns[0].Visible = false;           
             gv.Columns[1].Visible = false;
         }
-        private void LoadPriceList()
+        private void Calculate_Total()
         {
+            
+            decimal grossAmt = Convert.ToDecimal(dtInvoiceItem.Compute("Sum(gross_amt)", string.Empty));
+            decimal discount = Convert.ToDecimal(txtDiscount.Text);
+            decimal beforeVat = grossAmt - discount;
+            decimal vatRate = Convert.ToDecimal(txtVatRate.Text);
+            decimal vatAmt = (Convert.ToDecimal(txtVatRate.Text) > 0) ? beforeVat * vatRate / 100 : 0;
+            decimal netAmt = grossAmt - discount + vatAmt;
 
+            txtGrossAmt.Text = grossAmt.ToString();
+            txtDiscount.Text = discount.ToString();
+            txtBeforeVat.Text = beforeVat.ToString();
+            txtVatAmt.Text = vatAmt.ToString();
+            txtNetAmt.Text = netAmt.ToString();
+            
+            
+
+            //for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
+            //{
+            //    grossAmt += Convert.ToDecimal(dtInvoiceItem.Rows[i]["gross_amt"]);
+            //}
         }
-
         private void LoadCustomer()
         {
             var coll = CustomerController.GetAllCustomers();
@@ -289,36 +343,60 @@ namespace SlaughterHouseServer
             cboCustomer.ValueMember = "CustomerCode";
             cboCustomer.DataSource = coll;
         }
-        private void SaveOrder()
+        private void SaveInvoice()
         {
             try
             {
-                var orderItems = new List<OrderItem>();
-                int seq = 0; 
+                var invoiceItems = new List<InvoiceItem>();
+                int seq = 0;
+                foreach (DataRow row in dtInvoiceItem.Rows)
+                { 
+                    seq++;
+                    invoiceItems.Add(new InvoiceItem
+                    {
+                        InvoiceNo = txtInvoiceNo.Text,
+                        Seq = seq,
+                        Product = new Product
+                        {
+                            ProductCode = row["product_code"].ToString(),
+                            ProductName = row["product_name"].ToString(),
+                        },
+                        Qty = (int)row["stock_qty"],
+                        Wgh = (decimal)row["stock_wgh"],
+                        //UnitPrice  = (decimal)row["unit_price"],
+                        GrossAmt = (decimal)row["gross_amt"],
+                    });
+                }
 
-                var order = new Order
+                var invoice = new Invoice
                 {
-                    OrderNo = txtInvoiceNo.Text,
-                    RequestDate = dtpInvoiceDate.Value,
+                    InvoiceNo = txtInvoiceNo.Text,
+                    InvoiceDate = dtpInvoiceDate.Value,
                     Customer = new Customer
                     {
                         CustomerCode = cboCustomer.SelectedValue.ToString()
                     },
+                    GrossAmt = Convert.ToDecimal(txtGrossAmt.Text),
+                    Discount = Convert.ToDecimal(txtDiscount.Text),
+                    VatRate = Convert.ToDecimal(txtVatRate.Text),
+                    VatAmt = Convert.ToDecimal(txtVatAmt.Text),
+                    NetAmt = Convert.ToDecimal(txtNetAmt.Text),
                     Comments = txtComment.Text,
-                    OrderFlag = 0,
+                    InvoiceFlag = 0,
                     Active = chkActive.Checked,
                     CreateBy = "system",
                     ModifiedBy = "system",
-                    OrderItems = orderItems
+                    InvoiceItems = invoiceItems
                 };
 
-                if (string.IsNullOrEmpty(txtInvoiceNo.Text)) 
+                if (string.IsNullOrEmpty(txtInvoiceNo.Text))
                 {
-                    OrderController.Insert(order);
+                    InvoiceController.Insert(invoice);
                 }
-                else{
-                    OrderController.Update (order);
-                } 
+                else
+                {
+                    InvoiceController.Update(invoice);
+                }
             }
             catch (Exception)
             {

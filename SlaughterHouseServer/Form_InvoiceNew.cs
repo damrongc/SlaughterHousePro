@@ -144,19 +144,23 @@ namespace SlaughterHouseServer
             {
                 LoadDataDetail();
             }
-            
         }
         private void LoadDataDetail()
         { 
             DataTable d = new DataTable();
-           
             d = OrderItemController.GetOrderItemReadyToSell(gv.Rows[gv.CurrentCell.RowIndex].Cells[1].Value.ToString());
             gvDt.DataSource = d;
-            gvDt.Columns[1].HeaderText = "ลำดับ"; 
-            gvDt.Columns[2].HeaderText = "สินค้า";
-            gvDt.Columns[3].HeaderText = "ปริมาณ";
-            gvDt.Columns[4].HeaderText = "น้ำหนัก"; 
+            gvDt.Columns[1].HeaderText = "ลำดับ";
+            gvDt.Columns[2].HeaderText = "รหัสสินค้า"; 
+            gvDt.Columns[3].HeaderText = "ชื่อสินค้า";
+            gvDt.Columns[4].HeaderText = "หน่วยคำนวณ";
+            gvDt.Columns[5].HeaderText = "ปริมาณ";
+            gvDt.Columns[6].HeaderText = "น้ำหนัก"; 
             gvDt.Columns[0].Visible = false;
+            gvDt.Columns[2].Visible = false;
+            gvDt.Columns[4].Visible = false;
+            gvDt.Columns[5].Visible = false;
+            gvDt.Columns[6].Visible = false;
         } 
     }
 }
