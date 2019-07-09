@@ -58,7 +58,6 @@ namespace SlaughterHouseServer
             txtDiscount.Text = 0.ToString();
             txtNetAmt.Text = 0.ToString();
         }
-
         private void ChkVatFlag_CheckedChanged(object sender, EventArgs e)
         {
             if (chkVatFlag.Checked == true )
@@ -70,7 +69,6 @@ namespace SlaughterHouseServer
                 txtVatRate.Text = 0.ToString();
             }
         }
-
         private void Form_Shown(object sender, System.EventArgs e)
         {
             dtpInvoiceDate.Focus();
@@ -80,8 +78,6 @@ namespace SlaughterHouseServer
             LoadCustomer(); 
             LoadData();
         }
-
-
         private void DtpRequestDate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -220,7 +216,6 @@ namespace SlaughterHouseServer
         private void LoadData()
         {
             txtOrderNo .Text  = this.orderNo;
-
             if (String.IsNullOrEmpty(this.invoiceNo))
             {
                 Order order = OrderController.GetOrder(this.orderNo);
@@ -245,8 +240,6 @@ namespace SlaughterHouseServer
                     chkActive.Checked = invoice.Active; 
                 }
             }
-               
-            
             LoadDetail();
         }
         private void LoadDetail()
@@ -255,7 +248,17 @@ namespace SlaughterHouseServer
             {
                 dtInvoiceItem = new DataTable("INVOICE_ITEM");
                 dtInvoiceItem = OrderItemController.GetOrderItemReadyToSell(this.orderNo);
-                
+
+                if (dtInvoiceItem.Rows.Count > 0)
+                {
+                    ProductPrice productPrice;
+                    for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
+                    {
+                        productPrice = ProductPriceController.GetPriceList(dtInvoiceItem.Rows[i]["product_code"].ToString(), dtpInvoiceDate.Value);
+                        dtInvoiceItem.Rows[i]["unit_price"] = productPrice.UnitPrice;
+                        dtInvoiceItem.Rows[i]["sale_unit_method"] = productPrice.SaleUnitMethod;
+                    }
+                }
             }
             else
             {
@@ -265,15 +268,20 @@ namespace SlaughterHouseServer
             gv.Columns[0].HeaderText = "ลำดับ";
             gv.Columns[1].HeaderText = "รหัสสินค้า";
             gv.Columns[2].HeaderText = "ชื่อสินค้า";
-            gv.Columns[3].HeaderText = "ปริมาณ";
-            gv.Columns[4].HeaderText = "น้้ำหนัก";
-            gv.Columns[5].HeaderText = "ราคาต่อหน่วย";
-            gv.Columns[6].HeaderText = "ราคา";
-             
+            gv.Columns[3].HeaderText = "หน่วยคำนวณ";
+            gv.Columns[4].HeaderText = "ปริมาณ";
+            gv.Columns[5].HeaderText = "น้้ำหนัก";
+            gv.Columns[6].HeaderText = "ราคาต่อหน่วย";
+            gv.Columns[7].HeaderText = "ราคา";
 
             gv.Columns[0].Visible = false;           
             gv.Columns[1].Visible = false;
         }
+        private void LoadPriceList()
+        {
+
+        }
+
         private void LoadCustomer()
         {
             var coll = CustomerController.GetAllCustomers();
@@ -286,23 +294,7 @@ namespace SlaughterHouseServer
             try
             {
                 var orderItems = new List<OrderItem>();
-                int seq = 0;
-                //foreach (DataRow row in dtOrderItem.Rows)
-                //{
-                //    seq++;
-                //    orderItems.Add(new OrderItem
-                //    {
-                //        OrderNo = txtInvoiceNo.Text,
-                //        Seq = seq,
-                //        Product = new Product
-                //        {
-                //            ProductCode = row["product_code"].ToString(),
-                //            ProductName = row["product_name"].ToString(),
-                //        },
-                //        OrderQty = (int)row["order_qty"],
-                //        OrderWgh = (decimal)row["order_wgh"],
-                //    });
-                //}
+                int seq = 0; 
 
                 var order = new Order
                 {

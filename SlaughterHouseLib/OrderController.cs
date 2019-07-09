@@ -452,16 +452,21 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        public static DataTable GetOrderItemReadyToSell(string orderNo)
+
+        //public static DataTable GetOrderItemReadyToSell(string orderNo, DateTime? invoiceDate = null, bool flagReadPrice = false)
+                public static DataTable GetOrderItemReadyToSell(string orderNo)
         {
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"select sk.stock_item as seq, 
+                    var sql = ""; 
+                   
+                        sql = @"select sk.stock_item as seq, 
                                 sk.product_code, 
                                 b.product_name,
+                                '' as sale_unit_method,
                                 sk.stock_qty,
                                 sk.stock_wgh,
                                 0 as unit_price, 0 as gross_amt
@@ -471,10 +476,10 @@ namespace SlaughterHouseLib
                                 and a.order_no = sk.ref_document_no 
                                 and a.product_code = sk.product_code 
                                 and sk.ref_document_type ='SO'  
-                                order by sk.stock_item asc";
-                     
+                                order by sk.stock_item asc ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("order_no", orderNo);
+                    
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();
