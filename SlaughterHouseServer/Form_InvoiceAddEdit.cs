@@ -361,10 +361,10 @@ namespace SlaughterHouseServer
                             ProductCode = row["product_code"].ToString(),
                             ProductName = row["product_name"].ToString(),
                         },
-                        Qty = (int)row["stock_qty"],
-                        Wgh = (decimal)row["stock_wgh"],
-                        //UnitPrice  = (decimal)row["unit_price"],
-                        GrossAmt = (decimal)row["gross_amt"],
+                        Qty = Convert.ToInt16(row["stock_qty"]),
+                        Wgh = Convert.ToDecimal(row["stock_wgh"]),
+                        UnitPrice  = Convert.ToDecimal(row["unit_price"]),
+                        GrossAmt = Convert.ToDecimal(row["gross_amt"]),
                     });
                 }
 
