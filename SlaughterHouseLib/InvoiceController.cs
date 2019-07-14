@@ -73,7 +73,7 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        public static Invoice GetInvoice(string InvoiceNo)
+        public static Invoice GetInvoice(string invoiceNo)
         {
             try
             {
@@ -92,11 +92,11 @@ namespace SlaughterHouseLib
                                 invoice_flag,
                                 comments,
                                 active,
-                                create_at,
-                                FROM Invoices
+                                create_at
+                                FROM Invoice
                                 WHERE Invoice_no =@Invoice_no"; 
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("Invoice_no", InvoiceNo);
+                    cmd.Parameters.AddWithValue("Invoice_no", invoiceNo);
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();
@@ -144,7 +144,7 @@ namespace SlaughterHouseLib
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
-                    Invoice.InvoiceNo = DocumentGenerate.GetDocumentRunning("SO");
+                    Invoice.InvoiceNo = DocumentGenerate.GetDocumentRunning("INV");
                     conn.Open();
                     tr = conn.BeginTransaction();
                     var sql = @"INSERT
@@ -314,11 +314,49 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-      
+
+        //public static PrintInvoice(string invoiceNo)
+        //{
+        //    try
+        //    {
+        //        using (var conn = new MySqlConnection(Globals.CONN_STR))
+        //        {
+        //            conn.Open();
+        //            var sql = @"SELECT Invoice_no,
+        //                        Invoice_date,
+        //                        ref_document_no,
+        //                        customer_code,
+        //                        gross_amt,
+        //                        discount,
+        //                        vat_rate,
+        //                        vat_amt,
+        //                        net_amt,
+        //                        invoice_flag,
+        //                        comments,
+        //                        active,
+        //                        create_at
+        //                        FROM Invoice
+        //                        WHERE Invoice_no =@Invoice_no";
+        //            var cmd = new MySqlCommand(sql, conn);
+        //            cmd.Parameters.AddWithValue("Invoice_no", invoiceNo);
+        //            var da = new MySqlDataAdapter(cmd);
+
+        //            var ds = new DataSet();
+        //            da.Fill(ds);
+                     
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
+
     }
     public static class InvoiceItemController
     {
-        public static DataTable GetInvoiceItems(string InvoiceNo)
+        public static DataTable GetInvoiceItems(string invoiceNo)
         {
             try
             {
@@ -336,7 +374,7 @@ namespace SlaughterHouseLib
                                 Order by seq asc"; 
 
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("Invoice_no", InvoiceNo);
+                    cmd.Parameters.AddWithValue("Invoice_no", invoiceNo);
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();

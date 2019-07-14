@@ -1,4 +1,5 @@
 ﻿using SlaughterHouseLib.Models;
+using System;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
@@ -9,16 +10,60 @@ namespace SlaughterHouseServer
         public Form_ProductAddEdit()
         {
             InitializeComponent();
-
+            //KeyDown  
             txtProductCode.KeyDown += TxtProductCode_KeyDown;
             txtProductName.KeyDown += TxtProductName_KeyDown;
-
             comboxProductGroup.KeyDown += ComboxProductGroup_KeyDown;
             comboxUnitQty.KeyDown += ComboxUnitQty_KeyDown;
-            comboxUnitWgh.KeyDown += ComboxUnitWgh_KeyDown;
-             
+            comboxUnitWgh.KeyDown += ComboxUnitWgh_KeyDown; 
+            txtMinWgh.KeyDown += TxtMinWgh_KeyDown;
+            txtMaxWgh.KeyDown += TxtMaxWgh_KeyDown;
+            txtStdYield.KeyDown += TxtStdYield_KeyDown;
+         
+            //KeyPress
+            txtMinWgh.KeyPress += TxtMinWgh_KeyPress;
+            txtMaxWgh.KeyPress += TxtMaxWgh_KeyPress;
+            txtStdYield.KeyPress += TxtStdYield_KeyPress;
+
+
             this.Load += Form_ProductAddEdit_Load;
             this.Shown += Form_ProductAddEdit_Shown;
+        }
+
+        private void TxtStdYield_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                if (e.KeyChar != 46)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+        }
+
+        private void TxtMaxWgh_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                if (e.KeyChar != 46)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+        }
+
+        private void TxtMinWgh_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                if (e.KeyChar != 46)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
         }
 
         private void Form_ProductAddEdit_Shown(object sender, System.EventArgs e)
@@ -29,6 +74,7 @@ namespace SlaughterHouseServer
                 BtnSaveAndNew.Visible = false;
             }
         }
+       
 
         private void Form_ProductAddEdit_Load(object sender, System.EventArgs e)
         {
@@ -45,19 +91,15 @@ namespace SlaughterHouseServer
                     txtProductName.Text = product.ProductName;
                     comboxProductGroup.SelectedValue = product.ProductGroup.ProductGroupCode;
                     comboxUnitQty.SelectedValue = product.UnitOfQty.UnitCode ;
-                    comboxUnitWgh.SelectedValue = product.UnitOfWgh.UnitCode ;
-                    chkActive.Checked = product.Active;
+                    comboxUnitWgh.SelectedValue = product.UnitOfWgh.UnitCode ; 
+                    txtMinWgh.Text = product.MinWeight.ToString ();
+                    txtMaxWgh.Text = product.MaxWeight.ToString();
+                    txtStdYield.Text = product.StdYield.ToString();
+
+                   chkActive.Checked = product.Active;
                 }
             }
-        }
-
-        private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                BtnSaveAndNew.Focus();
-            }
-        }
+        } 
 
         private void TxtProductName_KeyDown(object sender, KeyEventArgs e)
         {
@@ -93,7 +135,36 @@ namespace SlaughterHouseServer
         {
             if (e.KeyCode == Keys.Enter)
             {
-                BtnSaveAndNew.Focus();
+                txtMinWgh.Focus();
+            }
+        }
+        private void TxtMinWgh_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtMaxWgh.Focus();
+            }
+        }
+
+        private void TxtMaxWgh_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtStdYield.Focus();
+            }
+        }
+        private void TxtStdYield_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (String.IsNullOrEmpty(productCode))
+                {
+                    BtnSaveAndNew.Focus();
+                }
+                else
+                {
+                    BtnSave.Focus();
+                }
             }
         }
 
@@ -122,12 +193,14 @@ namespace SlaughterHouseServer
                             UnitCode = (int)comboxUnitWgh.SelectedValue,
                             UnitName = comboxUnitWgh.Text,
                         },
+                        MinWeight = Convert.ToDecimal(txtMinWgh.Text),
+                        MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
+                        StdYield  = Convert.ToDecimal(txtStdYield.Text),
                         Active = chkActive.Checked,
                         CreateBy = "system",
                     };
                     ProductController.Insert(product);
                     MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 }
                 else
                 {
@@ -150,6 +223,9 @@ namespace SlaughterHouseServer
                             UnitCode = (int)comboxUnitWgh.SelectedValue,
                             UnitName = comboxUnitWgh.Text,
                         },
+                        MinWeight = Convert.ToDecimal(txtMinWgh.Text),
+                        MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
+                        StdYield = Convert.ToDecimal(txtStdYield.Text),
                         Active = chkActive.Checked,
                         ModifiedBy = "system",
                     };
@@ -193,6 +269,9 @@ namespace SlaughterHouseServer
                         UnitCode = (int)comboxUnitWgh.SelectedValue,
                         UnitName = comboxUnitWgh.Text,
                     },
+                    MinWeight = Convert.ToDecimal(txtMinWgh.Text),
+                    MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
+                    StdYield = Convert.ToDecimal(txtStdYield.Text),
                     Active = chkActive.Checked,
                     CreateBy = "system",
                 };
@@ -205,6 +284,9 @@ namespace SlaughterHouseServer
                 comboxProductGroup.SelectedIndex = 0;
                 comboxUnitQty.SelectedIndex = 0;
                 comboxUnitWgh.SelectedIndex = 0;
+                txtMinWgh.Text   = 0.ToString();
+                txtMaxWgh.Text   = 0.ToString();
+                txtStdYield.Text = 0.ToString();
                 chkActive.Checked = true;
 
             }

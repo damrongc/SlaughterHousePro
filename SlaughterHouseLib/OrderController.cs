@@ -465,8 +465,8 @@ namespace SlaughterHouseLib
                                 sk.product_code, 
                                 b.product_name,
                                 '' as sale_unit_method,
-                                sk.stock_qty,
-                                sk.stock_wgh,
+                                sk.stock_qty as qty,
+                                sk.stock_wgh as wgh,
                                 0 as unit_price, 0 as gross_amt
                                 from order_item a,product b, stock sk 
                                 where a.product_code =b.product_code

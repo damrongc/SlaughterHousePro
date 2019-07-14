@@ -159,8 +159,8 @@ namespace SlaughterHouseServer
             gvDt.Columns[0].Visible = false;
             gvDt.Columns[2].Visible = false;
             gvDt.Columns[4].Visible = false;
-            gvDt.Columns[5].Visible = false;
-            gvDt.Columns[6].Visible = false;
+            gvDt.Columns[7].Visible = false;
+            gvDt.Columns[8].Visible = false;
         } 
     }
 }

@@ -20,8 +20,12 @@ namespace SlaughterHouseLib.Models
         public ProductGroup ProductGroup { get; set; }
         public Unit UnitOfQty { get; set; }
         public Unit UnitOfWgh { get; set; }
-
+        public decimal MinWeight { get; set; }
+        public decimal MaxWeight { get; set; }
+        public decimal StdYield { get; set; }
     }
+
+
 
     public static class ProductController
     {
@@ -38,6 +42,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" ,b.product_group_name");
                     sb.Append(" ,unit_of_qty ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_qty) as unit_name_of_qty");
                     sb.Append(" ,unit_of_wgh ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_wgh) as unit_name_of_wgh");
+                    sb.Append(" ,min_weight, max_weight, std_yield ");
                     sb.Append(" ,a.active,a.create_at, a.create_by, a.modified_at, a.modified_by");
                     sb.Append(" from product a,product_group b");
                     sb.Append(" where a.product_group_code=b.product_group_code");
@@ -71,6 +76,11 @@ namespace SlaughterHouseLib.Models
                                     ProductGroupName = p.Field<string>("product_group_name"),
                                     UnitQtyName = p.Field<string>("unit_name_of_qty"),
                                     UnitWghName = p.Field<string>("unit_name_of_wgh"),
+
+                                    MinWeight = p.Field<decimal>("min_weight"),
+                                    MaxWeight = p.Field<decimal>("max_weight"),
+                                    StdYield = p.Field<decimal>("std_yield"),
+                                    
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
@@ -163,7 +173,9 @@ namespace SlaughterHouseLib.Models
                                 UnitCode = (int)ds.Tables[0].Rows[0]["unit_of_wgh"],
                                 //UnitName = ds.Tables[0].Rows[0]["unit_name"].ToString(),
                             },
-
+                            MinWeight = Convert.ToDecimal( ds.Tables[0].Rows[0]["min_weight"]),
+                            MaxWeight = Convert.ToDecimal( ds.Tables[0].Rows[0]["max_weight"]),
+                            StdYield  = Convert.ToDecimal( ds.Tables[0].Rows[0]["std_yield"]),
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
@@ -193,6 +205,7 @@ namespace SlaughterHouseLib.Models
                                 product_group_code,
                                 unit_of_qty,
                                 unit_of_wgh,
+                                min_weight, max_weight, std_yield,
                                 active,
                                 create_by)
                                 VALUES(@product_code,
@@ -208,6 +221,9 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("product_group_code", product.ProductGroup.ProductGroupCode);
                     cmd.Parameters.AddWithValue("unit_of_qty", product.UnitOfQty.UnitCode);
                     cmd.Parameters.AddWithValue("unit_of_wgh", product.UnitOfWgh.UnitCode);
+                    cmd.Parameters.AddWithValue("min_weight", product.MinWeight);
+                    cmd.Parameters.AddWithValue("max_weight", product.MaxWeight);
+                    cmd.Parameters.AddWithValue("std_yield", product.StdYield);
                     cmd.Parameters.AddWithValue("active", product.Active);
                     cmd.Parameters.AddWithValue("create_by", product.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
@@ -232,6 +248,9 @@ namespace SlaughterHouseLib.Models
                                 product_group_code=@product_group_code,
                                 unit_of_qty=@unit_of_qty,
                                 unit_of_wgh=@unit_of_wgh,
+                                min_weight=@min_weight, 
+                                max_weight=@max_weight, 
+                                std_yield=@std_yield,
                                 active=@active,
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by
@@ -242,6 +261,12 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("product_group_code", product.ProductGroup.ProductGroupCode);
                     cmd.Parameters.AddWithValue("unit_of_qty", product.UnitOfQty.UnitCode);
                     cmd.Parameters.AddWithValue("unit_of_wgh", product.UnitOfWgh.UnitCode);
+
+                    cmd.Parameters.AddWithValue("min_weight", product.MinWeight );
+                    cmd.Parameters.AddWithValue("max_weight", product.MaxWeight );
+                    cmd.Parameters.AddWithValue("std_yield", product.StdYield );
+
+
                     cmd.Parameters.AddWithValue("active", product.Active);
                     cmd.Parameters.AddWithValue("modified_by", product.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();

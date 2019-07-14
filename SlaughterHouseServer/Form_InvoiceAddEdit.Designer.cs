@@ -90,7 +90,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(725, 630);
+            this.BtnSave.Location = new System.Drawing.Point(725, 626);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -107,7 +107,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(516, 630);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(516, 626);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -338,17 +338,17 @@
             // 
             // txtVatRate
             // 
-            this.txtVatRate.Location = new System.Drawing.Point(616, 496);
+            this.txtVatRate.Location = new System.Drawing.Point(595, 496);
             this.txtVatRate.MaxLength = 10;
             this.txtVatRate.Name = "txtVatRate";
-            this.txtVatRate.Size = new System.Drawing.Size(44, 36);
+            this.txtVatRate.Size = new System.Drawing.Size(65, 36);
             this.txtVatRate.TabIndex = 61;
             this.txtVatRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // chkVatFlag
             // 
             this.chkVatFlag.AutoSize = true;
-            this.chkVatFlag.Location = new System.Drawing.Point(546, 498);
+            this.chkVatFlag.Location = new System.Drawing.Point(525, 498);
             this.chkVatFlag.Name = "chkVatFlag";
             this.chkVatFlag.Size = new System.Drawing.Size(64, 33);
             this.chkVatFlag.TabIndex = 62;

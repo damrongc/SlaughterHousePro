@@ -70,16 +70,7 @@ namespace SlaughterHouseServer
         }
         private void TxtWgh_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //// Verify that the pressed key isn't CTRL or any non-numeric digit
-            //if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            //{
-            //    e.Handled = true;
-            //} 
-            //// If you want, you can allow decimal (float) numbers
-            //if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            //{
-            //    e.Handled = true;
-            //}
+ 
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
             {
                 if (e.KeyChar != 46)

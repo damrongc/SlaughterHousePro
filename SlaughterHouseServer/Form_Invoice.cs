@@ -45,15 +45,14 @@ namespace SlaughterHouseServer
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-                    string orderNo = gv.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    string invoiceNo = gv.Rows[e.RowIndex].Cells[2].Value.ToString();
 
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
-                    {
-
+                    { 
                         case "Edit":
                             var frm = new Form_InvoiceAddEdit
                             {
-                                orderNo = orderNo
+                                invoiceNo = invoiceNo
                             };
                             if (frm.ShowDialog() == DialogResult.OK)
                             {
@@ -61,6 +60,7 @@ namespace SlaughterHouseServer
                             }
                             break;
                         case "Print":
+
                             break;
                     }
 

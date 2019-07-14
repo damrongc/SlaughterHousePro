@@ -33,10 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C1.C1DataExtender.2, Version=2.0.20113.81, Culture=neutral, PublicKeyToken=7c4b5683f80b910e, processorArchitecture=MSIL" />
+    <Reference Include="C1.C1Report.2, Version=2.0.20172.271, Culture=neutral, PublicKeyToken=594a0605db190bb9" />
+    <Reference Include="C1.Win.C1ReportDesigner.2, Version=2.0.20172.271, Culture=neutral, PublicKeyToken=fb528571dbff5bd2, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,6 +74,12 @@
     </Compile>
     <Compile Include="Form_Invoice.Designer.cs">
       <DependentUpon>Form_Invoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_InvoiceReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_InvoiceReport.Designer.cs">
+      <DependentUpon>Form_InvoiceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_InvoiceNew.cs">
       <SubType>Form</SubType>
@@ -212,6 +224,9 @@
     <EmbeddedResource Include="Form_Invoice.resx">
       <DependentUpon>Form_Invoice.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_InvoiceReport.resx">
+      <DependentUpon>Form_InvoiceReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_InvoiceNew.resx">
       <DependentUpon>Form_InvoiceNew.cs</DependentUpon>
     </EmbeddedResource>
@@ -278,6 +293,7 @@
     <EmbeddedResource Include="Form_ReceiveAddEdit.resx">
       <DependentUpon>Form_ReceiveAddEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
