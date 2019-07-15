@@ -62,7 +62,7 @@ namespace SlaughterHouseServer
                             break;
                         case "Print":
                             DataSet ds = InvoiceController.GetPrintInvoice(invoiceNo);
-                            GetPrintInvoice
+                            //GetPrintInvoice
                             break;
                     } 
                 }
