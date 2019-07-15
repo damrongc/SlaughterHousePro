@@ -1,6 +1,7 @@
 ﻿using SlaughterHouseLib;
 using SlaughterHouseLib.Models;
 using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
@@ -60,10 +61,10 @@ namespace SlaughterHouseServer
                             }
                             break;
                         case "Print":
-
+                            DataSet ds = InvoiceController.GetPrintInvoice(invoiceNo);
+                            GetPrintInvoice
                             break;
-                    }
-
+                    } 
                 }
             }
             catch (Exception ex)

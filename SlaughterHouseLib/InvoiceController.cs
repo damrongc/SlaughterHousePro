@@ -314,44 +314,44 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+        public static DataSet GetPrintInvoice(string invoiceNo)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"select i.invoice_no,
+                                i.invoice_date,
+                                i.ref_document_no,
+                                i.customer_code,
+                                i.gross_amt,
+                                i.discount,
+                                i.vat_rate,
+                                i.vat_amt,
+                                i.net_amt,
+                                i.invoice_flag,
+                                i.comments, 
+                                itm.product_code, itm.seq,
+                                itm.qty, itm.wgh, itm.unit_price,
+                                itm.gross_amt as gross_amt_item
+                                from invoice i , invoice_item itm
+                                where i.invoice_no = itm.invoice_no
+                                and Invoice_no =@Invoice_no";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("Invoice_no", invoiceNo);
+                    var da = new MySqlDataAdapter(cmd);
 
-        //public static PrintInvoice(string invoiceNo)
-        //{
-        //    try
-        //    {
-        //        using (var conn = new MySqlConnection(Globals.CONN_STR))
-        //        {
-        //            conn.Open();
-        //            var sql = @"SELECT Invoice_no,
-        //                        Invoice_date,
-        //                        ref_document_no,
-        //                        customer_code,
-        //                        gross_amt,
-        //                        discount,
-        //                        vat_rate,
-        //                        vat_amt,
-        //                        net_amt,
-        //                        invoice_flag,
-        //                        comments,
-        //                        active,
-        //                        create_at
-        //                        FROM Invoice
-        //                        WHERE Invoice_no =@Invoice_no";
-        //            var cmd = new MySqlCommand(sql, conn);
-        //            cmd.Parameters.AddWithValue("Invoice_no", invoiceNo);
-        //            var da = new MySqlDataAdapter(cmd);
-
-        //            var ds = new DataSet();
-        //            da.Fill(ds);
-                     
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    return ds; 
+                }
+            }
+            catch (Exception)
+            { 
+                throw;
+            }
+        }
 
     }
     public static class InvoiceItemController

@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="C1.C1DataExtender.2, Version=2.0.20113.81, Culture=neutral, PublicKeyToken=7c4b5683f80b910e, processorArchitecture=MSIL" />
-    <Reference Include="C1.C1Report.2, Version=2.0.20172.271, Culture=neutral, PublicKeyToken=594a0605db190bb9" />
-    <Reference Include="C1.Win.C1ReportDesigner.2, Version=2.0.20172.271, Culture=neutral, PublicKeyToken=fb528571dbff5bd2, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />

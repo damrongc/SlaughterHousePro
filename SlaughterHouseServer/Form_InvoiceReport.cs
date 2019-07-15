@@ -20,8 +20,6 @@ namespace SlaughterHouseServer
         }
         private void UserSettingsComponent()
         {
-            
-             
             //BtnRefresh.Click += BtnRefresh_Click;
             this.Load += Form_Load;
             this.Shown += Form_Shown;
