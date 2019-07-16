@@ -167,6 +167,7 @@ namespace SlaughterHouseServer
 
         }
         #endregion
+
 #region Event Click
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
@@ -178,8 +179,7 @@ namespace SlaughterHouseServer
                 this.Close();
             }
             catch (System.Exception ex)
-            {
-
+            { 
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -373,8 +373,14 @@ namespace SlaughterHouseServer
         }
         private void SaveInvoice()
         {
+           
             try
             {
+                if (Convert.ToDecimal(txtNetAmt.Text) <= 0)
+                {
+                    throw new Exception($"ราคาสุทธิต้องมีค่ามากกวว่า 0");
+                }
+
                 var invoiceItems = new List<InvoiceItem>();
                 int seq = 0;
                 foreach (DataRow row in dtInvoiceItem.Rows)
@@ -393,7 +399,13 @@ namespace SlaughterHouseServer
                         Wgh = Convert.ToDecimal(row["wgh"]),
                         UnitPrice  = Convert.ToDecimal(row["unit_price"]),
                         GrossAmt = Convert.ToDecimal(row["gross_amt"]),
+                        SaleUnitMethod = row["sale_unit_method"].ToString(),
                     });
+
+                    if (Convert.ToDecimal(row["unit_price"]) == 0)
+                    {
+                        throw new Exception($"สินค้า {row["product_name"].ToString()} ไม่มีการตั้งราคา");
+                    }
                 }
 
                 var invoice = new Invoice

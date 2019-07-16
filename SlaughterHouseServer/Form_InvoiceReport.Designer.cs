@@ -28,12 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         { 
+            this.rptViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.SuspendLayout();
+            // 
+            // rptViewer
+            // 
+            this.rptViewer.ActiveViewIndex = -1;
+            this.rptViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rptViewer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rptViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rptViewer.Location = new System.Drawing.Point(0, 0);
+            this.rptViewer.Name = "rptViewer";
+            this.rptViewer.ShowParameterPanelButton = false;
+            this.rptViewer.Size = new System.Drawing.Size(1026, 492);
+            this.rptViewer.TabIndex = 0;
+            this.rptViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
             // Form_InvoiceReport
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1026, 492);
+            this.Controls.Add(this.rptViewer);
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -46,6 +61,7 @@
         }
 
         #endregion
-         
+
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer rptViewer;
     }
 }

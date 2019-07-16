@@ -151,7 +151,7 @@ namespace SlaughterHouseLib
                                 INTO invoice(
                                     invoice_no, invoice_date, ref_document_no,
                                     customer_code, gross_amt, discount,
-                                    vat_rate, vat_amt, net_amt,
+                                    vat_rate, vat_amt, net_amt, 
                                     invoice_flag, comments, active,
                                     create_by
                                 )
@@ -182,12 +182,12 @@ namespace SlaughterHouseLib
                     sql = @"INSERT INTO invoice_item(
                                         invoice_no, product_code, seq,
                                         qty, wgh, unit_price,
-                                        gross_amt, net_amt, create_by 
+                                        gross_amt, net_amt, sale_unit_method, create_by 
                                     )
                                 VALUES ( 
                                         @invoice_no, @product_code, @seq,
                                         @qty, @wgh, @unit_price,
-                                        @gross_amt, @net_amt, @create_by )";
+                                        @gross_amt, @net_amt, @sale_unit_method, @create_by )";
                      
                         foreach (var item in Invoice.InvoiceItems)
                         {
@@ -203,6 +203,7 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("unit_price", item.UnitPrice );
                         cmd.Parameters.AddWithValue("gross_amt", item.GrossAmt );
                         cmd.Parameters.AddWithValue("net_amt", item.NetAmt );
+                        cmd.Parameters.AddWithValue("sale_unit_method", item.SaleUnitMethod);
                         cmd.Parameters.AddWithValue("create_by", Invoice.CreateBy);
                         cmd.ExecuteNonQuery();
                     }
@@ -281,12 +282,12 @@ namespace SlaughterHouseLib
                     sql = @"INSERT INTO invoice_item(
                                         invoice_no, product_code, seq,
                                         qty, wgh, unit_price,
-                                        gross_amt, net_amt, create_by 
+                                        gross_amt, net_amt, sale_unit_method, create_by 
                                     )
                                 VALUES ( 
                                         @invoice_no, @product_code, @seq,
                                         @qty, @wgh, @unit_price,
-                                        @gross_amt, @net_amt, @create_by )";
+                                        @gross_amt, @net_amt, @sale_unit_method, @create_by )";
 
                     foreach (var item in Invoice.InvoiceItems)
                     {
@@ -302,6 +303,7 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("unit_price", item.UnitPrice);
                         cmd.Parameters.AddWithValue("gross_amt", item.GrossAmt);
                         cmd.Parameters.AddWithValue("net_amt", item.NetAmt);
+                        cmd.Parameters.AddWithValue("sale_unit_method", item.SaleUnitMethod);
                         cmd.Parameters.AddWithValue("create_by", Invoice.CreateBy);
                         cmd.ExecuteNonQuery();
                     }
@@ -322,22 +324,26 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = @"select i.invoice_no,
-                                i.invoice_date,
-                                i.ref_document_no,
-                                i.customer_code,
-                                i.gross_amt,
-                                i.discount,
-                                i.vat_rate,
-                                i.vat_amt,
-                                i.net_amt,
-                                i.invoice_flag,
-                                i.comments, 
-                                itm.product_code, itm.seq,
-                                itm.qty, itm.wgh, itm.unit_price,
-                                itm.gross_amt as gross_amt_item
-                                from invoice i , invoice_item itm
-                                where i.invoice_no = itm.invoice_no
-                                and Invoice_no =@Invoice_no";
+	                                i.invoice_date,	i.ref_document_no, i.customer_code,
+	                                i.gross_amt as gross_amt_hd,
+	                                i.discount as discount_hd,
+                                    i.gross_amt - i.discount as before_vat,
+	                                i.vat_rate as vat_rate_hd,
+	                                i.vat_amt as vat_amt_hd,
+	                                i.net_amt as net_amt_hd,
+	                                i.invoice_flag,	i.comments, itm.product_code, 
+                                    p.product_name, u.unit_name, itm.seq,
+                                    case when itm.sale_unit_method = 'Q' then itm.qty else itm.wgh end qty_wgh,
+	                                itm.qty, itm.wgh, itm.unit_price,
+	                                itm.gross_amt, c.customer_name, c.address, 
+	                                c.ship_to, c.tax_id, c.contact_no
+                                from invoice i , invoice_item itm, 	product p, customer c, unit_of_measurement u
+                                where i.invoice_no =@Invoice_no
+	                                and i.invoice_no = itm.invoice_no                                    
+	                                and itm.product_code = p.product_code
+	                                and c.customer_code = i.customer_code
+                                    and case when itm.sale_unit_method = 'Q' then p.unit_of_qty else unit_of_wgh end = u.unit_code 
+                                ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("Invoice_no", invoiceNo);
                     var da = new MySqlDataAdapter(cmd);
@@ -366,13 +372,14 @@ namespace SlaughterHouseLib
                     var sql = @"select a.seq,
                                 a.product_code,
                                 b.product_name,
+                                a.sale_unit_method,
                                 qty, wgh,
-                                unit_price, gross_amt, net_amt
+                                unit_price, gross_amt
                                 from Invoice_item a, product b
                                 where a.product_code =b.product_code
                                 and a.Invoice_no =@Invoice_no 
-                                Order by seq asc"; 
-
+                                Order by seq asc";
+                     
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("Invoice_no", invoiceNo);
                     var da = new MySqlDataAdapter(cmd);

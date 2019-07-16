@@ -40,6 +40,7 @@ namespace SlaughterHouseServer
 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
@@ -61,8 +62,14 @@ namespace SlaughterHouseServer
                             }
                             break;
                         case "Print":
-                            DataSet ds = InvoiceController.GetPrintInvoice(invoiceNo);
-                            //GetPrintInvoice
+                            var frmPrint = new Form_InvoiceReport
+                            {
+                                invoiceNo = invoiceNo
+                            };
+                            if (frmPrint.ShowDialog() == DialogResult.OK)
+                            {
+                                LoadInvoice();
+                            }
                             break;
                     } 
                 }

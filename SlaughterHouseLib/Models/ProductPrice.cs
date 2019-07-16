@@ -174,7 +174,11 @@ namespace SlaughterHouseLib.Models
                     }
                     else
                     {
-                        return null;
+                        return new ProductPrice
+                        {
+                            UnitPrice = 0,
+                            SaleUnitMethod = "na"
+                        };
                     }
                 }
             }

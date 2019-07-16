@@ -15,6 +15,7 @@ namespace SlaughterHouseLib.Models
         public decimal VatRate { get; set; }
         public decimal VatAmt { get; set; }
         public decimal NetAmt { get; set; }
+        public string SaleUnitMethod { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
         public string ModifiedBy { get; set; }

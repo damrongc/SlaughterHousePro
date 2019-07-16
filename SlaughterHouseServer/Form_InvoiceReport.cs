@@ -1,4 +1,5 @@
-﻿using SlaughterHouseLib;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using SlaughterHouseLib;
 using SlaughterHouseLib.Models;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,7 @@ namespace SlaughterHouseServer
 {
     public partial class Form_InvoiceReport : Form
     {
-        public string orderNo { get; set; }
-        public DateTime requestDate { get; set; }
-        public string customerCode { get; set; }
+        public string invoiceNo { get; set; } 
          
         public Form_InvoiceReport()
         {
@@ -30,43 +29,31 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, System.EventArgs e)
         { 
-            LoadData();
-        }
-
-
-        #region Event Click
-
-        //private void BtnRefresh_Click(object sender, KeyEventArgs e)
-        //{
-        //    try
-        //    {
-        //        LoadData();
-        //    }
-        //    catch (System.Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
-        private void BtnRefresh_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadData();
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            LoadReport();
         }
          
-#endregion
-
-        private void LoadData()
+        private void LoadReport()
         {
-            
-        }
-     
+            ReportDocument doc = new ReportDocument();
+            DataSet ds = InvoiceController.GetPrintInvoice(invoiceNo);
+            ds.WriteXml($"report/{invoiceNo}.xml", XmlWriteMode.WriteSchema); 
+
+            //string path = "";
+            //path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    path = @"D:\MyWork\Backup\Softwares\RealPro Warehouse\realPRO_realWarehouse";
+            //}
+
+            //ds.WriteXml(path + @"\xml\barcode_product.xml", XmlWriteMode.WriteSchema);
+            doc.Load("./report/invoice.rpt");
+            doc.SetDataSource(ds);
+
+            //CrystalReportCustomPaperSize("", "", ref doc);
+            rptViewer.ReportSource = doc;
+            rptViewer.Zoom(100);
+            rptViewer.RefreshReport();
+        } 
     }
 }
  
