@@ -36,7 +36,7 @@ namespace SlaughterHouseServer
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = InvoiceController.GetPrintInvoice(invoiceNo);
-            ds.WriteXml($"report/{invoiceNo}.xml", XmlWriteMode.WriteSchema); 
+            ds.WriteXml($"report/{invoiceNo}.xml", XmlWriteMode.WriteSchema);
 
             //string path = "";
             //path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);

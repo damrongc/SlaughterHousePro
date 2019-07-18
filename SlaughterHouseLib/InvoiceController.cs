@@ -323,7 +323,7 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"select i.invoice_no,
+                    var sql = @"select 'xxx' as xx, i.invoice_no,
 	                                i.invoice_date,	i.ref_document_no, i.customer_code,
 	                                i.gross_amt as gross_amt_hd,
 	                                i.discount as discount_hd,

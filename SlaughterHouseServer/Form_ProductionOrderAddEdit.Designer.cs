@@ -39,9 +39,9 @@
             this.label11 = new System.Windows.Forms.Label();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.Del = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.gv = new System.Windows.Forms.DataGridView();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Del = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnAddPoItem = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -158,21 +158,6 @@
             this.panel2.Size = new System.Drawing.Size(933, 211);
             this.panel2.TabIndex = 43;
             // 
-            // Del
-            // 
-            this.Del.HeaderText = "ลบ";
-            this.Del.Image = ((System.Drawing.Image)(resources.GetObject("Del.Image")));
-            this.Del.Name = "Del";
-            this.Del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Del.Width = 42;
-            // 
-            // Edit
-            // 
-            this.Edit.HeaderText = "แก้ไข";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.Name = "Edit";
-            this.Edit.Width = 58;
-            // 
             // gv
             // 
             this.gv.AllowUserToAddRows = false;
@@ -193,6 +178,21 @@
             this.gv.RowHeadersWidth = 10;
             this.gv.Size = new System.Drawing.Size(933, 211);
             this.gv.TabIndex = 43;
+            // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "แก้ไข";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.Name = "Edit";
+            this.Edit.Width = 58;
+            // 
+            // Del
+            // 
+            this.Del.HeaderText = "ลบ";
+            this.Del.Image = ((System.Drawing.Image)(resources.GetObject("Del.Image")));
+            this.Del.Name = "Del";
+            this.Del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Del.Width = 42;
             // 
             // panel1
             // 
@@ -227,9 +227,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(3, 4);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(170, 29);
+            this.label2.Size = new System.Drawing.Size(175, 29);
             this.label2.TabIndex = 44;
-            this.label2.Text = "รายละเอียดใบสั่งขาย";
+            this.label2.Text = "รายละเอียดใบสั่งผลิต";
             // 
             // Form_ProductionOrderAddEdit
             // 

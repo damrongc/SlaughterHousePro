@@ -50,9 +50,9 @@
             this.label1.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(11, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 29);
+            this.label1.Size = new System.Drawing.Size(133, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ข้อมูลใบสั่งขาย";
+            this.label1.Text = "ข้อมูลใบสั่งผลิต";
             // 
             // BtnAdd
             // 
@@ -69,7 +69,7 @@
             this.BtnAdd.TabIndex = 2;
             this.BtnAdd.Text = "เพิ่มข้อมูล";
             this.BtnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnAdd.UseVisualStyleBackColor = false; 
+            this.BtnAdd.UseVisualStyleBackColor = false;
             // 
             // panel1
             // 
