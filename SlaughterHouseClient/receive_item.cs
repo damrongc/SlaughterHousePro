@@ -17,9 +17,12 @@ namespace SlaughterHouseClient
         public string receive_no { get; set; }
         public string product_code { get; set; }
         public int seq { get; set; }
+        public string lot_no { get; set; }
         public string sex_flag { get; set; }
         public int receive_qty { get; set; }
         public decimal receive_wgh { get; set; }
+        public Nullable<int> chill_qty { get; set; }
+        public Nullable<decimal> chill_wgh { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }

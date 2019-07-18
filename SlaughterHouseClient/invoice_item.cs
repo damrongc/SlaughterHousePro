@@ -26,6 +26,7 @@ namespace SlaughterHouseClient
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
+        public string sale_unit_method { get; set; }
     
         public virtual invoice invoice { get; set; }
         public virtual product product { get; set; }

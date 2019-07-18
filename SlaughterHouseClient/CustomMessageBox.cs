@@ -6,9 +6,10 @@ namespace SlaughterHouseClient
     public partial class CustomMessageBox : Form
     {
 
-        public CustomMessageBox()
+        public CustomMessageBox(string body)
         {
             InitializeComponent();
+            labelBody.Text = body;
             Load += CustomMessageBox_Load;
         }
 
@@ -20,6 +21,12 @@ namespace SlaughterHouseClient
         private void btnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
     }

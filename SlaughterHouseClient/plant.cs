@@ -18,5 +18,6 @@ namespace SlaughterHouseClient
         public System.DateTime production_date { get; set; }
         public string plant_name { get; set; }
         public string address { get; set; }
+        public string est_no { get; set; }
     }
 }

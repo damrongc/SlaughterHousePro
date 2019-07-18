@@ -91,11 +91,41 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FormAnimator.cs" />
+    <Compile Include="Form_ByProductReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ByProductReceive.Designer.cs">
+      <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_CarcassIssued.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_CarcassIssued.Designer.cs">
+      <DependentUpon>Form_CarcassIssued.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_CarcassReceive.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_CarcassReceive.Designer.cs">
       <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Lot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Lot.Designer.cs">
+      <DependentUpon>Form_Lot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Issued.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Issued.Designer.cs">
+      <DependentUpon>Form_Issued.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ReceiveLot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ReceiveLot.Designer.cs">
+      <DependentUpon>Form_ReceiveLot.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Receive.cs">
       <SubType>Form</SubType>
@@ -187,8 +217,23 @@
     <EmbeddedResource Include="CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_ByProductReceive.resx">
+      <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_CarcassIssued.resx">
+      <DependentUpon>Form_CarcassIssued.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_CarcassReceive.resx">
       <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Lot.resx">
+      <DependentUpon>Form_Lot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Issued.resx">
+      <DependentUpon>Form_Issued.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ReceiveLot.resx">
+      <DependentUpon>Form_ReceiveLot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Receive.resx">
       <DependentUpon>Form_Receive.cs</DependentUpon>
