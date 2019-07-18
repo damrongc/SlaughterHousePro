@@ -145,6 +145,7 @@ namespace SlaughterHouseLib
                     sb.Append(" AND a.order_date =@order_date");
                     sb.Append(" AND a.order_no = sk.ref_document_no");
                     sb.Append(" AND a.order_flag = 1");
+                    sb.Append(" AND a.invoice_flag = 0");
                     sb.Append(" AND sk.ref_document_Type ='SO' ");
                     if (!string.IsNullOrEmpty(customerCode))
                         sb.Append(" AND a.customer_code =@customer_code");

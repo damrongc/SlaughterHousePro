@@ -247,7 +247,7 @@ namespace SlaughterHouseServer
 #endregion
         private void LoadData()
         {
-            txtOrderNo .Text  = this.orderNo;
+            txtOrderNo.Text  = this.orderNo;
             if (String.IsNullOrEmpty(this.invoiceNo))
             {
                 Order order = OrderController.GetOrder(this.orderNo);
@@ -267,6 +267,7 @@ namespace SlaughterHouseServer
                 {
                     txtInvoiceNo.Text = invoice.InvoiceNo ;
                     dtpInvoiceDate.Value = invoice.InvoiceDate;
+                    txtOrderNo.Text = invoice.RefDocumentNo;
                     cboCustomer.SelectedValue = invoice.Customer.CustomerCode;
                     txtComment.Text = invoice.Comments;
                     chkActive.Checked = invoice.Active;

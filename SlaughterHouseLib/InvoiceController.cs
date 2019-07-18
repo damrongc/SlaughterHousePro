@@ -32,6 +32,7 @@ namespace SlaughterHouseLib
                     sb.Append(" FROM Invoice a,customer b");
                     sb.Append(" WHERE a.customer_code =b.customer_code");
                     sb.Append(" AND a.Invoice_date =@Invoice_date");
+                    sb.Append(" AND a.active = 1");
                      
                     if (!string.IsNullOrEmpty(customerCode))
                         sb.Append(" AND a.customer_code =@customer_code");
@@ -94,7 +95,7 @@ namespace SlaughterHouseLib
                                 active,
                                 create_at
                                 FROM Invoice
-                                WHERE Invoice_no =@Invoice_no"; 
+                                WHERE Invoice_no =@Invoice_no "; 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("Invoice_no", invoiceNo);
                     var da = new MySqlDataAdapter(cmd);
@@ -207,6 +208,18 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("create_by", Invoice.CreateBy);
                         cmd.ExecuteNonQuery();
                     }
+
+                    Int64 invoiceFlagOfSo = (Invoice.Active == true) ? 1 : 0;
+                    sql = @"UPDATE orders
+                                SET invoice_flag=@invoice_flag
+                                WHERE order_no=@order_no";
+                    cmd = new MySqlCommand(sql, conn)
+                    {
+                        Transaction = tr
+                    };
+                    cmd.Parameters.AddWithValue("invoice_flag", invoiceFlagOfSo);
+                    cmd.Parameters.AddWithValue("order_no", Invoice.RefDocumentNo);
+                    cmd.ExecuteNonQuery();
                     tr.Commit();
                 }
                 return true;
@@ -307,6 +320,19 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("create_by", Invoice.CreateBy);
                         cmd.ExecuteNonQuery();
                     }
+
+                    Int64 invoiceFlagOfSo = (Invoice.Active == true) ? 1 : 0; 
+                    sql = @"UPDATE orders
+                                SET invoice_flag=@invoice_flag
+                                WHERE order_no=@order_no";
+                    cmd = new MySqlCommand(sql, conn)
+                    {
+                        Transaction = tr
+                    };
+                    cmd.Parameters.AddWithValue("invoice_flag", invoiceFlagOfSo);
+                    cmd.Parameters.AddWithValue("order_no", Invoice.RefDocumentNo); 
+                    cmd.ExecuteNonQuery();
+
                     tr.Commit();
                 }
                 return true;
@@ -332,7 +358,7 @@ namespace SlaughterHouseLib
 	                                i.vat_amt as vat_amt_hd,
 	                                i.net_amt as net_amt_hd,
 	                                i.invoice_flag,	i.comments, itm.product_code, 
-                                    p.product_name, u.unit_name, itm.seq,
+                                    p.product_name, u.unit_name, itm.seq,m
                                     case when itm.sale_unit_method = 'Q' then itm.qty else itm.wgh end qty_wgh,
 	                                itm.qty, itm.wgh, itm.unit_price,
 	                                itm.gross_amt, c.customer_name, c.address, 
