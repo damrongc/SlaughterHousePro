@@ -9,6 +9,7 @@ namespace SlaughterHouseLib.Models
         public DateTime RequestDate { get; set; } 
         public Customer Customer { get; set; }
         public int OrderFlag { get; set; }
+        public int InvoiceFlag { get; set; }
         public string Comments { get; set; }
         public bool Active { get; set; }
         public string CreateBy { get; set; }
