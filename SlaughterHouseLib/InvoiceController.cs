@@ -349,7 +349,7 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"select 'xxx' as xx, i.invoice_no,
+                    var sql = @"select i.invoice_no,
 	                                i.invoice_date,	i.ref_document_no, i.customer_code,
 	                                i.gross_amt as gross_amt_hd,
 	                                i.discount as discount_hd,
@@ -358,17 +358,19 @@ namespace SlaughterHouseLib
 	                                i.vat_amt as vat_amt_hd,
 	                                i.net_amt as net_amt_hd,
 	                                i.invoice_flag,	i.comments, itm.product_code, 
-                                    p.product_name, u.unit_name, itm.seq,m
+                                    p.product_name, u.unit_name, itm.seq,
                                     case when itm.sale_unit_method = 'Q' then itm.qty else itm.wgh end qty_wgh,
 	                                itm.qty, itm.wgh, itm.unit_price,
 	                                itm.gross_amt, c.customer_name, c.address, 
-	                                c.ship_to, c.tax_id, c.contact_no
-                                from invoice i , invoice_item itm, 	product p, customer c, unit_of_measurement u
+	                                c.ship_to, c.tax_id, c.contact_no,
+                                    pl.plant_name, pl.address as plant_address
+                                from invoice i , invoice_item itm, 	product p, customer c, unit_of_measurement u, plant pl
                                 where i.invoice_no =@Invoice_no
 	                                and i.invoice_no = itm.invoice_no                                    
 	                                and itm.product_code = p.product_code
 	                                and c.customer_code = i.customer_code
                                     and case when itm.sale_unit_method = 'Q' then p.unit_of_qty else unit_of_wgh end = u.unit_code 
+                                    and pl.plant_id = 1
                                 ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("Invoice_no", invoiceNo);

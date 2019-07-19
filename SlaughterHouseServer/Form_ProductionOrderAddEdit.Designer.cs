@@ -252,7 +252,7 @@
             this.MinimizeBox = false;
             this.Name = "Form_ProductionOrderAddEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form_OrderAddEdit";
+            this.Text = "Form_ProductionOrderAddEdit";
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
             this.panel1.ResumeLayout(false);

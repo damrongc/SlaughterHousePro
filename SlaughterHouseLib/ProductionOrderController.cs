@@ -27,7 +27,8 @@ namespace SlaughterHouseLib
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by"); 
                     sb.Append(" FROM production_order a");
-                    sb.Append(" WHERE a.po_date =@po_date"); 
+                    sb.Append(" WHERE a.po_date =@po_date");
+                    sb.Append(" AND a.active = 1");
                     sb.Append(" ORDER BY po_no ASC");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
                     cmd.Parameters.AddWithValue("po_date", poDate.ToString("yyyy-MM-dd"));
@@ -122,8 +123,8 @@ namespace SlaughterHouseLib
                                 (po_no,
                                 po_date, 
                                 po_flag,
-                                active,
                                 comments,
+                                active, 
                                 create_by)
                                 VALUES(@po_no,
                                 @po_date, 

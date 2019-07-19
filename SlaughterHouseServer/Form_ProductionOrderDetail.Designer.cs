@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_OrderDetail));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ProductionOrderDetail));
             this.cboProduct = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnAddOrderItem = new System.Windows.Forms.Button();
@@ -107,7 +107,7 @@
             this.label3.TabIndex = 43;
             this.label3.Text = "น้ำหนัก:";
             // 
-            // Form_OrderDetail
+            // Form_ProductionOrderDetail
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(606, 214);
@@ -122,9 +122,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_OrderDetail";
+            this.Name = "Form_ProductionOrderDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form_OrderDetail";
+            this.Text = "Form_ProductionOrderDetail";
             this.ResumeLayout(false);
             this.PerformLayout();
 

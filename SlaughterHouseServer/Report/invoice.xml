@@ -1,0 +1,107 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="invoice_no" type="xs:string" minOccurs="0" />
+                <xs:element name="invoice_date" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="ref_document_no" type="xs:string" minOccurs="0" />
+                <xs:element name="customer_code" type="xs:string" minOccurs="0" />
+                <xs:element name="gross_amt_hd" type="xs:decimal" minOccurs="0" />
+                <xs:element name="discount_hd" type="xs:decimal" minOccurs="0" />
+                <xs:element name="before_vat" type="xs:decimal" minOccurs="0" />
+                <xs:element name="vat_rate_hd" type="xs:decimal" minOccurs="0" />
+                <xs:element name="vat_amt_hd" type="xs:decimal" minOccurs="0" />
+                <xs:element name="net_amt_hd" type="xs:decimal" minOccurs="0" />
+                <xs:element name="invoice_flag" type="xs:int" minOccurs="0" />
+                <xs:element name="comments" type="xs:string" minOccurs="0" />
+                <xs:element name="product_code" type="xs:string" minOccurs="0" />
+                <xs:element name="product_name" type="xs:string" minOccurs="0" />
+                <xs:element name="unit_name" type="xs:string" minOccurs="0" />
+                <xs:element name="seq" type="xs:int" minOccurs="0" />
+                <xs:element name="qty_wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="qty" type="xs:int" minOccurs="0" />
+                <xs:element name="wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="unit_price" type="xs:decimal" minOccurs="0" />
+                <xs:element name="gross_amt" type="xs:decimal" minOccurs="0" />
+                <xs:element name="customer_name" type="xs:string" minOccurs="0" />
+                <xs:element name="address" type="xs:string" minOccurs="0" />
+                <xs:element name="ship_to" type="xs:string" minOccurs="0" />
+                <xs:element name="tax_id" type="xs:string" minOccurs="0" />
+                <xs:element name="contact_no" type="xs:string" minOccurs="0" />
+                <xs:element name="plant_name" type="xs:string" minOccurs="0" />
+                <xs:element name="plant_address" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <invoice_no>INV0000001</invoice_no>
+    <invoice_date>2019-07-16T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000008</ref_document_no>
+    <customer_code>003</customer_code>
+    <gross_amt_hd>27300.00</gross_amt_hd>
+    <discount_hd>300.00</discount_hd>
+    <before_vat>27000.00</before_vat>
+    <vat_rate_hd>7.00</vat_rate_hd>
+    <vat_amt_hd>1890.00</vat_amt_hd>
+    <net_amt_hd>28890.00</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>2</seq>
+    <qty_wgh>32.00</qty_wgh>
+    <qty>13</qty>
+    <wgh>32.00</wgh>
+    <unit_price>150.00</unit_price>
+    <gross_amt>4800.00</gross_amt>
+    <customer_name>สมชาย ใจดี</customer_name>
+    <address>12/7 ต.นาขวาง อ.เมือง
+จ.สมุทรสาคร 75000</address>
+    <ship_to>โกดัง 15 ท่าเรือมมหาชัย</ship_to>
+    <tax_id>1254785695</tax_id>
+    <contact_no>0997847589</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+  </Table>
+  <Table>
+    <invoice_no>INV0000001</invoice_no>
+    <invoice_date>2019-07-16T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000008</ref_document_no>
+    <customer_code>003</customer_code>
+    <gross_amt_hd>27300.00</gross_amt_hd>
+    <discount_hd>300.00</discount_hd>
+    <before_vat>27000.00</before_vat>
+    <vat_rate_hd>7.00</vat_rate_hd>
+    <vat_amt_hd>1890.00</vat_amt_hd>
+    <net_amt_hd>28890.00</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P004</product_code>
+    <product_name>เครื่องใน</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>1</seq>
+    <qty_wgh>300.00</qty_wgh>
+    <qty>50</qty>
+    <wgh>300.00</wgh>
+    <unit_price>75.00</unit_price>
+    <gross_amt>22500.00</gross_amt>
+    <customer_name>สมชาย ใจดี</customer_name>
+    <address>12/7 ต.นาขวาง อ.เมือง
+จ.สมุทรสาคร 75000</address>
+    <ship_to>โกดัง 15 ท่าเรือมมหาชัย</ship_to>
+    <tax_id>1254785695</tax_id>
+    <contact_no>0997847589</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+  </Table>
+</NewDataSet>

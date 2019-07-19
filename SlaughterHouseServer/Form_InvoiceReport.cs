@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
@@ -35,18 +36,11 @@ namespace SlaughterHouseServer
         private void LoadReport()
         {
             ReportDocument doc = new ReportDocument();
-            DataSet ds = InvoiceController.GetPrintInvoice(invoiceNo);
-            ds.WriteXml($"report/{invoiceNo}.xml", XmlWriteMode.WriteSchema);
+            DataSet ds = InvoiceController.GetPrintInvoice(invoiceNo); 
+            string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\invoice")); 
 
-            //string path = "";
-            //path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-            //if (System.Diagnostics.Debugger.IsAttached)
-            //{
-            //    path = @"D:\MyWork\Backup\Softwares\RealPro Warehouse\realPRO_realWarehouse";
-            //}
-
-            //ds.WriteXml(path + @"\xml\barcode_product.xml", XmlWriteMode.WriteSchema);
-            doc.Load("./report/invoice.rpt");
+            ds.WriteXml(path + ".xml", XmlWriteMode.WriteSchema);
+            doc.Load(path + ".rpt");
             doc.SetDataSource(ds);
 
             //CrystalReportCustomPaperSize("", "", ref doc);

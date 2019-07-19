@@ -31,6 +31,7 @@ namespace SlaughterHouseLib
                     sb.Append(" FROM orders a,customer b");
                     sb.Append(" WHERE a.customer_code =b.customer_code");
                     sb.Append(" AND a.order_date =@order_date");
+                    sb.Append(" AND a.active = 1");
                     if (!string.IsNullOrEmpty(customerCode))
                         sb.Append(" AND a.customer_code =@customer_code");
                     sb.Append(" ORDER BY order_no ASC");
