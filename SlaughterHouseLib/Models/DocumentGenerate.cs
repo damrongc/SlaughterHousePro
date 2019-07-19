@@ -79,7 +79,7 @@ namespace SlaughterHouseLib.Models
             }
         }
 
-        public static string GetProductLotNo(int plantId, DateTime productionDate)
+        public static string GetProductLotNo(int plantId, DateTime productionDate, string estNo)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace SlaughterHouseLib.Models
                     var julian_date = DateTime.Today.DayOfYear.ToString().PadLeft(3, '0');
                     var day = productionDate.ToString("dd");
                     var month = productionDate.ToString("MM");
-                    var documentNo = string.Format("{0}{1}{2}{3}{4}", plantId, year, julian_date, day, month);
+                    var documentNo = string.Format("{0}{1}{2}{3}{4}{5}", plantId, year, julian_date, estNo, day, month);
                     return documentNo;
                 }
             }

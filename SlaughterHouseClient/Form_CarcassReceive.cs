@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using ToastNotifications;
 
 namespace SlaughterHouseClient
 {
@@ -87,12 +86,12 @@ namespace SlaughterHouseClient
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                var animationDirection = FormAnimator.AnimationDirection.Up;
-                var animationMethod = FormAnimator.AnimationMethod.Slide;
-                var toastNotification = new Notification("Notification", ex.Message, -1, animationMethod, animationDirection);
-                PlayNotificationSound("normal");
-                toastNotification.Show();
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //var animationDirection = FormAnimator.AnimationDirection.Up;
+                //var animationMethod = FormAnimator.AnimationMethod.Slide;
+                //var toastNotification = new Notification("Notification", ex.Message, -1, animationMethod, animationDirection);
+                //PlayNotificationSound("normal");
+                //toastNotification.Show();
 
             }
 

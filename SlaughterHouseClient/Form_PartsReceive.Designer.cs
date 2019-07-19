@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseClient
 {
-    partial class Form_ByProductReceive
+    partial class Form_PartsReceive
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ByProductReceive));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_PartsReceive));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblCurrentDatetime = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
@@ -109,14 +109,15 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
             this.label1.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 4);
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(190, 41);
+            this.label1.Size = new System.Drawing.Size(310, 54);
             this.label1.TabIndex = 0;
-            this.label1.Text = "รับเครื่องในแดง";
+            this.label1.Text = "รับชิ้นส่วน";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblWeight
             // 
@@ -162,9 +163,9 @@
             this.label5.Font = new System.Drawing.Font("Kanit", 16F);
             this.label5.Location = new System.Drawing.Point(12, 57);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 33);
+            this.label5.Size = new System.Drawing.Size(101, 33);
             this.label5.TabIndex = 8;
-            this.label5.Text = "เลขที่ใบรับ";
+            this.label5.Text = "เลขที่ล็อต";
             // 
             // lblReceiveNo
             // 
@@ -416,7 +417,7 @@
             // 
             this.dragControl1.SelectControl = this.panelHeader;
             // 
-            // Form_ByProductReceive
+            // Form_PartsReceive
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
@@ -451,12 +452,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_ByProductReceive";
+            this.Name = "Form_PartsReceive";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รับหมูเป็น";
             this.Load += new System.EventHandler(this.Form_SwineReceive_Load);
             this.panelHeader.ResumeLayout(false);
-            this.panelHeader.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

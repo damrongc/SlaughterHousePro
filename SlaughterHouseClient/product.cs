@@ -20,8 +20,8 @@ namespace SlaughterHouseClient
             this.invoice_item = new HashSet<invoice_item>();
             this.order_item = new HashSet<order_item>();
             this.production_order_item = new HashSet<production_order_item>();
-            this.receive_item = new HashSet<receive_item>();
             this.stocks = new HashSet<stock>();
+            this.receive_item = new HashSet<receive_item>();
         }
     
         public string product_code { get; set; }
@@ -29,6 +29,9 @@ namespace SlaughterHouseClient
         public int product_group_code { get; set; }
         public int unit_of_qty { get; set; }
         public int unit_of_wgh { get; set; }
+        public Nullable<decimal> min_weight { get; set; }
+        public Nullable<decimal> max_weight { get; set; }
+        public Nullable<decimal> std_yield { get; set; }
         public bool active { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
@@ -40,9 +43,9 @@ namespace SlaughterHouseClient
         public virtual ICollection<order_item> order_item { get; set; }
         public virtual ICollection<production_order_item> production_order_item { get; set; }
         public virtual product_group product_group { get; set; }
-        public virtual ICollection<receive_item> receive_item { get; set; }
         public virtual ICollection<stock> stocks { get; set; }
         public virtual unit_of_measurement unit_of_measurement { get; set; }
         public virtual unit_of_measurement unit_of_measurement1 { get; set; }
+        public virtual ICollection<receive_item> receive_item { get; set; }
     }
 }

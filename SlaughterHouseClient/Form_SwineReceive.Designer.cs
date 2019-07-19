@@ -124,6 +124,7 @@
             // btnFemale
             // 
             this.btnFemale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.btnFemale.FlatAppearance.BorderSize = 0;
             this.btnFemale.Font = new System.Drawing.Font("Kanit", 16F);
             this.btnFemale.Location = new System.Drawing.Point(415, 370);
             this.btnFemale.Name = "btnFemale";
@@ -145,6 +146,8 @@
             // 
             // btnUndified
             // 
+            this.btnUndified.FlatAppearance.BorderSize = 0;
+            this.btnUndified.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnUndified.Font = new System.Drawing.Font("Kanit", 16F);
             this.btnUndified.Location = new System.Drawing.Point(719, 370);
             this.btnUndified.Name = "btnUndified";
@@ -156,6 +159,7 @@
             // 
             // btnMale
             // 
+            this.btnMale.FlatAppearance.BorderSize = 0;
             this.btnMale.Font = new System.Drawing.Font("Kanit", 16F);
             this.btnMale.Location = new System.Drawing.Point(567, 370);
             this.btnMale.Name = "btnMale";

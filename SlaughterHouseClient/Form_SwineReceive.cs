@@ -138,6 +138,7 @@ namespace SlaughterHouseClient
                         receive_no = receive.receive_no,
                         product_code = productCode,
                         seq = seq,
+                        lot_no = receive.lot_no,
                         sex_flag = sexFlag,
                         receive_qty = 1,
                         receive_wgh = 100,
