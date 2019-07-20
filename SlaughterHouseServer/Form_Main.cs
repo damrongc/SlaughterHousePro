@@ -24,6 +24,7 @@ namespace SlaughterHouseServer
             BtnCarcass.Click += Btn_Click;
             BtnPriceList.Click += Btn_Click;
             BtnInvoice.Click += Btn_Click;
+            BtnReport.Click += Btn_Click;
         }
 
         private void Btn_Click(object sender, EventArgs e)

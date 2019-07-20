@@ -9,7 +9,9 @@ namespace SlaughterHouseServer
         public string productCode { get; set; }
         public string productName{ get; set; }
         public int qty { get; set; }
-        public decimal wgh { get; set; } 
+        public decimal wgh { get; set; }
+
+        private string SaleUnitMethod;
 
         public Form_OrderDetail()
         {
@@ -24,7 +26,21 @@ namespace SlaughterHouseServer
             //KeyPress
             txtQty.KeyPress += TxtQty_KeyPress;
             txtWgh.KeyPress += TxtWgh_KeyPress;
-        } 
+
+            cboProduct.SelectedIndexChanged += CboProduct_SelectedIndexChanged;
+        }
+
+        private void CboProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(cboProduct.SelectedValue.ToString()) == false)
+            {
+                LockControlBySaleUnitMethod(cboProduct.SelectedValue.ToString());
+                txtQty.Text = "0";
+                txtWgh.Text = "0";
+            }
+        }
+         
+
         private void Form_Shown(object sender, System.EventArgs e)
         {
            
@@ -34,23 +50,31 @@ namespace SlaughterHouseServer
             LoadProduct();
             if (!string.IsNullOrEmpty(this.productCode))
             { 
-                cboProduct.SelectedValue = this.productCode; 
+                cboProduct.SelectedValue = this.productCode;
+                LockControlBySaleUnitMethod(this.productCode);
             }
             txtQty.Text = this.qty.ToString();
-            txtWgh.Text = this.wgh.ToString();
+            txtWgh.Text = this.wgh.ToString(); 
         }
         private void CboProduct_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                txtQty.Focus();
+                if (this.SaleUnitMethod == "Q")
+                {
+                    txtQty.Focus();
+                }
+                else if (this.SaleUnitMethod == "W")
+                {
+                    txtWgh.Focus();
+                }
             }
         }
         private void TxtQty_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                txtWgh.Focus();
+                btnAddOrderItem.Focus();
             }
         }
         private void TxtWgh_KeyDown(object sender, KeyEventArgs e)
@@ -95,14 +119,29 @@ namespace SlaughterHouseServer
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
-                private void LoadProduct()
+        private void LoadProduct()
         {
             var coll = ProductController.GetAllProducts();
             cboProduct.DisplayMember = "ProductName";
             cboProduct.ValueMember = "ProductCode";
             cboProduct.DataSource = coll;
+        }
+
+        private void LockControlBySaleUnitMethod(string productCode)
+        {
+            Product product = ProductController.GetProduct(productCode);
+            this.SaleUnitMethod = product.SaleUnitMethod;
+            if (product.SaleUnitMethod == "Q")
+            {
+                txtQty.Enabled = true;
+                txtWgh.Enabled = false;
+            }
+            else if (product.SaleUnitMethod == "W")
+            {
+                txtQty.Enabled = false;
+                txtWgh.Enabled = true;
+            }
         }
     }
 }

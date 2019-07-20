@@ -37,18 +37,14 @@
             this.label11 = new System.Windows.Forms.Label();
             this.cboProduct = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rdbWgh = new System.Windows.Forms.RadioButton();
-            this.rdbQty = new System.Windows.Forms.RadioButton();
             this.txtUnitPrice = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(94, 109);
+            this.label1.Location = new System.Drawing.Point(90, 109);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 29);
             this.label1.TabIndex = 0;
@@ -71,7 +67,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(481, 302);
+            this.BtnSave.Location = new System.Drawing.Point(481, 206);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -88,7 +84,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(182, 302);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(182, 206);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -110,7 +106,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(83, 68);
+            this.label11.Location = new System.Drawing.Point(79, 68);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(97, 29);
             this.label11.TabIndex = 33;
@@ -127,44 +123,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(121, 24);
+            this.label4.Location = new System.Drawing.Point(117, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 29);
             this.label4.TabIndex = 35;
             this.label4.Text = "สินค้า:";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rdbWgh);
-            this.groupBox1.Controls.Add(this.rdbQty);
-            this.groupBox1.Location = new System.Drawing.Point(182, 189);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(215, 78);
-            this.groupBox1.TabIndex = 37;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "หน่วยคำนวณ";
-            // 
-            // rdbWgh
-            // 
-            this.rdbWgh.AutoSize = true;
-            this.rdbWgh.Location = new System.Drawing.Point(112, 35);
-            this.rdbWgh.Name = "rdbWgh";
-            this.rdbWgh.Size = new System.Drawing.Size(84, 33);
-            this.rdbWgh.TabIndex = 1;
-            this.rdbWgh.TabStop = true;
-            this.rdbWgh.Text = "น้ำหนัก";
-            this.rdbWgh.UseVisualStyleBackColor = true;
-            // 
-            // rdbQty
-            // 
-            this.rdbQty.AutoSize = true;
-            this.rdbQty.Location = new System.Drawing.Point(12, 35);
-            this.rdbQty.Name = "rdbQty";
-            this.rdbQty.Size = new System.Drawing.Size(90, 33);
-            this.rdbQty.TabIndex = 0;
-            this.rdbQty.TabStop = true;
-            this.rdbQty.Text = "ปริมาณ";
-            this.rdbQty.UseVisualStyleBackColor = true;
             // 
             // txtUnitPrice
             // 
@@ -177,7 +140,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(94, 151);
+            this.label2.Location = new System.Drawing.Point(122, 151);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 29);
             this.label2.TabIndex = 38;
@@ -186,10 +149,9 @@
             // Form_ProductPriceAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(730, 357);
+            this.ClientSize = new System.Drawing.Size(730, 267);
             this.Controls.Add(this.txtUnitPrice);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cboProduct);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dtpStartDate);
@@ -205,8 +167,6 @@
             this.Name = "Form_ProductPriceAddEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form_ProductPriceAddEdit";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,9 +182,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cboProduct;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rdbWgh;
-        private System.Windows.Forms.RadioButton rdbQty;
         private System.Windows.Forms.TextBox txtUnitPrice;
         private System.Windows.Forms.Label label2;
     }

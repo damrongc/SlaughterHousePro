@@ -300,11 +300,15 @@ namespace SlaughterHouseServer
                 if (dtInvoiceItem.Rows.Count > 0)
                 {
                     ProductPrice productPrice;
+                    Product product;
                     for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
                     {
-                        productPrice = ProductPriceController.GetPriceList(dtInvoiceItem.Rows[i]["product_code"].ToString(), dtpInvoiceDate.Value);
+                        string productCode = dtInvoiceItem.Rows[i]["product_code"].ToString();
+                        productPrice = ProductPriceController.GetPriceList(productCode, dtpInvoiceDate.Value);
+                        product = ProductController.GetProduct(productCode);
+
                         dtInvoiceItem.Rows[i]["unit_price"] = productPrice.UnitPrice;
-                        dtInvoiceItem.Rows[i]["sale_unit_method"] = productPrice.SaleUnitMethod;
+                        dtInvoiceItem.Rows[i]["sale_unit_method"] = product.SaleUnitMethod;
                         if (dtInvoiceItem.Rows[i]["sale_unit_method"].ToString() == "Q")
                         {
                             dtInvoiceItem.Rows[i]["gross_amt"] = Convert.ToDecimal(dtInvoiceItem.Rows[i]["unit_price"]) * Convert.ToDecimal(dtInvoiceItem.Rows[i]["qty"]);

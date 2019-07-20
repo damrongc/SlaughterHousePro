@@ -11,7 +11,6 @@ namespace SlaughterHouseLib.Models
     {
         public string ProductCode { get; set; }
         public string ProductName { get; set; }
-
         public bool Active { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
@@ -22,8 +21,11 @@ namespace SlaughterHouseLib.Models
         public Unit UnitOfWgh { get; set; }
         public decimal MinWeight { get; set; }
         public decimal MaxWeight { get; set; }
-        public decimal StdYield { get; set; }
+        public decimal StdYield { get; set; } 
+        public string SaleUnitMethod { get; set; }
+        public string IssueUnitMethod { get; set; }
     }
+    
 
 
 
@@ -33,7 +35,7 @@ namespace SlaughterHouseLib.Models
         {
             try
             {
-
+                //sale_unit_method   issue_unit_method
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -43,6 +45,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" ,unit_of_qty ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_qty) as unit_name_of_qty");
                     sb.Append(" ,unit_of_wgh ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_wgh) as unit_name_of_wgh");
                     sb.Append(" ,min_weight, max_weight, std_yield ");
+                    sb.Append(" ,sale_unit_method, issue_unit_method ");
                     sb.Append(" ,a.active,a.create_at, a.create_by, a.modified_at, a.modified_by");
                     sb.Append(" from product a,product_group b");
                     sb.Append(" where a.product_group_code=b.product_group_code");
@@ -80,7 +83,10 @@ namespace SlaughterHouseLib.Models
                                     MinWeight = p.Field<decimal>("min_weight"),
                                     MaxWeight = p.Field<decimal>("max_weight"),
                                     StdYield = p.Field<decimal>("std_yield"),
-                                    
+
+                                    SaleUnitMethod = p.Field<string>("sale_unit_method"),
+                                    IssueUnitMethod = p.Field<string>("issue_unit_method"),
+        
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
@@ -173,9 +179,11 @@ namespace SlaughterHouseLib.Models
                                 UnitCode = (int)ds.Tables[0].Rows[0]["unit_of_wgh"],
                                 //UnitName = ds.Tables[0].Rows[0]["unit_name"].ToString(),
                             },
-                            MinWeight = Convert.ToDecimal( ds.Tables[0].Rows[0]["min_weight"]),
-                            MaxWeight = Convert.ToDecimal( ds.Tables[0].Rows[0]["max_weight"]),
-                            StdYield  = Convert.ToDecimal( ds.Tables[0].Rows[0]["std_yield"]),
+                            MinWeight = Convert.ToDecimal(ds.Tables[0].Rows[0]["min_weight"]),
+                            MaxWeight = Convert.ToDecimal(ds.Tables[0].Rows[0]["max_weight"]),
+                            StdYield  = Convert.ToDecimal(ds.Tables[0].Rows[0]["std_yield"]),
+                            SaleUnitMethod = ds.Tables[0].Rows[0]["sale_unit_method"].ToString(), 
+                            IssueUnitMethod = ds.Tables[0].Rows[0]["issue_unit_method"].ToString(),
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
@@ -206,6 +214,7 @@ namespace SlaughterHouseLib.Models
                                 unit_of_qty,
                                 unit_of_wgh,
                                 min_weight, max_weight, std_yield,
+                                sale_unit_method, issue_unit_method,
                                 active,
                                 create_by)
                                 VALUES(@product_code,
@@ -213,6 +222,8 @@ namespace SlaughterHouseLib.Models
                                 @product_group_code,
                                 @unit_of_qty,
                                 @unit_of_wgh,
+                                @min_weight, @max_weight, @std_yield,
+                                @sale_unit_method, @issue_unit_method,
                                 @active,
                                 @create_by)";
                     var cmd = new MySqlCommand(sql, conn);
@@ -224,6 +235,8 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("min_weight", product.MinWeight);
                     cmd.Parameters.AddWithValue("max_weight", product.MaxWeight);
                     cmd.Parameters.AddWithValue("std_yield", product.StdYield);
+                    cmd.Parameters.AddWithValue("sale_unit_method", product.SaleUnitMethod);
+                    cmd.Parameters.AddWithValue("issue_unit_method", product.IssueUnitMethod);
                     cmd.Parameters.AddWithValue("active", product.Active);
                     cmd.Parameters.AddWithValue("create_by", product.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
@@ -251,6 +264,8 @@ namespace SlaughterHouseLib.Models
                                 min_weight=@min_weight, 
                                 max_weight=@max_weight, 
                                 std_yield=@std_yield,
+                                sale_unit_method = @sale_unit_method, 
+                                issue_unit_method = @issue_unit_method,
                                 active=@active,
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by
@@ -266,6 +281,8 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("max_weight", product.MaxWeight );
                     cmd.Parameters.AddWithValue("std_yield", product.StdYield );
 
+                    cmd.Parameters.AddWithValue("sale_unit_method", product.SaleUnitMethod);
+                    cmd.Parameters.AddWithValue("issue_unit_method", product.IssueUnitMethod);
 
                     cmd.Parameters.AddWithValue("active", product.Active);
                     cmd.Parameters.AddWithValue("modified_by", product.ModifiedBy);
