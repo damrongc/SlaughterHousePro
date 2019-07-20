@@ -144,7 +144,6 @@ namespace SlaughterHouseServer
             gv2.Columns[4].HeaderText = "จำนวนจ่าย";
             gv2.Columns[5].HeaderText = "น้ำหนักจ่าย";
 
-        }
-
+        } 
     }
 }

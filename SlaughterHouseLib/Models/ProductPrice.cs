@@ -95,11 +95,12 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" a.end_date,");
                     sb.Append(" a.unit_price,");
                     sb.Append(" a.sale_unit_method,");
-                    sb.Append(" a.end_date - a.start_date as day,");
+                    sb.Append(" DATEDIFF(a.end_date, a.start_date) as day,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by");
                     sb.Append(" FROM product_price a, product b");
                     sb.Append(" WHERE a.product_code =b.product_code");
+                    sb.Append(" AND a.product_code =@product_code");
                     sb.Append(" AND a.start_date =@start_date");
 
                     var cmd = new MySqlCommand(sb.ToString(), conn);

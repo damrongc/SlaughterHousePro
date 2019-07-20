@@ -115,7 +115,8 @@ namespace SlaughterHouseServer
         {
             
         var frm = new Form_ProductionOrderDetail();
-            
+            frm.qty = 0;
+            frm.wgh = 0;
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 DataRow dr;

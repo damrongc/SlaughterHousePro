@@ -87,7 +87,6 @@ namespace SlaughterHouseLib
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -137,7 +136,6 @@ namespace SlaughterHouseLib
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

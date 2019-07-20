@@ -206,7 +206,7 @@ namespace SlaughterHouseLib.Models
                     var sql = @"UPDATE customer 
                                 set customer_code =@customer_code,
                                 customer_name=@customer_name,
-                                address=address,
+                                address=@address,
                                 ship_to=@ship_to,
                                 tax_id=@tax_id,
                                 contact_no=@contact_no,

@@ -23,6 +23,7 @@ namespace SlaughterHouseLib
                     sb.Append(" a.order_date,");
                     sb.Append(" a.customer_code,");
                     sb.Append(" a.order_flag,");
+                    sb.Append(" a.invoice_flag,");
                     sb.Append(" a.comments,");
                     sb.Append(" a.active,");
                     sb.Append(" a.create_at,");
@@ -53,8 +54,9 @@ namespace SlaughterHouseLib
                                     OrderNo = p.Field<string>("order_no"),
                                     RequestDate =  p.Field<DateTime>("order_date"),
                                     CustomerName = p.Field<string>("customer_name"),
-                                    //Comments = p.Field<string>("comments"),
-                                    //OrderFlag = p.Field<int>("order_flag"),
+                                    Comments = p.Field<string>("comments"),
+                                    OrderFlag = p.Field<int>("order_flag"),
+                                    InvoiceFlag = p.Field<int>("invoice_flag"),
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
@@ -133,7 +135,7 @@ namespace SlaughterHouseLib
                     conn.Open();
                     var sb = new StringBuilder();
                     sb.Append("SELECT distinct a.order_no,");
-                    sb.Append(" a.order_date, sk.stock_no, ");
+                    sb.Append(" a.order_date, ");
                     sb.Append(" a.customer_code,");
                     sb.Append(" a.order_flag,");
                     sb.Append(" a.comments,");
@@ -141,13 +143,11 @@ namespace SlaughterHouseLib
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by,");
                     sb.Append(" b.customer_name");
-                    sb.Append(" FROM orders a, customer b, stock sk ");
+                    sb.Append(" FROM orders a, customer b");
                     sb.Append(" WHERE a.customer_code =b.customer_code");
                     sb.Append(" AND a.order_date =@order_date");
-                    sb.Append(" AND a.order_no = sk.ref_document_no");
                     sb.Append(" AND a.order_flag = 1");
                     sb.Append(" AND a.invoice_flag = 0");
-                    sb.Append(" AND sk.ref_document_Type ='SO' ");
                     if (!string.IsNullOrEmpty(customerCode))
                         sb.Append(" AND a.customer_code =@customer_code");
                     sb.Append(" ORDER BY order_no ASC");
@@ -171,7 +171,7 @@ namespace SlaughterHouseLib
                                     CustomerName = p.Field<string>("customer_name"),
                                     //Comments = p.Field<string>("comments"),
                                     //OrderFlag = p.Field<int>("order_flag"),
-                                    Active = p.Field<bool>("active"),
+                                    //Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
                                 }).ToList();
@@ -179,8 +179,7 @@ namespace SlaughterHouseLib
                 }
             }
             catch (Exception)
-            {
-
+            { 
                 throw;
             }
         }
@@ -189,11 +188,8 @@ namespace SlaughterHouseLib
             MySqlTransaction tr = null;
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
-
-
                     order.OrderNo = DocumentGenerate.GetDocumentRunning("SO");
                     conn.Open();
                     tr = conn.BeginTransaction();
@@ -282,8 +278,6 @@ namespace SlaughterHouseLib
                     {
                         throw new Exception("ไม่สามารถบันทึกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
                     }
-
-
                       sql = @"UPDATE orders
                                 SET order_date=@order_date,
                                 customer_code=@customer_code,
@@ -417,7 +411,9 @@ namespace SlaughterHouseLib
                                 a.product_code,
                                 b.product_name,
                                 order_qty,
-                                order_wgh
+                                order_wgh,
+                                unload_qty,
+                                unload_wgh
                                 from order_item a,product b
                                 where a.product_code =b.product_code
                                 and a.order_no =@order_no 
@@ -462,21 +458,33 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = ""; 
-                        sql = @"select sk.stock_item as seq, 
-                                sk.product_code, 
-                                b.product_name,
-                                '' as sale_unit_method,
-                                sk.stock_qty as qty,
-                                sk.stock_wgh as wgh,
-                                0 as unit_price, 0 as gross_amt
-                                from order_item a,product b, stock sk 
-                                where a.product_code =b.product_code
-                                and a.order_no =@order_no 
-                                and a.order_no = sk.ref_document_no 
-                                and a.product_code = sk.product_code 
-                                and sk.ref_document_type ='SO'  
-                                order by sk.stock_item asc ";
+                    var sql = "";
+                    //sql = @"select sk.stock_item as seq, 
+                    //        sk.product_code, 
+                    //        b.product_name,
+                    //        '' as sale_unit_method,
+                    //        sk.stock_qty as qty,
+                    //        sk.stock_wgh as wgh,
+                    //        0 as unit_price, 0 as gross_amt
+                    //        from order_item a,product b, stock sk 
+                    //        where a.product_code =b.product_code
+                    //        and a.order_no =@order_no 
+                    //        and a.order_no = sk.ref_document_no 
+                    //        and a.product_code = sk.product_code 
+                    //        and sk.ref_document_type ='SO'  
+                    //        order by sk.stock_item asc ";
+                    sql = @"select a.seq as seq, 
+                                  a.product_code, 
+                                  b.product_name,
+                                  '' as sale_unit_method,
+                                  a.unload_qty as qty,
+                                  a.unload_wgh as wgh,
+                                  0 as unit_price, 
+                                  0 as gross_amt
+                            from order_item a,product b 
+                            where a.product_code =b.product_code  
+                                  and a.order_no =@order_no   
+                                  order by a.seq asc "; 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("order_no", orderNo);
                     

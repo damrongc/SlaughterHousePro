@@ -32,18 +32,24 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.gv = new System.Windows.Forms.DataGridView();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Print = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cboCustomer = new System.Windows.Forms.ComboBox();
             this.dtpRequestDate = new System.Windows.Forms.DateTimePicker();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.gv = new System.Windows.Forms.DataGridView();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.gvDt = new System.Windows.Forms.DataGridView();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.OrderNo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -76,7 +82,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.gv);
+            this.panel1.Controls.Add(this.panel5);
+            this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -86,41 +93,6 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(6);
             this.panel1.Size = new System.Drawing.Size(1380, 730);
             this.panel1.TabIndex = 3;
-            // 
-            // gv
-            // 
-            this.gv.AllowUserToAddRows = false;
-            this.gv.AllowUserToDeleteRows = false;
-            this.gv.AllowUserToResizeColumns = false;
-            this.gv.AllowUserToResizeRows = false;
-            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.gv.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.gv.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Edit,
-            this.Print});
-            this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gv.Location = new System.Drawing.Point(6, 68);
-            this.gv.Name = "gv";
-            this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(1368, 656);
-            this.gv.TabIndex = 8;
-            // 
-            // Edit
-            // 
-            this.Edit.HeaderText = "แก้ไข";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.Name = "Edit";
-            this.Edit.Width = 58;
-            // 
-            // Print
-            // 
-            this.Print.HeaderText = "พิมพ์";
-            this.Print.Image = ((System.Drawing.Image)(resources.GetObject("Print.Image")));
-            this.Print.Name = "Print";
-            this.Print.Width = 58;
             // 
             // panel3
             // 
@@ -189,6 +161,76 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "ลูกค้า:";
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.gv);
+            this.panel4.Location = new System.Drawing.Point(6, 67);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1368, 364);
+            this.panel4.TabIndex = 9;
+            // 
+            // gv
+            // 
+            this.gv.AllowUserToAddRows = false;
+            this.gv.AllowUserToDeleteRows = false;
+            this.gv.AllowUserToResizeColumns = false;
+            this.gv.AllowUserToResizeRows = false;
+            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gv.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.gv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Edit,
+            this.OrderNo});
+            this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gv.Location = new System.Drawing.Point(0, 0);
+            this.gv.Name = "gv";
+            this.gv.RowHeadersWidth = 10;
+            this.gv.Size = new System.Drawing.Size(1368, 364);
+            this.gv.TabIndex = 9;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.gvDt);
+            this.panel5.Location = new System.Drawing.Point(6, 433);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1368, 294);
+            this.panel5.TabIndex = 10;
+            // 
+            // gvDt
+            // 
+            this.gvDt.AllowUserToAddRows = false;
+            this.gvDt.AllowUserToDeleteRows = false;
+            this.gvDt.AllowUserToResizeColumns = false;
+            this.gvDt.AllowUserToResizeRows = false;
+            this.gvDt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gvDt.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvDt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvDt.Location = new System.Drawing.Point(0, 0);
+            this.gvDt.Name = "gvDt";
+            this.gvDt.RowHeadersWidth = 10;
+            this.gvDt.Size = new System.Drawing.Size(1368, 294);
+            this.gvDt.TabIndex = 10;
+            // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "แก้ไข";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.Name = "Edit";
+            this.Edit.Width = 58;
+            // 
+            // OrderNo
+            // 
+            this.OrderNo.DataPropertyName = "OrderNo";
+            this.OrderNo.HeaderText = "ใบสั่งขาย";
+            this.OrderNo.Name = "OrderNo";
+            this.OrderNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.OrderNo.Width = 90;
+            // 
             // Form_Order
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -200,9 +242,12 @@
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Form_Farm";
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
+            this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -215,11 +260,14 @@
         private System.Windows.Forms.Button BtnSearch;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataGridView gv;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpRequestDate;
         private System.Windows.Forms.ComboBox cboCustomer;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.DataGridView gv;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.DataGridView gvDt;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
-        private System.Windows.Forms.DataGridViewImageColumn Print;
+        private System.Windows.Forms.DataGridViewLinkColumn OrderNo;
     }
 }

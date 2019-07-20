@@ -1,6 +1,7 @@
 ﻿using SlaughterHouseLib;
 using SlaughterHouseLib.Models;
 using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
@@ -26,7 +27,15 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
-             
+
+            gvDt.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            gvDt.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
+            gvDt.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
+            gvDt.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            gvDt.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            gvDt.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
+            gvDt.EnableHeadersVisualStyles = false;
+
             LoadCustomer();
             LoadOrder();
         }
@@ -41,14 +50,11 @@ namespace SlaughterHouseServer
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-
+                string orderNo =   gv.Rows[e.RowIndex].Cells["OrderNo"].Value.ToString();
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
-                {
-                    string orderNo = gv.Rows[e.RowIndex].Cells[2].Value.ToString();
-
+                { 
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
                     {
-
                         case "Edit":
                             var frm = new Form_OrderAddEdit
                             {
@@ -62,7 +68,10 @@ namespace SlaughterHouseServer
                         case "Print":
                             break;
                     }
-
+                }
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewLinkColumn)
+                {
+                    LoadItem(orderNo);
                 }
             }
             catch (Exception ex)
@@ -87,7 +96,6 @@ namespace SlaughterHouseServer
 
         private void LoadCustomer()
         {
-
             var coll = CustomerController.GetAllCustomers();
             coll.Insert(0, new Customer
             {
@@ -105,13 +113,43 @@ namespace SlaughterHouseServer
             var coll = OrderController.GetAllOrders(dtpRequestDate.Value, cboCustomer.SelectedValue.ToString());
             gv.DataSource = coll;
 
-            gv.Columns[2].HeaderText = "เลขที่ใบสั่งขาย";
-            gv.Columns[3].HeaderText = "วันที่ต้องการสินค้า";
-            gv.Columns[4].HeaderText = "ลูกค้า";
-            gv.Columns[5].HeaderText = "ใช้งาน";
-            gv.Columns[6].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[7].HeaderText = "ผู้สร้าง";
-            
+            gv.Columns[1].HeaderText = "เลขที่ใบสั่งขาย";
+            gv.Columns[2].HeaderText = "วันที่ต้องการสินค้า";
+            gv.Columns[3].HeaderText = "ลูกค้า";
+
+            gv.Columns[4].HeaderText = "หมายเหตุ";
+            gv.Columns[5].HeaderText = "สถานะ";
+            gv.Columns[6].HeaderText = "สถานะออกใบแจ้งหนี้";
+
+            gv.Columns[7].HeaderText = "ใช้งาน";
+            gv.Columns[8].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[9].HeaderText = "ผู้สร้าง"; 
+
+            LoadItem("");
+        }
+        private void LoadItem(string orderNo)
+        {
+            DataTable dtOrderItem = new DataTable("ORDER_ITEM");
+            dtOrderItem = OrderItemController.GetOrderItems(orderNo); 
+ 
+            gvDt.DataSource = dtOrderItem;
+
+            gvDt.Columns[0].HeaderText = "ลำดับ";
+            gvDt.Columns[1].HeaderText = "รหัสสินค้า";
+            gvDt.Columns[2].HeaderText = "สินค้า";
+            gvDt.Columns[3].HeaderText = "จำนวนใบสั่งขาย";
+            gvDt.Columns[4].HeaderText = "น้ำหนักใบสั่งขาย";
+            gvDt.Columns[5].HeaderText = "จำนวนจ่าย";
+            gvDt.Columns[6].HeaderText = "น้ำหนักจ่าย";
+
+            gvDt.Columns[1].Visible  = false ;
+
+            gvDt.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
         }
     }
 }

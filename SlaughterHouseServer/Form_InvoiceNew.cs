@@ -104,20 +104,24 @@ namespace SlaughterHouseServer
                             break; 
                     } 
                 }
-                else
-                {
-                    try
-                    {
-                        if (gv.Rows.Count > 0)
-                        {
-                            LoadDataDetail();
-                        }
-                    }
-                    catch (System.Exception ex)
-                    {
+                //else
+                //{
+                //    try
+                //    {
+                //        if (gv.Rows.Count > 0)
+                //        {
+                //            LoadDataDetail();
+                //        }
+                //    }
+                //    catch (System.Exception ex)
+                //    {
 
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    } 
+                //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    } 
+                //}
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewLinkColumn)
+                { 
+                    LoadDataDetail(gv.Rows[gv.CurrentCell.RowIndex].Cells[1].Value.ToString());
                 }
             }
             catch (Exception ex)
@@ -126,41 +130,43 @@ namespace SlaughterHouseServer
             }
             
         }
-#endregion
+        #endregion
 
+         
         private void LoadData()
         {
             var coll = OrderController.GetOrderReadyToSell(this.requestDate, this.customerCode);
             gv.DataSource = coll;
 
-            gv.Columns[2].HeaderText = "เลขที่ใบสั่งขาย";
-            gv.Columns[3].HeaderText = "วันที่ต้องการสินค้า";
-            gv.Columns[4].HeaderText = "ลูกค้า";
-            gv.Columns[5].HeaderText = "ใช้งาน";
-            gv.Columns[6].HeaderText = "ผู้สร้าง";
-
-            gv.Columns[5].Visible = false;
+            gv.Columns[1].HeaderText = "เลขที่ใบสั่งขาย";
+            gv.Columns[2].HeaderText = "วันที่ต้องการสินค้า";
+            gv.Columns[3].HeaderText = "ลูกค้า";
+            gv.Columns[4].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[5].HeaderText = "ผู้สร้าง";
+             
             if (gv.Rows.Count > 0)
             {
-                LoadDataDetail();
+                LoadDataDetail("");
             }
         }
-        private void LoadDataDetail()
+        private void LoadDataDetail(string orderNo)
         { 
-            DataTable d = new DataTable();
-            d = OrderItemController.GetOrderItemReadyToSell(gv.Rows[gv.CurrentCell.RowIndex].Cells[1].Value.ToString());
-            gvDt.DataSource = d;
-            gvDt.Columns[1].HeaderText = "ลำดับ";
-            gvDt.Columns[2].HeaderText = "รหัสสินค้า"; 
-            gvDt.Columns[3].HeaderText = "ชื่อสินค้า";
-            gvDt.Columns[4].HeaderText = "หน่วยคำนวณ";
-            gvDt.Columns[5].HeaderText = "ปริมาณ";
-            gvDt.Columns[6].HeaderText = "น้ำหนัก"; 
-            gvDt.Columns[0].Visible = false;
-            gvDt.Columns[2].Visible = false;
-            gvDt.Columns[4].Visible = false;
+            DataTable dt = new DataTable();
+            dt = OrderItemController.GetOrderItemReadyToSell(orderNo);
+            gvDt.DataSource = dt;
+            gvDt.Columns[0].HeaderText = "ลำดับ";
+            gvDt.Columns[1].HeaderText = "รหัสสินค้า"; 
+            gvDt.Columns[2].HeaderText = "ชื่อสินค้า";
+            gvDt.Columns[3].HeaderText = "หน่วยคำนวณ";
+            gvDt.Columns[4].HeaderText = "ปริมาณ";
+            gvDt.Columns[5].HeaderText = "น้ำหนัก";
+            gvDt.Columns[6].HeaderText = "ราคาต่อหน่วย";
+            gvDt.Columns[7].HeaderText = "ราคา";
+            
+            gvDt.Columns[1].Visible = false;
+            gvDt.Columns[3].Visible = false;
+            gvDt.Columns[6].Visible = false;
             gvDt.Columns[7].Visible = false;
-            gvDt.Columns[8].Visible = false;
         } 
     }
 }

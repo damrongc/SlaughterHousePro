@@ -36,7 +36,6 @@ namespace SlaughterHouseServer
         {
             for (int i = 0; i < gv.Rows.Count; i++)
             {
-
                 //string status = gv.Rows[i].Cells[15].Value.ToString();
                 //switch (status)
                 //{
@@ -50,9 +49,7 @@ namespace SlaughterHouseServer
                 //        gv.Rows[i].Cells[15].Style.BackColor = ColorTranslator.FromHtml("#219653");
                 //        break;
 
-                //}
-
-
+                //} 
             }
         }
 
@@ -76,12 +73,10 @@ namespace SlaughterHouseServer
                             MessageBox.Show("ปิดคิว เรียบร้อยแล้ว", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                     }
-
                 }
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -94,7 +89,6 @@ namespace SlaughterHouseServer
 
         private void LoadFarm()
         {
-
             var coll = FarmController.GetAllFarms();
             coll.Insert(0, new Farm
             {

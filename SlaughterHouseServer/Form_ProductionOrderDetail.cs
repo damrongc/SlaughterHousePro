@@ -35,9 +35,9 @@ namespace SlaughterHouseServer
             if (!string.IsNullOrEmpty(this.productCode))
             { 
                 cboProduct.SelectedValue = this.productCode;
-                txtQty.Text = this.qty.ToString();
-                txtWgh.Text = this.wgh.ToString(); 
             }
+            txtQty.Text = this.qty.ToString();
+            txtWgh.Text = this.wgh.ToString();
         }
         private void CboProduct_KeyDown(object sender, KeyEventArgs e)
         {
