@@ -9,11 +9,11 @@ using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_InvoiceReport : Form
+    public partial class Form_Report_Stock_Movement : Form
     {
         public string invoiceNo { get; set; } 
          
-        public Form_InvoiceReport()
+        public Form_Report_Stock_Movement()
         {
             InitializeComponent();
             UserSettingsComponent();
@@ -23,21 +23,29 @@ namespace SlaughterHouseServer
             //BtnRefresh.Click += BtnRefresh_Click;
             this.Load += Form_Load;
             this.Shown += Form_Shown;
+
+            this.BtnShowReport.Click += BtnShowReport_Click;
         }
+
+        private void BtnShowReport_Click(object sender, EventArgs e)
+        { 
+            LoadReport();
+        }
+
         private void Form_Shown(object sender, System.EventArgs e)
         {
              
         }
         private void Form_Load(object sender, System.EventArgs e)
         { 
-            LoadReport();
+           
         }
          
         private void LoadReport()
         {
             ReportDocument doc = new ReportDocument();
-            DataSet ds = InvoiceController.GetDataPrintInvoice(invoiceNo); 
-            string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\invoice")); 
+            DataSet ds = ReportController.GetDataReportStockMovement(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
+            string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\stockmovement"));
 
             ds.WriteXml(path + ".xml", XmlWriteMode.WriteSchema);
             doc.Load(path + ".rpt");

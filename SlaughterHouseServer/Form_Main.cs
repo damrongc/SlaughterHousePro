@@ -65,6 +65,9 @@ namespace SlaughterHouseServer
                 case "BtnInvoice":
                     AddFormToContainer(new Form_Invoice());
                     break;
+                case "BtnReport":
+                    AddFormToContainer(new Form_Report());
+                    break;
             }
         }
 
@@ -90,8 +93,7 @@ namespace SlaughterHouseServer
 
             //fh.WindowState = FormWindowState.Maximized;
             //this.plContainer.Tag = fh;
-            fh.Show();
-
+            fh.Show(); 
         }
     }
 }

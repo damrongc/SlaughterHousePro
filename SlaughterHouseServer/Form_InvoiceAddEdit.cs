@@ -334,12 +334,19 @@ namespace SlaughterHouseServer
             gv.Columns[2].HeaderText = "ชื่อสินค้า";
             gv.Columns[3].HeaderText = "หน่วยคำนวณ";
             gv.Columns[4].HeaderText = "ปริมาณ";
-            gv.Columns[5].HeaderText = "น้้ำหนัก";
-            gv.Columns[6].HeaderText = "ราคาต่อหน่วย";
-            gv.Columns[7].HeaderText = "ราคา";
+            gv.Columns[5].HeaderText = "น้ำหนัก";
+            gv.Columns[6].HeaderText = "ปริมาณจ่าย";
+            gv.Columns[7].HeaderText = "น้ำหนักจ่าย";
+            gv.Columns[8].HeaderText = "ราคาต่อหน่วย";
+            gv.Columns[9].HeaderText = "ราคา";
+
+
 
             gv.Columns[0].Visible = false;           
             gv.Columns[1].Visible = false;
+            gv.Columns[4].Visible = false;
+            gv.Columns[5].Visible = false;
+
         }
         private void Calculate_Total()
         {

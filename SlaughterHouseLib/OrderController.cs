@@ -477,6 +477,8 @@ namespace SlaughterHouseLib
                                   a.product_code, 
                                   b.product_name,
                                   '' as sale_unit_method,
+                                  a.order_qty as order_qty,
+                                  a.order_wgh as order_wgh,
                                   a.unload_qty as qty,
                                   a.unload_wgh as wgh,
                                   0 as unit_price, 

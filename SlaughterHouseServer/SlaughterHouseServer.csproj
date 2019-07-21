@@ -73,6 +73,24 @@
     <Compile Include="Form_CustomerAddEdit.Designer.cs">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Report_Stock_Movement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Report_Stock_Movement.Designer.cs">
+      <DependentUpon>Form_Report_Stock_Movement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Report_Daily_Sales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Report_Daily_Sales.Designer.cs">
+      <DependentUpon>Form_Report_Daily_Sales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Report.Designer.cs">
+      <DependentUpon>Form_Report.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Invoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +242,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_CustomerAddEdit.resx">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Report_Stock_Movement.resx">
+      <DependentUpon>Form_Report_Stock_Movement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Report_Daily_Sales.resx">
+      <DependentUpon>Form_Report_Daily_Sales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Report.resx">
+      <DependentUpon>Form_Report.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Invoice.resx">
       <DependentUpon>Form_Invoice.cs</DependentUpon>
