@@ -19,6 +19,16 @@ namespace SlaughterHouseServer
             btnReportDailySales.Click += BtnReportDailySales_Click;
             btnReportStockMovement.Click += BtnReportStockMovement_Click;
             btnReportSoWithInv.Click += BtnReportSoWithInv_Click;
+            btnStockBalance.Click += BtnStockBalance_Click;
+        }
+
+        private void BtnStockBalance_Click(object sender, EventArgs e)
+        {
+            var frm = new Form_Report_Stock_Balance
+            {
+
+            };
+            frm.ShowDialog();
         }
 
         private void BtnReportSoWithInv_Click(object sender, EventArgs e)

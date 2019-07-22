@@ -48,8 +48,8 @@
     <transaction_type>1</transaction_type>
     <location_name>ลานพักหมูเป็น</location_name>
     <description>เอกสารรับหมูเป็น</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>รับ</transaction_type_name>
   </Table>
   <Table>
@@ -68,8 +68,8 @@
     <transaction_type>2</transaction_type>
     <location_name>ลานพักหมูเป็น</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>จ่าย</transaction_type_name>
   </Table>
   <Table>
@@ -88,8 +88,8 @@
     <transaction_type>2</transaction_type>
     <location_name>ลานพักหมูเป็น</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>จ่าย</transaction_type_name>
   </Table>
   <Table>
@@ -108,8 +108,8 @@
     <transaction_type>1</transaction_type>
     <location_name>ห้องเย็นเก็บหมุซีก</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>รับ</transaction_type_name>
   </Table>
   <Table>
@@ -128,8 +128,8 @@
     <transaction_type>2</transaction_type>
     <location_name>ห้องเย็นเก็บหมุซีก</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>จ่าย</transaction_type_name>
   </Table>
   <Table>
@@ -148,13 +148,13 @@
     <transaction_type>2</transaction_type>
     <location_name>ห้องเย็นเก็บหมุซีก</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>จ่าย</transaction_type_name>
   </Table>
   <Table>
     <stock_date>2019-06-12T00:00:00+07:00</stock_date>
-    <stock_no>STK00000011.2</stock_no>
+    <stock_no>STK0000002.2</stock_no>
     <stock_item>1</stock_item>
     <product_code>P002</product_code>
     <product_name>หมูซีก</product_name>
@@ -168,8 +168,8 @@
     <transaction_type>1</transaction_type>
     <location_name>ห้องเย็นเก็บหมุซีก</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>รับ</transaction_type_name>
   </Table>
   <Table>
@@ -188,8 +188,8 @@
     <transaction_type>2</transaction_type>
     <location_name>ห้องเย็นเก็บหมุซีก</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>จ่าย</transaction_type_name>
   </Table>
   <Table>
@@ -208,8 +208,8 @@
     <transaction_type>1</transaction_type>
     <location_name>ห้องเย็นเก็บเครื่องในแดง</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>รับ</transaction_type_name>
   </Table>
   <Table>
@@ -228,8 +228,8 @@
     <transaction_type>1</transaction_type>
     <location_name>ห้องเย็นเก็บเครื่องในแดง</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>รับ</transaction_type_name>
   </Table>
   <Table>
@@ -248,8 +248,8 @@
     <transaction_type>1</transaction_type>
     <location_name>ห้องเก็บชิ้นส่วน1</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>รับ</transaction_type_name>
   </Table>
   <Table>
@@ -268,8 +268,27 @@
     <transaction_type>1</transaction_type>
     <location_name>ห้องเก็บชิ้นส่วน1</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-06-07T00:00:00+07:00</stock_date>
+    <stock_no>STK0000007</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P007</product_code>
+    <product_name>คอหมู</product_name>
+    <stock_qty>200</stock_qty>
+    <stock_wgh>700.00</stock_wgh>
+    <ref_document_type />
+    <ref_document_no />
+    <lot_no>11917912206</lot_no>
+    <location_code>5</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บชิ้นส่วน1</location_name>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>รับ</transaction_type_name>
   </Table>
   <Table>
@@ -288,8 +307,8 @@
     <transaction_type>1</transaction_type>
     <location_name>ห้องเก็บชิ้นส่วน1</location_name>
     <description>เอกสารเบิก</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>รับ</transaction_type_name>
   </Table>
   <Table>
@@ -308,28 +327,9 @@
     <transaction_type>2</transaction_type>
     <location_name>ห้องเก็บชิ้นส่วน1</location_name>
     <description>เอกสาร sales order</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>จ่าย</transaction_type_name>
-  </Table>
-  <Table>
-    <stock_date>2019-06-07T00:00:00+07:00</stock_date>
-    <stock_no>STK0000007</stock_no>
-    <stock_item>1</stock_item>
-    <product_code>P007</product_code>
-    <product_name>คอหมู</product_name>
-    <stock_qty>200</stock_qty>
-    <stock_wgh>700.00</stock_wgh>
-    <ref_document_type />
-    <ref_document_no />
-    <lot_no>11917912206</lot_no>
-    <location_code>5</location_code>
-    <barcode_no>0</barcode_no>
-    <transaction_type>1</transaction_type>
-    <location_name>ห้องเก็บชิ้นส่วน1</location_name>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
-    <transaction_type_name>รับ</transaction_type_name>
   </Table>
   <Table>
     <stock_date>2019-06-15T00:00:00+07:00</stock_date>
@@ -347,8 +347,8 @@
     <transaction_type>2</transaction_type>
     <location_name>ห้องเก็บชิ้นส่วน1</location_name>
     <description>เอกสาร sales order</description>
-    <date_str>01-06-2019</date_str>
-    <date_end>23-07-2019</date_end>
+    <date_str>01-25-2019</date_str>
+    <date_end>21-25-2019</date_end>
     <transaction_type_name>จ่าย</transaction_type_name>
   </Table>
 </NewDataSet>

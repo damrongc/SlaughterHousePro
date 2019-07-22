@@ -1,0 +1,106 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="product_code" type="xs:string" minOccurs="0" />
+                <xs:element name="product_name" type="xs:string" minOccurs="0" />
+                <xs:element name="qty_in" type="xs:decimal" minOccurs="0" />
+                <xs:element name="wgh_in" type="xs:decimal" minOccurs="0" />
+                <xs:element name="qty_out" type="xs:decimal" minOccurs="0" />
+                <xs:element name="wgh_out" type="xs:decimal" minOccurs="0" />
+                <xs:element name="qty_cf" type="xs:long" minOccurs="0" />
+                <xs:element name="wgh_cf" type="xs:long" minOccurs="0" />
+                <xs:element name="lot_no" type="xs:string" minOccurs="0" />
+                <xs:element name="unit_name" type="xs:string" minOccurs="0" />
+                <xs:element name="show_date_period" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <product_code>P001</product_code>
+    <product_name>หมูเป็น</product_name>
+    <qty_in>500</qty_in>
+    <wgh_in>5000.00</wgh_in>
+    <qty_out>500</qty_out>
+    <wgh_out>0.00</wgh_out>
+    <qty_cf>0</qty_cf>
+    <wgh_cf>5000</wgh_cf>
+    <lot_no>11917912206</lot_no>
+    <unit_name>ตัว</unit_name>
+    <show_date_period>25-06-2019</show_date_period>
+  </Table>
+  <Table>
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
+    <qty_in>1000</qty_in>
+    <wgh_in>8800.00</wgh_in>
+    <qty_out>310</qty_out>
+    <wgh_out>3200.00</wgh_out>
+    <qty_cf>690</qty_cf>
+    <wgh_cf>5600</wgh_cf>
+    <lot_no>11917912206</lot_no>
+    <unit_name>ซีก</unit_name>
+    <show_date_period>25-06-2019</show_date_period>
+  </Table>
+  <Table>
+    <product_code>P003</product_code>
+    <product_name>หัว</product_name>
+    <qty_in>250</qty_in>
+    <wgh_in>1700.00</wgh_in>
+    <qty_out>0</qty_out>
+    <wgh_out>0.00</wgh_out>
+    <qty_cf>250</qty_cf>
+    <wgh_cf>1700</wgh_cf>
+    <lot_no>11917912206</lot_no>
+    <unit_name>ตัว</unit_name>
+    <show_date_period>25-06-2019</show_date_period>
+  </Table>
+  <Table>
+    <product_code>P004</product_code>
+    <product_name>เครื่องใน</product_name>
+    <qty_in>1000</qty_in>
+    <wgh_in>9000.00</wgh_in>
+    <qty_out>0</qty_out>
+    <wgh_out>0.00</wgh_out>
+    <qty_cf>1000</qty_cf>
+    <wgh_cf>9000</wgh_cf>
+    <lot_no>11917912206</lot_no>
+    <unit_name>ตัว</unit_name>
+    <show_date_period>25-06-2019</show_date_period>
+  </Table>
+  <Table>
+    <product_code>P006</product_code>
+    <product_name>ขา</product_name>
+    <qty_in>330</qty_in>
+    <wgh_in>2280.00</wgh_in>
+    <qty_out>300</qty_out>
+    <wgh_out>1300.00</wgh_out>
+    <qty_cf>30</qty_cf>
+    <wgh_cf>980</wgh_cf>
+    <lot_no>11917912206</lot_no>
+    <unit_name>ชิ้น</unit_name>
+    <show_date_period>25-06-2019</show_date_period>
+  </Table>
+  <Table>
+    <product_code>P007</product_code>
+    <product_name>คอหมู</product_name>
+    <qty_in>200</qty_in>
+    <wgh_in>700.00</wgh_in>
+    <qty_out>52</qty_out>
+    <wgh_out>108.00</wgh_out>
+    <qty_cf>148</qty_cf>
+    <wgh_cf>592</wgh_cf>
+    <lot_no>11917912206</lot_no>
+    <unit_name>ชิ้น</unit_name>
+    <show_date_period>25-06-2019</show_date_period>
+  </Table>
+</NewDataSet>

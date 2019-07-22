@@ -61,7 +61,6 @@ namespace SlaughterHouseLib
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
                                 }).ToList();
-
                     return coll;
                 }
             }

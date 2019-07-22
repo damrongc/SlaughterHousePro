@@ -36,9 +36,9 @@
             this.btnReportDailySales = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.btnReportSoWithInv = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn1 = new System.Windows.Forms.Button();
             this.btnReportStockMovement = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnStockBalance = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -81,9 +81,9 @@
             this.groupBox1.Controls.Add(this.btnReportDailySales);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.btnReportSoWithInv);
-            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.btn1);
             this.groupBox1.Controls.Add(this.btnReportStockMovement);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.btnStockBalance);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
@@ -133,15 +133,15 @@
             this.btnReportSoWithInv.Text = "รายงานเปรียบเทียบใบสั่งขายกับใบแจ้งหนี้";
             this.btnReportSoWithInv.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btn1
             // 
-            this.button3.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.button3.Location = new System.Drawing.Point(318, 414);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(666, 59);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "report xxx";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btn1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btn1.Location = new System.Drawing.Point(318, 414);
+            this.btn1.Name = "btn1";
+            this.btn1.Size = new System.Drawing.Size(666, 59);
+            this.btn1.TabIndex = 3;
+            this.btn1.Text = "report xxx";
+            this.btn1.UseVisualStyleBackColor = false;
             // 
             // btnReportStockMovement
             // 
@@ -153,15 +153,15 @@
             this.btnReportStockMovement.Text = "รายงานเคลื่อนไหวสต็อก";
             this.btnReportStockMovement.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btnStockBalance
             // 
-            this.button2.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.button2.Location = new System.Drawing.Point(318, 326);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(666, 59);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "report xxx";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnStockBalance.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnStockBalance.Location = new System.Drawing.Point(318, 326);
+            this.btnStockBalance.Name = "btnStockBalance";
+            this.btnStockBalance.Size = new System.Drawing.Size(666, 59);
+            this.btnStockBalance.TabIndex = 1;
+            this.btnStockBalance.Text = "รายงานสต็อกคงเหลือ";
+            this.btnStockBalance.UseVisualStyleBackColor = false;
             // 
             // Form_Report
             // 
@@ -189,8 +189,8 @@
         private System.Windows.Forms.Button btnReportDailySales;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button btnReportSoWithInv;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.Button btnReportStockMovement;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnStockBalance;
     }
 }

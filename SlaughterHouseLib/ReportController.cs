@@ -69,14 +69,12 @@ namespace SlaughterHouseLib
                                 ";
                     //'2019-07-01 00:00:00' AND '2019-07-21 23:59:59'
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("invoice_date_str", invoiceDateStr);
-                    cmd.Parameters.AddWithValue("invoice_date_end", invoiceDateEnd);
+                    cmd.Parameters.AddWithValue("invoice_date_str", invoiceDateStr.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("invoice_date_end", invoiceDateEnd.ToString("yyyy-MM-dd"));
 
-                    cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd/mm/yyyy"));
-                    cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd/mm/yyyy"));
-
+                    cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd-MM-yyyy"));
+                    cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd-MM-yyyy"));
                     var da = new MySqlDataAdapter(cmd);
-
                     var ds = new DataSet();
                     da.Fill(ds);
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
@@ -135,17 +133,17 @@ namespace SlaughterHouseLib
                                     location lo ON sk.location_code = lo.location_code
                                         LEFT JOIN
                                     document_generate dc ON sk.ref_document_type = dc.document_type
-                                
-                                "; //WHERE sk.stock_date BETWEEN @date_str AND @date_end
-                    var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("date_str", invoiceDateStr);
-                    cmd.Parameters.AddWithValue("date_end", invoiceDateEnd);
-
-                    cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd/mm/yyyy"));
-                    cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd/mm/yyyy"));
-
+                                WHERE sk.stock_date >= @date_str 
+                                    AND sk.stock_date <= @date_end 
+                                ";
+                    // WHERE sk.stock_date BETWEEN @date_str AND @date_end
+                    // AND sk.stock_date <= @date_end
+                    var cmd = new MySqlCommand(sql, conn); 
+                    cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd-MM-yyyy"));
+                    cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd-MM-yyyy"));
+                    cmd.Parameters.AddWithValue("date_str", invoiceDateStr.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("date_end", invoiceDateEnd.ToString("yyyy-MM-dd"));
                     var da = new MySqlDataAdapter(cmd);
-
                     var ds = new DataSet();
                     da.Fill(ds);
             
@@ -158,6 +156,84 @@ namespace SlaughterHouseLib
             }
         }
 
+        public static DataSet GetDataReportStockBalance(DateTime invoiceDatePeriod)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"SELECT
+	                                sk.product_code,
+	                                p.product_name,
+	                                sum(case when sk.transaction_type = 1 then sk.stock_qty else 0 end) as qty_in,
+	                                sum(case when sk.transaction_type = 1 then sk.stock_wgh else 0 end) as wgh_in, 
+	                                sum(case when sk.transaction_type = 2 then sk.stock_qty else 0 end) as qty_out,
+	                                sum(case when sk.transaction_type = 2 then sk.stock_wgh else 0 end) as wgh_out,     
+                                    0 as qty_cf,
+                                    0 as wgh_cf,
+	                                sk.lot_no, 
+                                    u.unit_name,
+	                                @show_date_period as show_date_period 
+                                FROM
+	                                stock sk,
+                                    product p,
+	                                unit_of_measurement u
+                                where 1=1
+                                and DATE_FORMAT(sk.stock_date, '%Y-%m-01') = DATE_FORMAT(@date_period, '%Y-%m-01') 
+                                and sk.product_code = p.product_code 
+                                and u.unit_code = p.unit_of_qty 
+                                group by sk.product_code,
+	                                p.product_name, 
+	                                sk.lot_no
+                                ";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("date_period", invoiceDatePeriod.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("show_date_period", invoiceDatePeriod.ToString("dd-MM-yyyy")); 
+                    var da = new MySqlDataAdapter(cmd);
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    { 
+                            ds.Tables[0].Rows[i]["qty_cf"] = Convert.ToDecimal( ds.Tables[0].Rows[i]["qty_in"]) - Convert.ToDecimal(ds.Tables[0].Rows[i]["qty_out"]); 
+                            ds.Tables[0].Rows[i]["wgh_cf"] = Convert.ToDecimal( ds.Tables[0].Rows[i]["wgh_in"]) - Convert.ToDecimal(ds.Tables[0].Rows[i]["wgh_out"]);  
+                    }
+                    return ds;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static DataSet GetDataReportSoWithInv(DateTime invoiceDateStr, DateTime invoiceDateEnd)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @" 
+                                ";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("invoice_date_str", invoiceDateStr.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("invoice_date_end", invoiceDateEnd.ToString("yyyy-MM-dd"));
+
+                    cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd-MM-yyyy"));
+                    cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd-MM-yyyy"));
+                    var da = new MySqlDataAdapter(cmd);
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    return ds;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
 
