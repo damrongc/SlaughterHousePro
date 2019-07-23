@@ -174,7 +174,7 @@ namespace SlaughterHouseLib
                                     0 as wgh_cf,
 	                                sk.lot_no, 
                                     u.unit_name,
-	                                @show_date_period as show_date_period 
+	                                DATE_FORMAT(@date_period, '%m-%Y')  as show_date_period 
                                 FROM
 	                                stock sk,
                                     product p,

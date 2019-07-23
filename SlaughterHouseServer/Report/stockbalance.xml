@@ -36,7 +36,7 @@
     <wgh_cf>5000</wgh_cf>
     <lot_no>11917912206</lot_no>
     <unit_name>ตัว</unit_name>
-    <show_date_period>12-06-2019</show_date_period>
+    <show_date_period>06-2019</show_date_period>
   </Table>
   <Table>
     <product_code>P002</product_code>
@@ -49,7 +49,7 @@
     <wgh_cf>5600</wgh_cf>
     <lot_no>11917912206</lot_no>
     <unit_name>ซีก</unit_name>
-    <show_date_period>12-06-2019</show_date_period>
+    <show_date_period>06-2019</show_date_period>
   </Table>
   <Table>
     <product_code>P003</product_code>
@@ -62,7 +62,7 @@
     <wgh_cf>1700</wgh_cf>
     <lot_no>11917912206</lot_no>
     <unit_name>ตัว</unit_name>
-    <show_date_period>12-06-2019</show_date_period>
+    <show_date_period>06-2019</show_date_period>
   </Table>
   <Table>
     <product_code>P004</product_code>
@@ -75,7 +75,7 @@
     <wgh_cf>9000</wgh_cf>
     <lot_no>11917912206</lot_no>
     <unit_name>ตัว</unit_name>
-    <show_date_period>12-06-2019</show_date_period>
+    <show_date_period>06-2019</show_date_period>
   </Table>
   <Table>
     <product_code>P006</product_code>
@@ -88,7 +88,7 @@
     <wgh_cf>980</wgh_cf>
     <lot_no>11917912206</lot_no>
     <unit_name>ชิ้น</unit_name>
-    <show_date_period>12-06-2019</show_date_period>
+    <show_date_period>06-2019</show_date_period>
   </Table>
   <Table>
     <product_code>P007</product_code>
@@ -101,6 +101,6 @@
     <wgh_cf>592</wgh_cf>
     <lot_no>11917912206</lot_no>
     <unit_name>ชิ้น</unit_name>
-    <show_date_period>12-06-2019</show_date_period>
+    <show_date_period>06-2019</show_date_period>
   </Table>
 </NewDataSet>
