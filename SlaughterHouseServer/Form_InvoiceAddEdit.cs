@@ -164,7 +164,7 @@ namespace SlaughterHouseServer
         }
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-
+            
         }
         #endregion
 
@@ -296,7 +296,7 @@ namespace SlaughterHouseServer
             {
                 dtInvoiceItem = new DataTable("INVOICE_ITEM");
                 dtInvoiceItem = OrderItemController.GetOrderItemReadyToSell(this.orderNo);
-
+ 
                 if (dtInvoiceItem.Rows.Count > 0)
                 {
                     ProductPrice productPrice;
@@ -322,6 +322,7 @@ namespace SlaughterHouseServer
                     gv.Refresh();
                 }
                 Calculate_Total();
+
             }
             else
             {

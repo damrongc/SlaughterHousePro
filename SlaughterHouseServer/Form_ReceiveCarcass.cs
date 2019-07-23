@@ -122,7 +122,7 @@ namespace SlaughterHouseServer
             gv.Columns[11].HeaderText = "น้ำหนักฟาร์ม";
             gv.Columns[11].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            gv.Columns[12].HeaderText = "จำนวนรับ";
+             gv.Columns[12].HeaderText = "จำนวนรับ";
             gv.Columns[12].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gv.Columns[13].HeaderText = "น้ำหนักรับ";
             gv.Columns[13].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
