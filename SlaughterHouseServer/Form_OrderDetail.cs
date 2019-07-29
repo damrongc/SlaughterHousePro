@@ -21,10 +21,10 @@ namespace SlaughterHouseServer
             this.Load += Form_Load;
             this.Shown += Form_Shown;
             //KeyDown 
-            txtQtyWgh.KeyDown += TxtQty_KeyDown;
+            txtQtyWgh.KeyDown += TxtQtyWgh_KeyDown;
             cboProduct.KeyDown += CboProduct_KeyDown;
             //KeyPress
-            txtQtyWgh.KeyPress += TxtQty_KeyPress;
+            txtQtyWgh.KeyPress += TxtQtyWgh_KeyPress;
             cboProduct.SelectedIndexChanged += CboProduct_SelectedIndexChanged;
         }
 
@@ -61,7 +61,7 @@ namespace SlaughterHouseServer
                 txtQtyWgh.Focus();
             }
         }
-        private void TxtQty_KeyDown(object sender, KeyEventArgs e)
+        private void TxtQtyWgh_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -69,7 +69,7 @@ namespace SlaughterHouseServer
             }
         }
     
-        private void TxtQty_KeyPress(object sender, KeyPressEventArgs e)
+        private void TxtQtyWgh_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
             {
@@ -114,12 +114,7 @@ namespace SlaughterHouseServer
         {
             Product product = ProductController.GetProduct(productCode);
             this.issueUnitMethod = product.IssueUnitMethod;            
-        }
-
-        private void TxtQtyWgh_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        } 
     }
 }
  

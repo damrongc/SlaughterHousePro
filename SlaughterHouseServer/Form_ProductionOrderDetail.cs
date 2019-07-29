@@ -8,10 +8,10 @@ namespace SlaughterHouseServer
         public string poNo { get; set; }
         public string productCode { get; set; }
         public string productName{ get; set; }
-        public int qty { get; set; }
-        public decimal wgh { get; set; }
-
-        private string SaleUnitMethod;
+        public decimal qtyWgh { get; set; }
+        public int unitCode { get; set; }
+        public string unitName { get; set; }
+        public string issueUnitMethod { get; set; }
 
         public Form_ProductionOrderDetail()
         {
@@ -20,13 +20,10 @@ namespace SlaughterHouseServer
             this.Load += Form_Load;
             this.Shown += Form_Shown;
             //KeyDown 
-            txtQty.KeyDown += TxtQty_KeyDown;
-            txtWgh.KeyDown += TxtWgh_KeyDown;
+            txtQtyWgh.KeyDown += TxtQtyWgh_KeyDown;
             cboProduct.KeyDown += CboProduct_KeyDown;
             //KeyPress
-            txtQty.KeyPress += TxtQty_KeyPress;
-            txtWgh.KeyPress += TxtWgh_KeyPress;
-
+            txtQtyWgh.KeyPress += TxtQtyWgh_KeyPress;
             cboProduct.SelectedIndexChanged += CboProduct_SelectedIndexChanged;
         }
 
@@ -34,9 +31,10 @@ namespace SlaughterHouseServer
         {
             if (String.IsNullOrEmpty(cboProduct.SelectedValue.ToString()) == false)
             {
-                LockControlBySaleUnitMethod(cboProduct.SelectedValue.ToString());
-                txtQty.Text = "0";
-                txtWgh.Text = "0";
+                //LockControlBySaleUnitMethod(cboProduct.SelectedValue.ToString());
+                txtQtyWgh.Text = "0";
+                SetUnitMethod(cboProduct.SelectedValue.ToString());
+                SetUnitName(cboProduct.SelectedValue.ToString());
             }
         }
         private void Form_Shown(object sender, System.EventArgs e)
@@ -47,41 +45,29 @@ namespace SlaughterHouseServer
         {
             LoadProduct();
             if (!string.IsNullOrEmpty(this.productCode))
-            { 
+            {
                 cboProduct.SelectedValue = this.productCode;
+                //LockControlBySaleUnitMethod(this.productCode);
             }
-            txtQty.Text = this.qty.ToString();
-            txtWgh.Text = this.wgh.ToString();
+            txtQtyWgh.Text = this.qtyWgh.ToString();
+            lbUnitName.Text = this.unitName.ToString();
         }
         private void CboProduct_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (this.SaleUnitMethod == "Q")
-                {
-                    txtQty.Focus();
-                }
-                else if (this.SaleUnitMethod == "W")
-                {
-                    txtWgh.Focus();
-                }
+                txtQtyWgh.Focus();
             }
         }
-        private void TxtQty_KeyDown(object sender, KeyEventArgs e)
+        private void TxtQtyWgh_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 btnAddOrderItem.Focus();
             }
         }
-        private void TxtWgh_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnAddOrderItem.Focus();
-            }
-        }
-        private void TxtQty_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void TxtQtyWgh_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
             {
@@ -89,34 +75,22 @@ namespace SlaughterHouseServer
                 return;
             }
         }
-        private void TxtWgh_KeyPress(object sender, KeyPressEventArgs e)
-        { 
-            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
-            {
-                if (e.KeyChar != 46)
-                {
-                    e.Handled = true;
-                    return;
-                } 
-            } 
-        }
+
         private void btnAddOrderItem_Click(object sender, System.EventArgs e)
         {
             try
             {
                 this.productCode = cboProduct.SelectedValue.ToString();
                 this.productName = cboProduct.Text;
-                this.qty = Convert.ToInt32(txtQty.Text);
-                this.wgh = Convert.ToDecimal(txtWgh.Text);
+                this.qtyWgh = Convert.ToDecimal(txtQtyWgh.Text);
+                this.unitName = lbUnitName.Text;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (System.Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
         private void LoadProduct()
         {
@@ -126,22 +100,18 @@ namespace SlaughterHouseServer
             cboProduct.DataSource = coll;
         }
 
-        private void LockControlBySaleUnitMethod(string productCode)
+        private void SetUnitName(string productCode)
+        {
+            Unit unit = UnitController.GetUnitNameOfIssue(productCode);
+            this.unitCode = unit.UnitCode;
+            this.unitName = unit.UnitName;
+            lbUnitName.Text = unit.UnitName;
+        }
+
+        private void SetUnitMethod(string productCode)
         {
             Product product = ProductController.GetProduct(productCode);
-            this.SaleUnitMethod = product.SaleUnitMethod;
-
-            if (product.SaleUnitMethod == "Q")
-            {
-                txtQty.Enabled = true;
-                txtWgh.Enabled = false;
-            }
-            else if (product.SaleUnitMethod == "W")
-            {
-                txtQty.Enabled = false;
-                txtWgh.Enabled = true;
-            }
+            this.issueUnitMethod = product.IssueUnitMethod;
         }
     }
 }
- 

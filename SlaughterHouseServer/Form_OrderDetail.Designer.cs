@@ -79,7 +79,6 @@
             this.txtQtyWgh.Name = "txtQtyWgh";
             this.txtQtyWgh.Size = new System.Drawing.Size(215, 36);
             this.txtQtyWgh.TabIndex = 42;
-            this.txtQtyWgh.TextChanged += new System.EventHandler(this.TxtQtyWgh_TextChanged);
             // 
             // label2
             // 

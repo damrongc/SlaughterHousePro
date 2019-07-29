@@ -209,19 +209,21 @@ namespace SlaughterHouseServer
         { 
             dtOrderItem = new DataTable("ORDER_ITEM");
             dtOrderItem = OrderItemController.GetOrderItems(orderNo);
-         
-            gv.DataSource = dtOrderItem;
-            gv.Columns[2].HeaderText = "ลำดับ";
-            gv.Columns[3].HeaderText = "รหัสสินค้า";
-            gv.Columns[4].HeaderText = "ชื่อสินค้า";
-            gv.Columns[5].HeaderText = "จำนวน";
-            gv.Columns[6].HeaderText = "หน่วยคำนวณ";
-            gv.Columns[7].HeaderText = "รหัสหน่วยสินค้า";
-            gv.Columns[8].HeaderText = "หน่วยสินค้า";
 
-            gv.Columns[2].Visible = false;           
-            gv.Columns[6].Visible = false;
-            gv.Columns[7].Visible = false;
+            gv.DataSource = dtOrderItem;
+            gv.Columns["seq"].HeaderText = "ลำดับ";
+            gv.Columns["product_code"].HeaderText = "รหัสสินค้า";
+            gv.Columns["product_name"].HeaderText = "ชื่อสินค้า";
+            gv.Columns["qty_wgh"].HeaderText = "จำนวน";
+            gv.Columns["issue_unit_method"].HeaderText = "หน่วยคำนวณ";
+            gv.Columns["unit_code"].HeaderText = "รหัสหน่วยสินค้า";
+            gv.Columns["unit_name"].HeaderText = "หน่วยสินค้า";
+
+            gv.Columns["seq"].Visible = false;           
+            gv.Columns["issue_unit_method"].Visible = false;
+            gv.Columns["unit_code"].Visible = false;
+            gv.Columns["unload_qty"].Visible = false;
+            gv.Columns["unload_wgh"].Visible = false;
         }
         private void LoadCustomer()
         {
