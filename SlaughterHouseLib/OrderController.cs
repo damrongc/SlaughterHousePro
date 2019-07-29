@@ -409,12 +409,15 @@ namespace SlaughterHouseLib
                     var sql = @"select a.seq,
                                 a.product_code,
                                 b.product_name,
-                                order_qty,
-                                order_wgh,
+                                Case when b.issue_unit_method = 'Q' then order_qty else order_wgh end qty_wgh,
+                                b.issue_unit_method,
+                                u.unit_code,
+                                u.unit_name,
                                 unload_qty,
                                 unload_wgh
-                                from order_item a,product b
+                                from order_item a,product b, unit_of_measurement u
                                 where a.product_code =b.product_code
+                                and Case when b.issue_unit_method = 'Q' then unit_of_qty else unit_of_wgh end = u.unit_code
                                 and a.order_no =@order_no 
                                 order by seq asc";
                     

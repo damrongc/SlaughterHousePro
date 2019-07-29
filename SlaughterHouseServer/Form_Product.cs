@@ -96,8 +96,7 @@ namespace SlaughterHouseServer
             gv.Columns[12].HeaderText = "วันเวลาสร้าง";
             gv.Columns[13].HeaderText = "ผู้สร้าง";
             gv.Columns[14].HeaderText = "วันเวลาแก้ไข";
-            gv.Columns[15].HeaderText = "ผู้แก้ไข";
-             
+            gv.Columns[15].HeaderText = "ผู้แก้ไข"; 
         }
     }
 }
