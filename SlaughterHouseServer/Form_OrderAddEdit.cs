@@ -123,7 +123,7 @@ namespace SlaughterHouseServer
         private void BtnAddOrderItem_Click(object sender, System.EventArgs e)
         {
             
-        var frm = new Form_OrderDetail();
+            var frm = new Form_OrderDetail();
             frm.qtyWgh = 0;
             if (frm.ShowDialog() == DialogResult.OK)
             {

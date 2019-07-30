@@ -63,8 +63,7 @@ namespace SlaughterHouseLib
 		                        AND i.invoice_no = itm.invoice_no
                                 AND itm.product_code = p.product_code
                                 AND c.customer_code = i.customer_code
-                                AND CASE
-                                WHEN itm.sale_unit_method = 'Q' THEN p.unit_of_qty ELSE unit_of_wgh END = u.unit_code
+                                AND CASE WHEN itm.sale_unit_method = 'Q' THEN p.unit_of_qty ELSE unit_of_wgh END = u.unit_code
                                 AND pl.plant_id = 1
                                 ";
                     //'2019-07-01 00:00:00' AND '2019-07-21 23:59:59'
