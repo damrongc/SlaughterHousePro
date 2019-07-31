@@ -4,16 +4,16 @@ using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace SlaughterHouseClient
+namespace SlaughterHouseClient.Issued
 {
-    public partial class Form_CarcassIssued : Form
+    public partial class Form_Carcass : Form
     {
         private string productCode = "P002";
         private bool IsStart = false;
         private const string CHOOSE_DATA = "กรุณาเลือกข้อมูล";
         private const string START_WAITING = "กรุณาเริ่มชั่ง";
         private const string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
-        public Form_CarcassIssued()
+        public Form_Carcass()
         {
             InitializeComponent();
             Shown += Form_Shown;

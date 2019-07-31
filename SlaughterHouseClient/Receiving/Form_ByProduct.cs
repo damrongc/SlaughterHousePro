@@ -6,9 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace SlaughterHouseClient
+namespace SlaughterHouseClient.Receiving
 {
-    public partial class Form_PartsReceive : Form
+    public partial class Form_ByProduct : Form
     {
         private string productCode = "";
         private const int LOCATION_CODE = 3;
@@ -18,9 +18,15 @@ namespace SlaughterHouseClient
         const string CHOOSE_QUEUE = "กรุณาเลือกคิว";
         const string START_WAITING = "กรุณาเริ่มชั่ง";
         const string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
-        public Form_PartsReceive()
+        public Form_ByProduct()
         {
             InitializeComponent();
+            Shown += Form_Shown;
+        }
+
+        private void Form_Shown(object sender, EventArgs e)
+        {
+
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -32,7 +38,7 @@ namespace SlaughterHouseClient
         {
             lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
             lblMessage.Text = CHOOSE_QUEUE;
-            LoadProduct();
+
 
 
         }
@@ -44,13 +50,26 @@ namespace SlaughterHouseClient
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 LoadData(frm.receiveNo);
+                LoadProduct();
             }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(lblReceiveNo.Text))
+            {
+                lblMessage.Text = "กรุณาเลือกข้อมูล!";
+                return;
+            }
+            if (string.IsNullOrEmpty(productCode))
+            {
+                lblMessage.Text = "กรุณาเลือกสินค้า!";
+                return;
+            }
             IsStart = true;
             lblMessage.Text = WEIGHT_WAITING;
+
+
         }
 
 
@@ -94,6 +113,7 @@ namespace SlaughterHouseClient
             btn.BackColor = ColorTranslator.FromHtml("#2D9CDB");
             btn.ForeColor = Color.White;
             productCode = btn.Tag.ToString();
+            lblMessage.Text = WEIGHT_WAITING;
         }
 
         private void LoadData(string receiveNo)
@@ -283,7 +303,16 @@ namespace SlaughterHouseClient
 
                 }
 
-
+                //ReceiveItem receiveItem = new ReceiveItem
+                //{
+                //    ReceiveNo = receive.ReceiveNo,
+                //    ProductCode = this.productCode,
+                //    SexFlag = sexFlag,
+                //    ReceiveQty = 1,
+                //    ReceiveWgh = lblWeight.Text.ToDecimal(),
+                //    CreateBy = "Auto"
+                //};
+                //return ReceiveController.InsertItem(receiveItem);
                 return true;
             }
             catch (Exception)

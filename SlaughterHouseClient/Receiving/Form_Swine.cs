@@ -1,27 +1,100 @@
 ﻿
+using SerialPortListener.Serial;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
-namespace SlaughterHouseClient
+namespace SlaughterHouseClient.Receiving
 {
-    public partial class Form_SwineReceive : Form
+    public partial class Form_Swine : Form
     {
         private string productCode = "P001";
         private string sexFlag = "F";
         private bool isStart = false;
+        string sumText;
 
         const string CHOOSE_QUEUE = "กรุณาเลือกคิว";
         const string START_WAITING = "กรุณาเริ่มชั่ง";
         const string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
-        public Form_SwineReceive()
+
+        SerialPortManager _spManager;
+
+        public Form_Swine()
         {
             InitializeComponent();
+            UserInitialization();
+        }
+
+        private void UserInitialization()
+        {
+            _spManager = new SerialPortManager();
+
+            SerialSettings mySerialSettings = _spManager.CurrentSerialSettings;
+            //mySerialSettings.PortName = "COM1";
+            //serialSettingsBindingSource.DataSource = mySerialSettings;
+            //portNameComboBox.DataSource = mySerialSettings.PortNameCollection;
+            //baudRateComboBox.DataSource = mySerialSettings.BaudRateCollection;
+            //dataBitsComboBox.DataSource = mySerialSettings.DataBitsCollection;
+            //parityComboBox.DataSource = Enum.GetValues(typeof(System.IO.Ports.Parity));
+            //stopBitsComboBox.DataSource = Enum.GetValues(typeof(System.IO.Ports.StopBits));
+
+            _spManager.NewSerialDataRecieved += new EventHandler<SerialDataEventArgs>(_spManager_NewSerialDataRecieved);
+            FormClosing += new FormClosingEventHandler(Form_FormClosing);
+        }
+        private void Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isStart)
+                _spManager.StopListening();
+            _spManager.Dispose();
+        }
+
+        private void _spManager_NewSerialDataRecieved(object sender, SerialDataEventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                // Using this.Invoke causes deadlock when closing serial port, and BeginInvoke is good practice anyway.
+                this.BeginInvoke(new EventHandler<SerialDataEventArgs>(_spManager_NewSerialDataRecieved), new object[] { sender, e });
+                return;
+            }
+
+            //int maxTextLength = 1000; // maximum text length in text box
+            //if (tbData.TextLength > maxTextLength)
+            //    tbData.Text = tbData.Text.Remove(0, tbData.TextLength - maxTextLength);
+            string str = Encoding.ASCII.GetString(e.Data);
+            DisplayWeight(str);
+
+            for (int i = 0; i < e.Data.Length; i++)
+            {
+                char kk = (char)e.Data[i];
+                if (kk == 2)
+                {
+                    //Found Start
+                    sumText = "";
+                }
+                else if (kk == 3)
+                {
+                    //Found Stop
+                    DisplayWeight(sumText);
+                }
+                else
+                {
+                    sumText += kk.ToString();
+                }
+            }
+
+        }
+
+        private void DisplayWeight(string str)
+        {
+            lblWeight.Text = str;
+            //tbData.AppendText(str);
+            //tbData.ScrollToCaret();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Close();
         }
 
         private void Form_SwineReceive_Load(object sender, EventArgs e)
@@ -44,6 +117,7 @@ namespace SlaughterHouseClient
         {
             isStart = true;
             lblMessage.Text = WEIGHT_WAITING;
+            _spManager.StartListening();
         }
 
         private void btnFemale_Click(object sender, EventArgs e)

@@ -1,6 +1,6 @@
-﻿namespace SlaughterHouseClient
+﻿namespace SlaughterHouseClient.Receiving
 {
-    partial class Form_ReceiveLot
+    partial class Form_Receive
     {
         /// <summary>
         /// Required designer variable.
