@@ -116,8 +116,10 @@
             this.rptViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rptViewer.Location = new System.Drawing.Point(0, 0);
             this.rptViewer.Name = "rptViewer";
+            this.rptViewer.ShowLogo = false;
             this.rptViewer.Size = new System.Drawing.Size(1184, 572);
-            this.rptViewer.TabIndex = 0;
+            this.rptViewer.TabIndex = 1;
+            this.rptViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
             // Form_Report_Daily_Sales
             // 

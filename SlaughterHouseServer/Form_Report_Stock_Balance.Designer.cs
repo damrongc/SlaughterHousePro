@@ -32,19 +32,20 @@
             this.groupBoxReportName = new System.Windows.Forms.GroupBox();
             this.BtnShowReport = new System.Windows.Forms.Button();
             this.dtpInvoiceDatePeriod = new System.Windows.Forms.DateTimePicker();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.rptViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.groupBoxReportName.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxReportName
             // 
             this.groupBoxReportName.Controls.Add(this.BtnShowReport);
             this.groupBoxReportName.Controls.Add(this.dtpInvoiceDatePeriod);
-            this.groupBoxReportName.Controls.Add(this.rptViewer);
-            this.groupBoxReportName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxReportName.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxReportName.Location = new System.Drawing.Point(0, 0);
             this.groupBoxReportName.Name = "groupBoxReportName";
-            this.groupBoxReportName.Size = new System.Drawing.Size(1184, 661);
+            this.groupBoxReportName.Size = new System.Drawing.Size(1184, 91);
             this.groupBoxReportName.TabIndex = 0;
             this.groupBoxReportName.TabStop = false;
             this.groupBoxReportName.Text = "รายงานสต็อกคงเหลือ";
@@ -75,22 +76,33 @@
             this.dtpInvoiceDatePeriod.Size = new System.Drawing.Size(177, 36);
             this.dtpInvoiceDatePeriod.TabIndex = 11;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.rptViewer);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 91);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1184, 570);
+            this.panel1.TabIndex = 1;
+            // 
             // rptViewer
             // 
             this.rptViewer.ActiveViewIndex = -1;
             this.rptViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rptViewer.Cursor = System.Windows.Forms.Cursors.Default;
-            this.rptViewer.Location = new System.Drawing.Point(3, 77);
+            this.rptViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rptViewer.Location = new System.Drawing.Point(0, 0);
             this.rptViewer.Name = "rptViewer";
-            this.rptViewer.ShowParameterPanelButton = false;
-            this.rptViewer.Size = new System.Drawing.Size(1184, 601);
-            this.rptViewer.TabIndex = 2;
+            this.rptViewer.ShowLogo = false;
+            this.rptViewer.Size = new System.Drawing.Size(1184, 570);
+            this.rptViewer.TabIndex = 3;
             this.rptViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
             // Form_Report_Stock_Balance
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBoxReportName);
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -100,6 +112,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_Report_Stock_Movement";
             this.groupBoxReportName.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -107,8 +120,9 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBoxReportName;
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer rptViewer;
         private System.Windows.Forms.Button BtnShowReport;
         private System.Windows.Forms.DateTimePicker dtpInvoiceDatePeriod;
+        private System.Windows.Forms.Panel panel1;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer rptViewer;
     }
 }

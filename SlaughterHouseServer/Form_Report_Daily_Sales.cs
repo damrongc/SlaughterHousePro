@@ -2,6 +2,7 @@
 using SlaughterHouseLib;
 using System;
 using System.Data;
+using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
@@ -41,10 +42,12 @@ namespace SlaughterHouseServer
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = ReportController.GetDataReportDailySales(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
-            //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\dailysales"));
-
-            //ds.WriteXml(path + ".xml", XmlWriteMode.WriteSchema);
-            doc.Load(@"D:\MyWork\โรงงานปราจีนบุรี PKP6\source\SlaughterHouseServer\Report\rpt\dailysales.rpt");
+            string pathRpt = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\rpt\dailysales"));
+            string pathXml = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\xml\dailysales"));
+            ds.DataSetName = "NewDataSet";
+            ds.Tables[0].TableName = "Table";
+            ds.WriteXml(pathXml + ".xml", XmlWriteMode.WriteSchema);
+            doc.Load(pathRpt + ".rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;
