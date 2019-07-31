@@ -52,26 +52,29 @@ namespace SlaughterHouseClient
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 lblLotNo.Text = frm.LotNoSelected;
+                IsStart = true;
+                lblMessage.Text = WEIGHT_WAITING;
+                lblWeight.Text = RandomNumberBetween(20, 50).ToFormat2Double();
             }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
 
-            if (string.IsNullOrEmpty(lblProductionOrderNo.Text))
-            {
-                lblMessage.Text = "กรุณาเลือกข้อมูล!";
-                return;
-            }
-            if (string.IsNullOrEmpty(productCode))
-            {
-                lblMessage.Text = "กรุณาเลือกสินค้า!";
-                return;
-            }
+            //if (string.IsNullOrEmpty(lblProductionOrderNo.Text))
+            //{
+            //    lblMessage.Text = "กรุณาเลือกข้อมูล!";
+            //    return;
+            //}
+            //if (string.IsNullOrEmpty(lblLotNo.Text))
+            //{
+            //    lblMessage.Text = "กรุณาเลือก Lot No!";
+            //    return;
+            //}
 
-            IsStart = true;
-            lblMessage.Text = WEIGHT_WAITING;
-            lblWeight.Text = RandomNumberBetween(20, 50).ToFormat2Double();
+            //IsStart = true;
+            //lblMessage.Text = WEIGHT_WAITING;
+            //lblWeight.Text = RandomNumberBetween(20, 50).ToFormat2Double();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -79,20 +82,12 @@ namespace SlaughterHouseClient
             try
             {
 
-                var ret = SaveData();
-                if (ret)
-                {
-                    LoadData(lblProductionOrderNo.Text);
-                }
+                CloseJob();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //var animationDirection = FormAnimator.AnimationDirection.Up;
-                //var animationMethod = FormAnimator.AnimationMethod.Slide;
-                //var toastNotification = new Notification("Notification", ex.Message, -1, animationMethod, animationDirection);
-                //PlayNotificationSound("normal");
-                //toastNotification.Show();
+
 
             }
 
@@ -268,6 +263,37 @@ namespace SlaughterHouseClient
 
         }
 
+        private bool CloseJob()
+        {
+            try
+            {
+                var poNo = lblProductionOrderNo.Text;
+                using (var db = new SlaughterhouseEntities())
+                {
+                    var productionOrder = db.production_order.Where(p => p.po_no == poNo).SingleOrDefault();
+                    productionOrder.po_flag = 1;
+                    db.SaveChanges();
+
+
+                }
+
+                lblProductionOrderNo.Text = "";
+                lblProduct.Text = "";
+                lblLotNo.Text = "";
+                lblProductionOrderQty.Text = 0.ToString();
+                lblRemainQty.Text = 0.ToString();
+                lblUnloadedQty.Text = 0.ToString();
+                lblUnloadedWgh.Text = 0m.ToFormat2Decimal();
+                lblWeight.Text = 0m.ToFormat2Decimal();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private static readonly Random random = new Random();
 
         private static double RandomNumberBetween(double minValue, double maxValue)
@@ -277,6 +303,32 @@ namespace SlaughterHouseClient
             return minValue + (next * (maxValue - minValue));
         }
 
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(lblProductionOrderNo.Text))
+                {
+                    lblMessage.Text = "กรุณาเลือกข้อมูล!";
+                    return;
+                }
+                if (string.IsNullOrEmpty(lblLotNo.Text))
+                {
+                    lblMessage.Text = "กรุณาเลือก Lot No!";
+                    return;
+                }
+                var ret = SaveData();
+                if (ret)
+                {
+                    LoadData(lblProductionOrderNo.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+
+            }
+        }
     }
 }

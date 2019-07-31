@@ -55,6 +55,7 @@
             this.lblLotNo = new System.Windows.Forms.Label();
             this.btnLotNo = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnAccept = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -377,11 +378,27 @@
             this.label3.TabIndex = 31;
             this.label3.Text = "Lot No";
             // 
+            // btnAccept
+            // 
+            this.btnAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
+            this.btnAccept.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAccept.Font = new System.Drawing.Font("Kanit", 16F);
+            this.btnAccept.ForeColor = System.Drawing.Color.White;
+            this.btnAccept.Location = new System.Drawing.Point(588, 378);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(146, 43);
+            this.btnAccept.TabIndex = 32;
+            this.btnAccept.Text = "ตกลง";
+            this.btnAccept.UseVisualStyleBackColor = false;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
+            // 
             // Form_CarcassIssued
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(934, 681);
+            this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblLotNo);
             this.Controls.Add(this.btnLotNo);
@@ -446,6 +463,7 @@
         private System.Windows.Forms.Label lblLotNo;
         private System.Windows.Forms.Button btnLotNo;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnAccept;
     }
 }
 

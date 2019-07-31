@@ -42,9 +42,9 @@ namespace SlaughterHouseClient
         public DbSet<stock> stocks { get; set; }
         public DbSet<stock_item_running> stock_item_running { get; set; }
         public DbSet<unit_of_measurement> unit_of_measurement { get; set; }
-        public DbSet<product> products { get; set; }
         public DbSet<plant> plants { get; set; }
-        public DbSet<product_price> product_price { get; set; }
         public DbSet<receive_item> receive_item { get; set; }
+        public DbSet<product> products { get; set; }
+        public DbSet<product_price> product_price { get; set; }
     }
 }
