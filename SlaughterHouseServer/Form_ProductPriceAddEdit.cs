@@ -124,14 +124,7 @@ namespace SlaughterHouseServer
                 cboProduct.SelectedValue = productPrice.Product.ProductCode;
                 txtUnitPrice.Text = productPrice.UnitPrice.ToString();
                 txtDay.Text = productPrice.Day.ToString();
-                if (productPrice.SaleUnitMethod.ToUpper() == "Q")
-                {
-                    rdbQty.Checked = true;
-                }
-                else
-                {
-                    rdbWgh.Checked = true;
-                }
+                
                 dtpStartDate.Value = productPrice.StartDate;
                 dtpStartDate.Enabled = false;
                 BtnSaveAndNew.Visible = false;
@@ -142,7 +135,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-                string vSaleUnitMethod = (rdbQty.Checked == true) ? "Q" : "W";
+                
                 var productPrice = new ProductPrice
                 {
                     Product = new Product
@@ -154,7 +147,6 @@ namespace SlaughterHouseServer
                     Day = Convert.ToInt16(txtDay.Text),
 
                     UnitPrice = Convert.ToDecimal(txtUnitPrice.Text),
-                    SaleUnitMethod = vSaleUnitMethod,
                     CreateBy = "system",
                     ModifiedBy = "system"
                 };

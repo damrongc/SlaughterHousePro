@@ -45,6 +45,5 @@ namespace SlaughterHouseClient
         public DbSet<plant> plants { get; set; }
         public DbSet<receive_item> receive_item { get; set; }
         public DbSet<product> products { get; set; }
-        public DbSet<product_price> product_price { get; set; }
     }
 }

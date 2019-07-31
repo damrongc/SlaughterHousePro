@@ -24,6 +24,7 @@ namespace SlaughterHouseServer
             BtnCarcass.Click += Btn_Click;
             BtnPriceList.Click += Btn_Click;
             BtnInvoice.Click += Btn_Click;
+            BtnReport.Click += Btn_Click;
         }
 
         private void Btn_Click(object sender, EventArgs e)
@@ -64,6 +65,9 @@ namespace SlaughterHouseServer
                 case "BtnInvoice":
                     AddFormToContainer(new Form_Invoice());
                     break;
+                case "BtnReport":
+                    AddFormToContainer(new Form_Report());
+                    break;
             }
         }
 
@@ -89,8 +93,7 @@ namespace SlaughterHouseServer
 
             //fh.WindowState = FormWindowState.Maximized;
             //this.plContainer.Tag = fh;
-            fh.Show();
-
+            fh.Show(); 
         }
     }
 }

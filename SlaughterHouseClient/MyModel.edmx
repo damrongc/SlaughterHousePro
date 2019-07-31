@@ -195,20 +195,6 @@
           <Property Name="modified_at" Type="datetime" Precision="0" />
           <Property Name="modified_by" Type="varchar" MaxLength="45" />
         </EntityType>
-        <EntityType Name="product_price">
-          <Key>
-            <PropertyRef Name="product_code" />
-            <PropertyRef Name="start_date" />
-          </Key>
-          <Property Name="product_code" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="start_date" Type="date" Nullable="false" />
-          <Property Name="end_date" Type="date" Nullable="false" />
-          <Property Name="unit_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="modified_at" Type="datetime" Precision="0" />
-          <Property Name="modified_by" Type="varchar" MaxLength="45" />
-        </EntityType>
         <EntityType Name="production_order">
           <Key>
             <PropertyRef Name="po_no" />
@@ -548,7 +534,6 @@
           <EntitySet Name="plant" EntityType="Self.plant" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="product_group" EntityType="Self.product_group" Schema="slaughterhouse" store:Type="Tables" />
-          <EntitySet Name="product_price" EntityType="Self.product_price" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="production_order" EntityType="Self.production_order" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="production_order_item" EntityType="Self.production_order_item" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="receive_item" EntityType="Self.receive_item" Schema="slaughterhouse" store:Type="Tables" />
@@ -718,7 +703,6 @@
             <End Role="unit_of_measurement" EntitySet="unit_of_measurement" />
             <End Role="product" EntitySet="products" />
           </AssociationSet>
-          <EntitySet Name="product_price" EntityType="SlaughterhouseModel.product_price" />
         </EntityContainer>
         <EntityType Name="barcode">
           <Key>
@@ -1269,20 +1253,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="product_price">
-          <Key>
-            <PropertyRef Name="product_code" />
-            <PropertyRef Name="start_date" />
-          </Key>
-          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="start_date" Type="DateTime" Nullable="false" />
-          <Property Name="end_date" Type="DateTime" Nullable="false" />
-          <Property Name="unit_price" Type="Decimal" Nullable="false" />
-          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="modified_at" Type="DateTime" />
-          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1607,20 +1577,6 @@
                 <ScalarProperty Name="unit_of_qty" ColumnName="unit_of_qty" />
                 <ScalarProperty Name="product_group_code" ColumnName="product_group_code" />
                 <ScalarProperty Name="product_name" ColumnName="product_name" />
-                <ScalarProperty Name="product_code" ColumnName="product_code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="product_price">
-            <EntityTypeMapping TypeName="SlaughterhouseModel.product_price">
-              <MappingFragment StoreEntitySet="product_price">
-                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
-                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="create_at" ColumnName="create_at" />
-                <ScalarProperty Name="unit_price" ColumnName="unit_price" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="product_code" ColumnName="product_code" />
               </MappingFragment>
             </EntityTypeMapping>

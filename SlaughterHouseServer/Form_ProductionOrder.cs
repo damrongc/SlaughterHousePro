@@ -29,13 +29,13 @@ namespace SlaughterHouseServer
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
 
-            gv2.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
-            gv2.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
-            gv2.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
-            gv2.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            gv2.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            gv2.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
-            gv2.EnableHeadersVisualStyles = false;
+            gvDt.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            gvDt.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
+            gvDt.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
+            gvDt.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            gvDt.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            gvDt.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
+            gvDt.EnableHeadersVisualStyles = false;
 
             LoadOrder();
         }
@@ -123,26 +123,53 @@ namespace SlaughterHouseServer
         private void LoadItem(string poNo)
         {
             //var farmCtrl = new FarmController();
-            var items = ProductionOrderItemController.GetProductionOrderItems(poNo);
+            //var items = ProductionOrderItemController.GetProductionOrderItems(poNo);
 
-            var coll = items.AsEnumerable().Select(p => new
-            {
-                seq = p.Field<int>("seq"),
-                product_name = p.Field<string>("product_name"),
-                po_qty = p.Field<int>("po_qty").ToComma(),
-                po_wgh = p.Field<decimal>("po_wgh").ToFormat2Decimal(),
-                unload_qty = p.Field<int>("unload_qty").ToComma(),
-                unload_wgh = p.Field<decimal>("unload_wgh").ToFormat2Decimal(),
+            DataTable dtPoItem = new DataTable("PO_ITEM");
+            dtPoItem = ProductionOrderItemController.GetProductionOrderItems(poNo);
 
-            }).ToList();
-            gv2.DataSource = coll;
+            gvDt.DataSource = dtPoItem;
 
-            gv2.Columns[0].HeaderText = "ลำดับ";
-            gv2.Columns[1].HeaderText = "สินค้า";
-            gv2.Columns[2].HeaderText = "จำนวนเบิก";
-            gv2.Columns[3].HeaderText = "น้ำหนักเบิก";
-            gv2.Columns[4].HeaderText = "จำนวนจ่าย";
-            gv2.Columns[5].HeaderText = "น้ำหนักจ่าย";
+            gvDt.Columns[0].HeaderText = "ลำดับ";
+            gvDt.Columns[1].HeaderText = "รหัสสินค้า";
+            gvDt.Columns[2].HeaderText = "สินค้า";
+            gvDt.Columns[3].HeaderText = "จำนวน";
+            gvDt.Columns[4].HeaderText = "หน่วยคำนวณ";
+            gvDt.Columns[5].HeaderText = "รหัสหน่วยสินค้า";
+            gvDt.Columns[6].HeaderText = "หน่วยสินค้า";
+            gvDt.Columns[7].HeaderText = "จำนวนจ่าย";
+            gvDt.Columns[8].HeaderText = "น้ำหนักจ่าย";
+
+            gvDt.Columns[1].Visible = false;
+            gvDt.Columns[4].Visible = false;
+            gvDt.Columns[5].Visible = false;
+
+            gvDt.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            //###################################################
+
+            //var coll = items.AsEnumerable().Select(p => new
+            //{
+            //    seq = p.Field<int>("seq"),
+            //    product_name = p.Field<string>("product_name"),
+            //    po_qty = p.Field<int>("po_qty").ToComma(),
+            //    po_wgh = p.Field<decimal>("po_wgh").ToFormat2Decimal(),
+            //    unload_qty = p.Field<int>("unload_qty").ToComma(),
+            //    unload_wgh = p.Field<decimal>("unload_wgh").ToFormat2Decimal(),
+
+            //}).ToList();
+            //gv2.DataSource = coll;
+
+            //gv2.Columns[0].HeaderText = "ลำดับ";
+            //gv2.Columns[1].HeaderText = "สินค้า";
+            //gv2.Columns[2].HeaderText = "จำนวนเบิก";
+            //gv2.Columns[3].HeaderText = "น้ำหนักเบิก";
+            //gv2.Columns[4].HeaderText = "จำนวนจ่าย";
+            //gv2.Columns[5].HeaderText = "น้ำหนักจ่าย";
 
         } 
     }

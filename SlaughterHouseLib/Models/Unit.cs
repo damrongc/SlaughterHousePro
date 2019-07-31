@@ -205,7 +205,87 @@ namespace SlaughterHouseLib.Models
             }
         }
 
-  
+        public static Unit GetUnitNameOfIssue(string productCode)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"select u.unit_code, u.unit_name
+                                from product p, unit_of_measurement u
+                                where p.product_code = @product_code
+                                and case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end = u.unit_code";
+
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_code", productCode);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    var Unit = new Unit();
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        return new Unit
+                        {
+                            UnitCode = Convert.ToInt32(ds.Tables[0].Rows[0]["Unit_code"]),
+                            UnitName = ds.Tables[0].Rows[0]["Unit_name"].ToString()
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static Unit GetUnitNameOfSale(string productCode)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"select u.unit_code, u.unit_name
+                                from product p, unit_of_measurement u
+                                where p.product_code = @product_code
+                                and case when p.sale_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end = u.unit_code";
+
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_code", productCode);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    var Unit = new Unit();
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        return new Unit
+                        {
+                            UnitCode = Convert.ToInt32(ds.Tables[0].Rows[0]["Unit_code"]),
+                            UnitName = ds.Tables[0].Rows[0]["Unit_name"].ToString()
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
     }
 }

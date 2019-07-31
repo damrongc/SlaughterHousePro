@@ -160,13 +160,15 @@ namespace SlaughterHouseServer
             gvDt.Columns[3].HeaderText = "หน่วยคำนวณ";
             gvDt.Columns[4].HeaderText = "ปริมาณ";
             gvDt.Columns[5].HeaderText = "น้ำหนัก";
-            gvDt.Columns[6].HeaderText = "ราคาต่อหน่วย";
-            gvDt.Columns[7].HeaderText = "ราคา";
+            gvDt.Columns[6].HeaderText = "ปริมาณจ่าย";
+            gvDt.Columns[7].HeaderText = "น้ำหนักจ่าย";
+            gvDt.Columns[8].HeaderText = "ราคาต่อหน่วย";
+            gvDt.Columns[9].HeaderText = "ราคา";
             
             gvDt.Columns[1].Visible = false;
             gvDt.Columns[3].Visible = false;
-            gvDt.Columns[6].Visible = false;
-            gvDt.Columns[7].Visible = false;
+            gvDt.Columns[8].Visible = false;
+            gvDt.Columns[9].Visible = false;
         } 
     }
 }

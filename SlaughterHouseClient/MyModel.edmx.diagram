@@ -42,7 +42,6 @@
         <AssociationConnector Association="SlaughterhouseModel.fk_stock_product" />
         <AssociationConnector Association="SlaughterhouseModel.fk_unit_qty" />
         <AssociationConnector Association="SlaughterhouseModel.fk_unit_wgh" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.product_price" Width="1.5" PointX="10.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

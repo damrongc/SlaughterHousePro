@@ -137,12 +137,16 @@ namespace SlaughterHouseServer
             gvDt.Columns[0].HeaderText = "ลำดับ";
             gvDt.Columns[1].HeaderText = "รหัสสินค้า";
             gvDt.Columns[2].HeaderText = "สินค้า";
-            gvDt.Columns[3].HeaderText = "จำนวนใบสั่งขาย";
-            gvDt.Columns[4].HeaderText = "น้ำหนักใบสั่งขาย";
-            gvDt.Columns[5].HeaderText = "จำนวนจ่าย";
-            gvDt.Columns[6].HeaderText = "น้ำหนักจ่าย";
+            gvDt.Columns[3].HeaderText = "จำนวน";
+            gvDt.Columns[4].HeaderText = "หน่วยคำนวณ";
+            gvDt.Columns[5].HeaderText = "รหัสหน่วยสินค้า";
+            gvDt.Columns[6].HeaderText = "หน่วยสินค้า";
+            gvDt.Columns[7].HeaderText = "จำนวนจ่าย";
+            gvDt.Columns[8].HeaderText = "น้ำหนักจ่าย";
 
             gvDt.Columns[1].Visible  = false ;
+            gvDt.Columns[4].Visible  = false;
+            gvDt.Columns[5].Visible  = false;
 
             gvDt.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvDt.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;

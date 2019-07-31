@@ -36,14 +36,13 @@ namespace SlaughterHouseServer
         private void LoadReport()
         {
             ReportDocument doc = new ReportDocument();
-            DataSet ds = InvoiceController.GetPrintInvoice(invoiceNo); 
+            DataSet ds = InvoiceController.GetDataPrintInvoice(invoiceNo); 
             string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\invoice")); 
 
             ds.WriteXml(path + ".xml", XmlWriteMode.WriteSchema);
             doc.Load(path + ".rpt");
             doc.SetDataSource(ds);
 
-            //CrystalReportCustomPaperSize("", "", ref doc);
             rptViewer.ReportSource = doc;
             rptViewer.Zoom(100);
             rptViewer.RefreshReport();

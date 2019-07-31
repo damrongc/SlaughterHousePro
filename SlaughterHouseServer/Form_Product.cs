@@ -87,11 +87,16 @@ namespace SlaughterHouseServer
             gv.Columns[3].HeaderText = "ชื่อกลุ่มสินค้า";
             gv.Columns[4].HeaderText = "หน่วยนับปริมาณ";
             gv.Columns[5].HeaderText = "หน่วยนับน้ำหนัก";
-            gv.Columns[6].HeaderText = "ใช้งาน";
-            gv.Columns[7].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[8].HeaderText = "ผู้สร้าง";
-            gv.Columns[9].HeaderText = "วันเวลาแก้ไข";
-            gv.Columns[10].HeaderText = "ผู้แก้ไข";
+            gv.Columns[6].HeaderText = "น้ำหนักต่าสุด";
+            gv.Columns[7].HeaderText = "น้ำหนักสูงสุด";
+            gv.Columns[8].HeaderText = "std. yield";
+            gv.Columns[9].HeaderText = "หน่วยคำนวณขาย";
+            gv.Columns[10].HeaderText = "หน่วยคำนวณเบิก";
+            gv.Columns[11].HeaderText = "ใช้งาน";
+            gv.Columns[12].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[13].HeaderText = "ผู้สร้าง";
+            gv.Columns[14].HeaderText = "วันเวลาแก้ไข";
+            gv.Columns[15].HeaderText = "ผู้แก้ไข"; 
         }
     }
 }

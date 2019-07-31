@@ -81,8 +81,7 @@ namespace SlaughterHouseServer
             FillProductGroup();
             FillUnitQtyWgh();
             if (!string.IsNullOrEmpty(this.productCode))
-            {
-
+            { 
                 var product = ProductController.GetProduct(this.productCode);
                 if (product != null)
                 {
@@ -92,12 +91,33 @@ namespace SlaughterHouseServer
                     comboxProductGroup.SelectedValue = product.ProductGroup.ProductGroupCode;
                     comboxUnitQty.SelectedValue = product.UnitOfQty.UnitCode ;
                     comboxUnitWgh.SelectedValue = product.UnitOfWgh.UnitCode ; 
-                    txtMinWgh.Text = product.MinWeight.ToString ();
+                    txtMinWgh.Text = product.MinWeight.ToString();
                     txtMaxWgh.Text = product.MaxWeight.ToString();
                     txtStdYield.Text = product.StdYield.ToString();
-
-                   chkActive.Checked = product.Active;
+                    if (product.SaleUnitMethod.ToUpper() == "Q")
+                    {
+                        rdbQtySale.Checked = true;
+                    }
+                    else if(product.SaleUnitMethod.ToUpper() == "W")
+                    {
+                        rdbWghSale.Checked = true;
+                    }
+                    if (product.IssueUnitMethod.ToUpper() == "Q")
+                    {
+                        rdbQtyIssue.Checked = true;
+                    }
+                    else if (product.SaleUnitMethod.ToUpper() == "W")
+                    {
+                        rdbWghIssue.Checked = true;
+                    }
+                    chkActive.Checked = product.Active;
                 }
+            }
+            else
+            {
+                txtMinWgh.Text = "0";
+                txtMaxWgh.Text = "0";
+                txtStdYield.Text = "0";
             }
         } 
 
@@ -196,6 +216,8 @@ namespace SlaughterHouseServer
                         MinWeight = Convert.ToDecimal(txtMinWgh.Text),
                         MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
                         StdYield  = Convert.ToDecimal(txtStdYield.Text),
+                        SaleUnitMethod = (rdbQtySale.Checked == true) ? "Q" : "W",
+                        IssueUnitMethod = (rdbQtyIssue.Checked == true) ? "Q" : "W",
                         Active = chkActive.Checked,
                         CreateBy = "system",
                     };
@@ -225,7 +247,9 @@ namespace SlaughterHouseServer
                         },
                         MinWeight = Convert.ToDecimal(txtMinWgh.Text),
                         MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
-                        StdYield = Convert.ToDecimal(txtStdYield.Text),
+                        StdYield = Convert.ToDecimal(txtStdYield.Text), 
+                        SaleUnitMethod = (rdbQtySale.Checked == true) ? "Q" : "W",
+                        IssueUnitMethod = (rdbQtyIssue.Checked == true) ? "Q" : "W",
                         Active = chkActive.Checked,
                         ModifiedBy = "system",
                     };

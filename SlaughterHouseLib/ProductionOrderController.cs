@@ -27,7 +27,6 @@ namespace SlaughterHouseLib
                     sb.Append(" a.create_by");
                     sb.Append(" FROM production_order a");
                     sb.Append(" WHERE a.po_date =@po_date");
- 
                     sb.Append(" AND a.active = 1"); 
                     sb.Append(" ORDER BY po_no ASC");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
@@ -283,15 +282,17 @@ namespace SlaughterHouseLib
                     var sql = @"select a.seq,
                                 a.product_code,
                                 b.product_name,
-                                po_qty,
-                                po_wgh,
+                                Case when b.issue_unit_method = 'Q' then po_qty else po_wgh end qty_wgh, 
+                                b.issue_unit_method,
+                                u.unit_code,
+                                u.unit_name,
                                 unload_qty,
                                 unload_wgh
-                                from production_order_item a,product b
+                                from production_order_item a, product b, unit_of_measurement u
                                 where a.product_code =b.product_code
+                                and Case when b.issue_unit_method = 'Q' then unit_of_qty else unit_of_wgh end = u.unit_code
                                 and a.po_no =@po_no 
-                                order by seq asc";
-
+                                order by seq asc"; 
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("po_no", poNo);

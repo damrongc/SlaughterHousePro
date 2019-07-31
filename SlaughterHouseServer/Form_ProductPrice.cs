@@ -112,11 +112,10 @@ namespace SlaughterHouseServer
             gv.Columns[2].HeaderText = "ชื่อสินค้า";
             gv.Columns[3].HeaderText = "วันที่เริ่มต้น";
             gv.Columns[4].HeaderText = "วินที่สิ้นสุด";
-            gv.Columns[5].HeaderText = "ราคาต่อหน่วย"; 
-            gv.Columns[6].HeaderText = "หน่วยคำนวณขาย";
-            gv.Columns[7].HeaderText = "จำนวนวัน";
-            gv.Columns[8].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[9].HeaderText = "ผู้สร้าง";
+            gv.Columns[5].HeaderText = "ราคาต่อหน่วย";  
+            gv.Columns[6].HeaderText = "จำนวนวัน";
+            gv.Columns[7].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[8].HeaderText = "ผู้สร้าง";
             gv.Columns[7].Visible = false;
         }
 

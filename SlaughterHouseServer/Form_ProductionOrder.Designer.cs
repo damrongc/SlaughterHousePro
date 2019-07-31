@@ -29,22 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ProductionOrder));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.gv2 = new System.Windows.Forms.DataGridView();
-            this.seq = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.po_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.po_wgh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unload_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unload_wgh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gvDt = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
@@ -56,7 +45,7 @@
             this.BtnSearch = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
@@ -106,90 +95,31 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.gv2);
+            this.panel5.Controls.Add(this.gvDt);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(6, 426);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1368, 298);
             this.panel5.TabIndex = 8;
             // 
-            // gv2
+            // gvDt
             // 
-            this.gv2.AllowUserToAddRows = false;
-            this.gv2.AllowUserToDeleteRows = false;
-            this.gv2.AllowUserToResizeColumns = false;
-            this.gv2.AllowUserToResizeRows = false;
-            this.gv2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gv2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.gv2.BackgroundColor = System.Drawing.Color.LightGray;
-            this.gv2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gv2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.seq,
-            this.product_name,
-            this.po_qty,
-            this.po_wgh,
-            this.unload_qty,
-            this.unload_wgh});
-            this.gv2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gv2.Location = new System.Drawing.Point(0, 0);
-            this.gv2.Name = "gv2";
-            this.gv2.RowHeadersWidth = 10;
-            this.gv2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gv2.Size = new System.Drawing.Size(1368, 298);
-            this.gv2.TabIndex = 10;
-            // 
-            // seq
-            // 
-            this.seq.DataPropertyName = "seq";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.seq.DefaultCellStyle = dataGridViewCellStyle6;
-            this.seq.HeaderText = "ลำดับ";
-            this.seq.Name = "seq";
-            this.seq.Width = 81;
-            // 
-            // product_name
-            // 
-            this.product_name.DataPropertyName = "product_name";
-            this.product_name.HeaderText = "สินค้า";
-            this.product_name.Name = "product_name";
-            this.product_name.Width = 81;
-            // 
-            // po_qty
-            // 
-            this.po_qty.DataPropertyName = "po_qty";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.po_qty.DefaultCellStyle = dataGridViewCellStyle7;
-            this.po_qty.HeaderText = "จำนวนเบิก";
-            this.po_qty.Name = "po_qty";
-            this.po_qty.Width = 118;
-            // 
-            // po_wgh
-            // 
-            this.po_wgh.DataPropertyName = "po_wgh";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.po_wgh.DefaultCellStyle = dataGridViewCellStyle8;
-            this.po_wgh.HeaderText = "น้ำหนักเบิก";
-            this.po_wgh.Name = "po_wgh";
-            this.po_wgh.Width = 121;
-            // 
-            // unload_qty
-            // 
-            this.unload_qty.DataPropertyName = "unload_qty";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.unload_qty.DefaultCellStyle = dataGridViewCellStyle9;
-            this.unload_qty.HeaderText = "จำนวนจ่าย";
-            this.unload_qty.Name = "unload_qty";
-            this.unload_qty.Width = 118;
-            // 
-            // unload_wgh
-            // 
-            this.unload_wgh.DataPropertyName = "unload_wgh";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.unload_wgh.DefaultCellStyle = dataGridViewCellStyle10;
-            this.unload_wgh.HeaderText = "น้ำหนักจ่าย (กก.)";
-            this.unload_wgh.Name = "unload_wgh";
-            this.unload_wgh.Width = 167;
+            this.gvDt.AllowUserToAddRows = false;
+            this.gvDt.AllowUserToDeleteRows = false;
+            this.gvDt.AllowUserToResizeColumns = false;
+            this.gvDt.AllowUserToResizeRows = false;
+            this.gvDt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gvDt.BackgroundColor = System.Drawing.Color.LightGray;
+            this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvDt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvDt.Location = new System.Drawing.Point(0, 0);
+            this.gvDt.Name = "gvDt";
+            this.gvDt.RowHeadersWidth = 10;
+            this.gvDt.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gvDt.Size = new System.Drawing.Size(1368, 298);
+            this.gvDt.TabIndex = 10;
             // 
             // panel4
             // 
@@ -303,7 +233,7 @@
             this.Text = "Form_Farm";
             this.panel1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gv2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).EndInit();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -327,12 +257,6 @@
         private System.Windows.Forms.DataGridViewImageColumn Print;
         private System.Windows.Forms.DataGridViewLinkColumn colPoNo;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.DataGridView gv2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn seq;
-        private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn po_qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn po_wgh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unload_qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unload_wgh;
+        private System.Windows.Forms.DataGridView gvDt;
     }
 }

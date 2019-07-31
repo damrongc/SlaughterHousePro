@@ -48,12 +48,20 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtStdYield = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rdbWghSale = new System.Windows.Forms.RadioButton();
+            this.rdbQtySale = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rdbWghIssue = new System.Windows.Forms.RadioButton();
+            this.rdbQtyIssue = new System.Windows.Forms.RadioButton();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(74, 25);
+            this.label1.Location = new System.Drawing.Point(94, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 29);
             this.label1.TabIndex = 0;
@@ -61,7 +69,7 @@
             // 
             // txtProductCode
             // 
-            this.txtProductCode.Location = new System.Drawing.Point(178, 22);
+            this.txtProductCode.Location = new System.Drawing.Point(198, 22);
             this.txtProductCode.MaxLength = 10;
             this.txtProductCode.Name = "txtProductCode";
             this.txtProductCode.Size = new System.Drawing.Size(215, 36);
@@ -69,7 +77,7 @@
             // 
             // txtProductName
             // 
-            this.txtProductName.Location = new System.Drawing.Point(178, 64);
+            this.txtProductName.Location = new System.Drawing.Point(198, 64);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(529, 36);
             this.txtProductName.TabIndex = 3;
@@ -77,7 +85,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(85, 67);
+            this.label2.Location = new System.Drawing.Point(105, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 29);
             this.label2.TabIndex = 2;
@@ -88,7 +96,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(178, 365);
+            this.chkActive.Location = new System.Drawing.Point(198, 365);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 6;
@@ -104,7 +112,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(492, 421);
+            this.BtnSave.Location = new System.Drawing.Point(512, 421);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -121,7 +129,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(178, 421);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(198, 421);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -133,7 +141,7 @@
             // comboxProductGroup
             // 
             this.comboxProductGroup.FormattingEnabled = true;
-            this.comboxProductGroup.Location = new System.Drawing.Point(178, 105);
+            this.comboxProductGroup.Location = new System.Drawing.Point(198, 105);
             this.comboxProductGroup.Name = "comboxProductGroup";
             this.comboxProductGroup.Size = new System.Drawing.Size(215, 37);
             this.comboxProductGroup.TabIndex = 26;
@@ -141,7 +149,7 @@
             // labelProductGroup
             // 
             this.labelProductGroup.AutoSize = true;
-            this.labelProductGroup.Location = new System.Drawing.Point(73, 109);
+            this.labelProductGroup.Location = new System.Drawing.Point(93, 109);
             this.labelProductGroup.Name = "labelProductGroup";
             this.labelProductGroup.Size = new System.Drawing.Size(90, 29);
             this.labelProductGroup.TabIndex = 27;
@@ -150,7 +158,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 152);
+            this.label3.Location = new System.Drawing.Point(46, 152);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(137, 29);
             this.label3.TabIndex = 29;
@@ -159,7 +167,7 @@
             // comboxUnitQty
             // 
             this.comboxUnitQty.FormattingEnabled = true;
-            this.comboxUnitQty.Location = new System.Drawing.Point(178, 148);
+            this.comboxUnitQty.Location = new System.Drawing.Point(198, 148);
             this.comboxUnitQty.Name = "comboxUnitQty";
             this.comboxUnitQty.Size = new System.Drawing.Size(215, 37);
             this.comboxUnitQty.TabIndex = 28;
@@ -167,7 +175,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(32, 196);
+            this.label4.Location = new System.Drawing.Point(52, 196);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(131, 29);
             this.label4.TabIndex = 31;
@@ -176,14 +184,14 @@
             // comboxUnitWgh
             // 
             this.comboxUnitWgh.FormattingEnabled = true;
-            this.comboxUnitWgh.Location = new System.Drawing.Point(178, 192);
+            this.comboxUnitWgh.Location = new System.Drawing.Point(198, 192);
             this.comboxUnitWgh.Name = "comboxUnitWgh";
             this.comboxUnitWgh.Size = new System.Drawing.Size(215, 37);
             this.comboxUnitWgh.TabIndex = 30;
             // 
             // txtMinWgh
             // 
-            this.txtMinWgh.Location = new System.Drawing.Point(178, 235);
+            this.txtMinWgh.Location = new System.Drawing.Point(198, 235);
             this.txtMinWgh.MaxLength = 10;
             this.txtMinWgh.Name = "txtMinWgh";
             this.txtMinWgh.Size = new System.Drawing.Size(215, 36);
@@ -192,7 +200,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(53, 238);
+            this.label5.Location = new System.Drawing.Point(73, 238);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 29);
             this.label5.TabIndex = 32;
@@ -200,7 +208,7 @@
             // 
             // txtMaxWgh
             // 
-            this.txtMaxWgh.Location = new System.Drawing.Point(178, 277);
+            this.txtMaxWgh.Location = new System.Drawing.Point(198, 277);
             this.txtMaxWgh.MaxLength = 10;
             this.txtMaxWgh.Name = "txtMaxWgh";
             this.txtMaxWgh.Size = new System.Drawing.Size(215, 36);
@@ -209,7 +217,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(50, 280);
+            this.label6.Location = new System.Drawing.Point(70, 280);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(113, 29);
             this.label6.TabIndex = 34;
@@ -217,7 +225,7 @@
             // 
             // txtStdYield
             // 
-            this.txtStdYield.Location = new System.Drawing.Point(178, 319);
+            this.txtStdYield.Location = new System.Drawing.Point(198, 319);
             this.txtStdYield.MaxLength = 10;
             this.txtStdYield.Name = "txtStdYield";
             this.txtStdYield.Size = new System.Drawing.Size(215, 36);
@@ -226,16 +234,84 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(76, 322);
+            this.label7.Location = new System.Drawing.Point(96, 322);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(87, 29);
             this.label7.TabIndex = 36;
             this.label7.Text = "std yield";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rdbWghSale);
+            this.groupBox1.Controls.Add(this.rdbQtySale);
+            this.groupBox1.Location = new System.Drawing.Point(512, 176);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(215, 78);
+            this.groupBox1.TabIndex = 38;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "หน่วยคำนวณขาย";
+            // 
+            // rdbWghSale
+            // 
+            this.rdbWghSale.AutoSize = true;
+            this.rdbWghSale.Location = new System.Drawing.Point(112, 35);
+            this.rdbWghSale.Name = "rdbWghSale";
+            this.rdbWghSale.Size = new System.Drawing.Size(84, 33);
+            this.rdbWghSale.TabIndex = 1;
+            this.rdbWghSale.TabStop = true;
+            this.rdbWghSale.Text = "น้ำหนัก";
+            this.rdbWghSale.UseVisualStyleBackColor = true;
+            // 
+            // rdbQtySale
+            // 
+            this.rdbQtySale.AutoSize = true;
+            this.rdbQtySale.Location = new System.Drawing.Point(12, 35);
+            this.rdbQtySale.Name = "rdbQtySale";
+            this.rdbQtySale.Size = new System.Drawing.Size(90, 33);
+            this.rdbQtySale.TabIndex = 0;
+            this.rdbQtySale.TabStop = true;
+            this.rdbQtySale.Text = "ปริมาณ";
+            this.rdbQtySale.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rdbWghIssue);
+            this.groupBox2.Controls.Add(this.rdbQtyIssue);
+            this.groupBox2.Location = new System.Drawing.Point(512, 275);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(215, 78);
+            this.groupBox2.TabIndex = 39;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "หน่วยคำนวณเบิก";
+            // 
+            // rdbWghIssue
+            // 
+            this.rdbWghIssue.AutoSize = true;
+            this.rdbWghIssue.Location = new System.Drawing.Point(112, 35);
+            this.rdbWghIssue.Name = "rdbWghIssue";
+            this.rdbWghIssue.Size = new System.Drawing.Size(84, 33);
+            this.rdbWghIssue.TabIndex = 1;
+            this.rdbWghIssue.TabStop = true;
+            this.rdbWghIssue.Text = "น้ำหนัก";
+            this.rdbWghIssue.UseVisualStyleBackColor = true;
+            // 
+            // rdbQtyIssue
+            // 
+            this.rdbQtyIssue.AutoSize = true;
+            this.rdbQtyIssue.Location = new System.Drawing.Point(12, 35);
+            this.rdbQtyIssue.Name = "rdbQtyIssue";
+            this.rdbQtyIssue.Size = new System.Drawing.Size(90, 33);
+            this.rdbQtyIssue.TabIndex = 0;
+            this.rdbQtyIssue.TabStop = true;
+            this.rdbQtyIssue.Text = "ปริมาณ";
+            this.rdbQtyIssue.UseVisualStyleBackColor = true;
+            // 
             // Form_ProductAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(739, 474);
+            this.ClientSize = new System.Drawing.Size(802, 474);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtStdYield);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtMaxWgh);
@@ -262,6 +338,10 @@
             this.Name = "Form_ProductAddEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form_ProductAddEdit";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,5 +368,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtStdYield;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rdbWghSale;
+        private System.Windows.Forms.RadioButton rdbQtySale;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rdbWghIssue;
+        private System.Windows.Forms.RadioButton rdbQtyIssue;
     }
 }

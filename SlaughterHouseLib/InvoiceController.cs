@@ -342,7 +342,7 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        public static DataSet GetPrintInvoice(string invoiceNo)
+        public static DataSet GetDataPrintInvoice(string invoiceNo)
         {
             try
             {
@@ -401,7 +401,7 @@ namespace SlaughterHouseLib
                                 a.product_code,
                                 b.product_name,
                                 a.sale_unit_method,
-                                qty, wgh,
+                                qty, wgh, qty, wgh,
                                 unit_price, gross_amt
                                 from Invoice_item a, product b
                                 where a.product_code =b.product_code

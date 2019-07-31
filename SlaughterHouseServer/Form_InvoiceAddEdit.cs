@@ -164,7 +164,7 @@ namespace SlaughterHouseServer
         }
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-
+            
         }
         #endregion
 
@@ -296,15 +296,19 @@ namespace SlaughterHouseServer
             {
                 dtInvoiceItem = new DataTable("INVOICE_ITEM");
                 dtInvoiceItem = OrderItemController.GetOrderItemReadyToSell(this.orderNo);
-
+ 
                 if (dtInvoiceItem.Rows.Count > 0)
                 {
                     ProductPrice productPrice;
+                    Product product;
                     for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
                     {
-                        productPrice = ProductPriceController.GetPriceList(dtInvoiceItem.Rows[i]["product_code"].ToString(), dtpInvoiceDate.Value);
+                        string productCode = dtInvoiceItem.Rows[i]["product_code"].ToString();
+                        productPrice = ProductPriceController.GetPriceList(productCode, dtpInvoiceDate.Value);
+                        product = ProductController.GetProduct(productCode);
+
                         dtInvoiceItem.Rows[i]["unit_price"] = productPrice.UnitPrice;
-                        dtInvoiceItem.Rows[i]["sale_unit_method"] = productPrice.SaleUnitMethod;
+                        dtInvoiceItem.Rows[i]["sale_unit_method"] = product.SaleUnitMethod;
                         if (dtInvoiceItem.Rows[i]["sale_unit_method"].ToString() == "Q")
                         {
                             dtInvoiceItem.Rows[i]["gross_amt"] = Convert.ToDecimal(dtInvoiceItem.Rows[i]["unit_price"]) * Convert.ToDecimal(dtInvoiceItem.Rows[i]["qty"]);
@@ -318,6 +322,7 @@ namespace SlaughterHouseServer
                     gv.Refresh();
                 }
                 Calculate_Total();
+
             }
             else
             {
@@ -330,12 +335,19 @@ namespace SlaughterHouseServer
             gv.Columns[2].HeaderText = "ชื่อสินค้า";
             gv.Columns[3].HeaderText = "หน่วยคำนวณ";
             gv.Columns[4].HeaderText = "ปริมาณ";
-            gv.Columns[5].HeaderText = "น้้ำหนัก";
-            gv.Columns[6].HeaderText = "ราคาต่อหน่วย";
-            gv.Columns[7].HeaderText = "ราคา";
+            gv.Columns[5].HeaderText = "น้ำหนัก";
+            gv.Columns[6].HeaderText = "ปริมาณจ่าย";
+            gv.Columns[7].HeaderText = "น้ำหนักจ่าย";
+            gv.Columns[8].HeaderText = "ราคาต่อหน่วย";
+            gv.Columns[9].HeaderText = "ราคา";
+
+
 
             gv.Columns[0].Visible = false;           
             gv.Columns[1].Visible = false;
+            gv.Columns[4].Visible = false;
+            gv.Columns[5].Visible = false;
+
         }
         private void Calculate_Total()
         {

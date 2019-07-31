@@ -13,7 +13,6 @@ namespace SlaughterHouseLib.Models
         public DateTime EndDate { get; set; }
         public int Day { get; set; }
         public decimal UnitPrice { get; set; }
-        public string SaleUnitMethod { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
         public string ModifiedBy { get; set; }
@@ -37,8 +36,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" b.product_name,");
                     sb.Append(" a.start_date,");
                     sb.Append(" a.end_date,");
-                    sb.Append(" a.unit_price,");
-                    sb.Append(" a.sale_unit_method,");
+                    sb.Append(" a.unit_price,"); 
                     sb.Append(" a.end_date - a.start_date as day,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by");
@@ -65,8 +63,7 @@ namespace SlaughterHouseLib.Models
                                     ProductName = p.Field<string>("product_name"),
                                     StartDate = p.Field<DateTime>("start_date"),
                                     EndDate = p.Field<DateTime>("end_date"),
-                                    UnitPrice = p.Field<decimal>("unit_price"),
-                                    SaleUnitMethod = p.Field<string>("sale_unit_method"),
+                                    UnitPrice = p.Field<decimal>("unit_price"), 
                                     Day = p.Field<Int64>("day"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
@@ -93,8 +90,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" b.product_name,");
                     sb.Append(" a.start_date,");
                     sb.Append(" a.end_date,");
-                    sb.Append(" a.unit_price,");
-                    sb.Append(" a.sale_unit_method,");
+                    sb.Append(" a.unit_price,"); 
                     sb.Append(" DATEDIFF(a.end_date, a.start_date) as day,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by");
@@ -121,8 +117,7 @@ namespace SlaughterHouseLib.Models
                             },
                             StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
                             EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
-                            UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"],
-                            SaleUnitMethod = (string)ds.Tables[0].Rows[0]["sale_unit_method"],
+                            UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"], 
                             Day = (int)(Int64)ds.Tables[0].Rows[0]["day"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
@@ -149,7 +144,7 @@ namespace SlaughterHouseLib.Models
                     conn.Open();
                     var sql = "";
 
-                    sql = @"select unit_price, sale_unit_method
+                    sql = @"select unit_price
 	                        from product_price p
                             where start_date <=@start_date
                              and end_date >=@end_date
@@ -170,7 +165,6 @@ namespace SlaughterHouseLib.Models
                         return new ProductPrice
                         { 
                             UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"],
-                            SaleUnitMethod = (string)ds.Tables[0].Rows[0]["sale_unit_method"]
                         };
                     }
                     else
@@ -178,7 +172,6 @@ namespace SlaughterHouseLib.Models
                         return new ProductPrice
                         {
                             UnitPrice = 0,
-                            SaleUnitMethod = "na"
                         };
                     }
                 }
@@ -198,17 +191,16 @@ namespace SlaughterHouseLib.Models
                     conn.Open();
                     var sql = @"INSERT INTO product_price
                                     (product_code, start_date, end_date, 
-                                    unit_price, sale_unit_method, create_by) 
+                                    unit_price, create_by) 
                                     VALUES 
                                      (@product_code, @start_date, @end_date, 
-                                    @unit_price, @sale_unit_method, @create_by) ";
+                                    @unit_price, @create_by) ";
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("product_code", productPrice.Product.ProductCode); 
                     cmd.Parameters.AddWithValue("start_date", productPrice.StartDate);
                     cmd.Parameters.AddWithValue("end_date", productPrice.EndDate);
                     cmd.Parameters.AddWithValue("unit_price", productPrice.UnitPrice);
-                    cmd.Parameters.AddWithValue("sale_unit_method", productPrice.SaleUnitMethod);
                     cmd.Parameters.AddWithValue("create_by", productPrice.CreateBy); 
                     var affRow = cmd.ExecuteNonQuery();
                 }
@@ -229,8 +221,7 @@ namespace SlaughterHouseLib.Models
                     conn.Open();
                     var sql = @"UPDATE product_price 
                                 set end_date =@end_date,
-                                unit_price=@unit_price,
-                                sale_unit_method=@sale_unit_method, 
+                                unit_price=@unit_price, 
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by 
                                 WHERE product_code = @product_code
@@ -239,8 +230,7 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("product_code", productPrice.Product.ProductCode);
                     cmd.Parameters.AddWithValue("start_date", productPrice.StartDate);
                     cmd.Parameters.AddWithValue("end_date", productPrice.EndDate);
-                    cmd.Parameters.AddWithValue("unit_price", productPrice.UnitPrice);
-                    cmd.Parameters.AddWithValue("sale_unit_method", productPrice.SaleUnitMethod); 
+                    cmd.Parameters.AddWithValue("unit_price", productPrice.UnitPrice); 
                     cmd.Parameters.AddWithValue("modified_by", productPrice.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
                 }

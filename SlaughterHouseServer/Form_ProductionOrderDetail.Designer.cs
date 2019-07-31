@@ -32,10 +32,9 @@
             this.cboProduct = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnAddOrderItem = new System.Windows.Forms.Button();
-            this.txtQty = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtWgh = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbUnitName = new System.Windows.Forms.Label();
+            this.txtQtyWgh = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // cboProduct
@@ -64,7 +63,7 @@
             this.btnAddOrderItem.ForeColor = System.Drawing.Color.White;
             this.btnAddOrderItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddOrderItem.Image")));
             this.btnAddOrderItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddOrderItem.Location = new System.Drawing.Point(122, 168);
+            this.btnAddOrderItem.Location = new System.Drawing.Point(122, 127);
             this.btnAddOrderItem.Name = "btnAddOrderItem";
             this.btnAddOrderItem.Size = new System.Drawing.Size(91, 36);
             this.btnAddOrderItem.TabIndex = 39;
@@ -72,14 +71,6 @@
             this.btnAddOrderItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddOrderItem.UseVisualStyleBackColor = false;
             this.btnAddOrderItem.Click += new System.EventHandler(this.btnAddOrderItem_Click);
-            // 
-            // txtQty
-            // 
-            this.txtQty.Location = new System.Drawing.Point(122, 67);
-            this.txtQty.MaxLength = 10;
-            this.txtQty.Name = "txtQty";
-            this.txtQty.Size = new System.Drawing.Size(215, 36);
-            this.txtQty.TabIndex = 42;
             // 
             // label2
             // 
@@ -90,30 +81,29 @@
             this.label2.TabIndex = 41;
             this.label2.Text = "จำนวน:";
             // 
-            // txtWgh
+            // lbUnitName
             // 
-            this.txtWgh.Location = new System.Drawing.Point(122, 109);
-            this.txtWgh.MaxLength = 10;
-            this.txtWgh.Name = "txtWgh";
-            this.txtWgh.Size = new System.Drawing.Size(215, 36);
-            this.txtWgh.TabIndex = 44;
+            this.lbUnitName.AutoSize = true;
+            this.lbUnitName.Location = new System.Drawing.Point(359, 70);
+            this.lbUnitName.Name = "lbUnitName";
+            this.lbUnitName.Size = new System.Drawing.Size(40, 29);
+            this.lbUnitName.TabIndex = 45;
+            this.lbUnitName.Text = "---";
             // 
-            // label3
+            // txtQtyWgh
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(49, 112);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 29);
-            this.label3.TabIndex = 43;
-            this.label3.Text = "น้ำหนัก:";
+            this.txtQtyWgh.Location = new System.Drawing.Point(122, 66);
+            this.txtQtyWgh.MaxLength = 10;
+            this.txtQtyWgh.Name = "txtQtyWgh";
+            this.txtQtyWgh.Size = new System.Drawing.Size(215, 36);
+            this.txtQtyWgh.TabIndex = 44;
             // 
             // Form_ProductionOrderDetail
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(606, 214);
-            this.Controls.Add(this.txtWgh);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtQty);
+            this.ClientSize = new System.Drawing.Size(606, 181);
+            this.Controls.Add(this.lbUnitName);
+            this.Controls.Add(this.txtQtyWgh);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnAddOrderItem);
             this.Controls.Add(this.cboProduct);
@@ -134,9 +124,8 @@
         private System.Windows.Forms.ComboBox cboProduct;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnAddOrderItem;
-        private System.Windows.Forms.TextBox txtQty;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtWgh;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbUnitName;
+        private System.Windows.Forms.TextBox txtQtyWgh;
     }
 }

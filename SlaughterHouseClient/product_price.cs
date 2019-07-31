@@ -10,8 +10,7 @@
 namespace SlaughterHouseClient
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class product_price
     {
         public string product_code { get; set; }

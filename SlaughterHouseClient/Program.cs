@@ -15,7 +15,7 @@ namespace SlaughterHouseClient
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form_SwineReceive());
             //Application.Run(new Form_CarcassReceive());
-            Application.Run(new Form_Menu());
+            Application.Run(new Report.Form_Barcode());
             //Application.Run(new Form_ByProductReceive());
         }
     }
