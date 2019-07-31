@@ -1,32 +1,24 @@
 ﻿
 using System;
 using System.Data.Entity;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace SlaughterHouseClient
+namespace SlaughterHouseClient.Receiving
 {
-    public partial class Form_ByProductReceive : Form
+    public partial class Form_Carcass : Form
     {
-        private string productCode = "";
-        private const int LOCATION_CODE = 3;
+        private string productCode = "P002";
         private bool IsStart = false;
 
 
         const string CHOOSE_QUEUE = "กรุณาเลือกคิว";
         const string START_WAITING = "กรุณาเริ่มชั่ง";
         const string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
-        public Form_ByProductReceive()
+        public Form_Carcass()
         {
             InitializeComponent();
-            Shown += Form_Shown;
-        }
-
-        private void Form_Shown(object sender, EventArgs e)
-        {
-
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -38,9 +30,6 @@ namespace SlaughterHouseClient
         {
             lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
             lblMessage.Text = CHOOSE_QUEUE;
-
-
-
         }
 
         private void btnReceiveNo_Click(object sender, EventArgs e)
@@ -50,71 +39,15 @@ namespace SlaughterHouseClient
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 LoadData(frm.receiveNo);
-                LoadProduct();
             }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(lblReceiveNo.Text))
-            {
-                lblMessage.Text = "กรุณาเลือกข้อมูล!";
-                return;
-            }
-            if (string.IsNullOrEmpty(productCode))
-            {
-                lblMessage.Text = "กรุณาเลือกสินค้า!";
-                return;
-            }
             IsStart = true;
             lblMessage.Text = WEIGHT_WAITING;
-
-
         }
 
-
-        private void LoadProduct()
-        {
-            using (var db = new SlaughterhouseEntities())
-            {
-                var products = db.products.Where(p => p.product_group_code == 2).ToList();
-
-                foreach (var item in products)
-                {
-                    var btn = new Button
-                    {
-                        Text = item.product_name,
-                        Width = 150,
-                        Height = 50,
-                        FlatStyle = FlatStyle.Flat,
-                        Font = new Font("Kanit", 16),
-                        BackColor = Color.WhiteSmoke,
-                        Tag = item.product_code
-
-
-
-                    };
-
-                    btn.Click += Btn_Click;
-                    flowLayoutPanel1.Controls.Add(btn);
-                }
-            }
-        }
-
-        private void Btn_Click(object sender, EventArgs e)
-        {
-            foreach (Control ctrl in flowLayoutPanel1.Controls)
-            {
-                var b = (Button)ctrl;
-                b.BackColor = Color.WhiteSmoke;
-                b.ForeColor = Color.Black;
-            }
-            var btn = (Button)sender;
-            btn.BackColor = ColorTranslator.FromHtml("#2D9CDB");
-            btn.ForeColor = Color.White;
-            productCode = btn.Tag.ToString();
-            lblMessage.Text = WEIGHT_WAITING;
-        }
 
         private void LoadData(string receiveNo)
         {
@@ -122,8 +55,8 @@ namespace SlaughterHouseClient
             using (var db = new SlaughterhouseEntities())
             {
                 var receive = db.receives.Where(p => p.receive_no == receiveNo).SingleOrDefault();
-                //int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Sum(p => p.receive_qty);
-                //decimal stock_wgh = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Sum(p => p.receive_wgh);
+                int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Sum(p => p.receive_qty);
+                decimal stock_wgh = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Sum(p => p.receive_wgh);
 
                 lblReceiveNo.Text = receive.receive_no;
                 lblFarm.Text = receive.farm.farm_name;
@@ -131,10 +64,11 @@ namespace SlaughterHouseClient
                 lblTruckNo.Text = receive.truck_no;
                 lblQueueNo.Text = receive.queue_no.ToString();
                 lblSwineQty.Text = receive.factory_qty.ToComma();
-                //lblStockQty.Text = stock_qty.ToComma();
-                //lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
-                //lblRemainQty.Text = (receive.farm_qty - stock_qty).ToComma();
+                lblStockQty.Text = stock_qty.ToComma();
+                lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
+                lblRemainQty.Text = (receive.farm_qty - stock_qty).ToComma();
             }
+
 
             lblMessage.Text = START_WAITING;
         }
@@ -248,7 +182,7 @@ namespace SlaughterHouseClient
                                 ref_document_no = receive.receive_no,
                                 ref_document_type = Constants.REV,
                                 lot_no = receive.lot_no,
-                                location_code = LOCATION_CODE, //ห้องเย็นเก็บหมุซีก
+                                location_code = 2, //ห้องเย็นเก็บหมุซีก
                                 barcode_no = 0,
                                 transaction_type = 1,
                                 create_by = item.create_by

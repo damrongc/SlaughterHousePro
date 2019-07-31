@@ -8,32 +8,45 @@ namespace SlaughterHouseClient
         public Form_Menu()
         {
             InitializeComponent();
+            Load += Form_Load;
+        }
+
+        private void Form_Load(object sender, EventArgs e)
+        {
+            lblCurrentDatetime.Text = DateTime.Today.ToString("dd-MM-yyyy");
         }
 
         private void btnReceiveSwine_Click(object sender, EventArgs e)
         {
-            var frm = new Form_SwineReceive();
-            frm.Show();
+            var frm = new Receiving.Form_Swine();
+            frm.ShowDialog();
         }
 
         private void btnReceiveCarcass_Click(object sender, EventArgs e)
         {
 
+            var frm = new Receiving.Form_Carcass();
+            frm.ShowDialog();
         }
 
         private void btnReceiveByProductWhite_Click(object sender, EventArgs e)
         {
 
+            var frm = new Receiving.Form_ByProduct();
+            frm.ShowDialog();
         }
 
         private void btnReceiveByProductRed_Click(object sender, EventArgs e)
         {
 
+            var frm = new Receiving.Form_ByProduct();
+            frm.ShowDialog();
         }
 
         private void btnIssueCarcass_Click(object sender, EventArgs e)
         {
-
+            var frm = new Issued.Form_Carcass();
+            frm.ShowDialog();
         }
 
         private void btnIssueCarcassForSales_Click(object sender, EventArgs e)
@@ -59,6 +72,11 @@ namespace SlaughterHouseClient
         private void btnIssuePart_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Menu));
+            this.btnExit = new System.Windows.Forms.Button();
+            this.panelHeader = new System.Windows.Forms.Panel();
+            this.lblCurrentDatetime = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnReceiveSwine = new System.Windows.Forms.Button();
             this.btnReceiveCarcass = new System.Windows.Forms.Button();
@@ -39,8 +44,67 @@
             this.btnIssueHead = new System.Windows.Forms.Button();
             this.btnIssueByProduct = new System.Windows.Forms.Button();
             this.btnIssuePart = new System.Windows.Forms.Button();
+            this.dragControl1 = new DragControl();
+            this.panelHeader.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.btnExit.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnExit.ForeColor = System.Drawing.Color.White;
+            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExit.Location = new System.Drawing.Point(858, 0);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(76, 54);
+            this.btnExit.TabIndex = 13;
+            this.btnExit.Text = "Exit";
+            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // panelHeader
+            // 
+            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.panelHeader.Controls.Add(this.lblCurrentDatetime);
+            this.panelHeader.Controls.Add(this.btnExit);
+            this.panelHeader.Controls.Add(this.label1);
+            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            this.panelHeader.Name = "panelHeader";
+            this.panelHeader.Size = new System.Drawing.Size(934, 54);
+            this.panelHeader.TabIndex = 1;
+            // 
+            // lblCurrentDatetime
+            // 
+            this.lblCurrentDatetime.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblCurrentDatetime.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblCurrentDatetime.ForeColor = System.Drawing.Color.White;
+            this.lblCurrentDatetime.Location = new System.Drawing.Point(708, 0);
+            this.lblCurrentDatetime.Name = "lblCurrentDatetime";
+            this.lblCurrentDatetime.Size = new System.Drawing.Size(150, 54);
+            this.lblCurrentDatetime.TabIndex = 14;
+            this.lblCurrentDatetime.Text = "-";
+            this.lblCurrentDatetime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(437, 54);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "ระบบบริการจัดการโรงเชือด";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // flowLayoutPanel1
             // 
@@ -55,11 +119,12 @@
             this.flowLayoutPanel1.Controls.Add(this.btnIssueByProduct);
             this.flowLayoutPanel1.Controls.Add(this.btnIssuePart);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 6);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 54);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(906, 630);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(934, 627);
+            this.flowLayoutPanel1.TabIndex = 2;
+            this.flowLayoutPanel1.Click += new System.EventHandler(this.btnIssuePart_Click);
             // 
             // btnReceiveSwine
             // 
@@ -68,9 +133,9 @@
             this.btnReceiveSwine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceiveSwine.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnReceiveSwine.ForeColor = System.Drawing.Color.White;
-            this.btnReceiveSwine.Location = new System.Drawing.Point(13, 13);
+            this.btnReceiveSwine.Location = new System.Drawing.Point(33, 33);
             this.btnReceiveSwine.Name = "btnReceiveSwine";
-            this.btnReceiveSwine.Size = new System.Drawing.Size(247, 89);
+            this.btnReceiveSwine.Size = new System.Drawing.Size(285, 89);
             this.btnReceiveSwine.TabIndex = 8;
             this.btnReceiveSwine.Text = "รับหมูเป็น";
             this.btnReceiveSwine.UseVisualStyleBackColor = false;
@@ -83,9 +148,9 @@
             this.btnReceiveCarcass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceiveCarcass.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnReceiveCarcass.ForeColor = System.Drawing.Color.White;
-            this.btnReceiveCarcass.Location = new System.Drawing.Point(266, 13);
+            this.btnReceiveCarcass.Location = new System.Drawing.Point(324, 33);
             this.btnReceiveCarcass.Name = "btnReceiveCarcass";
-            this.btnReceiveCarcass.Size = new System.Drawing.Size(247, 89);
+            this.btnReceiveCarcass.Size = new System.Drawing.Size(285, 89);
             this.btnReceiveCarcass.TabIndex = 9;
             this.btnReceiveCarcass.Text = "รับหมูซีก";
             this.btnReceiveCarcass.UseVisualStyleBackColor = false;
@@ -98,9 +163,9 @@
             this.btnReceiveByProductWhite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceiveByProductWhite.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnReceiveByProductWhite.ForeColor = System.Drawing.Color.White;
-            this.btnReceiveByProductWhite.Location = new System.Drawing.Point(519, 13);
+            this.btnReceiveByProductWhite.Location = new System.Drawing.Point(615, 33);
             this.btnReceiveByProductWhite.Name = "btnReceiveByProductWhite";
-            this.btnReceiveByProductWhite.Size = new System.Drawing.Size(247, 89);
+            this.btnReceiveByProductWhite.Size = new System.Drawing.Size(285, 89);
             this.btnReceiveByProductWhite.TabIndex = 10;
             this.btnReceiveByProductWhite.Text = "รับเครื่องในขาว";
             this.btnReceiveByProductWhite.UseVisualStyleBackColor = false;
@@ -113,9 +178,9 @@
             this.btnReceiveByProductRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceiveByProductRed.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnReceiveByProductRed.ForeColor = System.Drawing.Color.White;
-            this.btnReceiveByProductRed.Location = new System.Drawing.Point(13, 108);
+            this.btnReceiveByProductRed.Location = new System.Drawing.Point(33, 128);
             this.btnReceiveByProductRed.Name = "btnReceiveByProductRed";
-            this.btnReceiveByProductRed.Size = new System.Drawing.Size(247, 89);
+            this.btnReceiveByProductRed.Size = new System.Drawing.Size(285, 89);
             this.btnReceiveByProductRed.TabIndex = 11;
             this.btnReceiveByProductRed.Text = "รับเครื่องในแดง";
             this.btnReceiveByProductRed.UseVisualStyleBackColor = false;
@@ -128,9 +193,9 @@
             this.btnIssueCarcass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssueCarcass.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnIssueCarcass.ForeColor = System.Drawing.Color.White;
-            this.btnIssueCarcass.Location = new System.Drawing.Point(266, 108);
+            this.btnIssueCarcass.Location = new System.Drawing.Point(324, 128);
             this.btnIssueCarcass.Name = "btnIssueCarcass";
-            this.btnIssueCarcass.Size = new System.Drawing.Size(247, 89);
+            this.btnIssueCarcass.Size = new System.Drawing.Size(285, 89);
             this.btnIssueCarcass.TabIndex = 12;
             this.btnIssueCarcass.Text = "เบิกหมูซีกตัดแต่ง";
             this.btnIssueCarcass.UseVisualStyleBackColor = false;
@@ -143,9 +208,9 @@
             this.btnIssueCarcassForSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssueCarcassForSales.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnIssueCarcassForSales.ForeColor = System.Drawing.Color.White;
-            this.btnIssueCarcassForSales.Location = new System.Drawing.Point(519, 108);
+            this.btnIssueCarcassForSales.Location = new System.Drawing.Point(615, 128);
             this.btnIssueCarcassForSales.Name = "btnIssueCarcassForSales";
-            this.btnIssueCarcassForSales.Size = new System.Drawing.Size(247, 89);
+            this.btnIssueCarcassForSales.Size = new System.Drawing.Size(285, 89);
             this.btnIssueCarcassForSales.TabIndex = 13;
             this.btnIssueCarcassForSales.Text = "ขายหมูซีก";
             this.btnIssueCarcassForSales.UseVisualStyleBackColor = false;
@@ -158,9 +223,9 @@
             this.btnReceivePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceivePart.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnReceivePart.ForeColor = System.Drawing.Color.White;
-            this.btnReceivePart.Location = new System.Drawing.Point(13, 203);
+            this.btnReceivePart.Location = new System.Drawing.Point(33, 223);
             this.btnReceivePart.Name = "btnReceivePart";
-            this.btnReceivePart.Size = new System.Drawing.Size(247, 89);
+            this.btnReceivePart.Size = new System.Drawing.Size(285, 89);
             this.btnReceivePart.TabIndex = 14;
             this.btnReceivePart.Text = "รับชิ้นส่วน";
             this.btnReceivePart.UseVisualStyleBackColor = false;
@@ -173,9 +238,9 @@
             this.btnIssueHead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssueHead.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnIssueHead.ForeColor = System.Drawing.Color.White;
-            this.btnIssueHead.Location = new System.Drawing.Point(266, 203);
+            this.btnIssueHead.Location = new System.Drawing.Point(324, 223);
             this.btnIssueHead.Name = "btnIssueHead";
-            this.btnIssueHead.Size = new System.Drawing.Size(247, 89);
+            this.btnIssueHead.Size = new System.Drawing.Size(285, 89);
             this.btnIssueHead.TabIndex = 15;
             this.btnIssueHead.Text = "จ่ายหัว";
             this.btnIssueHead.UseVisualStyleBackColor = false;
@@ -188,9 +253,9 @@
             this.btnIssueByProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssueByProduct.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnIssueByProduct.ForeColor = System.Drawing.Color.White;
-            this.btnIssueByProduct.Location = new System.Drawing.Point(519, 203);
+            this.btnIssueByProduct.Location = new System.Drawing.Point(615, 223);
             this.btnIssueByProduct.Name = "btnIssueByProduct";
-            this.btnIssueByProduct.Size = new System.Drawing.Size(247, 89);
+            this.btnIssueByProduct.Size = new System.Drawing.Size(285, 89);
             this.btnIssueByProduct.TabIndex = 16;
             this.btnIssueByProduct.Text = "จ่ายเครื่องใน";
             this.btnIssueByProduct.UseVisualStyleBackColor = false;
@@ -203,33 +268,40 @@
             this.btnIssuePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssuePart.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnIssuePart.ForeColor = System.Drawing.Color.White;
-            this.btnIssuePart.Location = new System.Drawing.Point(13, 298);
+            this.btnIssuePart.Location = new System.Drawing.Point(33, 318);
             this.btnIssuePart.Name = "btnIssuePart";
-            this.btnIssuePart.Size = new System.Drawing.Size(247, 89);
+            this.btnIssuePart.Size = new System.Drawing.Size(285, 89);
             this.btnIssuePart.TabIndex = 17;
             this.btnIssuePart.Text = "จ่ายชิ้นส่วน";
             this.btnIssuePart.UseVisualStyleBackColor = false;
-            this.btnIssuePart.Click += new System.EventHandler(this.btnIssuePart_Click);
+            // 
+            // dragControl1
+            // 
+            this.dragControl1.SelectControl = this.panelHeader;
             // 
             // Form_Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 24F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 642);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(934, 681);
             this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.panelHeader);
             this.Font = new System.Drawing.Font("Kanit", 12F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Name = "Form_Menu";
-            this.Padding = new System.Windows.Forms.Padding(6);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_Menu";
+            this.panelHeader.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Panel panelHeader;
+        private System.Windows.Forms.Label lblCurrentDatetime;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnReceiveSwine;
         private System.Windows.Forms.Button btnReceiveCarcass;
@@ -241,5 +313,6 @@
         private System.Windows.Forms.Button btnIssueHead;
         private System.Windows.Forms.Button btnIssueByProduct;
         private System.Windows.Forms.Button btnIssuePart;
+        private DragControl dragControl1;
     }
 }

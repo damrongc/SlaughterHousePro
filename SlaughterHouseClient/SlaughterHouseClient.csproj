@@ -98,23 +98,23 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FormAnimator.cs" />
-    <Compile Include="Form_ByProductReceive.cs">
+    <Compile Include="Receiving\Form_ByProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_ByProductReceive.Designer.cs">
-      <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
+    <Compile Include="Receiving\Form_ByProduct.Designer.cs">
+      <DependentUpon>Form_ByProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_CarcassIssued.cs">
+    <Compile Include="Issued\Form_Carcass.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_CarcassIssued.Designer.cs">
-      <DependentUpon>Form_CarcassIssued.cs</DependentUpon>
+    <Compile Include="Issued\Form_Carcass.Designer.cs">
+      <DependentUpon>Form_Carcass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_CarcassReceive.cs">
+    <Compile Include="Receiving\Form_Carcass.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_CarcassReceive.Designer.cs">
-      <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
+    <Compile Include="Receiving\Form_Carcass.Designer.cs">
+      <DependentUpon>Form_Carcass.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Lot.cs">
       <SubType>Form</SubType>
@@ -122,10 +122,10 @@
     <Compile Include="Form_Lot.Designer.cs">
       <DependentUpon>Form_Lot.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Issued.cs">
+    <Compile Include="Issued\Form_Issued.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Issued.Designer.cs">
+    <Compile Include="Issued\Form_Issued.Designer.cs">
       <DependentUpon>Form_Issued.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Menu.cs">
@@ -134,23 +134,23 @@
     <Compile Include="Form_Menu.Designer.cs">
       <DependentUpon>Form_Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_ReceiveLot.cs">
+    <Compile Include="Receiving\Form_ReceiveLot.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_ReceiveLot.Designer.cs">
+    <Compile Include="Receiving\Form_ReceiveLot.Designer.cs">
       <DependentUpon>Form_ReceiveLot.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Receive.cs">
+    <Compile Include="Receiving\Form_Receive.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Receive.Designer.cs">
+    <Compile Include="Receiving\Form_Receive.Designer.cs">
       <DependentUpon>Form_Receive.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_SwineReceive.cs">
+    <Compile Include="Receiving\Form_Swine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_SwineReceive.Designer.cs">
-      <DependentUpon>Form_SwineReceive.cs</DependentUpon>
+    <Compile Include="Receiving\Form_Swine.Designer.cs">
+      <DependentUpon>Form_Swine.cs</DependentUpon>
     </Compile>
     <Compile Include="invoice.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
@@ -233,32 +233,32 @@
     <EmbeddedResource Include="CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_ByProductReceive.resx">
-      <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
+    <EmbeddedResource Include="Receiving\Form_ByProduct.resx">
+      <DependentUpon>Form_ByProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_CarcassIssued.resx">
-      <DependentUpon>Form_CarcassIssued.cs</DependentUpon>
+    <EmbeddedResource Include="Issued\Form_Carcass.resx">
+      <DependentUpon>Form_Carcass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_CarcassReceive.resx">
-      <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
+    <EmbeddedResource Include="Receiving\Form_Carcass.resx">
+      <DependentUpon>Form_Carcass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Lot.resx">
       <DependentUpon>Form_Lot.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Issued.resx">
+    <EmbeddedResource Include="Issued\Form_Issued.resx">
       <DependentUpon>Form_Issued.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Menu.resx">
       <DependentUpon>Form_Menu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_ReceiveLot.resx">
+    <EmbeddedResource Include="Receiving\Form_ReceiveLot.resx">
       <DependentUpon>Form_ReceiveLot.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Receive.resx">
+    <EmbeddedResource Include="Receiving\Form_Receive.resx">
       <DependentUpon>Form_Receive.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_SwineReceive.resx">
-      <DependentUpon>Form_SwineReceive.cs</DependentUpon>
+    <EmbeddedResource Include="Receiving\Form_Swine.resx">
+      <DependentUpon>Form_Swine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Notification.resx">
       <DependentUpon>Notification.cs</DependentUpon>

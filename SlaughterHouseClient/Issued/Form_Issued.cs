@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-namespace SlaughterHouseClient
+namespace SlaughterHouseClient.Issued
 {
     public partial class Form_Issued : Form
     {

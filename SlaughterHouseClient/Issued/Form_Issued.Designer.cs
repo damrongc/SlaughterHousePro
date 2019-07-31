@@ -1,4 +1,4 @@
-﻿namespace SlaughterHouseClient
+﻿namespace SlaughterHouseClient.Issued
 {
     partial class Form_Issued
     {
