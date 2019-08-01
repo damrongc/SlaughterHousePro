@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseServer
 {
-    partial class Form_Report_So_With_Inv
+    partial class Form_Report_So_Map_Inv
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         { 
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Report_So_With_Inv));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Report_So_Map_Inv));
             this.groupBoxReportName = new System.Windows.Forms.GroupBox();
             this.BtnShowReport = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();

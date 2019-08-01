@@ -42,12 +42,11 @@ namespace SlaughterHouseServer
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = ReportController.GetDataReportDailySales(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
-            string pathRpt = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\rpt\dailysales"));
-            string pathXml = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\xml\dailysales"));
-            ds.DataSetName = "NewDataSet";
-            ds.Tables[0].TableName = "Table";
-            ds.WriteXml(pathXml + ".xml", XmlWriteMode.WriteSchema);
-            doc.Load(pathRpt + ".rpt");
+            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report")); 
+            //ds.DataSetName = "NewDataSet";
+            //ds.Tables[0].TableName = "Table";
+            ds.WriteXml(path + @"\xml\dailysales.xml", XmlWriteMode.WriteSchema);
+            doc.Load(path + @"\dailysales.rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;

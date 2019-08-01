@@ -45,10 +45,10 @@ namespace SlaughterHouseServer
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = ReportController.GetDataReportStockMovement(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
-            string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\stockmovement"));
+            string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
-            ds.WriteXml(path + ".xml", XmlWriteMode.WriteSchema);
-            doc.Load(path + ".rpt");
+            ds.WriteXml(path + @"\xml\stockmovement.xml", XmlWriteMode.WriteSchema);
+            doc.Load(path + @"\stockmovement.rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;

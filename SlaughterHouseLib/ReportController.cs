@@ -206,7 +206,7 @@ namespace SlaughterHouseLib
             }
         }
 
-        public static DataSet GetDataReportSoWithInv(DateTime invoiceDateStr, DateTime invoiceDateEnd)
+        public static DataSet GetDataReportSoMapInv(DateTime invoiceDateStr, DateTime invoiceDateEnd)
         {
             try
             {

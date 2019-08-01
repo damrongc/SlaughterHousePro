@@ -9,11 +9,11 @@ using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_Report_So_With_Inv : Form
+    public partial class Form_Report_So_Map_Inv : Form
     {
         public string invoiceNo { get; set; } 
          
-        public Form_Report_So_With_Inv()
+        public Form_Report_So_Map_Inv()
         {
             InitializeComponent();
             UserSettingsComponent();
@@ -44,13 +44,11 @@ namespace SlaughterHouseServer
         private void LoadReport()
         {
             ReportDocument doc = new ReportDocument();
-            DataSet ds = ReportController.GetDataReportDailySales(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
-            string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\dailysales"));
+            DataSet ds = ReportController.GetDataReportSoMapInv(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
+            string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
-
-
-            ds.WriteXml(path + ".xml", XmlWriteMode.WriteSchema);
-            doc.Load(path + ".rpt");
+            ds.WriteXml(path + @"\xml\somapinvoice.xml", XmlWriteMode.WriteSchema);
+            doc.Load(path + @"\somapinvoice.rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;
