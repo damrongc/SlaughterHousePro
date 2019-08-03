@@ -42,7 +42,7 @@ namespace SlaughterHouseServer
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = ReportController.GetDataReportDailySales(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
-            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report")); 
+            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
             //ds.DataSetName = "NewDataSet";
             //ds.Tables[0].TableName = "Table";
             ds.WriteXml(path + @"\xml\dailysales.xml", XmlWriteMode.WriteSchema);
