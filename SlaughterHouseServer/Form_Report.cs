@@ -33,7 +33,7 @@ namespace SlaughterHouseServer
 
         private void BtnReportSoWithInv_Click(object sender, EventArgs e)
         {
-            var frm = new Form_Report_Daily_Sales
+            var frm = new Form_Report_So_Map_Inv 
             {
 
             };

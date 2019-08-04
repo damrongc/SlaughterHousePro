@@ -37,10 +37,10 @@ namespace SlaughterHouseServer
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = InvoiceController.GetDataPrintInvoice(invoiceNo); 
-            string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\invoice")); 
-
-            ds.WriteXml(path + ".xml", XmlWriteMode.WriteSchema);
-            doc.Load(path + ".rpt");
+            string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+            //string reportName = "invoice";
+            //ds.WriteXml(path + @"\xml\invoice.xml", XmlWriteMode.WriteSchema);
+            doc.Load(path + @"\invoice.rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;
@@ -49,4 +49,4 @@ namespace SlaughterHouseServer
         } 
     }
 }
- 
+;

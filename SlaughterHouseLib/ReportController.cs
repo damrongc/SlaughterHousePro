@@ -71,8 +71,8 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("invoice_date_str", invoiceDateStr.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("invoice_date_end", invoiceDateEnd.ToString("yyyy-MM-dd"));
 
-                    cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd-MM-yyyy"));
-                    cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd-MM-yyyy"));
+                    cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd/MM/yyyy"));
+                    cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd/MM/yyyy"));
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);
@@ -111,6 +111,7 @@ namespace SlaughterHouseLib
                                     sk.stock_item,
                                     sk.product_code,
                                     p.product_name,
+                                    sk.lot_no, 
                                     sk.stock_qty,
                                     sk.stock_wgh,
                                     sk.ref_document_type,
@@ -121,6 +122,8 @@ namespace SlaughterHouseLib
                                     sk.transaction_type,
                                     lo.location_name,
                                     dc.description,
+                                    pl.plant_name,
+                                    pl.address AS plant_address,
                                     @show_date_str as date_str,
                                     @show_date_end as date_end,
                                     case when sk.transaction_type = 1 then 'รับ' else 'จ่าย' end as transaction_type_name
@@ -132,14 +135,16 @@ namespace SlaughterHouseLib
                                     location lo ON sk.location_code = lo.location_code
                                         LEFT JOIN
                                     document_generate dc ON sk.ref_document_type = dc.document_type
+                                        INNER JOIN 
+                                    plant pl ON pl.plant_id = 1
                                 WHERE sk.stock_date >= @date_str 
-                                    AND sk.stock_date <= @date_end 
+                                    AND sk.stock_date <= @date_end  
                                 ";
                     // WHERE sk.stock_date BETWEEN @date_str AND @date_end
                     // AND sk.stock_date <= @date_end
                     var cmd = new MySqlCommand(sql, conn); 
-                    cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd-MM-yyyy"));
-                    cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd-MM-yyyy"));
+                    cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd/MM/yyyy"));
+                    cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd/MM/yyyy"));
                     cmd.Parameters.AddWithValue("date_str", invoiceDateStr.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("date_end", invoiceDateEnd.ToString("yyyy-MM-dd"));
                     var da = new MySqlDataAdapter(cmd);
@@ -172,23 +177,30 @@ namespace SlaughterHouseLib
                                     0 as qty_cf,
                                     0 as wgh_cf,
 	                                sk.lot_no, 
-                                    u.unit_name,
+                                    uq.unit_name as unit_name_qty,
+                                    uw.unit_name as unit_name_wgh,
+                                pl.plant_name,
+                                pl.address AS plant_address,
 	                                DATE_FORMAT(@date_period, '%m-%Y')  as show_date_period 
                                 FROM
 	                                stock sk,
                                     product p,
-	                                unit_of_measurement u
+	                                unit_of_measurement uq,
+	                                unit_of_measurement uw,
+                                    plant pl
                                 where 1=1
                                 and DATE_FORMAT(sk.stock_date, '%Y-%m-01') = DATE_FORMAT(@date_period, '%Y-%m-01') 
                                 and sk.product_code = p.product_code 
-                                and u.unit_code = p.unit_of_qty 
+                                and uq.unit_code = p.unit_of_qty 
+                                and uw.unit_code = p.unit_of_wgh 
+                                AND pl.plant_id = 1
                                 group by sk.product_code,
 	                                p.product_name, 
 	                                sk.lot_no
                                 ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("date_period", invoiceDatePeriod.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("show_date_period", invoiceDatePeriod.ToString("dd-MM-yyyy")); 
+                    cmd.Parameters.AddWithValue("show_date_period", invoiceDatePeriod.ToString("dd/MM/yyyy")); 
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);
@@ -213,14 +225,34 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @" 
+                    var sql = @"select o.order_no, o.order_date, otm.product_code, po.product_name, 
+                                CASE WHEN po.issue_unit_method = 'Q' THEN otm.order_qty ELSE otm.order_wgh END as qty_wgh, uo.unit_name,
+                                i.invoice_no, i.invoice_date , itm.product_code as product_code_inv, pi.product_name as product_name_inv ,
+                                itm.qty, itm.wgh, uiq.unit_name as unit_name_qty_inv, uiw.unit_name as unit_name_wgh_inv,
+                                pl.plant_name, pl.address,
+                                IFNULL(CASE WHEN po.issue_unit_method = 'Q' THEN otm.order_qty-itm.qty ELSE otm.order_wgh-itm.wgh END, 0) as qty_wgh_diff,
+                                    @show_date_str as date_str,
+                                    @show_date_end as date_end
+                                from orders as o
+	                                inner join order_item as otm on o.order_no = otm.order_no
+                                    left join invoice as i on i.ref_document_no = o.order_no
+                                    left join invoice_item as itm on itm.invoice_no = i.invoice_no and itm.product_code = otm.product_code
+                                    inner join plant as pl ON pl.plant_id = 1
+                                    inner join product as po ON po.product_code = otm.product_code
+                                    inner join unit_of_measurement as uo on uo.unit_code = CASE WHEN po.issue_unit_method = 'Q' THEN po.unit_of_qty else po.unit_of_wgh end
+                                    left join product as pi ON pi.product_code = itm.product_code
+                                    left join unit_of_measurement as uiq on uiq.unit_code = pi.unit_of_qty
+                                    left join unit_of_measurement as uiw on uiw.unit_code = pi.unit_of_wgh
+                                 WHERE o.order_date >= @date_str 
+                                    AND o.order_date <= @date_end  
+                                 order by o.order_date, o.order_no, i.invoice_date, i.invoice_no 
                                 ";
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("invoice_date_str", invoiceDateStr.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("invoice_date_end", invoiceDateEnd.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("date_str", invoiceDateStr.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("date_end", invoiceDateEnd.ToString("yyyy-MM-dd"));
 
-                    cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd-MM-yyyy"));
-                    cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd-MM-yyyy"));
+                    cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd/MM/yyyy"));
+                    cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd/MM/yyyy"));
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);

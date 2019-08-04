@@ -47,7 +47,7 @@ namespace SlaughterHouseServer
             DataSet ds = ReportController.GetDataReportStockBalance(dtpInvoiceDatePeriod.Value);
             string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
-            ds.WriteXml(path + @"\xml\stockbalance.xml", XmlWriteMode.WriteSchema);
+            //ds.WriteXml(path + @"\xml\stockbalance.xml", XmlWriteMode.WriteSchema);
             doc.Load(path + @"\stockbalance.rpt");
             doc.SetDataSource(ds);
 

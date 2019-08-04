@@ -121,7 +121,7 @@
             this.rptViewer.TabIndex = 2;
             this.rptViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
-            // Form_Report_So_With_Inv
+            // Form_Report_So_Map_Inv
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1184, 661);
@@ -129,9 +129,8 @@
             this.Controls.Add(this.groupBoxReportName);
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_Report_So_With_Inv";
+            this.Name = "Form_Report_So_Map_Inv";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_Report_Daily_Sales";
             this.groupBoxReportName.ResumeLayout(false);

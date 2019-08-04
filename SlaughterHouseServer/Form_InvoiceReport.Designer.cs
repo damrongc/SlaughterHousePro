@@ -64,7 +64,6 @@
             this.Controls.Add(this.groupBoxReportName);
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form_InvoiceReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

@@ -106,11 +106,10 @@
             this.Controls.Add(this.groupBoxReportName);
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form_Report_Stock_Balance";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form_Report_Stock_Movement";
+            this.Text = "Form_Report_Stock_Balance";
             this.groupBoxReportName.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

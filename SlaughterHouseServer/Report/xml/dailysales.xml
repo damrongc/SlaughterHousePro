@@ -49,6 +49,42 @@
     </xs:element>
   </xs:schema>
   <Table>
+    <invoice_no>INV0000003</invoice_no>
+    <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000012</ref_document_no>
+    <customer_code>002</customer_code>
+    <gross_amt_hd>22500.00</gross_amt_hd>
+    <discount_hd>350.00</discount_hd>
+    <before_vat_hd>22150.00</before_vat_hd>
+    <vat_rate_hd>7.00</vat_rate_hd>
+    <vat_amt_hd>1550.50</vat_amt_hd>
+    <net_amt_hd>23700.50</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>1</seq>
+    <qty_wgh>150.00</qty_wgh>
+    <qty>0</qty>
+    <wgh>150.00</wgh>
+    <unit_price>150.00</unit_price>
+    <gross_amt>22500.00</gross_amt>
+    <discount>0</discount>
+    <before_vat>22500.00</before_vat>
+    <vat_amt>0</vat_amt>
+    <net_amt>0</net_amt>
+    <customer_name>จอนวิค</customer_name>
+    <address>1880 สารทร กรุงเทพ 120520</address>
+    <ship_to>บางรัก</ship_to>
+    <tax_id>1759000021</tax_id>
+    <contact_no>0981562200</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-07-2019</date_str>
+    <date_end>03-08-2019</date_end>
+  </Table>
+  <Table>
     <invoice_no>INV0000004</invoice_no>
     <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
     <ref_document_no>SO00000011</ref_document_no>
@@ -83,7 +119,7 @@
     <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
     <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
     <date_str>01-07-2019</date_str>
-    <date_end>01-08-2019</date_end>
+    <date_end>03-08-2019</date_end>
   </Table>
   <Table>
     <invoice_no>INV0000004</invoice_no>
@@ -120,80 +156,7 @@
     <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
     <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
     <date_str>01-07-2019</date_str>
-    <date_end>01-08-2019</date_end>
-  </Table>
-  <Table>
-    <invoice_no>INV0000004</invoice_no>
-    <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
-    <ref_document_no>SO00000011</ref_document_no>
-    <customer_code>001</customer_code>
-    <gross_amt_hd>0</gross_amt_hd>
-    <discount_hd>0</discount_hd>
-    <before_vat_hd>0</before_vat_hd>
-    <vat_rate_hd>7.00</vat_rate_hd>
-    <vat_amt_hd>0</vat_amt_hd>
-    <net_amt_hd>0</net_amt_hd>
-    <invoice_flag>0</invoice_flag>
-    <comments />
-    <product_code>P005</product_code>
-    <product_name>หางหมู</product_name>
-    <unit_name>ชิ้น</unit_name>
-    <seq>3</seq>
-    <qty_wgh>15.00</qty_wgh>
-    <qty>15</qty>
-    <wgh>0.00</wgh>
-    <unit_price>77.00</unit_price>
-    <gross_amt>1155.00</gross_amt>
-    <discount>0</discount>
-    <before_vat>1155.00</before_vat>
-    <vat_amt>0</vat_amt>
-    <net_amt>0</net_amt>
-    <customer_name>Iron Man</customer_name>
-    <address>10880 Malibu Point, Florida United Sta
-320032</address>
-    <ship_to>Malibu</ship_to>
-    <tax_id>1234455587</tax_id>
-    <contact_no>0981562333</contact_no>
-    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
-    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
-    <date_str>01-07-2019</date_str>
-    <date_end>01-08-2019</date_end>
-  </Table>
-  <Table>
-    <invoice_no>INV0000003</invoice_no>
-    <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
-    <ref_document_no>SO00000012</ref_document_no>
-    <customer_code>002</customer_code>
-    <gross_amt_hd>22500.00</gross_amt_hd>
-    <discount_hd>350.00</discount_hd>
-    <before_vat_hd>22150.00</before_vat_hd>
-    <vat_rate_hd>7.00</vat_rate_hd>
-    <vat_amt_hd>1550.50</vat_amt_hd>
-    <net_amt_hd>23700.50</net_amt_hd>
-    <invoice_flag>0</invoice_flag>
-    <comments />
-    <product_code>P002</product_code>
-    <product_name>หมูซีก</product_name>
-    <unit_name>กิโลกรัม</unit_name>
-    <seq>1</seq>
-    <qty_wgh>150.00</qty_wgh>
-    <qty>0</qty>
-    <wgh>150.00</wgh>
-    <unit_price>150.00</unit_price>
-    <gross_amt>22500.00</gross_amt>
-    <discount>0</discount>
-    <before_vat>22500.00</before_vat>
-    <vat_amt>0</vat_amt>
-    <net_amt>0</net_amt>
-    <customer_name>จอนวิค</customer_name>
-    <address>1880 สารทร กรุงเทพ 120520</address>
-    <ship_to>บางรัก</ship_to>
-    <tax_id>1759000021</tax_id>
-    <contact_no>0981562200</contact_no>
-    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
-    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
-    <date_str>01-07-2019</date_str>
-    <date_end>01-08-2019</date_end>
+    <date_end>03-08-2019</date_end>
   </Table>
   <Table>
     <invoice_no>INV0000005</invoice_no>
@@ -230,7 +193,7 @@
     <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
     <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
     <date_str>01-07-2019</date_str>
-    <date_end>01-08-2019</date_end>
+    <date_end>03-08-2019</date_end>
   </Table>
   <Table>
     <invoice_no>INV0000005</invoice_no>
@@ -267,13 +230,50 @@
     <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
     <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
     <date_str>01-07-2019</date_str>
-    <date_end>01-08-2019</date_end>
+    <date_end>03-08-2019</date_end>
   </Table>
   <Table>
     <invoice_no>INV0000006</invoice_no>
-    <invoice_date>2019-07-23T00:00:00+07:00</invoice_date>
+    <invoice_date>2019-07-29T00:00:00+07:00</invoice_date>
     <ref_document_no>SO00000014</ref_document_no>
-    <customer_code>003</customer_code>
+    <customer_code>001</customer_code>
+    <gross_amt_hd>3810.00</gross_amt_hd>
+    <discount_hd>300.00</discount_hd>
+    <before_vat_hd>3510.00</before_vat_hd>
+    <vat_rate_hd>7.00</vat_rate_hd>
+    <vat_amt_hd>245.70</vat_amt_hd>
+    <net_amt_hd>3755.70</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P001</product_code>
+    <product_name>หมูเป็น</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>1</seq>
+    <qty_wgh>120.00</qty_wgh>
+    <qty>22</qty>
+    <wgh>120.00</wgh>
+    <unit_price>13.00</unit_price>
+    <gross_amt>1560.00</gross_amt>
+    <discount>0</discount>
+    <before_vat>1560.00</before_vat>
+    <vat_amt>0</vat_amt>
+    <net_amt>0</net_amt>
+    <customer_name>Iron Man</customer_name>
+    <address>10880 Malibu Point, Florida United Sta
+320032</address>
+    <ship_to>Malibu</ship_to>
+    <tax_id>1234455587</tax_id>
+    <contact_no>0981562333</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-07-2019</date_str>
+    <date_end>03-08-2019</date_end>
+  </Table>
+  <Table>
+    <invoice_no>INV0000006</invoice_no>
+    <invoice_date>2019-07-29T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000014</ref_document_no>
+    <customer_code>001</customer_code>
     <gross_amt_hd>0</gross_amt_hd>
     <discount_hd>0</discount_hd>
     <before_vat_hd>0</before_vat_hd>
@@ -282,65 +282,65 @@
     <net_amt_hd>0</net_amt_hd>
     <invoice_flag>0</invoice_flag>
     <comments />
-    <product_code>P002</product_code>
-    <product_name>หมูซีก</product_name>
+    <product_code>P004</product_code>
+    <product_name>เครื่องใน</product_name>
     <unit_name>กิโลกรัม</unit_name>
     <seq>2</seq>
-    <qty_wgh>200.00</qty_wgh>
-    <qty>0</qty>
-    <wgh>200.00</wgh>
-    <unit_price>150.00</unit_price>
-    <gross_amt>30000.00</gross_amt>
+    <qty_wgh>30.00</qty_wgh>
+    <qty>1</qty>
+    <wgh>30.00</wgh>
+    <unit_price>75.00</unit_price>
+    <gross_amt>2250.00</gross_amt>
     <discount>0</discount>
-    <before_vat>30000.00</before_vat>
+    <before_vat>2250.00</before_vat>
     <vat_amt>0</vat_amt>
     <net_amt>0</net_amt>
-    <customer_name>สมชาย ใจดี</customer_name>
-    <address>12/7 ต.นาขวาง อ.เมือง
-จ.สมุทรสาคร 75000</address>
-    <ship_to>โกดัง 15 ท่าเรือมมหาชัย</ship_to>
-    <tax_id>1254785695</tax_id>
-    <contact_no>0997847589</contact_no>
+    <customer_name>Iron Man</customer_name>
+    <address>10880 Malibu Point, Florida United Sta
+320032</address>
+    <ship_to>Malibu</ship_to>
+    <tax_id>1234455587</tax_id>
+    <contact_no>0981562333</contact_no>
     <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
     <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
     <date_str>01-07-2019</date_str>
-    <date_end>01-08-2019</date_end>
+    <date_end>03-08-2019</date_end>
   </Table>
   <Table>
-    <invoice_no>INV0000006</invoice_no>
-    <invoice_date>2019-07-23T00:00:00+07:00</invoice_date>
-    <ref_document_no>SO00000014</ref_document_no>
-    <customer_code>003</customer_code>
-    <gross_amt_hd>68500.00</gross_amt_hd>
-    <discount_hd>800.00</discount_hd>
-    <before_vat_hd>67700.00</before_vat_hd>
+    <invoice_no>INV0000004</invoice_no>
+    <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000011</ref_document_no>
+    <customer_code>001</customer_code>
+    <gross_amt_hd>0</gross_amt_hd>
+    <discount_hd>0</discount_hd>
+    <before_vat_hd>0</before_vat_hd>
     <vat_rate_hd>7.00</vat_rate_hd>
-    <vat_amt_hd>4739.00</vat_amt_hd>
-    <net_amt_hd>72439.00</net_amt_hd>
+    <vat_amt_hd>0</vat_amt_hd>
+    <net_amt_hd>0</net_amt_hd>
     <invoice_flag>0</invoice_flag>
     <comments />
     <product_code>P005</product_code>
     <product_name>หางหมู</product_name>
     <unit_name>ชิ้น</unit_name>
-    <seq>1</seq>
-    <qty_wgh>500.00</qty_wgh>
-    <qty>500</qty>
+    <seq>3</seq>
+    <qty_wgh>15.00</qty_wgh>
+    <qty>15</qty>
     <wgh>0.00</wgh>
     <unit_price>77.00</unit_price>
-    <gross_amt>38500.00</gross_amt>
+    <gross_amt>1155.00</gross_amt>
     <discount>0</discount>
-    <before_vat>38500.00</before_vat>
+    <before_vat>1155.00</before_vat>
     <vat_amt>0</vat_amt>
     <net_amt>0</net_amt>
-    <customer_name>สมชาย ใจดี</customer_name>
-    <address>12/7 ต.นาขวาง อ.เมือง
-จ.สมุทรสาคร 75000</address>
-    <ship_to>โกดัง 15 ท่าเรือมมหาชัย</ship_to>
-    <tax_id>1254785695</tax_id>
-    <contact_no>0997847589</contact_no>
+    <customer_name>Iron Man</customer_name>
+    <address>10880 Malibu Point, Florida United Sta
+320032</address>
+    <ship_to>Malibu</ship_to>
+    <tax_id>1234455587</tax_id>
+    <contact_no>0981562333</contact_no>
     <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
     <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
     <date_str>01-07-2019</date_str>
-    <date_end>01-08-2019</date_end>
+    <date_end>03-08-2019</date_end>
   </Table>
 </NewDataSet>
