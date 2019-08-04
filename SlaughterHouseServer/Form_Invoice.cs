@@ -74,10 +74,11 @@ namespace SlaughterHouseServer
                             {
                                 invoiceNo = invoiceNo
                             };
-                            if (frmPrint.ShowDialog() == DialogResult.OK)
-                            {
-                                LoadInvoice();
-                            }
+                            frmPrint.ShowDialog();
+                            //if (frmPrint.ShowDialog() == DialogResult.OK)
+                            //{
+                            //    LoadInvoice();
+                            //}
                             break;
                     } 
                 }
