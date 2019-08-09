@@ -172,7 +172,7 @@
             this.btnAddOrderItem.TabIndex = 39;
             this.btnAddOrderItem.Text = "เพิ่ม";
             this.btnAddOrderItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddOrderItem.UseVisualStyleBackColor = false;
+            this.btnAddOrderItem.UseVisualStyleBackColor = false; 
             // 
             // panel2
             // 

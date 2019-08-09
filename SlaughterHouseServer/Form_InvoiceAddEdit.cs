@@ -171,10 +171,26 @@ namespace SlaughterHouseServer
 #region Event Click
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
+            
+    
             try
             {
+                for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
+                {
+                    if (Convert.ToDecimal(dtInvoiceItem.Rows[i]["unit_price"]) == 0)
+                    {
+                        MessageBox.Show($"สินค้า {dtInvoiceItem.Rows[i]["product_name"]} ไม่มีราคาประกาศ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
                 SaveInvoice();
-                MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var frmPrint = new Form_InvoiceReport
+                {
+                    invoiceNo = invoiceNo
+                };
+                frmPrint.ShowDialog();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

@@ -125,6 +125,7 @@ namespace SlaughterHouseServer
             
             var frm = new Form_OrderDetail();
             frm.qtyWgh = 0;
+            frm.orderDate = dtpRequestDate.Value;
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 DataRow dr;
@@ -285,5 +286,6 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
+         
     }
 }

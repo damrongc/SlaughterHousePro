@@ -144,7 +144,7 @@ namespace SlaughterHouseLib.Models
                     conn.Open();
                     var sql = "";
 
-                    sql = @"select unit_price
+                    sql = @"select COALESCE(unit_price)
 	                        from product_price p
                             where start_date <=@start_date
                              and end_date >=@end_date

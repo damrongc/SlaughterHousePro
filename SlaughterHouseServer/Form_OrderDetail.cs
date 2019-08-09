@@ -12,7 +12,7 @@ namespace SlaughterHouseServer
         public int unitCode { get; set; }
         public string unitName { get; set; }
         public string issueUnitMethod { get; set; }
-
+        public DateTime orderDate { get; set; }
 
         public Form_OrderDetail()
         {
@@ -80,6 +80,20 @@ namespace SlaughterHouseServer
       
         private void btnAddOrderItem_Click(object sender, System.EventArgs e)
         {
+            ProductPrice productPrice;
+            try
+            {
+                productPrice = ProductPriceController.GetPriceList(cboProduct.SelectedValue.ToString(), this.orderDate);
+                if (productPrice.UnitPrice == 0)
+                {
+                    MessageBox.Show("สินค้านี้ไม่มีราคาประกาศตามวันที่ต้องการสินค้า", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            catch
+            {
+
+            }
             try
             {
                 this.productCode = cboProduct.SelectedValue.ToString();

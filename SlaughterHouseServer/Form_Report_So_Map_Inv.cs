@@ -47,7 +47,7 @@ namespace SlaughterHouseServer
             DataSet ds = ReportController.GetDataReportSoMapInv(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
             string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
-            ds.WriteXml(path + @"\xml\somapinvoice.xml", XmlWriteMode.WriteSchema);
+            //ds.WriteXml(path + @"\xml\somapinvoice.xml", XmlWriteMode.WriteSchema);
             doc.Load(path + @"\somapinvoice.rpt");
             doc.SetDataSource(ds);
 
