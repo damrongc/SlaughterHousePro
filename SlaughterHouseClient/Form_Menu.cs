@@ -28,18 +28,23 @@ namespace SlaughterHouseClient
             var frm = new Receiving.Form_Carcass();
             frm.ShowDialog();
         }
+        private void btnReceiveHead_Click(object sender, EventArgs e)
+        {
+            var frm = new Receiving.Form_ByProduct("P003");
+            frm.ShowDialog();
+        }
 
         private void btnReceiveByProductWhite_Click(object sender, EventArgs e)
         {
 
-            var frm = new Receiving.Form_ByProduct();
+            var frm = new Receiving.Form_ByProduct("P005");
             frm.ShowDialog();
         }
 
         private void btnReceiveByProductRed_Click(object sender, EventArgs e)
         {
 
-            var frm = new Receiving.Form_ByProduct();
+            var frm = new Receiving.Form_ByProduct("P004");
             frm.ShowDialog();
         }
 
@@ -78,5 +83,7 @@ namespace SlaughterHouseClient
         {
             Application.Exit();
         }
+
+
     }
 }

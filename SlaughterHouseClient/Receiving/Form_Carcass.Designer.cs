@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Carcass));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblCurrentDatetime = new System.Windows.Forms.Label();
@@ -47,7 +48,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.lblQueueNo = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.btnStart = new System.Windows.Forms.Button();
             this.lblSwineQty = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.lblRemainQty = new System.Windows.Forms.Label();
@@ -56,8 +56,13 @@
             this.label20 = new System.Windows.Forms.Label();
             this.lblStockWgh = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.btnStop = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.BtnOK = new System.Windows.Forms.Button();
+            this.BgwMinWeight = new System.ComponentModel.BackgroundWorker();
+            this.TmMinWeight = new System.Windows.Forms.Timer(this.components);
+            this.btnZero = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,7 +75,7 @@
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(934, 54);
+            this.panelHeader.Size = new System.Drawing.Size(1024, 54);
             this.panelHeader.TabIndex = 0;
             // 
             // lblCurrentDatetime
@@ -78,7 +83,7 @@
             this.lblCurrentDatetime.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblCurrentDatetime.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblCurrentDatetime.ForeColor = System.Drawing.Color.White;
-            this.lblCurrentDatetime.Location = new System.Drawing.Point(708, 0);
+            this.lblCurrentDatetime.Location = new System.Drawing.Point(798, 0);
             this.lblCurrentDatetime.Name = "lblCurrentDatetime";
             this.lblCurrentDatetime.Size = new System.Drawing.Size(150, 54);
             this.lblCurrentDatetime.TabIndex = 14;
@@ -97,7 +102,7 @@
             this.btnExit.ForeColor = System.Drawing.Color.White;
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(858, 0);
+            this.btnExit.Location = new System.Drawing.Point(948, 0);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(76, 54);
             this.btnExit.TabIndex = 13;
@@ -127,7 +132,7 @@
             this.lblWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblWeight.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblWeight.Font = new System.Drawing.Font("Kanit", 120F);
-            this.lblWeight.Location = new System.Drawing.Point(415, 90);
+            this.lblWeight.Location = new System.Drawing.Point(507, 88);
             this.lblWeight.Name = "lblWeight";
             this.lblWeight.Size = new System.Drawing.Size(505, 230);
             this.lblWeight.TabIndex = 5;
@@ -138,7 +143,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label4.Location = new System.Drawing.Point(753, 57);
+            this.label4.Location = new System.Drawing.Point(845, 55);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(169, 33);
             this.label4.TabIndex = 6;
@@ -151,7 +156,7 @@
             this.btnReceiveNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceiveNo.Font = new System.Drawing.Font("Kanit", 16F);
             this.btnReceiveNo.ForeColor = System.Drawing.Color.White;
-            this.btnReceiveNo.Location = new System.Drawing.Point(263, 90);
+            this.btnReceiveNo.Location = new System.Drawing.Point(355, 88);
             this.btnReceiveNo.Name = "btnReceiveNo";
             this.btnReceiveNo.Size = new System.Drawing.Size(146, 43);
             this.btnReceiveNo.TabIndex = 7;
@@ -178,7 +183,7 @@
             this.lblReceiveNo.ForeColor = System.Drawing.Color.Black;
             this.lblReceiveNo.Location = new System.Drawing.Point(18, 90);
             this.lblReceiveNo.Name = "lblReceiveNo";
-            this.lblReceiveNo.Size = new System.Drawing.Size(239, 43);
+            this.lblReceiveNo.Size = new System.Drawing.Size(331, 43);
             this.lblReceiveNo.TabIndex = 9;
             // 
             // lblFarm
@@ -188,9 +193,9 @@
             this.lblFarm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblFarm.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblFarm.ForeColor = System.Drawing.Color.Black;
-            this.lblFarm.Location = new System.Drawing.Point(19, 181);
+            this.lblFarm.Location = new System.Drawing.Point(19, 182);
             this.lblFarm.Name = "lblFarm";
-            this.lblFarm.Size = new System.Drawing.Size(390, 43);
+            this.lblFarm.Size = new System.Drawing.Size(482, 43);
             this.lblFarm.TabIndex = 11;
             // 
             // label8
@@ -210,7 +215,7 @@
             this.lblTruckNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTruckNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblTruckNo.ForeColor = System.Drawing.Color.Black;
-            this.lblTruckNo.Location = new System.Drawing.Point(19, 277);
+            this.lblTruckNo.Location = new System.Drawing.Point(19, 274);
             this.lblTruckNo.Name = "lblTruckNo";
             this.lblTruckNo.Size = new System.Drawing.Size(238, 43);
             this.lblTruckNo.TabIndex = 13;
@@ -232,7 +237,7 @@
             this.lblBreeder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblBreeder.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblBreeder.ForeColor = System.Drawing.Color.Black;
-            this.lblBreeder.Location = new System.Drawing.Point(19, 367);
+            this.lblBreeder.Location = new System.Drawing.Point(19, 366);
             this.lblBreeder.Name = "lblBreeder";
             this.lblBreeder.Size = new System.Drawing.Size(238, 43);
             this.lblBreeder.TabIndex = 15;
@@ -254,9 +259,9 @@
             this.lblQueueNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblQueueNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblQueueNo.ForeColor = System.Drawing.Color.Black;
-            this.lblQueueNo.Location = new System.Drawing.Point(263, 277);
+            this.lblQueueNo.Location = new System.Drawing.Point(263, 274);
             this.lblQueueNo.Name = "lblQueueNo";
-            this.lblQueueNo.Size = new System.Drawing.Size(146, 43);
+            this.lblQueueNo.Size = new System.Drawing.Size(238, 43);
             this.lblQueueNo.TabIndex = 17;
             // 
             // label14
@@ -269,21 +274,6 @@
             this.label14.TabIndex = 16;
             this.label14.Text = "คิวที่";
             // 
-            // btnStart
-            // 
-            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
-            this.btnStart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Font = new System.Drawing.Font("Kanit", 16F);
-            this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(415, 429);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(146, 43);
-            this.btnStart.TabIndex = 18;
-            this.btnStart.Text = "เริ่มชั่ง";
-            this.btnStart.UseVisualStyleBackColor = false;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
             // lblSwineQty
             // 
             this.lblSwineQty.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -291,7 +281,7 @@
             this.lblSwineQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSwineQty.Font = new System.Drawing.Font("Kanit", 50F);
             this.lblSwineQty.ForeColor = System.Drawing.Color.Black;
-            this.lblSwineQty.Location = new System.Drawing.Point(19, 521);
+            this.lblSwineQty.Location = new System.Drawing.Point(19, 612);
             this.lblSwineQty.Name = "lblSwineQty";
             this.lblSwineQty.Size = new System.Drawing.Size(175, 97);
             this.lblSwineQty.TabIndex = 20;
@@ -302,11 +292,11 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label16.Location = new System.Drawing.Point(13, 488);
+            this.label16.Location = new System.Drawing.Point(14, 579);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(177, 33);
+            this.label16.Size = new System.Drawing.Size(147, 33);
             this.label16.TabIndex = 19;
-            this.label16.Text = "จำนวน (เป้าหมาย)";
+            this.label16.Text = "จำนวน (ฟาร์ม)";
             // 
             // lblRemainQty
             // 
@@ -315,7 +305,7 @@
             this.lblRemainQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblRemainQty.Font = new System.Drawing.Font("Kanit", 50F);
             this.lblRemainQty.ForeColor = System.Drawing.Color.Black;
-            this.lblRemainQty.Location = new System.Drawing.Point(200, 521);
+            this.lblRemainQty.Location = new System.Drawing.Point(239, 612);
             this.lblRemainQty.Name = "lblRemainQty";
             this.lblRemainQty.Size = new System.Drawing.Size(175, 97);
             this.lblRemainQty.TabIndex = 22;
@@ -326,7 +316,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label18.Location = new System.Drawing.Point(194, 488);
+            this.label18.Location = new System.Drawing.Point(233, 579);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(146, 33);
             this.label18.TabIndex = 21;
@@ -339,7 +329,7 @@
             this.lblStockQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblStockQty.Font = new System.Drawing.Font("Kanit", 50F);
             this.lblStockQty.ForeColor = System.Drawing.Color.Black;
-            this.lblStockQty.Location = new System.Drawing.Point(407, 521);
+            this.lblStockQty.Location = new System.Drawing.Point(459, 612);
             this.lblStockQty.Name = "lblStockQty";
             this.lblStockQty.Size = new System.Drawing.Size(175, 97);
             this.lblStockQty.TabIndex = 24;
@@ -350,7 +340,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label20.Location = new System.Drawing.Point(399, 488);
+            this.label20.Location = new System.Drawing.Point(453, 579);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(158, 33);
             this.label20.TabIndex = 23;
@@ -363,7 +353,7 @@
             this.lblStockWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblStockWgh.Font = new System.Drawing.Font("Kanit", 50F);
             this.lblStockWgh.ForeColor = System.Drawing.Color.Black;
-            this.lblStockWgh.Location = new System.Drawing.Point(588, 521);
+            this.lblStockWgh.Location = new System.Drawing.Point(679, 612);
             this.lblStockWgh.Name = "lblStockWgh";
             this.lblStockWgh.Size = new System.Drawing.Size(332, 97);
             this.lblStockWgh.TabIndex = 26;
@@ -374,26 +364,11 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label22.Location = new System.Drawing.Point(808, 488);
+            this.label22.Location = new System.Drawing.Point(902, 579);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(112, 33);
             this.label22.TabIndex = 25;
             this.label22.Text = "น้ำหนักรวม";
-            // 
-            // btnStop
-            // 
-            this.btnStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
-            this.btnStop.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStop.Font = new System.Drawing.Font("Kanit", 16F);
-            this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(719, 429);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(146, 43);
-            this.btnStop.TabIndex = 27;
-            this.btnStop.Text = "ปิดงาน";
-            this.btnStop.UseVisualStyleBackColor = false;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // lblMessage
             // 
@@ -401,20 +376,81 @@
             this.lblMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblMessage.Font = new System.Drawing.Font("Kanit", 16F);
             this.lblMessage.ForeColor = System.Drawing.Color.White;
-            this.lblMessage.Location = new System.Drawing.Point(0, 648);
+            this.lblMessage.Location = new System.Drawing.Point(0, 718);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(934, 33);
+            this.lblMessage.Size = new System.Drawing.Size(1024, 50);
             this.lblMessage.TabIndex = 28;
             this.lblMessage.Text = "Message";
             this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Form_CarcassReceive
+            // btnStop
+            // 
+            this.btnStop.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnStop.Location = new System.Drawing.Point(649, 367);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(136, 70);
+            this.btnStop.TabIndex = 35;
+            this.btnStop.Text = "ยกเลิก";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnStart.Location = new System.Drawing.Point(507, 367);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(136, 70);
+            this.btnStart.TabIndex = 34;
+            this.btnStart.Text = "เริ่มชั่ง";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // BtnOK
+            // 
+            this.BtnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
+            this.BtnOK.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.BtnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOK.Font = new System.Drawing.Font("Kanit", 20F);
+            this.BtnOK.ForeColor = System.Drawing.Color.White;
+            this.BtnOK.Location = new System.Drawing.Point(876, 367);
+            this.BtnOK.Name = "BtnOK";
+            this.BtnOK.Size = new System.Drawing.Size(136, 70);
+            this.BtnOK.TabIndex = 33;
+            this.BtnOK.Text = "ตกลง";
+            this.BtnOK.UseVisualStyleBackColor = false;
+            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
+            // 
+            // BgwMinWeight
+            // 
+            this.BgwMinWeight.WorkerReportsProgress = true;
+            this.BgwMinWeight.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgwMinWeight_DoWork);
+            this.BgwMinWeight.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BgwMinWeight_RunWorkerCompleted);
+            // 
+            // TmMinWeight
+            // 
+            this.TmMinWeight.Interval = 1000;
+            this.TmMinWeight.Tick += new System.EventHandler(this.TmMinWeight_Tick);
+            // 
+            // btnZero
+            // 
+            this.btnZero.Location = new System.Drawing.Point(507, 321);
+            this.btnZero.Name = "btnZero";
+            this.btnZero.Size = new System.Drawing.Size(98, 40);
+            this.btnZero.TabIndex = 36;
+            this.btnZero.Text = "Set Zero";
+            this.btnZero.UseVisualStyleBackColor = true;
+            this.btnZero.Click += new System.EventHandler(this.btnZero_Click);
+            // 
+            // Form_Carcass
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(934, 681);
-            this.Controls.Add(this.lblMessage);
+            this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.btnZero);
             this.Controls.Add(this.btnStop);
+            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.BtnOK);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.lblStockWgh);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.lblStockQty);
@@ -423,7 +459,6 @@
             this.Controls.Add(this.label18);
             this.Controls.Add(this.lblSwineQty);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblQueueNo);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.lblBreeder);
@@ -442,7 +477,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_CarcassReceive";
+            this.Name = "Form_Carcass";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รับหมูเป็น";
             this.Load += new System.EventHandler(this.Form_SwineReceive_Load);
@@ -472,7 +507,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblQueueNo;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label lblSwineQty;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label lblRemainQty;
@@ -482,8 +516,13 @@
         private System.Windows.Forms.Label lblStockWgh;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lblCurrentDatetime;
-        private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button BtnOK;
+        private System.ComponentModel.BackgroundWorker BgwMinWeight;
+        private System.Windows.Forms.Timer TmMinWeight;
+        private System.Windows.Forms.Button btnZero;
     }
 }
 

@@ -41,6 +41,10 @@ public static class MyExtension
     {
         return string.Format("{0: #,##0.00}", a);
     }
+    public static string ToFormatNoDecimal(this decimal a)
+    {
+        return string.Format("{0: #,##0}", a);
+    }
 
     public static string ToFormat2Double(this double a)
     {

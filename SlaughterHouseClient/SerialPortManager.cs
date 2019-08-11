@@ -110,13 +110,22 @@ namespace SerialPortListener.Serial
         /// </summary>
         private void UpdateBaudRateCollection()
         {
-            _serialPort = new SerialPort(_currentSerialSettings.PortName);
-            _serialPort.Open();
-            object p = _serialPort.BaseStream.GetType().GetField("commProp", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(_serialPort.BaseStream);
-            Int32 dwSettableBaud = (Int32)p.GetType().GetField("dwSettableBaud", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).GetValue(p);
+            try
+            {
+                _serialPort = new SerialPort(_currentSerialSettings.PortName);
+                _serialPort.Open();
+                object p = _serialPort.BaseStream.GetType().GetField("commProp", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(_serialPort.BaseStream);
+                Int32 dwSettableBaud = (Int32)p.GetType().GetField("dwSettableBaud", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).GetValue(p);
 
-            _serialPort.Close();
-            _currentSerialSettings.UpdateBaudRateCollection(dwSettableBaud);
+                _serialPort.Close();
+                _currentSerialSettings.UpdateBaudRateCollection(dwSettableBaud);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         // Call to release serial port

@@ -98,6 +98,12 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FormAnimator.cs" />
+    <Compile Include="Receiving\Form_ByProductWithParts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_ByProductWithParts.Designer.cs">
+      <DependentUpon>Form_ByProductWithParts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receiving\Form_ByProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,6 +238,9 @@
     </Compile>
     <EmbeddedResource Include="CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_ByProductWithParts.resx">
+      <DependentUpon>Form_ByProductWithParts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_ByProduct.resx">
       <DependentUpon>Form_ByProduct.cs</DependentUpon>

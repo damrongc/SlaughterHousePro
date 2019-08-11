@@ -1,46 +1,250 @@
 ﻿
+using SerialPortListener.Serial;
 using System;
 using System.Data.Entity;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SlaughterHouseClient.Receiving
 {
     public partial class Form_ByProduct : Form
     {
-        private string productCode = "";
+        product product;
+
+
         private const int LOCATION_CODE = 3;
-        private bool IsStart = false;
+        private bool isStart = false;
+        string sumText;
+        bool lockWeight = false;
+        bool minWeightReset = false;
+        int minWeightTime = 0;
 
 
-        const string CHOOSE_QUEUE = "กรุณาเลือกคิว";
-        const string START_WAITING = "กรุณาเริ่มชั่ง";
-        const string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
-        public Form_ByProduct()
+        //const string CHOOSE_QUEUE = "กรุณาเลือกคิว";
+        //const string START_WAITING = "กรุณาเริ่มชั่ง";
+        //const string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
+
+        SerialPortManager _spManager;
+
+
+        public Form_ByProduct(string productCode)
         {
             InitializeComponent();
-            Shown += Form_Shown;
+            UserInitialization();
+            LoadProduct(productCode);
+            lblCaption.Text = string.Format("รับ{0}", product.product_name);
+            lblMinWeight.Text = product.min_weight.ToString();
+            lblMaxWeight.Text = product.max_weight.ToString();
+
         }
 
-        private void Form_Shown(object sender, EventArgs e)
+
+        private void Form_Load(object sender, EventArgs e)
+        {
+            lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
+            lblMessage.Text = Constants.CHOOSE_QUEUE;
+
+
+
+        }
+
+        private void Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isStart)
+                _spManager.StopListening();
+            _spManager.Dispose();
+        }
+
+        private void UserInitialization()
+        {
+            _spManager = new SerialPortManager();
+
+            SerialSettings mySerialSettings = _spManager.CurrentSerialSettings;
+            //mySerialSettings.PortName = "COM1";
+            //serialSettingsBindingSource.DataSource = mySerialSettings;
+            //portNameComboBox.DataSource = mySerialSettings.PortNameCollection;
+            //baudRateComboBox.DataSource = mySerialSettings.BaudRateCollection;
+            //dataBitsComboBox.DataSource = mySerialSettings.DataBitsCollection;
+            //parityComboBox.DataSource = Enum.GetValues(typeof(System.IO.Ports.Parity));
+            //stopBitsComboBox.DataSource = Enum.GetValues(typeof(System.IO.Ports.StopBits));
+
+            _spManager.NewSerialDataRecieved += new EventHandler<SerialDataEventArgs>(_spManager_NewSerialDataRecieved);
+            FormClosing += new FormClosingEventHandler(Form_FormClosing);
+
+
+            btnStart.Enabled = false;
+            btnStop.Enabled = false;
+            BtnOK.Enabled = false;
+            //BtnCloseQueue.Enabled = false;
+
+        }
+
+
+        private void _spManager_NewSerialDataRecieved(object sender, SerialDataEventArgs e)
+        {
+            Thread.Sleep(100);
+            if (this.InvokeRequired)
+            {
+                // Using this.Invoke causes deadlock when closing serial port, and BeginInvoke is good practice anyway.
+                this.BeginInvoke(new EventHandler<SerialDataEventArgs>(_spManager_NewSerialDataRecieved), new object[] { sender, e });
+                return;
+            }
+
+            //int maxTextLength = 1000; // maximum text length in text box
+            //if (tbData.TextLength > maxTextLength)
+            //    tbData.Text = tbData.Text.Remove(0, tbData.TextLength - maxTextLength);
+            //string str = Encoding.ASCII.GetString(e.Data);
+            //DisplayWeight(str);
+
+            for (int i = 0; i < e.Data.Length; i++)
+            {
+                char kk = (char)e.Data[i];
+                if (kk == 2)
+                {
+                    //Found Start
+                    sumText = "";
+                }
+                else if (kk == 3)
+                {
+                    //Found Stop
+                    DisplayWeight(sumText);
+                }
+                else
+                {
+                    sumText += kk.ToString();
+                }
+            }
+
+        }
+
+
+        private void DisplayWeight(string str)
+        {
+            if (str.Length == 38 && lockWeight == false)
+            {
+                var weight = str.Substring(14, 7).ToDecimal() / 1000;
+                lblWeight.Text = weight.ToFormat2Decimal();
+                ProcessData();
+
+            }
+            //tbData.AppendText(str);
+            //tbData.ScrollToCaret();
+        }
+
+
+        private async void ProcessData()
+        {
+            lockWeight = true;
+            SaveData();
+            PlayNotificationSound("savanna");
+            lblWeight.BackColor = Color.FromArgb(33, 150, 83);
+            lblWeight.ForeColor = Color.White;
+            await Task.Delay(1000);
+            lblWeight.BackColor = Color.White;
+            lblWeight.ForeColor = Color.Black;
+
+
+            //clear weight
+            LoadData(lblReceiveNo.Text);
+
+            lblWeight.Text = 0m.ToFormat2Decimal();
+            lblMessage.Text = Constants.WEIGHT_WAITING;
+
+            lockWeight = false;
+        }
+
+        //private void LoadProduct()
+        //{
+
+        //    //flowLayoutPanel1.Controls.Clear();
+        //    using (var db = new SlaughterhouseEntities())
+        //    {
+        //        var products = db.products.Where(p => p.product_group_code == 2).ToList();
+
+        //        foreach (var item in products)
+        //        {
+        //            var btn = new Button
+        //            {
+        //                Text = item.product_name,
+        //                Width = 150,
+        //                Height = 80,
+        //                FlatStyle = FlatStyle.Flat,
+        //                Font = new Font("Kanit", 16),
+        //                BackColor = Color.WhiteSmoke,
+        //                Tag = item.product_code
+
+
+
+        //            };
+
+        //            btn.Click += Btn_Click;
+        //            flowLayoutPanel1.Controls.Add(btn);
+        //        }
+        //    }
+        //}
+
+        //private void Btn_Click(object sender, EventArgs e)
+        //{
+        //    foreach (Control ctrl in flowLayoutPanel1.Controls)
+        //    {
+        //        var b = (Button)ctrl;
+        //        b.BackColor = Color.WhiteSmoke;
+        //        b.ForeColor = Color.Black;
+        //    }
+        //    var btn = (Button)sender;
+        //    btn.BackColor = ColorTranslator.FromHtml("#2D9CDB");
+        //    btn.ForeColor = Color.White;
+        //    productCode = btn.Tag.ToString();
+        //    lblMessage.Text = WEIGHT_WAITING;
+        //}
+
+        private void LoadData(string receiveNo)
         {
 
+            using (var db = new SlaughterhouseEntities())
+            {
+                var receive = db.receives.Where(p => p.receive_no == receiveNo).SingleOrDefault();
+                int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
+                decimal stock_wgh = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_wgh);
+
+                int remain_qty = receive.farm_qty - stock_qty;
+                lblReceiveNo.Text = receive.receive_no;
+                lblFarm.Text = receive.farm.farm_name;
+                lblBreeder.Text = receive.breeder.breeder_name;
+                lblTruckNo.Text = receive.truck_no;
+                lblQueueNo.Text = receive.queue_no.ToString();
+                lblSwineQty.Text = receive.factory_qty.ToComma();
+                lblStockQty.Text = stock_qty.ToComma();
+                lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
+                lblRemainQty.Text = remain_qty.ToComma();
+
+                if (remain_qty > 0)
+                {
+                    btnStart.Enabled = true;
+                }
+            }
+
+
+            lblMessage.Text = Constants.START_WAITING;
+        }
+
+        private void LoadProduct(string productCode)
+        {
+            using (var db = new SlaughterhouseEntities())
+            {
+                product = db.products.Where(p => p.product_code == productCode).SingleOrDefault();
+
+
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-        }
-
-        private void Form_SwineReceive_Load(object sender, EventArgs e)
-        {
-            lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
-            lblMessage.Text = CHOOSE_QUEUE;
-
-
-
+            this.Close();
         }
 
         private void btnReceiveNo_Click(object sender, EventArgs e)
@@ -50,116 +254,57 @@ namespace SlaughterHouseClient.Receiving
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 LoadData(frm.receiveNo);
-                LoadProduct();
+
             }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(lblReceiveNo.Text))
-            {
-                lblMessage.Text = "กรุณาเลือกข้อมูล!";
-                return;
-            }
-            if (string.IsNullOrEmpty(productCode))
-            {
-                lblMessage.Text = "กรุณาเลือกสินค้า!";
-                return;
-            }
-            IsStart = true;
-            lblMessage.Text = WEIGHT_WAITING;
+            isStart = true;
+            lblMessage.Text = Constants.WEIGHT_WAITING;
+            if (_spManager.CurrentSerialSettings.PortName != "")
+                _spManager.StartListening();
 
+
+            lblWeight.Text = "0.00";
+            btnStart.Enabled = false;
+            btnStop.Enabled = true;
+            BtnOK.Enabled = true;
+
+            lblMessage.Text = Constants.WEIGHT_WAITING;
 
         }
 
-
-        private void LoadProduct()
-        {
-            using (var db = new SlaughterhouseEntities())
-            {
-                var products = db.products.Where(p => p.product_group_code == 2).ToList();
-
-                foreach (var item in products)
-                {
-                    var btn = new Button
-                    {
-                        Text = item.product_name,
-                        Width = 150,
-                        Height = 50,
-                        FlatStyle = FlatStyle.Flat,
-                        Font = new Font("Kanit", 16),
-                        BackColor = Color.WhiteSmoke,
-                        Tag = item.product_code
-
-
-
-                    };
-
-                    btn.Click += Btn_Click;
-                    flowLayoutPanel1.Controls.Add(btn);
-                }
-            }
-        }
-
-        private void Btn_Click(object sender, EventArgs e)
-        {
-            foreach (Control ctrl in flowLayoutPanel1.Controls)
-            {
-                var b = (Button)ctrl;
-                b.BackColor = Color.WhiteSmoke;
-                b.ForeColor = Color.Black;
-            }
-            var btn = (Button)sender;
-            btn.BackColor = ColorTranslator.FromHtml("#2D9CDB");
-            btn.ForeColor = Color.White;
-            productCode = btn.Tag.ToString();
-            lblMessage.Text = WEIGHT_WAITING;
-        }
-
-        private void LoadData(string receiveNo)
-        {
-
-            using (var db = new SlaughterhouseEntities())
-            {
-                var receive = db.receives.Where(p => p.receive_no == receiveNo).SingleOrDefault();
-                //int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Sum(p => p.receive_qty);
-                //decimal stock_wgh = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Sum(p => p.receive_wgh);
-
-                lblReceiveNo.Text = receive.receive_no;
-                lblFarm.Text = receive.farm.farm_name;
-                lblBreeder.Text = receive.breeder.breeder_name;
-                lblTruckNo.Text = receive.truck_no;
-                lblQueueNo.Text = receive.queue_no.ToString();
-                lblSwineQty.Text = receive.factory_qty.ToComma();
-                //lblStockQty.Text = stock_qty.ToComma();
-                //lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
-                //lblRemainQty.Text = (receive.farm_qty - stock_qty).ToComma();
-            }
-
-            lblMessage.Text = START_WAITING;
-        }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            try
-            {
+            if (_spManager.CurrentSerialSettings.PortName != "")
+                _spManager.StopListening();
 
-                var ret = SaveData();
-                if (ret)
-                {
-                    LoadData(lblReceiveNo.Text);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //var animationDirection = FormAnimator.AnimationDirection.Up;
-                //var animationMethod = FormAnimator.AnimationMethod.Slide;
-                //var toastNotification = new Notification("Notification", ex.Message, -1, animationMethod, animationDirection);
-                //PlayNotificationSound("normal");
-                //toastNotification.Show();
 
-            }
+            lblWeight.Text = "0.00";
+            btnStart.Enabled = true;
+            btnStop.Enabled = false;
+
+            //try
+            //{
+
+            //    var ret = SaveData();
+            //    if (ret)
+            //    {
+            //        LoadData(lblReceiveNo.Text);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    //var animationDirection = FormAnimator.AnimationDirection.Up;
+            //    //var animationMethod = FormAnimator.AnimationMethod.Slide;
+            //    //var toastNotification = new Notification("Notification", ex.Message, -1, animationMethod, animationDirection);
+            //    //PlayNotificationSound("normal");
+            //    //toastNotification.Show();
+
+            //}
 
         }
 
@@ -178,29 +323,31 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
+
+                decimal weight = lblWeight.Text.ToDecimal();
                 using (var db = new SlaughterhouseEntities())
                 {
                     //update receive
                     var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
 
-                    int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Sum(p => p.receive_qty);
+                    int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
                     if (receive.factory_qty - stock_qty == 0)
                     {
                         throw new Exception("จำนวนรับครบแล้ว ไม่สามารถรับเพิ่มได้!");
                     }
 
 
-                    int seq = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Count();
+                    int seq = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Count();
                     //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
                     seq += 1;
                     var item = new receive_item
                     {
                         receive_no = receive.receive_no,
-                        product_code = productCode,
+                        product_code = product.product_code,
                         seq = seq,
                         sex_flag = "",
                         receive_qty = 1,
-                        receive_wgh = 85,
+                        receive_wgh = weight,
                         create_by = Constants.CREATE_BY
 
                     };
@@ -321,6 +468,51 @@ namespace SlaughterHouseClient.Receiving
                 throw;
             }
 
+        }
+
+        private async void BtnOK_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lockWeight = true;
+                string msg = string.Format("{0}", lblWeight.Text);
+                var frmConfirm = new CustomMessageBox(msg);
+                if (frmConfirm.ShowDialog() == DialogResult.OK)
+                {
+                    BtnOK.Enabled = false;
+                    btnStop.Enabled = false;
+                    lblMessage.Text = Constants.PROCESSING;
+                    //Thread.Sleep(1000);
+                    SaveData();
+                    PlayNotificationSound("savanna");
+                    lblWeight.BackColor = Color.FromArgb(33, 150, 83);
+                    lblWeight.ForeColor = Color.White;
+                    await Task.Delay(1000);
+                    lblWeight.BackColor = Color.White;
+                    lblWeight.ForeColor = Color.Black;
+                    //รอรับน้ำหนัก  MinWeight
+                    lockWeight = false;
+                    //TmMinWeight.Enabled = true;
+                }
+                lockWeight = false;
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSetWgh_Click(object sender, EventArgs e)
+        {
+            lblWeight.Text = txtSimWeight.Text.ToDecimal().ToFormat2Decimal();
+            ProcessData();
+        }
+
+        private void btnZero_Click(object sender, EventArgs e)
+        {
+            lblWeight.Text = 0m.ToFormat2Decimal();
         }
     }
 }
