@@ -209,7 +209,7 @@ namespace SlaughterHouseServer
         private void LoadDetail()
         { 
             dtOrderItem = new DataTable("ORDERS_ITEM");
-            dtOrderItem = OrderItemController.GetOrderItems(orderNo);
+            dtOrderItem = OrderItemController.GetOrderItems(orderNo,"Y");
             
             gv.DataSource = dtOrderItem;
             gv.Columns["seq"].HeaderText = "ลำดับ";

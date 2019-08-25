@@ -355,7 +355,7 @@ namespace SlaughterHouseLib
     }
     public static class OrderItemController
     {
-        public static DataTable GetOrderItems(string orderNo)
+        public static DataTable GetOrderItems(string orderNo, string configShowProductSet = "Y")
         {
             try
             {
@@ -363,23 +363,9 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = "";
-                        //sql = @"select a.seq,
-                        //        a.product_code,
-                        //        b.product_name,
-                        //        Case when b.issue_unit_method = 'Q' then order_qty else order_wgh end qty_wgh,
-                        //        b.issue_unit_method,
-                        //        u.unit_code,
-                        //        u.unit_name,
-                        //        unload_qty,
-                        //        unload_wgh
-                        //        from orders_item a,product b, unit_of_measurement u
-                        //        where a.product_code =b.product_code
-                        //        and Case when b.issue_unit_method = 'Q' then unit_of_qty else unit_of_wgh end = u.unit_code
-                        //        and a.order_no =@order_no 
-                        //        order by seq asc";
-                        
-                    sql = @"SELECT  distinct
-	                        a.order_no, 
+                    if (configShowProductSet == "Y")
+                    {
+                        sql = @"SELECT  distinct 
                             0 as seq,
                             p.product_code,
                             p.product_name, 
@@ -392,7 +378,7 @@ namespace SlaughterHouseLib
                             u.unit_code,
                             u.unit_name,
                             a.unload_qty,
-                            a.unload_wgh
+                            a.unload_wgh 
                         FROM
                             orders_item a,
                             product p,
@@ -406,10 +392,26 @@ namespace SlaughterHouseLib
                                 WHEN p.issue_unit_method = 'Q' THEN unit_of_qty
                                 ELSE unit_of_wgh
                             END = u.unit_code  ";
-                     
-                                //unload_qty,
-                                //unload_wgh
-
+                    }
+                    else
+                    {
+                        sql = @"select 
+                            a.seq,
+                            a.product_code,
+                            b.product_name,
+                            Case when b.issue_unit_method = 'Q' then order_qty else order_wgh end qty_wgh,
+                            b.issue_unit_method,
+                            u.unit_code,
+                            u.unit_name,
+                            unload_qty,
+                            unload_wgh,              
+                            case when a.bom_code = 0 then 0 else 1 end as product_set
+                            from orders_item a,product b, unit_of_measurement u
+                            where a.product_code =b.product_code
+                            and Case when b.issue_unit_method = 'Q' then unit_of_qty else unit_of_wgh end = u.unit_code
+                            and a.order_no =@order_no 
+                            order by seq asc";
+                    }
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("order_no", orderNo);
                     var da = new MySqlDataAdapter(cmd);

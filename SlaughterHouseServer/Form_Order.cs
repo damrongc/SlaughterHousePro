@@ -8,6 +8,9 @@ namespace SlaughterHouseServer
 {
     public partial class Form_Order : Form
     {
+        
+        OrderItem.columnDt colDt;
+
         public Form_Order()
         {
             InitializeComponent();
@@ -16,6 +19,24 @@ namespace SlaughterHouseServer
 
         private void UserSettingsComponent()
         {
+            colDt.order_no       = "order_no";
+            colDt.product_code   = "product_code";
+            colDt.product_name = "product_name";
+            colDt.bom_code       = "bom_code";
+            colDt.seq            = "seq";
+            colDt.qty_wgh = "qty_wgh";
+            colDt.issue_unit_method = "issue_unit_method";
+            colDt.unit_code = "unit_code";
+            colDt.unit_name = "unit_name";
+            colDt.unload_qty     = "unload_qty";
+            colDt.unload_wgh     = "unload_wgh"; 
+            colDt.product_set = "product_set";
+            colDt.create_at      = "create_at";
+            colDt.create_by      = "create_by";
+            colDt.modified_at    = "modified_at";
+            colDt.modified_by    = "modified_by";
+            
+
             BtnAdd.Click += BtnAdd_Click;
             BtnSearch.Click += BtnSearch_Click;
             gv.CellContentClick += Gv_CellContentClick;
@@ -130,29 +151,32 @@ namespace SlaughterHouseServer
         private void LoadItem(string orderNo)
         {
             DataTable dtOrderItem = new DataTable("ORDERS_ITEM");
-            dtOrderItem = OrderItemController.GetOrderItems(orderNo); 
+            dtOrderItem = OrderItemController.GetOrderItems(orderNo,"N"); 
  
             gvDt.DataSource = dtOrderItem;
 
-            gvDt.Columns[0].HeaderText = "ลำดับ";
-            gvDt.Columns[1].HeaderText = "รหัสสินค้า";
-            gvDt.Columns[2].HeaderText = "สินค้า";
-            gvDt.Columns[3].HeaderText = "จำนวน";
-            gvDt.Columns[4].HeaderText = "หน่วยคำนวณ";
-            gvDt.Columns[5].HeaderText = "รหัสหน่วยสินค้า";
-            gvDt.Columns[6].HeaderText = "หน่วยสินค้า";
-            gvDt.Columns[7].HeaderText = "จำนวนจ่าย";
-            gvDt.Columns[8].HeaderText = "น้ำหนักจ่าย";
+            gvDt.Columns[colDt.seq ].HeaderText = "ลำดับ"; 
+            gvDt.Columns[colDt.product_code ].HeaderText = "รหัสสินค้า";
+            gvDt.Columns[colDt.product_name].HeaderText = "สินค้า";
+            gvDt.Columns[colDt.qty_wgh ].HeaderText = "จำนวน";
+            gvDt.Columns[colDt.issue_unit_method].HeaderText = "หน่วยคำนวณ";
+            gvDt.Columns[colDt.unit_code ].HeaderText = "รหัสหน่วยสินค้า";
+            gvDt.Columns[colDt.unit_name ].HeaderText = "หน่วยสินค้า";
+            gvDt.Columns[colDt.unload_qty ].HeaderText = "จำนวนจ่าย";
+            gvDt.Columns[colDt.unload_wgh ].HeaderText = "น้ำหนักจ่าย";
+            gvDt.Columns[colDt.product_set].HeaderText = "สินค้าชุด";
 
-            gvDt.Columns[1].Visible  = false ;
-            gvDt.Columns[4].Visible  = false;
-            gvDt.Columns[5].Visible  = false;
+            gvDt.Columns[colDt.seq ].Visible  = false ; 
+            gvDt.Columns[colDt.product_code  ].Visible  = false ;
+            gvDt.Columns[colDt.unit_code   ].Visible  = false;
+            gvDt.Columns[colDt.issue_unit_method].Visible  = false;
+             
 
-            gvDt.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvDt.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvDt.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvDt.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvDt.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gvDt.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gvDt.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gvDt.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gvDt.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gvDt.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
         }
     }

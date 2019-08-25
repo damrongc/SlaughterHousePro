@@ -44,6 +44,7 @@
             this.dtpRequestDate = new System.Windows.Forms.DateTimePicker();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.product_set = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvDt)).BeginInit();
@@ -113,9 +114,12 @@
             this.gvDt.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvDt.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.product_set});
             this.gvDt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvDt.Location = new System.Drawing.Point(0, 0);
             this.gvDt.Name = "gvDt";
+            this.gvDt.ReadOnly = true;
             this.gvDt.RowHeadersWidth = 10;
             this.gvDt.Size = new System.Drawing.Size(1368, 294);
             this.gvDt.TabIndex = 10;
@@ -231,6 +235,14 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "ลูกค้า:";
             // 
+            // product_set
+            // 
+            this.product_set.DataPropertyName = "product_set";
+            this.product_set.HeaderText = "product_set";
+            this.product_set.Name = "product_set";
+            this.product_set.ReadOnly = true;
+            this.product_set.Width = 121;
+            // 
             // Form_Order
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -269,5 +281,6 @@
         private System.Windows.Forms.DataGridView gvDt;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewLinkColumn OrderNo;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn product_set;
     }
 }
