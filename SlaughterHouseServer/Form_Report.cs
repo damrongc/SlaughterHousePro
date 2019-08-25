@@ -3,6 +3,7 @@ using SlaughterHouseLib.Models;
 using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
@@ -57,6 +58,12 @@ namespace SlaughterHouseServer
             };
             frm.ShowDialog();
         }
-        
+
+        private void Button7_Click(object sender, EventArgs e)
+        {
+            DataSet ds = ReportController.GetDataReceiveStickerBarcode(12349);
+            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+            ds.WriteXml(path + @"\xml\receivebarcode.xml", XmlWriteMode.WriteSchema);
+        }
     } 
 }

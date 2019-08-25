@@ -129,7 +129,7 @@ namespace SlaughterHouseServer
         }
         private void LoadItem(string orderNo)
         {
-            DataTable dtOrderItem = new DataTable("ORDER_ITEM");
+            DataTable dtOrderItem = new DataTable("ORDERS_ITEM");
             dtOrderItem = OrderItemController.GetOrderItems(orderNo); 
  
             gvDt.DataSource = dtOrderItem;

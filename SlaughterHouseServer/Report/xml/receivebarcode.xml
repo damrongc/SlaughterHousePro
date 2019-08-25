@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="barcode_no" type="xs:int" minOccurs="0" />
+                <xs:element name="product_code" type="xs:string" minOccurs="0" />
+                <xs:element name="product_name" type="xs:string" minOccurs="0" />
+                <xs:element name="qty" type="xs:int" minOccurs="0" />
+                <xs:element name="wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="production_date" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="expired_date" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="lot_no" type="xs:string" minOccurs="0" />
+                <xs:element name="issue_unit_method" type="xs:string" minOccurs="0" />
+                <xs:element name="unit_name_qty" type="xs:string" minOccurs="0" />
+                <xs:element name="unit_name_wgh" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <barcode_no>1234567892349</barcode_no>
+    <product_code>P001</product_code>
+    <product_name>หมูเป็น</product_name>
+    <qty>12</qty>
+    <wgh>3.20</wgh>
+    <production_date>2019-08-07T00:00:00+07:00</production_date>
+    <expired_date>2019-10-06T00:00:00+07:00</expired_date>
+    <lot_no>0000000000102</lot_no>
+    <issue_unit_method>Q</issue_unit_method>
+    <unit_name_qty>ตัว</unit_name_qty>
+    <unit_name_wgh>กิโลกรัม</unit_name_wgh>
+  </Table>
+</NewDataSet>

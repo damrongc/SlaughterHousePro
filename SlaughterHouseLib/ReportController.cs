@@ -97,7 +97,6 @@ namespace SlaughterHouseLib
             }
         }
 
-
         public static DataSet GetDataReportStockMovement(DateTime invoiceDateStr, DateTime invoiceDateEnd)
         {
             try
@@ -234,7 +233,7 @@ namespace SlaughterHouseLib
                                     @show_date_str as date_str,
                                     @show_date_end as date_end
                                 from orders as o
-	                                inner join order_item as otm on o.order_no = otm.order_no
+	                                inner join orders_item as otm on o.order_no = otm.order_no
                                     left join invoice as i on i.ref_document_no = o.order_no
                                     left join invoice_item as itm on itm.invoice_no = i.invoice_no and itm.product_code = otm.product_code
                                     inner join plant as pl ON pl.plant_id = 1
@@ -253,6 +252,38 @@ namespace SlaughterHouseLib
 
                     cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd/MM/yyyy"));
                     cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd/MM/yyyy"));
+                    var da = new MySqlDataAdapter(cmd);
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    return ds;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+        public static DataSet GetDataReceiveStickerBarcode(Int64 barcodeNo)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"select b.barcode_no, b.product_code, p.product_name, b.qty, b.wgh,
+                                    b.production_date, DATE_ADD(b.production_date, INTERVAL p.shelflife DAY) as expired_date, b.lot_no,
+                                    p.issue_unit_method, uq.unit_name as unit_name_qty, uw.unit_name as unit_name_wgh
+                                    from barcode b, product p, unit_of_measurement uq, unit_of_measurement uw
+                                    where b.product_code = p.product_code
+                                    and p.unit_of_qty = uq.unit_code
+                                    and p.unit_of_wgh = uw.unit_code
+                                    and b.barcode_no = @barcode_no
+                                ";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("barcode_no", barcodeNo); 
+                     
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);

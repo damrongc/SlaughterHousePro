@@ -54,7 +54,7 @@
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(6);
-            this.panel1.Size = new System.Drawing.Size(1380, 730);
+            this.panel1.Size = new System.Drawing.Size(1256, 673);
             this.panel1.TabIndex = 3;
             // 
             // panel3
@@ -63,7 +63,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(6, 721);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1368, 1);
+            this.panel3.Size = new System.Drawing.Size(1244, 1);
             this.panel3.TabIndex = 6;
             // 
             // panel2
@@ -72,7 +72,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(6, 6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1368, 715);
+            this.panel2.Size = new System.Drawing.Size(1244, 715);
             this.panel2.TabIndex = 5;
             // 
             // groupBox1
@@ -88,7 +88,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1368, 715);
+            this.groupBox1.Size = new System.Drawing.Size(1244, 715);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "รายงาน";
@@ -102,6 +102,7 @@
             this.button7.TabIndex = 6;
             this.button7.Text = "report xxx";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.Button7_Click);
             // 
             // btnReportDailySales
             // 
@@ -166,7 +167,7 @@
             // Form_Report
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1400, 750);
+            this.ClientSize = new System.Drawing.Size(1276, 693);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Kanit", 15.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

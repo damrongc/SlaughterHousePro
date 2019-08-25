@@ -208,9 +208,9 @@ namespace SlaughterHouseServer
         }
         private void LoadDetail()
         { 
-            dtOrderItem = new DataTable("ORDER_ITEM");
+            dtOrderItem = new DataTable("ORDERS_ITEM");
             dtOrderItem = OrderItemController.GetOrderItems(orderNo);
-
+            
             gv.DataSource = dtOrderItem;
             gv.Columns["seq"].HeaderText = "ลำดับ";
             gv.Columns["product_code"].HeaderText = "รหัสสินค้า";
