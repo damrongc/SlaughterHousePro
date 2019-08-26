@@ -355,7 +355,7 @@ namespace SlaughterHouseLib
     }
     public static class OrderItemController
     {
-        public static DataTable GetOrderItems(string orderNo, string configShowProductSet = "Y")
+        public static DataTable GetOrderItems(string orderNo, string showProductSet = "Y")
         {
             try
             {
@@ -363,7 +363,7 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = "";
-                    if (configShowProductSet == "Y")
+                    if (showProductSet == "Y")
                     {
                         sql = @"SELECT  distinct 
                             0 as seq,
@@ -396,22 +396,27 @@ namespace SlaughterHouseLib
                     else
                     {
                         sql = @"select 
-                            a.seq,
+                            0 as seq,
                             a.product_code,
                             b.product_name,
-                            Case when b.issue_unit_method = 'Q' then order_qty else order_wgh end qty_wgh,
+                            sum(Case when b.issue_unit_method = 'Q' then order_qty else order_wgh end) qty_wgh,
                             b.issue_unit_method,
                             u.unit_code,
                             u.unit_name,
-                            unload_qty,
-                            unload_wgh,              
-                            case when a.bom_code = 0 then 0 else 1 end as product_set
+                            sum(unload_qty) as unload_qty,
+                            sum(unload_wgh) as unload_wgh 
                             from orders_item a,product b, unit_of_measurement u
                             where a.product_code =b.product_code
                             and Case when b.issue_unit_method = 'Q' then unit_of_qty else unit_of_wgh end = u.unit_code
                             and a.order_no =@order_no 
+                            group by a.product_code,
+                                b.product_name, 
+                                b.issue_unit_method,
+                                u.unit_code,
+                                u.unit_name 
                             order by seq asc";
                     }
+                    //case when a.bom_code = 0 then 0 else 1 end as product_set
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("order_no", orderNo);
                     var da = new MySqlDataAdapter(cmd);

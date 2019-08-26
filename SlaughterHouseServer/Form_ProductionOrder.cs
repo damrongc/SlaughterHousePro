@@ -137,7 +137,7 @@ namespace SlaughterHouseServer
             gvDt.Columns[4].HeaderText = "หน่วยคำนวณ";
             gvDt.Columns[5].HeaderText = "รหัสหน่วยสินค้า";
             gvDt.Columns[6].HeaderText = "หน่วยสินค้า";
-            gvDt.Columns[7].HeaderText = "จำนวนจ่าย";
+            gvDt.Columns[7].HeaderText = "ปริมาณจ่าย";
             gvDt.Columns[8].HeaderText = "น้ำหนักจ่าย";
 
             gvDt.Columns[1].Visible = false;

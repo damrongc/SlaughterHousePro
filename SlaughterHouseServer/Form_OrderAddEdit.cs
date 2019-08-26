@@ -242,19 +242,26 @@ namespace SlaughterHouseServer
                 foreach (DataRow row in dtOrderItem.Rows)
                 {
                     seq++;
+                    List<BomItem> bomItm = BomController.GetBom(row["product_code"].ToString());
 
-                    orderItems.Add(new OrderItem
+                    if (bomItm.Count > 0 )
                     {
-                        OrderNo = txtOrderNo.Text,
-                        Seq = seq,
-                        Product = new Product
+                        xxxxxxxxxxx
+                    } 
+                        orderItems.Add(new OrderItem
                         {
-                            ProductCode = row["product_code"].ToString(),
-                            ProductName = row["product_name"].ToString(),
-                        },
-                        OrderQty = row["issue_unit_method"].ToString() == "Q" ? Convert.ToInt16(row["qty_wgh"]) : 0,
-                        OrderWgh = row["issue_unit_method"].ToString() == "W" ? Convert.ToDecimal(row["qty_wgh"]) : 0,
-                    });
+                            OrderNo = txtOrderNo.Text,
+                            Seq = seq,
+                            Product = new Product
+                            {
+                                ProductCode = row["product_code"].ToString(),
+                                ProductName = row["product_name"].ToString(),
+                            },
+                            OrderQty = row["issue_unit_method"].ToString() == "Q" ? Convert.ToInt16(row["qty_wgh"]) : 0,
+                            OrderWgh = row["issue_unit_method"].ToString() == "W" ? Convert.ToDecimal(row["qty_wgh"]) : 0,
+                        }); 
+
+                    
                 }
 
                 var order = new Order

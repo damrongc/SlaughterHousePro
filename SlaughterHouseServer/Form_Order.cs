@@ -162,9 +162,9 @@ namespace SlaughterHouseServer
             gvDt.Columns[colDt.issue_unit_method].HeaderText = "หน่วยคำนวณ";
             gvDt.Columns[colDt.unit_code ].HeaderText = "รหัสหน่วยสินค้า";
             gvDt.Columns[colDt.unit_name ].HeaderText = "หน่วยสินค้า";
-            gvDt.Columns[colDt.unload_qty ].HeaderText = "จำนวนจ่าย";
+            gvDt.Columns[colDt.unload_qty ].HeaderText = "ปริมาณจ่าย";
             gvDt.Columns[colDt.unload_wgh ].HeaderText = "น้ำหนักจ่าย";
-            gvDt.Columns[colDt.product_set].HeaderText = "สินค้าชุด";
+            //gvDt.Columns[colDt.product_set].HeaderText = "สินค้าชุด";
 
             gvDt.Columns[colDt.seq ].Visible  = false ; 
             gvDt.Columns[colDt.product_code  ].Visible  = false ;
