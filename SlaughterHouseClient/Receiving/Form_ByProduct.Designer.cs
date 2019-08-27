@@ -51,7 +51,6 @@
             this.lblMessage = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            this.BtnOK = new System.Windows.Forms.Button();
             this.btnZero = new System.Windows.Forms.Button();
             this.lblQueueNo = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -63,8 +62,8 @@
             this.lblMaxWeight = new System.Windows.Forms.Label();
             this.dragControl1 = new DragControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtSimWeight = new System.Windows.Forms.TextBox();
             this.btnSetWgh = new System.Windows.Forms.Button();
+            this.txtSimWeight = new System.Windows.Forms.TextBox();
             this.panelHeader.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -339,24 +338,9 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // BtnOK
-            // 
-            this.BtnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
-            this.BtnOK.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.BtnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOK.Font = new System.Drawing.Font("Kanit", 40F);
-            this.BtnOK.ForeColor = System.Drawing.Color.White;
-            this.BtnOK.Location = new System.Drawing.Point(767, 461);
-            this.BtnOK.Name = "BtnOK";
-            this.BtnOK.Size = new System.Drawing.Size(245, 97);
-            this.BtnOK.TabIndex = 36;
-            this.BtnOK.Text = "ตกลง";
-            this.BtnOK.UseVisualStyleBackColor = false;
-            this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
-            // 
             // btnZero
             // 
-            this.btnZero.Location = new System.Drawing.Point(156, 74);
+            this.btnZero.Location = new System.Drawing.Point(112, 74);
             this.btnZero.Name = "btnZero";
             this.btnZero.Size = new System.Drawing.Size(98, 31);
             this.btnZero.TabIndex = 41;
@@ -468,29 +452,29 @@
             this.groupBox1.Controls.Add(this.btnZero);
             this.groupBox1.Location = new System.Drawing.Point(19, 432);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(282, 126);
+            this.groupBox1.Size = new System.Drawing.Size(238, 126);
             this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Simulator";
             // 
-            // txtSimWeight
-            // 
-            this.txtSimWeight.Location = new System.Drawing.Point(50, 37);
-            this.txtSimWeight.Name = "txtSimWeight";
-            this.txtSimWeight.Size = new System.Drawing.Size(100, 31);
-            this.txtSimWeight.TabIndex = 42;
-            this.txtSimWeight.Text = "0";
-            this.txtSimWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // btnSetWgh
             // 
-            this.btnSetWgh.Location = new System.Drawing.Point(156, 37);
+            this.btnSetWgh.Location = new System.Drawing.Point(112, 37);
             this.btnSetWgh.Name = "btnSetWgh";
             this.btnSetWgh.Size = new System.Drawing.Size(98, 31);
             this.btnSetWgh.TabIndex = 43;
             this.btnSetWgh.Text = "Set Wgh";
             this.btnSetWgh.UseVisualStyleBackColor = true;
             this.btnSetWgh.Click += new System.EventHandler(this.btnSetWgh_Click);
+            // 
+            // txtSimWeight
+            // 
+            this.txtSimWeight.Location = new System.Drawing.Point(6, 37);
+            this.txtSimWeight.Name = "txtSimWeight";
+            this.txtSimWeight.Size = new System.Drawing.Size(100, 31);
+            this.txtSimWeight.TabIndex = 42;
+            this.txtSimWeight.Text = "0";
+            this.txtSimWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Form_ByProduct
             // 
@@ -508,7 +492,6 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.BtnOK);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.lblStockWgh);
             this.Controls.Add(this.label22);
@@ -567,7 +550,6 @@
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Button BtnOK;
         private System.Windows.Forms.Button btnZero;
         private System.Windows.Forms.Label lblQueueNo;
         private System.Windows.Forms.Label label14;

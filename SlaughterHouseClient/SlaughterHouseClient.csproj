@@ -225,6 +225,7 @@
     <Compile Include="Report\Form_Barcode.Designer.cs">
       <DependentUpon>Form_Barcode.cs</DependentUpon>
     </Compile>
+    <Compile Include="ScaleHelper.cs" />
     <Compile Include="SerialPortManager.cs" />
     <Compile Include="SerialSettings.cs" />
     <Compile Include="stock.cs">

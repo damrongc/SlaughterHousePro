@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToastNotifications;
 
 namespace SlaughterHouseClient.Receiving
 {
@@ -20,13 +21,6 @@ namespace SlaughterHouseClient.Receiving
         private bool isStart = false;
         string sumText;
         bool lockWeight = false;
-        bool minWeightReset = false;
-        int minWeightTime = 0;
-
-
-        //const string CHOOSE_QUEUE = "กรุณาเลือกคิว";
-        //const string START_WAITING = "กรุณาเริ่มชั่ง";
-        //const string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
 
         SerialPortManager _spManager;
 
@@ -39,7 +33,6 @@ namespace SlaughterHouseClient.Receiving
             lblCaption.Text = string.Format("รับ{0}", product.product_name);
             lblMinWeight.Text = product.min_weight.ToString();
             lblMaxWeight.Text = product.max_weight.ToString();
-
         }
 
 
@@ -78,8 +71,6 @@ namespace SlaughterHouseClient.Receiving
 
             btnStart.Enabled = false;
             btnStop.Enabled = false;
-            BtnOK.Enabled = false;
-            //BtnCloseQueue.Enabled = false;
 
         }
 
@@ -122,15 +113,38 @@ namespace SlaughterHouseClient.Receiving
         }
 
 
-        private void DisplayWeight(string str)
+        private void DisplayWeight(string DataInvoke)
         {
-            if (str.Length == 38 && lockWeight == false)
+            if (lockWeight == false)
             {
-                var weight = str.Substring(14, 7).ToDecimal() / 1000;
-                lblWeight.Text = weight.ToFormat2Decimal();
-                ProcessData();
 
+                lblWeight.Text = ScaleHelper.GetWeightIWX(DataInvoke);
+                ProcessData();
+                //if (DataInvoke.Length == 40)
+                //{
+
+                //    int scaleDecimal = DataInvoke.Substring(22, 2).ToInt32();
+                //    int scaleDivision = (int)Math.Round(Math.Pow(10.0, unchecked(scaleDecimal)));
+
+                //    string strFormatWt = scaleDecimal == 0 ? "#0" : "#0." + "0".PadRight(scaleDecimal, '0');
+                //    short stateOfScale = DataInvoke.Substring(7, 1).ToInt16();
+                //    short stableWt = DataInvoke.Substring(6, 1).ToInt16();
+
+                //    if (stateOfScale == 0)
+                //    {
+                //        num = DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
+                //    }
+                //    else
+                //    {
+                //        num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
+                //    }
+                //    //var weight = str.Substring(14, 7).ToDecimal() / 1000;
+                //    lblWeight.Text = num.ToString(strFormatWt);
+                //    ProcessData();
+
+                //}
             }
+
             //tbData.AppendText(str);
             //tbData.ScrollToCaret();
         }
@@ -138,23 +152,32 @@ namespace SlaughterHouseClient.Receiving
 
         private async void ProcessData()
         {
-            lockWeight = true;
-            SaveData();
-            PlayNotificationSound("savanna");
-            lblWeight.BackColor = Color.FromArgb(33, 150, 83);
-            lblWeight.ForeColor = Color.White;
-            await Task.Delay(1000);
-            lblWeight.BackColor = Color.White;
-            lblWeight.ForeColor = Color.Black;
+            try
+            {
+                lockWeight = true;
+                SaveData();
+                PlayNotificationSound("savanna");
+                lblWeight.BackColor = Color.FromArgb(33, 150, 83);
+                lblWeight.ForeColor = Color.White;
+                await Task.Delay(1000);
+                lblWeight.BackColor = Color.White;
+                lblWeight.ForeColor = Color.Black;
 
 
-            //clear weight
-            LoadData(lblReceiveNo.Text);
+                //clear weight
+                LoadData(lblReceiveNo.Text);
 
-            lblWeight.Text = 0m.ToFormat2Decimal();
-            lblMessage.Text = Constants.WEIGHT_WAITING;
+                lblWeight.Text = 0m.ToFormat2Decimal();
+                lblMessage.Text = Constants.WEIGHT_WAITING;
 
-            lockWeight = false;
+                lockWeight = false;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         //private void LoadProduct()
@@ -222,10 +245,10 @@ namespace SlaughterHouseClient.Receiving
                 lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
                 lblRemainQty.Text = remain_qty.ToComma();
 
-                if (remain_qty > 0)
-                {
-                    btnStart.Enabled = true;
-                }
+                //if (remain_qty > 0)
+                //{
+                //    btnStart.Enabled = true;
+                //}
             }
 
 
@@ -260,6 +283,12 @@ namespace SlaughterHouseClient.Receiving
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+
+            var animationDirection = FormAnimator.AnimationDirection.Up;
+            var animationMethod = FormAnimator.AnimationMethod.Slide;
+            var toastNotification = new Notification("Notification", "Start", -1, animationMethod, animationDirection);
+            toastNotification.Show();
+
             isStart = true;
             lblMessage.Text = Constants.WEIGHT_WAITING;
             if (_spManager.CurrentSerialSettings.PortName != "")
@@ -269,12 +298,10 @@ namespace SlaughterHouseClient.Receiving
             lblWeight.Text = "0.00";
             btnStart.Enabled = false;
             btnStop.Enabled = true;
-            BtnOK.Enabled = true;
 
             lblMessage.Text = Constants.WEIGHT_WAITING;
 
         }
-
 
         private void btnStop_Click(object sender, EventArgs e)
         {
@@ -468,40 +495,6 @@ namespace SlaughterHouseClient.Receiving
                 throw;
             }
 
-        }
-
-        private async void BtnOK_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                lockWeight = true;
-                string msg = string.Format("{0}", lblWeight.Text);
-                var frmConfirm = new CustomMessageBox(msg);
-                if (frmConfirm.ShowDialog() == DialogResult.OK)
-                {
-                    BtnOK.Enabled = false;
-                    btnStop.Enabled = false;
-                    lblMessage.Text = Constants.PROCESSING;
-                    //Thread.Sleep(1000);
-                    SaveData();
-                    PlayNotificationSound("savanna");
-                    lblWeight.BackColor = Color.FromArgb(33, 150, 83);
-                    lblWeight.ForeColor = Color.White;
-                    await Task.Delay(1000);
-                    lblWeight.BackColor = Color.White;
-                    lblWeight.ForeColor = Color.Black;
-                    //รอรับน้ำหนัก  MinWeight
-                    lockWeight = false;
-                    //TmMinWeight.Enabled = true;
-                }
-                lockWeight = false;
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void btnSetWgh_Click(object sender, EventArgs e)
