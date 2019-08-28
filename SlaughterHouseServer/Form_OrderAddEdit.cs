@@ -156,7 +156,9 @@ namespace SlaughterHouseServer
 
                         case "Edit":
                             var frm = new Form_OrderDetail();
-                            frm.orderNo = txtOrderNo.Text;
+                            frm.orderNo = txtOrderNo.Text; 
+                            frm.orderDate = dtpRequestDate.Value;
+
                             frm.productCode = dtOrderItem.Rows[e.RowIndex]["product_code"].ToString();
                             frm.qtyWgh = Convert.ToDecimal(dtOrderItem.Rows[e.RowIndex]["qty_wgh"]);
                             frm.issueUnitMethod = dtOrderItem.Rows[e.RowIndex]["issue_unit_method"].ToString();
@@ -241,13 +243,36 @@ namespace SlaughterHouseServer
                 int seq = 0;
                 foreach (DataRow row in dtOrderItem.Rows)
                 {
-                    seq++;
-                    List<BomItem> bomItm = BomController.GetBom(row["product_code"].ToString());
+                   
 
-                    if (bomItm.Count > 0 )
+
+                    DataTable dtBom = BomController.GetBom(row["product_code"].ToString());
+                     
+                    if (dtBom.Rows.Count > 0 )
                     {
-                        xxxxxxxxxxx
-                    } 
+                        foreach (DataRow dtRow in dtBom.Rows)
+                        { 
+                            seq++;
+                            orderItems.Add(new OrderItem
+                            {
+                                OrderNo = txtOrderNo.Text,
+                                Seq = seq,
+                                Product = new Product
+                                {
+                                    ProductCode = dtRow["product_code"].ToString(),
+                                    ProductName = "",
+                                },
+                                BomCode = (int)dtRow["bom_code"],
+                                OrderSetQty = row["issue_unit_method"].ToString() == "Q" ? Convert.ToInt16(row["qty_wgh"]) : 0,
+                                OrderSetWgh = row["issue_unit_method"].ToString() == "W" ? Convert.ToDecimal(row["qty_wgh"]) : 0,
+                                OrderQty = row["issue_unit_method"].ToString() == "Q" ? Convert.ToInt16(row["qty_wgh"]) * Convert.ToInt16(dtRow["Mutiply_Qty"]) : 0,
+                                OrderWgh = row["issue_unit_method"].ToString() == "W" ? Convert.ToDecimal(row["qty_wgh"]) * Convert.ToDecimal(dtRow["Mutiply_Wgh"]) : 0,
+                            });
+                        } 
+                    }
+                    else
+                    {
+                        seq++;
                         orderItems.Add(new OrderItem
                         {
                             OrderNo = txtOrderNo.Text,
@@ -257,11 +282,13 @@ namespace SlaughterHouseServer
                                 ProductCode = row["product_code"].ToString(),
                                 ProductName = row["product_name"].ToString(),
                             },
+                            BomCode = 0,
+                            OrderSetQty =  0,
+                            OrderSetWgh =   0,
                             OrderQty = row["issue_unit_method"].ToString() == "Q" ? Convert.ToInt16(row["qty_wgh"]) : 0,
                             OrderWgh = row["issue_unit_method"].ToString() == "W" ? Convert.ToDecimal(row["qty_wgh"]) : 0,
                         }); 
-
-                    
+                    } 
                 }
 
                 var order = new Order
@@ -293,6 +320,6 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
-         
+ 
     }
 }

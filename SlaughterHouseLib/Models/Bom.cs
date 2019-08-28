@@ -25,7 +25,7 @@ namespace SlaughterHouseLib.Models
     }
     public static class BomController
     { 
-        public static List<BomItem> GetBom(string productCode)
+        public static DataTable GetBom(string productCode)
         {
             try
             {
@@ -46,19 +46,19 @@ namespace SlaughterHouseLib.Models
                     da.Fill(ds);
 
 
-                    var bomItems = new List<BomItem>();
+                    //var bomItems = new List<BomItem>();
 
-                    foreach (DataRow row in ds.Tables[0].Rows)
-                    {
-                        bomItems.Add(new BomItem
-                        { 
-                            BomCode = (int)ds.Tables[0].Rows[0]["breeder_code"],
-                            ProductCode = ds.Tables[0].Rows[0]["product_code"].ToString(),
-                            MutiplyQty = (int)ds.Tables[0].Rows[0]["Mutiply_Qty"],
-                            MutiplyWgh = (decimal)ds.Tables[0].Rows[0]["Mutiply_wgh"],
-                        });
-                    }
-                    return bomItems;
+                    //foreach (DataRow row in ds.Tables[0].Rows)
+                    //{
+                    //    bomItems.Add(new BomItem
+                    //    { 
+                    //        BomCode = (int)ds.Tables[0].Rows[0]["bom_code"],
+                    //        ProductCode = ds.Tables[0].Rows[0]["product_code"].ToString(),
+                    //        MutiplyQty = (int)ds.Tables[0].Rows[0]["Mutiply_Qty"],
+                    //        MutiplyWgh = (decimal)ds.Tables[0].Rows[0]["Mutiply_wgh"],
+                    //    });
+                    //}
+                    return ds.Tables[0];
                 }
             }
             catch (Exception)

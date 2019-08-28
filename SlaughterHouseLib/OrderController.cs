@@ -227,6 +227,8 @@ namespace SlaughterHouseLib
                                 order_qty,
                                 order_wgh,
                                 bom_code,
+                                order_set_qty,
+                                order_set_wgh,
                                 create_by)
                                 VALUES(
                                 @order_no,
@@ -235,6 +237,8 @@ namespace SlaughterHouseLib
                                 @order_qty,
                                 @order_wgh,
                                 @bom_code,
+                                @order_set_qty,
+                                @order_set_wgh,
                                 @create_by)";
 
                     foreach (var item in order.OrderItems)
@@ -249,6 +253,8 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("order_qty", item.OrderQty);
                         cmd.Parameters.AddWithValue("order_wgh", item.OrderWgh);
                         cmd.Parameters.AddWithValue("bom_code", item.BomCode);
+                        cmd.Parameters.AddWithValue("order_set_qty", item.OrderSetQty);
+                        cmd.Parameters.AddWithValue("order_set_wgh", item.OrderSetWgh);
                         cmd.Parameters.AddWithValue("active", order.Active); 
                         cmd.Parameters.AddWithValue("create_by", order.CreateBy);
                         cmd.ExecuteNonQuery();
@@ -318,6 +324,8 @@ namespace SlaughterHouseLib
                                 order_qty,
                                 order_wgh,
                                 bom_code,
+                                order_set_qty,
+                                order_set_wgh,
                                 create_by)
                                 VALUES(
                                 @order_no,
@@ -326,6 +334,8 @@ namespace SlaughterHouseLib
                                 @order_qty,
                                 @order_wgh,
                                 @bom_code,
+                                @order_set_qty,
+                                @order_set_wgh,
                                 @create_by)";
 
                     foreach (var item in order.OrderItems)
@@ -340,6 +350,8 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("order_qty", item.OrderQty);
                         cmd.Parameters.AddWithValue("order_wgh", item.OrderWgh);
                         cmd.Parameters.AddWithValue("bom_code", item.BomCode);
+                        cmd.Parameters.AddWithValue("order_set_qty", item.OrderSetQty);
+                        cmd.Parameters.AddWithValue("order_set_wgh", item.OrderSetWgh);
                         cmd.Parameters.AddWithValue("create_by", order.CreateBy);
                         cmd.ExecuteNonQuery();
                     }

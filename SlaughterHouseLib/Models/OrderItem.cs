@@ -12,8 +12,8 @@ namespace SlaughterHouseLib.Models
         public int UnloadQty { get; set; }
         public decimal UnloadWgh { get; set; }
         public int BomCode { get; set; }
-        public int BomQty { get; set; }
-        public decimal BomWgh { get; set; }
+        public int OrderSetQty { get; set; }
+        public decimal OrderSetWgh { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
         public string ModifiedBy { get; set; }
