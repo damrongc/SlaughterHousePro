@@ -19,8 +19,7 @@ namespace SlaughterHouseServer
         }
         private void UserSettingsComponent()
         {
-            //btnAddOrderItem.Click += BtnAddOrderItem_Click;
-            gv.CellContentClick += Gv_CellContentClick;
+            //GridView 
             gv.DataBindingComplete += Gv_DataBindingComplete;
             gv.ReadOnly = true;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
@@ -45,17 +44,20 @@ namespace SlaughterHouseServer
             //KeyDown  
             dtpInvoiceDate.KeyDown += DtpRequestDate_KeyDown;
             cboCustomer.KeyDown += CboCustomer_KeyDown;
+            txtDiscount.KeyDown += TxtDiscount_KeyDown;
 
+            //Leave
+            //txtDiscount.Leave  += TxtDiscount_Leave;
 
             cboCustomer.Enabled = false;
             dtpInvoiceDate.Enabled = false;
             txtOrderNo.Enabled = false;
             txtInvoiceNo.Enabled = false;
-            BtnSaveAndNew.Visible = false;
             txtGrossAmt.Enabled = false;
             txtBeforeVat.Enabled = false;
             txtVatAmt.Enabled = false;
             txtNetAmt.Enabled = false;
+            
 
             txtVatAmt.Text = 0.ToString();
             txtVatRate.Text = "";
@@ -66,6 +68,7 @@ namespace SlaughterHouseServer
             txtNetAmt.Text = 0.ToString();
         }
 
+        #region Event Focus, KeyDown 
         private void TxtDiscount_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
@@ -77,18 +80,16 @@ namespace SlaughterHouseServer
                 }
             }
         }
-
         private void TxtVatRate_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (chkVatFlag.Checked == false)
-            { 
+            {
                 e.Handled = true;
-                return; 
+                return;
             }
-        } 
-
+        }
         private void TxtVatRate_TextChanged(object sender, EventArgs e)
-        { 
+        {
             try
             {
                 Calculate_Total();
@@ -98,7 +99,6 @@ namespace SlaughterHouseServer
 
             }
         }
-
         private void TxtDiscount_TextChanged(object sender, EventArgs e)
         {
             try
@@ -108,11 +108,11 @@ namespace SlaughterHouseServer
             catch
             {
 
-            } 
-        } 
+            }
+        }
         private void ChkVatFlag_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkVatFlag.Checked == true )
+            if (chkVatFlag.Checked == true)
             {
                 txtVatRate.Text = 7.ToString();
                 txtVatRate.Enabled = true;
@@ -130,7 +130,7 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
-            LoadCustomer(); 
+            LoadCustomer();
             LoadData();
         }
         private void DtpRequestDate_KeyDown(object sender, KeyEventArgs e)
@@ -146,124 +146,84 @@ namespace SlaughterHouseServer
             {
                 txtComment.Focus();
             }
-        } 
-        #region Event Focus, KeyDown 
-        private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
+        }
+        private void TxtDiscount_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                BtnSaveAndNew.Focus();
+                txtDiscount.Text = string.Format("{0:#,##0.00}", double.Parse(txtDiscount.Text));
+                BtnSave.Focus();
             }
         }
-        private void TxtFarmName_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtComment.Focus();
-            }
-        }
+        //private void TxtDiscount_Leave(object sender, EventArgs e)
+        //{
+        //    //txtDiscount.Text = string.Format("{0:#,##0.00}", double.Parse(txtDiscount.Text));
+        //}
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            
+            gv.Columns[GlobalsColumn.SEQ].HeaderText = "ลำดับ";
+            gv.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gv.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            gv.Columns[GlobalsColumn.SALE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
+            gv.Columns[GlobalsColumn.QTY].HeaderText = "ปริมาณจ่าย";
+            gv.Columns[GlobalsColumn.WGH].HeaderText = "น้ำหนักจ่าย";
+            gv.Columns[GlobalsColumn.UNIT_PRICE].HeaderText = "ราคาต่อหน่วย";
+            gv.Columns[GlobalsColumn.GROSS_AMT].HeaderText = "ราคา";
+
+            gv.Columns[GlobalsColumn.SEQ].Visible = false;
+            gv.Columns[GlobalsColumn.PRODUCT_CODE].Visible = false;
+
+            gv.Columns[GlobalsColumn.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[GlobalsColumn.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[GlobalsColumn.UNIT_PRICE].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            gv.Columns[GlobalsColumn.QTY].DefaultCellStyle.Format = "N0";
+            gv.Columns[GlobalsColumn.WGH].DefaultCellStyle.Format = "N2";
+            gv.Columns[GlobalsColumn.UNIT_PRICE].DefaultCellStyle.Format = "N2";
+            gv.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Format = "N2";
         }
         #endregion
 
-#region Event Click
+        #region Event Click
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
-            
-    
             try
             {
-                for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
-                {
-                    if (Convert.ToDecimal(dtInvoiceItem.Rows[i]["unit_price"]) == 0)
-                    {
-                        MessageBox.Show($"สินค้า {dtInvoiceItem.Rows[i]["product_name"]} ไม่มีราคาประกาศ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                }
-
                 SaveInvoice();
                 //MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                var frmPrint = new Form_InvoiceReport
-                {
-                    invoiceNo = invoiceNo
-                };
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            try
+            {
+                var frmPrint = new Form_InvoiceReport();
+                frmPrint.invoiceNo = InvoiceController.GetInvoiceNoByOrderNo(txtOrderNo.Text);
+
                 frmPrint.ShowDialog();
                 this.DialogResult = DialogResult.OK;
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
                 this.Close();
             }
-            catch (System.Exception ex)
-            { 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
         }
-        private void BtnSaveAndNew_Click(object sender, System.EventArgs e)
-        {
-            try
-            {
-                SaveInvoice();
-                MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+ 
+        #endregion
 
-                orderNo = "";
-                txtInvoiceNo.Text = "";
-                txtInvoiceNo.Focus();
-                cboCustomer.SelectedIndex = 0;
-                txtComment.Text = "";
-                chkActive.Checked = true;
-                LoadDetail();
-            }
-            catch (System.Exception ex)
-            { 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        } 
-        private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                DataGridView senderGrid = (DataGridView)sender;
-
-                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
-                {
-                    switch (senderGrid.Columns[e.ColumnIndex].Name)
-                    {
-
-                        //case "Edit":
-                        //    var frm = new Form_OrderDetail();
-                        //    frm.orderNo = txtInvoiceNo.Text;
-                        //    frm.productCode = dtOrderItem.Rows[e.RowIndex]["product_code"].ToString();
-                        //    frm.qty = (int)dtOrderItem.Rows[e.RowIndex]["order_qty"];
-                        //    frm.wgh = (decimal)dtOrderItem.Rows[e.RowIndex]["order_wgh"];
-                        //    if (frm.ShowDialog() == DialogResult.OK)
-                        //    {
-                        //        dtOrderItem.Rows[e.RowIndex]["product_code"] = frm.productCode;
-                        //        dtOrderItem.Rows[e.RowIndex]["product_name"] = frm.productName;
-                        //        dtOrderItem.Rows[e.RowIndex]["order_qty"] = frm.qty;
-                        //        dtOrderItem.Rows[e.RowIndex]["order_wgh"] = frm.wgh;
-                        //        dtOrderItem.AcceptChanges();
-                        //        gv.Refresh();
-                        //    }
-                        //    break;
-                        //case "Del":
-                        //    dtOrderItem.Rows[e.RowIndex].Delete();
-                        //    dtOrderItem.AcceptChanges();
-                        //    gv.Refresh(); 
-                        //    break;
-                    } 
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } 
-        }
-#endregion
+        #region Method Connect DB
         private void LoadData()
         {
-            txtOrderNo.Text  = this.orderNo;
+            txtOrderNo.Text = this.orderNo;
             if (String.IsNullOrEmpty(this.invoiceNo))
             {
                 Order order = OrderController.GetOrder(this.orderNo);
@@ -273,23 +233,23 @@ namespace SlaughterHouseServer
                     dtpInvoiceDate.Value = order.RequestDate;
                     cboCustomer.SelectedValue = order.Customer.CustomerCode;
                     txtComment.Text = "";
-                    chkActive.Checked = order.Active; 
+                    chkActive.Checked = order.Active;
                 }
             }
             else
             {
-                Invoice invoice = InvoiceController.GetInvoice(this.invoiceNo );
+                Invoice invoice = InvoiceController.GetInvoice(this.invoiceNo);
                 if (invoice != null)
                 {
-                    txtInvoiceNo.Text = invoice.InvoiceNo ;
+                    txtInvoiceNo.Text = invoice.InvoiceNo;
                     dtpInvoiceDate.Value = invoice.InvoiceDate;
                     txtOrderNo.Text = invoice.RefDocumentNo;
                     cboCustomer.SelectedValue = invoice.Customer.CustomerCode;
                     txtComment.Text = invoice.Comments;
                     chkActive.Checked = invoice.Active;
-                    txtGrossAmt.Text = invoice.GrossAmt.ToString(); 
+                    txtGrossAmt.Text = invoice.GrossAmt.ToString();
                     txtDiscount.Text = invoice.Discount.ToString();
-                    txtBeforeVat.Text = (invoice.GrossAmt - invoice.Discount).ToString (); 
+                    txtBeforeVat.Text = (invoice.GrossAmt - invoice.Discount).ToString();
                     txtVatAmt.Text = invoice.VatAmt.ToString();
                     txtNetAmt.Text = invoice.NetAmt.ToString();
                     if (invoice.VatRate > 0)
@@ -302,8 +262,11 @@ namespace SlaughterHouseServer
                         chkVatFlag.Checked = false;
                         txtVatRate.Text = "";
                     }
+                    txtDiscount.Enabled = false;
+                    chkVatFlag.Enabled = false;
                 }
             }
+            SetFormatNumberTextbox();
             LoadDetail();
         }
         private void LoadDetail()
@@ -312,26 +275,26 @@ namespace SlaughterHouseServer
             {
                 dtInvoiceItem = new DataTable("INVOICE_ITEM");
                 dtInvoiceItem = OrderItemController.GetOrderItemReadyToSell(this.orderNo);
- 
+
                 if (dtInvoiceItem.Rows.Count > 0)
                 {
                     ProductPrice productPrice;
                     Product product;
                     for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
                     {
-                        string productCode = dtInvoiceItem.Rows[i]["product_code"].ToString();
+                        string productCode = dtInvoiceItem.Rows[i][GlobalsColumn.PRODUCT_CODE].ToString();
                         productPrice = ProductPriceController.GetPriceList(productCode, dtpInvoiceDate.Value);
                         product = ProductController.GetProduct(productCode);
 
-                        dtInvoiceItem.Rows[i]["unit_price"] = productPrice.UnitPrice;
-                        dtInvoiceItem.Rows[i]["sale_unit_method"] = product.SaleUnitMethod;
-                        if (dtInvoiceItem.Rows[i]["sale_unit_method"].ToString() == "Q")
+                        dtInvoiceItem.Rows[i][GlobalsColumn.UNIT_PRICE] = productPrice.UnitPrice;
+                        dtInvoiceItem.Rows[i][GlobalsColumn.SALE_UNIT_METHOD] = product.SaleUnitMethod;
+                        if (dtInvoiceItem.Rows[i][GlobalsColumn.SALE_UNIT_METHOD].ToString() == "Q")
                         {
-                            dtInvoiceItem.Rows[i]["gross_amt"] = Convert.ToDecimal(dtInvoiceItem.Rows[i]["unit_price"]) * Convert.ToDecimal(dtInvoiceItem.Rows[i]["qty"]);
+                            dtInvoiceItem.Rows[i][GlobalsColumn.GROSS_AMT] = Convert.ToDecimal(dtInvoiceItem.Rows[i][GlobalsColumn.UNIT_PRICE]) * Convert.ToDecimal(dtInvoiceItem.Rows[i][GlobalsColumn.QTY]);
                         }
                         else
                         {
-                            dtInvoiceItem.Rows[i]["gross_amt"] = Convert.ToDecimal(dtInvoiceItem.Rows[i]["unit_price"]) * Convert.ToDecimal(dtInvoiceItem.Rows[i]["wgh"]);
+                            dtInvoiceItem.Rows[i][GlobalsColumn.GROSS_AMT] = Convert.ToDecimal(dtInvoiceItem.Rows[i][GlobalsColumn.UNIT_PRICE]) * Convert.ToDecimal(dtInvoiceItem.Rows[i][GlobalsColumn.WGH]);
                         }
                     }
                     dtInvoiceItem.AcceptChanges();
@@ -346,52 +309,7 @@ namespace SlaughterHouseServer
                 dtInvoiceItem = InvoiceItemController.GetInvoiceItems(this.invoiceNo);
             }
             gv.DataSource = dtInvoiceItem;
-            gv.Columns[0].HeaderText = "ลำดับ";
-            gv.Columns[1].HeaderText = "รหัสสินค้า";
-            gv.Columns[2].HeaderText = "ชื่อสินค้า";
-            gv.Columns[3].HeaderText = "หน่วยคำนวณ";
-            gv.Columns[4].HeaderText = "ปริมาณ";
-            gv.Columns[5].HeaderText = "น้ำหนัก";
-            gv.Columns[6].HeaderText = "ปริมาณจ่าย";
-            gv.Columns[7].HeaderText = "น้ำหนักจ่าย";
-            gv.Columns[8].HeaderText = "ราคาต่อหน่วย";
-            gv.Columns[9].HeaderText = "ราคา";
 
-
-
-            gv.Columns[0].Visible = false;           
-            gv.Columns[1].Visible = false;
-            gv.Columns[4].Visible = false;
-            gv.Columns[5].Visible = false;
-
-        }
-        private void Calculate_Total()
-        {
-            if (dtInvoiceItem != null && dtInvoiceItem.Rows.Count > 0)
-            {
-                decimal grossAmt = Convert.ToDecimal(dtInvoiceItem.Compute("Sum(gross_amt)", string.Empty));
-                decimal discount = Convert.ToDecimal(txtDiscount.Text);
-                decimal beforeVat = grossAmt - discount;
-
-                decimal vatRate = 0;
-                    if (chkVatFlag.Checked == true )
-                {
-                    vatRate = Convert.ToDecimal(txtVatRate.Text);
-
-                }
-                decimal vatAmt = (vatRate > 0) ? beforeVat * vatRate / 100 : 0;
-                decimal netAmt = grossAmt - discount + vatAmt;
-
-                txtGrossAmt.Text = grossAmt.ToString();
-                txtDiscount.Text = discount.ToString();
-                txtBeforeVat.Text = beforeVat.ToString();
-                txtVatAmt.Text = vatAmt.ToString();
-                txtNetAmt.Text = netAmt.ToString();
-            }
-            //for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
-            //{
-            //    grossAmt += Convert.ToDecimal(dtInvoiceItem.Rows[i]["gross_amt"]);
-            //}
         }
         private void LoadCustomer()
         {
@@ -402,18 +320,14 @@ namespace SlaughterHouseServer
         }
         private void SaveInvoice()
         {
-           
             try
-            {
-                if (Convert.ToDecimal(txtNetAmt.Text) <= 0)
-                {
-                    throw new Exception($"ราคาสุทธิต้องมีค่ามากกวว่า 0");
-                }
+            {  
+                CheckBeforeSave();
 
                 var invoiceItems = new List<InvoiceItem>();
                 int seq = 0;
                 foreach (DataRow row in dtInvoiceItem.Rows)
-                { 
+                {
                     seq++;
                     invoiceItems.Add(new InvoiceItem
                     {
@@ -421,19 +335,19 @@ namespace SlaughterHouseServer
                         Seq = seq,
                         Product = new Product
                         {
-                            ProductCode = row["product_code"].ToString(),
-                            ProductName = row["product_name"].ToString(),
+                            ProductCode = row[GlobalsColumn.PRODUCT_CODE].ToString(),
+                            ProductName = row[GlobalsColumn.PRODUCT_NAME].ToString(),
                         },
-                        Qty = Convert.ToInt16(row["qty"]),
-                        Wgh = Convert.ToDecimal(row["wgh"]),
-                        UnitPrice  = Convert.ToDecimal(row["unit_price"]),
-                        GrossAmt = Convert.ToDecimal(row["gross_amt"]),
-                        SaleUnitMethod = row["sale_unit_method"].ToString(),
+                        Qty = Convert.ToInt16(row[GlobalsColumn.QTY]),
+                        Wgh = Convert.ToDecimal(row[GlobalsColumn.WGH]),
+                        UnitPrice = Convert.ToDecimal(row[GlobalsColumn.UNIT_PRICE]),
+                        GrossAmt = Convert.ToDecimal(row[GlobalsColumn.GROSS_AMT]),
+                        SaleUnitMethod = row[GlobalsColumn.SALE_UNIT_METHOD].ToString(),
                     });
 
-                    if (Convert.ToDecimal(row["unit_price"]) == 0)
+                    if (Convert.ToDecimal(row[GlobalsColumn.UNIT_PRICE]) == 0)
                     {
-                        throw new Exception($"สินค้า {row["product_name"].ToString()} ไม่มีการตั้งราคา");
+                        throw new Exception($"สินค้า {row[GlobalsColumn.PRODUCT_NAME].ToString()} ไม่มีการตั้งราคา");
                     }
                 }
 
@@ -447,8 +361,8 @@ namespace SlaughterHouseServer
                         CustomerCode = cboCustomer.SelectedValue.ToString()
                     },
                     GrossAmt = Convert.ToDecimal(txtGrossAmt.Text),
-                    Discount = Convert.ToDecimal(txtDiscount.Text), 
-                    VatRate = (chkVatFlag.Checked == true) ? Convert.ToDecimal(txtVatRate.Text) : 0, 
+                    Discount = Convert.ToDecimal(txtDiscount.Text),
+                    VatRate = (chkVatFlag.Checked == true) ? Convert.ToDecimal(txtVatRate.Text) : 0,
                     VatAmt = Convert.ToDecimal(txtVatAmt.Text),
                     NetAmt = Convert.ToDecimal(txtNetAmt.Text),
                     Comments = txtComment.Text,
@@ -473,5 +387,77 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
+        #endregion
+
+        #region Method Other
+        private void CheckBeforeSave()
+        {
+            try
+            {
+
+                //Check UNIT_PRICE
+                for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
+                {
+                    if (Convert.ToDecimal(dtInvoiceItem.Rows[i][GlobalsColumn.UNIT_PRICE]) == 0)
+                    {
+                        throw new Exception($"สินค้า {dtInvoiceItem.Rows[i][GlobalsColumn.PRODUCT_NAME]} ไม่มีราคาประกาศ");
+                    }
+                }
+
+                //Check txtNetAmt
+                if (Convert.ToDecimal(txtNetAmt.Text) <= 0)
+                {
+                    throw new Exception($"ราคาสุทธิต้องมีค่ามากกวว่า 0");
+                }
+
+                //chkActive
+                if (chkActive.Checked == false)
+                {
+                    if (String.IsNullOrEmpty(txtComment.Text))
+                    {
+                        throw new Exception($"ถ้ายกเลิกเอกสาร กรุณาระบุเหตุผลที่ยกเลิก");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private void Calculate_Total()
+        {
+            if (dtInvoiceItem != null && dtInvoiceItem.Rows.Count > 0)
+            {
+                decimal grossAmt = Convert.ToDecimal(dtInvoiceItem.Compute("Sum(gross_amt)", string.Empty));
+                decimal discount = Convert.ToDecimal(txtDiscount.Text);
+                decimal beforeVat = grossAmt - discount;
+
+                decimal vatRate = 0;
+                if (chkVatFlag.Checked == true)
+                {
+                    vatRate = Convert.ToDecimal(txtVatRate.Text);
+
+                }
+                decimal vatAmt = (vatRate > 0) ? beforeVat * vatRate / 100 : 0;
+                decimal netAmt = grossAmt - discount + vatAmt;
+
+                txtGrossAmt.Text = string.Format("{0:#,##0.00}", grossAmt);
+                txtBeforeVat.Text = string.Format("{0:#,##0.00}", beforeVat);
+                txtVatAmt.Text = string.Format("{0:#,##0.00}", vatAmt);
+                txtNetAmt.Text = string.Format("{0:#,##0.00}", netAmt);
+
+            }
+        }
+        private void SetFormatNumberTextbox()
+        {
+            txtGrossAmt.Text = string.Format("{0:#,##0.00}", double.Parse(txtGrossAmt.Text));
+            txtDiscount.Text = string.Format("{0:#,##0.00}", double.Parse(txtDiscount.Text));
+            txtBeforeVat.Text = string.Format("{0:#,##0.00}", double.Parse(txtBeforeVat.Text));
+            txtVatAmt.Text = string.Format("{0:#,##0.00}", double.Parse(txtVatAmt.Text));
+            txtNetAmt.Text = string.Format("{0:#,##0.00}", double.Parse(txtNetAmt.Text));
+
+        }
+        #endregion
+         
     }
 }

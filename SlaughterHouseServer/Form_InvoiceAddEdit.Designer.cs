@@ -32,7 +32,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtInvoiceNo = new System.Windows.Forms.TextBox();
             this.BtnSave = new System.Windows.Forms.Button();
-            this.BtnSaveAndNew = new System.Windows.Forms.Button();
             this.dtpInvoiceDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.cboCustomer = new System.Windows.Forms.ComboBox();
@@ -97,25 +96,6 @@
             this.BtnSave.Text = "บันทึกแล้วปริ้น";
             this.BtnSave.UseVisualStyleBackColor = false;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
-            // 
-            // BtnSaveAndNew
-            // 
-            this.BtnSaveAndNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(160)))), ((int)(((byte)(93)))));
-            this.BtnSaveAndNew.FlatAppearance.BorderSize = 0;
-            this.BtnSaveAndNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSaveAndNew.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
-            this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
-            this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(516, 626);
-            this.BtnSaveAndNew.Name = "BtnSaveAndNew";
-            this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
-            this.BtnSaveAndNew.TabIndex = 25;
-            this.BtnSaveAndNew.Text = "บันทึกแล้วสร้างใหม่";
-            this.BtnSaveAndNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnSaveAndNew.UseVisualStyleBackColor = false;
-            this.BtnSaveAndNew.Visible = false;
-            this.BtnSaveAndNew.Click += new System.EventHandler(this.BtnSaveAndNew_Click);
             // 
             // dtpInvoiceDate
             // 
@@ -381,7 +361,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dtpInvoiceDate);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.BtnSaveAndNew);
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.txtInvoiceNo);
             this.Controls.Add(this.label1);
@@ -408,7 +387,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtInvoiceNo;
         private System.Windows.Forms.Button BtnSave;
-        private System.Windows.Forms.Button BtnSaveAndNew;
         private System.Windows.Forms.DateTimePicker dtpInvoiceDate;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cboCustomer;

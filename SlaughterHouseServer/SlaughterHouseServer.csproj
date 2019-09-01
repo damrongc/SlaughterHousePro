@@ -248,6 +248,7 @@
     <Compile Include="Form_ReceiveAddEdit.Designer.cs">
       <DependentUpon>Form_ReceiveAddEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_Customer.resx">
