@@ -39,7 +39,7 @@ namespace SlaughterHouseServer
             DataSet ds = InvoiceController.GetDataPrintInvoice(invoiceNo); 
             string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
             //string reportName = "invoice";
-            //ds.WriteXml(path + @"\xml\invoice.xml", XmlWriteMode.WriteSchema);
+            ds.WriteXml(path + @"\xml\invoice.xml", XmlWriteMode.WriteSchema);
             doc.Load(path + @"\invoice.rpt");
             doc.SetDataSource(ds);
 

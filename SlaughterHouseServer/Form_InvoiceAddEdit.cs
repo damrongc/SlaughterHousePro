@@ -57,7 +57,7 @@ namespace SlaughterHouseServer
             txtBeforeVat.Enabled = false;
             txtVatAmt.Enabled = false;
             txtNetAmt.Enabled = false;
-            
+
 
             txtVatAmt.Text = 0.ToString();
             txtVatRate.Text = "";
@@ -190,7 +190,14 @@ namespace SlaughterHouseServer
         {
             try
             {
-                SaveInvoice();
+                if (chkActive.Checked == true)
+                {
+                    SaveInvoice();
+                }
+                else if (chkActive.Checked == false && chkActive.Enabled == true)
+                {
+                    CancelInvoice();
+                }
                 //MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (System.Exception ex)
@@ -203,7 +210,7 @@ namespace SlaughterHouseServer
             try
             {
                 var frmPrint = new Form_InvoiceReport();
-                frmPrint.invoiceNo = InvoiceController.GetInvoiceNoByOrderNo(txtOrderNo.Text);
+                frmPrint.invoiceNo = (String.IsNullOrEmpty(txtInvoiceNo.Text)) ? InvoiceController.GetInvoiceNoByOrderNo(txtOrderNo.Text) : txtInvoiceNo.Text;
 
                 frmPrint.ShowDialog();
                 this.DialogResult = DialogResult.OK;
@@ -217,7 +224,7 @@ namespace SlaughterHouseServer
                 this.Close();
             }
         }
- 
+
         #endregion
 
         #region Method Connect DB
@@ -262,8 +269,15 @@ namespace SlaughterHouseServer
                         chkVatFlag.Checked = false;
                         txtVatRate.Text = "";
                     }
-                    txtDiscount.Enabled = false;
-                    chkVatFlag.Enabled = false;
+                    
+                    if (chkActive.Checked == false)
+                    {
+                        chkActive.Enabled = false;
+                        //txtComment.Enabled = false;
+                        //txtDiscount.Enabled = false;
+                        //chkVatFlag.Enabled = false;
+                        BtnSave.Visible = false;
+                    }
                 }
             }
             SetFormatNumberTextbox();
@@ -321,7 +335,7 @@ namespace SlaughterHouseServer
         private void SaveInvoice()
         {
             try
-            {  
+            {
                 CheckBeforeSave();
 
                 var invoiceItems = new List<InvoiceItem>();
@@ -387,6 +401,32 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
+        private void CancelInvoice()
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(txtComment.Text))
+                {
+                    txtComment.Focus();
+                    throw new Exception($"ถ้ายกเลิกเอกสาร กรุณาระบุเหตุผลที่ยกเลิก");
+                }
+                var invoice = new Invoice
+                {
+                    InvoiceNo = txtInvoiceNo.Text,
+                    InvoiceDate = dtpInvoiceDate.Value,
+                    RefDocumentNo = txtOrderNo.Text,
+                    Comments = txtComment.Text,
+                    Active = chkActive.Checked,
+                    ModifiedBy = "system"
+                };
+
+                InvoiceController.Cancel(invoice);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Method Other
@@ -394,6 +434,10 @@ namespace SlaughterHouseServer
         {
             try
             {
+                if (String.IsNullOrEmpty(txtInvoiceNo.Text) == false)
+                {
+                    throw new Exception($"เอกสารใบแจ้งหนี้บันทึกแล้วไม่สามารถบันทึกซ้ำได้");
+                }
 
                 //Check UNIT_PRICE
                 for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
@@ -408,15 +452,6 @@ namespace SlaughterHouseServer
                 if (Convert.ToDecimal(txtNetAmt.Text) <= 0)
                 {
                     throw new Exception($"ราคาสุทธิต้องมีค่ามากกวว่า 0");
-                }
-
-                //chkActive
-                if (chkActive.Checked == false)
-                {
-                    if (String.IsNullOrEmpty(txtComment.Text))
-                    {
-                        throw new Exception($"ถ้ายกเลิกเอกสาร กรุณาระบุเหตุผลที่ยกเลิก");
-                    }
                 }
             }
             catch (Exception)
@@ -458,6 +493,6 @@ namespace SlaughterHouseServer
 
         }
         #endregion
-         
+
     }
 }

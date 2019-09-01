@@ -54,6 +54,17 @@ namespace SlaughterHouseServer
             gv.Columns[GlobalsColumn.NET_AMT].HeaderText = "ราคาสุทธิ";
             gv.Columns[GlobalsColumn.ACTIVE].HeaderText = "ใช้งาน";
             gv.Columns[GlobalsColumn.CREATE_AT].HeaderText = "วันเวลาสร้าง";
+
+            gv.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[GlobalsColumn.DISCOUNT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[GlobalsColumn.VAT_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[GlobalsColumn.NET_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+
+            gv.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Format = "N2";
+            gv.Columns[GlobalsColumn.DISCOUNT].DefaultCellStyle.Format = "N2";
+            gv.Columns[GlobalsColumn.VAT_AMT].DefaultCellStyle.Format = "N2";
+            gv.Columns[GlobalsColumn.NET_AMT].DefaultCellStyle.Format = "N2";
         }
 
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

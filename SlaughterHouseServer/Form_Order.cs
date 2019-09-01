@@ -195,10 +195,11 @@ namespace SlaughterHouseServer
         private void BtnAdd_Click(object sender, System.EventArgs e)
         {
             var frm = new Form_OrderAddEdit();
-            if (frm.ShowDialog() == DialogResult.OK)
+            if (frm.ShowDialog() == DialogResult.OK  )
             {
-                LoadOrder();
+              
             }
+            LoadOrder();
         }
 
         private void LoadCustomer()
@@ -227,5 +228,7 @@ namespace SlaughterHouseServer
             dtOrderItem = OrderItemController.GetOrderItems(orderNo, "N");
             gvDt.DataSource = dtOrderItem;  
         }
+
+     
     }
 }
