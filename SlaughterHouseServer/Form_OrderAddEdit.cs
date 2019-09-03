@@ -116,6 +116,20 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CancelOrder();
+                MessageBox.Show("ยกเลิกเอกสาร เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void BtnAddOrderItem_Click(object sender, System.EventArgs e)
         {
 
@@ -302,6 +316,30 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
-
+        private void CancelOrder()
+        {
+            try
+            {
+                var order = new Order
+                {
+                    OrderNo = txtOrderNo.Text,
+                    RequestDate = dtpRequestDate.Value,
+                    Customer = new Customer
+                    {
+                        CustomerCode = cboCustomer.SelectedValue.ToString()
+                    },
+                    Comments = txtComment.Text,
+                    OrderFlag = 0,
+                    Active = false,
+                    CreateBy = "system",
+                    ModifiedBy = "system" 
+                };
+                OrderController.Cancel(order);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

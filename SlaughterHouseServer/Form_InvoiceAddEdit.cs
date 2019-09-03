@@ -190,38 +190,27 @@ namespace SlaughterHouseServer
         {
             try
             {
-                if (chkActive.Checked == true)
-                {
-                    SaveInvoice();
-                }
-                else if (chkActive.Checked == false && chkActive.Enabled == true)
-                {
-                    CancelInvoice();
-                }
-                //MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SaveInvoice();
+                PrintReport();
             }
             catch (System.Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
+            } 
+        }
 
-
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
             try
             {
-                var frmPrint = new Form_InvoiceReport();
-                frmPrint.invoiceNo = (String.IsNullOrEmpty(txtInvoiceNo.Text)) ? InvoiceController.GetInvoiceNoByOrderNo(txtOrderNo.Text) : txtInvoiceNo.Text;
-
-                frmPrint.ShowDialog();
-                this.DialogResult = DialogResult.OK;
+                CancelInvoice();
+                PrintReport();
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message, "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                this.Close();
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
 
@@ -242,6 +231,7 @@ namespace SlaughterHouseServer
                     txtComment.Text = "";
                     chkActive.Checked = order.Active;
                 }
+                BtnCancel.Enabled = false;
             }
             else
             {
@@ -269,14 +259,16 @@ namespace SlaughterHouseServer
                         chkVatFlag.Checked = false;
                         txtVatRate.Text = "";
                     }
-                    
+
+                    chkActive.Enabled = false;
+                    BtnSave.Enabled = false;
+                    txtDiscount.Enabled = false;
+                    chkVatFlag.Enabled = false;
+                    txtVatRate.Enabled = false;
                     if (chkActive.Checked == false)
                     {
-                        chkActive.Enabled = false;
-                        //txtComment.Enabled = false;
-                        //txtDiscount.Enabled = false;
-                        //chkVatFlag.Enabled = false;
-                        BtnSave.Visible = false;
+                        BtnCancel.Enabled = false;
+                        txtComment.Enabled = false;
                     }
                 }
             }
@@ -416,7 +408,7 @@ namespace SlaughterHouseServer
                     InvoiceDate = dtpInvoiceDate.Value,
                     RefDocumentNo = txtOrderNo.Text,
                     Comments = txtComment.Text,
-                    Active = chkActive.Checked,
+                    Active = false,
                     ModifiedBy = "system"
                 };
 
@@ -492,7 +484,27 @@ namespace SlaughterHouseServer
             txtNetAmt.Text = string.Format("{0:#,##0.00}", double.Parse(txtNetAmt.Text));
 
         }
+        private void PrintReport()
+        {
+            try
+            {
+                var frmPrint = new Form_InvoiceReport();
+                frmPrint.invoiceNo = (String.IsNullOrEmpty(txtInvoiceNo.Text)) ? InvoiceController.GetInvoiceNoByOrderNo(txtOrderNo.Text) : txtInvoiceNo.Text;
+
+                frmPrint.ShowDialog();
+                this.DialogResult = DialogResult.OK;
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                this.Close();
+            }
+        }
         #endregion
 
+       
     }
 }

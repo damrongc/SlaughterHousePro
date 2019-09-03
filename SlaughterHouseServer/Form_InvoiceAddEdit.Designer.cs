@@ -57,6 +57,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtVatRate = new System.Windows.Forms.TextBox();
             this.chkVatFlag = new System.Windows.Forms.CheckBox();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
@@ -183,6 +184,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkActive.Enabled = false;
             this.chkActive.Location = new System.Drawing.Point(861, 24);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(79, 33);
@@ -335,10 +337,28 @@
             this.chkVatFlag.Text = "ภาษี";
             this.chkVatFlag.UseVisualStyleBackColor = true;
             // 
+            // BtnCancel
+            // 
+            this.BtnCancel.BackColor = System.Drawing.Color.Tomato;
+            this.BtnCancel.FlatAppearance.BorderSize = 0;
+            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancel.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCancel.ForeColor = System.Drawing.Color.White;
+            this.BtnCancel.Image = ((System.Drawing.Image)(resources.GetObject("BtnCancel.Image")));
+            this.BtnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnCancel.Location = new System.Drawing.Point(517, 626);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(202, 36);
+            this.BtnCancel.TabIndex = 63;
+            this.BtnCancel.Text = "ยกเลิกเอกสาร";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
             // Form_InvoiceAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(957, 678);
+            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.chkVatFlag);
             this.Controls.Add(this.txtVatRate);
             this.Controls.Add(this.txtNetAmt);
@@ -412,5 +432,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtVatRate;
         private System.Windows.Forms.CheckBox chkVatFlag;
+        private System.Windows.Forms.Button BtnCancel;
     }
 }

@@ -44,16 +44,16 @@
     </xs:element>
   </xs:schema>
   <Table>
-    <invoice_no>INV0000015</invoice_no>
+    <invoice_no>INV0000018</invoice_no>
     <invoice_date>2019-09-01T00:00:00+07:00</invoice_date>
     <ref_document_no>SO00000015</ref_document_no>
     <customer_code>001</customer_code>
     <gross_amt_hd>437823.00</gross_amt_hd>
-    <discount_hd>3620.00</discount_hd>
-    <before_vat>434203.00</before_vat>
+    <discount_hd>576.00</discount_hd>
+    <before_vat>437247.00</before_vat>
     <vat_rate_hd>7.00</vat_rate_hd>
-    <vat_amt_hd>30394.21</vat_amt_hd>
-    <net_amt_hd>464597.21</net_amt_hd>
+    <vat_amt_hd>30607.29</vat_amt_hd>
+    <net_amt_hd>467854.29</net_amt_hd>
     <invoice_flag>0</invoice_flag>
     <comments />
     <product_code>P002</product_code>
@@ -76,16 +76,16 @@
     <active>true</active>
   </Table>
   <Table>
-    <invoice_no>INV0000015</invoice_no>
+    <invoice_no>INV0000018</invoice_no>
     <invoice_date>2019-09-01T00:00:00+07:00</invoice_date>
     <ref_document_no>SO00000015</ref_document_no>
     <customer_code>001</customer_code>
     <gross_amt_hd>437823.00</gross_amt_hd>
-    <discount_hd>3620.00</discount_hd>
-    <before_vat>434203.00</before_vat>
+    <discount_hd>576.00</discount_hd>
+    <before_vat>437247.00</before_vat>
     <vat_rate_hd>7.00</vat_rate_hd>
-    <vat_amt_hd>30394.21</vat_amt_hd>
-    <net_amt_hd>464597.21</net_amt_hd>
+    <vat_amt_hd>30607.29</vat_amt_hd>
+    <net_amt_hd>467854.29</net_amt_hd>
     <invoice_flag>0</invoice_flag>
     <comments />
     <product_code>P008</product_code>

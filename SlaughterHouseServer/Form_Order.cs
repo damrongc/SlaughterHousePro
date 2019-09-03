@@ -74,8 +74,8 @@ namespace SlaughterHouseServer
                 string invocieFlag = gv.Rows[row.Index].Cells[GlobalsColumn.INVOICE_FLAG].Value.ToString();
                 if (invocieFlag == "1")
                 {
-                    gv.Rows[row.Index].Cells[GlobalsColumn.BTN_INVOICE].Style.BackColor = Color.DarkSlateGray;
-                    //gv.Rows[row.Index].Cells[GlobalsColumn.BTN_INVOICE].Value = "ออกใบแจ้งหนี้";
+                    gv.Rows[row.Index].Cells[GlobalsColumn.BTN_INVOICE].Style.BackColor = Color.Gray;
+                    //gv.Rows[row.Index].Cells[GlobalsColumn.BTN_INVOICE].DataGridView.b = "xxxxxxx";
                 }
                 else
                 {
@@ -83,6 +83,7 @@ namespace SlaughterHouseServer
                 }
             }
         }
+ 
 
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {

@@ -47,6 +47,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.BtnSaveAndNew = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
@@ -225,6 +226,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkActive.Enabled = false;
             this.chkActive.Location = new System.Drawing.Point(182, 289);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(79, 33);
@@ -250,10 +252,28 @@
             this.BtnSaveAndNew.UseVisualStyleBackColor = false;
             this.BtnSaveAndNew.Click += new System.EventHandler(this.BtnSaveAndNew_Click);
             // 
+            // BtnCancel
+            // 
+            this.BtnCancel.BackColor = System.Drawing.Color.Tomato;
+            this.BtnCancel.FlatAppearance.BorderSize = 0;
+            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancel.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCancel.ForeColor = System.Drawing.Color.White;
+            this.BtnCancel.Image = ((System.Drawing.Image)(resources.GetObject("BtnCancel.Image")));
+            this.BtnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnCancel.Location = new System.Drawing.Point(313, 611);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(202, 36);
+            this.BtnCancel.TabIndex = 47;
+            this.BtnCancel.Text = "ยกเลิกเอกสาร";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
             // Form_OrderAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(957, 661);
+            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.chkActive);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
@@ -303,5 +323,6 @@
         private System.Windows.Forms.DataGridViewImageColumn Del;
         private System.Windows.Forms.CheckBox chkActive;
         private System.Windows.Forms.Button BtnSaveAndNew;
+        private System.Windows.Forms.Button BtnCancel;
     }
 }
