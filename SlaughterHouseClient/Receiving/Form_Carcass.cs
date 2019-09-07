@@ -12,7 +12,7 @@ namespace SlaughterHouseClient.Receiving
 {
     public partial class Form_Carcass : Form
     {
-        private string productCode = "P002";
+        product product;
         private bool isStart = false;
         string sumText;
         bool lockWeight = false;
@@ -54,9 +54,22 @@ namespace SlaughterHouseClient.Receiving
             btnStart.Enabled = false;
             btnStop.Enabled = false;
             BtnOK.Enabled = false;
+
+            LoadProduct("P002");
             //BtnCloseQueue.Enabled = false;
 
         }
+
+        private void LoadProduct(string productCode)
+        {
+            using (var db = new SlaughterhouseEntities())
+            {
+                product = db.products.Where(p => p.product_code == productCode).SingleOrDefault();
+                lblMinWeight.Text = product.min_weight.ToString();
+                lblMaxWeight.Text = product.max_weight.ToString();
+            }
+        }
+
 
         private void Form_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -130,7 +143,7 @@ namespace SlaughterHouseClient.Receiving
 
         private void btnReceiveNo_Click(object sender, EventArgs e)
         {
-            var frm = new Form_Receive(1);
+            var frm = new Form_LookupSwine();
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 LoadData(frm.receiveNo);
@@ -158,8 +171,8 @@ namespace SlaughterHouseClient.Receiving
             using (var db = new SlaughterhouseEntities())
             {
                 var receive = db.receives.Where(p => p.receive_no == receiveNo).SingleOrDefault();
-                int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Sum(p => p.receive_qty);
-                decimal stock_wgh = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Sum(p => p.receive_wgh);
+                int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
+                decimal stock_wgh = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_wgh);
                 int remain_qty = receive.farm_qty - stock_qty;
                 lblReceiveNo.Text = receive.receive_no;
                 lblFarm.Text = receive.farm.farm_name;
@@ -174,6 +187,11 @@ namespace SlaughterHouseClient.Receiving
                 if (remain_qty == 0)
                 {
                     btnStart.Enabled = false;
+                }
+                else
+                {
+                    btnStart.Enabled = true;
+
                 }
             }
 
@@ -215,20 +233,20 @@ namespace SlaughterHouseClient.Receiving
                     //update receive
                     var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
 
-                    int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Sum(p => p.receive_qty);
+                    int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
                     if (receive.factory_qty - stock_qty == 0)
                     {
                         throw new Exception("จำนวนรับครบแล้ว ไม่สามารถรับเพิ่มได้!");
                     }
 
 
-                    int seq = receive.receive_item.Where(p => p.product_code.Equals(productCode)).Count();
+                    int seq = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Count();
                     //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
                     seq += 1;
                     var item = new receive_item
                     {
                         receive_no = receive.receive_no,
-                        product_code = productCode,
+                        product_code = product.product_code,
                         seq = seq,
                         lot_no = receive.lot_no,
                         sex_flag = "",
@@ -349,7 +367,7 @@ namespace SlaughterHouseClient.Receiving
 
         }
 
-        private async void BtnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             try
             {
@@ -363,15 +381,18 @@ namespace SlaughterHouseClient.Receiving
                     lblMessage.Text = Constants.PROCESSING;
                     //Thread.Sleep(1000);
                     SaveData();
-                    Console.Beep();
-                    lblWeight.BackColor = Color.FromArgb(33, 150, 83);
-                    lblWeight.ForeColor = Color.White;
-                    await Task.Delay(1000);
-                    lblWeight.BackColor = Color.White;
-                    lblWeight.ForeColor = Color.Black;
-                    //รอรับน้ำหนัก  MinWeight
-                    lockWeight = false;
-                    TmMinWeight.Enabled = true;
+                    lblMessage.Text = Constants.SAVE_SUCCESS;
+                    LoadData(lblReceiveNo.Text);
+                    lblWeight.Text = $"0.0";
+                    //Console.Beep();
+                    //lblWeight.BackColor = Color.FromArgb(33, 150, 83);
+                    //lblWeight.ForeColor = Color.White;
+                    //await Task.Delay(1000);
+                    //lblWeight.BackColor = Color.White;
+                    //lblWeight.ForeColor = Color.Black;
+                    ////รอรับน้ำหนัก  MinWeight
+                    //lockWeight = false;
+                    //TmMinWeight.Enabled = true;
                 }
                 lockWeight = false;
 

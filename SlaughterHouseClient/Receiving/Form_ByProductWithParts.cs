@@ -47,7 +47,7 @@ namespace SlaughterHouseClient.Receiving
 
         private void btnReceiveNo_Click(object sender, EventArgs e)
         {
-            var frm = new Form_Receive(1);
+            var frm = new Form_Receive();
 
             if (frm.ShowDialog() == DialogResult.OK)
             {

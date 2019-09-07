@@ -4,11 +4,11 @@ using System.Linq;
 using System.Windows.Forms;
 namespace SlaughterHouseClient.Receiving
 {
-    public partial class Form_Receive : Form
+    public partial class Form_LookupSwine : Form
     {
         //int ReceiveFlag { get; set; }
         public string receiveNo { get; set; }
-        public Form_Receive()
+        public Form_LookupSwine()
         {
             InitializeComponent();
             Load += Form_Receive_Load;
@@ -45,8 +45,6 @@ namespace SlaughterHouseClient.Receiving
                     receiveNo = gv.Rows[e.RowIndex].Cells[1].Value.ToString();
                     DialogResult = DialogResult.OK;
                     Close();
-
-
                 }
             }
             catch (Exception ex)
@@ -66,7 +64,7 @@ namespace SlaughterHouseClient.Receiving
 
             using (var db = new SlaughterhouseEntities())
             {
-                var qry = db.receives.Where(p => (p.farm_qty - p.factory_qty) > 0).ToList();
+                var qry = db.receives.Where(p => p.receive_flag == 1).ToList();
                 var coll = qry.AsEnumerable().Select(p => new
                 {
                     p.receive_no,

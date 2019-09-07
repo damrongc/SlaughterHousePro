@@ -416,20 +416,19 @@
             // 
             // lblMinWeight
             // 
-            this.lblMinWeight.AutoSize = true;
             this.lblMinWeight.BackColor = System.Drawing.Color.Yellow;
             this.lblMinWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMinWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblMinWeight.Font = new System.Drawing.Font("Kanit", 16F);
-            this.lblMinWeight.Location = new System.Drawing.Point(459, 290);
+            this.lblMinWeight.Location = new System.Drawing.Point(459, 282);
             this.lblMinWeight.Name = "lblMinWeight";
-            this.lblMinWeight.Size = new System.Drawing.Size(63, 35);
+            this.lblMinWeight.Size = new System.Drawing.Size(99, 43);
             this.lblMinWeight.TabIndex = 48;
             this.lblMinWeight.Text = "0.00";
+            this.lblMinWeight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblMaxWeight
             // 
-            this.lblMaxWeight.AutoSize = true;
             this.lblMaxWeight.BackColor = System.Drawing.Color.Red;
             this.lblMaxWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMaxWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -437,9 +436,10 @@
             this.lblMaxWeight.ForeColor = System.Drawing.Color.White;
             this.lblMaxWeight.Location = new System.Drawing.Point(459, 90);
             this.lblMaxWeight.Name = "lblMaxWeight";
-            this.lblMaxWeight.Size = new System.Drawing.Size(63, 35);
+            this.lblMaxWeight.Size = new System.Drawing.Size(99, 43);
             this.lblMaxWeight.TabIndex = 49;
             this.lblMaxWeight.Text = "0.00";
+            this.lblMaxWeight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dragControl1
             // 
@@ -456,6 +456,7 @@
             this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Simulator";
+            this.groupBox1.Visible = false;
             // 
             // btnSetWgh
             // 

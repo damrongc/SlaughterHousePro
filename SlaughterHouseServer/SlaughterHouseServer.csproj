@@ -368,11 +368,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MySql.Data">
-      <Version>8.0.16</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Database\" />
     <Folder Include="Resources\" />
   </ItemGroup>
@@ -384,6 +379,17 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MySql.Data">
+      <Version>8.0.17</Version>
+    </PackageReference>
+    <PackageReference Include="MySql.Data.Entity">
+      <Version>6.10.9</Version>
+    </PackageReference>
+    <PackageReference Include="MySql.Data.EntityFramework">
+      <Version>8.0.17</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

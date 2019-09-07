@@ -44,7 +44,7 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
-            LoadCustomer(); 
+            LoadCustomer();
             LoadData();
         }
         private void DtpRequestDate_KeyDown(object sender, KeyEventArgs e)
@@ -60,7 +60,7 @@ namespace SlaughterHouseServer
             {
                 txtComment.Focus();
             }
-        } 
+        }
         #region Event Focus, KeyDown 
         private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
@@ -82,7 +82,7 @@ namespace SlaughterHouseServer
         }
         #endregion
 
-#region Event Click
+        #region Event Click
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
@@ -122,7 +122,7 @@ namespace SlaughterHouseServer
         }
         private void BtnAddOrderItem_Click(object sender, System.EventArgs e)
         {
-            
+
             var frm = new Form_OrderDetail();
             frm.qtyWgh = 0;
             frm.orderDate = dtpRequestDate.Value;
@@ -167,9 +167,9 @@ namespace SlaughterHouseServer
                                 dtOrderItem.Rows[e.RowIndex]["product_code"] = frm.productCode;
                                 dtOrderItem.Rows[e.RowIndex]["product_name"] = frm.productName;
                                 dtOrderItem.Rows[e.RowIndex]["qty_wgh"] = frm.qtyWgh;
-                                dtOrderItem.Rows[e.RowIndex]["issue_unit_method"] = frm.issueUnitMethod ;
+                                dtOrderItem.Rows[e.RowIndex]["issue_unit_method"] = frm.issueUnitMethod;
                                 dtOrderItem.Rows[e.RowIndex]["unit_code"] = frm.unitCode;
-                                dtOrderItem.Rows[e.RowIndex]["unit_name"] = frm.unitName ;
+                                dtOrderItem.Rows[e.RowIndex]["unit_name"] = frm.unitName;
                                 dtOrderItem.AcceptChanges();
                                 gv.Refresh();
                             }
@@ -177,7 +177,7 @@ namespace SlaughterHouseServer
                         case "Del":
                             dtOrderItem.Rows[e.RowIndex].Delete();
                             dtOrderItem.AcceptChanges();
-                            gv.Refresh(); 
+                            gv.Refresh();
                             break;
                     }
                 }
@@ -186,9 +186,9 @@ namespace SlaughterHouseServer
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
-#endregion
+        #endregion
 
         private void LoadData()
         {
@@ -202,15 +202,15 @@ namespace SlaughterHouseServer
                 txtComment.Text = order.Comments;
                 chkActive.Checked = order.Active;
                 dtpRequestDate.Enabled = false;
-                BtnSaveAndNew.Visible = false; 
+                BtnSaveAndNew.Visible = false;
             }
             LoadDetail();
         }
         private void LoadDetail()
-        { 
+        {
             dtOrderItem = new DataTable("ORDERS_ITEM");
-            dtOrderItem = OrderItemController.GetOrderItems(orderNo,"Y");
-            
+            dtOrderItem = OrderItemController.GetOrderItems(orderNo, "Y");
+
             gv.DataSource = dtOrderItem;
             gv.Columns["seq"].HeaderText = "ลำดับ";
             gv.Columns["product_code"].HeaderText = "รหัสสินค้า";
@@ -220,7 +220,7 @@ namespace SlaughterHouseServer
             gv.Columns["unit_code"].HeaderText = "รหัสหน่วยสินค้า";
             gv.Columns["unit_name"].HeaderText = "หน่วยสินค้า";
 
-            gv.Columns["seq"].Visible = false;           
+            gv.Columns["seq"].Visible = false;
             gv.Columns["issue_unit_method"].Visible = false;
             gv.Columns["unit_code"].Visible = false;
             gv.Columns["unload_qty"].Visible = false;
@@ -244,24 +244,23 @@ namespace SlaughterHouseServer
                     seq++;
                     List<BomItem> bomItm = BomController.GetBom(row["product_code"].ToString());
 
-                    if (bomItm.Count > 0 )
+                    if (bomItm.Count > 0)
                     {
-                        xxxxxxxxxxx
-                    } 
-                        orderItems.Add(new OrderItem
+                    }
+                    orderItems.Add(new OrderItem
+                    {
+                        OrderNo = txtOrderNo.Text,
+                        Seq = seq,
+                        Product = new Product
                         {
-                            OrderNo = txtOrderNo.Text,
-                            Seq = seq,
-                            Product = new Product
-                            {
-                                ProductCode = row["product_code"].ToString(),
-                                ProductName = row["product_name"].ToString(),
-                            },
-                            OrderQty = row["issue_unit_method"].ToString() == "Q" ? Convert.ToInt16(row["qty_wgh"]) : 0,
-                            OrderWgh = row["issue_unit_method"].ToString() == "W" ? Convert.ToDecimal(row["qty_wgh"]) : 0,
-                        }); 
+                            ProductCode = row["product_code"].ToString(),
+                            ProductName = row["product_name"].ToString(),
+                        },
+                        OrderQty = row["issue_unit_method"].ToString() == "Q" ? Convert.ToInt16(row["qty_wgh"]) : 0,
+                        OrderWgh = row["issue_unit_method"].ToString() == "W" ? Convert.ToDecimal(row["qty_wgh"]) : 0,
+                    });
 
-                    
+
                 }
 
                 var order = new Order
@@ -280,19 +279,20 @@ namespace SlaughterHouseServer
                     OrderItems = orderItems
                 };
 
-                if (string.IsNullOrEmpty(txtOrderNo.Text)) 
+                if (string.IsNullOrEmpty(txtOrderNo.Text))
                 {
                     OrderController.Insert(order);
                 }
-                else{
-                    OrderController.Update (order);
-                } 
+                else
+                {
+                    OrderController.Update(order);
+                }
             }
             catch (Exception)
             {
                 throw;
             }
         }
-         
+
     }
 }

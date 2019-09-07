@@ -12,12 +12,11 @@ namespace SlaughterHouseClient
     using System;
     using System.Collections.Generic;
     
-    public partial class plant
+    public partial class bom_item
     {
-        public int plant_id { get; set; }
-        public System.DateTime production_date { get; set; }
-        public string plant_name { get; set; }
-        public string address { get; set; }
-        public string est_no { get; set; }
+        public int bom_code { get; set; }
+        public string product_code { get; set; }
+        public Nullable<int> mutiply_qty { get; set; }
+        public Nullable<decimal> mutiply_wgh { get; set; }
     }
 }

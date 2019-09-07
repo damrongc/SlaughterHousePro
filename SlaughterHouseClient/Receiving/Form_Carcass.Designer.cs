@@ -63,6 +63,8 @@
             this.BgwMinWeight = new System.ComponentModel.BackgroundWorker();
             this.TmMinWeight = new System.Windows.Forms.Timer(this.components);
             this.btnZero = new System.Windows.Forms.Button();
+            this.lblMaxWeight = new System.Windows.Forms.Label();
+            this.lblMinWeight = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -441,11 +443,40 @@
             this.btnZero.UseVisualStyleBackColor = true;
             this.btnZero.Click += new System.EventHandler(this.btnZero_Click);
             // 
+            // lblMaxWeight
+            // 
+            this.lblMaxWeight.BackColor = System.Drawing.Color.Red;
+            this.lblMaxWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMaxWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblMaxWeight.Font = new System.Drawing.Font("Kanit", 16F);
+            this.lblMaxWeight.ForeColor = System.Drawing.Color.White;
+            this.lblMaxWeight.Location = new System.Drawing.Point(507, 88);
+            this.lblMaxWeight.Name = "lblMaxWeight";
+            this.lblMaxWeight.Size = new System.Drawing.Size(99, 43);
+            this.lblMaxWeight.TabIndex = 51;
+            this.lblMaxWeight.Text = "0.00";
+            this.lblMaxWeight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMinWeight
+            // 
+            this.lblMinWeight.BackColor = System.Drawing.Color.Yellow;
+            this.lblMinWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMinWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblMinWeight.Font = new System.Drawing.Font("Kanit", 16F);
+            this.lblMinWeight.Location = new System.Drawing.Point(507, 275);
+            this.lblMinWeight.Name = "lblMinWeight";
+            this.lblMinWeight.Size = new System.Drawing.Size(99, 43);
+            this.lblMinWeight.TabIndex = 50;
+            this.lblMinWeight.Text = "0.00";
+            this.lblMinWeight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form_Carcass
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.lblMaxWeight);
+            this.Controls.Add(this.lblMinWeight);
             this.Controls.Add(this.btnZero);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
@@ -523,6 +554,8 @@
         private System.ComponentModel.BackgroundWorker BgwMinWeight;
         private System.Windows.Forms.Timer TmMinWeight;
         private System.Windows.Forms.Button btnZero;
+        private System.Windows.Forms.Label lblMaxWeight;
+        private System.Windows.Forms.Label lblMinWeight;
     }
 }
 

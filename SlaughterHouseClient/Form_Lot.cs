@@ -12,12 +12,7 @@ namespace SlaughterHouseClient
         public Form_Lot(string productCode)
         {
             InitializeComponent();
-
-
-
-
             //UserSettingsComponent();
-
             LoadData(productCode);
 
         }

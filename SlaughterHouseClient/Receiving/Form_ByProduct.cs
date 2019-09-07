@@ -34,8 +34,6 @@ namespace SlaughterHouseClient.Receiving
             lblMinWeight.Text = product.min_weight.ToString();
             lblMaxWeight.Text = product.max_weight.ToString();
         }
-
-
         private void Form_Load(object sender, EventArgs e)
         {
             lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
@@ -155,18 +153,18 @@ namespace SlaughterHouseClient.Receiving
             try
             {
                 lockWeight = true;
+                lblMessage.Text = Constants.PROCESSING;
                 SaveData();
-                PlayNotificationSound("savanna");
+                //PlayNotificationSound("savanna");
                 lblWeight.BackColor = Color.FromArgb(33, 150, 83);
                 lblWeight.ForeColor = Color.White;
+                lblMessage.Text = Constants.SAVE_SUCCESS;
                 await Task.Delay(1000);
                 lblWeight.BackColor = Color.White;
                 lblWeight.ForeColor = Color.Black;
-
-
-                //clear weight
                 LoadData(lblReceiveNo.Text);
 
+                //clear weight
                 lblWeight.Text = 0m.ToFormat2Decimal();
                 lblMessage.Text = Constants.WEIGHT_WAITING;
 
@@ -174,7 +172,6 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -245,10 +242,15 @@ namespace SlaughterHouseClient.Receiving
                 lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
                 lblRemainQty.Text = remain_qty.ToComma();
 
-                //if (remain_qty > 0)
-                //{
-                //    btnStart.Enabled = true;
-                //}
+                if (remain_qty == 0)
+                {
+                    btnStart.Enabled = false;
+                }
+                else
+                {
+                    btnStart.Enabled = true;
+
+                }
             }
 
 
@@ -260,8 +262,8 @@ namespace SlaughterHouseClient.Receiving
             using (var db = new SlaughterhouseEntities())
             {
                 product = db.products.Where(p => p.product_code == productCode).SingleOrDefault();
-
-
+                lblMinWeight.Text = product.min_weight.ToString();
+                lblMaxWeight.Text = product.max_weight.ToString();
             }
         }
 
@@ -272,7 +274,7 @@ namespace SlaughterHouseClient.Receiving
 
         private void btnReceiveNo_Click(object sender, EventArgs e)
         {
-            var frm = new Form_Receive(1);
+            var frm = new Form_LookupSwine();
 
             if (frm.ShowDialog() == DialogResult.OK)
             {
@@ -284,10 +286,10 @@ namespace SlaughterHouseClient.Receiving
         private void btnStart_Click(object sender, EventArgs e)
         {
 
-            var animationDirection = FormAnimator.AnimationDirection.Up;
-            var animationMethod = FormAnimator.AnimationMethod.Slide;
-            var toastNotification = new Notification("Notification", "Start", -1, animationMethod, animationDirection);
-            toastNotification.Show();
+            //var animationDirection = FormAnimator.AnimationDirection.Up;
+            //var animationMethod = FormAnimator.AnimationMethod.Slide;
+            //var toastNotification = new Notification("Notification", "Start", -1, animationMethod, animationDirection);
+            //toastNotification.Show();
 
             isStart = true;
             lblMessage.Text = Constants.WEIGHT_WAITING;
@@ -335,16 +337,16 @@ namespace SlaughterHouseClient.Receiving
 
         }
 
-        private static void PlayNotificationSound(string sound)
-        {
-            var soundsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sounds");
-            var soundFile = Path.Combine(soundsFolder, sound + ".wav");
+        //private static void PlayNotificationSound(string sound)
+        //{
+        //    var soundsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sounds");
+        //    var soundFile = Path.Combine(soundsFolder, sound + ".wav");
 
-            using (var player = new System.Media.SoundPlayer(soundFile))
-            {
-                player.Play();
-            }
-        }
+        //    using (var player = new System.Media.SoundPlayer(soundFile))
+        //    {
+        //        player.Play();
+        //    }
+        //}
 
         private bool SaveData()
         {

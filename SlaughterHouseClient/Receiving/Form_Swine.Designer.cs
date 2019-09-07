@@ -132,6 +132,7 @@
             this.btnFemale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
             this.btnFemale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFemale.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnFemale.ForeColor = System.Drawing.Color.White;
             this.btnFemale.Location = new System.Drawing.Point(18, 399);
             this.btnFemale.Name = "btnFemale";
             this.btnFemale.Size = new System.Drawing.Size(136, 70);
@@ -152,9 +153,10 @@
             // 
             // btnUndified
             // 
-            this.btnUndified.BackColor = System.Drawing.SystemColors.Control;
+            this.btnUndified.BackColor = System.Drawing.Color.Silver;
             this.btnUndified.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUndified.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnUndified.ForeColor = System.Drawing.Color.White;
             this.btnUndified.Location = new System.Drawing.Point(302, 399);
             this.btnUndified.Name = "btnUndified";
             this.btnUndified.Size = new System.Drawing.Size(136, 70);
@@ -165,9 +167,10 @@
             // 
             // btnMale
             // 
-            this.btnMale.BackColor = System.Drawing.SystemColors.Control;
+            this.btnMale.BackColor = System.Drawing.Color.Silver;
             this.btnMale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMale.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnMale.ForeColor = System.Drawing.Color.White;
             this.btnMale.Location = new System.Drawing.Point(160, 399);
             this.btnMale.Name = "btnMale";
             this.btnMale.Size = new System.Drawing.Size(136, 70);
@@ -440,7 +443,7 @@
             this.BtnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnOK.Font = new System.Drawing.Font("Kanit", 20F);
             this.BtnOK.ForeColor = System.Drawing.Color.White;
-            this.BtnOK.Location = new System.Drawing.Point(728, 453);
+            this.BtnOK.Location = new System.Drawing.Point(874, 399);
             this.BtnOK.Name = "BtnOK";
             this.BtnOK.Size = new System.Drawing.Size(136, 70);
             this.BtnOK.TabIndex = 29;
@@ -455,18 +458,19 @@
             this.BtnCloseQueue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCloseQueue.Font = new System.Drawing.Font("Kanit", 20F);
             this.BtnCloseQueue.ForeColor = System.Drawing.Color.White;
-            this.BtnCloseQueue.Location = new System.Drawing.Point(876, 453);
+            this.BtnCloseQueue.Location = new System.Drawing.Point(875, 475);
             this.BtnCloseQueue.Name = "BtnCloseQueue";
             this.BtnCloseQueue.Size = new System.Drawing.Size(136, 70);
             this.BtnCloseQueue.TabIndex = 30;
             this.BtnCloseQueue.Text = "ปิดคิว";
             this.BtnCloseQueue.UseVisualStyleBackColor = false;
+            this.BtnCloseQueue.Visible = false;
             this.BtnCloseQueue.Click += new System.EventHandler(this.BtnCloseQueue_Click);
             // 
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Kanit", 20F);
-            this.btnStart.Location = new System.Drawing.Point(728, 363);
+            this.btnStart.Location = new System.Drawing.Point(507, 399);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(136, 70);
             this.btnStart.TabIndex = 31;
@@ -489,7 +493,7 @@
             // btnStop
             // 
             this.btnStop.Font = new System.Drawing.Font("Kanit", 20F);
-            this.btnStop.Location = new System.Drawing.Point(876, 363);
+            this.btnStop.Location = new System.Drawing.Point(655, 399);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(136, 70);
             this.btnStop.TabIndex = 32;

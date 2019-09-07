@@ -55,7 +55,7 @@
             // 
             this.labelBody.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelBody.BackColor = System.Drawing.Color.Transparent;
-            this.labelBody.Font = new System.Drawing.Font("Kanit", 90F);
+            this.labelBody.Font = new System.Drawing.Font("Kanit", 45F);
             this.labelBody.ForeColor = System.Drawing.Color.White;
             this.labelBody.Location = new System.Drawing.Point(15, 39);
             this.labelBody.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);

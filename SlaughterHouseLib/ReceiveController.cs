@@ -90,21 +90,21 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sb = new StringBuilder();
-                    sb.Append("SELECT a.receive_no,a.receive_date,a.transport_doc_no,");
-                    sb.Append(" a.truck_no,a.farm_code,a.coop_no,");
-                    sb.Append(" a.farm_qty,a.farm_wgh,");
-                    sb.Append(" a.factory_qty,a.factory_wgh,");
-                    sb.Append(" a.receive_flag,");
-                    sb.Append(" a.queue_no,");
-                    sb.Append(" b.farm_name,");
-                    sb.Append(" c.breeder_name,a.create_at");
-                    sb.Append(" FROM receives a,farm b,breeder c");
-                    sb.Append(" WHERE a.farm_code =b.farm_code");
-                    sb.Append(" AND a.breeder_code =c.breeder_code");
-                    sb.Append(" AND a.receive_flag = @receive_flag");
-                    sb.Append(" ORDER BY receive_no asc");
-                    var cmd = new MySqlCommand(sb.ToString(), conn);
+                    var sql = @"SELECT a.receive_no,a.receive_date,a.transport_doc_no,
+                     a.truck_no,a.farm_code,a.coop_no,
+                     a.farm_qty,a.farm_wgh,
+                     a.factory_qty,a.factory_wgh,
+                     a.receive_flag,
+                     a.queue_no,
+                     b.farm_name,
+                     c.breeder_name,a.create_at
+                     FROM receives a,farm b,breeder c
+                     WHERE a.farm_code =b.farm_code
+                     AND a.breeder_code =c.breeder_code
+                     AND a.receive_flag = @receive_flag
+                     ORDER BY receive_no asc";
+
+                    var cmd = new MySqlCommand(sql, conn);
 
                     cmd.Parameters.AddWithValue("receive_flag", receiveFlag);
                     var da = new MySqlDataAdapter(cmd);

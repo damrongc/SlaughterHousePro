@@ -92,6 +92,7 @@
             // txtTransportNo
             // 
             this.txtTransportNo.Location = new System.Drawing.Point(187, 95);
+            this.txtTransportNo.MaxLength = 10;
             this.txtTransportNo.Name = "txtTransportNo";
             this.txtTransportNo.Size = new System.Drawing.Size(215, 36);
             this.txtTransportNo.TabIndex = 9;
@@ -256,8 +257,9 @@
             // 
             // dtpReceiveDate
             // 
+            this.dtpReceiveDate.Checked = false;
             this.dtpReceiveDate.CustomFormat = "dd/MM/yyyy";
-            this.dtpReceiveDate.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpReceiveDate.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.dtpReceiveDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpReceiveDate.Location = new System.Drawing.Point(187, 56);
             this.dtpReceiveDate.Name = "dtpReceiveDate";

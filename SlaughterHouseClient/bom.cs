@@ -12,21 +12,12 @@ namespace SlaughterHouseClient
     using System;
     using System.Collections.Generic;
     
-    public partial class production_order_item
+    public partial class bom
     {
-        public string po_no { get; set; }
+        public int bom_code { get; set; }
         public string product_code { get; set; }
-        public int seq { get; set; }
-        public int po_qty { get; set; }
-        public decimal po_wgh { get; set; }
-        public int unload_qty { get; set; }
-        public decimal unload_wgh { get; set; }
+        public bool active { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
-        public Nullable<System.DateTime> modified_at { get; set; }
-        public string modified_by { get; set; }
-    
-        public virtual product product { get; set; }
-        public virtual production_order production_order { get; set; }
     }
 }

@@ -56,7 +56,6 @@ namespace SlaughterHouseClient.Receiving
 
         }
 
-
         private void Form_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (isStart)
@@ -126,7 +125,7 @@ namespace SlaughterHouseClient.Receiving
 
         private void btnReceiveNo_Click(object sender, EventArgs e)
         {
-            var frm = new Form_Receive(0);
+            var frm = new Form_Receive();
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 LoadData(frm.receiveNo);
@@ -153,18 +152,20 @@ namespace SlaughterHouseClient.Receiving
         {
 
             sexFlag = "F";
-            btnFemale.BackColor = System.Drawing.ColorTranslator.FromHtml("#459CDB");
-            btnMale.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
-            btnUndified.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
+            btnFemale.BackColor = ColorTranslator.FromHtml("#459CDB");
+            btnFemale.ForeColor = Color.White;
+            btnMale.BackColor = Color.Silver;
+            btnUndified.BackColor = Color.Silver;
         }
 
         private void btnMale_Click(object sender, EventArgs e)
         {
 
             sexFlag = "M";
-            btnFemale.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
-            btnMale.BackColor = System.Drawing.ColorTranslator.FromHtml("#459CDB");
-            btnUndified.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
+            btnFemale.BackColor = Color.Silver;
+            btnMale.BackColor = ColorTranslator.FromHtml("#459CDB");
+            btnMale.ForeColor = Color.White;
+            btnUndified.BackColor = Color.Silver;
 
         }
 
@@ -172,9 +173,10 @@ namespace SlaughterHouseClient.Receiving
         {
 
             sexFlag = "NA";
-            btnFemale.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
-            btnMale.BackColor = System.Drawing.ColorTranslator.FromHtml("#E1E1E1");
-            btnUndified.BackColor = System.Drawing.ColorTranslator.FromHtml("#459CDB");
+            btnFemale.BackColor = Color.Silver;
+            btnMale.BackColor = Color.Silver;
+            btnUndified.BackColor = ColorTranslator.FromHtml("#459CDB");
+            btnUndified.ForeColor = Color.White;
 
         }
 
@@ -200,7 +202,11 @@ namespace SlaughterHouseClient.Receiving
                 if (remain_qty == 0)
                 {
                     btnStart.Enabled = false;
-                    BtnCloseQueue.Enabled = true;
+                    //BtnCloseQueue.Enabled = true;
+                }
+                else
+                {
+                    btnStart.Enabled = true;
                 }
             }
 
@@ -234,23 +240,25 @@ namespace SlaughterHouseClient.Receiving
                     //BtnControl(false, false, false);
                     lblMessage.Text = Constants.PROCESSING;
                     SaveData();
-                    Console.Beep();
-                    lblWeight.BackColor = Color.FromArgb(33, 150, 83);
-                    lblWeight.ForeColor = Color.White;
+                    //Console.Beep();
+                    //lblWeight.BackColor = Color.FromArgb(33, 150, 83);
+                    //lblWeight.ForeColor = Color.White;
                     await Task.Delay(1000);
-                    lblWeight.BackColor = Color.White;
-                    lblWeight.ForeColor = Color.Black;
+                    lblMessage.Text = Constants.SAVE_SUCCESS;
+                    LoadData(lblReceiveNo.Text);
+                    //lblWeight.BackColor = Color.White;
+                    //lblWeight.ForeColor = Color.Black;
 
                     //รอรับน้ำหนัก  MinWeight
                     lockWeight = false;
-                    TmMinWeight.Enabled = true;
+                    lblWeight.Text = $"0.0";
+                    //TmMinWeight.Enabled = true;
                 }
                 lockWeight = false;
 
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
