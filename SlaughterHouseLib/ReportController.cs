@@ -52,7 +52,7 @@ namespace SlaughterHouseLib
                                 pl.address AS plant_address,
                                 @show_date_str as date_str,
                                 @show_date_end as date_end
-                            FROM
+                            FROM 
                                 invoice i,
                                 invoice_item itm,
                                 product p,

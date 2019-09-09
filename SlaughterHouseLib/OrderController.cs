@@ -506,7 +506,7 @@ namespace SlaughterHouseLib
 							p.product_code,
 							p.product_name, 
 							'' as sale_unit_method, 
-							case when a.bom_code = 0 then a.unload_qty else CEILING(sum(a.unload_qty) / sum(bmt.mutiply_qty)) end as qty,
+							case when a.bom_code = 0 then sum(a.unload_qty) else CEILING(sum(a.unload_qty) / sum(bmt.mutiply_qty)) end as qty,
 							sum(a.unload_wgh) as wgh,
 								0 as unit_price, 
 								0 as gross_amt
@@ -520,8 +520,9 @@ namespace SlaughterHouseLib
 							and a.bom_code = bm.bom_code
 							and bm.bom_code = bmt.bom_code
 							and p.product_code = case when a.bom_code = 0 then a.product_code else bm.product_code end
-							group by p.product_code,
-							p.product_name ";
+						group by p.product_code,
+							p.product_name,
+                            a.bom_code ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("order_no", orderNo);
 

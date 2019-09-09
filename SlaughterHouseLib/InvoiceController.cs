@@ -19,7 +19,7 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT a.Invoice_No, a.Invoice_date,");
+                    sb.Append("SELECT a.invoice_No, a.Invoice_date,");
                     sb.Append(" a.Ref_Document_No, a.customer_code,");
                     sb.Append(" a.Gross_Amt, a.Discount,");
                     sb.Append(" a.Vat_Rate, a.Vat_Amt,");
@@ -29,16 +29,16 @@ namespace SlaughterHouseLib
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by,");
                     sb.Append(" b.customer_name");
-                    sb.Append(" FROM Invoice a,customer b");
+                    sb.Append(" FROM invoice a,customer b");
                     sb.Append(" WHERE a.customer_code =b.customer_code");
-                    sb.Append(" AND a.Invoice_date =@Invoice_date");
+                    sb.Append(" AND a.invoice_date =@invoice_date");
                     //sb.Append(" AND a.active = 1");
 
                     if (!string.IsNullOrEmpty(customerCode))
                         sb.Append(" AND a.customer_code =@customer_code");
-                    sb.Append(" Order BY Invoice_no ASC");
+                    sb.Append(" Order BY invoice_no ASC");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
-                    cmd.Parameters.AddWithValue("Invoice_date", InvoiceDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("invoice_date", InvoiceDate.ToString("yyyy-MM-dd"));
 
                     if (!string.IsNullOrEmpty(customerCode))
                         cmd.Parameters.AddWithValue("customer_code", customerCode);
@@ -92,7 +92,7 @@ namespace SlaughterHouseLib
 								comments,
 								active,
 								create_at
-								FROM Invoice
+								FROM invoice
 								WHERE Invoice_no =@Invoice_no ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("Invoice_no", invoiceNo);
@@ -282,7 +282,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("modified_by", Invoice.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
 
-                    sql = @"Delete From Invoice_item 
+                    sql = @"Delete From invoice_item 
 								WHERE Invoice_no=@Invoice_no";
                     cmd = new MySqlCommand(sql, conn)
                     {
@@ -442,7 +442,7 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = @"SELECT max(Invoice_no)  as Invoice_no
-								FROM Invoice
+								FROM invoice
 								WHERE ref_document_no =@orderNo 
                                    and active = 1 ";
                     var cmd = new MySqlCommand(sql, conn);
@@ -484,7 +484,7 @@ namespace SlaughterHouseLib
 								a.sale_unit_method,
 								qty, wgh,  
 								unit_price, gross_amt
-								from Invoice_item a, product b
+								from invoice_item a, product b
 								where a.product_code =b.product_code
 								and a.Invoice_no =@Invoice_no 
 								Order by seq asc";

@@ -216,6 +216,10 @@ namespace SlaughterHouseServer
                 dtpRequestDate.Enabled = false;
                 BtnSaveAndNew.Visible = false;
             }
+            else
+            {
+                BtnCancel.Enabled = false;
+            }
             LoadDetail();
         }
         private void LoadDetail()
