@@ -80,10 +80,10 @@ namespace SlaughterHouseLib
                     {
                         if (ds.Tables[0].Rows[i]["seq"].ToString() != "1")
                         {
-                            ds.Tables[0].Rows[i]["gross_amt_hd"] = 0; 
-                            ds.Tables[0].Rows[i]["discount_hd"] = 0; 
-                            ds.Tables[0].Rows[i]["before_vat_hd"] = 0; 
-                            ds.Tables[0].Rows[i]["vat_amt_hd"] = 0; 
+                            ds.Tables[0].Rows[i]["gross_amt_hd"] = 0;
+                            ds.Tables[0].Rows[i]["discount_hd"] = 0;
+                            ds.Tables[0].Rows[i]["before_vat_hd"] = 0;
+                            ds.Tables[0].Rows[i]["vat_amt_hd"] = 0;
                             ds.Tables[0].Rows[i]["net_amt_hd"] = 0;
                         }
                     }
@@ -141,7 +141,7 @@ namespace SlaughterHouseLib
                                 ";
                     // WHERE sk.stock_date BETWEEN @date_str AND @date_end
                     // AND sk.stock_date <= @date_end
-                    var cmd = new MySqlCommand(sql, conn); 
+                    var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("show_date_str", invoiceDateStr.ToString("dd/MM/yyyy"));
                     cmd.Parameters.AddWithValue("show_date_end", invoiceDateEnd.ToString("dd/MM/yyyy"));
                     cmd.Parameters.AddWithValue("date_str", invoiceDateStr.ToString("yyyy-MM-dd"));
@@ -149,7 +149,7 @@ namespace SlaughterHouseLib
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);
-            
+
                     return ds;
                 }
             }
@@ -199,14 +199,14 @@ namespace SlaughterHouseLib
                                 ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("date_period", invoiceDatePeriod.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("show_date_period", invoiceDatePeriod.ToString("dd/MM/yyyy")); 
+                    cmd.Parameters.AddWithValue("show_date_period", invoiceDatePeriod.ToString("dd/MM/yyyy"));
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                    { 
-                            ds.Tables[0].Rows[i]["qty_cf"] = Convert.ToDecimal( ds.Tables[0].Rows[i]["qty_in"]) - Convert.ToDecimal(ds.Tables[0].Rows[i]["qty_out"]); 
-                            ds.Tables[0].Rows[i]["wgh_cf"] = Convert.ToDecimal( ds.Tables[0].Rows[i]["wgh_in"]) - Convert.ToDecimal(ds.Tables[0].Rows[i]["wgh_out"]);  
+                    {
+                        ds.Tables[0].Rows[i]["qty_cf"] = Convert.ToDecimal(ds.Tables[0].Rows[i]["qty_in"]) - Convert.ToDecimal(ds.Tables[0].Rows[i]["qty_out"]);
+                        ds.Tables[0].Rows[i]["wgh_cf"] = Convert.ToDecimal(ds.Tables[0].Rows[i]["wgh_in"]) - Convert.ToDecimal(ds.Tables[0].Rows[i]["wgh_out"]);
                     }
                     return ds;
                 }
@@ -264,7 +264,7 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        
+
         public static DataSet GetDataReceiveStickerBarcode(Int64 barcodeNo)
         {
             try
@@ -282,8 +282,8 @@ namespace SlaughterHouseLib
                                     and b.barcode_no = @barcode_no
                                 ";
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("barcode_no", barcodeNo); 
-                     
+                    cmd.Parameters.AddWithValue("barcode_no", barcodeNo);
+
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);
@@ -296,6 +296,61 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+
+        public static DataSet GetDataReportSwineReceiveHeader(string receiveNo)
+        {
+            try
+            {
+                var ds = new DataSet();
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"select receive_no,receive_date,transport_doc_no,
+                                    truck_no,rev.farm_code,coop_no,queue_no,lot_no
+                                    farm_qty,farm_wgh,factory_qty,factory_wgh,
+                                    farm.farm_name,farm.address,
+                                    breeder.breeder_name
+                                    from receives rev,farm,breeder
+                                    where receive_no =@receive_no
+                                    and rev.farm_code =farm.farm_code
+                                    and rev.breeder_code =breeder.breeder_code";
+
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("receive_no", receiveNo);
+                        var da = new MySqlDataAdapter(cmd);
+
+                        da.Fill(ds);
+
+                    }
+                    sql = @"select receive_no,product_code,seq,sex_flag,receive_qty,receive_wgh
+                                    from receive_item
+                                    where receive_no =@receive_no
+                                    and product_code ='P001'
+                                    order by seq asc";
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("receive_no", receiveNo);
+                        var da = new MySqlDataAdapter(cmd);
+                        var ds1 = new DataSet();
+                        da.Fill(ds1);
+                        var dt = new DataTable();
+                        dt = ds1.Tables[0].Copy();
+                        dt.TableName = "TableItem";
+                        ds.Tables.Add(dt);
+                    }
+
+                    return ds;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
     }
 }
 

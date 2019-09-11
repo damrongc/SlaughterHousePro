@@ -8,8 +8,6 @@ namespace SlaughterHouseServer
 {
     public partial class Form_Order : Form
     {
-        
-        OrderItem.columnDt colDt;
 
         public Form_Order()
         {
@@ -19,24 +17,6 @@ namespace SlaughterHouseServer
 
         private void UserSettingsComponent()
         {
-            colDt.order_no       = "order_no";
-            colDt.product_code   = "product_code";
-            colDt.product_name = "product_name";
-            colDt.bom_code       = "bom_code";
-            colDt.seq            = "seq";
-            colDt.qty_wgh = "qty_wgh";
-            colDt.issue_unit_method = "issue_unit_method";
-            colDt.unit_code = "unit_code";
-            colDt.unit_name = "unit_name";
-            colDt.unload_qty     = "unload_qty";
-            colDt.unload_wgh     = "unload_wgh"; 
-            colDt.product_set = "product_set";
-            colDt.create_at      = "create_at";
-            colDt.create_by      = "create_by";
-            colDt.modified_at    = "modified_at";
-            colDt.modified_by    = "modified_by";
-            
-
             BtnAdd.Click += BtnAdd_Click;
             BtnSearch.Click += BtnSearch_Click;
             gv.CellContentClick += Gv_CellContentClick;
@@ -49,6 +29,7 @@ namespace SlaughterHouseServer
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
 
+            gvDt.DataBindingComplete += GvDt_DataBindingComplete; 
             gvDt.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             gvDt.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
             gvDt.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
@@ -63,7 +44,72 @@ namespace SlaughterHouseServer
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-              
+            gv.Columns[GlobalsColumn.ORDER_NO].HeaderText = "เลขที่ใบสั่งขาย";
+            gv.Columns[GlobalsColumn.REQUEST_DATE].HeaderText = "วันที่ต้องการสินค้า";
+            gv.Columns[GlobalsColumn.CUSTOMER_NAME].HeaderText = "ลูกค้า";
+            gv.Columns[GlobalsColumn.COMMENTS].HeaderText = "หมายเหตุ";
+            gv.Columns[GlobalsColumn.ORDER_FLAG].HeaderText = "สถานะ";
+            gv.Columns[GlobalsColumn.INVOICE_FLAG].HeaderText = "สถานะออกใบแจ้งหนี้";
+            gv.Columns[GlobalsColumn.ACTIVE].HeaderText = "ใช้งาน";
+            gv.Columns[GlobalsColumn.CREATE_AT].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[GlobalsColumn.CREATE_BY].HeaderText = "ผู้สร้าง";
+
+            gv.Columns[GlobalsColumn.ORDER_FLAG].Visible = false;
+            gv.Columns[GlobalsColumn.INVOICE_FLAG].Visible = false;
+            gv.Columns[GlobalsColumn.ACTIVE].Visible = false;
+            gv.Columns[GlobalsColumn.CREATE_BY].Visible = false;
+
+            DataGridViewButtonColumn invoiceBtnColumn = new DataGridViewButtonColumn();
+            invoiceBtnColumn.Name = GlobalsColumn.BTN_INVOICE;
+            invoiceBtnColumn.Text = "ออกใบแจ้งหนี้";
+            invoiceBtnColumn.UseColumnTextForButtonValue = true; //dont forget this line
+            invoiceBtnColumn.FlatStyle = FlatStyle.Flat;
+            if (gv.Columns[GlobalsColumn.BTN_INVOICE] == null)
+            {
+                gv.Columns.Insert(gv.ColumnCount, invoiceBtnColumn);
+                gv.Columns[GlobalsColumn.BTN_INVOICE].HeaderText = "ใบแจ้งหนี้";
+            }
+            foreach (DataGridViewRow row in gv.Rows)
+            {
+                string invocieFlag = gv.Rows[row.Index].Cells[GlobalsColumn.INVOICE_FLAG].Value.ToString();
+                if (invocieFlag == "1")
+                {
+                    gv.Rows[row.Index].Cells[GlobalsColumn.BTN_INVOICE].Style.BackColor = Color.Gray;
+                    //gv.Rows[row.Index].Cells[GlobalsColumn.BTN_INVOICE].DataGridView.b = "xxxxxxx";
+                }
+                else
+                {
+                    gv.Rows[row.Index].Cells[GlobalsColumn.BTN_INVOICE].Style.BackColor = Color.MediumSpringGreen;
+                }
+            }
+        }
+ 
+
+        private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            gvDt.Columns[GlobalsColumn.SEQ].HeaderText = "ลำดับ";
+            gvDt.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gvDt.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "สินค้า";
+            gvDt.Columns[GlobalsColumn.QTY_WGH].HeaderText = "จำนวน";
+            gvDt.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
+            gvDt.Columns[GlobalsColumn.UNIT_CODE].HeaderText = "รหัสหน่วยสินค้า";
+            gvDt.Columns[GlobalsColumn.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+            gvDt.Columns[GlobalsColumn.UNLOAD_QTY].HeaderText = "ปริมาณจ่าย";
+            gvDt.Columns[GlobalsColumn.UNLOAD_WGH].HeaderText = "น้ำหนักจ่าย";
+
+            gvDt.Columns[GlobalsColumn.SEQ].Visible = false;
+            gvDt.Columns[GlobalsColumn.PRODUCT_CODE].Visible = false;
+            gvDt.Columns[GlobalsColumn.UNIT_CODE].Visible = false;
+            gvDt.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
+
+
+            gvDt.Columns[GlobalsColumn.QTY_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[GlobalsColumn.UNLOAD_QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[GlobalsColumn.UNLOAD_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            gvDt.Columns[GlobalsColumn.QTY_WGH].DefaultCellStyle.Format = "N2";
+            gvDt.Columns[GlobalsColumn.UNLOAD_QTY].DefaultCellStyle.Format ="N0";
+            gvDt.Columns[GlobalsColumn.UNLOAD_WGH].DefaultCellStyle.Format = "N2";
         }
 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -71,9 +117,11 @@ namespace SlaughterHouseServer
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-                string orderNo =   gv.Rows[e.RowIndex].Cells["OrderNo"].Value.ToString();
-                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
-                { 
+                string orderNo = gv.Rows[e.RowIndex].Cells[GlobalsColumn.ORDER_NO].Value.ToString();
+
+
+                if ((senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn || senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn) && e.RowIndex >= 0)
+                {
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
                     {
                         case "Edit":
@@ -87,6 +135,45 @@ namespace SlaughterHouseServer
                             }
                             break;
                         case "Print":
+                            break;
+                        case GlobalsColumn.BTN_INVOICE:
+                            string invocieFlag = gv.Rows[e.RowIndex].Cells[GlobalsColumn.INVOICE_FLAG].Value.ToString();
+                            if (invocieFlag == "1")
+                            { 
+                                return;
+                            }
+                            bool pickingCompleteFlag = OrderItemController.CheckPickingComplete(orderNo);
+                            if (pickingCompleteFlag == false )
+                            {
+                                DialogResult result = MessageBox.Show("จำนวนสินยังไม่ครบตามใบสั่งขาย ท่านยังต้องขายใช่ไหม", "Warning ", MessageBoxButtons.YesNo);
+                                if (result == DialogResult.Yes )
+                                {
+                                    var frmInv = new Form_InvoiceAddEdit
+                                    {
+                                        orderNo = orderNo
+                                    };
+                                    if (frmInv.ShowDialog() == DialogResult.OK)
+                                    {
+                                        LoadOrder();
+                                    }
+                                } 
+                                else
+                                {
+                                    LoadItem(orderNo);
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                var frmInv = new Form_InvoiceAddEdit
+                                {
+                                    orderNo = orderNo
+                                };
+                                if (frmInv.ShowDialog() == DialogResult.OK)
+                                {
+                                    LoadOrder();
+                                }
+                            }
                             break;
                     }
                 }
@@ -109,10 +196,11 @@ namespace SlaughterHouseServer
         private void BtnAdd_Click(object sender, System.EventArgs e)
         {
             var frm = new Form_OrderAddEdit();
-            if (frm.ShowDialog() == DialogResult.OK)
+            if (frm.ShowDialog() == DialogResult.OK  )
             {
-                LoadOrder();
+              
             }
+            LoadOrder();
         }
 
         private void LoadCustomer()
@@ -132,52 +220,16 @@ namespace SlaughterHouseServer
         {
             //var farmCtrl = new FarmController();
             var coll = OrderController.GetAllOrders(dtpRequestDate.Value, cboCustomer.SelectedValue.ToString());
-            gv.DataSource = coll;
-
-            gv.Columns[1].HeaderText = "เลขที่ใบสั่งขาย";
-            gv.Columns[2].HeaderText = "วันที่ต้องการสินค้า";
-            gv.Columns[3].HeaderText = "ลูกค้า";
-
-            gv.Columns[4].HeaderText = "หมายเหตุ";
-            gv.Columns[5].HeaderText = "สถานะ";
-            gv.Columns[6].HeaderText = "สถานะออกใบแจ้งหนี้";
-
-            gv.Columns[7].HeaderText = "ใช้งาน";
-            gv.Columns[8].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[9].HeaderText = "ผู้สร้าง"; 
-
+            gv.DataSource = coll; 
             LoadItem("");
         }
         private void LoadItem(string orderNo)
         {
             DataTable dtOrderItem = new DataTable("ORDERS_ITEM");
-            dtOrderItem = OrderItemController.GetOrderItems(orderNo,"N"); 
- 
-            gvDt.DataSource = dtOrderItem;
-
-            gvDt.Columns[colDt.seq ].HeaderText = "ลำดับ"; 
-            gvDt.Columns[colDt.product_code ].HeaderText = "รหัสสินค้า";
-            gvDt.Columns[colDt.product_name].HeaderText = "สินค้า";
-            gvDt.Columns[colDt.qty_wgh ].HeaderText = "จำนวน";
-            gvDt.Columns[colDt.issue_unit_method].HeaderText = "หน่วยคำนวณ";
-            gvDt.Columns[colDt.unit_code ].HeaderText = "รหัสหน่วยสินค้า";
-            gvDt.Columns[colDt.unit_name ].HeaderText = "หน่วยสินค้า";
-            gvDt.Columns[colDt.unload_qty ].HeaderText = "ปริมาณจ่าย";
-            gvDt.Columns[colDt.unload_wgh ].HeaderText = "น้ำหนักจ่าย";
-            //gvDt.Columns[colDt.product_set].HeaderText = "สินค้าชุด";
-
-            gvDt.Columns[colDt.seq ].Visible  = false ; 
-            gvDt.Columns[colDt.product_code  ].Visible  = false ;
-            gvDt.Columns[colDt.unit_code   ].Visible  = false;
-            gvDt.Columns[colDt.issue_unit_method].Visible  = false;
-             
-
-            //gvDt.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //gvDt.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //gvDt.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //gvDt.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //gvDt.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
+            dtOrderItem = OrderItemController.GetOrderItems(orderNo, "N");
+            gvDt.DataSource = dtOrderItem;  
         }
+
+     
     }
 }

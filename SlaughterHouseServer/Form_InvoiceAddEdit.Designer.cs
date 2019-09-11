@@ -32,7 +32,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtInvoiceNo = new System.Windows.Forms.TextBox();
             this.BtnSave = new System.Windows.Forms.Button();
-            this.BtnSaveAndNew = new System.Windows.Forms.Button();
             this.dtpInvoiceDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.cboCustomer = new System.Windows.Forms.ComboBox();
@@ -58,6 +57,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtVatRate = new System.Windows.Forms.TextBox();
             this.chkVatFlag = new System.Windows.Forms.CheckBox();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
@@ -97,25 +97,6 @@
             this.BtnSave.Text = "บันทึกแล้วปริ้น";
             this.BtnSave.UseVisualStyleBackColor = false;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
-            // 
-            // BtnSaveAndNew
-            // 
-            this.BtnSaveAndNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(160)))), ((int)(((byte)(93)))));
-            this.BtnSaveAndNew.FlatAppearance.BorderSize = 0;
-            this.BtnSaveAndNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSaveAndNew.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
-            this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
-            this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(516, 626);
-            this.BtnSaveAndNew.Name = "BtnSaveAndNew";
-            this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
-            this.BtnSaveAndNew.TabIndex = 25;
-            this.BtnSaveAndNew.Text = "บันทึกแล้วสร้างใหม่";
-            this.BtnSaveAndNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnSaveAndNew.UseVisualStyleBackColor = false;
-            this.BtnSaveAndNew.Visible = false;
-            this.BtnSaveAndNew.Click += new System.EventHandler(this.BtnSaveAndNew_Click);
             // 
             // dtpInvoiceDate
             // 
@@ -203,6 +184,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkActive.Enabled = false;
             this.chkActive.Location = new System.Drawing.Point(861, 24);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(79, 33);
@@ -355,10 +337,28 @@
             this.chkVatFlag.Text = "ภาษี";
             this.chkVatFlag.UseVisualStyleBackColor = true;
             // 
+            // BtnCancel
+            // 
+            this.BtnCancel.BackColor = System.Drawing.Color.Tomato;
+            this.BtnCancel.FlatAppearance.BorderSize = 0;
+            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancel.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCancel.ForeColor = System.Drawing.Color.White;
+            this.BtnCancel.Image = ((System.Drawing.Image)(resources.GetObject("BtnCancel.Image")));
+            this.BtnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnCancel.Location = new System.Drawing.Point(517, 626);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(202, 36);
+            this.BtnCancel.TabIndex = 63;
+            this.BtnCancel.Text = "ยกเลิกเอกสาร";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
             // Form_InvoiceAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(957, 678);
+            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.chkVatFlag);
             this.Controls.Add(this.txtVatRate);
             this.Controls.Add(this.txtNetAmt);
@@ -381,7 +381,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dtpInvoiceDate);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.BtnSaveAndNew);
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.txtInvoiceNo);
             this.Controls.Add(this.label1);
@@ -408,7 +407,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtInvoiceNo;
         private System.Windows.Forms.Button BtnSave;
-        private System.Windows.Forms.Button BtnSaveAndNew;
         private System.Windows.Forms.DateTimePicker dtpInvoiceDate;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cboCustomer;
@@ -434,5 +432,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtVatRate;
         private System.Windows.Forms.CheckBox chkVatFlag;
+        private System.Windows.Forms.Button BtnCancel;
     }
 }

@@ -78,6 +78,19 @@ namespace SlaughterHouseServer
 
         private void btnAddOrderItem_Click(object sender, System.EventArgs e)
         {
+
+            try
+            {
+                if (String.IsNullOrEmpty(txtQtyWgh.Text) || Convert.ToDecimal(txtQtyWgh.Text) <= 0 )
+                {
+                    MessageBox.Show("จำนวนต้องมากกว่า 0", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                } 
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             try
             {
                 this.productCode = cboProduct.SelectedValue.ToString();

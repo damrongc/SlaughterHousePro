@@ -29,6 +29,7 @@ namespace SlaughterHouseServer
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
 
+            gvDt.DataBindingComplete += GvDt_DataBindingComplete;
             gvDt.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             gvDt.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
             gvDt.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
@@ -43,7 +44,51 @@ namespace SlaughterHouseServer
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-              
+            gv.Columns[GlobalsColumn.INVOICE_NO].HeaderText = "เลขที่ใบแจ้งหนี้";
+            gv.Columns[GlobalsColumn.INVOICE_DATE].HeaderText = "วันที่แจ้งหนี้";
+            gv.Columns[GlobalsColumn.REF_DOCUMENT_NO].HeaderText = "เลขที่ใบสั่งขาย";
+            gv.Columns[GlobalsColumn.CUSTOMER_NAME].HeaderText = "ลูกค้า";
+            gv.Columns[GlobalsColumn.GROSS_AMT].HeaderText = "ราคา";
+            gv.Columns[GlobalsColumn.DISCOUNT].HeaderText = "ส่วนลด";
+            gv.Columns[GlobalsColumn.VAT_AMT].HeaderText = "ภาษี";
+            gv.Columns[GlobalsColumn.NET_AMT].HeaderText = "ราคาสุทธิ";
+            gv.Columns[GlobalsColumn.ACTIVE].HeaderText = "ใช้งาน";
+            gv.Columns[GlobalsColumn.CREATE_AT].HeaderText = "วันเวลาสร้าง";
+
+            gv.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[GlobalsColumn.DISCOUNT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[GlobalsColumn.VAT_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[GlobalsColumn.NET_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+
+            gv.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Format = "N2";
+            gv.Columns[GlobalsColumn.DISCOUNT].DefaultCellStyle.Format = "N2";
+            gv.Columns[GlobalsColumn.VAT_AMT].DefaultCellStyle.Format = "N2";
+            gv.Columns[GlobalsColumn.NET_AMT].DefaultCellStyle.Format = "N2";
+        }
+
+        private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            gvDt.Columns[GlobalsColumn.SEQ].HeaderText = "ลำดับ";
+            gvDt.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gvDt.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "สินค้า";
+            gvDt.Columns[GlobalsColumn.SALE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
+            gvDt.Columns[GlobalsColumn.QTY].HeaderText = "ปริมาณ";
+            gvDt.Columns[GlobalsColumn.WGH].HeaderText = "น้ำหนัก";
+            gvDt.Columns[GlobalsColumn.UNIT_PRICE].HeaderText = "ราคาต่อหน่วย";
+            gvDt.Columns[GlobalsColumn.GROSS_AMT].HeaderText = "จำนวนเงิน";
+
+            gvDt.Columns[GlobalsColumn.SEQ].Visible = false;
+
+            gvDt.Columns[GlobalsColumn.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[GlobalsColumn.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[GlobalsColumn.UNIT_PRICE].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            gvDt.Columns[GlobalsColumn.QTY].DefaultCellStyle.Format = "N0";
+            gvDt.Columns[GlobalsColumn.WGH].DefaultCellStyle.Format = "N2";
+            gvDt.Columns[GlobalsColumn.UNIT_PRICE].DefaultCellStyle.Format = "N2";
+            gvDt.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Format = "N2";
         }
 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -125,7 +170,6 @@ namespace SlaughterHouseServer
 
         private void LoadCustomer()
         {
-
             var coll = CustomerController.GetAllCustomers();
             coll.Insert(0, new Customer
             {
@@ -141,21 +185,8 @@ namespace SlaughterHouseServer
         {
             //var farmCtrl = new FarmController();
             var coll = InvoiceController.GetAllInvoices(dtpInvoiceDate.Value, cboCustomer.SelectedValue.ToString());
-            gv.DataSource = coll;
-
-            gv.Columns[2].HeaderText = "เลขที่ใบแจ้งหนี้";
-            gv.Columns[3].HeaderText = "วันที่แจ้งหนี้";
-            gv.Columns[4].HeaderText = "เลขที่ใบสั่งขาย";
-            gv.Columns[5].HeaderText = "ลูกค้า";
-            gv.Columns[6].HeaderText = "ราคา";
-            gv.Columns[7].HeaderText = "ส่วนลด";
-            gv.Columns[8].HeaderText = "ภาษี";
-            gv.Columns[9].HeaderText = "ราคาสุทธิ";
-            gv.Columns[10].HeaderText = "ใช้งาน";
-            gv.Columns[11].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[12].HeaderText = "ผู้สร้าง";
-
-            gv.Columns[10].Visible = false;
+            gv.DataSource = coll; 
+             
             LoadItem("");
         }
         private void LoadItem(string invoiceNo)
@@ -164,21 +195,8 @@ namespace SlaughterHouseServer
             dtInvoiceItem = InvoiceItemController.GetInvoiceItems(invoiceNo);
 
             gvDt.DataSource = dtInvoiceItem;
-            gvDt.Columns[0].HeaderText = "ลำดับ";
-            gvDt.Columns[1].HeaderText = "รหัสสินค้า";
-            gvDt.Columns[2].HeaderText = "สินค้า";
-            gvDt.Columns[3].HeaderText = "หน่วยคำนวณ";
-            gvDt.Columns[4].HeaderText = "ปริมาณ";
-            gvDt.Columns[5].HeaderText = "น้ำหนัก";
-            gvDt.Columns[6].HeaderText = "ราคาต่อหน่วย"; 
-            gvDt.Columns[7].HeaderText = "จำนวนเงิน";
-
-            gvDt.Columns[1].Visible = false;
- 
-            gvDt.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvDt.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvDt.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvDt.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            
         }
+         
     }
 }

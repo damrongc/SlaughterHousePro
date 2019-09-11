@@ -35,6 +35,7 @@
                 <xs:element name="contact_no" type="xs:string" minOccurs="0" />
                 <xs:element name="plant_name" type="xs:string" minOccurs="0" />
                 <xs:element name="plant_address" type="xs:string" minOccurs="0" />
+                <xs:element name="active" type="xs:boolean" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -43,58 +44,27 @@
     </xs:element>
   </xs:schema>
   <Table>
-    <invoice_no>INV0000004</invoice_no>
-    <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
-    <ref_document_no>SO00000011</ref_document_no>
+    <invoice_no>INV0000018</invoice_no>
+    <invoice_date>2019-09-01T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000015</ref_document_no>
     <customer_code>001</customer_code>
-    <gross_amt_hd>17135.00</gross_amt_hd>
-    <discount_hd>1713.00</discount_hd>
-    <before_vat>15422.00</before_vat>
+    <gross_amt_hd>437823.00</gross_amt_hd>
+    <discount_hd>576.00</discount_hd>
+    <before_vat>437247.00</before_vat>
     <vat_rate_hd>7.00</vat_rate_hd>
-    <vat_amt_hd>1079.54</vat_amt_hd>
-    <net_amt_hd>16501.54</net_amt_hd>
+    <vat_amt_hd>30607.29</vat_amt_hd>
+    <net_amt_hd>467854.29</net_amt_hd>
     <invoice_flag>0</invoice_flag>
     <comments />
-    <product_code>P001</product_code>
-    <product_name>หมูเป็น</product_name>
-    <unit_name>กิโลกรัม</unit_name>
-    <seq>2</seq>
-    <qty_wgh>10.00</qty_wgh>
-    <qty>0</qty>
-    <wgh>10.00</wgh>
-    <unit_price>98.00</unit_price>
-    <gross_amt>980.00</gross_amt>
-    <customer_name>Iron Man</customer_name>
-    <address>10880 Malibu Point, Florida United Sta
-320032</address>
-    <ship_to>Malibu</ship_to>
-    <tax_id>1234455587</tax_id>
-    <contact_no>0981562333</contact_no>
-    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
-    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
-  </Table>
-  <Table>
-    <invoice_no>INV0000004</invoice_no>
-    <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
-    <ref_document_no>SO00000011</ref_document_no>
-    <customer_code>001</customer_code>
-    <gross_amt_hd>17135.00</gross_amt_hd>
-    <discount_hd>1713.00</discount_hd>
-    <before_vat>15422.00</before_vat>
-    <vat_rate_hd>7.00</vat_rate_hd>
-    <vat_amt_hd>1079.54</vat_amt_hd>
-    <net_amt_hd>16501.54</net_amt_hd>
-    <invoice_flag>0</invoice_flag>
-    <comments />
-    <product_code>P004</product_code>
-    <product_name>เครื่องใน</product_name>
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
     <unit_name>กิโลกรัม</unit_name>
     <seq>1</seq>
-    <qty_wgh>200.00</qty_wgh>
-    <qty>0</qty>
-    <wgh>200.00</wgh>
-    <unit_price>75.00</unit_price>
-    <gross_amt>15000.00</gross_amt>
+    <qty_wgh>1230.00</qty_wgh>
+    <qty>4</qty>
+    <wgh>1230.00</wgh>
+    <unit_price>280.00</unit_price>
+    <gross_amt>344400.00</gross_amt>
     <customer_name>Iron Man</customer_name>
     <address>10880 Malibu Point, Florida United Sta
 320032</address>
@@ -103,29 +73,30 @@
     <contact_no>0981562333</contact_no>
     <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
     <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <active>true</active>
   </Table>
   <Table>
-    <invoice_no>INV0000004</invoice_no>
-    <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
-    <ref_document_no>SO00000011</ref_document_no>
+    <invoice_no>INV0000018</invoice_no>
+    <invoice_date>2019-09-01T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000015</ref_document_no>
     <customer_code>001</customer_code>
-    <gross_amt_hd>17135.00</gross_amt_hd>
-    <discount_hd>1713.00</discount_hd>
-    <before_vat>15422.00</before_vat>
+    <gross_amt_hd>437823.00</gross_amt_hd>
+    <discount_hd>576.00</discount_hd>
+    <before_vat>437247.00</before_vat>
     <vat_rate_hd>7.00</vat_rate_hd>
-    <vat_amt_hd>1079.54</vat_amt_hd>
-    <net_amt_hd>16501.54</net_amt_hd>
+    <vat_amt_hd>30607.29</vat_amt_hd>
+    <net_amt_hd>467854.29</net_amt_hd>
     <invoice_flag>0</invoice_flag>
     <comments />
-    <product_code>P005</product_code>
-    <product_name>หางหมู</product_name>
-    <unit_name>ชิ้น</unit_name>
-    <seq>3</seq>
-    <qty_wgh>15.00</qty_wgh>
-    <qty>15</qty>
-    <wgh>0.00</wgh>
-    <unit_price>77.00</unit_price>
-    <gross_amt>1155.00</gross_amt>
+    <product_code>P008</product_code>
+    <product_name>หมูชุด ซีกและเครื่องใน</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>2</seq>
+    <qty_wgh>1639.00</qty_wgh>
+    <qty>1</qty>
+    <wgh>1639.00</wgh>
+    <unit_price>57.00</unit_price>
+    <gross_amt>93423.00</gross_amt>
     <customer_name>Iron Man</customer_name>
     <address>10880 Malibu Point, Florida United Sta
 320032</address>
@@ -134,5 +105,6 @@
     <contact_no>0981562333</contact_no>
     <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
     <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <active>true</active>
   </Table>
 </NewDataSet>

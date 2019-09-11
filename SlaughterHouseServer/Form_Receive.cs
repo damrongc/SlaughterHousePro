@@ -89,6 +89,9 @@ namespace SlaughterHouseServer
                             }
                             break;
                         case "Print":
+                            var frmReport = new Form_Report_Swine_Receive();
+                            frmReport.ReceiveNo = receiveNo;
+                            frmReport.ShowDialog();
 
                             break;
                         case "CloseFlag":

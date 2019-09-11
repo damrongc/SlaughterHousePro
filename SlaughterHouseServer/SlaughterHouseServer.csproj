@@ -86,6 +86,12 @@
     <Compile Include="Form_Report_Stock_Balance.Designer.cs">
       <DependentUpon>Form_Report_Stock_Balance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Report_Swine_Receive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Report_Swine_Receive.Designer.cs">
+      <DependentUpon>Form_Report_Swine_Receive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Report_Stock_Movement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,6 +254,7 @@
     <Compile Include="Form_ReceiveAddEdit.Designer.cs">
       <DependentUpon>Form_ReceiveAddEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_Customer.resx">
@@ -261,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Report_Stock_Balance.resx">
       <DependentUpon>Form_Report_Stock_Balance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Report_Swine_Receive.resx">
+      <DependentUpon>Form_Report_Swine_Receive.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Report_Stock_Movement.resx">
       <DependentUpon>Form_Report_Stock_Movement.cs</DependentUpon>

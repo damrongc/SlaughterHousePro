@@ -7,7 +7,7 @@ namespace SlaughterHouseServer
     {
         public string orderNo { get; set; }
         public string productCode { get; set; }
-        public string productName{ get; set; }
+        public string productName { get; set; }
         public decimal qtyWgh { get; set; }
         public int unitCode { get; set; }
         public string unitName { get; set; }
@@ -17,7 +17,7 @@ namespace SlaughterHouseServer
         public Form_OrderDetail()
         {
             InitializeComponent();
-             
+
             this.Load += Form_Load;
             this.Shown += Form_Shown;
             //KeyDown 
@@ -38,21 +38,21 @@ namespace SlaughterHouseServer
                 SetUnitName(cboProduct.SelectedValue.ToString());
             }
         }
-         
+
         private void Form_Shown(object sender, System.EventArgs e)
         {
-           
+
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
             LoadProduct();
             if (!string.IsNullOrEmpty(this.productCode))
-            { 
+            {
                 cboProduct.SelectedValue = this.productCode;
                 //LockControlBySaleUnitMethod(this.productCode);
             }
             txtQtyWgh.Text = this.qtyWgh.ToString();
-            lbUnitName.Text = this.unitName.ToString(); 
+            lbUnitName.Text = this.unitName.ToString();
         }
         private void CboProduct_KeyDown(object sender, KeyEventArgs e)
         {
@@ -68,7 +68,7 @@ namespace SlaughterHouseServer
                 btnAddOrderItem.Focus();
             }
         }
-    
+
         private void TxtQtyWgh_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
@@ -77,12 +77,17 @@ namespace SlaughterHouseServer
                 return;
             }
         }
-      
+
         private void btnAddOrderItem_Click(object sender, System.EventArgs e)
         {
             ProductPrice productPrice;
             try
             {
+                if (String.IsNullOrEmpty(txtQtyWgh.Text) || Convert.ToDecimal(txtQtyWgh.Text) <= 0)
+                {
+                    MessageBox.Show("จำนวนต้องมากกว่า 0", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 productPrice = ProductPriceController.GetPriceList(cboProduct.SelectedValue.ToString(), this.orderDate);
                 if (productPrice.UnitPrice == 0)
                 {
@@ -90,16 +95,16 @@ namespace SlaughterHouseServer
                     return;
                 }
             }
-            catch
+            catch (System.Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             try
             {
                 this.productCode = cboProduct.SelectedValue.ToString();
                 this.productName = cboProduct.Text;
                 this.qtyWgh = Convert.ToDecimal(txtQtyWgh.Text);
-                this.unitName = lbUnitName.Text; 
+                this.unitName = lbUnitName.Text;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -121,14 +126,13 @@ namespace SlaughterHouseServer
             Unit unit = UnitController.GetUnitNameOfIssue(productCode);
             this.unitCode = unit.UnitCode;
             this.unitName = unit.UnitName;
-            lbUnitName.Text = unit.UnitName; 
+            lbUnitName.Text = unit.UnitName;
         }
 
         private void SetUnitMethod(string productCode)
         {
             Product product = ProductController.GetProduct(productCode);
-            this.issueUnitMethod = product.IssueUnitMethod;            
-        } 
+            this.issueUnitMethod = product.IssueUnitMethod;
+        }
     }
 }
- 

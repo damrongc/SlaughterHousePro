@@ -37,7 +37,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.OrderNo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.ORDER_NO = new System.Windows.Forms.DataGridViewLinkColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cboCustomer = new System.Windows.Forms.ComboBox();
@@ -142,7 +142,7 @@
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Edit,
-            this.OrderNo});
+            this.ORDER_NO});
             this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
@@ -157,13 +157,13 @@
             this.Edit.Name = "Edit";
             this.Edit.Width = 58;
             // 
-            // OrderNo
+            // ORDER_NO
             // 
-            this.OrderNo.DataPropertyName = "OrderNo";
-            this.OrderNo.HeaderText = "ใบสั่งขาย";
-            this.OrderNo.Name = "OrderNo";
-            this.OrderNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.OrderNo.Width = 90;
+            this.ORDER_NO.DataPropertyName = "ORDER_NO";
+            this.ORDER_NO.HeaderText = "ใบสั่งขาย";
+            this.ORDER_NO.Name = "ORDER_NO";
+            this.ORDER_NO.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ORDER_NO.Width = 90;
             // 
             // panel3
             // 
@@ -269,6 +269,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.DataGridView gvDt;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
-        private System.Windows.Forms.DataGridViewLinkColumn OrderNo;
+        private System.Windows.Forms.DataGridViewLinkColumn ORDER_NO;
     }
 }

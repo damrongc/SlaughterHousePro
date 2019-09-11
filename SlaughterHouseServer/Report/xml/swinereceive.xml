@@ -1,0 +1,99 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="receive_no" type="xs:string" minOccurs="0" />
+                <xs:element name="receive_date" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="transport_doc_no" type="xs:string" minOccurs="0" />
+                <xs:element name="truck_no" type="xs:string" minOccurs="0" />
+                <xs:element name="farm_code" type="xs:string" minOccurs="0" />
+                <xs:element name="coop_no" type="xs:string" minOccurs="0" />
+                <xs:element name="queue_no" type="xs:int" minOccurs="0" />
+                <xs:element name="farm_qty" type="xs:string" minOccurs="0" />
+                <xs:element name="farm_wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="factory_qty" type="xs:int" minOccurs="0" />
+                <xs:element name="factory_wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="farm_name" type="xs:string" minOccurs="0" />
+                <xs:element name="address" type="xs:string" minOccurs="0" />
+                <xs:element name="breeder_name" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="TableItem">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="receive_no" type="xs:string" minOccurs="0" />
+                <xs:element name="product_code" type="xs:string" minOccurs="0" />
+                <xs:element name="seq" type="xs:int" minOccurs="0" />
+                <xs:element name="sex_flag" type="xs:string" minOccurs="0" />
+                <xs:element name="receive_qty" type="xs:int" minOccurs="0" />
+                <xs:element name="receive_wgh" type="xs:decimal" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <receive_no>REV0000001</receive_no>
+    <receive_date>2019-09-06T00:00:00+07:00</receive_date>
+    <transport_doc_no>TS001</transport_doc_no>
+    <truck_no>1234</truck_no>
+    <farm_code>001</farm_code>
+    <coop_no>1</coop_no>
+    <queue_no>1</queue_no>
+    <farm_qty>11924910609</farm_qty>
+    <farm_wgh>500.00</farm_wgh>
+    <factory_qty>5</factory_qty>
+    <factory_wgh>500.00</factory_wgh>
+    <farm_name>ฟาร์มเอ</farm_name>
+    <address>120/15 บางใหญ่ กรุงเทพ 10111</address>
+    <breeder_name>หมูขาว</breeder_name>
+  </Table>
+  <TableItem>
+    <receive_no>REV0000001</receive_no>
+    <product_code>P001</product_code>
+    <seq>1</seq>
+    <sex_flag>F</sex_flag>
+    <receive_qty>1</receive_qty>
+    <receive_wgh>100.00</receive_wgh>
+  </TableItem>
+  <TableItem>
+    <receive_no>REV0000001</receive_no>
+    <product_code>P001</product_code>
+    <seq>2</seq>
+    <sex_flag>F</sex_flag>
+    <receive_qty>1</receive_qty>
+    <receive_wgh>100.00</receive_wgh>
+  </TableItem>
+  <TableItem>
+    <receive_no>REV0000001</receive_no>
+    <product_code>P001</product_code>
+    <seq>3</seq>
+    <sex_flag>F</sex_flag>
+    <receive_qty>1</receive_qty>
+    <receive_wgh>100.00</receive_wgh>
+  </TableItem>
+  <TableItem>
+    <receive_no>REV0000001</receive_no>
+    <product_code>P001</product_code>
+    <seq>4</seq>
+    <sex_flag>F</sex_flag>
+    <receive_qty>1</receive_qty>
+    <receive_wgh>100.00</receive_wgh>
+  </TableItem>
+  <TableItem>
+    <receive_no>REV0000001</receive_no>
+    <product_code>P001</product_code>
+    <seq>5</seq>
+    <sex_flag>F</sex_flag>
+    <receive_qty>1</receive_qty>
+    <receive_wgh>100.00</receive_wgh>
+  </TableItem>
+</NewDataSet>
