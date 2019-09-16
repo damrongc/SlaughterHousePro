@@ -7,19 +7,18 @@ using System.Drawing;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_OrderAddEdit : Form
+    public partial class Form_ProductSlip : Form
     {
         public string orderNo { get; set; }
         DataTable dtOrderItem;
 
-        public Form_OrderAddEdit()
+        public Form_ProductSlip()
         {
             InitializeComponent();
             UserSettingsComponent();
         }
         private void UserSettingsComponent()
         {
-            btnAddOrderItem.Click += BtnAddOrderItem_Click;
             gv.CellContentClick += Gv_CellContentClick;
             gv.DataBindingComplete += Gv_DataBindingComplete;
             gv.ReadOnly = true;
@@ -35,12 +34,11 @@ namespace SlaughterHouseServer
             this.Shown += Form_Shown;
 
             //KeyDown  
-            dtpRequestDate.KeyDown += DtpRequestDate_KeyDown;
-            cboCustomer.KeyDown += CboCustomer_KeyDown;
+            dtpProductSlipDate.KeyDown += DtpRequestDate_KeyDown;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
-            dtpRequestDate.Focus();
+            dtpProductSlipDate.Focus();
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
@@ -51,30 +49,24 @@ namespace SlaughterHouseServer
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cboCustomer.Focus();
+                BtnSave.Focus();
             }
         }
-        private void CboCustomer_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtComment.Focus();
-            }
-        }
+       
         #region Event Focus, KeyDown 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             gv.Columns["seq"].HeaderText = "ลำดับ";
             gv.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
-            gv.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            gv.Columns["product_name"].HeaderText = "ชื่อสินค้า";
             gv.Columns[GlobalsColumn.QTY_WGH].HeaderText = "จำนวน";
             gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
-            gv.Columns[GlobalsColumn.UNIT_CODE].HeaderText = "รหัสหน่วยสินค้า";
-            gv.Columns[GlobalsColumn.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+            gv.Columns["unit_code"].HeaderText = "รหัสหน่วยสินค้า";
+            gv.Columns["unit_name"].HeaderText = "หน่วยสินค้า";
 
             gv.Columns["seq"].Visible = false;
             gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
-            gv.Columns[GlobalsColumn.UNIT_CODE].Visible = false;
+            gv.Columns["unit_code"].Visible = false;
         }
         #endregion
 
@@ -103,10 +95,9 @@ namespace SlaughterHouseServer
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 orderNo = "";
-                txtOrderNo.Text = "";
-                txtOrderNo.Focus();
+                txtProductSlip.Text = "";
+                txtProductSlip.Focus();
                 cboCustomer.SelectedIndex = 0;
-                txtComment.Text = "";
                 chkActive.Checked = true;
                 LoadDetail();
             }
@@ -135,19 +126,19 @@ namespace SlaughterHouseServer
 
             var frm = new Form_OrderDetail();
             frm.qtyWgh = 0;
-            frm.orderDate = dtpRequestDate.Value;
+            frm.orderDate = dtpProductSlipDate.Value;
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 DataRow dr;
                 dr = dtOrderItem.NewRow();
 
-                dr[GlobalsColumn.SEQ] = 0;
+                dr["seq"] = 0;
                 dr[GlobalsColumn.PRODUCT_CODE] = frm.productCode;
-                dr[GlobalsColumn.PRODUCT_NAME] = frm.productName;
+                dr["product_name"] = frm.productName;
                 dr[GlobalsColumn.QTY_WGH] = frm.qtyWgh;
                 dr[GlobalsColumn.ISSUE_UNIT_METHOD] = frm.issueUnitMethod;
-                dr[GlobalsColumn.UNIT_CODE] = frm.unitCode;
-                dr[GlobalsColumn.UNIT_NAME] = frm.unitName;
+                dr["unit_code"] = frm.unitCode;
+                dr["unit_name"] = frm.unitName;
                 dtOrderItem.Rows.Add(dr);
                 dtOrderItem.AcceptChanges();
             }
@@ -166,22 +157,22 @@ namespace SlaughterHouseServer
 
                         case "Edit":
                             var frm = new Form_OrderDetail();
-                            frm.orderNo = txtOrderNo.Text;
-                            frm.orderDate = dtpRequestDate.Value;
+                            frm.orderNo = txtProductSlip.Text;
+                            frm.orderDate = dtpProductSlipDate.Value;
 
                             frm.productCode = dtOrderItem.Rows[e.RowIndex][GlobalsColumn.PRODUCT_CODE].ToString();
                             frm.qtyWgh = Convert.ToDecimal(dtOrderItem.Rows[e.RowIndex][GlobalsColumn.QTY_WGH]);
                             frm.issueUnitMethod = dtOrderItem.Rows[e.RowIndex][GlobalsColumn.ISSUE_UNIT_METHOD].ToString();
-                            frm.unitCode = Convert.ToInt16(dtOrderItem.Rows[e.RowIndex][GlobalsColumn.UNIT_CODE]);
-                            frm.unitName = dtOrderItem.Rows[e.RowIndex][GlobalsColumn.UNIT_NAME].ToString();
+                            frm.unitCode = Convert.ToInt16(dtOrderItem.Rows[e.RowIndex]["unit_code"]);
+                            frm.unitName = dtOrderItem.Rows[e.RowIndex]["unit_name"].ToString();
                             if (frm.ShowDialog() == DialogResult.OK)
                             {
                                 dtOrderItem.Rows[e.RowIndex][GlobalsColumn.PRODUCT_CODE] = frm.productCode;
-                                dtOrderItem.Rows[e.RowIndex][GlobalsColumn.PRODUCT_NAME] = frm.productName;
+                                dtOrderItem.Rows[e.RowIndex]["product_name"] = frm.productName;
                                 dtOrderItem.Rows[e.RowIndex][GlobalsColumn.QTY_WGH] = frm.qtyWgh;
                                 dtOrderItem.Rows[e.RowIndex][GlobalsColumn.ISSUE_UNIT_METHOD] = frm.issueUnitMethod;
-                                dtOrderItem.Rows[e.RowIndex][GlobalsColumn.UNIT_CODE] = frm.unitCode;
-                                dtOrderItem.Rows[e.RowIndex][GlobalsColumn.UNIT_NAME] = frm.unitName;
+                                dtOrderItem.Rows[e.RowIndex]["unit_code"] = frm.unitCode;
+                                dtOrderItem.Rows[e.RowIndex]["unit_name"] = frm.unitName;
                                 dtOrderItem.AcceptChanges();
                                 gv.Refresh();
                             }
@@ -204,17 +195,15 @@ namespace SlaughterHouseServer
 
         private void LoadData()
         {
-            txtOrderNo.Enabled = false;
+            txtProductSlip.Enabled = false;
             Order order = OrderController.GetOrder(this.orderNo);
             if (order != null)
             {
-                txtOrderNo.Text = order.OrderNo;
-                dtpRequestDate.Value = order.RequestDate;
+                txtProductSlip.Text = order.OrderNo;
+                dtpProductSlipDate.Value = order.RequestDate;
                 cboCustomer.SelectedValue = order.Customer.CustomerCode;
-                txtComment.Text = order.Comments;
                 chkActive.Checked = order.Active;
-                dtpRequestDate.Enabled = false;
-                BtnSaveAndNew.Visible = false;
+                dtpProductSlipDate.Enabled = false;
             }
             else
             {
@@ -254,18 +243,18 @@ namespace SlaughterHouseServer
                             seq++;
                             orderItems.Add(new OrderItem
                             {
-                                OrderNo = txtOrderNo.Text,
+                                OrderNo = txtProductSlip.Text,
                                 Seq = seq,
                                 Product = new Product
                                 {
                                     ProductCode = dtRow[GlobalsColumn.PRODUCT_CODE].ToString(),
                                     ProductName = "",
                                 },
-                                BomCode = (int)dtRow["bom_code"],
+                                BomCode = (int)dtRow[GlobalsColumn.BOM_CODE ],
                                 OrderSetQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) : 0,
                                 OrderSetWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) : 0,
-                                OrderQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) * Convert.ToInt16(dtRow["Mutiply_Qty"]) : 0,
-                                OrderWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) * Convert.ToDecimal(dtRow["Mutiply_Wgh"]) : 0,
+                                OrderQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) * Convert.ToInt16(dtRow[GlobalsColumn.MUTIPLY_QTY]) : 0,
+                                OrderWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) * Convert.ToDecimal(dtRow[GlobalsColumn.MUTIPLY_WGH]) : 0,
                             });
                         }
                     }
@@ -274,7 +263,7 @@ namespace SlaughterHouseServer
                         seq++;
                         orderItems.Add(new OrderItem
                         {
-                            OrderNo = txtOrderNo.Text,
+                            OrderNo = txtProductSlip.Text,
                             Seq = seq,
                             Product = new Product
                             {
@@ -292,13 +281,12 @@ namespace SlaughterHouseServer
 
                 var order = new Order
                 {
-                    OrderNo = txtOrderNo.Text,
-                    RequestDate = dtpRequestDate.Value,
+                    OrderNo = txtProductSlip.Text,
+                    RequestDate = dtpProductSlipDate.Value,
                     Customer = new Customer
                     {
                         CustomerCode = cboCustomer.SelectedValue.ToString()
                     },
-                    Comments = txtComment.Text,
                     OrderFlag = 0,
                     Active = chkActive.Checked,
                     CreateBy = "system",
@@ -306,7 +294,7 @@ namespace SlaughterHouseServer
                     OrderItems = orderItems
                 };
 
-                if (string.IsNullOrEmpty(txtOrderNo.Text))
+                if (string.IsNullOrEmpty(txtProductSlip.Text))
                 {
                     OrderController.Insert(order);
                 }
@@ -320,19 +308,18 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
-        private void CancelOrder()
+        private void CancelProductSlip()
         {
             try
             {
                 var order = new Order
                 {
-                    OrderNo = txtOrderNo.Text,
-                    RequestDate = dtpRequestDate.Value,
+                    OrderNo = txtProductSlip.Text,
+                    RequestDate = dtpProductSlipDate.Value,
                     Customer = new Customer
                     {
                         CustomerCode = cboCustomer.SelectedValue.ToString()
                     },
-                    Comments = txtComment.Text,
                     OrderFlag = 0,
                     Active = false,
                     CreateBy = "system",
@@ -345,5 +332,7 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
+
+       
     }
 }

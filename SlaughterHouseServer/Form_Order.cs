@@ -74,13 +74,23 @@ namespace SlaughterHouseServer
                 string invocieFlag = gv.Rows[row.Index].Cells[GlobalsColumn.INVOICE_FLAG].Value.ToString();
                 if (invocieFlag == "1")
                 {
-                    gv.Rows[row.Index].Cells[GlobalsColumn.BTN_INVOICE].Style.BackColor = Color.Gray;
-                    //gv.Rows[row.Index].Cells[GlobalsColumn.BTN_INVOICE].DataGridView.b = "xxxxxxx";
+                    gv.Rows[row.Index].Cells[GlobalsColumn.BTN_INVOICE].Style.BackColor = Color.Gray; 
                 }
                 else
                 {
                     gv.Rows[row.Index].Cells[GlobalsColumn.BTN_INVOICE].Style.BackColor = Color.MediumSpringGreen;
                 }
+            }
+
+            DataGridViewButtonColumn printProductSlipBtnColumn = new DataGridViewButtonColumn();
+            printProductSlipBtnColumn.Name = GlobalsColumn.PRODUCT_SLIP;
+            printProductSlipBtnColumn.Text = "ปริ้นใบจัดสินค้า";
+            printProductSlipBtnColumn.UseColumnTextForButtonValue = true; //dont forget this line
+            printProductSlipBtnColumn.FlatStyle = FlatStyle.Flat; 
+            if (gv.Columns[GlobalsColumn.PRODUCT_SLIP] == null)
+            {
+                gv.Columns.Insert(gv.ColumnCount, printProductSlipBtnColumn);
+                gv.Columns[GlobalsColumn.PRODUCT_SLIP].HeaderText = "ปริ้นใบจัดสินค้า";
             }
         }
  

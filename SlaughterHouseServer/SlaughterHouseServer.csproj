@@ -74,6 +74,12 @@
     <Compile Include="Form_CustomerAddEdit.Designer.cs">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_ProductSlip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductSlip.Designer.cs">
+      <DependentUpon>Form_ProductSlip.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Report_So_Map_Inv.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_CustomerAddEdit.resx">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProductSlip.resx">
+      <DependentUpon>Form_ProductSlip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Report_So_Map_Inv.resx">
       <DependentUpon>Form_Report_So_Map_Inv.cs</DependentUpon>

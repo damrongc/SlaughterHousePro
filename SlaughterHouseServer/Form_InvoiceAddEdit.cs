@@ -231,7 +231,7 @@ namespace SlaughterHouseServer
                     txtComment.Text = "";
                     chkActive.Checked = order.Active;
                 }
-                BtnCancel.Enabled = false;
+                BtnCancel.Visible = false;
             }
             else
             {
@@ -267,7 +267,7 @@ namespace SlaughterHouseServer
                     txtVatRate.Enabled = false;
                     if (chkActive.Checked == false)
                     {
-                        BtnCancel.Enabled = false;
+                        BtnCancel.Visible = false;
                         txtComment.Enabled = false;
                     }
                 }

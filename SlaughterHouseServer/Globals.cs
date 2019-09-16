@@ -10,6 +10,7 @@ namespace SlaughterHouseServer
     { 
 
         public const string BTN_INVOICE = "BTN_INVOICE";
+        public const string PRODUCT_SLIP = "PRODUCT_SLIP";
         public const string REQUEST_DATE = "REQUEST_DATE";
         public const string QTY_WGH = "QTY_WGH";
 
