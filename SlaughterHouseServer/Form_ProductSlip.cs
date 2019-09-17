@@ -111,7 +111,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-                CancelOrder();
+                //CancelOrder();
                 MessageBox.Show("ยกเลิกเอกสาร เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Bom.cs" />
+    <Compile Include="Models\ProductSlipItem.cs" />
+    <Compile Include="Models\ProductSlip.cs" />
     <Compile Include="Models\ProductPrice.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\InvoiceItem.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Globals.cs" />
     <Compile Include="MyExtension.cs" />
     <Compile Include="InvoiceController.cs" />
+    <Compile Include="ProductSlipController.cs" />
     <Compile Include="ProductionOrderController.cs" />
     <Compile Include="ReportController.cs" />
     <Compile Include="Models\Farm.cs" />
