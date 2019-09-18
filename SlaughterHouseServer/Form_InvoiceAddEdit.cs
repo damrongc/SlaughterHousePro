@@ -235,6 +235,7 @@ namespace SlaughterHouseServer
             }
             else
             {
+              
                 Invoice invoice = InvoiceController.GetInvoice(this.invoiceNo);
                 if (invoice != null)
                 {

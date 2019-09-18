@@ -8,6 +8,7 @@ namespace SlaughterHouseLib.Models
         public string ProductSlipNo { get; set; }
         public DateTime ProductSlipDate { get; set; }  
         public string RefDocumentNo { get; set; }
+        public string ProductSlipFlag { get; set; }
         public bool Active { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }

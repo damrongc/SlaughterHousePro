@@ -22,18 +22,20 @@ namespace SlaughterHouseLib
                     conn.Open();
                     tr = conn.BeginTransaction();
                     var sql = @"INSERT INTO product_slip
-                                    (product_slip_no,
-                                    product_slip_date,
-                                    ref_document_no,
-                                    active,
-                                    create_by)
-                                VALUES
-                                    (@product_slip_no,
-                                     @product_slip_date,
-                                     @ref_document_no,
-                                     @active,
-                                     @create_by ) 
-                               ";
+									(product_slip_no,
+									product_slip_date,
+									ref_document_no,
+                                    product_slip_flag,
+									active,
+									create_by)
+								VALUES
+									(@product_slip_no,
+									 @product_slip_date,
+									 @ref_document_no,
+									 @product_slip_flag,
+									 @active,
+									 @create_by ) 
+							   ";
                     var cmd = new MySqlCommand(sql, conn)
                     {
                         Transaction = tr
@@ -41,23 +43,24 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
                     cmd.Parameters.AddWithValue("product_slip_date", productSlip.ProductSlipDate);
                     cmd.Parameters.AddWithValue("ref_document_no", productSlip.RefDocumentNo);
+                    cmd.Parameters.AddWithValue("product_slip_flag", productSlip.ProductSlipFlag);
                     cmd.Parameters.AddWithValue("active", productSlip.Active);
                     cmd.Parameters.AddWithValue("create_by", productSlip.CreateBy);
                     cmd.ExecuteNonQuery();
 
                     sql = @"INSERT INTO slaughterhouse.product_slip_item
-                               (product_slip_no,
-                                product_code,
-                                location_code,
-                                seq,
-                                create_by )
-                            VALUES
-                               (@product_slip_no ,
-                                @product_code ,
-                                @location_code ,
-                                @seq , 
-                                @create_by )
-                            "; 
+							   (product_slip_no,
+								product_code,
+								location_code,
+								seq,
+								create_by )
+							VALUES
+							   (@product_slip_no ,
+								@product_code ,
+								@location_code ,
+								@seq , 
+								@create_by )
+							";
 
                     foreach (var item in productSlip.ProductSlipItem)
                     {
@@ -68,7 +71,7 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
                         cmd.Parameters.AddWithValue("product_code", item.Product.ProductCode);
                         cmd.Parameters.AddWithValue("location_code", item.Location.LocationCode);
-                        cmd.Parameters.AddWithValue("seq", item.Seq); 
+                        cmd.Parameters.AddWithValue("seq", item.Seq);
                         cmd.Parameters.AddWithValue("create_by", item.CreateBy);
                         cmd.ExecuteNonQuery();
                     }
@@ -82,7 +85,7 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-        public static bool Update(Order order)
+        public static bool Update(ProductSlip productSlip)
         {
             MySqlTransaction tr = null;
             try
@@ -91,40 +94,35 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     tr = conn.BeginTransaction();
-                    var sql = @"SELECT order_flag FROM orders WHERE order_no=@order_no";
+                    var sql = @"SELECT product_slip_flag FROM product_slip WHERE product_slip_no=@product_slip_no";
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("order_no", order.OrderNo);
-                    var orderFlag = (int)cmd.ExecuteScalar();
+                    cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
+                    var productSlipFlag = (int)cmd.ExecuteScalar();
 
-
-                    sql = @"SELECT sum(unload_wgh) as unload_wgh FROM orders_item WHERE order_no=@order_no";
-                    cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("order_no", order.OrderNo);
-                    var unloadWgh = (decimal)cmd.ExecuteScalar();
-                    if (orderFlag > 0 || unloadWgh > 0)
+                    if (productSlipFlag > 0)
                     {
                         throw new Exception("ไม่สามารถบันทึกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
                     }
-                    sql = @"UPDATE orders
-								SET order_date=@order_date,
-								customer_code=@customer_code,
-								order_flag=@order_flag,
-								comments=@comments,
+                    sql = @"UPDATE slaughterhouse.product_slip
+                            SET 
+                                product_slip_date = @product_slip_date,
+                                ref_document_no = @ref_document_no,
+                                product_slip_flag = @product_slip_flag,
 								active=@active,
 								modified_at=CURRENT_TIMESTAMP,
 								modified_by=@modified_by
-								WHERE order_no=@order_no";
+                            WHERE product_slip_no = @product_slip_no
+                          ";
                     cmd = new MySqlCommand(sql, conn)
                     {
                         Transaction = tr
                     };
-                    cmd.Parameters.AddWithValue("order_no", order.OrderNo);
-                    cmd.Parameters.AddWithValue("order_date", order.RequestDate);
-                    cmd.Parameters.AddWithValue("customer_code", order.Customer.CustomerCode);
-                    cmd.Parameters.AddWithValue("order_flag", order.OrderFlag);
-                    cmd.Parameters.AddWithValue("comments", order.Comments);
-                    cmd.Parameters.AddWithValue("active", order.Active);
-                    cmd.Parameters.AddWithValue("modified_by", order.ModifiedBy);
+                    cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
+                    cmd.Parameters.AddWithValue("product_slip_date", productSlip.ProductSlipDate);
+                    cmd.Parameters.AddWithValue("ref_document_no", productSlip.RefDocumentNo);
+                    cmd.Parameters.AddWithValue("product_slip_flag", productSlip.ProductSlipFlag);
+                    cmd.Parameters.AddWithValue("active", productSlip.Active);
+                    cmd.Parameters.AddWithValue("modified_by", productSlip.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
 
                     sql = @"Delete From orders_item 
@@ -133,47 +131,47 @@ namespace SlaughterHouseLib
                     {
                         Transaction = tr
                     };
-                    cmd.Parameters.AddWithValue("order_no", order.OrderNo);
-                    cmd.ExecuteNonQuery();
+                    //cmd.Parameters.AddWithValue("order_no", order.OrderNo);
+                    //cmd.ExecuteNonQuery();
 
-                    sql = @"INSERT INTO orders_item
-								(order_no,
-								product_code,
-								seq,
-								order_qty,
-								order_wgh,
-								bom_code,
-								order_set_qty,
-								order_set_wgh,
-								create_by)
-								VALUES(
-								@order_no,
-								@product_code,
-								@seq,
-								@order_qty,
-								@order_wgh,
-								@bom_code,
-								@order_set_qty,
-								@order_set_wgh,
-								@create_by)";
+                    //sql = @"INSERT INTO orders_item
+                    //			(order_no,
+                    //			product_code,
+                    //			seq,
+                    //			order_qty,
+                    //			order_wgh,
+                    //			bom_code,
+                    //			order_set_qty,
+                    //			order_set_wgh,
+                    //			create_by)
+                    //			VALUES(
+                    //			@order_no,
+                    //			@product_code,
+                    //			@seq,
+                    //			@order_qty,
+                    //			@order_wgh,
+                    //			@bom_code,
+                    //			@order_set_qty,
+                    //			@order_set_wgh,
+                    //			@create_by)";
 
-                    foreach (var item in order.OrderItems)
-                    {
-                        cmd = new MySqlCommand(sql, conn)
-                        {
-                            Transaction = tr
-                        };
-                        cmd.Parameters.AddWithValue("order_no", order.OrderNo);
-                        cmd.Parameters.AddWithValue("product_code", item.Product.ProductCode);
-                        cmd.Parameters.AddWithValue("seq", item.Seq);
-                        cmd.Parameters.AddWithValue("order_qty", item.OrderQty);
-                        cmd.Parameters.AddWithValue("order_wgh", item.OrderWgh);
-                        cmd.Parameters.AddWithValue("bom_code", item.BomCode);
-                        cmd.Parameters.AddWithValue("order_set_qty", item.OrderSetQty);
-                        cmd.Parameters.AddWithValue("order_set_wgh", item.OrderSetWgh);
-                        cmd.Parameters.AddWithValue("create_by", order.CreateBy);
-                        cmd.ExecuteNonQuery();
-                    }
+                    //foreach (var item in order.OrderItems)
+                    //{
+                    //	cmd = new MySqlCommand(sql, conn)
+                    //	{
+                    //		Transaction = tr
+                    //	};
+                    //	cmd.Parameters.AddWithValue("order_no", order.OrderNo);
+                    //	cmd.Parameters.AddWithValue("product_code", item.Product.ProductCode);
+                    //	cmd.Parameters.AddWithValue("seq", item.Seq);
+                    //	cmd.Parameters.AddWithValue("order_qty", item.OrderQty);
+                    //	cmd.Parameters.AddWithValue("order_wgh", item.OrderWgh);
+                    //	cmd.Parameters.AddWithValue("bom_code", item.BomCode);
+                    //	cmd.Parameters.AddWithValue("order_set_qty", item.OrderSetQty);
+                    //	cmd.Parameters.AddWithValue("order_set_wgh", item.OrderSetWgh);
+                    //	cmd.Parameters.AddWithValue("create_by", order.CreateBy);
+                    //	cmd.ExecuteNonQuery();
+                    //}
                     tr.Commit();
                 }
                 return true;
@@ -334,7 +332,7 @@ namespace SlaughterHouseLib
 							and p.product_code = case when a.bom_code = 0 then a.product_code else bm.product_code end
 						group by p.product_code,
 							p.product_name,
-                            a.bom_code ";
+							a.bom_code ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("order_no", orderNo);
 
@@ -361,11 +359,11 @@ namespace SlaughterHouseLib
                     conn.Open();
                     var sql = "";
                     sql = @"
-                            select COALESCE(sum(case when p.issue_unit_method = 'Q' then a.unload_qty else a.unload_wgh end), 0) as qty_wgh_unload,
-                             COALESCE(sum(case when p.issue_unit_method = 'Q' then a.order_qty else a.order_wgh end), 0) as qty_wgh
-                            from orders_item a , product p
-                            where a.order_no = @order_no
-                            and a.product_code = p.product_code  
+							select COALESCE(sum(case when p.issue_unit_method = 'Q' then a.unload_qty else a.unload_wgh end), 0) as qty_wgh_unload,
+							 COALESCE(sum(case when p.issue_unit_method = 'Q' then a.order_qty else a.order_wgh end), 0) as qty_wgh
+							from orders_item a , product p
+							where a.order_no = @order_no
+							and a.product_code = p.product_code  
 							";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("order_no", orderNo);
