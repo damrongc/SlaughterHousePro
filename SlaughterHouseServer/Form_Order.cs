@@ -83,14 +83,14 @@ namespace SlaughterHouseServer
             }
 
             DataGridViewButtonColumn printProductSlipBtnColumn = new DataGridViewButtonColumn();
-            printProductSlipBtnColumn.Name = GlobalsColumn.PRODUCT_SLIP;
+            printProductSlipBtnColumn.Name = GlobalsColumn.BTN_PRODUCT_SLIP;
             printProductSlipBtnColumn.Text = "ปริ้นใบจัดสินค้า";
             printProductSlipBtnColumn.UseColumnTextForButtonValue = true; //dont forget this line
             printProductSlipBtnColumn.FlatStyle = FlatStyle.Flat; 
-            if (gv.Columns[GlobalsColumn.PRODUCT_SLIP] == null)
+            if (gv.Columns[GlobalsColumn.BTN_PRODUCT_SLIP] == null)
             {
                 gv.Columns.Insert(gv.ColumnCount, printProductSlipBtnColumn);
-                gv.Columns[GlobalsColumn.PRODUCT_SLIP].HeaderText = "ปริ้นใบจัดสินค้า";
+                gv.Columns[GlobalsColumn.BTN_PRODUCT_SLIP].HeaderText = "ปริ้นใบจัดสินค้า";
             }
         }
  
@@ -183,6 +183,16 @@ namespace SlaughterHouseServer
                                 {
                                     LoadOrder();
                                 }
+                            }
+                            break;
+                        case GlobalsColumn.BTN_PRODUCT_SLIP:
+                            var frmSlip = new Form_ProductSlip
+                            {
+                                orderNo = orderNo
+                            };
+                            if (frmSlip.ShowDialog() == DialogResult.OK)
+                            {
+                                LoadOrder();
                             }
                             break;
                     }
