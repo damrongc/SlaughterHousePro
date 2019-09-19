@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using SlaughterHouseLib.Models;
 using System;
+using System.Data;
+using System.Linq;
 
 namespace SlaughterHouseLib
 {
@@ -293,6 +295,66 @@ namespace SlaughterHouseLib
 
 
         }
+        public static DataTable GetCfLocation(string productCode, string lotNo = "")
+        {
+            try
+            {
 
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    string sql = @"
+                                Select  p.product_name, stk.lot_no, loc.location_code, loc.location_name, 
+                                case when p.issue_unit_method = 'W' 
+	                                then sum(case when stk.transaction_type = '1' then stk.stock_wgh else stk.stock_wgh*-1 end)
+                                    else sum(case when stk.transaction_type = '1' then stk.stock_qty else stk.stock_qty*-1 end)
+                                    end as qty_wgh, p.issue_unit_method
+                                From stock stk, product p, location loc
+                                where DATE_FORMAT(stk.stock_date, '%Y-%m-01') = DATE_FORMAT(SYSDATE(), '%Y-%m-01')
+                                 and stk.product_code = @product_code
+                                 and stk.lot_no > @lot_no
+                                 and stk.product_code = p.product_code
+                                 and stk.location_code = loc.location_code
+                                 group by p.product_name, stk.lot_no,  stk.transaction_type, loc.location_code, loc.location_name, p.issue_unit_method, p.sale_unit_method
+                                 having case when p.sale_unit_method = 'W' 
+	                                then sum(case when stk.transaction_type = '1' then stk.stock_wgh else stk.stock_wgh*-1 end) 
+                                    else sum(case when stk.transaction_type = '1' then stk.stock_qty else stk.stock_qty*-1 end) 
+                                    end > 0
+                                 order by stk.lot_no limit 1
+                                            "; 
+
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_code", productCode);
+                    cmd.Parameters.AddWithValue("lot_no", lotNo);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+
+                    //var coll = (from p in ds.Tables[0].AsEnumerable()
+                    //            select new
+                    //            {
+                    //                LocationCode = p.Field<int>("location_code"),
+                    //                LocationName = p.Field<string>("location_name"),
+                    //                LotNo = p.Field<string>("lot_no"),
+                    //                QtyWgh = p.Field<decimal>("qty_wgh"),
+                    //            }).ToList();
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        return ds.Tables[0];
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
     }
 }
