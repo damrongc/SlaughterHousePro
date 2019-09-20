@@ -74,7 +74,21 @@ namespace SlaughterHouseServer
         }
         #endregion
 
-#region Event Click
+        #region Event Click
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CancelOrder();
+                MessageBox.Show("ยกเลิกเอกสาร เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
@@ -194,6 +208,10 @@ namespace SlaughterHouseServer
                 dtpPoDate.Enabled = false;
                 BtnSaveAndNew.Visible = false; 
             }
+            else
+            {
+                BtnCancel.Visible = false;
+            }
             LoadDetail();
         }
         private void LoadDetail()
@@ -267,5 +285,28 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
+        private void CancelOrder()
+        {
+            try
+            {
+                var po = new ProductionOrder
+                {
+                    PoNo = txtPoNo.Text,
+                    PoDate  = dtpPoDate.Value, 
+                    Comments = txtComment.Text,
+                    PoFlag = 0,
+                    Active = false,
+                    CreateBy = "system",
+                    ModifiedBy = "system"
+                };
+                ProductionOrderController.Cancel(po);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+ 
     }
 }

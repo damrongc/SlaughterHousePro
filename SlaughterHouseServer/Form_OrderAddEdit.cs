@@ -82,16 +82,16 @@ namespace SlaughterHouseServer
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             gv.Columns["seq"].HeaderText = "ลำดับ";
-            gv.Columns["product_code"].HeaderText = "รหัสสินค้า";
-            gv.Columns["product_name"].HeaderText = "ชื่อสินค้า";
-            gv.Columns["qty_wgh"].HeaderText = "จำนวน";
-            gv.Columns["issue_unit_method"].HeaderText = "หน่วยคำนวณ";
-            gv.Columns["unit_code"].HeaderText = "รหัสหน่วยสินค้า";
-            gv.Columns["unit_name"].HeaderText = "หน่วยสินค้า";
+            gv.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gv.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            gv.Columns[GlobalsColumn.QTY_WGH].HeaderText = "จำนวน";
+            gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
+            gv.Columns[GlobalsColumn.UNIT_CODE].HeaderText = "รหัสหน่วยสินค้า";
+            gv.Columns[GlobalsColumn.UNIT_NAME].HeaderText = "หน่วยสินค้า";
 
             gv.Columns["seq"].Visible = false;
-            gv.Columns["issue_unit_method"].Visible = false;
-            gv.Columns["unit_code"].Visible = false;
+            gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
+            gv.Columns[GlobalsColumn.UNIT_CODE].Visible = false;
         }
         #endregion
 
@@ -158,13 +158,13 @@ namespace SlaughterHouseServer
                 DataRow dr;
                 dr = dtOrderItem.NewRow();
 
-                dr["seq"] = 0;
-                dr["product_code"] = frm.productCode;
-                dr["product_name"] = frm.productName;
-                dr["qty_wgh"] = frm.qtyWgh;
-                dr["issue_unit_method"] = frm.issueUnitMethod;
-                dr["unit_code"] = frm.unitCode;
-                dr["unit_name"] = frm.unitName;
+                dr[GlobalsColumn.SEQ] = 0;
+                dr[GlobalsColumn.PRODUCT_CODE] = frm.productCode;
+                dr[GlobalsColumn.PRODUCT_NAME] = frm.productName;
+                dr[GlobalsColumn.QTY_WGH] = frm.qtyWgh;
+                dr[GlobalsColumn.ISSUE_UNIT_METHOD] = frm.issueUnitMethod;
+                dr[GlobalsColumn.UNIT_CODE] = frm.unitCode;
+                dr[GlobalsColumn.UNIT_NAME] = frm.unitName;
                 dtOrderItem.Rows.Add(dr);
                 dtOrderItem.AcceptChanges();
             }
@@ -186,19 +186,19 @@ namespace SlaughterHouseServer
                             frm.orderNo = txtOrderNo.Text;
                             frm.orderDate = dtpRequestDate.Value;
 
-                            frm.productCode = dtOrderItem.Rows[e.RowIndex]["product_code"].ToString();
-                            frm.qtyWgh = Convert.ToDecimal(dtOrderItem.Rows[e.RowIndex]["qty_wgh"]);
-                            frm.issueUnitMethod = dtOrderItem.Rows[e.RowIndex]["issue_unit_method"].ToString();
-                            frm.unitCode = Convert.ToInt16(dtOrderItem.Rows[e.RowIndex]["unit_code"]);
-                            frm.unitName = dtOrderItem.Rows[e.RowIndex]["unit_name"].ToString();
+                            frm.productCode = dtOrderItem.Rows[e.RowIndex][GlobalsColumn.PRODUCT_CODE].ToString();
+                            frm.qtyWgh = Convert.ToDecimal(dtOrderItem.Rows[e.RowIndex][GlobalsColumn.QTY_WGH]);
+                            frm.issueUnitMethod = dtOrderItem.Rows[e.RowIndex][GlobalsColumn.ISSUE_UNIT_METHOD].ToString();
+                            frm.unitCode = Convert.ToInt16(dtOrderItem.Rows[e.RowIndex][GlobalsColumn.UNIT_CODE]);
+                            frm.unitName = dtOrderItem.Rows[e.RowIndex][GlobalsColumn.UNIT_NAME].ToString();
                             if (frm.ShowDialog() == DialogResult.OK)
                             {
-                                dtOrderItem.Rows[e.RowIndex]["product_code"] = frm.productCode;
-                                dtOrderItem.Rows[e.RowIndex]["product_name"] = frm.productName;
-                                dtOrderItem.Rows[e.RowIndex]["qty_wgh"] = frm.qtyWgh;
-                                dtOrderItem.Rows[e.RowIndex]["issue_unit_method"] = frm.issueUnitMethod;
-                                dtOrderItem.Rows[e.RowIndex]["unit_code"] = frm.unitCode;
-                                dtOrderItem.Rows[e.RowIndex]["unit_name"] = frm.unitName;
+                                dtOrderItem.Rows[e.RowIndex][GlobalsColumn.PRODUCT_CODE] = frm.productCode;
+                                dtOrderItem.Rows[e.RowIndex][GlobalsColumn.PRODUCT_NAME] = frm.productName;
+                                dtOrderItem.Rows[e.RowIndex][GlobalsColumn.QTY_WGH] = frm.qtyWgh;
+                                dtOrderItem.Rows[e.RowIndex][GlobalsColumn.ISSUE_UNIT_METHOD] = frm.issueUnitMethod;
+                                dtOrderItem.Rows[e.RowIndex][GlobalsColumn.UNIT_CODE] = frm.unitCode;
+                                dtOrderItem.Rows[e.RowIndex][GlobalsColumn.UNIT_NAME] = frm.unitName;
                                 dtOrderItem.AcceptChanges();
                                 gv.Refresh();
                             }
@@ -235,7 +235,7 @@ namespace SlaughterHouseServer
             }
             else
             {
-                BtnCancel.Enabled = false;
+                BtnCancel.Visible = false;
             }
             LoadDetail();
         }
@@ -266,7 +266,7 @@ namespace SlaughterHouseServer
                 int seq = 0;
                 foreach (DataRow row in dtOrderItem.Rows)
                 {
-                    DataTable dtBom = BomController.GetBom(row["product_code"].ToString());
+                    DataTable dtBom = BomController.GetBom(row[GlobalsColumn.PRODUCT_CODE].ToString());
 
                     //if (bomItm.Count > 0)
                     //{
@@ -295,14 +295,14 @@ namespace SlaughterHouseServer
                                 Seq = seq,
                                 Product = new Product
                                 {
-                                    ProductCode = dtRow["product_code"].ToString(),
+                                    ProductCode = dtRow[GlobalsColumn.PRODUCT_CODE].ToString(),
                                     ProductName = "",
                                 },
                                 BomCode = (int)dtRow["bom_code"],
-                                OrderSetQty = row["issue_unit_method"].ToString() == "Q" ? Convert.ToInt16(row["qty_wgh"]) : 0,
-                                OrderSetWgh = row["issue_unit_method"].ToString() == "W" ? Convert.ToDecimal(row["qty_wgh"]) : 0,
-                                OrderQty = row["issue_unit_method"].ToString() == "Q" ? Convert.ToInt16(row["qty_wgh"]) * Convert.ToInt16(dtRow["Mutiply_Qty"]) : 0,
-                                OrderWgh = row["issue_unit_method"].ToString() == "W" ? Convert.ToDecimal(row["qty_wgh"]) * Convert.ToDecimal(dtRow["Mutiply_Wgh"]) : 0,
+                                OrderSetQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) : 0,
+                                OrderSetWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) : 0,
+                                OrderQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) * Convert.ToInt16(dtRow["Mutiply_Qty"]) : 0,
+                                OrderWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) * Convert.ToDecimal(dtRow["Mutiply_Wgh"]) : 0,
                             });
                         }
                     }
@@ -315,14 +315,14 @@ namespace SlaughterHouseServer
                             Seq = seq,
                             Product = new Product
                             {
-                                ProductCode = row["product_code"].ToString(),
-                                ProductName = row["product_name"].ToString(),
+                                ProductCode = row[GlobalsColumn.PRODUCT_CODE].ToString(),
+                                ProductName = row[GlobalsColumn.PRODUCT_NAME].ToString(),
                             },
                             BomCode = 0,
                             OrderSetQty = 0,
                             OrderSetWgh = 0,
-                            OrderQty = row["issue_unit_method"].ToString() == "Q" ? Convert.ToInt16(row["qty_wgh"]) : 0,
-                            OrderWgh = row["issue_unit_method"].ToString() == "W" ? Convert.ToDecimal(row["qty_wgh"]) : 0,
+                            OrderQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) : 0,
+                            OrderWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) : 0,
                         });
                     }
                 }

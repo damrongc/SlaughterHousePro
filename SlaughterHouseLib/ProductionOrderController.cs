@@ -269,6 +269,37 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+        public static bool Cancel(ProductionOrder po)
+        {
+            MySqlTransaction tr = null;
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    tr = conn.BeginTransaction();
+                    var sql = "";
+
+                    sql = @"UPDATE production_order
+								SET  active=@active 
+								WHERE po_no=@po_no";
+                    var cmd = new MySqlCommand(sql, conn)
+                    {
+                        Transaction = tr
+                    };
+                    cmd.Parameters.AddWithValue("po_no", po.PoNo);
+                    cmd.Parameters.AddWithValue("active", po.Active);
+                    var affRow = cmd.ExecuteNonQuery();
+
+                    tr.Commit();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
     public static class ProductionOrderItemController
     {

@@ -125,6 +125,7 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+
         public static object GetOrderReadyToSell(DateTime requestDate, string customerCode = "")
         {
             try

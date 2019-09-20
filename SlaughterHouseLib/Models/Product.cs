@@ -93,7 +93,6 @@ namespace SlaughterHouseLib.Models
                                     ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
                                     ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
                                 }).ToList();
-
                     return coll;
                 }
             }

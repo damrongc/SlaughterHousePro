@@ -77,6 +77,12 @@
     <Compile Include="Reports\Form_ReportSoMapInv.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_ProductSlip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductSlip.Designer.cs">
+      <DependentUpon>Form_ProductSlip.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Form_ReportSoMapInv.Designer.cs">
       <DependentUpon>Form_ReportSoMapInv.cs</DependentUpon>
     </Compile>
@@ -268,6 +274,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Form_ReportStockBalance.resx">
       <DependentUpon>Form_ReportStockBalance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProductSlip.resx">
+      <DependentUpon>Form_ProductSlip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Form_ReportSwineReceive.resx">
       <DependentUpon>Form_ReportSwineReceive.cs</DependentUpon>
