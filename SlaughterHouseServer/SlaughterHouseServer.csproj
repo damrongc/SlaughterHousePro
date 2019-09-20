@@ -62,16 +62,16 @@
     <Compile Include="DragControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Form_Customer.cs">
+    <Compile Include="Masters\Form_Customer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Customer.Designer.cs">
+    <Compile Include="Masters\Form_Customer.Designer.cs">
       <DependentUpon>Form_Customer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_CustomerAddEdit.cs">
+    <Compile Include="Masters\Form_CustomerAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_CustomerAddEdit.Designer.cs">
+    <Compile Include="Masters\Form_CustomerAddEdit.Designer.cs">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Form_ReportSoMapInv.cs">
@@ -140,10 +140,10 @@
     <Compile Include="Form_InvoiceAddEdit.Designer.cs">
       <DependentUpon>Form_InvoiceAddEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_ProductPriceAddEdit.cs">
+    <Compile Include="Masters\Form_ProductPriceAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_ProductPriceAddEdit.Designer.cs">
+    <Compile Include="Masters\Form_ProductPriceAddEdit.Designer.cs">
       <DependentUpon>Form_ProductPriceAddEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_ProductionOrder.cs">
@@ -176,34 +176,34 @@
     <Compile Include="Form_OrderAddEdit.Designer.cs">
       <DependentUpon>Form_OrderAddEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_ProductAddEdit.cs">
+    <Compile Include="Masters\Form_ProductAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_ProductAddEdit.Designer.cs">
+    <Compile Include="Masters\Form_ProductAddEdit.Designer.cs">
       <DependentUpon>Form_ProductAddEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Product.cs">
+    <Compile Include="Masters\Form_Product.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Product.Designer.cs">
+    <Compile Include="Masters\Form_Product.Designer.cs">
       <DependentUpon>Form_Product.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_ProductGroup.cs">
+    <Compile Include="Masters\Form_ProductGroup.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_ProductGroup.Designer.cs">
+    <Compile Include="Masters\Form_ProductGroup.Designer.cs">
       <DependentUpon>Form_ProductGroup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_ProductGroupAddEdit.cs">
+    <Compile Include="Masters\Form_ProductGroupAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_ProductGroupAddEdit.Designer.cs">
+    <Compile Include="Masters\Form_ProductGroupAddEdit.Designer.cs">
       <DependentUpon>Form_ProductGroupAddEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_ProductPrice.cs">
+    <Compile Include="Masters\Form_ProductPrice.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_ProductPrice.Designer.cs">
+    <Compile Include="Masters\Form_ProductPrice.Designer.cs">
       <DependentUpon>Form_ProductPrice.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_ReceiveCarcass.cs">
@@ -230,10 +230,10 @@
     <Compile Include="Form_Unit.Designer.cs">
       <DependentUpon>Form_Unit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Farm.cs">
+    <Compile Include="Masters\Form_Farm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Farm.Designer.cs">
+    <Compile Include="Masters\Form_Farm.Designer.cs">
       <DependentUpon>Form_Farm.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Receive.cs">
@@ -242,10 +242,10 @@
     <Compile Include="Form_Receive.Designer.cs">
       <DependentUpon>Form_Receive.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_FarmAddEdit.cs">
+    <Compile Include="Masters\Form_FarmAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_FarmAddEdit.Designer.cs">
+    <Compile Include="Masters\Form_FarmAddEdit.Designer.cs">
       <DependentUpon>Form_FarmAddEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Main.cs">
@@ -263,10 +263,10 @@
     <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form_Customer.resx">
+    <EmbeddedResource Include="Masters\Form_Customer.resx">
       <DependentUpon>Form_Customer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_CustomerAddEdit.resx">
+    <EmbeddedResource Include="Masters\Form_CustomerAddEdit.resx">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Form_ReportSoMapInv.resx">
@@ -302,7 +302,7 @@
     <EmbeddedResource Include="Form_InvoiceAddEdit.resx">
       <DependentUpon>Form_InvoiceAddEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_ProductPriceAddEdit.resx">
+    <EmbeddedResource Include="Masters\Form_ProductPriceAddEdit.resx">
       <DependentUpon>Form_ProductPriceAddEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_ProductionOrder.resx">
@@ -320,19 +320,19 @@
     <EmbeddedResource Include="Form_OrderAddEdit.resx">
       <DependentUpon>Form_OrderAddEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_ProductAddEdit.resx">
+    <EmbeddedResource Include="Masters\Form_ProductAddEdit.resx">
       <DependentUpon>Form_ProductAddEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Product.resx">
+    <EmbeddedResource Include="Masters\Form_Product.resx">
       <DependentUpon>Form_Product.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_ProductGroup.resx">
+    <EmbeddedResource Include="Masters\Form_ProductGroup.resx">
       <DependentUpon>Form_ProductGroup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_ProductGroupAddEdit.resx">
+    <EmbeddedResource Include="Masters\Form_ProductGroupAddEdit.resx">
       <DependentUpon>Form_ProductGroupAddEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_ProductPrice.resx">
+    <EmbeddedResource Include="Masters\Form_ProductPrice.resx">
       <DependentUpon>Form_ProductPrice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_ReceiveCarcass.resx">
@@ -347,13 +347,13 @@
     <EmbeddedResource Include="Form_Unit.resx">
       <DependentUpon>Form_Unit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Farm.resx">
+    <EmbeddedResource Include="Masters\Form_Farm.resx">
       <DependentUpon>Form_Farm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Receive.resx">
       <DependentUpon>Form_Receive.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_FarmAddEdit.resx">
+    <EmbeddedResource Include="Masters\Form_FarmAddEdit.resx">
       <DependentUpon>Form_FarmAddEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Main.resx">
