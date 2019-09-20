@@ -208,8 +208,7 @@ namespace SlaughterHouseLib
         public static DataTable GetProductSlipItem(string orderNo)
         {
             try
-            {
-
+            { 
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -217,11 +216,11 @@ namespace SlaughterHouseLib
                                 a.product_code,
                                 b.product_name,
                                 sum(Case when b.issue_unit_method = 'Q' then order_qty else order_wgh end) qty_wgh,
-                                u.unit_name,
                                 null as lot_no,
                                 null as location_code,
                                 null as location_name,
                                 0 as qty_wgh_location,
+                                u.unit_name,
                                 b.issue_unit_method 
                                 from orders_item a,product b, unit_of_measurement u
                                 where a.product_code =b.product_code
@@ -250,41 +249,38 @@ namespace SlaughterHouseLib
                     {
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
-                            if (Convert.IsDBNull(dt.Rows[i]["LOCATION_CODE"]))
-                            {
+                            if (Convert.ToDecimal(dt.Rows[i]["QTY_WGH_LOCATION"]) == 0)
+                            { 
                                 dtLocation = StockController.GetCfLocation(dt.Rows[i]["PRODUCT_CODE"].ToString());
                                 if (dtLocation != null && dtLocation.Rows.Count > 0)
                                 {
-                                    if (Convert.ToDecimal(dtLocation.Rows[0]["QTY_WGH"]) >= Convert.ToDecimal(dt.Rows[i]["QTY_WGH"]))
+                                    int row = i;
+                                    decimal qtyWghSo = Convert.ToDecimal(dt.Rows[row]["QTY_WGH"]);
+                                    for (int j = 0; j < dtLocation.Rows.Count; j++)
                                     {
-                                        dt.Rows[i]["LOT_NO"] = dtLocation.Rows[0]["LOT_NO"].ToString();
-                                        dt.Rows[i]["LOCATION_CODE"] = dtLocation.Rows[0]["LOCATION_CODE"].ToString();
-                                        dt.Rows[i]["LOCATION_NAME"] = dtLocation.Rows[0]["LOCATION_NAME"].ToString();
-                                        dt.Rows[i]["QTY_WGH_LOCATION"] = Convert.ToDecimal(dt.Rows[i]["QTY_WGH"]);
-                                    }
-                                    else if (Convert.ToDecimal(dtLocation.Rows[0]["QTY_WGH"]) > 0)
-                                    {
-                                        dt.Rows[i]["LOT_NO"] = dtLocation.Rows[0]["LOT_NO"].ToString();
-                                        dt.Rows[i]["LOCATION_CODE"] = dtLocation.Rows[0]["LOCATION_CODE"].ToString();
-                                        dt.Rows[i]["LOCATION_NAME"] = dtLocation.Rows[0]["LOCATION_NAME"].ToString();
-                                        dt.Rows[i]["QTY_WGH_LOCATION"] = Convert.ToDecimal(dtLocation.Rows[0]["QTY_WGH"]);
-
-                                        int rowCurrent = i;
-                                        while (true)
+                                        if (Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]) >= qtyWghSo)
                                         {
-                                            bool res = Create_Row(ref dt, rowCurrent);
-                                            rowCurrent = dt.Rows.Count - 1;
-                                            if (res == false)
-                                            {
-                                                break;
-                                            }
+                                            dt.Rows[row]["LOT_NO"] = dtLocation.Rows[j]["LOT_NO"].ToString();
+                                            dt.Rows[row]["LOCATION_CODE"] = dtLocation.Rows[j]["LOCATION_CODE"].ToString();
+                                            dt.Rows[row]["LOCATION_NAME"] = dtLocation.Rows[j]["LOCATION_NAME"].ToString();
+                                            dt.Rows[row]["QTY_WGH_LOCATION"] = Convert.ToDecimal(dt.Rows[row]["QTY_WGH"]);
                                         }
-                                    }
+                                        else if (Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]) > 0)
+                                        {
+                                            dt.Rows[row]["LOT_NO"] = dtLocation.Rows[j]["LOT_NO"].ToString();
+                                            dt.Rows[row]["LOCATION_CODE"] = dtLocation.Rows[j]["LOCATION_CODE"].ToString();
+                                            dt.Rows[row]["LOCATION_NAME"] = dtLocation.Rows[j]["LOCATION_NAME"].ToString();
+                                            dt.Rows[row]["QTY_WGH_LOCATION"] = Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]);
+
+                                            qtyWghSo = qtyWghSo - Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]);
+                                            row = Create_Row(ref dt, i, qtyWghSo); 
+                                        } 
+                                    } 
                                 }
                             }
                         }
                         DataView dv = dt.DefaultView;
-                        dv.Sort = "PRODUCT_CODE, LOT_NO asc";
+                        dv.Sort = "PRODUCT_CODE ASC, LOT_NO ASC";
                         sortedDT = dv.ToTable();
                     }
 
@@ -320,46 +316,47 @@ namespace SlaughterHouseLib
             }
         }
 
-        private static bool Create_Row(ref DataTable dt, int idxRow)
+        private static int Create_Row(ref DataTable dt, int idxRow, decimal cfQtyWgh)
         {
-            bool res = false;
+            //bool res = false;
             DataRow drNew = dt.NewRow();
             drNew["PRODUCT_CODE"] = dt.Rows[idxRow]["PRODUCT_CODE"];
             drNew["PRODUCT_NAME"] = dt.Rows[idxRow]["PRODUCT_NAME"];
             drNew["QTY_WGH"] = Convert.ToDecimal(dt.Rows[idxRow]["QTY_WGH"]);
-            drNew["UNIT_NAME"] = dt.Rows[idxRow]["UNIT_NAME"];
+            drNew["UNIT_NAME"] = dt.Rows[idxRow]["UNIT_NAME"]; 
+            drNew["QTY_WGH_LOCATION"] = cfQtyWgh;
+            dt.Rows.Add(drNew);
+            //DataTable dtLocation = new DataTable();
+            //dtLocation = StockController.GetCfLocation(dt.Rows[idxRow]["PRODUCT_CODE"].ToString(), dt.Rows[idxRow]["LOT_NO"].ToString());
+            //if (dtLocation != null && dtLocation.Rows.Count > 0)
+            //{
+            //    drNew["LOT_NO"] = dtLocation.Rows[0]["LOT_NO"].ToString();
+            //    drNew["LOCATION_CODE"] = dtLocation.Rows[0]["LOCATION_CODE"].ToString();
+            //    drNew["LOCATION_NAME"] = dtLocation.Rows[0]["LOCATION_NAME"].ToString();
+            //    if (Convert.ToDecimal(dtLocation.Rows[0]["QTY_WGH"]) >= Convert.ToDecimal(dt.Rows[idxRow]["QTY_WGH"]))
+            //    {
 
-            DataTable dtLocation = new DataTable();
-            dtLocation = StockController.GetCfLocation(dt.Rows[idxRow]["PRODUCT_CODE"].ToString(), dt.Rows[idxRow]["LOT_NO"].ToString());
-            if (dtLocation != null && dtLocation.Rows.Count > 0)
-            {
-                drNew["LOT_NO"] = dtLocation.Rows[0]["LOT_NO"].ToString();
-                drNew["LOCATION_CODE"] = dtLocation.Rows[0]["LOCATION_CODE"].ToString();
-                drNew["LOCATION_NAME"] = dtLocation.Rows[0]["LOCATION_NAME"].ToString();
-                if (Convert.ToDecimal(dtLocation.Rows[0]["QTY_WGH"]) >= Convert.ToDecimal(dt.Rows[idxRow]["QTY_WGH"]))
-                {
-
-                    drNew["QTY_WGH_LOCATION"] = Convert.ToDecimal(drNew["QTY_WGH"]);
-                    dt.Rows.Add(drNew);
-                    res = false;
-                }
-                else if (Convert.ToDecimal(dtLocation.Rows[0]["QTY_WGH"]) > 0)
-                {
-                    drNew["QTY_WGH_LOCATION"] = Convert.ToDecimal(dtLocation.Rows[0]["QTY_WGH"]);
-                    dt.Rows.Add(drNew);
-                    res = true;
-                }
-                else
-                {
-                    res = false;
-                }
-            }
-            else
-            {
-                dt.Rows.Add(drNew);
-                res = false;
-            }
-            return res;
+            //        drNew["QTY_WGH_LOCATION"] = Convert.ToDecimal(drNew["QTY_WGH"]);
+            //        dt.Rows.Add(drNew);
+            //        res = false;
+            //    }
+            //    else if (Convert.ToDecimal(dtLocation.Rows[0]["QTY_WGH"]) > 0)
+            //    {
+            //        drNew["QTY_WGH_LOCATION"] = Convert.ToDecimal(dtLocation.Rows[0]["QTY_WGH"]);
+            //        dt.Rows.Add(drNew);
+            //        res = true;
+            //    }
+            //    else
+            //    {
+            //        res = false;
+            //    }
+            //}
+            //else
+            //{
+            //    //dt.Rows.Add(drNew);
+            //    //res = false;
+            //}
+            return dt.Rows.Count - 1;
         }
     }
 }

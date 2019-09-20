@@ -30,6 +30,17 @@ namespace SlaughterHouseServer
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
 
+             
+            gvSo.DataBindingComplete += GvSo_DataBindingComplete;
+            gvSo.ReadOnly = true;
+            gvSo.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            gvSo.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
+            gvSo.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
+            gvSo.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            gvSo.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            gvSo.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
+            gvSo.EnableHeadersVisualStyles = false;
+
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
@@ -60,20 +71,36 @@ namespace SlaughterHouseServer
             gv.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gv.Columns[GlobalsColumn.PRODUCT_NAME ].HeaderText = "ชื่อสินค้า";
             gv.Columns[GlobalsColumn.QTY_WGH].HeaderText = "จำนวน";
+            gv.Columns[GlobalsColumn.QTY_WGH_LOCATION].HeaderText = "จำนวน";
             //gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
             //gv.Columns[GlobalsColumn.UNIT_CODE ].HeaderText = "รหัสหน่วยสินค้า";
             gv.Columns[GlobalsColumn.UNIT_NAME ].HeaderText = "หน่วยสินค้า";
             gv.Columns[GlobalsColumn.LOCATION_CODE  ].HeaderText = "รหัสคลังสินค้า";
             gv.Columns[GlobalsColumn.LOCATION_NAME ].HeaderText = "คลังสินค้า";
 
-            //gv.Columns[GlobalsColumn.SEQ].Visible = false;
+            gv.Columns[GlobalsColumn.PRODUCT_CODE].Visible = false;
+            gv.Columns[GlobalsColumn.QTY_WGH].Visible = false;
             gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
             gv.Columns[GlobalsColumn.LOCATION_CODE].Visible = false;
         }
-        #endregion
+        private void GvSo_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            gvSo.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gvSo.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            gvSo.Columns[GlobalsColumn.QTY_WGH].HeaderText = "จำนวน";
+            gvSo.Columns[GlobalsColumn.UNIT_NAME].HeaderText = "หน่วยสินค้า";
 
-        #region Event Click
-        private void BtnSave_Click(object sender, System.EventArgs e)
+            gvSo.Columns[GlobalsColumn.SEQ].Visible = false;
+            gvSo.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
+            gvSo.Columns[GlobalsColumn.PRODUCT_CODE].Visible = false; 
+            gvSo.Columns[GlobalsColumn.UNLOAD_QTY].Visible = false;
+            gvSo.Columns[GlobalsColumn.UNLOAD_WGH].Visible = false;
+            gvSo.Columns[GlobalsColumn.UNIT_CODE].Visible = false;
+        }
+            #endregion
+
+            #region Event Click
+            private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
             {
@@ -179,7 +206,8 @@ namespace SlaughterHouseServer
             Order order = OrderController.GetOrder(this.orderNo);
             if (order != null)
             {
-                txtProductSlip.Text = order.OrderNo;
+                txtProductSlip.Text = "";
+                txtOrderNo.Text = order.OrderNo;
                 dtpProductSlipDate.Value = order.RequestDate;
                 cboCustomer.SelectedValue = order.Customer.CustomerCode;
                 chkActive.Checked = order.Active;
@@ -195,12 +223,12 @@ namespace SlaughterHouseServer
         {
             dtProductSlipItem = new DataTable("PRODUCT_SLIP_ITEM");
             dtProductSlipItem = ProductSlipItemController.GetProductSlipItem(orderNo);
-gv.DataSource = dtProductSlipItem;
+            gv.DataSource = dtProductSlipItem;
 
 
             DataTable dtOrdersIteemItem = new DataTable("ORDERS_ITEM");
-            dtOrdersIteemItem = OrderItemController.GetOrderItems(orderNo);
-gvSo.DataSource = dtOrdersIteemItem;
+            dtOrdersIteemItem = OrderItemController.GetOrderItems(orderNo, "N");
+            gvSo.DataSource = dtOrdersIteemItem;
 
         }
         private void LoadCustomer()

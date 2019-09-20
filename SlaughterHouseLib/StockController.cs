@@ -320,7 +320,7 @@ namespace SlaughterHouseLib
 	                                then sum(case when stk.transaction_type = '1' then stk.stock_wgh else stk.stock_wgh*-1 end) 
                                     else sum(case when stk.transaction_type = '1' then stk.stock_qty else stk.stock_qty*-1 end) 
                                     end > 0
-                                 order by stk.lot_no limit 1
+                                 order by stk.lot_no
                                             "; 
 
                     var cmd = new MySqlCommand(sql, conn);
