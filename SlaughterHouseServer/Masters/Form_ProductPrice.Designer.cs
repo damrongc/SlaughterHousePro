@@ -36,10 +36,10 @@
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.cboProduct = new System.Windows.Forms.ComboBox();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
-            this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.BtnSearch = new System.Windows.Forms.Button();
+            this.cboProduct = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
@@ -49,7 +49,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 15);
+            this.label1.Location = new System.Drawing.Point(11, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(155, 29);
             this.label1.TabIndex = 0;
@@ -80,10 +80,10 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(10, 10);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(6);
-            this.panel1.Size = new System.Drawing.Size(1380, 730);
+            this.panel1.Size = new System.Drawing.Size(1400, 750);
             this.panel1.TabIndex = 3;
             // 
             // gv
@@ -103,7 +103,7 @@
             this.gv.Location = new System.Drawing.Point(6, 68);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(1368, 656);
+            this.gv.Size = new System.Drawing.Size(1388, 676);
             this.gv.TabIndex = 8;
             // 
             // Edit
@@ -119,7 +119,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(6, 67);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1368, 1);
+            this.panel3.Size = new System.Drawing.Size(1388, 1);
             this.panel3.TabIndex = 6;
             // 
             // panel2
@@ -133,16 +133,8 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(6, 6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1368, 61);
+            this.panel2.Size = new System.Drawing.Size(1388, 61);
             this.panel2.TabIndex = 5;
-            // 
-            // cboProduct
-            // 
-            this.cboProduct.FormattingEnabled = true;
-            this.cboProduct.Location = new System.Drawing.Point(598, 11);
-            this.cboProduct.Name = "cboProduct";
-            this.cboProduct.Size = new System.Drawing.Size(382, 37);
-            this.cboProduct.TabIndex = 7;
             // 
             // dtpStartDate
             // 
@@ -150,8 +142,18 @@
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStartDate.Location = new System.Drawing.Point(317, 11);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(177, 36);
+            this.dtpStartDate.Size = new System.Drawing.Size(160, 36);
             this.dtpStartDate.TabIndex = 6;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(483, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 29);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "สินค้า:";
             // 
             // BtnSearch
             // 
@@ -162,7 +164,7 @@
             this.BtnSearch.ForeColor = System.Drawing.Color.White;
             this.BtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("BtnSearch.Image")));
             this.BtnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSearch.Location = new System.Drawing.Point(986, 11);
+            this.BtnSearch.Location = new System.Drawing.Point(732, 11);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(142, 36);
             this.BtnSearch.TabIndex = 4;
@@ -170,15 +172,13 @@
             this.BtnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnSearch.UseVisualStyleBackColor = false;
             // 
-            // label2
+            // cboProduct
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(531, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 29);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "สินค้า:";
+            this.cboProduct.FormattingEnabled = true;
+            this.cboProduct.Location = new System.Drawing.Point(548, 10);
+            this.cboProduct.Name = "cboProduct";
+            this.cboProduct.Size = new System.Drawing.Size(178, 37);
+            this.cboProduct.TabIndex = 7;
             // 
             // Form_ProductPrice
             // 
@@ -188,7 +188,6 @@
             this.Font = new System.Drawing.Font("Kanit", 15.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form_ProductPrice";
-            this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Form_Farm";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
@@ -203,13 +202,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnAdd;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button BtnSearch;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView gv;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpStartDate;
-        private System.Windows.Forms.ComboBox cboProduct;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
+        private System.Windows.Forms.ComboBox cboProduct;
+        private System.Windows.Forms.Button BtnSearch;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Farm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Customer));
             this.label1 = new System.Windows.Forms.Label();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -51,7 +51,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ข้อมูลฟาร์ม";
+            this.label1.Text = "ข้อมูลลูกค้า";
             // 
             // BtnAdd
             // 
@@ -78,10 +78,10 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(10, 10);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(6);
-            this.panel1.Size = new System.Drawing.Size(1380, 730);
+            this.panel1.Size = new System.Drawing.Size(1400, 750);
             this.panel1.TabIndex = 3;
             // 
             // gv
@@ -101,7 +101,7 @@
             this.gv.Location = new System.Drawing.Point(6, 65);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(1368, 659);
+            this.gv.Size = new System.Drawing.Size(1388, 679);
             this.gv.TabIndex = 8;
             // 
             // Edit
@@ -117,7 +117,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(6, 64);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1368, 1);
+            this.panel3.Size = new System.Drawing.Size(1388, 1);
             this.panel3.TabIndex = 6;
             // 
             // panel2
@@ -129,7 +129,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(6, 6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1368, 58);
+            this.panel2.Size = new System.Drawing.Size(1388, 58);
             this.panel2.TabIndex = 5;
             // 
             // TxtFilter
@@ -158,15 +158,14 @@
             this.BtnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnSearch.UseVisualStyleBackColor = false;
             // 
-            // Form_Farm
+            // Form_Customer
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1400, 750);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Kanit", 15.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form_Farm";
-            this.Padding = new System.Windows.Forms.Padding(10);
+            this.Name = "Form_Customer";
             this.Text = "Form_Farm";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();

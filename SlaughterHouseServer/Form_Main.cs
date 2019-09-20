@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SlaughterHouseServer.Masters;
+using System;
 using System.Windows.Forms;
 
 namespace SlaughterHouseServer
@@ -13,61 +14,51 @@ namespace SlaughterHouseServer
 
         private void UserSettingComponent()
         {
-            BtnFarm.Click += Btn_Click;
-            BtnCustomer.Click += Btn_Click;
-            BtnProduct.Click += Btn_Click;
-            BtnProductGroup.Click += Btn_Click;
-            BtnUnit.Click += Btn_Click;
+            BtnMaster.Click += Btn_Click;
             BtnOrder.Click += Btn_Click;
             BtnProductionOrder.Click += Btn_Click;
             BtnReceive.Click += Btn_Click;
             BtnCarcass.Click += Btn_Click;
-            BtnPriceList.Click += Btn_Click;
             BtnInvoice.Click += Btn_Click;
             BtnReport.Click += Btn_Click;
         }
 
+
+
         private void Btn_Click(object sender, EventArgs e)
         {
+
+            foreach (Button item in plMenu.Controls)
+            {
+                item.BackColor = System.Drawing.ColorTranslator.FromHtml("#27212A");
+            }
             var btn = (Button)sender;
+            btn.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
             switch (btn.Name)
             {
-                case "BtnFarm":
-                    AddFormToContainer(new Form_Farm());
-                    break;
-                case "BtnCustomer":
-                    AddFormToContainer(new Form_Customer());
-                    break;
-                case "BtnProduct":
-                    AddFormToContainer(new Form_Product());
-                    break;
-                case "BtnProductGroup":
-                    AddFormToContainer(new Form_ProductGroup());
-                    break;
-                case "BtnUnit":
-                    AddFormToContainer(new Form_Unit());
+                case "BtnMaster":
+                    AddFormToContainer(new Form_MasterMenu());
                     break;
                 case "BtnReceive":
                     AddFormToContainer(new Form_Receive());
-                    break; 
+                    break;
                 case "BtnCarcass":
                     AddFormToContainer(new Form_ReceiveCarcass());
                     break;
                 case "BtnOrder":
-                    AddFormToContainer(new Form_Order ()); 
+                    AddFormToContainer(new Form_Order());
                     break;
                 case "BtnProductionOrder":
                     AddFormToContainer(new Form_ProductionOrder());
                     break;
-                case "BtnPriceList":
-                    AddFormToContainer(new Form_ProductPrice());
-                    break;
+
                 case "BtnInvoice":
                     AddFormToContainer(new Form_Invoice());
                     break;
                 case "BtnReport":
                     AddFormToContainer(new Form_Report());
                     break;
+
             }
         }
 
@@ -93,7 +84,7 @@ namespace SlaughterHouseServer
 
             //fh.WindowState = FormWindowState.Maximized;
             //this.plContainer.Tag = fh;
-            fh.Show(); 
+            fh.Show();
         }
     }
 }
