@@ -27,12 +27,35 @@
           <xs:element name="TableItem">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="receive_no" type="xs:string" minOccurs="0" />
-                <xs:element name="product_code" type="xs:string" minOccurs="0" />
-                <xs:element name="seq" type="xs:int" minOccurs="0" />
-                <xs:element name="sex_flag" type="xs:string" minOccurs="0" />
-                <xs:element name="receive_qty" type="xs:int" minOccurs="0" />
-                <xs:element name="receive_wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="SeqNo1" type="xs:int" minOccurs="0" />
+                <xs:element name="SexFlag1" type="xs:string" minOccurs="0" />
+                <xs:element name="NetWeight1" type="xs:decimal" minOccurs="0" />
+                <xs:element name="SeqNo2" type="xs:int" minOccurs="0" />
+                <xs:element name="SexFlag2" type="xs:string" minOccurs="0" />
+                <xs:element name="NetWeight2" type="xs:decimal" minOccurs="0" />
+                <xs:element name="SeqNo3" type="xs:int" minOccurs="0" />
+                <xs:element name="SexFlag3" type="xs:string" minOccurs="0" />
+                <xs:element name="NetWeight3" type="xs:decimal" minOccurs="0" />
+                <xs:element name="SeqNo4" type="xs:int" minOccurs="0" />
+                <xs:element name="SexFlag4" type="xs:string" minOccurs="0" />
+                <xs:element name="NetWeight4" type="xs:decimal" minOccurs="0" />
+                <xs:element name="SeqNo5" type="xs:int" minOccurs="0" />
+                <xs:element name="SexFlag5" type="xs:string" minOccurs="0" />
+                <xs:element name="NetWeight5" type="xs:decimal" minOccurs="0" />
+                <xs:element name="SeqNo6" type="xs:int" minOccurs="0" />
+                <xs:element name="SexFlag6" type="xs:string" minOccurs="0" />
+                <xs:element name="NetWeight6" type="xs:decimal" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="TableFooter">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="SumWeight" type="xs:decimal" minOccurs="0" />
+                <xs:element name="StartDatetime" type="xs:string" minOccurs="0" />
+                <xs:element name="EndDatetime" type="xs:string" minOccurs="0" />
+                <xs:element name="UserCreate" type="xs:string" minOccurs="0" />
+                <xs:element name="UsageTime" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -48,7 +71,7 @@
     <farm_code>001</farm_code>
     <coop_no>1</coop_no>
     <queue_no>1</queue_no>
-    <farm_qty>11924910609</farm_qty>
+    <farm_qty>5</farm_qty>
     <farm_wgh>500.00</farm_wgh>
     <factory_qty>5</factory_qty>
     <factory_wgh>500.00</factory_wgh>
@@ -57,43 +80,259 @@
     <breeder_name>หมูขาว</breeder_name>
   </Table>
   <TableItem>
-    <receive_no>REV0000001</receive_no>
-    <product_code>P001</product_code>
-    <seq>1</seq>
-    <sex_flag>F</sex_flag>
-    <receive_qty>1</receive_qty>
-    <receive_wgh>100.00</receive_wgh>
+    <SeqNo1>1</SeqNo1>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>100.00</NetWeight1>
+    <SeqNo2>31</SeqNo2>
+    <SeqNo3>61</SeqNo3>
+    <SeqNo4>91</SeqNo4>
+    <SeqNo5>121</SeqNo5>
+    <SeqNo6>151</SeqNo6>
   </TableItem>
   <TableItem>
-    <receive_no>REV0000001</receive_no>
-    <product_code>P001</product_code>
-    <seq>2</seq>
-    <sex_flag>F</sex_flag>
-    <receive_qty>1</receive_qty>
-    <receive_wgh>100.00</receive_wgh>
+    <SeqNo1>2</SeqNo1>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>100.00</NetWeight1>
+    <SeqNo2>32</SeqNo2>
+    <SeqNo3>62</SeqNo3>
+    <SeqNo4>92</SeqNo4>
+    <SeqNo5>122</SeqNo5>
+    <SeqNo6>152</SeqNo6>
   </TableItem>
   <TableItem>
-    <receive_no>REV0000001</receive_no>
-    <product_code>P001</product_code>
-    <seq>3</seq>
-    <sex_flag>F</sex_flag>
-    <receive_qty>1</receive_qty>
-    <receive_wgh>100.00</receive_wgh>
+    <SeqNo1>3</SeqNo1>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>100.00</NetWeight1>
+    <SeqNo2>33</SeqNo2>
+    <SeqNo3>63</SeqNo3>
+    <SeqNo4>93</SeqNo4>
+    <SeqNo5>123</SeqNo5>
+    <SeqNo6>153</SeqNo6>
   </TableItem>
   <TableItem>
-    <receive_no>REV0000001</receive_no>
-    <product_code>P001</product_code>
-    <seq>4</seq>
-    <sex_flag>F</sex_flag>
-    <receive_qty>1</receive_qty>
-    <receive_wgh>100.00</receive_wgh>
+    <SeqNo1>4</SeqNo1>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>100.00</NetWeight1>
+    <SeqNo2>34</SeqNo2>
+    <SeqNo3>64</SeqNo3>
+    <SeqNo4>94</SeqNo4>
+    <SeqNo5>124</SeqNo5>
+    <SeqNo6>154</SeqNo6>
   </TableItem>
   <TableItem>
-    <receive_no>REV0000001</receive_no>
-    <product_code>P001</product_code>
-    <seq>5</seq>
-    <sex_flag>F</sex_flag>
-    <receive_qty>1</receive_qty>
-    <receive_wgh>100.00</receive_wgh>
+    <SeqNo1>5</SeqNo1>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>100.00</NetWeight1>
+    <SeqNo2>35</SeqNo2>
+    <SeqNo3>65</SeqNo3>
+    <SeqNo4>95</SeqNo4>
+    <SeqNo5>125</SeqNo5>
+    <SeqNo6>155</SeqNo6>
   </TableItem>
+  <TableItem>
+    <SeqNo1>6</SeqNo1>
+    <SeqNo2>36</SeqNo2>
+    <SeqNo3>66</SeqNo3>
+    <SeqNo4>96</SeqNo4>
+    <SeqNo5>126</SeqNo5>
+    <SeqNo6>156</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>7</SeqNo1>
+    <SeqNo2>37</SeqNo2>
+    <SeqNo3>67</SeqNo3>
+    <SeqNo4>97</SeqNo4>
+    <SeqNo5>127</SeqNo5>
+    <SeqNo6>157</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>8</SeqNo1>
+    <SeqNo2>38</SeqNo2>
+    <SeqNo3>68</SeqNo3>
+    <SeqNo4>98</SeqNo4>
+    <SeqNo5>128</SeqNo5>
+    <SeqNo6>158</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>9</SeqNo1>
+    <SeqNo2>39</SeqNo2>
+    <SeqNo3>69</SeqNo3>
+    <SeqNo4>99</SeqNo4>
+    <SeqNo5>129</SeqNo5>
+    <SeqNo6>159</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>10</SeqNo1>
+    <SeqNo2>40</SeqNo2>
+    <SeqNo3>70</SeqNo3>
+    <SeqNo4>100</SeqNo4>
+    <SeqNo5>130</SeqNo5>
+    <SeqNo6>160</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>11</SeqNo1>
+    <SeqNo2>41</SeqNo2>
+    <SeqNo3>71</SeqNo3>
+    <SeqNo4>101</SeqNo4>
+    <SeqNo5>131</SeqNo5>
+    <SeqNo6>161</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>12</SeqNo1>
+    <SeqNo2>42</SeqNo2>
+    <SeqNo3>72</SeqNo3>
+    <SeqNo4>102</SeqNo4>
+    <SeqNo5>132</SeqNo5>
+    <SeqNo6>162</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>13</SeqNo1>
+    <SeqNo2>43</SeqNo2>
+    <SeqNo3>73</SeqNo3>
+    <SeqNo4>103</SeqNo4>
+    <SeqNo5>133</SeqNo5>
+    <SeqNo6>163</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>14</SeqNo1>
+    <SeqNo2>44</SeqNo2>
+    <SeqNo3>74</SeqNo3>
+    <SeqNo4>104</SeqNo4>
+    <SeqNo5>134</SeqNo5>
+    <SeqNo6>164</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>15</SeqNo1>
+    <SeqNo2>45</SeqNo2>
+    <SeqNo3>75</SeqNo3>
+    <SeqNo4>105</SeqNo4>
+    <SeqNo5>135</SeqNo5>
+    <SeqNo6>165</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>16</SeqNo1>
+    <SeqNo2>46</SeqNo2>
+    <SeqNo3>76</SeqNo3>
+    <SeqNo4>106</SeqNo4>
+    <SeqNo5>136</SeqNo5>
+    <SeqNo6>166</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>17</SeqNo1>
+    <SeqNo2>47</SeqNo2>
+    <SeqNo3>77</SeqNo3>
+    <SeqNo4>107</SeqNo4>
+    <SeqNo5>137</SeqNo5>
+    <SeqNo6>167</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>18</SeqNo1>
+    <SeqNo2>48</SeqNo2>
+    <SeqNo3>78</SeqNo3>
+    <SeqNo4>108</SeqNo4>
+    <SeqNo5>138</SeqNo5>
+    <SeqNo6>168</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>19</SeqNo1>
+    <SeqNo2>49</SeqNo2>
+    <SeqNo3>79</SeqNo3>
+    <SeqNo4>109</SeqNo4>
+    <SeqNo5>139</SeqNo5>
+    <SeqNo6>169</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>20</SeqNo1>
+    <SeqNo2>50</SeqNo2>
+    <SeqNo3>80</SeqNo3>
+    <SeqNo4>110</SeqNo4>
+    <SeqNo5>140</SeqNo5>
+    <SeqNo6>170</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>21</SeqNo1>
+    <SeqNo2>51</SeqNo2>
+    <SeqNo3>81</SeqNo3>
+    <SeqNo4>111</SeqNo4>
+    <SeqNo5>141</SeqNo5>
+    <SeqNo6>171</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>22</SeqNo1>
+    <SeqNo2>52</SeqNo2>
+    <SeqNo3>82</SeqNo3>
+    <SeqNo4>112</SeqNo4>
+    <SeqNo5>142</SeqNo5>
+    <SeqNo6>172</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>23</SeqNo1>
+    <SeqNo2>53</SeqNo2>
+    <SeqNo3>83</SeqNo3>
+    <SeqNo4>113</SeqNo4>
+    <SeqNo5>143</SeqNo5>
+    <SeqNo6>173</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>24</SeqNo1>
+    <SeqNo2>54</SeqNo2>
+    <SeqNo3>84</SeqNo3>
+    <SeqNo4>114</SeqNo4>
+    <SeqNo5>144</SeqNo5>
+    <SeqNo6>174</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>25</SeqNo1>
+    <SeqNo2>55</SeqNo2>
+    <SeqNo3>85</SeqNo3>
+    <SeqNo4>115</SeqNo4>
+    <SeqNo5>145</SeqNo5>
+    <SeqNo6>175</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>26</SeqNo1>
+    <SeqNo2>56</SeqNo2>
+    <SeqNo3>86</SeqNo3>
+    <SeqNo4>116</SeqNo4>
+    <SeqNo5>146</SeqNo5>
+    <SeqNo6>176</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>27</SeqNo1>
+    <SeqNo2>57</SeqNo2>
+    <SeqNo3>87</SeqNo3>
+    <SeqNo4>117</SeqNo4>
+    <SeqNo5>147</SeqNo5>
+    <SeqNo6>177</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>28</SeqNo1>
+    <SeqNo2>58</SeqNo2>
+    <SeqNo3>88</SeqNo3>
+    <SeqNo4>118</SeqNo4>
+    <SeqNo5>148</SeqNo5>
+    <SeqNo6>178</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>29</SeqNo1>
+    <SeqNo2>59</SeqNo2>
+    <SeqNo3>89</SeqNo3>
+    <SeqNo4>119</SeqNo4>
+    <SeqNo5>149</SeqNo5>
+    <SeqNo6>179</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>30</SeqNo1>
+    <SeqNo2>60</SeqNo2>
+    <SeqNo3>90</SeqNo3>
+    <SeqNo4>120</SeqNo4>
+    <SeqNo5>150</SeqNo5>
+    <SeqNo6>180</SeqNo6>
+  </TableItem>
+  <TableFooter>
+    <SumWeight>500.00</SumWeight>
+    <StartDatetime>19:57</StartDatetime>
+    <EndDatetime>20:01</EndDatetime>
+    <UsageTime>4</UsageTime>
+  </TableFooter>
 </NewDataSet>

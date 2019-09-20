@@ -306,7 +306,7 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = @"select receive_no,receive_date,transport_doc_no,
-                                    truck_no,rev.farm_code,coop_no,queue_no,lot_no
+                                    truck_no,rev.farm_code,coop_no,queue_no,lot_no,
                                     farm_qty,farm_wgh,factory_qty,factory_wgh,
                                     farm.farm_name,farm.address,
                                     breeder.breeder_name
@@ -323,7 +323,7 @@ namespace SlaughterHouseLib
                         da.Fill(ds);
 
                     }
-                    sql = @"select receive_no,product_code,seq,sex_flag,receive_qty,receive_wgh
+                    sql = @"select receive_no,product_code,seq,sex_flag,receive_qty,receive_wgh,create_at
                                     from receive_item
                                     where receive_no =@receive_no
                                     and product_code ='P001'
@@ -334,10 +334,99 @@ namespace SlaughterHouseLib
                         var da = new MySqlDataAdapter(cmd);
                         var ds1 = new DataSet();
                         da.Fill(ds1);
-                        var dt = new DataTable();
-                        dt = ds1.Tables[0].Copy();
-                        dt.TableName = "TableItem";
+
+
+                        decimal multiplyRound = 1;
+                        int totalRecord = 200;
+                        int rowPerCol = 30;
+                        int totalCol = 6;
+
+
+                        DataTable dt = new DataTable("TableItem");
+
+
+                        for (int i = 0; i < totalCol; i++)
+                        {
+                            dt.Columns.Add("SeqNo" + (i + 1), typeof(int));
+                            dt.Columns.Add("SexFlag" + (i + 1));
+                            dt.Columns.Add("NetWeight" + (i + 1), typeof(decimal));
+                        }
+
+                        int rowCount = ds1.Tables[0].Rows.Count;
+
+                        if (rowCount > 0)
+                        {
+                            multiplyRound = Math.Ceiling(Convert.ToDecimal(rowCount / totalRecord) + 1);
+                        }
+
+                        for (int idxPage = 0; idxPage < multiplyRound; idxPage++)
+                        {
+                            for (int idx = 0; idx < rowPerCol; idx++)
+                            {
+                                var dr = dt.NewRow();
+                                for (int ii = 0; ii < totalCol; ii++)
+                                {
+                                    int rowIdx = idx + (ii * rowPerCol) + (totalRecord * idxPage);
+
+                                    int seq = ii + 1;
+
+                                    if (rowIdx < (rowCount - 1))
+                                    {
+                                        dr["SeqNo" + seq.ToString()] = rowIdx + 1;
+                                        dr["SexFlag" + seq.ToString()] = ds1.Tables[0].Rows[rowIdx]["sex_flag"].ToString();
+                                        dr["NetWeight" + seq.ToString()] = ds1.Tables[0].Rows[rowIdx]["receive_wgh"].ToString().ToDecimal();
+                                    }
+                                    else
+                                    {
+                                        dr["SeqNo" + seq.ToString()] = rowIdx + 1;
+                                        if (rowIdx == (rowCount - 1))
+                                        {
+                                            dr["SeqNo" + seq.ToString()] = rowIdx + 1;
+                                            dr["SexFlag" + seq.ToString()] = ds1.Tables[0].Rows[rowIdx]["sex_flag"].ToString();
+                                            dr["NetWeight" + seq.ToString()] = ds1.Tables[0].Rows[rowIdx]["receive_wgh"].ToString().ToDecimal();
+                                        }
+                                    }
+                                }
+                                dt.Rows.Add(dr);
+                            }
+                        }
                         ds.Tables.Add(dt);
+
+
+                        decimal sumWeight = 0;
+                        string startDatetime = "";
+                        string endDatetime = "";
+
+                        for (int i = 0; i < rowCount; i++)
+                        {
+                            if (i == 0)
+                            {
+                                startDatetime = Convert.ToDateTime(ds1.Tables[0].Rows[i]["create_at"]).ToString("HH:mm");
+                            }
+                            if (i == ds1.Tables[0].Rows.Count - 1)
+                            {
+                                endDatetime = Convert.ToDateTime(ds1.Tables[0].Rows[i]["create_at"]).ToString("HH:mm");
+                            }
+
+                            sumWeight += ds1.Tables[0].Rows[i]["receive_wgh"].ToString().ToDecimal();
+                        }
+
+
+                        DataTable dtFooter = new DataTable("TableFooter");
+                        dtFooter.Columns.Add("SumWeight", typeof(decimal));
+                        dtFooter.Columns.Add("StartDatetime");
+                        dtFooter.Columns.Add("EndDatetime");
+                        dtFooter.Columns.Add("UserCreate");
+                        dtFooter.Columns.Add("UsageTime");
+
+                        var drFooter = dtFooter.NewRow();
+                        drFooter["SumWeight"] = sumWeight;
+                        drFooter["StartDatetime"] = startDatetime;
+                        drFooter["EndDatetime"] = endDatetime;
+                        drFooter["UsageTime"] = (Convert.ToDateTime(endDatetime) - Convert.ToDateTime(startDatetime)).TotalMinutes;
+                        dtFooter.Rows.Add(drFooter);
+
+                        ds.Tables.Add(dtFooter);
                     }
 
                     return ds;

@@ -42,11 +42,15 @@ namespace SlaughterHouseServer.Reports
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = ReportController.GetDataReportSwineReceiveHeader(ReceiveNo);
+
+
+
+
             string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
             ds.WriteXml(path + @"\xml\swinereceive.xml", XmlWriteMode.WriteSchema);
-            doc.Load(path + @"\swinereceive.rpt");
-            doc.SetDataSource(ds);
+            //doc.Load(path + @"\swinereceive.rpt");
+            //doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;
             rptViewer.Zoom(100);
