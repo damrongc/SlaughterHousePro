@@ -83,7 +83,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(962, 574);
+            this.BtnSave.Location = new System.Drawing.Point(788, 571);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -113,9 +113,9 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.gv);
-            this.panel2.Location = new System.Drawing.Point(604, 146);
+            this.panel2.Location = new System.Drawing.Point(421, 146);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(573, 404);
+            this.panel2.Size = new System.Drawing.Size(595, 404);
             this.panel2.TabIndex = 43;
             // 
             // gv
@@ -133,7 +133,7 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(573, 404);
+            this.gv.Size = new System.Drawing.Size(595, 404);
             this.gv.TabIndex = 43;
             // 
             // label2
@@ -150,9 +150,9 @@
             this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(604, 109);
+            this.panel1.Location = new System.Drawing.Point(421, 109);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(573, 36);
+            this.panel1.Size = new System.Drawing.Size(595, 36);
             this.panel1.TabIndex = 45;
             // 
             // chkActive
@@ -177,7 +177,7 @@
             this.BtnCancel.ForeColor = System.Drawing.Color.White;
             this.BtnCancel.Image = ((System.Drawing.Image)(resources.GetObject("BtnCancel.Image")));
             this.BtnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCancel.Location = new System.Drawing.Point(754, 574);
+            this.BtnCancel.Location = new System.Drawing.Point(580, 571);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(202, 36);
             this.BtnCancel.TabIndex = 47;
@@ -229,7 +229,7 @@
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(12, 109);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(586, 36);
+            this.panel3.Size = new System.Drawing.Size(403, 36);
             this.panel3.TabIndex = 53;
             // 
             // label3
@@ -246,7 +246,7 @@
             this.panel4.Controls.Add(this.gvSo);
             this.panel4.Location = new System.Drawing.Point(12, 146);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(586, 404);
+            this.panel4.Size = new System.Drawing.Size(403, 404);
             this.panel4.TabIndex = 52;
             // 
             // gvSo
@@ -264,13 +264,13 @@
             this.gvSo.Location = new System.Drawing.Point(0, 0);
             this.gvSo.Name = "gvSo";
             this.gvSo.RowHeadersWidth = 10;
-            this.gvSo.Size = new System.Drawing.Size(586, 404);
+            this.gvSo.Size = new System.Drawing.Size(403, 404);
             this.gvSo.TabIndex = 43;
             // 
             // Form_ProductSlip
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1189, 632);
+            this.ClientSize = new System.Drawing.Size(1027, 632);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.cboCustomer);
