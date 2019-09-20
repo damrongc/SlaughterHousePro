@@ -56,7 +56,7 @@ namespace SlaughterHouseServer
         #region Event Focus, KeyDown 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            gv.Columns[GlobalsColumn.SEQ ].HeaderText = "ลำดับ";
+            //gv.Columns[GlobalsColumn.SEQ ].HeaderText = "ลำดับ";
             gv.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gv.Columns[GlobalsColumn.PRODUCT_NAME ].HeaderText = "ชื่อสินค้า";
             gv.Columns[GlobalsColumn.QTY_WGH].HeaderText = "จำนวน";
@@ -66,7 +66,7 @@ namespace SlaughterHouseServer
             gv.Columns[GlobalsColumn.LOCATION_CODE  ].HeaderText = "รหัสคลังสินค้า";
             gv.Columns[GlobalsColumn.LOCATION_NAME ].HeaderText = "คลังสินค้า";
 
-            gv.Columns[GlobalsColumn.SEQ].Visible = false;
+            //gv.Columns[GlobalsColumn.SEQ].Visible = false;
             gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
             gv.Columns[GlobalsColumn.LOCATION_CODE].Visible = false;
         }
@@ -195,8 +195,12 @@ namespace SlaughterHouseServer
         {
             dtProductSlipItem = new DataTable("PRODUCT_SLIP_ITEM");
             dtProductSlipItem = ProductSlipItemController.GetProductSlipItem(orderNo);
+gv.DataSource = dtProductSlipItem;
 
-            gv.DataSource = dtProductSlipItem;
+
+            DataTable dtOrdersIteemItem = new DataTable("ORDERS_ITEM");
+            dtOrdersIteemItem = OrderItemController.GetOrderItems(orderNo);
+gvSo.DataSource = dtOrdersIteemItem;
 
         }
         private void LoadCustomer()
