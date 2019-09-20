@@ -400,6 +400,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_bom_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="bom" Type="Self.bom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="bom">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bomitem_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="bom_item" Type="Self.bom_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="bom_item">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_breeder_01">
           <End Role="breeder" Type="Self.breeder" Multiplicity="1" />
           <End Role="receives" Type="Self.receives" Multiplicity="*" />
@@ -622,6 +646,14 @@
             <End Role="product" EntitySet="product" />
             <End Role="barcode" EntitySet="barcode" />
           </AssociationSet>
+          <AssociationSet Name="fk_bom_product" Association="Self.fk_bom_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="bom" EntitySet="bom" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bomitem_product" Association="Self.fk_bomitem_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="bom_item" EntitySet="bom_item" />
+          </AssociationSet>
           <AssociationSet Name="fk_breeder_01" Association="Self.fk_breeder_01">
             <End Role="breeder" EntitySet="breeder" />
             <End Role="receives" EntitySet="receives" />
@@ -705,26 +737,6 @@
           <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="create_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="product" Relationship="Self.fk_barcode_product" FromRole="barcode" ToRole="product" />
-        </EntityType>
-        <EntityType Name="bom">
-          <Key>
-            <PropertyRef Name="bom_code" />
-          </Key>
-          <Property Name="bom_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_code" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="active" Type="Boolean" Nullable="false" />
-          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="create_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="bom_item">
-          <Key>
-            <PropertyRef Name="bom_code" />
-            <PropertyRef Name="product_code" />
-          </Key>
-          <Property Name="bom_code" Type="Int32" Nullable="false" />
-          <Property Name="product_code" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="mutiply_qty" Type="Int32" />
-          <Property Name="mutiply_wgh" Type="Decimal" />
         </EntityType>
         <EntityType Name="breeder">
           <Key>
@@ -916,6 +928,8 @@
           <NavigationProperty Name="unit_of_measurement" Relationship="Self.fk_unit_qty" FromRole="product" ToRole="unit_of_measurement" />
           <NavigationProperty Name="unit_of_measurement1" Relationship="Self.fk_unit_wgh" FromRole="product" ToRole="unit_of_measurement" />
           <NavigationProperty Name="receive_item" Relationship="SlaughterhouseModel.fk_receives_02" FromRole="product" ToRole="receive_item" />
+          <NavigationProperty Name="boms" Relationship="SlaughterhouseModel.fk_bom_product" FromRole="product" ToRole="bom" />
+          <NavigationProperty Name="bom_item" Relationship="SlaughterhouseModel.fk_bomitem_product" FromRole="product" ToRole="bom_item" />
         </EntityType>
         <EntityType Name="product_group">
           <Key>
@@ -1268,8 +1282,6 @@
         </Association>
         <EntityContainer Name="SlaughterhouseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="barcodes" EntityType="Self.barcode" />
-          <EntitySet Name="boms" EntityType="Self.bom" />
-          <EntitySet Name="bom_item" EntityType="Self.bom_item" />
           <EntitySet Name="breeders" EntityType="Self.breeder" />
           <EntitySet Name="customers" EntityType="Self.customer" />
           <EntitySet Name="document_generate" EntityType="Self.document_generate" />
@@ -1360,6 +1372,16 @@
             <End Role="receive" EntitySet="receives" />
             <End Role="receive_item" EntitySet="receive_item" />
           </AssociationSet>
+          <EntitySet Name="boms" EntityType="SlaughterhouseModel.bom" />
+          <EntitySet Name="bom_item" EntityType="SlaughterhouseModel.bom_item" />
+          <AssociationSet Name="fk_bom_product" Association="SlaughterhouseModel.fk_bom_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="bom" EntitySet="boms" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bomitem_product" Association="SlaughterhouseModel.fk_bomitem_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="bom_item" EntitySet="bom_item" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="receive_item">
           <Key>
@@ -1407,6 +1429,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="bom">
+          <Key>
+            <PropertyRef Name="bom_code" />
+          </Key>
+          <Property Name="bom_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="product" Relationship="SlaughterhouseModel.fk_bom_product" FromRole="bom" ToRole="product" />
+        </EntityType>
+        <EntityType Name="bom_item">
+          <Key>
+            <PropertyRef Name="bom_code" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="bom_code" Type="Int32" Nullable="false" />
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="mutiply_qty" Type="Int32" />
+          <Property Name="mutiply_wgh" Type="Decimal" />
+          <NavigationProperty Name="product" Relationship="SlaughterhouseModel.fk_bomitem_product" FromRole="bom_item" ToRole="product" />
+        </EntityType>
+        <Association Name="fk_bom_product">
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.bom" Role="bom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="bom">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bomitem_product">
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.bom_item" Role="bom_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="bom_item">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1425,27 +1493,6 @@
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="create_at" ColumnName="create_at" />
                 <ScalarProperty Name="create_by" ColumnName="create_by" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="boms">
-            <EntityTypeMapping TypeName="SlaughterhouseModel.bom">
-              <MappingFragment StoreEntitySet="bom">
-                <ScalarProperty Name="bom_code" ColumnName="bom_code" />
-                <ScalarProperty Name="product_code" ColumnName="product_code" />
-                <ScalarProperty Name="active" ColumnName="active" />
-                <ScalarProperty Name="create_at" ColumnName="create_at" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="bom_item">
-            <EntityTypeMapping TypeName="SlaughterhouseModel.bom_item">
-              <MappingFragment StoreEntitySet="bom_item">
-                <ScalarProperty Name="bom_code" ColumnName="bom_code" />
-                <ScalarProperty Name="product_code" ColumnName="product_code" />
-                <ScalarProperty Name="mutiply_qty" ColumnName="mutiply_qty" />
-                <ScalarProperty Name="mutiply_wgh" ColumnName="mutiply_wgh" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1804,6 +1851,27 @@
                 <ScalarProperty Name="seq" ColumnName="seq" />
                 <ScalarProperty Name="product_code" ColumnName="product_code" />
                 <ScalarProperty Name="receive_no" ColumnName="receive_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="boms">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.bom">
+              <MappingFragment StoreEntitySet="bom">
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="bom_code" ColumnName="bom_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bom_item">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.bom_item">
+              <MappingFragment StoreEntitySet="bom_item">
+                <ScalarProperty Name="mutiply_wgh" ColumnName="mutiply_wgh" />
+                <ScalarProperty Name="mutiply_qty" ColumnName="mutiply_qty" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="bom_code" ColumnName="bom_code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

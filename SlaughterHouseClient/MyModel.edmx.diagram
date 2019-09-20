@@ -6,8 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="217538d12a614ee0bc02a52f55759ae3" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="SlaughterhouseModel.barcode" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.bom" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.bom_item" Width="1.5" PointX="5.75" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.breeder" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.customer" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.document_generate" Width="1.5" PointX="7.75" PointY="6.875" IsExpanded="true" />
@@ -47,6 +45,10 @@
         <EntityTypeShape EntityType="SlaughterhouseModel.receive_item" Width="1.5" PointX="8.25" PointY="10.5" />
         <AssociationConnector Association="SlaughterhouseModel.fk_receives_02" />
         <AssociationConnector Association="SlaughterhouseModel.fk_receives_01" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.bom" Width="1.5" PointX="5.25" PointY="7" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.bom_item" Width="1.5" PointX="5.25" PointY="34" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_bom_product" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_bomitem_product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

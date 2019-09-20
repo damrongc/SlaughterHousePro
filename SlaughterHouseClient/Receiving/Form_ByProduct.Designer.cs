@@ -60,12 +60,14 @@
             this.label10 = new System.Windows.Forms.Label();
             this.lblMinWeight = new System.Windows.Forms.Label();
             this.lblMaxWeight = new System.Windows.Forms.Label();
-            this.dragControl1 = new DragControl();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.plSimulator = new System.Windows.Forms.GroupBox();
             this.btnSetWgh = new System.Windows.Forms.Button();
             this.txtSimWeight = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.dragControl1 = new DragControl();
             this.panelHeader.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.plSimulator.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -318,10 +320,10 @@
             // 
             // btnStop
             // 
-            this.btnStop.Font = new System.Drawing.Font("Kanit", 40F);
-            this.btnStop.Location = new System.Drawing.Point(767, 347);
+            this.btnStop.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnStop.Location = new System.Drawing.Point(876, 437);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(245, 97);
+            this.btnStop.Size = new System.Drawing.Size(136, 70);
             this.btnStop.TabIndex = 38;
             this.btnStop.Text = "ยกเลิก";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -329,10 +331,10 @@
             // 
             // btnStart
             // 
-            this.btnStart.Font = new System.Drawing.Font("Kanit", 40F);
-            this.btnStart.Location = new System.Drawing.Point(459, 347);
+            this.btnStart.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnStart.Location = new System.Drawing.Point(876, 361);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(245, 97);
+            this.btnStart.Size = new System.Drawing.Size(136, 70);
             this.btnStart.TabIndex = 37;
             this.btnStart.Text = "เริ่มชั่ง";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -355,16 +357,16 @@
             this.lblQueueNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblQueueNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblQueueNo.ForeColor = System.Drawing.Color.Black;
-            this.lblQueueNo.Location = new System.Drawing.Point(263, 282);
+            this.lblQueueNo.Location = new System.Drawing.Point(201, 282);
             this.lblQueueNo.Name = "lblQueueNo";
-            this.lblQueueNo.Size = new System.Drawing.Size(190, 43);
+            this.lblQueueNo.Size = new System.Drawing.Size(100, 43);
             this.lblQueueNo.TabIndex = 47;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label14.Location = new System.Drawing.Point(257, 249);
+            this.label14.Location = new System.Drawing.Point(195, 249);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(53, 33);
             this.label14.TabIndex = 46;
@@ -377,16 +379,16 @@
             this.lblBreeder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblBreeder.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblBreeder.ForeColor = System.Drawing.Color.Black;
-            this.lblBreeder.Location = new System.Drawing.Point(19, 378);
+            this.lblBreeder.Location = new System.Drawing.Point(307, 282);
             this.lblBreeder.Name = "lblBreeder";
-            this.lblBreeder.Size = new System.Drawing.Size(238, 43);
+            this.lblBreeder.Size = new System.Drawing.Size(146, 43);
             this.lblBreeder.TabIndex = 45;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label12.Location = new System.Drawing.Point(13, 347);
+            this.label12.Location = new System.Drawing.Point(301, 249);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(81, 33);
             this.label12.TabIndex = 44;
@@ -401,7 +403,7 @@
             this.lblTruckNo.ForeColor = System.Drawing.Color.Black;
             this.lblTruckNo.Location = new System.Drawing.Point(19, 282);
             this.lblTruckNo.Name = "lblTruckNo";
-            this.lblTruckNo.Size = new System.Drawing.Size(238, 43);
+            this.lblTruckNo.Size = new System.Drawing.Size(176, 43);
             this.lblTruckNo.TabIndex = 43;
             // 
             // label10
@@ -441,22 +443,17 @@
             this.lblMaxWeight.Text = "0.00";
             this.lblMaxWeight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dragControl1
+            // plSimulator
             // 
-            this.dragControl1.SelectControl = this.panelHeader;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnSetWgh);
-            this.groupBox1.Controls.Add(this.txtSimWeight);
-            this.groupBox1.Controls.Add(this.btnZero);
-            this.groupBox1.Location = new System.Drawing.Point(19, 432);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(238, 126);
-            this.groupBox1.TabIndex = 50;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Simulator";
-            this.groupBox1.Visible = false;
+            this.plSimulator.Controls.Add(this.btnSetWgh);
+            this.plSimulator.Controls.Add(this.txtSimWeight);
+            this.plSimulator.Controls.Add(this.btnZero);
+            this.plSimulator.Location = new System.Drawing.Point(155, 150);
+            this.plSimulator.Name = "plSimulator";
+            this.plSimulator.Size = new System.Drawing.Size(238, 126);
+            this.plSimulator.TabIndex = 50;
+            this.plSimulator.TabStop = false;
+            this.plSimulator.Text = "Simulator";
             // 
             // btnSetWgh
             // 
@@ -477,12 +474,38 @@
             this.txtSimWeight.Text = "0";
             this.txtSimWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label2.Location = new System.Drawing.Point(13, 325);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 33);
+            this.label2.TabIndex = 52;
+            this.label2.Text = "สินค้า";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(19, 361);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(851, 211);
+            this.flowLayoutPanel1.TabIndex = 51;
+            // 
+            // dragControl1
+            // 
+            this.dragControl1.SelectControl = this.panelHeader;
+            // 
             // Form_ByProduct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1024, 768);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.plSimulator);
             this.Controls.Add(this.lblMaxWeight);
             this.Controls.Add(this.lblMinWeight);
             this.Controls.Add(this.lblQueueNo);
@@ -519,8 +542,8 @@
             this.Text = "รับหมูเป็น";
             this.Load += new System.EventHandler(this.Form_Load);
             this.panelHeader.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.plSimulator.ResumeLayout(false);
+            this.plSimulator.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -560,9 +583,11 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblMinWeight;
         private System.Windows.Forms.Label lblMaxWeight;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox plSimulator;
         private System.Windows.Forms.Button btnSetWgh;
         private System.Windows.Forms.TextBox txtSimWeight;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
 

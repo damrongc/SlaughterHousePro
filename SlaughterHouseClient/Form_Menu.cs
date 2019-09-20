@@ -30,21 +30,21 @@ namespace SlaughterHouseClient
         }
         private void btnReceiveHead_Click(object sender, EventArgs e)
         {
-            var frm = new Receiving.Form_ByProduct("P005");
+            var frm = new Receiving.Form_ByProduct(4);
             frm.ShowDialog();
         }
 
         private void btnReceiveByProductWhite_Click(object sender, EventArgs e)
         {
 
-            var frm = new Receiving.Form_ByProduct("P004");
+            var frm = new Receiving.Form_ByProduct(3);
             frm.ShowDialog();
         }
 
         private void btnReceiveByProductRed_Click(object sender, EventArgs e)
         {
 
-            var frm = new Receiving.Form_ByProduct("P003");
+            var frm = new Receiving.Form_ByProduct(2);
             frm.ShowDialog();
         }
 

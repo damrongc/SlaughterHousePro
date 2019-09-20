@@ -23,6 +23,8 @@ namespace SlaughterHouseClient
             this.production_order_item = new HashSet<production_order_item>();
             this.stocks = new HashSet<stock>();
             this.receive_item = new HashSet<receive_item>();
+            this.boms = new HashSet<bom>();
+            this.bom_item = new HashSet<bom_item>();
         }
     
         public string product_code { get; set; }
@@ -57,5 +59,9 @@ namespace SlaughterHouseClient
         public virtual unit_of_measurement unit_of_measurement1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<receive_item> receive_item { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bom> boms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bom_item> bom_item { get; set; }
     }
 }

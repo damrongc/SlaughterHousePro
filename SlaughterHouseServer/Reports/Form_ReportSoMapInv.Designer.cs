@@ -1,6 +1,6 @@
-﻿namespace SlaughterHouseServer
+﻿namespace SlaughterHouseServer.Reports
 {
-    partial class Form_Report_Daily_Sales
+    partial class Form_ReportSoMapInv
     {
         /// <summary>
         /// Required designer variable.
@@ -27,8 +27,8 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
-        { 
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Report_Daily_Sales));
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ReportSoMapInv));
             this.groupBoxReportName = new System.Windows.Forms.GroupBox();
             this.BtnShowReport = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,10 +49,10 @@
             this.groupBoxReportName.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxReportName.Location = new System.Drawing.Point(0, 0);
             this.groupBoxReportName.Name = "groupBoxReportName";
-            this.groupBoxReportName.Size = new System.Drawing.Size(1184, 89);
+            this.groupBoxReportName.Size = new System.Drawing.Size(1184, 88);
             this.groupBoxReportName.TabIndex = 0;
             this.groupBoxReportName.TabStop = false;
-            this.groupBoxReportName.Text = "รายวันขาย";
+            this.groupBoxReportName.Text = "รายงานเปรียบเทียบใบสั่งขายกับใบแจ้งหนี้";
             // 
             // BtnShowReport
             // 
@@ -103,10 +103,10 @@
             // 
             this.panel1.Controls.Add(this.rptViewer);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 89);
+            this.panel1.Location = new System.Drawing.Point(0, 88);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1184, 572);
-            this.panel1.TabIndex = 1;
+            this.panel1.Size = new System.Drawing.Size(1184, 573);
+            this.panel1.TabIndex = 3;
             // 
             // rptViewer
             // 
@@ -117,11 +117,11 @@
             this.rptViewer.Location = new System.Drawing.Point(0, 0);
             this.rptViewer.Name = "rptViewer";
             this.rptViewer.ShowLogo = false;
-            this.rptViewer.Size = new System.Drawing.Size(1184, 572);
-            this.rptViewer.TabIndex = 1;
+            this.rptViewer.Size = new System.Drawing.Size(1184, 573);
+            this.rptViewer.TabIndex = 2;
             this.rptViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
-            // Form_Report_Daily_Sales
+            // Form_Report_So_Map_Inv
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1184, 661);
@@ -130,7 +130,7 @@
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimizeBox = false;
-            this.Name = "Form_Report_Daily_Sales";
+            this.Name = "Form_Report_So_Map_Inv";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_Report_Daily_Sales";
             this.groupBoxReportName.ResumeLayout(false);

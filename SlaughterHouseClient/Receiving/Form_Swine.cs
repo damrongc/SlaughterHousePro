@@ -421,7 +421,6 @@ namespace SlaughterHouseClient.Receiving
 
         #region MinWeightProcess
 
-
         private void TmMinWeight_Tick(object sender, EventArgs e)
         {
             if (!BgwMinWeight.IsBusy)
@@ -454,7 +453,6 @@ namespace SlaughterHouseClient.Receiving
                 lblMessage.Text = Constants.WEIGHT_WAITING;
             }
         }
-
 
         #endregion
 

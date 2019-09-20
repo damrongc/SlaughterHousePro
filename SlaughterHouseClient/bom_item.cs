@@ -18,5 +18,7 @@ namespace SlaughterHouseClient
         public string product_code { get; set; }
         public Nullable<int> mutiply_qty { get; set; }
         public Nullable<decimal> mutiply_wgh { get; set; }
+    
+        public virtual product product { get; set; }
     }
 }

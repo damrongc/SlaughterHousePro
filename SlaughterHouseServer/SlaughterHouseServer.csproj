@@ -74,35 +74,35 @@
     <Compile Include="Form_CustomerAddEdit.Designer.cs">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Report_So_Map_Inv.cs">
+    <Compile Include="Reports\Form_ReportSoMapInv.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Report_So_Map_Inv.Designer.cs">
-      <DependentUpon>Form_Report_So_Map_Inv.cs</DependentUpon>
+    <Compile Include="Reports\Form_ReportSoMapInv.Designer.cs">
+      <DependentUpon>Form_ReportSoMapInv.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Report_Stock_Balance.cs">
+    <Compile Include="Reports\Form_ReportStockBalance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Report_Stock_Balance.Designer.cs">
-      <DependentUpon>Form_Report_Stock_Balance.cs</DependentUpon>
+    <Compile Include="Reports\Form_ReportStockBalance.Designer.cs">
+      <DependentUpon>Form_ReportStockBalance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Report_Swine_Receive.cs">
+    <Compile Include="Reports\Form_ReportSwineReceive.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Report_Swine_Receive.Designer.cs">
-      <DependentUpon>Form_Report_Swine_Receive.cs</DependentUpon>
+    <Compile Include="Reports\Form_ReportSwineReceive.Designer.cs">
+      <DependentUpon>Form_ReportSwineReceive.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Report_Stock_Movement.cs">
+    <Compile Include="Reports\Form_ReportStockMovement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Report_Stock_Movement.Designer.cs">
-      <DependentUpon>Form_Report_Stock_Movement.cs</DependentUpon>
+    <Compile Include="Reports\Form_ReportStockMovement.Designer.cs">
+      <DependentUpon>Form_ReportStockMovement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Report_Daily_Sales.cs">
+    <Compile Include="Reports\Form_ReportDailySales.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Report_Daily_Sales.Designer.cs">
-      <DependentUpon>Form_Report_Daily_Sales.cs</DependentUpon>
+    <Compile Include="Reports\Form_ReportDailySales.Designer.cs">
+      <DependentUpon>Form_ReportDailySales.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Report.cs">
       <SubType>Form</SubType>
@@ -263,20 +263,20 @@
     <EmbeddedResource Include="Form_CustomerAddEdit.resx">
       <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Report_So_Map_Inv.resx">
-      <DependentUpon>Form_Report_So_Map_Inv.cs</DependentUpon>
+    <EmbeddedResource Include="Reports\Form_ReportSoMapInv.resx">
+      <DependentUpon>Form_ReportSoMapInv.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Report_Stock_Balance.resx">
-      <DependentUpon>Form_Report_Stock_Balance.cs</DependentUpon>
+    <EmbeddedResource Include="Reports\Form_ReportStockBalance.resx">
+      <DependentUpon>Form_ReportStockBalance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Report_Swine_Receive.resx">
-      <DependentUpon>Form_Report_Swine_Receive.cs</DependentUpon>
+    <EmbeddedResource Include="Reports\Form_ReportSwineReceive.resx">
+      <DependentUpon>Form_ReportSwineReceive.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Report_Stock_Movement.resx">
-      <DependentUpon>Form_Report_Stock_Movement.cs</DependentUpon>
+    <EmbeddedResource Include="Reports\Form_ReportStockMovement.resx">
+      <DependentUpon>Form_ReportStockMovement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Report_Daily_Sales.resx">
-      <DependentUpon>Form_Report_Daily_Sales.cs</DependentUpon>
+    <EmbeddedResource Include="Reports\Form_ReportDailySales.resx">
+      <DependentUpon>Form_ReportDailySales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Report.resx">
       <DependentUpon>Form_Report.cs</DependentUpon>

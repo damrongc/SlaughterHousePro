@@ -7,13 +7,13 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-namespace SlaughterHouseServer
+namespace SlaughterHouseServer.Reports
 {
-    public partial class Form_Report_Swine_Receive : Form
+    public partial class Form_ReportSoMapInv : Form
     {
-        public string ReceiveNo { get; set; }
+        public string invoiceNo { get; set; }
 
-        public Form_Report_Swine_Receive()
+        public Form_ReportSoMapInv()
         {
             InitializeComponent();
             UserSettingsComponent();
@@ -22,30 +22,33 @@ namespace SlaughterHouseServer
         {
             //BtnRefresh.Click += BtnRefresh_Click;
             this.Load += Form_Load;
-            rptViewer.ShowCloseButton = false;
-            rptViewer.ShowCopyButton = false;
-            rptViewer.ShowGroupTreeButton = false;
-            rptViewer.ShowParameterPanelButton = false;
-            rptViewer.ShowTextSearchButton = false;
-            rptViewer.ShowLogo = false;
+            this.Shown += Form_Shown;
 
+            this.BtnShowReport.Click += BtnShowReport_Click;
         }
 
-
-
-        private void Form_Load(object sender, System.EventArgs e)
+        private void BtnShowReport_Click(object sender, EventArgs e)
         {
             LoadReport();
+        }
+
+        private void Form_Shown(object sender, System.EventArgs e)
+        {
+
+        }
+        private void Form_Load(object sender, System.EventArgs e)
+        {
+
         }
 
         private void LoadReport()
         {
             ReportDocument doc = new ReportDocument();
-            DataSet ds = ReportController.GetDataReportSwineReceiveHeader(ReceiveNo);
+            DataSet ds = ReportController.GetDataReportSoMapInv(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
             string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
-            ds.WriteXml(path + @"\xml\swinereceive.xml", XmlWriteMode.WriteSchema);
-            doc.Load(path + @"\swinereceive.rpt");
+            //ds.WriteXml(path + @"\xml\somapinvoice.xml", XmlWriteMode.WriteSchema);
+            doc.Load(path + @"\somapinvoice.rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;

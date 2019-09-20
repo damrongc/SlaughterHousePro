@@ -15,6 +15,7 @@ namespace SlaughterHouseClient.Receiving
     public partial class Form_ByProduct : Form
     {
         product product;
+        bom bom;
 
 
         private const int LOCATION_CODE = 3;
@@ -25,14 +26,24 @@ namespace SlaughterHouseClient.Receiving
         SerialPortManager _spManager;
 
 
-        public Form_ByProduct(string productCode)
+        public Form_ByProduct(int bomCode)
         {
             InitializeComponent();
             UserInitialization();
-            LoadProduct(productCode);
-            lblCaption.Text = string.Format("รับ{0}", product.product_name);
-            lblMinWeight.Text = product.min_weight.ToString();
-            lblMaxWeight.Text = product.max_weight.ToString();
+
+
+            using (var db = new SlaughterhouseEntities())
+            {
+                bom = db.boms.Where(p => p.bom_code == bomCode).SingleOrDefault();
+                lblCaption.Text = bom.product.product_name;
+            }
+            plSimulator.Visible = true;
+
+            //LoadProduct(productCode);
+            //LoadBomItem(bomCode);
+            //lblCaption.Text = string.Format("รับ{0}", product.product_name);
+            //lblMinWeight.Text = product.min_weight.ToString();
+            //lblMaxWeight.Text = product.max_weight.ToString();
         }
         private void Form_Load(object sender, EventArgs e)
         {
@@ -228,16 +239,57 @@ namespace SlaughterHouseClient.Receiving
             using (var db = new SlaughterhouseEntities())
             {
                 var receive = db.receives.Where(p => p.receive_no == receiveNo).SingleOrDefault();
-                int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
-                decimal stock_wgh = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_wgh);
+                //int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
+                //decimal stock_wgh = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_wgh);
 
-                int remain_qty = receive.farm_qty - stock_qty;
+                //int remain_qty = receive.farm_qty - stock_qty;
                 lblReceiveNo.Text = receive.receive_no;
                 lblFarm.Text = receive.farm.farm_name;
                 lblBreeder.Text = receive.breeder.breeder_name;
                 lblTruckNo.Text = receive.truck_no;
                 lblQueueNo.Text = receive.queue_no.ToString();
                 lblSwineQty.Text = receive.factory_qty.ToComma();
+                //lblStockQty.Text = stock_qty.ToComma();
+                //lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
+                //lblRemainQty.Text = remain_qty.ToComma();
+
+                //if (remain_qty == 0)
+                //{
+                //    btnStart.Enabled = false;
+                //}
+                //else
+                //{
+                //    btnStart.Enabled = true;
+
+                //}
+            }
+
+
+            lblMessage.Text = Constants.START_WAITING;
+        }
+
+        private void LoadProduct(string productCode)
+        {
+            using (var db = new SlaughterhouseEntities())
+            {
+                product = db.products.Where(p => p.product_code == productCode).SingleOrDefault();
+
+                lblMinWeight.Text = product.min_weight.ToString();
+                lblMaxWeight.Text = product.max_weight.ToString();
+
+
+                var receiveItems = db.receive_item.Where(p => p.product_code.Equals(product.product_code)
+                && p.receive_no.Equals(lblReceiveNo.Text)).ToList();
+
+                int stock_qty = 0;
+                decimal stock_wgh = 0;
+                foreach (var item in receiveItems)
+                {
+                    stock_qty += item.receive_qty;
+                    stock_wgh += item.receive_wgh;
+                }
+
+                int remain_qty = lblSwineQty.Text.ToInt16() - stock_qty;
                 lblStockQty.Text = stock_qty.ToComma();
                 lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
                 lblRemainQty.Text = remain_qty.ToComma();
@@ -251,20 +303,70 @@ namespace SlaughterHouseClient.Receiving
                     btnStart.Enabled = true;
 
                 }
+
+
             }
-
-
-            lblMessage.Text = Constants.START_WAITING;
         }
 
-        private void LoadProduct(string productCode)
+        private void LoadBomItem(int bomCode)
         {
             using (var db = new SlaughterhouseEntities())
             {
-                product = db.products.Where(p => p.product_code == productCode).SingleOrDefault();
-                lblMinWeight.Text = product.min_weight.ToString();
-                lblMaxWeight.Text = product.max_weight.ToString();
+                //var bom = db.boms.Where(p => p.bom_code == bomCode).SingleOrDefault();
+                //lblCaption.Text = bom.product.product_name;
+
+
+                var bomItems = db.bom_item.Where(p => p.bom_code == bomCode).ToList();
+
+                //lblMinWeight.Text = product.min_weight.ToString();
+                //lblMaxWeight.Text = product.max_weight.ToString();
+                flowLayoutPanel1.Controls.Clear();
+                foreach (var item in bomItems)
+                {
+                    var btn = new Button
+                    {
+                        Text = item.product.product_name,
+                        Width = 150,
+                        Height = 80,
+                        FlatStyle = FlatStyle.Flat,
+                        Font = new Font("Kanit", 16),
+                        BackColor = Color.WhiteSmoke,
+                        Tag = item.product_code
+                    };
+
+                    btn.Click += Btn_Click;
+                    flowLayoutPanel1.Controls.Add(btn);
+                }
+
             }
+        }
+
+        private void Btn_Click(object sender, EventArgs e)
+        {
+
+
+            foreach (Control ctrl in flowLayoutPanel1.Controls)
+            {
+                var b = (Button)ctrl;
+                b.BackColor = Color.WhiteSmoke;
+                b.ForeColor = Color.Black;
+            }
+            var btn = (Button)sender;
+            btn.BackColor = ColorTranslator.FromHtml("#2D9CDB");
+            btn.ForeColor = Color.White;
+
+            LoadProduct(btn.Tag.ToString());
+
+            //using (var db = new SlaughterhouseEntities())
+            //{
+            //    product = db.products.Where(p => p.product_code == btn.Tag.ToString()).SingleOrDefault();
+            //    lblMinWeight.Text = product.min_weight.ToString();
+            //    lblMaxWeight.Text = product.max_weight.ToString();
+
+            //}
+
+            //productCode = btn.Tag.ToString();
+            //lblMessage.Text = WEIGHT_WAITING;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -279,7 +381,15 @@ namespace SlaughterHouseClient.Receiving
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 LoadData(frm.receiveNo);
+                LoadBomItem(bom.bom_code);
 
+                int stock_qty = 0;
+                decimal stock_wgh = 0;
+
+                int remain_qty = lblSwineQty.Text.ToInt16() - stock_qty;
+                lblStockQty.Text = stock_qty.ToComma();
+                lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
+                lblRemainQty.Text = remain_qty.ToComma();
             }
         }
 

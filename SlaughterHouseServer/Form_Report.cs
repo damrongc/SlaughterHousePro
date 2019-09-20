@@ -1,8 +1,7 @@
 ﻿using SlaughterHouseLib;
-using SlaughterHouseLib.Models;
+using SlaughterHouseServer.Reports;
 using System;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
@@ -25,7 +24,7 @@ namespace SlaughterHouseServer
 
         private void BtnStockBalance_Click(object sender, EventArgs e)
         {
-            var frm = new Form_Report_Stock_Balance
+            var frm = new Form_ReportStockBalance
             {
 
             };
@@ -34,7 +33,7 @@ namespace SlaughterHouseServer
 
         private void BtnReportSoWithInv_Click(object sender, EventArgs e)
         {
-            var frm = new Form_Report_So_Map_Inv 
+            var frm = new Form_ReportSoMapInv
             {
 
             };
@@ -43,7 +42,7 @@ namespace SlaughterHouseServer
 
         private void BtnReportStockMovement_Click(object sender, EventArgs e)
         {
-            var frm = new Form_Report_Stock_Movement
+            var frm = new Form_ReportStockMovement
             {
 
             };
@@ -52,8 +51,8 @@ namespace SlaughterHouseServer
 
         private void BtnReportDailySales_Click(object sender, EventArgs e)
         {
-            var frm = new Form_Report_Daily_Sales 
-            { 
+            var frm = new Form_ReportDailySales
+            {
 
             };
             frm.ShowDialog();
@@ -65,5 +64,5 @@ namespace SlaughterHouseServer
             string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
             ds.WriteXml(path + @"\xml\receivebarcode.xml", XmlWriteMode.WriteSchema);
         }
-    } 
+    }
 }

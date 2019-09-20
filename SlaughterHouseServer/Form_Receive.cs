@@ -1,5 +1,6 @@
 ﻿using SlaughterHouseLib;
 using SlaughterHouseLib.Models;
+using SlaughterHouseServer.Reports;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -89,8 +90,10 @@ namespace SlaughterHouseServer
                             }
                             break;
                         case "Print":
-                            var frmReport = new Form_Report_Swine_Receive();
-                            frmReport.ReceiveNo = receiveNo;
+                            var frmReport = new Form_ReportSwineReceive
+                            {
+                                ReceiveNo = receiveNo
+                            };
                             frmReport.ShowDialog();
 
                             break;

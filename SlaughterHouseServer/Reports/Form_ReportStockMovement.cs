@@ -1,16 +1,19 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using SlaughterHouseLib;
+using SlaughterHouseLib.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-namespace SlaughterHouseServer
+namespace SlaughterHouseServer.Reports
 {
-    public partial class Form_Report_Daily_Sales : Form
+    public partial class Form_ReportStockMovement : Form
     {
         public string invoiceNo { get; set; }
 
-        public Form_Report_Daily_Sales()
+        public Form_ReportStockMovement()
         {
             InitializeComponent();
             UserSettingsComponent();
@@ -41,12 +44,11 @@ namespace SlaughterHouseServer
         private void LoadReport()
         {
             ReportDocument doc = new ReportDocument();
-            DataSet ds = ReportController.GetDataReportDailySales(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
+            DataSet ds = ReportController.GetDataReportStockMovement(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
             string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
-            //ds.DataSetName = "NewDataSet";
-            //ds.Tables[0].TableName = "Table";
-            //ds.WriteXml(path + @"\xml\dailysales.xml", XmlWriteMode.WriteSchema);
-            doc.Load(path + @"\dailysales.rpt");
+
+            ds.WriteXml(path + @"\xml\stockmovement.xml", XmlWriteMode.WriteSchema);
+            doc.Load(path + @"\stockmovement.rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;
