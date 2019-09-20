@@ -263,7 +263,8 @@ namespace SlaughterHouseLib
                                             dt.Rows[row]["LOT_NO"] = dtLocation.Rows[j]["LOT_NO"].ToString();
                                             dt.Rows[row]["LOCATION_CODE"] = dtLocation.Rows[j]["LOCATION_CODE"].ToString();
                                             dt.Rows[row]["LOCATION_NAME"] = dtLocation.Rows[j]["LOCATION_NAME"].ToString();
-                                            dt.Rows[row]["QTY_WGH_LOCATION"] = Convert.ToDecimal(dt.Rows[row]["QTY_WGH"]);
+                                            dt.Rows[row]["QTY_WGH_LOCATION"] = qtyWghSo;
+                                            break;
                                         }
                                         else if (Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]) > 0)
                                         {
