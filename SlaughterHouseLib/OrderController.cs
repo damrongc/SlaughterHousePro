@@ -426,7 +426,9 @@ namespace SlaughterHouseLib
 							END qty_wgh,
 							p.issue_unit_method,
 							u.unit_code,
-							u.unit_name 
+							u.unit_name,
+							0 as unload_qty,
+							0 as unload_wgh 
 						FROM
 							orders_item a,
 							product p,

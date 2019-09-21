@@ -30,6 +30,17 @@ namespace SlaughterHouseServer
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
 
+
+            gvSo.DataBindingComplete += GvSo_DataBindingComplete;
+            gvSo.ReadOnly = true;
+            gvSo.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            gvSo.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
+            gvSo.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
+            gvSo.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            gvSo.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            gvSo.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
+            gvSo.EnableHeadersVisualStyles = false;
+
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
@@ -52,23 +63,39 @@ namespace SlaughterHouseServer
                 BtnSave.Focus();
             }
         }
-       
+
         #region Event Focus, KeyDown 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            gv.Columns[GlobalsColumn.SEQ ].HeaderText = "ลำดับ";
+            //gv.Columns[GlobalsColumn.SEQ ].HeaderText = "ลำดับ";
             gv.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
-            gv.Columns[GlobalsColumn.PRODUCT_NAME ].HeaderText = "ชื่อสินค้า";
+            gv.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
             gv.Columns[GlobalsColumn.QTY_WGH].HeaderText = "จำนวน";
+            gv.Columns[GlobalsColumn.QTY_WGH_LOCATION].HeaderText = "จำนวน";
             //gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
             //gv.Columns[GlobalsColumn.UNIT_CODE ].HeaderText = "รหัสหน่วยสินค้า";
-            gv.Columns[GlobalsColumn.UNIT_NAME ].HeaderText = "หน่วยสินค้า";
-            gv.Columns[GlobalsColumn.LOCATION_CODE  ].HeaderText = "รหัสคลังสินค้า";
-            gv.Columns[GlobalsColumn.LOCATION_NAME ].HeaderText = "คลังสินค้า";
+            gv.Columns[GlobalsColumn.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+            gv.Columns[GlobalsColumn.LOCATION_CODE].HeaderText = "รหัสคลังสินค้า";
+            gv.Columns[GlobalsColumn.LOCATION_NAME].HeaderText = "คลังสินค้า";
 
-            gv.Columns[GlobalsColumn.SEQ].Visible = false;
+            gv.Columns[GlobalsColumn.PRODUCT_CODE].Visible = false;
+            gv.Columns[GlobalsColumn.QTY_WGH].Visible = false;
             gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
             gv.Columns[GlobalsColumn.LOCATION_CODE].Visible = false;
+        }
+        private void GvSo_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            gvSo.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gvSo.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            gvSo.Columns[GlobalsColumn.QTY_WGH].HeaderText = "จำนวน";
+            gvSo.Columns[GlobalsColumn.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+
+            gvSo.Columns[GlobalsColumn.SEQ].Visible = false;
+            gvSo.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
+            gvSo.Columns[GlobalsColumn.PRODUCT_CODE].Visible = false;
+            gvSo.Columns[GlobalsColumn.UNLOAD_QTY].Visible = false;
+            gvSo.Columns[GlobalsColumn.UNLOAD_WGH].Visible = false;
+            gvSo.Columns[GlobalsColumn.UNIT_CODE].Visible = false;
         }
         #endregion
 
@@ -77,7 +104,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-                //SaveOrder();
+                SaveProductSlip();
                 MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -97,8 +124,8 @@ namespace SlaughterHouseServer
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 orderNo = "";
-                txtProductSlip.Text = "";
-                txtProductSlip.Focus();
+                txtProductSlipNo.Text = "";
+                txtProductSlipNo.Focus();
                 cboCustomer.SelectedIndex = 0;
                 chkActive.Checked = true;
                 LoadDetail();
@@ -123,7 +150,7 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-       
+
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -175,11 +202,12 @@ namespace SlaughterHouseServer
 
         private void LoadData()
         {
-            txtProductSlip.Enabled = false;
+            txtProductSlipNo.Enabled = false;
             Order order = OrderController.GetOrder(this.orderNo);
             if (order != null)
             {
-                txtProductSlip.Text = order.OrderNo;
+                txtProductSlipNo.Text = "";
+                txtOrderNo.Text = order.OrderNo;
                 dtpProductSlipDate.Value = order.RequestDate;
                 cboCustomer.SelectedValue = order.Customer.CustomerCode;
                 chkActive.Checked = order.Active;
@@ -195,8 +223,12 @@ namespace SlaughterHouseServer
         {
             dtProductSlipItem = new DataTable("PRODUCT_SLIP_ITEM");
             dtProductSlipItem = ProductSlipItemController.GetProductSlipItem(orderNo);
-
             gv.DataSource = dtProductSlipItem;
+
+
+            DataTable dtOrdersIteemItem = new DataTable("ORDERS_ITEM");
+            dtOrdersIteemItem = OrderItemController.GetOrderItems(orderNo, "N");
+            gvSo.DataSource = dtOrdersIteemItem;
 
         }
         private void LoadCustomer()
@@ -206,88 +238,61 @@ namespace SlaughterHouseServer
             cboCustomer.ValueMember = "CustomerCode";
             cboCustomer.DataSource = coll;
         }
-        //private void SaveOrder()
-        //{
-        //    try
-        //    {
-        //        var orderItems = new List<OrderItem>();
-        //        int seq = 0;
-        //        foreach (DataRow row in dtOrderItem.Rows)
-        //        {
-        //            DataTable dtBom = BomController.GetBom(row[GlobalsColumn.PRODUCT_CODE].ToString());
+        private void SaveProductSlip()
+        {
+            try
+            {
+                var productSlipItems = new List<ProductSlipItem>();
+                int seq = 0;
+                foreach (DataRow row in dtProductSlipItem.Rows)
+                {
+                    seq++;
+                    var xx = new ProductSlipItem();
 
-        //            if (dtBom.Rows.Count > 0)
-        //            {
-        //                foreach (DataRow dtRow in dtBom.Rows)
-        //                {
-        //                    seq++;
-        //                    orderItems.Add(new OrderItem
-        //                    {
-        //                        OrderNo = txtProductSlip.Text,
-        //                        Seq = seq,
-        //                        Product = new Product
-        //                        {
-        //                            ProductCode = dtRow[GlobalsColumn.PRODUCT_CODE].ToString(),
-        //                            ProductName = "",
-        //                        },
-        //                        BomCode = (int)dtRow[GlobalsColumn.BOM_CODE ],
-        //                        OrderSetQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) : 0,
-        //                        OrderSetWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) : 0,
-        //                        OrderQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) * Convert.ToInt16(dtRow[GlobalsColumn.MUTIPLY_QTY]) : 0,
-        //                        OrderWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) * Convert.ToDecimal(dtRow[GlobalsColumn.MUTIPLY_WGH]) : 0,
-        //                    });
-        //                }
-        //            }
-        //            else
-        //            {
-        //                seq++;
-        //                orderItems.Add(new OrderItem
-        //                {
-        //                    OrderNo = txtProductSlip.Text,
-        //                    Seq = seq,
-        //                    Product = new Product
-        //                    {
-        //                        ProductCode = row[GlobalsColumn.PRODUCT_CODE].ToString(),
-        //                        ProductName = row[GlobalsColumn.PRODUCT_NAME].ToString(),
-        //                    },
-        //                    BomCode = 0,
-        //                    OrderSetQty = 0,
-        //                    OrderSetWgh = 0,
-        //                    OrderQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) : 0,
-        //                    OrderWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) : 0,
-        //                });
-        //            }
-        //        }
 
-        //        var order = new Order
-        //        {
-        //            OrderNo = txtProductSlip.Text,
-        //            RequestDate = dtpProductSlipDate.Value,
-        //            Customer = new Customer
-        //            {
-        //                CustomerCode = cboCustomer.SelectedValue.ToString()
-        //            },
-        //            OrderFlag = 0,
-        //            Active = chkActive.Checked,
-        //            CreateBy = "system",
-        //            ModifiedBy = "system",
-        //            OrderItems = orderItems
-        //        };
+                    xx.ProductSlipNo = txtProductSlipNo.Text;
+                    xx.Seq = seq;
+                    xx.Product = new Product
+                    {
+                        ProductCode = row[GlobalsColumn.PRODUCT_CODE].ToString(),
+                        ProductName = row[GlobalsColumn.PRODUCT_NAME].ToString(),
+                    }; 
+                    xx.Location = new Location
+                    {
+                        LocationCode = int.Parse(row[GlobalsColumn.LOCATION_CODE].ToString()),
+                        LocationName =   row[GlobalsColumn.LOCATION_NAME].ToString(),
+                    };
+                    xx.LotNo = row[GlobalsColumn.LOT_NO].ToString();
+                    xx.Qty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH_LOCATION]) : 0;
+                    xx.Wgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH_LOCATION]) : 0;
+                    productSlipItems.Add(xx);
+                }
+                var productSlip = new ProductSlip
+                {
+                    ProductSlipNo = txtProductSlipNo.Text,
+                    ProductSlipDate = dtpProductSlipDate.Value,
+                    RefDocumentNo = txtOrderNo.Text,
+                    ProductSlipFlag = 0,
+                    Active = chkActive.Checked,
+                    CreateBy = "system",
+                    ModifiedBy = "system",
+                    ProductSlipItem = productSlipItems
+                };
 
-        //        if (string.IsNullOrEmpty(txtProductSlip.Text))
-        //        {
-        //            OrderController.Insert(order);
-        //        }
-        //        else
-        //        {
-        //            OrderController.Update(order);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+                if (string.IsNullOrEmpty(txtProductSlipNo.Text))
+                {
+                    ProductSlipController.Insert(productSlip);
+                }
+                else
+                {
+                    ProductSlipController.Update(productSlip);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         //private void CancelProductSlip()
         //{
         //    try
@@ -313,6 +318,6 @@ namespace SlaughterHouseServer
         //    }
         //}
 
-       
+
     }
 }
