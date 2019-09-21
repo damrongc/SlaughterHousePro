@@ -1,13 +1,23 @@
 <?xml version="1.0" standalone="yes"?>
 <NewDataSet>
   <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="Barcode" msdata:UseCurrentLocale="true">
       <xs:complexType>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element name="dtBarcode">
+          <xs:element name="Barcode">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="BarcodeId" type="xs:string" minOccurs="0" />
+                <xs:element name="barcode_no" type="xs:string" minOccurs="0" />
+                <xs:element name="barcode_no_text" type="xs:string" minOccurs="0" />
+                <xs:element name="product_code" type="xs:string" minOccurs="0" />
+                <xs:element name="product_name" type="xs:string" minOccurs="0" />
+                <xs:element name="production_date" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="expired_date" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="lot_no" type="xs:string" minOccurs="0" />
+                <xs:element name="qty" type="xs:int" minOccurs="0" />
+                <xs:element name="qty_unit" type="xs:string" minOccurs="0" />
+                <xs:element name="wgh" type="xs:double" minOccurs="0" />
+                <xs:element name="wgh_unit" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -15,7 +25,17 @@
       </xs:complexType>
     </xs:element>
   </xs:schema>
-  <dtBarcode>
-    <BarcodeId>287d50e9-2470-4df7-9a18-dabe23ac36e1</BarcodeId>
-  </dtBarcode>
+  <Barcode>
+    <barcode_no>*1000000000107*</barcode_no>
+    <barcode_no_text>1000000000107</barcode_no_text>
+    <product_code>P0021</product_code>
+    <product_name>สะโพก- Raw</product_name>
+    <production_date>2019-09-21T00:00:00+07:00</production_date>
+    <expired_date>2019-11-20T00:00:00+07:00</expired_date>
+    <lot_no>11924910609</lot_no>
+    <qty>1</qty>
+    <qty_unit>ซีก</qty_unit>
+    <wgh>11.88</wgh>
+    <wgh_unit>กิโลกรัม</wgh_unit>
+  </Barcode>
 </NewDataSet>

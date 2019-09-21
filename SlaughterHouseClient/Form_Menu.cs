@@ -30,21 +30,21 @@ namespace SlaughterHouseClient
         }
         private void btnReceiveHead_Click(object sender, EventArgs e)
         {
-            var frm = new Receiving.Form_ByProduct(4);
+            var frm = new Receiving.Form_ByProduct("รับหัว", 4);
             frm.ShowDialog();
         }
 
         private void btnReceiveByProductWhite_Click(object sender, EventArgs e)
         {
 
-            var frm = new Receiving.Form_ByProduct(3);
+            var frm = new Receiving.Form_ByProduct("รับเครื่องในขาว", 3);
             frm.ShowDialog();
         }
 
         private void btnReceiveByProductRed_Click(object sender, EventArgs e)
         {
 
-            var frm = new Receiving.Form_ByProduct(2);
+            var frm = new Receiving.Form_ByProduct("รับเครื่องในแดง", 2);
             frm.ShowDialog();
         }
 
@@ -61,7 +61,8 @@ namespace SlaughterHouseClient
 
         private void btnReceivePart_Click(object sender, EventArgs e)
         {
-
+            var frm = new Receiving.Form_ByProduct("รับผลได้ชิ้นส่วน", 5);
+            frm.ShowDialog();
         }
 
         private void btnIssueHead_Click(object sender, EventArgs e)

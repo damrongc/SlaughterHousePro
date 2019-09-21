@@ -792,11 +792,8 @@ namespace SlaughterHouseLib
 
         public static bool CloseFlagSwineReceive(string receiveNo, string modifiedBy)
         {
-
-
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();

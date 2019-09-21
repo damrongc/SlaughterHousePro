@@ -21,10 +21,10 @@ namespace SlaughterHouseClient
             this.invoice_item = new HashSet<invoice_item>();
             this.orders_item = new HashSet<orders_item>();
             this.production_order_item = new HashSet<production_order_item>();
-            this.stocks = new HashSet<stock>();
             this.receive_item = new HashSet<receive_item>();
             this.boms = new HashSet<bom>();
             this.bom_item = new HashSet<bom_item>();
+            this.stocks = new HashSet<stock>();
         }
     
         public string product_code { get; set; }
@@ -53,8 +53,6 @@ namespace SlaughterHouseClient
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<production_order_item> production_order_item { get; set; }
         public virtual product_group product_group { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<stock> stocks { get; set; }
         public virtual unit_of_measurement unit_of_measurement { get; set; }
         public virtual unit_of_measurement unit_of_measurement1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -63,5 +61,7 @@ namespace SlaughterHouseClient
         public virtual ICollection<bom> boms { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bom_item> bom_item { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<stock> stocks { get; set; }
     }
 }

@@ -1,9 +1,13 @@
 ﻿
 using SerialPortListener.Serial;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +22,7 @@ namespace SlaughterHouseClient.Receiving
         bool lockWeight = false;
         bool minWeightReset = false;
         int minWeightTime = 0;
+        string IO_Address = "01";
 
         //const string CHOOSE_QUEUE = "กรุณาเลือกคิว";
         //const string START_WAITING = "กรุณาเริ่มชั่ง";
@@ -114,6 +119,7 @@ namespace SlaughterHouseClient.Receiving
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+
             this.Close();
         }
 
@@ -208,6 +214,8 @@ namespace SlaughterHouseClient.Receiving
                 {
                     btnStart.Enabled = true;
                 }
+
+
             }
 
             lblMessage.Text = Constants.START_WAITING;
@@ -333,7 +341,7 @@ namespace SlaughterHouseClient.Receiving
 
                             receive.factory_qty += item.receive_qty;
                             receive.factory_wgh += item.receive_wgh;
-                            db.Entry(receive).State = EntityState.Modified;
+                            db.Entry(receive).State = System.Data.Entity.EntityState.Modified;
 
                             db.receive_item.Add(item);
 
@@ -370,7 +378,7 @@ namespace SlaughterHouseClient.Receiving
 
                                 //update document_generate
                                 documentGenerate.running += 1;
-                                db.Entry(documentGenerate).State = EntityState.Modified;
+                                db.Entry(documentGenerate).State = System.Data.Entity.EntityState.Modified;
 
 
                             }
@@ -378,7 +386,7 @@ namespace SlaughterHouseClient.Receiving
                             {
                                 //update stock_item_running
                                 stockItemRunning.stock_item += 1;
-                                db.Entry(stockItemRunning).State = EntityState.Modified;
+                                db.Entry(stockItemRunning).State = System.Data.Entity.EntityState.Modified;
                             }
 
 
@@ -497,8 +505,108 @@ namespace SlaughterHouseClient.Receiving
 
         private void btnZero_Click(object sender, EventArgs e)
         {
-            lblWeight.Text = "0";
+            //lblWeight.Text = "0";
+            //serialPort1.Open();
+            //serialPort1.WriteLine("");
+
+            //using (var db = new SlaughterhouseEntities())
+            //{
+            //    var barcode = db.barcodes.Where(p => p.barcode_no == 1000000000101).SingleOrDefault();
+
+            //    DataTable dt = new DataTable("Barcode");
+            //    dt.Columns.Add("barcode_no", typeof(string));
+            //    dt.Columns.Add("barcode_no_text", typeof(string));
+            //    dt.Columns.Add("product_code", typeof(string));
+            //    dt.Columns.Add("product_name", typeof(string));
+            //    dt.Columns.Add("production_date", typeof(DateTime));
+            //    dt.Columns.Add("expired_date", typeof(DateTime));
+            //    dt.Columns.Add("lot_no", typeof(string));
+            //    dt.Columns.Add("qty", typeof(int));
+            //    dt.Columns.Add("qty_unit", typeof(string));
+            //    dt.Columns.Add("wgh", typeof(double));
+            //    dt.Columns.Add("wgh_unit", typeof(string));
+
+            //    DataRow dr = dt.NewRow();
+            //    dr["barcode_no"] = string.Format("*{0}*", barcode.barcode_no);
+            //    dr["barcode_no_text"] = barcode.barcode_no.ToString();
+            //    dr["product_code"] = barcode.product_code;
+            //    dr["product_name"] = barcode.product.product_name;
+            //    dr["production_date"] = barcode.production_date;
+            //    dr["expired_date"] = barcode.production_date.AddDays(barcode.product.shelflife.ToString().ToDouble());
+            //    dr["lot_no"] = barcode.lot_no;
+            //    dr["qty"] = barcode.qty;
+            //    dr["qty_unit"] = barcode.product.unit_of_measurement.unit_name;
+            //    dr["wgh"] = barcode.wgh;
+            //    dr["wgh_unit"] = barcode.product.unit_of_measurement1.unit_name;
+            //    dt.Rows.Add(dr);
+
+            //    string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+            //    dt.WriteXml(path + @"\xml\barcode.xml", XmlWriteMode.WriteSchema);
+            //}
+
+            try
+            {
+
+                serialPort1.PortName = "COM4";
+                serialPort1.Open();
+                serialPort1.Write("#010A00");
+                //MSCommIO.CommPort = 4;
+                //MSCommIO.Settings = "9600,N,8,1";
+                //MSCommIO.InputLen = 1;
+                //MSCommIO.RThreshold = 1;
+                //if (!MSCommIO.PortOpen)
+                //{
+                //    MSCommIO.PortOpen = true;
+
+                //}
+                //if (MSCommIO.PortOpen)
+                //{
+                //    this.SendToIO("#" + IO_Address + "0A00");
+                //    Thread.Sleep(50);
+                //}
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
+        //private void SendToIO(string xCmd)
+        //{
+        //    try
+        //    {
+        //        if (MSCommIO.PortOpen)
+        //        {
+        //            MSCommIO.Output = xCmd + "\r";
+
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+
+        //    }
+        //}
+
+        //private void Button1_Click(object sender, EventArgs e)
+        //{
+
+        //    serialPort1.Write("#010AFF");
+        //    //this.SendToIO("#" + IO_Address + "0AFF");
+        //    //Thread.Sleep(100);
+        //    //this.SendToIO("#" + IO_Address + "0AFF");
+        //    //string text = "#";
+        //    //string text2 = "1";
+        //    //string text3 = "";
+        //    //text3 = text + IO_Address + text2 + StringType.FromInteger(xOutPort) + xValue.ToString("00");
+        //    //if (this.IOComport > 0 & this.MSCommIO.PortOpen)
+        //    //{
+        //    //    this.MSCommIO.Output = text3 + "\r";
+        //    //    this.lblSent.Text = text3;
+        //    //}
+        //}
     }
 }

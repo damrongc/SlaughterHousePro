@@ -327,7 +327,7 @@
           <Property Name="ref_document_no" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="lot_no" Type="varchar" MaxLength="13" Nullable="false" />
           <Property Name="location_code" Type="int" Nullable="false" />
-          <Property Name="barcode_no" Type="int" Nullable="false" />
+          <Property Name="barcode_no" Type="bigint" Nullable="false" />
           <Property Name="transaction_type" Type="int" Nullable="false" />
           <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
@@ -846,7 +846,7 @@
           <Property Name="create_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="modified_at" Type="DateTime" />
           <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="stocks" Relationship="Self.fk_stock_location" FromRole="location" ToRole="stock" />
+          <NavigationProperty Name="stocks" Relationship="SlaughterhouseModel.fk_stock_location" FromRole="location" ToRole="stock" />
         </EntityType>
         <EntityType Name="order">
           <Key>
@@ -924,12 +924,12 @@
           <NavigationProperty Name="orders_item" Relationship="Self.fk_order_product" FromRole="product" ToRole="orders_item" />
           <NavigationProperty Name="production_order_item" Relationship="Self.fk_porderitem_product" FromRole="product" ToRole="production_order_item" />
           <NavigationProperty Name="product_group" Relationship="Self.fk_product_group" FromRole="product" ToRole="product_group" />
-          <NavigationProperty Name="stocks" Relationship="Self.fk_stock_product" FromRole="product" ToRole="stock" />
           <NavigationProperty Name="unit_of_measurement" Relationship="Self.fk_unit_qty" FromRole="product" ToRole="unit_of_measurement" />
           <NavigationProperty Name="unit_of_measurement1" Relationship="Self.fk_unit_wgh" FromRole="product" ToRole="unit_of_measurement" />
           <NavigationProperty Name="receive_item" Relationship="SlaughterhouseModel.fk_receives_02" FromRole="product" ToRole="receive_item" />
           <NavigationProperty Name="boms" Relationship="SlaughterhouseModel.fk_bom_product" FromRole="product" ToRole="bom" />
           <NavigationProperty Name="bom_item" Relationship="SlaughterhouseModel.fk_bomitem_product" FromRole="product" ToRole="bom_item" />
+          <NavigationProperty Name="stocks" Relationship="SlaughterhouseModel.fk_stock_product" FromRole="product" ToRole="stock" />
         </EntityType>
         <EntityType Name="product_group">
           <Key>
@@ -1017,30 +1017,6 @@
           <NavigationProperty Name="breeder" Relationship="Self.fk_breeder_01" FromRole="receives" ToRole="breeder" />
           <NavigationProperty Name="farm" Relationship="Self.fk_farm_01" FromRole="receives" ToRole="farm" />
           <NavigationProperty Name="receive_item" Relationship="SlaughterhouseModel.fk_receives_01" FromRole="receive" ToRole="receive_item" />
-        </EntityType>
-        <EntityType Name="stock">
-          <Key>
-            <PropertyRef Name="stock_date" />
-            <PropertyRef Name="stock_no" />
-            <PropertyRef Name="stock_item" />
-            <PropertyRef Name="product_code" />
-          </Key>
-          <Property Name="stock_date" Type="DateTime" Nullable="false" />
-          <Property Name="stock_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="stock_item" Type="Int32" Nullable="false" />
-          <Property Name="product_code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="stock_qty" Type="Int32" Nullable="false" />
-          <Property Name="stock_wgh" Type="Decimal" Nullable="false" />
-          <Property Name="ref_document_type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ref_document_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lot_no" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="location_code" Type="Int32" Nullable="false" />
-          <Property Name="barcode_no" Type="Int32" Nullable="false" />
-          <Property Name="transaction_type" Type="Int32" Nullable="false" />
-          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="create_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="location" Relationship="Self.fk_stock_location" FromRole="stock" ToRole="location" />
-          <NavigationProperty Name="product" Relationship="Self.fk_stock_product" FromRole="stock" ToRole="product" />
         </EntityType>
         <EntityType Name="stock_item_running">
           <Key>
@@ -1172,18 +1148,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_stock_location">
-          <End Role="location" Type="Self.location" Multiplicity="1" />
-          <End Role="stock" Type="Self.stock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="location">
-              <PropertyRef Name="location_code" />
-            </Principal>
-            <Dependent Role="stock">
-              <PropertyRef Name="location_code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_order_orderitem">
           <End Role="orders" Type="Self.order" Multiplicity="1" />
           <End Role="orders_item" Type="Self.orders_item" Multiplicity="*" />
@@ -1229,18 +1193,6 @@
             </Principal>
             <Dependent Role="product">
               <PropertyRef Name="product_group_code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_stock_product">
-          <End Role="product" Type="Self.product" Multiplicity="1" />
-          <End Role="stock" Type="Self.stock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="product">
-              <PropertyRef Name="product_code" />
-            </Principal>
-            <Dependent Role="stock">
-              <PropertyRef Name="product_code" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1298,7 +1250,6 @@
           <EntitySet Name="production_order" EntityType="Self.production_order" />
           <EntitySet Name="production_order_item" EntityType="Self.production_order_item" />
           <EntitySet Name="receives" EntityType="Self.receive" />
-          <EntitySet Name="stocks" EntityType="Self.stock" />
           <EntitySet Name="stock_item_running" EntityType="Self.stock_item_running" />
           <EntitySet Name="transports" EntityType="Self.transport" />
           <EntitySet Name="transport_item" EntityType="Self.transport_item" />
@@ -1327,10 +1278,6 @@
             <End Role="product" EntitySet="products" />
             <End Role="invoice_item" EntitySet="invoice_item" />
           </AssociationSet>
-          <AssociationSet Name="fk_stock_location" Association="Self.fk_stock_location">
-            <End Role="location" EntitySet="locations" />
-            <End Role="stock" EntitySet="stocks" />
-          </AssociationSet>
           <AssociationSet Name="fk_order_orderitem" Association="Self.fk_order_orderitem">
             <End Role="orders" EntitySet="orders" />
             <End Role="orders_item" EntitySet="orders_item" />
@@ -1346,10 +1293,6 @@
           <AssociationSet Name="fk_product_group" Association="Self.fk_product_group">
             <End Role="product_group" EntitySet="product_group" />
             <End Role="product" EntitySet="products" />
-          </AssociationSet>
-          <AssociationSet Name="fk_stock_product" Association="Self.fk_stock_product">
-            <End Role="product" EntitySet="products" />
-            <End Role="stock" EntitySet="stocks" />
           </AssociationSet>
           <AssociationSet Name="fk_unit_qty" Association="Self.fk_unit_qty">
             <End Role="unit_of_measurement" EntitySet="unit_of_measurement" />
@@ -1381,6 +1324,15 @@
           <AssociationSet Name="fk_bomitem_product" Association="SlaughterhouseModel.fk_bomitem_product">
             <End Role="product" EntitySet="products" />
             <End Role="bom_item" EntitySet="bom_item" />
+          </AssociationSet>
+          <EntitySet Name="stocks" EntityType="SlaughterhouseModel.stock" />
+          <AssociationSet Name="fk_stock_location" Association="SlaughterhouseModel.fk_stock_location">
+            <End Role="location" EntitySet="locations" />
+            <End Role="stock" EntitySet="stocks" />
+          </AssociationSet>
+          <AssociationSet Name="fk_stock_product" Association="SlaughterhouseModel.fk_stock_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="stock" EntitySet="stocks" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="receive_item">
@@ -1471,6 +1423,54 @@
               <PropertyRef Name="product_code" />
             </Principal>
             <Dependent Role="bom_item">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="stock">
+          <Key>
+            <PropertyRef Name="stock_date" />
+            <PropertyRef Name="stock_no" />
+            <PropertyRef Name="stock_item" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="stock_date" Type="DateTime" Nullable="false" />
+          <Property Name="stock_no" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="stock_item" Type="Int32" Nullable="false" />
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="stock_qty" Type="Int32" Nullable="false" />
+          <Property Name="stock_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="ref_document_type" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ref_document_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="lot_no" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="location_code" Type="Int32" Nullable="false" />
+          <Property Name="barcode_no" Type="Int64" Nullable="false" />
+          <Property Name="transaction_type" Type="Int32" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="location" Relationship="SlaughterhouseModel.fk_stock_location" FromRole="stock" ToRole="location" />
+          <NavigationProperty Name="product" Relationship="SlaughterhouseModel.fk_stock_product" FromRole="stock" ToRole="product" />
+        </EntityType>
+        <Association Name="fk_stock_location">
+          <End Type="SlaughterhouseModel.location" Role="location" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.stock" Role="stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location">
+              <PropertyRef Name="location_code" />
+            </Principal>
+            <Dependent Role="stock">
+              <PropertyRef Name="location_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_stock_product">
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.stock" Role="stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="stock">
               <PropertyRef Name="product_code" />
             </Dependent>
           </ReferentialConstraint>
@@ -1758,26 +1758,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="stocks">
-            <EntityTypeMapping TypeName="SlaughterhouseModel.stock">
-              <MappingFragment StoreEntitySet="stock">
-                <ScalarProperty Name="stock_date" ColumnName="stock_date" />
-                <ScalarProperty Name="stock_no" ColumnName="stock_no" />
-                <ScalarProperty Name="stock_item" ColumnName="stock_item" />
-                <ScalarProperty Name="product_code" ColumnName="product_code" />
-                <ScalarProperty Name="stock_qty" ColumnName="stock_qty" />
-                <ScalarProperty Name="stock_wgh" ColumnName="stock_wgh" />
-                <ScalarProperty Name="ref_document_type" ColumnName="ref_document_type" />
-                <ScalarProperty Name="ref_document_no" ColumnName="ref_document_no" />
-                <ScalarProperty Name="lot_no" ColumnName="lot_no" />
-                <ScalarProperty Name="location_code" ColumnName="location_code" />
-                <ScalarProperty Name="barcode_no" ColumnName="barcode_no" />
-                <ScalarProperty Name="transaction_type" ColumnName="transaction_type" />
-                <ScalarProperty Name="create_at" ColumnName="create_at" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="stock_item_running">
             <EntityTypeMapping TypeName="SlaughterhouseModel.stock_item_running">
               <MappingFragment StoreEntitySet="stock_item_running">
@@ -1872,6 +1852,26 @@
                 <ScalarProperty Name="mutiply_qty" ColumnName="mutiply_qty" />
                 <ScalarProperty Name="product_code" ColumnName="product_code" />
                 <ScalarProperty Name="bom_code" ColumnName="bom_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stocks">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.stock">
+              <MappingFragment StoreEntitySet="stock">
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="transaction_type" ColumnName="transaction_type" />
+                <ScalarProperty Name="barcode_no" ColumnName="barcode_no" />
+                <ScalarProperty Name="location_code" ColumnName="location_code" />
+                <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+                <ScalarProperty Name="ref_document_no" ColumnName="ref_document_no" />
+                <ScalarProperty Name="ref_document_type" ColumnName="ref_document_type" />
+                <ScalarProperty Name="stock_wgh" ColumnName="stock_wgh" />
+                <ScalarProperty Name="stock_qty" ColumnName="stock_qty" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="stock_item" ColumnName="stock_item" />
+                <ScalarProperty Name="stock_no" ColumnName="stock_no" />
+                <ScalarProperty Name="stock_date" ColumnName="stock_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

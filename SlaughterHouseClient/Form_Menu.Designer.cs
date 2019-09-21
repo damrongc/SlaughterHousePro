@@ -36,16 +36,16 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnReceiveSwine = new System.Windows.Forms.Button();
             this.btnReceiveCarcass = new System.Windows.Forms.Button();
+            this.btnReceiveHead = new System.Windows.Forms.Button();
             this.btnReceiveByProductWhite = new System.Windows.Forms.Button();
             this.btnReceiveByProductRed = new System.Windows.Forms.Button();
+            this.btnReceivePart = new System.Windows.Forms.Button();
             this.btnIssueCarcass = new System.Windows.Forms.Button();
             this.btnIssueCarcassForSales = new System.Windows.Forms.Button();
-            this.btnReceivePart = new System.Windows.Forms.Button();
             this.btnIssueHead = new System.Windows.Forms.Button();
             this.btnIssueByProduct = new System.Windows.Forms.Button();
             this.btnIssuePart = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
-            this.btnReceiveHead = new System.Windows.Forms.Button();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelHeader.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -155,6 +155,21 @@
             this.btnReceiveCarcass.UseVisualStyleBackColor = false;
             this.btnReceiveCarcass.Click += new System.EventHandler(this.btnReceiveCarcass_Click);
             // 
+            // btnReceiveHead
+            // 
+            this.btnReceiveHead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
+            this.btnReceiveHead.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnReceiveHead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReceiveHead.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnReceiveHead.ForeColor = System.Drawing.Color.White;
+            this.btnReceiveHead.Location = new System.Drawing.Point(615, 33);
+            this.btnReceiveHead.Name = "btnReceiveHead";
+            this.btnReceiveHead.Size = new System.Drawing.Size(285, 89);
+            this.btnReceiveHead.TabIndex = 18;
+            this.btnReceiveHead.Text = "รับหัว";
+            this.btnReceiveHead.UseVisualStyleBackColor = false;
+            this.btnReceiveHead.Click += new System.EventHandler(this.btnReceiveHead_Click);
+            // 
             // btnReceiveByProductWhite
             // 
             this.btnReceiveByProductWhite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
@@ -166,7 +181,7 @@
             this.btnReceiveByProductWhite.Name = "btnReceiveByProductWhite";
             this.btnReceiveByProductWhite.Size = new System.Drawing.Size(285, 89);
             this.btnReceiveByProductWhite.TabIndex = 10;
-            this.btnReceiveByProductWhite.Text = "รับเครื่องในขาว(ชุด)";
+            this.btnReceiveByProductWhite.Text = "รับเครื่องในขาว";
             this.btnReceiveByProductWhite.UseVisualStyleBackColor = false;
             this.btnReceiveByProductWhite.Click += new System.EventHandler(this.btnReceiveByProductWhite_Click);
             // 
@@ -181,9 +196,24 @@
             this.btnReceiveByProductRed.Name = "btnReceiveByProductRed";
             this.btnReceiveByProductRed.Size = new System.Drawing.Size(285, 89);
             this.btnReceiveByProductRed.TabIndex = 11;
-            this.btnReceiveByProductRed.Text = "รับเครื่องในแดง(ชุด)";
+            this.btnReceiveByProductRed.Text = "รับเครื่องในแดง";
             this.btnReceiveByProductRed.UseVisualStyleBackColor = false;
             this.btnReceiveByProductRed.Click += new System.EventHandler(this.btnReceiveByProductRed_Click);
+            // 
+            // btnReceivePart
+            // 
+            this.btnReceivePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
+            this.btnReceivePart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnReceivePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReceivePart.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnReceivePart.ForeColor = System.Drawing.Color.White;
+            this.btnReceivePart.Location = new System.Drawing.Point(615, 128);
+            this.btnReceivePart.Name = "btnReceivePart";
+            this.btnReceivePart.Size = new System.Drawing.Size(285, 89);
+            this.btnReceivePart.TabIndex = 14;
+            this.btnReceivePart.Text = "รับชิ้นส่วน";
+            this.btnReceivePart.UseVisualStyleBackColor = false;
+            this.btnReceivePart.Click += new System.EventHandler(this.btnReceivePart_Click);
             // 
             // btnIssueCarcass
             // 
@@ -214,21 +244,6 @@
             this.btnIssueCarcassForSales.Text = "จ่ายหมูซีก-ขาย";
             this.btnIssueCarcassForSales.UseVisualStyleBackColor = false;
             this.btnIssueCarcassForSales.Click += new System.EventHandler(this.btnIssueCarcassForSales_Click);
-            // 
-            // btnReceivePart
-            // 
-            this.btnReceivePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
-            this.btnReceivePart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnReceivePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReceivePart.Font = new System.Drawing.Font("Kanit", 20F);
-            this.btnReceivePart.ForeColor = System.Drawing.Color.White;
-            this.btnReceivePart.Location = new System.Drawing.Point(615, 128);
-            this.btnReceivePart.Name = "btnReceivePart";
-            this.btnReceivePart.Size = new System.Drawing.Size(285, 89);
-            this.btnReceivePart.TabIndex = 14;
-            this.btnReceivePart.Text = "รับชิ้นส่วน";
-            this.btnReceivePart.UseVisualStyleBackColor = false;
-            this.btnReceivePart.Click += new System.EventHandler(this.btnReceivePart_Click);
             // 
             // btnIssueHead
             // 
@@ -277,21 +292,6 @@
             // dragControl1
             // 
             this.dragControl1.SelectControl = this.panelHeader;
-            // 
-            // btnReceiveHead
-            // 
-            this.btnReceiveHead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
-            this.btnReceiveHead.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnReceiveHead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReceiveHead.Font = new System.Drawing.Font("Kanit", 20F);
-            this.btnReceiveHead.ForeColor = System.Drawing.Color.White;
-            this.btnReceiveHead.Location = new System.Drawing.Point(615, 33);
-            this.btnReceiveHead.Name = "btnReceiveHead";
-            this.btnReceiveHead.Size = new System.Drawing.Size(285, 89);
-            this.btnReceiveHead.TabIndex = 18;
-            this.btnReceiveHead.Text = "รับหัว";
-            this.btnReceiveHead.UseVisualStyleBackColor = false;
-            this.btnReceiveHead.Click += new System.EventHandler(this.btnReceiveHead_Click);
             // 
             // flowLayoutPanel2
             // 

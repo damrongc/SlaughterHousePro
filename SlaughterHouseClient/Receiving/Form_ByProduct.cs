@@ -9,6 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ToastNotifications;
+using CrystalDecisions.Windows.Forms;
+using System.Data;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using System.Drawing.Printing;
 
 namespace SlaughterHouseClient.Receiving
 {
@@ -17,6 +22,7 @@ namespace SlaughterHouseClient.Receiving
         product product;
         bom bom;
 
+        CrystalReportViewer reportViewer = new CrystalReportViewer();
 
         private const int LOCATION_CODE = 3;
         private bool isStart = false;
@@ -26,7 +32,7 @@ namespace SlaughterHouseClient.Receiving
         SerialPortManager _spManager;
 
 
-        public Form_ByProduct(int bomCode)
+        public Form_ByProduct(string title, int bomCode)
         {
             InitializeComponent();
             UserInitialization();
@@ -35,8 +41,8 @@ namespace SlaughterHouseClient.Receiving
             using (var db = new SlaughterhouseEntities())
             {
                 bom = db.boms.Where(p => p.bom_code == bomCode).SingleOrDefault();
-                lblCaption.Text = bom.product.product_name;
             }
+            lblCaption.Text = title;
             plSimulator.Visible = true;
 
             //LoadProduct(productCode);
@@ -47,8 +53,18 @@ namespace SlaughterHouseClient.Receiving
         }
         private void Form_Load(object sender, EventArgs e)
         {
-            lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
-            lblMessage.Text = Constants.CHOOSE_QUEUE;
+            try
+            {
+                lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
+                lblMessage.Text = Constants.CHOOSE_QUEUE;
+
+                //serialPort1.PortName = Constants.TWPORT;
+                //serialPort1.Open();
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = ex.Message;
+            }
 
 
 
@@ -314,10 +330,7 @@ namespace SlaughterHouseClient.Receiving
             {
                 //var bom = db.boms.Where(p => p.bom_code == bomCode).SingleOrDefault();
                 //lblCaption.Text = bom.product.product_name;
-
-
                 var bomItems = db.bom_item.Where(p => p.bom_code == bomCode).ToList();
-
                 //lblMinWeight.Text = product.min_weight.ToString();
                 //lblMaxWeight.Text = product.max_weight.ToString();
                 flowLayoutPanel1.Controls.Clear();
@@ -357,16 +370,6 @@ namespace SlaughterHouseClient.Receiving
 
             LoadProduct(btn.Tag.ToString());
 
-            //using (var db = new SlaughterhouseEntities())
-            //{
-            //    product = db.products.Where(p => p.product_code == btn.Tag.ToString()).SingleOrDefault();
-            //    lblMinWeight.Text = product.min_weight.ToString();
-            //    lblMaxWeight.Text = product.max_weight.ToString();
-
-            //}
-
-            //productCode = btn.Tag.ToString();
-            //lblMessage.Text = WEIGHT_WAITING;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -376,41 +379,42 @@ namespace SlaughterHouseClient.Receiving
 
         private void btnReceiveNo_Click(object sender, EventArgs e)
         {
-            var frm = new Form_LookupSwine();
-
-            if (frm.ShowDialog() == DialogResult.OK)
+            try
             {
-                LoadData(frm.receiveNo);
-                LoadBomItem(bom.bom_code);
+                var frm = new Form_LookupSwine();
 
-                int stock_qty = 0;
-                decimal stock_wgh = 0;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadData(frm.receiveNo);
+                    LoadBomItem(bom.bom_code);
 
-                int remain_qty = lblSwineQty.Text.ToInt16() - stock_qty;
-                lblStockQty.Text = stock_qty.ToComma();
-                lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
-                lblRemainQty.Text = remain_qty.ToComma();
+                    int stock_qty = 0;
+                    decimal stock_wgh = 0;
+
+                    int remain_qty = lblSwineQty.Text.ToInt16() - stock_qty;
+                    lblStockQty.Text = stock_qty.ToComma();
+                    lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
+                    lblRemainQty.Text = remain_qty.ToComma();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-
-            //var animationDirection = FormAnimator.AnimationDirection.Up;
-            //var animationMethod = FormAnimator.AnimationMethod.Slide;
-            //var toastNotification = new Notification("Notification", "Start", -1, animationMethod, animationDirection);
-            //toastNotification.Show();
-
             isStart = true;
             lblMessage.Text = Constants.WEIGHT_WAITING;
+            _spManager.CurrentSerialSettings.PortName = Constants.SCALEPORT;
             if (_spManager.CurrentSerialSettings.PortName != "")
                 _spManager.StartListening();
-
 
             lblWeight.Text = "0.00";
             btnStart.Enabled = false;
             btnStop.Enabled = true;
-
             lblMessage.Text = Constants.WEIGHT_WAITING;
 
         }
@@ -419,63 +423,27 @@ namespace SlaughterHouseClient.Receiving
         {
             if (_spManager.CurrentSerialSettings.PortName != "")
                 _spManager.StopListening();
-
-
             lblWeight.Text = "0.00";
             btnStart.Enabled = true;
             btnStop.Enabled = false;
-
-            //try
-            //{
-
-            //    var ret = SaveData();
-            //    if (ret)
-            //    {
-            //        LoadData(lblReceiveNo.Text);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    //var animationDirection = FormAnimator.AnimationDirection.Up;
-            //    //var animationMethod = FormAnimator.AnimationMethod.Slide;
-            //    //var toastNotification = new Notification("Notification", ex.Message, -1, animationMethod, animationDirection);
-            //    //PlayNotificationSound("normal");
-            //    //toastNotification.Show();
-
-            //}
-
         }
 
-        //private static void PlayNotificationSound(string sound)
-        //{
-        //    var soundsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sounds");
-        //    var soundFile = Path.Combine(soundsFolder, sound + ".wav");
 
-        //    using (var player = new System.Media.SoundPlayer(soundFile))
-        //    {
-        //        player.Play();
-        //    }
-        //}
 
         private bool SaveData()
         {
             try
             {
-
                 decimal weight = lblWeight.Text.ToDecimal();
                 using (var db = new SlaughterhouseEntities())
                 {
                     //update receive
                     var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
-
-                    int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
-                    if (receive.factory_qty - stock_qty == 0)
-                    {
-                        throw new Exception("จำนวนรับครบแล้ว ไม่สามารถรับเพิ่มได้!");
-                    }
-
-
+                    //int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
+                    //if (receive.factory_qty - stock_qty == 0)
+                    //{
+                    //    throw new Exception("จำนวนรับครบแล้ว ไม่สามารถรับเพิ่มได้!");
+                    //}
                     int seq = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Count();
                     //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
                     seq += 1;
@@ -485,43 +453,35 @@ namespace SlaughterHouseClient.Receiving
                         product_code = product.product_code,
                         seq = seq,
                         sex_flag = "",
+                        lot_no = receive.lot_no,
                         receive_qty = 1,
                         receive_wgh = weight,
                         create_by = Constants.CREATE_BY
 
                     };
 
+                    var barcode_no = db.barcodes.Max(p => p.barcode_no) + 1;
                     string stock_no = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).Select(p => p.stock_no).SingleOrDefault();
-
-                    //var documentGenerate = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
-
-
-                    //check stock_item_running
-                    //var stockItemRunning = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).SingleOrDefault();
-                    //if (stockItemRunning == null)
-                    //{
-                    //    //get new stock doc no
-                    //    stock_no = Constants.STK + documentGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
-                    //}
-                    //else
-                    //{
-                    //    stock_no = stockItemRunning.stock_no;
-                    //}
-
-
                     using (DbContextTransaction transaction = db.Database.BeginTransaction())
                     {
                         try
                         {
+                            //insert barcode
+                            var barcode = new barcode
+                            {
+                                barcode_no = barcode_no,
+                                product_code = item.product_code,
+                                production_date = DateTime.Today,
+                                lot_no = receive.lot_no,
+                                qty = item.receive_qty,
+                                wgh = item.receive_wgh,
+                                create_by = item.create_by
+                            };
 
+                            db.barcodes.Add(barcode);
 
-
-                            //receive.factory_qty += item.receive_qty;
-                            //receive.factory_wgh += item.receive_wgh;
-                            //db.Entry(receive).State = EntityState.Modified;
-
+                            //insert receive_item
                             db.receive_item.Add(item);
-
                             //insert stock
                             var stock = new stock
                             {
@@ -535,70 +495,69 @@ namespace SlaughterHouseClient.Receiving
                                 ref_document_type = Constants.REV,
                                 lot_no = receive.lot_no,
                                 location_code = LOCATION_CODE, //ห้องเย็นเก็บหมุซีก
-                                barcode_no = 0,
+                                barcode_no = barcode_no,
                                 transaction_type = 1,
                                 create_by = item.create_by
                             };
 
                             db.stocks.Add(stock);
-
-                            //รับหมูซีก เครื่องใน ไม่ต้อง update stock_item_running เพราะเริ่มตาม receive_item.seq
-
-                            //if (stockItemRunning == null)
-                            //{
-                            //    //insert stock_item_running
-                            //    var newStockItem = new stock_item_running
-                            //    {
-                            //        doc_no = receive.receive_no,
-                            //        stock_no = stock_no,
-                            //        stock_item = 1,
-                            //        create_by = item.create_by
-
-                            //    };
-
-                            //    db.stock_item_running.Add(newStockItem);
-
-                            //    //update document_generate
-                            //    documentGenerate.running += 1;
-                            //    db.Entry(documentGenerate).State = EntityState.Modified;
-
-
-                            //}
-                            //else
-                            //{
-
-                            //    //update stock_item_running
-                            //    stockItemRunning.stock_item += 1;
-                            //    db.Entry(stockItemRunning).State = EntityState.Modified;
-                            //}
-
-
-
-
                             db.SaveChanges();
                             transaction.Commit();
+
+
+                            barcode = db.barcodes.Where(p => p.barcode_no == 1000000000107).SingleOrDefault();
+
+                            DataTable dt = new DataTable("Barcode");
+                            dt.Columns.Add("barcode_no", typeof(string));
+                            dt.Columns.Add("barcode_no_text", typeof(string));
+                            dt.Columns.Add("product_code", typeof(string));
+                            dt.Columns.Add("product_name", typeof(string));
+                            dt.Columns.Add("production_date", typeof(DateTime));
+                            dt.Columns.Add("expired_date", typeof(DateTime));
+                            dt.Columns.Add("lot_no", typeof(string));
+                            dt.Columns.Add("qty", typeof(int));
+                            dt.Columns.Add("qty_unit", typeof(string));
+                            dt.Columns.Add("wgh", typeof(double));
+                            dt.Columns.Add("wgh_unit", typeof(string));
+
+                            DataRow dr = dt.NewRow();
+                            dr["barcode_no"] = string.Format("*{0}*", barcode.barcode_no);
+                            dr["barcode_no_text"] = barcode.barcode_no.ToString();
+                            dr["product_code"] = barcode.product_code;
+                            dr["product_name"] = barcode.product.product_name;
+                            dr["production_date"] = barcode.production_date;
+                            dr["expired_date"] = barcode.production_date.AddDays(barcode.product.shelflife.ToString().ToDouble());
+                            dr["lot_no"] = barcode.lot_no;
+                            dr["qty"] = barcode.qty;
+                            dr["qty_unit"] = barcode.product.unit_of_measurement.unit_name;
+                            dr["wgh"] = barcode.wgh;
+                            dr["wgh_unit"] = barcode.product.unit_of_measurement1.unit_name;
+                            dt.Rows.Add(dr);
+
+                            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+                            //dt.WriteXml(path + @"\xml\barcode.xml", XmlWriteMode.WriteSchema);
+
+
+                            ReportDocument doc = new ReportDocument();
+                            doc.Load(path + @"\Rpt\barcode.rpt");
+                            doc.SetDataSource(dt);
+
+                            doc.PrintToPrinter(1, true, 0, 0);
+
+                            //reportViewer.ReportSource = doc;
+
+                            //reportViewer.Zoom(100);
+                            //rptViewer.RefreshReport();
+
                         }
                         catch (Exception)
                         {
-
                             transaction.Rollback();
                             throw;
                         }
-
                     }
 
                 }
-
-                //ReceiveItem receiveItem = new ReceiveItem
-                //{
-                //    ReceiveNo = receive.ReceiveNo,
-                //    ProductCode = this.productCode,
-                //    SexFlag = sexFlag,
-                //    ReceiveQty = 1,
-                //    ReceiveWgh = lblWeight.Text.ToDecimal(),
-                //    CreateBy = "Auto"
-                //};
-                //return ReceiveController.InsertItem(receiveItem);
                 return true;
             }
             catch (Exception)
@@ -618,6 +577,150 @@ namespace SlaughterHouseClient.Receiving
         private void btnZero_Click(object sender, EventArgs e)
         {
             lblWeight.Text = 0m.ToFormat2Decimal();
+
+            using (var db = new SlaughterhouseEntities())
+            {
+                var barcode = db.barcodes.Where(p => p.barcode_no == 1000000000107).SingleOrDefault();
+
+                DataTable dt = new DataTable("Barcode");
+                dt.Columns.Add("barcode_no", typeof(string));
+                dt.Columns.Add("barcode_no_text", typeof(string));
+                dt.Columns.Add("product_code", typeof(string));
+                dt.Columns.Add("product_name", typeof(string));
+                dt.Columns.Add("production_date", typeof(DateTime));
+                dt.Columns.Add("expired_date", typeof(DateTime));
+                dt.Columns.Add("lot_no", typeof(string));
+                dt.Columns.Add("qty", typeof(int));
+                dt.Columns.Add("qty_unit", typeof(string));
+                dt.Columns.Add("wgh", typeof(double));
+                dt.Columns.Add("wgh_unit", typeof(string));
+
+                DataRow dr = dt.NewRow();
+                dr["barcode_no"] = string.Format("*{0}*", barcode.barcode_no);
+                dr["barcode_no_text"] = barcode.barcode_no.ToString();
+                dr["product_code"] = barcode.product_code;
+                dr["product_name"] = barcode.product.product_name;
+                dr["production_date"] = barcode.production_date;
+                dr["expired_date"] = barcode.production_date.AddDays(barcode.product.shelflife.ToString().ToDouble());
+                dr["lot_no"] = barcode.lot_no;
+                dr["qty"] = barcode.qty;
+                dr["qty_unit"] = barcode.product.unit_of_measurement.unit_name;
+                dr["wgh"] = barcode.wgh;
+                dr["wgh_unit"] = barcode.product.unit_of_measurement1.unit_name;
+                dt.Rows.Add(dr);
+
+                string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+                //dt.WriteXml(path + @"\Xml\barcode.xml", XmlWriteMode.WriteSchema);
+
+
+                ReportDocument doc = new ReportDocument();
+
+
+                lblMessage.Text = path;
+                doc.Load(path + @"\Rpt\barcode.rpt");
+                doc.SetDataSource(dt);
+
+                //PageMargins margins = new PageMargins();
+                //margins.bottomMargin = 0;
+
+                //margins.leftMargin = 0;
+
+                //margins.rightMargin = 0;
+
+                //margins.topMargin = 0;
+                //doc.PrintOptions.ApplyPageMargins(margins);
+
+
+                //System.Drawing.Printing.PrintDocument doctoprint = new System.Drawing.Printing.PrintDocument();
+                //doctoprint.PrinterSettings.PrinterName = "ZDesigner GK420t"; //'(ex. "Epson SQ-1170 ESC/P 2")
+
+                //for (int i = 0; i < doctoprint.PrinterSettings.PaperSizes.Count; i++)
+                //{
+                //    int rawKind;
+                //    if (doctoprint.PrinterSettings.PaperSizes[i].PaperName == "6 x 6")
+                //    {
+                //        rawKind = Convert.ToInt32(doctoprint.PrinterSettings.PaperSizes[i].GetType().GetField("kind", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(doctoprint.PrinterSettings.PaperSizes[i]));
+                //        //crPrintOut.PrintOptions.PaperSize = rawKind;
+                //        doc.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)rawKind;
+
+                //        break;
+                //    }
+                //}
+
+                //CrystalReportCustomPaperSize("", "", ref doc);
+
+                doc.PrintToPrinter(1, true, 0, 0);
+
+
+            }
+
         }
+
+
+        const string PaperSizeName = "6 x 6";
+        public Int32 GetPaperSize(String sPrinterName, String sPaperSizeName)
+        {
+            PrintDocument docPrintDoc = new PrintDocument();
+            docPrintDoc.PrinterSettings.PrinterName = sPrinterName;
+            for (int i = 0; i < docPrintDoc.PrinterSettings.PaperSizes.Count; i++)
+            {
+                int raw = docPrintDoc.PrinterSettings.PaperSizes[i].RawKind;
+                if (docPrintDoc.PrinterSettings.PaperSizes[i].PaperName == sPaperSizeName)
+                {
+                    return raw;
+                }
+            }
+            return 0;
+        }
+
+        private void CrystalReportCustomPaperSize(string ProgramCode, string ReportID, ref ReportDocument Report)
+        {
+            string PrinterName = null;
+
+            string[] PaperSizeList = null;
+
+            System.Drawing.Printing.PrinterSettings aPrinterSettings = new System.Drawing.Printing.PrinterSettings();
+            PrinterName = aPrinterSettings.PrinterName.ToString();
+            if ((PaperSizeName != null))
+            {
+                System.Drawing.Printing.PrintDocument DocToPrint = new System.Drawing.Printing.PrintDocument();
+                DocToPrint.PrinterSettings.PrinterName = PrinterName;
+
+                PaperSizeList = new string[DocToPrint.PrinterSettings.PaperSizes.Count + 1];
+                for (int i = 0; i <= DocToPrint.PrinterSettings.PaperSizes.Count - 1; i++)
+                {
+                    int rawKind = 0;
+
+                    // PaperSizeList(i) = DocToPrint.PrinterSettings.PaperSizes(i).PaperName;
+
+                    if (DocToPrint.PrinterSettings.PaperSizes[i].PaperName == PaperSizeName)
+                    {
+                        rawKind = Convert.ToInt32(DocToPrint.PrinterSettings.PaperSizes[i].GetType().GetField("kind", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(DocToPrint.PrinterSettings.PaperSizes[i]));
+                        Report.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)rawKind;
+
+                        CrystalDecisions.Shared.PageMargins Margins = new CrystalDecisions.Shared.PageMargins();
+                        Margins = Report.PrintOptions.PageMargins;
+                        Margins.leftMargin = 0;
+                        Margins.topMargin = 0;
+                        Margins.rightMargin = 0;
+                        Margins.bottomMargin = 0;
+
+                        //if (LefMargin >= 0)
+                        //    Margins.leftMargin = LefMargin * TWIP;
+                        //if (RightMargin >= 0)
+                        //    Margins.rightMargin = RightMargin * TWIP;
+                        //if (TopMargin >= 0)
+                        //    Margins.topMargin = TopMargin * TWIP;
+                        //if (ButtomMargin >= 0)
+                        //    Margins.bottomMargin = ButtomMargin * TWIP;
+
+                        //Report.PrintOptions.ApplyPageMargins(Margins);
+
+                        break; // TODO: might not be correct. Was : Exit For
+                    }
+                }
+            }
+        }
+
     }
 }
