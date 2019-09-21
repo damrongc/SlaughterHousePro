@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ProductSlip));
             this.label1 = new System.Windows.Forms.Label();
-            this.txtProductSlip = new System.Windows.Forms.TextBox();
+            this.txtProductSlipNo = new System.Windows.Forms.TextBox();
             this.BtnSave = new System.Windows.Forms.Button();
             this.dtpProductSlipDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
@@ -65,14 +65,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "เลขที่ใบจัดสินค้า:";
             // 
-            // txtProductSlip
+            // txtProductSlipNo
             // 
-            this.txtProductSlip.Enabled = false;
-            this.txtProductSlip.Location = new System.Drawing.Point(182, 22);
-            this.txtProductSlip.MaxLength = 10;
-            this.txtProductSlip.Name = "txtProductSlip";
-            this.txtProductSlip.Size = new System.Drawing.Size(215, 36);
-            this.txtProductSlip.TabIndex = 1;
+            this.txtProductSlipNo.Enabled = false;
+            this.txtProductSlipNo.Location = new System.Drawing.Point(182, 22);
+            this.txtProductSlipNo.MaxLength = 10;
+            this.txtProductSlipNo.Name = "txtProductSlipNo";
+            this.txtProductSlipNo.Size = new System.Drawing.Size(215, 36);
+            this.txtProductSlipNo.TabIndex = 1;
             // 
             // BtnSave
             // 
@@ -83,7 +83,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(788, 571);
+            this.BtnSave.Location = new System.Drawing.Point(785, 570);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -113,7 +113,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.gv);
-            this.panel2.Location = new System.Drawing.Point(421, 146);
+            this.panel2.Location = new System.Drawing.Point(405, 146);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(595, 404);
             this.panel2.TabIndex = 43;
@@ -150,7 +150,7 @@
             this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(421, 109);
+            this.panel1.Location = new System.Drawing.Point(405, 109);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(595, 36);
             this.panel1.TabIndex = 45;
@@ -177,7 +177,7 @@
             this.BtnCancel.ForeColor = System.Drawing.Color.White;
             this.BtnCancel.Image = ((System.Drawing.Image)(resources.GetObject("BtnCancel.Image")));
             this.BtnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCancel.Location = new System.Drawing.Point(580, 571);
+            this.BtnCancel.Location = new System.Drawing.Point(577, 570);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(202, 36);
             this.BtnCancel.TabIndex = 47;
@@ -229,7 +229,7 @@
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(12, 109);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(403, 36);
+            this.panel3.Size = new System.Drawing.Size(385, 36);
             this.panel3.TabIndex = 53;
             // 
             // label3
@@ -246,7 +246,7 @@
             this.panel4.Controls.Add(this.gvSo);
             this.panel4.Location = new System.Drawing.Point(12, 146);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(403, 404);
+            this.panel4.Size = new System.Drawing.Size(385, 404);
             this.panel4.TabIndex = 52;
             // 
             // gvSo
@@ -264,13 +264,13 @@
             this.gvSo.Location = new System.Drawing.Point(0, 0);
             this.gvSo.Name = "gvSo";
             this.gvSo.RowHeadersWidth = 10;
-            this.gvSo.Size = new System.Drawing.Size(403, 404);
+            this.gvSo.Size = new System.Drawing.Size(385, 404);
             this.gvSo.TabIndex = 43;
             // 
             // Form_ProductSlip
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1027, 632);
+            this.ClientSize = new System.Drawing.Size(1013, 632);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.cboCustomer);
@@ -284,7 +284,7 @@
             this.Controls.Add(this.dtpProductSlipDate);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.BtnSave);
-            this.Controls.Add(this.txtProductSlip);
+            this.Controls.Add(this.txtProductSlipNo);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -309,7 +309,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtProductSlip;
+        private System.Windows.Forms.TextBox txtProductSlipNo;
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.DateTimePicker dtpProductSlipDate;
         private System.Windows.Forms.Label label11;

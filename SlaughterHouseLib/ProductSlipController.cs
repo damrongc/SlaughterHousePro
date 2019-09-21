@@ -18,7 +18,7 @@ namespace SlaughterHouseLib
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
-                    productSlip.ProductSlipNo = DocumentGenerate.GetDocumentRunning("PS");
+                    productSlip.ProductSlipNo = DocumentGenerate.GetDocumentRunning("PDS");
                     conn.Open();
                     tr = conn.BeginTransaction();
                     var sql = @"INSERT INTO product_slip
@@ -52,13 +52,13 @@ namespace SlaughterHouseLib
 							   (product_slip_no,
 								product_code,
 								location_code,
-								seq,
+								seq, qty, wgh,
 								create_by )
 							VALUES
 							   (@product_slip_no ,
 								@product_code ,
 								@location_code ,
-								@seq , 
+								@seq , @qty , @wgh , 
 								@create_by )
 							";
 
@@ -72,6 +72,8 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("product_code", item.Product.ProductCode);
                         cmd.Parameters.AddWithValue("location_code", item.Location.LocationCode);
                         cmd.Parameters.AddWithValue("seq", item.Seq);
+                        cmd.Parameters.AddWithValue("qty", item.Qty);
+                        cmd.Parameters.AddWithValue("wgh", item.Wgh);
                         cmd.Parameters.AddWithValue("create_by", item.CreateBy);
                         cmd.ExecuteNonQuery();
                     }
@@ -217,7 +219,7 @@ namespace SlaughterHouseLib
                                 b.product_name,
                                 sum(Case when b.issue_unit_method = 'Q' then order_qty else order_wgh end) qty_wgh,
                                 null as lot_no,
-                                null as location_code,
+                                0 as location_code,
                                 null as location_name,
                                 0 as qty_wgh_location,
                                 u.unit_name,
@@ -250,18 +252,18 @@ namespace SlaughterHouseLib
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
                             if (Convert.ToDecimal(dt.Rows[i]["QTY_WGH_LOCATION"]) == 0)
-                            { 
-                                dtLocation = StockController.GetCfLocation(dt.Rows[i]["PRODUCT_CODE"].ToString());
+                            {
+                                int row = i;
+                                dtLocation = StockController.GetCfLocation(dt.Rows[row]["PRODUCT_CODE"].ToString());
                                 if (dtLocation != null && dtLocation.Rows.Count > 0)
                                 {
-                                    int row = i;
                                     decimal qtyWghSo = Convert.ToDecimal(dt.Rows[row]["QTY_WGH"]);
                                     for (int j = 0; j < dtLocation.Rows.Count; j++)
                                     {
                                         if (Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]) >= qtyWghSo)
                                         {
                                             dt.Rows[row]["LOT_NO"] = dtLocation.Rows[j]["LOT_NO"].ToString();
-                                            dt.Rows[row]["LOCATION_CODE"] = dtLocation.Rows[j]["LOCATION_CODE"].ToString();
+                                            dt.Rows[row]["LOCATION_CODE"] = (int)dtLocation.Rows[j]["LOCATION_CODE"];
                                             dt.Rows[row]["LOCATION_NAME"] = dtLocation.Rows[j]["LOCATION_NAME"].ToString();
                                             dt.Rows[row]["QTY_WGH_LOCATION"] = qtyWghSo;
                                             break;
@@ -269,7 +271,7 @@ namespace SlaughterHouseLib
                                         else if (Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]) > 0)
                                         {
                                             dt.Rows[row]["LOT_NO"] = dtLocation.Rows[j]["LOT_NO"].ToString();
-                                            dt.Rows[row]["LOCATION_CODE"] = dtLocation.Rows[j]["LOCATION_CODE"].ToString();
+                                            dt.Rows[row]["LOCATION_CODE"] = (int)dtLocation.Rows[j]["LOCATION_CODE"];
                                             dt.Rows[row]["LOCATION_NAME"] = dtLocation.Rows[j]["LOCATION_NAME"].ToString();
                                             dt.Rows[row]["QTY_WGH_LOCATION"] = Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]);
 
@@ -277,6 +279,12 @@ namespace SlaughterHouseLib
                                             row = Create_Row(ref dt, i, qtyWghSo); 
                                         } 
                                     } 
+                                }
+                                else
+                                {
+                                    dt.Rows[row]["LOT_NO"] = "NA";
+                                    dt.Rows[row]["LOCATION_CODE"] = 0;
+                                    dt.Rows[row]["LOCATION_NAME"] = "NA";
                                 }
                             }
                         }
@@ -323,8 +331,12 @@ namespace SlaughterHouseLib
             DataRow drNew = dt.NewRow();
             drNew["PRODUCT_CODE"] = dt.Rows[idxRow]["PRODUCT_CODE"];
             drNew["PRODUCT_NAME"] = dt.Rows[idxRow]["PRODUCT_NAME"];
+            drNew["LOT_NO"] = "NA";
+            drNew["LOCATION_CODE"] = 0;
+            drNew["LOCATION_NAME"] = "NA";
             drNew["QTY_WGH"] = Convert.ToDecimal(dt.Rows[idxRow]["QTY_WGH"]);
             drNew["UNIT_NAME"] = dt.Rows[idxRow]["UNIT_NAME"]; 
+            drNew["ISSUE_UNIT_METHOD"] = dt.Rows[idxRow]["ISSUE_UNIT_METHOD"];
             drNew["QTY_WGH_LOCATION"] = cfQtyWgh;
             dt.Rows.Add(drNew);
             //DataTable dtLocation = new DataTable();
