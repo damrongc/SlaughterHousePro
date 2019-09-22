@@ -14,7 +14,8 @@
                 <xs:element name="farm_code" type="xs:string" minOccurs="0" />
                 <xs:element name="coop_no" type="xs:string" minOccurs="0" />
                 <xs:element name="queue_no" type="xs:int" minOccurs="0" />
-                <xs:element name="farm_qty" type="xs:string" minOccurs="0" />
+                <xs:element name="lot_no" type="xs:string" minOccurs="0" />
+                <xs:element name="farm_qty" type="xs:int" minOccurs="0" />
                 <xs:element name="farm_wgh" type="xs:decimal" minOccurs="0" />
                 <xs:element name="factory_qty" type="xs:int" minOccurs="0" />
                 <xs:element name="factory_wgh" type="xs:decimal" minOccurs="0" />
@@ -71,6 +72,7 @@
     <farm_code>001</farm_code>
     <coop_no>1</coop_no>
     <queue_no>1</queue_no>
+    <lot_no>11924910609</lot_no>
     <farm_qty>5</farm_qty>
     <farm_wgh>500.00</farm_wgh>
     <factory_qty>5</factory_qty>

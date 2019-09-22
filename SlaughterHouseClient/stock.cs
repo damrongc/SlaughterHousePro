@@ -24,7 +24,7 @@ namespace SlaughterHouseClient
         public string ref_document_no { get; set; }
         public string lot_no { get; set; }
         public int location_code { get; set; }
-        public int barcode_no { get; set; }
+        public long barcode_no { get; set; }
         public int transaction_type { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }

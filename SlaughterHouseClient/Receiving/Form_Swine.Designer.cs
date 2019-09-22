@@ -68,6 +68,7 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnZero = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.panelHeader.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -607,6 +608,7 @@
         private System.Windows.Forms.Timer TmMinWeight;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnZero;
+        private System.IO.Ports.SerialPort serialPort1;
     }
 }
 
