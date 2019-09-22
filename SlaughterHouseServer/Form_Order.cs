@@ -188,7 +188,7 @@ namespace SlaughterHouseServer
                         case GlobalsColumn.BTN_PRODUCT_SLIP:
                             var frmSlip = new Form_ProductSlip
                             {
-                                orderNo = orderNo
+                                orderNo = orderNo,
                             };
                             if (frmSlip.ShowDialog() == DialogResult.OK)
                             {

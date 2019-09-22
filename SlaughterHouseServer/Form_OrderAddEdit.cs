@@ -268,22 +268,6 @@ namespace SlaughterHouseServer
                 {
                     DataTable dtBom = BomController.GetBom(row[GlobalsColumn.PRODUCT_CODE].ToString());
 
-                    //if (bomItm.Count > 0)
-                    //{
-                    //}
-                    orderItems.Add(new OrderItem
-                    {
-                        OrderNo = txtOrderNo.Text,
-                        Seq = seq,
-                        Product = new Product
-                        {
-                            ProductCode = row["product_code"].ToString(),
-                            ProductName = row["product_name"].ToString(),
-                        },
-                        OrderQty = row["issue_unit_method"].ToString() == "Q" ? Convert.ToInt16(row["qty_wgh"]) : 0,
-                        OrderWgh = row["issue_unit_method"].ToString() == "W" ? Convert.ToDecimal(row["qty_wgh"]) : 0,
-                    });
-
                     if (dtBom.Rows.Count > 0)
                     {
                         foreach (DataRow dtRow in dtBom.Rows)

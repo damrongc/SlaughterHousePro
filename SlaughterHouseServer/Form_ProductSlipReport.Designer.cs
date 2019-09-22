@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseServer
 {
-    partial class Form_InvoiceReport
+    partial class Form_ProductSlipReport
     {
         /// <summary>
         /// Required designer variable.

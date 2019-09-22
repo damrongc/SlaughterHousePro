@@ -10,6 +10,7 @@ namespace SlaughterHouseServer
     public partial class Form_ProductSlip : Form
     {
         public string orderNo { get; set; }
+        //public string productSlipNo { get; set; }
         DataTable dtProductSlipItem;
 
         public Form_ProductSlip()
@@ -46,6 +47,8 @@ namespace SlaughterHouseServer
 
             //KeyDown  
             dtpProductSlipDate.KeyDown += DtpRequestDate_KeyDown;
+
+
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
@@ -104,10 +107,14 @@ namespace SlaughterHouseServer
         {
             try
             {
-                SaveProductSlip();
-                MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                if (String.IsNullOrEmpty(txtProductSlipNo.Text))
+                {
+                    SaveProductSlip();
+                }
+                PrintReport();
+                //MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //this.DialogResult = DialogResult.OK;
+                //this.Close();
             }
             catch (System.Exception ex)
             {
@@ -140,7 +147,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-                //CancelOrder();
+                CancelProductSlip();
                 MessageBox.Show("ยกเลิกเอกสาร เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -201,7 +208,7 @@ namespace SlaughterHouseServer
         #endregion
 
         private void LoadData()
-        {
+        { 
             txtProductSlipNo.Enabled = false;
             Order order = OrderController.GetOrder(this.orderNo);
             if (order != null)
@@ -211,24 +218,44 @@ namespace SlaughterHouseServer
                 dtpProductSlipDate.Value = order.RequestDate;
                 cboCustomer.SelectedValue = order.Customer.CustomerCode;
                 chkActive.Checked = order.Active;
-                dtpProductSlipDate.Enabled = false;
+                dtpProductSlipDate.Enabled = false; 
             }
             else
             {
                 BtnCancel.Visible = false;
             }
+
+            ProductSlip productSlip = ProductSlipController.GetProductSlipByOrderNo(orderNo);
+            if (productSlip != null)
+            {
+                txtProductSlipNo.Text = productSlip.ProductSlipNo;
+            }
+            else
+            {
+                BtnCancel.Visible = false;
+            }
+
             LoadDetail();
         }
         private void LoadDetail()
         {
-            dtProductSlipItem = new DataTable("PRODUCT_SLIP_ITEM");
-            dtProductSlipItem = ProductSlipItemController.GetProductSlipItem(orderNo);
-            gv.DataSource = dtProductSlipItem;
-
-
             DataTable dtOrdersIteemItem = new DataTable("ORDERS_ITEM");
             dtOrdersIteemItem = OrderItemController.GetOrderItems(orderNo, "N");
             gvSo.DataSource = dtOrdersIteemItem;
+
+            if (String.IsNullOrEmpty(txtProductSlipNo.Text))
+            {
+                dtProductSlipItem = new DataTable("PRODUCT_SLIP_ITEM");
+                dtProductSlipItem = ProductSlipItemController.GetProductSlipItemByOrderNo(orderNo);
+                gv.DataSource = dtProductSlipItem;
+            }
+            else
+            {
+                dtProductSlipItem = new DataTable("PRODUCT_SLIP_ITEM");
+                dtProductSlipItem = ProductSlipItemController.GetProductSlipItem(txtProductSlipNo.Text);
+                gv.DataSource = dtProductSlipItem;
+            }
+
 
         }
         private void LoadCustomer()
@@ -293,31 +320,45 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
-        //private void CancelProductSlip()
-        //{
-        //    try
-        //    {
-        //        var order = new Order
-        //        {
-        //            OrderNo = txtProductSlip.Text,
-        //            RequestDate = dtpProductSlipDate.Value,
-        //            Customer = new Customer
-        //            {
-        //                CustomerCode = cboCustomer.SelectedValue.ToString()
-        //            },
-        //            OrderFlag = 0,
-        //            Active = false,
-        //            CreateBy = "system",
-        //            ModifiedBy = "system" 
-        //        };
-        //        OrderController.Cancel(order);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        private void CancelProductSlip()
+        {
+            try
+            {
+                var productSlip = new ProductSlip
+                {
+                    ProductSlipNo = txtProductSlipNo.Text,
+                    ProductSlipDate = dtpProductSlipDate.Value, 
+                    ProductSlipFlag = 0,
+                    Active = false,
+                    CreateBy = "system",
+                    ModifiedBy = "system"
+                };
+                ProductSlipController.Cancel(productSlip);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
+        private void PrintReport()
+        {
+            try
+            {
+                var frmPrint = new Form_ProductSlipReport();
+                frmPrint.productSlipNo = txtProductSlipNo.Text;
 
+                frmPrint.ShowDialog();
+                this.DialogResult = DialogResult.OK;
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                this.Close();
+            }
+        }
     }
 }

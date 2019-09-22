@@ -52,12 +52,14 @@ namespace SlaughterHouseLib
 							   (product_slip_no,
 								product_code,
 								location_code,
+                                lot_no,
 								seq, qty, wgh,
 								create_by )
 							VALUES
 							   (@product_slip_no ,
 								@product_code ,
 								@location_code ,
+								@lot_no ,
 								@seq , @qty , @wgh , 
 								@create_by )
 							";
@@ -71,17 +73,18 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
                         cmd.Parameters.AddWithValue("product_code", item.Product.ProductCode);
                         cmd.Parameters.AddWithValue("location_code", item.Location.LocationCode);
+                        cmd.Parameters.AddWithValue("lot_no", item.LotNo);
                         cmd.Parameters.AddWithValue("seq", item.Seq);
                         cmd.Parameters.AddWithValue("qty", item.Qty);
                         cmd.Parameters.AddWithValue("wgh", item.Wgh);
-                        cmd.Parameters.AddWithValue("create_by", item.CreateBy);
+                        cmd.Parameters.AddWithValue("create_by", productSlip.CreateBy);
                         cmd.ExecuteNonQuery();
                     }
                     tr.Commit();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 tr.Rollback();
                 throw;
@@ -203,11 +206,83 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+        public static ProductSlip GetProductSlipByOrderNo(string orderNo)
+        {
+            try
+            {
+
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"SELECT  product_slip_no ,
+                                 product_slip_date ,
+                                 ref_document_no ,
+                                 product_slip_flag ,
+                                 active  
+                        FROM product_slip 
+                        Where ref_document_no = @ref_document_no 
+                            and active  = 1
+                            ";
+
+
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("ref_document_no", orderNo);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        return new ProductSlip
+                        {
+
+                            ProductSlipNo = (string)ds.Tables[0].Rows[0]["product_slip_no"],
+                            ProductSlipDate = (DateTime)ds.Tables[0].Rows[0]["product_slip_date"], 
+                            RefDocumentNo = (string)ds.Tables[0].Rows[0]["ref_document_no"], 
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static DataSet GetDataPrintProductSlip(string productSlip)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @" 
+
+								";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_slip_no", productSlip);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    return ds;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 
     public static class ProductSlipItemController
     {
-        public static DataTable GetProductSlipItem(string orderNo)
+        public static DataTable GetProductSlipItemByOrderNo(string orderNo)
         {
             try
             { 
@@ -316,6 +391,55 @@ namespace SlaughterHouseLib
                     //{
                     //    return null;
                     //}
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public static DataTable GetProductSlipItem(string productSlipNo)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"select  a.seq,
+	                            a.product_code,
+	                            b.product_name,
+	                            0 as qty_wgh,
+	                            a.lot_no as lot_no,
+	                            a.location_code as location_code,
+	                            lo.location_name as location_name,
+	                            sum(Case when b.issue_unit_method = 'Q' then qty else wgh end)  as qty_wgh_location,
+	                            u.unit_name,
+	                            b.issue_unit_method 
+	                            from product_slip_item a,product b, unit_of_measurement u, location lo
+	                            where a.product_code =b.product_code
+	                            and Case when b.issue_unit_method = 'Q' then unit_of_qty else unit_of_wgh end = u.unit_code 
+                                and a.location_code = lo.location_code
+                                and a.product_slip_no = @product_slip_no
+	                            group by a.seq, a.product_code,  
+		                            b.product_name, 
+		                            b.issue_unit_method,
+		                            u.unit_name , a.lot_no,a.location_code ,
+	                            lo.location_name 
+                                order by a.seq 
+    
+                            ";
+                     
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_slip_no", productSlipNo);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    
+                     
+
+                    return ds.Tables[0];
                 }
             }
             catch (Exception)
