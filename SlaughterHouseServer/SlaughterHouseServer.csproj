@@ -62,6 +62,12 @@
     <Compile Include="DragControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Form_LovProductSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_LovProductSale.Designer.cs">
+      <DependentUpon>Form_LovProductSale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_ProductSlipReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -275,6 +281,9 @@
     <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form_LovProductSale.resx">
+      <DependentUpon>Form_LovProductSale.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_ProductSlipReport.resx">
       <DependentUpon>Form_ProductSlipReport.cs</DependentUpon>
     </EmbeddedResource>

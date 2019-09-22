@@ -19,10 +19,9 @@ namespace SlaughterHouseServer
         }
         private void UserSettingsComponent()
         {
-            btnAddOrderItem.Click += BtnAddOrderItem_Click;
             gv.CellContentClick += Gv_CellContentClick;
             gv.DataBindingComplete += Gv_DataBindingComplete;
-            gv.ReadOnly = true;
+            //gv.ReadOnly = true;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
             gv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
@@ -33,6 +32,9 @@ namespace SlaughterHouseServer
 
             this.Load += Form_Load;
             this.Shown += Form_Shown;
+
+            btnAddOrderItem.Click += BtnAddOrderItem_Click;
+
 
             //KeyDown  
             dtpRequestDate.KeyDown += DtpRequestDate_KeyDown;
@@ -92,6 +94,14 @@ namespace SlaughterHouseServer
             gv.Columns["seq"].Visible = false;
             gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
             gv.Columns[GlobalsColumn.UNIT_CODE].Visible = false;
+
+
+            gv.Columns[GlobalsColumn.PRODUCT_CODE].ReadOnly = true;
+            gv.Columns[GlobalsColumn.PRODUCT_NAME].ReadOnly = true;
+            gv.Columns[GlobalsColumn.UNIT_NAME].ReadOnly = true;
+            gv.Columns[GlobalsColumn.QTY_WGH].ReadOnly = false;
+
+
         }
         #endregion
 
@@ -150,24 +160,56 @@ namespace SlaughterHouseServer
         private void BtnAddOrderItem_Click(object sender, System.EventArgs e)
         {
 
-            var frm = new Form_OrderDetail();
-            frm.qtyWgh = 0;
-            frm.orderDate = dtpRequestDate.Value;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                DataRow dr;
-                dr = dtOrderItem.NewRow();
+            //var frm = new Form_OrderDetail();
+            //frm.qtyWgh = 0;
+            //frm.orderDate = dtpRequestDate.Value;
+            //if (frm.ShowDialog() == DialogResult.OK)
+            //{
+            //    DataRow dr;
+            //    dr = dtOrderItem.NewRow();
 
-                dr[GlobalsColumn.SEQ] = 0;
-                dr[GlobalsColumn.PRODUCT_CODE] = frm.productCode;
-                dr[GlobalsColumn.PRODUCT_NAME] = frm.productName;
-                dr[GlobalsColumn.QTY_WGH] = frm.qtyWgh;
-                dr[GlobalsColumn.ISSUE_UNIT_METHOD] = frm.issueUnitMethod;
-                dr[GlobalsColumn.UNIT_CODE] = frm.unitCode;
-                dr[GlobalsColumn.UNIT_NAME] = frm.unitName;
-                dtOrderItem.Rows.Add(dr);
-                dtOrderItem.AcceptChanges();
+            //    dr[GlobalsColumn.SEQ] = 0;
+            //    dr[GlobalsColumn.PRODUCT_CODE] = frm.productCode;
+            //    dr[GlobalsColumn.PRODUCT_NAME] = frm.productName;
+            //    dr[GlobalsColumn.QTY_WGH] = frm.qtyWgh;
+            //    dr[GlobalsColumn.ISSUE_UNIT_METHOD] = frm.issueUnitMethod;
+            //    dr[GlobalsColumn.UNIT_CODE] = frm.unitCode;
+            //    dr[GlobalsColumn.UNIT_NAME] = frm.unitName;
+            //    dtOrderItem.Rows.Add(dr);
+            //    dtOrderItem.AcceptChanges();
+            //}
+            try
+            {
+                var frm = new Form_LovProductSale();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    DataRow dr;
+                    foreach (DataRow row in frm.dtResultProduct.Rows)
+                    {
+                        DataRow[] results = dtOrderItem.Select($"product_code = '{row[GlobalsColumn.PRODUCT_CODE]}' ");
+
+                        if (results.Length == 0)
+                        {
+                            dr = dtOrderItem.NewRow();
+                            dr[GlobalsColumn.SEQ] = 0;
+                            dr[GlobalsColumn.PRODUCT_CODE] = row[GlobalsColumn.PRODUCT_CODE];
+                            dr[GlobalsColumn.PRODUCT_NAME] = row[GlobalsColumn.PRODUCT_NAME];
+                            dr[GlobalsColumn.QTY_WGH] = 0;
+                            dr[GlobalsColumn.ISSUE_UNIT_METHOD] = row[GlobalsColumn.ISSUE_UNIT_METHOD];
+                            dr[GlobalsColumn.UNIT_CODE] = row[GlobalsColumn.UNIT_CODE];
+                            dr[GlobalsColumn.UNIT_NAME] = row[GlobalsColumn.UNIT_NAME];
+                            dtOrderItem.Rows.Add(dr);
+                            dtOrderItem.AcceptChanges();
+                        }
+
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
 
         }
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -366,6 +408,8 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
+
+
     }
 
 }

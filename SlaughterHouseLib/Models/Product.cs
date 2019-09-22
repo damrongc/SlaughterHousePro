@@ -21,11 +21,11 @@ namespace SlaughterHouseLib.Models
         public Unit UnitOfWgh { get; set; }
         public decimal MinWeight { get; set; }
         public decimal MaxWeight { get; set; }
-        public decimal StdYield { get; set; } 
+        public decimal StdYield { get; set; }
         public string SaleUnitMethod { get; set; }
         public string IssueUnitMethod { get; set; }
     }
-    
+
 
 
 
@@ -86,7 +86,7 @@ namespace SlaughterHouseLib.Models
 
                                     SaleUnitMethod = p.Field<string>("sale_unit_method"),
                                     IssueUnitMethod = p.Field<string>("issue_unit_method"),
-        
+
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
@@ -129,6 +129,68 @@ namespace SlaughterHouseLib.Models
                     }
 
                     return products;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static DataTable GetProductsForSale(string productCode, string productName)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"
+                                Select 0 as select_col, p.product_code, product_name,
+                                p.issue_unit_method, 
+                                case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end  as unit_code,
+                                u.unit_name
+                                From product p,
+                                product_price pp,
+                                unit_of_measurement u
+                                where p.product_code = pp.product_code
+                                and DATE_FORMAT(sysdate(),'%Y-%m-%d')  >= pp.start_date
+                                and DATE_FORMAT(sysdate(),'%Y-%m-%d')  <= pp.end_date
+                                and p.active = 1 
+                                and case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end = u.unit_code
+                              ";
+                    if (String.IsNullOrEmpty(productCode) == false)
+                    {
+                        sql += $" and p.product_code like '%{productCode}%' ";
+                    }
+                    if (String.IsNullOrEmpty(productName) == false)
+                    {
+                        sql += $" and p.product_name like '%{productName}%' ";
+                    }
+                    sql += "  order by p.product_code  ";
+                    var cmd = new MySqlCommand(sql, conn);
+
+                    //if (String.IsNullOrEmpty(productCode) == false)
+                    //{
+                    //    cmd.Parameters.AddWithValue("product_code", productCode);
+                    //}
+                    //if (String.IsNullOrEmpty(productName) == false)
+                    //{
+                    //    cmd.Parameters.AddWithValue("product_name", productName);
+                    //}
+
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+
+                    //var coll = (from p in ds.Tables[0].AsEnumerable()
+                    //            select new
+                    //            {
+                    //                ProductCode = p.Field<string>("product_code"),
+                    //                ProductName = p.Field<string>("product_name"),
+                    //            }).ToList();
+
+                    return ds.Tables[0];
                 }
             }
             catch (Exception)
@@ -180,8 +242,8 @@ namespace SlaughterHouseLib.Models
                             },
                             MinWeight = Convert.ToDecimal(ds.Tables[0].Rows[0]["min_weight"]),
                             MaxWeight = Convert.ToDecimal(ds.Tables[0].Rows[0]["max_weight"]),
-                            StdYield  = Convert.ToDecimal(ds.Tables[0].Rows[0]["std_yield"]),
-                            SaleUnitMethod = ds.Tables[0].Rows[0]["sale_unit_method"].ToString(), 
+                            StdYield = Convert.ToDecimal(ds.Tables[0].Rows[0]["std_yield"]),
+                            SaleUnitMethod = ds.Tables[0].Rows[0]["sale_unit_method"].ToString(),
                             IssueUnitMethod = ds.Tables[0].Rows[0]["issue_unit_method"].ToString(),
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
@@ -276,9 +338,9 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("unit_of_qty", product.UnitOfQty.UnitCode);
                     cmd.Parameters.AddWithValue("unit_of_wgh", product.UnitOfWgh.UnitCode);
 
-                    cmd.Parameters.AddWithValue("min_weight", product.MinWeight );
-                    cmd.Parameters.AddWithValue("max_weight", product.MaxWeight );
-                    cmd.Parameters.AddWithValue("std_yield", product.StdYield );
+                    cmd.Parameters.AddWithValue("min_weight", product.MinWeight);
+                    cmd.Parameters.AddWithValue("max_weight", product.MaxWeight);
+                    cmd.Parameters.AddWithValue("std_yield", product.StdYield);
 
                     cmd.Parameters.AddWithValue("sale_unit_method", product.SaleUnitMethod);
                     cmd.Parameters.AddWithValue("issue_unit_method", product.IssueUnitMethod);

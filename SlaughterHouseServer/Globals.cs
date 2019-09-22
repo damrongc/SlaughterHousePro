@@ -15,7 +15,8 @@ namespace SlaughterHouseServer
         public const string REQUEST_DATE = "REQUEST_DATE";
         public const string QTY_WGH = "QTY_WGH";
         public const string QTY_WGH_LOCATION = "QTY_WGH_LOCATION";
-        
+        public const string SELECT_COL = "SELECT_COL";
+
 
         public const string ACTIVE = "ACTIVE";
         public const string ADDRESS = "ADDRESS";

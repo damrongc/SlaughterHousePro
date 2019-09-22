@@ -42,7 +42,7 @@
             this.groupBoxReportName.Size = new System.Drawing.Size(1184, 661);
             this.groupBoxReportName.TabIndex = 0;
             this.groupBoxReportName.TabStop = false;
-            this.groupBoxReportName.Text = "ใบแจ้งหหนี้";
+            this.groupBoxReportName.Text = "ใบจัดสินค้า";
             // 
             // rptViewer
             // 
@@ -58,7 +58,7 @@
             this.rptViewer.TabIndex = 1;
             this.rptViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
-            // Form_InvoiceReport
+            // Form_ProductSlipReport
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1184, 661);
@@ -66,7 +66,7 @@
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimizeBox = false;
-            this.Name = "Form_InvoiceReport";
+            this.Name = "Form_ProductSlipReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form_InvoiceReport";
             this.groupBoxReportName.ResumeLayout(false);
