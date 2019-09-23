@@ -32,9 +32,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.gvDt = new System.Windows.Forms.DataGridView();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.ORDER_NO = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -44,12 +41,15 @@
             this.dtpRequestDate = new System.Windows.Forms.DateTimePicker();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.gvDt = new System.Windows.Forms.DataGridView();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).BeginInit();
-            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -94,41 +94,6 @@
             this.panel1.Size = new System.Drawing.Size(1380, 730);
             this.panel1.TabIndex = 3;
             // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.gvDt);
-            this.panel5.Location = new System.Drawing.Point(6, 433);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1368, 294);
-            this.panel5.TabIndex = 10;
-            // 
-            // gvDt
-            // 
-            this.gvDt.AllowUserToAddRows = false;
-            this.gvDt.AllowUserToDeleteRows = false;
-            this.gvDt.AllowUserToResizeColumns = false;
-            this.gvDt.AllowUserToResizeRows = false;
-            this.gvDt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.gvDt.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvDt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvDt.Location = new System.Drawing.Point(0, 0);
-            this.gvDt.Name = "gvDt";
-            this.gvDt.ReadOnly = true;
-            this.gvDt.RowHeadersWidth = 10;
-            this.gvDt.Size = new System.Drawing.Size(1368, 294);
-            this.gvDt.TabIndex = 10;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.gv);
-            this.panel4.Location = new System.Drawing.Point(6, 67);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1368, 364);
-            this.panel4.TabIndex = 9;
-            // 
             // gv
             // 
             this.gv.AllowUserToAddRows = false;
@@ -137,7 +102,7 @@
             this.gv.AllowUserToResizeRows = false;
             this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.gv.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.gv.BackgroundColor = System.Drawing.Color.Gray;
             this.gv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -147,7 +112,7 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(1368, 364);
+            this.gv.Size = new System.Drawing.Size(1368, 290);
             this.gv.TabIndex = 9;
             // 
             // Edit
@@ -232,6 +197,43 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "ลูกค้า:";
             // 
+            // gvDt
+            // 
+            this.gvDt.AllowUserToAddRows = false;
+            this.gvDt.AllowUserToDeleteRows = false;
+            this.gvDt.AllowUserToResizeColumns = false;
+            this.gvDt.AllowUserToResizeRows = false;
+            this.gvDt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gvDt.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvDt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvDt.Location = new System.Drawing.Point(0, 0);
+            this.gvDt.Name = "gvDt";
+            this.gvDt.ReadOnly = true;
+            this.gvDt.RowHeadersWidth = 10;
+            this.gvDt.Size = new System.Drawing.Size(1368, 366);
+            this.gvDt.TabIndex = 10;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.gv);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(6, 68);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1368, 290);
+            this.panel4.TabIndex = 10;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.gvDt);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(6, 358);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1368, 366);
+            this.panel5.TabIndex = 11;
+            // 
             // Form_Order
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -243,12 +245,12 @@
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Form_Farm";
             this.panel1.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).EndInit();
-            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -264,11 +266,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpRequestDate;
         private System.Windows.Forms.ComboBox cboCustomer;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.DataGridView gv;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.DataGridView gvDt;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewLinkColumn ORDER_NO;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.DataGridView gvDt;
+        private System.Windows.Forms.Panel panel4;
     }
 }

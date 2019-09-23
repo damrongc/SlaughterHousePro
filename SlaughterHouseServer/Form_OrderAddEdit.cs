@@ -265,6 +265,8 @@ namespace SlaughterHouseServer
             }
 
         }
+
+
         #endregion
 
         private void LoadData()
@@ -310,6 +312,7 @@ namespace SlaughterHouseServer
         {
             try
             {
+                CheckBeforeSave();
                 var orderItems = new List<OrderItem>();
                 int seq = 0;
                 foreach (DataRow row in dtOrderItem.Rows)
@@ -318,23 +321,24 @@ namespace SlaughterHouseServer
 
                     if (dtBom.Rows.Count > 0)
                     {
-                        foreach (DataRow dtRow in dtBom.Rows)
+                        foreach (DataRow dtBomRow in dtBom.Rows)
                         {
                             seq++;
+                            //Product productBom = ProductController.GetProduct(dtBomRow[GlobalsColumn.PRODUCT_CODE].ToString());
                             orderItems.Add(new OrderItem
                             {
                                 OrderNo = txtOrderNo.Text,
                                 Seq = seq,
                                 Product = new Product
                                 {
-                                    ProductCode = dtRow[GlobalsColumn.PRODUCT_CODE].ToString(),
+                                    ProductCode = dtBomRow[GlobalsColumn.PRODUCT_CODE].ToString(),
                                     ProductName = "",
                                 },
-                                BomCode = (int)dtRow["bom_code"],
+                                BomCode = (int)dtBomRow["bom_code"],
                                 OrderSetQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) : 0,
                                 OrderSetWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) : 0,
-                                OrderQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) * Convert.ToInt16(dtRow["Mutiply_Qty"]) : 0,
-                                OrderWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) * Convert.ToDecimal(dtRow["Mutiply_Wgh"]) : 0,
+                                OrderQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) * Convert.ToInt16(dtBomRow["Mutiply_Qty"]) : 0,
+                                OrderWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) * Convert.ToDecimal(dtBomRow["Mutiply_Wgh"]) : 0,
                             });
                         }
                     }
@@ -414,7 +418,28 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
+        private void CheckBeforeSave()
+        {
+            try
+            {
+             
 
+                //Check UNIT_PRICE
+                for (int i = 0; i < dtOrderItem.Rows.Count; i++)
+                {
+                    if (Convert.ToDecimal(dtOrderItem.Rows[i][GlobalsColumn.QTY_WGH]) == 0)
+                    {
+                        throw new Exception($"สินค้า {dtOrderItem.Rows[i][GlobalsColumn.PRODUCT_NAME]} ไม่ได้ระบุจำนวน");
+                    }
+                }
+
+             
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 

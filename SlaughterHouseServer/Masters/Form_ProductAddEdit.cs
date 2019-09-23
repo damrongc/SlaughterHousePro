@@ -271,9 +271,7 @@ namespace SlaughterHouseServer
         private void BtnSaveAndNew_Click(object sender, System.EventArgs e)
         {
             try
-            {
-                //UnitOfQty = new Unit;
-                //UnitOfWgh = new Unit;
+            { 
                 var product = new Product
                 {
                     ProductCode = txtProductCode.Text.Trim(),
@@ -286,7 +284,7 @@ namespace SlaughterHouseServer
                     UnitOfQty = new Unit
                     {
                         UnitCode = (int)comboxUnitQty.SelectedValue,
-                        UnitName = comboxUnitQty.Text,  
+                        UnitName = comboxUnitQty.Text,
                     },
                     UnitOfWgh = new Unit
                     {
@@ -296,10 +294,12 @@ namespace SlaughterHouseServer
                     MinWeight = Convert.ToDecimal(txtMinWgh.Text),
                     MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
                     StdYield = Convert.ToDecimal(txtStdYield.Text),
+                    SaleUnitMethod = (rdbQtySale.Checked == true) ? "Q" : "W",
+                    IssueUnitMethod = (rdbQtyIssue.Checked == true) ? "Q" : "W",
                     Active = chkActive.Checked,
                     CreateBy = "system",
                 };
-                ProductController.Insert(product);
+                ProductController.Insert(product); 
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 txtProductCode.Text = "";
