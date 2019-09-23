@@ -66,6 +66,7 @@
     <Compile Include="Globals.cs" />
     <Compile Include="MyExtension.cs" />
     <Compile Include="InvoiceController.cs" />
+    <Compile Include="BomController.cs" />
     <Compile Include="ProductSlipController.cs" />
     <Compile Include="ProductionOrderController.cs" />
     <Compile Include="ReportController.cs" />

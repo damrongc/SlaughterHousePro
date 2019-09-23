@@ -33,16 +33,16 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.plMenu = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.plContainer = new System.Windows.Forms.Panel();
-            this.BtnMaster = new System.Windows.Forms.Button();
-            this.dragControl1 = new DragControl();
             this.BtnReport = new System.Windows.Forms.Button();
             this.BtnInvoice = new System.Windows.Forms.Button();
             this.BtnProductionOrder = new System.Windows.Forms.Button();
             this.BtnOrder = new System.Windows.Forms.Button();
             this.BtnCarcass = new System.Windows.Forms.Button();
             this.BtnReceive = new System.Windows.Forms.Button();
+            this.BtnMaster = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.plContainer = new System.Windows.Forms.Panel();
+            this.dragControl1 = new DragControl();
             this.plHeader.SuspendLayout();
             this.plMenu.SuspendLayout();
             this.SuspendLayout();
@@ -107,58 +107,6 @@
             this.plMenu.Name = "plMenu";
             this.plMenu.Size = new System.Drawing.Size(147, 846);
             this.plMenu.TabIndex = 9;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Black;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(0, 813);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(147, 33);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "©2019 NAV Project";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // plContainer
-            // 
-            this.plContainer.AutoScroll = true;
-            this.plContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plContainer.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.plContainer.Location = new System.Drawing.Point(147, 54);
-            this.plContainer.Name = "plContainer";
-            this.plContainer.Size = new System.Drawing.Size(1253, 846);
-            this.plContainer.TabIndex = 10;
-            // 
-            // BtnMaster
-            // 
-            this.BtnMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnMaster.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnMaster.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.BtnMaster.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnMaster.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnMaster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMaster.Font = new System.Drawing.Font("Kanit", 14.25F);
-            this.BtnMaster.ForeColor = System.Drawing.Color.White;
-            this.BtnMaster.Image = ((System.Drawing.Image)(resources.GetObject("BtnMaster.Image")));
-            this.BtnMaster.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnMaster.Location = new System.Drawing.Point(0, 0);
-            this.BtnMaster.Name = "BtnMaster";
-            this.BtnMaster.Size = new System.Drawing.Size(147, 50);
-            this.BtnMaster.TabIndex = 27;
-            this.BtnMaster.Text = "ข้อมูลหลัก";
-            this.BtnMaster.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnMaster.UseVisualStyleBackColor = false;
-            // 
-            // dragControl1
-            // 
-            this.dragControl1.SelectControl = this.plHeader;
             // 
             // BtnReport
             // 
@@ -279,6 +227,58 @@
             this.BtnReceive.Text = "รับหมูเป็น";
             this.BtnReceive.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnReceive.UseVisualStyleBackColor = false;
+            // 
+            // BtnMaster
+            // 
+            this.BtnMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnMaster.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnMaster.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.BtnMaster.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnMaster.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnMaster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnMaster.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnMaster.ForeColor = System.Drawing.Color.White;
+            this.BtnMaster.Image = ((System.Drawing.Image)(resources.GetObject("BtnMaster.Image")));
+            this.BtnMaster.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnMaster.Location = new System.Drawing.Point(0, 0);
+            this.BtnMaster.Name = "BtnMaster";
+            this.BtnMaster.Size = new System.Drawing.Size(147, 50);
+            this.BtnMaster.TabIndex = 27;
+            this.BtnMaster.Text = "ข้อมูลหลัก";
+            this.BtnMaster.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnMaster.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Black;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(0, 813);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(147, 33);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "©2019 NAV Project";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // plContainer
+            // 
+            this.plContainer.AutoScroll = true;
+            this.plContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plContainer.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.plContainer.Location = new System.Drawing.Point(147, 54);
+            this.plContainer.Name = "plContainer";
+            this.plContainer.Size = new System.Drawing.Size(1253, 846);
+            this.plContainer.TabIndex = 10;
+            // 
+            // dragControl1
+            // 
+            this.dragControl1.SelectControl = this.plHeader;
             // 
             // Form_Main
             // 

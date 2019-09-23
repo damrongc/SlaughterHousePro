@@ -29,19 +29,21 @@
         private void InitializeComponent()
         {
             this.plMenu = new System.Windows.Forms.Panel();
-            this.plContainer = new System.Windows.Forms.Panel();
-            this.BtnFarm = new System.Windows.Forms.Button();
-            this.BtnCustomer = new System.Windows.Forms.Button();
             this.BtnPriceList = new System.Windows.Forms.Button();
-            this.BtnProductGroup = new System.Windows.Forms.Button();
+            this.BtnCustomer = new System.Windows.Forms.Button();
             this.BtnUnit = new System.Windows.Forms.Button();
+            this.BtnProductGroup = new System.Windows.Forms.Button();
             this.BtnProduct = new System.Windows.Forms.Button();
+            this.BtnFarm = new System.Windows.Forms.Button();
+            this.plContainer = new System.Windows.Forms.Panel();
+            this.BtnBom = new System.Windows.Forms.Button();
             this.plMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // plMenu
             // 
             this.plMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.plMenu.Controls.Add(this.BtnBom);
             this.plMenu.Controls.Add(this.BtnPriceList);
             this.plMenu.Controls.Add(this.BtnCustomer);
             this.plMenu.Controls.Add(this.BtnUnit);
@@ -53,42 +55,6 @@
             this.plMenu.Name = "plMenu";
             this.plMenu.Size = new System.Drawing.Size(165, 750);
             this.plMenu.TabIndex = 2;
-            // 
-            // plContainer
-            // 
-            this.plContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plContainer.Location = new System.Drawing.Point(165, 0);
-            this.plContainer.Name = "plContainer";
-            this.plContainer.Size = new System.Drawing.Size(1235, 750);
-            this.plContainer.TabIndex = 3;
-            // 
-            // BtnFarm
-            // 
-            this.BtnFarm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnFarm.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnFarm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnFarm.Font = new System.Drawing.Font("Kanit", 14.25F);
-            this.BtnFarm.ForeColor = System.Drawing.Color.White;
-            this.BtnFarm.Location = new System.Drawing.Point(0, 0);
-            this.BtnFarm.Name = "BtnFarm";
-            this.BtnFarm.Size = new System.Drawing.Size(165, 50);
-            this.BtnFarm.TabIndex = 0;
-            this.BtnFarm.Text = "ฟาร์ม";
-            this.BtnFarm.UseVisualStyleBackColor = false;
-            // 
-            // BtnCustomer
-            // 
-            this.BtnCustomer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnCustomer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCustomer.Font = new System.Drawing.Font("Kanit", 14.25F);
-            this.BtnCustomer.ForeColor = System.Drawing.Color.White;
-            this.BtnCustomer.Location = new System.Drawing.Point(0, 200);
-            this.BtnCustomer.Name = "BtnCustomer";
-            this.BtnCustomer.Size = new System.Drawing.Size(165, 50);
-            this.BtnCustomer.TabIndex = 1;
-            this.BtnCustomer.Text = "ลูกค้า";
-            this.BtnCustomer.UseVisualStyleBackColor = false;
             // 
             // BtnPriceList
             // 
@@ -104,19 +70,19 @@
             this.BtnPriceList.Text = "ราคาประกาศ";
             this.BtnPriceList.UseVisualStyleBackColor = false;
             // 
-            // BtnProductGroup
+            // BtnCustomer
             // 
-            this.BtnProductGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnProductGroup.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnProductGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnProductGroup.Font = new System.Drawing.Font("Kanit", 14.25F);
-            this.BtnProductGroup.ForeColor = System.Drawing.Color.White;
-            this.BtnProductGroup.Location = new System.Drawing.Point(0, 100);
-            this.BtnProductGroup.Name = "BtnProductGroup";
-            this.BtnProductGroup.Size = new System.Drawing.Size(165, 50);
-            this.BtnProductGroup.TabIndex = 2;
-            this.BtnProductGroup.Text = "กลุ่มสินค้า";
-            this.BtnProductGroup.UseVisualStyleBackColor = false;
+            this.BtnCustomer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnCustomer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCustomer.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnCustomer.ForeColor = System.Drawing.Color.White;
+            this.BtnCustomer.Location = new System.Drawing.Point(0, 200);
+            this.BtnCustomer.Name = "BtnCustomer";
+            this.BtnCustomer.Size = new System.Drawing.Size(165, 50);
+            this.BtnCustomer.TabIndex = 1;
+            this.BtnCustomer.Text = "ลูกค้า";
+            this.BtnCustomer.UseVisualStyleBackColor = false;
             // 
             // BtnUnit
             // 
@@ -132,6 +98,20 @@
             this.BtnUnit.Text = "หน่วยสินค้า";
             this.BtnUnit.UseVisualStyleBackColor = false;
             // 
+            // BtnProductGroup
+            // 
+            this.BtnProductGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnProductGroup.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnProductGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnProductGroup.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnProductGroup.ForeColor = System.Drawing.Color.White;
+            this.BtnProductGroup.Location = new System.Drawing.Point(0, 100);
+            this.BtnProductGroup.Name = "BtnProductGroup";
+            this.BtnProductGroup.Size = new System.Drawing.Size(165, 50);
+            this.BtnProductGroup.TabIndex = 2;
+            this.BtnProductGroup.Text = "กลุ่มสินค้า";
+            this.BtnProductGroup.UseVisualStyleBackColor = false;
+            // 
             // BtnProduct
             // 
             this.BtnProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
@@ -145,6 +125,42 @@
             this.BtnProduct.TabIndex = 3;
             this.BtnProduct.Text = "สินค้า";
             this.BtnProduct.UseVisualStyleBackColor = false;
+            // 
+            // BtnFarm
+            // 
+            this.BtnFarm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnFarm.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnFarm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnFarm.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnFarm.ForeColor = System.Drawing.Color.White;
+            this.BtnFarm.Location = new System.Drawing.Point(0, 0);
+            this.BtnFarm.Name = "BtnFarm";
+            this.BtnFarm.Size = new System.Drawing.Size(165, 50);
+            this.BtnFarm.TabIndex = 0;
+            this.BtnFarm.Text = "ฟาร์ม";
+            this.BtnFarm.UseVisualStyleBackColor = false;
+            // 
+            // plContainer
+            // 
+            this.plContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plContainer.Location = new System.Drawing.Point(165, 0);
+            this.plContainer.Name = "plContainer";
+            this.plContainer.Size = new System.Drawing.Size(1235, 750);
+            this.plContainer.TabIndex = 3;
+            // 
+            // BtnBom
+            // 
+            this.BtnBom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnBom.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnBom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBom.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnBom.ForeColor = System.Drawing.Color.White;
+            this.BtnBom.Location = new System.Drawing.Point(0, 300);
+            this.BtnBom.Name = "BtnBom";
+            this.BtnBom.Size = new System.Drawing.Size(165, 50);
+            this.BtnBom.TabIndex = 6;
+            this.BtnBom.Text = "Bom";
+            this.BtnBom.UseVisualStyleBackColor = false;
             // 
             // Form_MasterMenu
             // 
@@ -171,5 +187,6 @@
         private System.Windows.Forms.Button BtnProduct;
         private System.Windows.Forms.Button BtnFarm;
         private System.Windows.Forms.Panel plContainer;
+        private System.Windows.Forms.Button BtnBom;
     }
 }

@@ -62,11 +62,29 @@
     <Compile Include="DragControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Form_LovProductSale.cs">
+    <Compile Include="Masters\Form_LovProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_LovProductSale.Designer.cs">
-      <DependentUpon>Form_LovProductSale.cs</DependentUpon>
+    <Compile Include="Masters\Form_LovProduct.Designer.cs">
+      <DependentUpon>Form_LovProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_LovProductMuti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_LovProductMuti.Designer.cs">
+      <DependentUpon>Form_LovProductMuti.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_Bom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Bom.Designer.cs">
+      <DependentUpon>Form_Bom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_BomAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_BomAddEdit.Designer.cs">
+      <DependentUpon>Form_BomAddEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_ProductSlipReport.cs">
       <SubType>Form</SubType>
@@ -281,8 +299,17 @@
     <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form_LovProductSale.resx">
-      <DependentUpon>Form_LovProductSale.cs</DependentUpon>
+    <EmbeddedResource Include="Masters\Form_LovProduct.resx">
+      <DependentUpon>Form_LovProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_LovProductMuti.resx">
+      <DependentUpon>Form_LovProductMuti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Bom.resx">
+      <DependentUpon>Form_Bom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_BomAddEdit.resx">
+      <DependentUpon>Form_BomAddEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_ProductSlipReport.resx">
       <DependentUpon>Form_ProductSlipReport.cs</DependentUpon>

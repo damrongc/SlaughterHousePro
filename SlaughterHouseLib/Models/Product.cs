@@ -198,6 +198,82 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
+        public static DataTable GetProducts(string productCode, string productName, bool mutiFlag = false)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"";
+                    if (mutiFlag == true)
+                    {
+                        sql = @"
+                                Select 0 as select_col,  p.product_code, product_name,
+                                p.issue_unit_method, 
+                                case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end  as unit_code,
+                                u.unit_name
+                                From product p, 
+                                unit_of_measurement u
+                                where p.active = 1 
+                                and case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end = u.unit_code
+                              ";
+                    }
+                    else
+                    {
+                        sql = @"
+                                Select   p.product_code, product_name,
+                                p.issue_unit_method, 
+                                case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end  as unit_code,
+                                u.unit_name
+                                From product p, 
+                                unit_of_measurement u
+                                where p.active = 1 
+                                and case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end = u.unit_code
+                              ";
+                    }
+                    
+                    if (String.IsNullOrEmpty(productCode) == false)
+                    {
+                        sql += $" and p.product_code like '%{productCode}%' ";
+                    }
+                    if (String.IsNullOrEmpty(productName) == false)
+                    {
+                        sql += $" and p.product_name like '%{productName}%' ";
+                    }
+                    sql += "  order by p.product_code  ";
+                    var cmd = new MySqlCommand(sql, conn);
+
+                    //if (String.IsNullOrEmpty(productCode) == false)
+                    //{
+                    //    cmd.Parameters.AddWithValue("product_code", productCode);
+                    //}
+                    //if (String.IsNullOrEmpty(productName) == false)
+                    //{
+                    //    cmd.Parameters.AddWithValue("product_name", productName);
+                    //}
+
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+
+                    //var coll = (from p in ds.Tables[0].AsEnumerable()
+                    //            select new
+                    //            {
+                    //                ProductCode = p.Field<string>("product_code"),
+                    //                ProductName = p.Field<string>("product_name"),
+                    //            }).ToList();
+
+                    return ds.Tables[0];
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public static Product GetProduct(string product_code)
         {
             try

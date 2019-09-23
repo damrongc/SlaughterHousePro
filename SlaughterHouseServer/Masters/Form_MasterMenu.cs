@@ -27,6 +27,7 @@ namespace SlaughterHouseServer.Masters
             BtnProductGroup.Click += Btn_Click;
             BtnUnit.Click += Btn_Click;
             BtnPriceList.Click += Btn_Click;
+            BtnBom.Click += Btn_Click;
 
         }
 
@@ -57,6 +58,9 @@ namespace SlaughterHouseServer.Masters
                     break;
                 case "BtnPriceList":
                     AddFormToContainer(new Form_ProductPrice());
+                    break;
+                case "BtnBom":
+                    AddFormToContainer(new Form_Bom());
                     break;
 
             }

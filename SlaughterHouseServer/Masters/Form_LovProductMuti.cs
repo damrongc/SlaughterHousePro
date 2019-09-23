@@ -8,16 +8,17 @@ using System.Web.UI.WebControls;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_LovProductSale : Form
+    public partial class Form_LovProductMuti : Form
     {
         public string orderNo { get; set; }
         //public string productSlipNo { get; set; }
 
         DataTable dtProduct;
         public DataTable dtResultProduct;
+        public bool forSaleFlag = false;
 
 
-        public Form_LovProductSale()
+        public Form_LovProductMuti()
         {
             InitializeComponent();
             UserSettingsComponent();
@@ -26,6 +27,7 @@ namespace SlaughterHouseServer
         {
             gv.CellContentClick += Gv_CellContentClick;
             gv.DataBindingComplete += Gv_DataBindingComplete;
+           
             gv.ReadOnly = false;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
@@ -68,18 +70,20 @@ namespace SlaughterHouseServer
 
             gv.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gv.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-            gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
+            gv.Columns[GlobalsColumn.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+
+             gv.Columns[GlobalsColumn.UNIT_CODE].Visible = false;
+             gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
 
             gv.Columns[GlobalsColumn.PRODUCT_CODE].ReadOnly = true;
             gv.Columns[GlobalsColumn.PRODUCT_NAME].ReadOnly = true;
             gv.Columns[GlobalsColumn.UNIT_NAME].ReadOnly = true;
             gv.Columns[GlobalsColumn.SELECT_COL].ReadOnly = false;
 
-            //gv.Columns[GlobalsColumn.UNIT_CODE ].HeaderText = "รหัสหน่วยสินค้า";
-
-
-            //gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
-            //gv.Columns[GlobalsColumn.UNIT_CODE].Visible = false;
+            foreach (DataGridViewColumn column in gv.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         #endregion
@@ -141,7 +145,15 @@ namespace SlaughterHouseServer
         private void LoadData()
         {
             dtProduct = new DataTable();
-            dtProduct = ProductController.GetProductsForSale(txtProductCode.Text, txtProductName.Text);
+            if (forSaleFlag == true)
+            {
+                dtProduct = ProductController.GetProductsForSale(txtProductCode.Text, txtProductName.Text);
+            }
+            else
+            {
+                dtProduct = ProductController.GetProducts(txtProductCode.Text, txtProductName.Text, true);
+            }
+            
             if (dtProduct != null)
             {
                 gv.DataSource = dtProduct;
@@ -185,20 +197,7 @@ namespace SlaughterHouseServer
                 this.Close();
             }
 
-
-
-
-
-            //drNew["PRODUCT_CODE"] = dt.Rows[idxRow]["PRODUCT_CODE"];
-            //drNew["PRODUCT_NAME"] = dt.Rows[idxRow]["PRODUCT_NAME"];
-            //drNew["LOT_NO"] = "NA";
-            //drNew["LOCATION_CODE"] = 0;
-            //drNew["LOCATION_NAME"] = "NA";
-            //drNew["QTY_WGH"] = Convert.ToDecimal(dt.Rows[idxRow]["QTY_WGH"]);
-            //drNew["UNIT_NAME"] = dt.Rows[idxRow]["UNIT_NAME"];
-            //drNew["ISSUE_UNIT_METHOD"] = dt.Rows[idxRow]["ISSUE_UNIT_METHOD"];
-            //drNew["QTY_WGH_LOCATION"] = cfQtyWgh;
-            //dt.Rows.Add(drNew);
+             
 
             catch (Exception ex)
             {
@@ -207,15 +206,7 @@ namespace SlaughterHouseServer
 
         }
 
-
-
-        //private void LoadCustomer()
-        //{
-        //    var coll = CustomerController.GetAllCustomers();
-        //    cboCustomer.DisplayMember = "CustomerName";
-        //    cboCustomer.ValueMember = "CustomerCode";
-        //    cboCustomer.DataSource = coll;
-        //}
+ 
 
     }
 }

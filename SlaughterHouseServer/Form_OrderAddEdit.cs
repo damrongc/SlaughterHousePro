@@ -29,6 +29,7 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
+  
 
             this.Load += Form_Load;
             this.Shown += Form_Shown;
@@ -100,9 +101,13 @@ namespace SlaughterHouseServer
             gv.Columns[GlobalsColumn.PRODUCT_NAME].ReadOnly = true;
             gv.Columns[GlobalsColumn.UNIT_NAME].ReadOnly = true;
             gv.Columns[GlobalsColumn.QTY_WGH].ReadOnly = false;
-
+            foreach (DataGridViewColumn column in gv.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
 
         }
+
         #endregion
 
         #region Event Click
@@ -180,7 +185,8 @@ namespace SlaughterHouseServer
             //}
             try
             {
-                var frm = new Form_LovProductSale();
+                var frm = new Form_LovProductMuti();
+                frm.forSaleFlag = true;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     DataRow dr;

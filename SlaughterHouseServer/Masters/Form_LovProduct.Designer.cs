@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseServer
 {
-    partial class Form_LovProductSale
+    partial class Form_LovProduct
     {
         /// <summary>
         /// Required designer variable.
@@ -28,21 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LovProductSale));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LovProduct));
             this.label1 = new System.Windows.Forms.Label();
             this.txtProductCode = new System.Windows.Forms.TextBox();
-            this.BtnOk = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
+            this.select_col = new System.Windows.Forms.DataGridViewImageColumn();
+            this.product_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BtnCancel = new System.Windows.Forms.Button();
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.BtnSearch = new System.Windows.Forms.Button();
-            this.select_col = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.product_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
@@ -64,23 +62,6 @@
             this.txtProductCode.Name = "txtProductCode";
             this.txtProductCode.Size = new System.Drawing.Size(215, 36);
             this.txtProductCode.TabIndex = 1;
-            // 
-            // BtnOk
-            // 
-            this.BtnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnOk.FlatAppearance.BorderSize = 0;
-            this.BtnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOk.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnOk.ForeColor = System.Drawing.Color.White;
-            this.BtnOk.Image = ((System.Drawing.Image)(resources.GetObject("BtnOk.Image")));
-            this.BtnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnOk.Location = new System.Drawing.Point(287, 569);
-            this.BtnOk.Name = "BtnOk";
-            this.BtnOk.Size = new System.Drawing.Size(215, 36);
-            this.BtnOk.TabIndex = 7;
-            this.BtnOk.Text = "ตกลง";
-            this.BtnOk.UseVisualStyleBackColor = false;
-            this.BtnOk.Click += new System.EventHandler(this.BtnOk_Click);
             // 
             // panel2
             // 
@@ -112,6 +93,31 @@
             this.gv.Size = new System.Drawing.Size(698, 404);
             this.gv.TabIndex = 43;
             // 
+            // select_col
+            // 
+            this.select_col.DataPropertyName = "select_col";
+            this.select_col.HeaderText = "select_col";
+            this.select_col.Image = ((System.Drawing.Image)(resources.GetObject("select_col.Image")));
+            this.select_col.Name = "select_col";
+            this.select_col.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.select_col.Width = 102;
+            // 
+            // product_code
+            // 
+            this.product_code.DataPropertyName = "product_code";
+            this.product_code.HeaderText = "product_code";
+            this.product_code.Name = "product_code";
+            this.product_code.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.product_code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.product_code.Width = 135;
+            // 
+            // product_name
+            // 
+            this.product_name.DataPropertyName = "product_name";
+            this.product_name.HeaderText = "product_name";
+            this.product_name.Name = "product_name";
+            this.product_name.Width = 161;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -130,22 +136,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(698, 36);
             this.panel1.TabIndex = 45;
-            // 
-            // BtnCancel
-            // 
-            this.BtnCancel.BackColor = System.Drawing.Color.Tomato;
-            this.BtnCancel.FlatAppearance.BorderSize = 0;
-            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCancel.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCancel.ForeColor = System.Drawing.Color.White;
-            this.BtnCancel.Image = ((System.Drawing.Image)(resources.GetObject("BtnCancel.Image")));
-            this.BtnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCancel.Location = new System.Drawing.Point(508, 569);
-            this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(202, 36);
-            this.BtnCancel.TabIndex = 47;
-            this.BtnCancel.Text = "ยกเลิก";
-            this.BtnCancel.UseVisualStyleBackColor = false;
             // 
             // txtProductName
             // 
@@ -182,49 +172,24 @@
             this.BtnSearch.UseVisualStyleBackColor = false;
             this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
-            // select_col
-            // 
-            this.select_col.DataPropertyName = "select_col";
-            this.select_col.HeaderText = "select_col";
-            this.select_col.Name = "select_col";
-            this.select_col.Width = 102;
-            // 
-            // product_code
-            // 
-            this.product_code.DataPropertyName = "product_code";
-            this.product_code.HeaderText = "product_code";
-            this.product_code.Name = "product_code";
-            this.product_code.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.product_code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.product_code.Width = 135;
-            // 
-            // product_name
-            // 
-            this.product_name.DataPropertyName = "product_name";
-            this.product_name.HeaderText = "product_name";
-            this.product_name.Name = "product_name";
-            this.product_name.Width = 161;
-            // 
-            // Form_LovProductSale
+            // Form_LovProduct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(723, 632);
+            this.ClientSize = new System.Drawing.Size(723, 563);
             this.Controls.Add(this.BtnSearch);
             this.Controls.Add(this.txtProductName);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.BtnOk);
             this.Controls.Add(this.txtProductCode);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_LovProductSale";
+            this.Name = "Form_LovProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form_LovProduct";
+            this.Text = "Form_LovProductOnlyOne";
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -238,16 +203,14 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtProductCode;
-        private System.Windows.Forms.Button BtnOk;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView gv;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.TextBox txtProductName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button BtnSearch;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn select_col;
+        private System.Windows.Forms.DataGridViewImageColumn select_col;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
     }
