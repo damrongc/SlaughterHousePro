@@ -46,9 +46,9 @@ namespace SlaughterHouseClient
         public virtual DbSet<transport> transports { get; set; }
         public virtual DbSet<transport_item> transport_item { get; set; }
         public virtual DbSet<unit_of_measurement> unit_of_measurement { get; set; }
-        public virtual DbSet<receive_item> receive_item { get; set; }
         public virtual DbSet<bom> boms { get; set; }
         public virtual DbSet<bom_item> bom_item { get; set; }
         public virtual DbSet<stock> stocks { get; set; }
+        public virtual DbSet<receive_item> receive_item { get; set; }
     }
 }

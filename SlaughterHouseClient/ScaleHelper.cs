@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Net;
+using System.Net.Sockets;
 
 namespace SlaughterHouseClient
 {
-    public static class ScaleHelper
+    public static class Helper
     {
 
         public static string GetWeightIWX(string DataInvoke)
@@ -32,5 +34,19 @@ namespace SlaughterHouseClient
 
             return num.ToString();
         }
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
     }
+
+
 }

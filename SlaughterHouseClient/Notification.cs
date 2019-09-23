@@ -23,7 +23,7 @@ namespace ToastNotifications
         /// <param name="duration"></param>
         /// <param name="animation"></param>
         /// <param name="direction"></param>
-        public Notification(string title, string body, int duration, FormAnimator.AnimationMethod animation, FormAnimator.AnimationDirection direction)
+        public Notification(string title, string body, int duration, Color color, FormAnimator.AnimationMethod animation, FormAnimator.AnimationDirection direction)
         {
             InitializeComponent();
 
@@ -35,7 +35,8 @@ namespace ToastNotifications
             lifeTimer.Interval = duration;
             labelTitle.Text = title;
             labelBody.Text = body;
-            //BackColor = Color.Red;
+
+            BackColor = color;
 
             _animator = new FormAnimator(this, animation, direction, 500);
 

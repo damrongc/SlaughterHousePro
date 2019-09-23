@@ -69,6 +69,7 @@
             this.btnZero = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.btnTare = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -508,7 +509,7 @@
             this.btnZero.Name = "btnZero";
             this.btnZero.Size = new System.Drawing.Size(98, 40);
             this.btnZero.TabIndex = 33;
-            this.btnZero.Text = "Set Zero";
+            this.btnZero.Text = "ZERO";
             this.btnZero.UseVisualStyleBackColor = true;
             this.btnZero.Click += new System.EventHandler(this.btnZero_Click);
             // 
@@ -516,11 +517,22 @@
             // 
             this.dragControl1.SelectControl = this.panelHeader;
             // 
+            // btnTare
+            // 
+            this.btnTare.Location = new System.Drawing.Point(611, 325);
+            this.btnTare.Name = "btnTare";
+            this.btnTare.Size = new System.Drawing.Size(98, 40);
+            this.btnTare.TabIndex = 34;
+            this.btnTare.Text = "TARE";
+            this.btnTare.UseVisualStyleBackColor = true;
+            this.btnTare.Click += new System.EventHandler(this.BtnTare_Click);
+            // 
             // Form_Swine
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.btnTare);
             this.Controls.Add(this.btnZero);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
@@ -609,6 +621,7 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnZero;
         private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Button btnTare;
     }
 }
 

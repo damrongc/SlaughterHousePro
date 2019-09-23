@@ -46,7 +46,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(934, 44);
+            this.panel1.Size = new System.Drawing.Size(1024, 44);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -73,7 +73,7 @@
             this.btnClose.ForeColor = System.Drawing.Color.White;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(838, 0);
+            this.btnClose.Location = new System.Drawing.Point(928, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(96, 44);
             this.btnClose.TabIndex = 14;
@@ -90,7 +90,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 44);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(10);
-            this.panel2.Size = new System.Drawing.Size(934, 637);
+            this.panel2.Size = new System.Drawing.Size(1024, 724);
             this.panel2.TabIndex = 1;
             // 
             // gv
@@ -108,19 +108,19 @@
             this.gv.Location = new System.Drawing.Point(10, 10);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(914, 617);
+            this.gv.Size = new System.Drawing.Size(1004, 704);
             this.gv.TabIndex = 10;
             // 
             // Form_Issued
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(934, 681);
+            this.ClientSize = new System.Drawing.Size(1024, 768);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Kanit", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form_Issued";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_Receive";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

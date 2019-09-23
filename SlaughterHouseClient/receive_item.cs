@@ -23,6 +23,7 @@ namespace SlaughterHouseClient
         public decimal receive_wgh { get; set; }
         public Nullable<int> chill_qty { get; set; }
         public Nullable<decimal> chill_wgh { get; set; }
+        public long barcode_no { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }

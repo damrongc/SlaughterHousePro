@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="217538d12a614ee0bc02a52f55759ae3" Name="Diagram1" ZoomLevel="97">
+      <Diagram DiagramId="217538d12a614ee0bc02a52f55759ae3" Name="Diagram1" ZoomLevel="127">
         <EntityTypeShape EntityType="SlaughterhouseModel.barcode" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.breeder" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.customer" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
@@ -39,9 +39,6 @@
         <AssociationConnector Association="SlaughterhouseModel.fk_unit_qty" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_unit_wgh" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_porderitem_order" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.receive_item" Width="1.5" PointX="8.25" PointY="10.5" />
-        <AssociationConnector Association="SlaughterhouseModel.fk_receives_02" />
-        <AssociationConnector Association="SlaughterhouseModel.fk_receives_01" />
         <EntityTypeShape EntityType="SlaughterhouseModel.bom" Width="1.5" PointX="5.25" PointY="7" />
         <EntityTypeShape EntityType="SlaughterhouseModel.bom_item" Width="1.5" PointX="5.25" PointY="34" />
         <AssociationConnector Association="SlaughterhouseModel.fk_bom_product" />
@@ -49,6 +46,9 @@
         <EntityTypeShape EntityType="SlaughterhouseModel.stock" Width="1.5" PointX="8.25" PointY="21.375" />
         <AssociationConnector Association="SlaughterhouseModel.fk_stock_location" />
         <AssociationConnector Association="SlaughterhouseModel.fk_stock_product" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.receive_item" Width="1.5" PointX="8.25" PointY="9.625" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_receives_02" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_receives_01" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

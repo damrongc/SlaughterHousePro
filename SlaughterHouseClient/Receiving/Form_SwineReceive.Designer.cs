@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseClient.Receiving
 {
-    partial class Form_ByProduct
+    partial class Form_SwineReceive
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ByProduct));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_SwineReceive));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblCurrentDatetime = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
@@ -41,10 +41,6 @@
             this.lblReceiveNo = new System.Windows.Forms.Label();
             this.lblFarm = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.lblStockQty = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.lblStockWgh = new System.Windows.Forms.Label();
-            this.lblStockWeightCaption = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
@@ -60,19 +56,23 @@
             this.plSimulator = new System.Windows.Forms.GroupBox();
             this.btnSetWgh = new System.Windows.Forms.Button();
             this.txtSimWeight = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.lblStable = new System.Windows.Forms.Label();
-            this.btnDown = new System.Windows.Forms.Button();
-            this.btnUp = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblLastWeight = new System.Windows.Forms.Label();
             this.timerMinWeight = new System.Windows.Forms.Timer(this.components);
-            this.btnTareWeight = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.dragControl1 = new DragControl();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.btnMale = new System.Windows.Forms.Button();
+            this.btnUndified = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnFemale = new System.Windows.Forms.Button();
+            this.lblFactoryWgh = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.lblFactoryQty = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lblRemainQty = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.lblFarmQty = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
             this.plSimulator.SuspendLayout();
             this.SuspendLayout();
@@ -131,7 +131,7 @@
             this.lblCaption.Name = "lblCaption";
             this.lblCaption.Size = new System.Drawing.Size(266, 54);
             this.lblCaption.TabIndex = 0;
-            this.lblCaption.Text = "รับเครื่องในแดง";
+            this.lblCaption.Text = "รับหมูเป็น";
             this.lblCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblWeight
@@ -216,56 +216,6 @@
             this.label8.TabIndex = 10;
             this.label8.Text = "ฟาร์ม";
             // 
-            // lblStockQty
-            // 
-            this.lblStockQty.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblStockQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblStockQty.Font = new System.Drawing.Font("Kanit", 40F);
-            this.lblStockQty.ForeColor = System.Drawing.Color.Black;
-            this.lblStockQty.Location = new System.Drawing.Point(254, 632);
-            this.lblStockQty.Name = "lblStockQty";
-            this.lblStockQty.Size = new System.Drawing.Size(148, 75);
-            this.lblStockQty.TabIndex = 24;
-            this.lblStockQty.Text = "0";
-            this.lblStockQty.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label20.Font = new System.Drawing.Font("Kanit", 12F);
-            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.label20.Location = new System.Drawing.Point(252, 632);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(80, 24);
-            this.label20.TabIndex = 23;
-            this.label20.Text = "จำนวนรวม";
-            // 
-            // lblStockWgh
-            // 
-            this.lblStockWgh.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblStockWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblStockWgh.Font = new System.Drawing.Font("Kanit", 40F);
-            this.lblStockWgh.ForeColor = System.Drawing.Color.Black;
-            this.lblStockWgh.Location = new System.Drawing.Point(408, 632);
-            this.lblStockWgh.Name = "lblStockWgh";
-            this.lblStockWgh.Size = new System.Drawing.Size(254, 75);
-            this.lblStockWgh.TabIndex = 26;
-            this.lblStockWgh.Text = "0.00";
-            this.lblStockWgh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblStockWeightCaption
-            // 
-            this.lblStockWeightCaption.AutoSize = true;
-            this.lblStockWeightCaption.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblStockWeightCaption.Font = new System.Drawing.Font("Kanit", 12F);
-            this.lblStockWeightCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.lblStockWeightCaption.Location = new System.Drawing.Point(404, 632);
-            this.lblStockWeightCaption.Name = "lblStockWeightCaption";
-            this.lblStockWeightCaption.Size = new System.Drawing.Size(83, 24);
-            this.lblStockWeightCaption.TabIndex = 25;
-            this.lblStockWeightCaption.Text = "น้ำหนักรวม";
-            // 
             // lblMessage
             // 
             this.lblMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
@@ -285,7 +235,7 @@
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(903, 629);
+            this.btnStop.Location = new System.Drawing.Point(903, 353);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(109, 78);
             this.btnStop.TabIndex = 38;
@@ -299,7 +249,7 @@
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(903, 545);
+            this.btnStart.Location = new System.Drawing.Point(788, 353);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(109, 78);
             this.btnStart.TabIndex = 37;
@@ -441,15 +391,6 @@
             this.txtSimWeight.Text = "0";
             this.txtSimWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(19, 361);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(878, 262);
-            this.flowLayoutPanel1.TabIndex = 51;
-            // 
             // lblStable
             // 
             this.lblStable.AutoSize = true;
@@ -459,102 +400,10 @@
             this.lblStable.TabIndex = 53;
             this.lblStable.Text = "0";
             // 
-            // btnDown
-            // 
-            this.btnDown.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDown.Font = new System.Drawing.Font("Kanit", 18F);
-            this.btnDown.ForeColor = System.Drawing.Color.White;
-            this.btnDown.Image = ((System.Drawing.Image)(resources.GetObject("btnDown.Image")));
-            this.btnDown.Location = new System.Drawing.Point(903, 437);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(109, 70);
-            this.btnDown.TabIndex = 54;
-            this.btnDown.UseVisualStyleBackColor = false;
-            this.btnDown.Click += new System.EventHandler(this.BtnDown_Click);
-            // 
-            // btnUp
-            // 
-            this.btnUp.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUp.Font = new System.Drawing.Font("Kanit", 18F);
-            this.btnUp.ForeColor = System.Drawing.Color.White;
-            this.btnUp.Image = ((System.Drawing.Image)(resources.GetObject("btnUp.Image")));
-            this.btnUp.Location = new System.Drawing.Point(903, 361);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(109, 70);
-            this.btnUp.TabIndex = 55;
-            this.btnUp.UseVisualStyleBackColor = false;
-            this.btnUp.Click += new System.EventHandler(this.BtnUp_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label2.Location = new System.Drawing.Point(13, 325);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 33);
-            this.label2.TabIndex = 52;
-            this.label2.Text = "สินค้า";
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Font = new System.Drawing.Font("Kanit", 18F);
-            this.btnPrint.ForeColor = System.Drawing.Color.White;
-            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.Location = new System.Drawing.Point(788, 629);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(109, 78);
-            this.btnPrint.TabIndex = 56;
-            this.btnPrint.UseVisualStyleBackColor = false;
-            this.btnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Kanit", 12F);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.label1.Location = new System.Drawing.Point(8, 632);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 24);
-            this.label1.TabIndex = 59;
-            this.label1.Text = "น้ำหนัก";
-            // 
-            // lblLastWeight
-            // 
-            this.lblLastWeight.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblLastWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblLastWeight.Font = new System.Drawing.Font("Kanit", 40F);
-            this.lblLastWeight.ForeColor = System.Drawing.Color.Black;
-            this.lblLastWeight.Location = new System.Drawing.Point(12, 632);
-            this.lblLastWeight.Name = "lblLastWeight";
-            this.lblLastWeight.Size = new System.Drawing.Size(236, 75);
-            this.lblLastWeight.TabIndex = 60;
-            this.lblLastWeight.Text = "0.00";
-            this.lblLastWeight.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // timerMinWeight
             // 
             this.timerMinWeight.Interval = 1000;
             this.timerMinWeight.Tick += new System.EventHandler(this.TimerMinWeight_Tick);
-            // 
-            // btnTareWeight
-            // 
-            this.btnTareWeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(141)))), ((int)(((byte)(0)))));
-            this.btnTareWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTareWeight.Font = new System.Drawing.Font("Kanit", 18F);
-            this.btnTareWeight.ForeColor = System.Drawing.Color.White;
-            this.btnTareWeight.Location = new System.Drawing.Point(673, 629);
-            this.btnTareWeight.Name = "btnTareWeight";
-            this.btnTareWeight.Size = new System.Drawing.Size(109, 78);
-            this.btnTareWeight.TabIndex = 61;
-            this.btnTareWeight.Text = "Zero";
-            this.btnTareWeight.UseVisualStyleBackColor = false;
-            this.btnTareWeight.Visible = false;
-            this.btnTareWeight.Click += new System.EventHandler(this.BtnTareWeight_Click);
             // 
             // backgroundWorker1
             // 
@@ -565,22 +414,172 @@
             // 
             this.dragControl1.SelectControl = this.panelHeader;
             // 
-            // Form_ByProduct
+            // btnMale
+            // 
+            this.btnMale.BackColor = System.Drawing.Color.Silver;
+            this.btnMale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMale.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnMale.ForeColor = System.Drawing.Color.White;
+            this.btnMale.Location = new System.Drawing.Point(161, 361);
+            this.btnMale.Name = "btnMale";
+            this.btnMale.Size = new System.Drawing.Size(136, 70);
+            this.btnMale.TabIndex = 65;
+            this.btnMale.Text = "ผู้";
+            this.btnMale.UseVisualStyleBackColor = false;
+            this.btnMale.Click += new System.EventHandler(this.BtnMale_Click);
+            // 
+            // btnUndified
+            // 
+            this.btnUndified.BackColor = System.Drawing.Color.Silver;
+            this.btnUndified.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUndified.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnUndified.ForeColor = System.Drawing.Color.White;
+            this.btnUndified.Location = new System.Drawing.Point(303, 361);
+            this.btnUndified.Name = "btnUndified";
+            this.btnUndified.Size = new System.Drawing.Size(136, 70);
+            this.btnUndified.TabIndex = 64;
+            this.btnUndified.Text = "ไม่ระบุ";
+            this.btnUndified.UseVisualStyleBackColor = false;
+            this.btnUndified.Click += new System.EventHandler(this.BtnUndified_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label2.Location = new System.Drawing.Point(13, 325);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 33);
+            this.label2.TabIndex = 63;
+            this.label2.Text = "เพศ";
+            // 
+            // btnFemale
+            // 
+            this.btnFemale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.btnFemale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFemale.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnFemale.ForeColor = System.Drawing.Color.White;
+            this.btnFemale.Location = new System.Drawing.Point(19, 361);
+            this.btnFemale.Name = "btnFemale";
+            this.btnFemale.Size = new System.Drawing.Size(136, 70);
+            this.btnFemale.TabIndex = 62;
+            this.btnFemale.Text = "เมีย";
+            this.btnFemale.UseVisualStyleBackColor = false;
+            this.btnFemale.Click += new System.EventHandler(this.BtnFemale_Click);
+            // 
+            // lblFactoryWgh
+            // 
+            this.lblFactoryWgh.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblFactoryWgh.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblFactoryWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblFactoryWgh.Font = new System.Drawing.Font("Kanit", 48F);
+            this.lblFactoryWgh.ForeColor = System.Drawing.Color.Black;
+            this.lblFactoryWgh.Location = new System.Drawing.Point(678, 611);
+            this.lblFactoryWgh.Name = "lblFactoryWgh";
+            this.lblFactoryWgh.Size = new System.Drawing.Size(332, 97);
+            this.lblFactoryWgh.TabIndex = 73;
+            this.lblFactoryWgh.Text = "0";
+            this.lblFactoryWgh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label22.Location = new System.Drawing.Point(899, 578);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(112, 33);
+            this.label22.TabIndex = 72;
+            this.label22.Text = "น้ำหนักรวม";
+            // 
+            // lblFactoryQty
+            // 
+            this.lblFactoryQty.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblFactoryQty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblFactoryQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblFactoryQty.Font = new System.Drawing.Font("Kanit", 48F);
+            this.lblFactoryQty.ForeColor = System.Drawing.Color.Black;
+            this.lblFactoryQty.Location = new System.Drawing.Point(458, 611);
+            this.lblFactoryQty.Name = "lblFactoryQty";
+            this.lblFactoryQty.Size = new System.Drawing.Size(175, 97);
+            this.lblFactoryQty.TabIndex = 71;
+            this.lblFactoryQty.Text = "0";
+            this.lblFactoryQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label20.Location = new System.Drawing.Point(450, 578);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(158, 33);
+            this.label20.TabIndex = 70;
+            this.label20.Text = "จำนวน (ชั่งแล้ว)";
+            // 
+            // lblRemainQty
+            // 
+            this.lblRemainQty.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblRemainQty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblRemainQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblRemainQty.Font = new System.Drawing.Font("Kanit", 48F);
+            this.lblRemainQty.ForeColor = System.Drawing.Color.Black;
+            this.lblRemainQty.Location = new System.Drawing.Point(238, 611);
+            this.lblRemainQty.Name = "lblRemainQty";
+            this.lblRemainQty.Size = new System.Drawing.Size(175, 97);
+            this.lblRemainQty.TabIndex = 69;
+            this.lblRemainQty.Text = "0";
+            this.lblRemainQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label18.Location = new System.Drawing.Point(232, 578);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(146, 33);
+            this.label18.TabIndex = 68;
+            this.label18.Text = "จำนวน (รอชั่ง)";
+            // 
+            // lblFarmQty
+            // 
+            this.lblFarmQty.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblFarmQty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblFarmQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblFarmQty.Font = new System.Drawing.Font("Kanit", 48F);
+            this.lblFarmQty.ForeColor = System.Drawing.Color.Black;
+            this.lblFarmQty.Location = new System.Drawing.Point(18, 611);
+            this.lblFarmQty.Name = "lblFarmQty";
+            this.lblFarmQty.Size = new System.Drawing.Size(175, 97);
+            this.lblFarmQty.TabIndex = 67;
+            this.lblFarmQty.Text = "0";
+            this.lblFarmQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label16.Location = new System.Drawing.Point(12, 578);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(147, 33);
+            this.label16.TabIndex = 66;
+            this.label16.Text = "จำนวน (ฟาร์ม)";
+            // 
+            // Form_SwineReceive
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1024, 768);
-            this.Controls.Add(this.btnTareWeight);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblLastWeight);
-            this.Controls.Add(this.btnPrint);
-            this.Controls.Add(this.lblStockWeightCaption);
+            this.Controls.Add(this.lblFactoryWgh);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.lblFactoryQty);
             this.Controls.Add(this.label20);
-            this.Controls.Add(this.btnUp);
-            this.Controls.Add(this.btnDown);
-            this.Controls.Add(this.lblStable);
+            this.Controls.Add(this.lblRemainQty);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.lblFarmQty);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.btnMale);
+            this.Controls.Add(this.btnUndified);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.btnFemale);
+            this.Controls.Add(this.lblStable);
             this.Controls.Add(this.plSimulator);
             this.Controls.Add(this.lblMaxWeight);
             this.Controls.Add(this.lblMinWeight);
@@ -593,8 +592,6 @@
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblMessage);
-            this.Controls.Add(this.lblStockWgh);
-            this.Controls.Add(this.lblStockQty);
             this.Controls.Add(this.lblFarm);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lblReceiveNo);
@@ -607,7 +604,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_ByProduct";
+            this.Name = "Form_SwineReceive";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รับหมูเป็น";
             this.Load += new System.EventHandler(this.Form_Load);
@@ -632,10 +629,6 @@
         private System.Windows.Forms.Label lblReceiveNo;
         private System.Windows.Forms.Label lblFarm;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label lblStockQty;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label lblStockWgh;
-        private System.Windows.Forms.Label lblStockWeightCaption;
         private System.Windows.Forms.Label lblCurrentDatetime;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Button btnStop;
@@ -652,18 +645,22 @@
         private System.Windows.Forms.GroupBox plSimulator;
         private System.Windows.Forms.Button btnSetWgh;
         private System.Windows.Forms.TextBox txtSimWeight;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label lblStable;
-        private System.Windows.Forms.Button btnDown;
-        private System.Windows.Forms.Button btnUp;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblLastWeight;
         private System.Windows.Forms.Timer timerMinWeight;
-        private System.Windows.Forms.Button btnTareWeight;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Button btnMale;
+        private System.Windows.Forms.Button btnUndified;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnFemale;
+        private System.Windows.Forms.Label lblFactoryWgh;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label lblFactoryQty;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label lblRemainQty;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label lblFarmQty;
+        private System.Windows.Forms.Label label16;
     }
 }
 
