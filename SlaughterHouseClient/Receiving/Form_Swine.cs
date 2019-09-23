@@ -41,7 +41,7 @@ namespace SlaughterHouseClient.Receiving
             _spManager = new SerialPortManager();
 
             SerialSettings mySerialSettings = _spManager.CurrentSerialSettings;
-            //mySerialSettings.PortName = "COM1";
+            _spManager.CurrentSerialSettings.PortName = Constants.SCALEPORT;
             //serialSettingsBindingSource.DataSource = mySerialSettings;
             //portNameComboBox.DataSource = mySerialSettings.PortNameCollection;
             //baudRateComboBox.DataSource = mySerialSettings.BaudRateCollection;
@@ -53,10 +53,10 @@ namespace SlaughterHouseClient.Receiving
             FormClosing += new FormClosingEventHandler(Form_FormClosing);
 
 
-            btnStart.Enabled = false;
-            btnStop.Enabled = false;
-            BtnOK.Enabled = false;
-            BtnCloseQueue.Enabled = false;
+            //btnStart.Enabled = false;
+            //btnStop.Enabled = false;
+            //BtnOK.Enabled = false;
+            //BtnCloseQueue.Enabled = false;
 
 
         }
@@ -134,7 +134,7 @@ namespace SlaughterHouseClient.Receiving
             var frm = new Form_Receive();
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                LoadData(frm.receiveNo);
+                LoadData(frm.ReceiveNo);
             }
         }
 
@@ -315,10 +315,7 @@ namespace SlaughterHouseClient.Receiving
                     };
 
                     string stock_no = "";
-
                     var documentGenerate = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
-
-
                     //check stock_item_running
                     var stockItemRunning = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).SingleOrDefault();
                     if (stockItemRunning == null)
@@ -328,7 +325,6 @@ namespace SlaughterHouseClient.Receiving
                     }
                     else
                     {
-
                         stock_no = stockItemRunning.stock_no;
 
                     }
@@ -546,10 +542,11 @@ namespace SlaughterHouseClient.Receiving
 
             try
             {
+                _spManager.WriteData("Z");
 
-                serialPort1.PortName = "COM4";
-                serialPort1.Open();
-                serialPort1.Write("#010A00");
+                //serialPort1.PortName = "COM4";
+                //serialPort1.Open();
+                //serialPort1.Write("Z \r\n");
                 //MSCommIO.CommPort = 4;
                 //MSCommIO.Settings = "9600,N,8,1";
                 //MSCommIO.InputLen = 1;
@@ -572,6 +569,11 @@ namespace SlaughterHouseClient.Receiving
             }
 
 
+        }
+
+        private void BtnTare_Click(object sender, EventArgs e)
+        {
+            _spManager.WriteData("T");
         }
 
         //private void SendToIO(string xCmd)

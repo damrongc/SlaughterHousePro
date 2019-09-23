@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO.Ports;
 using System.Reflection;
+using System.Text;
 
 namespace SerialPortListener.Serial
 {
@@ -104,6 +105,17 @@ namespace SerialPortListener.Serial
             _serialPort.Close();
         }
 
+
+        public void WriteData(string tx)
+        {
+            if (_serialPort != null && _serialPort.IsOpen)
+            {
+
+                byte[] bytes = Encoding.ASCII.GetBytes(tx + " \r\n");
+                //_serialPort.WriteLine("T \r\n");
+                _serialPort.Write(bytes, 0, 1);
+            }
+        }
 
         /// <summary>
         /// Retrieves the current selected device's COMMPROP structure, and extracts the dwSettableBaud property

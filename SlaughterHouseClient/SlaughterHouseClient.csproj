@@ -59,6 +59,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
@@ -105,12 +106,42 @@
     <Compile Include="farm.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAnimator.cs" />
     <Compile Include="invoice.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="invoice_item.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Issued\Form_MainProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Issued\Form_MainProduct.Designer.cs">
+      <DependentUpon>Form_MainProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Issued\Form_Carcass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Issued\Form_Carcass.Designer.cs">
+      <DependentUpon>Form_Carcass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Issued\Form_Orders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Issued\Form_Orders.Designer.cs">
+      <DependentUpon>Form_Orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Issued\Form_Issued.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Issued\Form_Issued.Designer.cs">
+      <DependentUpon>Form_Issued.cs</DependentUpon>
     </Compile>
     <Compile Include="location.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
@@ -160,6 +191,18 @@
     <Compile Include="receive_item.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Receiving\Form_SwineReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_SwineReceive.Designer.cs">
+      <DependentUpon>Form_SwineReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Receiving\Form_ConfirmStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_ConfirmStock.Designer.cs">
+      <DependentUpon>Form_ConfirmStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receiving\Form_ByProductWithParts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,12 +215,6 @@
     <Compile Include="Receiving\Form_ByProduct.Designer.cs">
       <DependentUpon>Form_ByProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Issued\Form_Carcass.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Issued\Form_Carcass.Designer.cs">
-      <DependentUpon>Form_Carcass.cs</DependentUpon>
-    </Compile>
     <Compile Include="Receiving\Form_Carcass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,12 +226,6 @@
     </Compile>
     <Compile Include="Form_Lot.Designer.cs">
       <DependentUpon>Form_Lot.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Issued\Form_Issued.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Issued\Form_Issued.Designer.cs">
-      <DependentUpon>Form_Issued.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Menu.cs">
       <SubType>Form</SubType>
@@ -242,6 +273,13 @@
     <Compile Include="Report\Form_Barcode.Designer.cs">
       <DependentUpon>Form_Barcode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\Rpt\barcode.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>barcode.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="ScaleHelper.cs" />
     <Compile Include="SerialPortManager.cs" />
     <Compile Include="SerialSettings.cs" />
@@ -263,23 +301,38 @@
     <EmbeddedResource Include="CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_MainProduct.resx">
+      <DependentUpon>Form_MainProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_Carcass.resx">
+      <DependentUpon>Form_Carcass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_Orders.resx">
+      <DependentUpon>Form_Orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_Issued.resx">
+      <DependentUpon>Form_Issued.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_SwineReceive.resx">
+      <DependentUpon>Form_SwineReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_ConfirmStock.resx">
+      <DependentUpon>Form_ConfirmStock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_ByProductWithParts.resx">
       <DependentUpon>Form_ByProductWithParts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_ByProduct.resx">
       <DependentUpon>Form_ByProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Issued\Form_Carcass.resx">
-      <DependentUpon>Form_Carcass.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_Carcass.resx">
       <DependentUpon>Form_Carcass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Lot.resx">
       <DependentUpon>Form_Lot.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Issued\Form_Issued.resx">
-      <DependentUpon>Form_Issued.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Menu.resx">
       <DependentUpon>Form_Menu.cs</DependentUpon>
@@ -310,6 +363,11 @@
     </Compile>
     <EmbeddedResource Include="Report\Form_Barcode.resx">
       <DependentUpon>Form_Barcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt\barcode.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>barcode.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EntityDeploy Include="MyModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -353,9 +411,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Report\Rpt\" />
     <Folder Include="Report\Xml\" />
   </ItemGroup>
   <ItemGroup>

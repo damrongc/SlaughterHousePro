@@ -134,36 +134,4 @@
         YII=
 </value>
   </data>
-  <metadata name="Edit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewCellStyle1.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
-        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
-        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
-        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
-        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
-        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
-        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
-        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
-        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
-        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
-        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
-        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
-</value>
-  </data>
-  <data name="Edit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAAWxJREFUSEvt
-        lr1KA0EUhddG1MJaNtmfYMDCB/IBRH0ACxuLIIiCmhk3CFr5CGJpozY+go0RlPgQJoUc7x1nZbN7E9g/
-        G3Pgg2Tu3HO4ySQ7zkx/Ii/Cqn+ObV/juAiBxm5LY83aTRc1bBFDAiUZeRob1laWmayaMOaj2UXbWsui
-        TTyd1JyXQRzm9eAac0m+QkdozsuAPyn2o+9ynz2NuaQKAl/dM3js5SmcmLUaA7NhTE2B/d8wjdOxWsHA
-        L2HtB4X3oIcW99NkB0I9d+CL/bncptaZfiNCk3vpgHSFev7AQOHRvcISHfNFqt8lam+hQsh9FHaYWB+n
-        wITMUzvC8noH82R+Q++fwwusOMAcvVaJfVkKBjL3PGl4jQWatmH2axyl9mQpEciYSe1kl6maTMlA0LF/
-        mHhAJMoG5uafB2rsZBrKQjcHa59VxQ9g5jP+25so2lTVFWNIp3nT2k5X4hK1VwjqjR/CM9Usx/kGit2O
-        AqDwOrcAAAAASUVORK5CYII=
-</value>
-  </data>
 </root>

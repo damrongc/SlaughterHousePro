@@ -51,7 +51,7 @@ namespace SlaughterHouseClient.Receiving
 
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                LoadData(frm.receiveNo);
+                LoadData(frm.ReceiveNo);
                 LoadProduct();
             }
         }

@@ -47,6 +47,8 @@
             this.btnIssuePart = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnConfirmStock = new System.Windows.Forms.Button();
+            this.btnIssueProductForSales = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -117,6 +119,7 @@
             this.flowLayoutPanel1.Controls.Add(this.btnReceiveByProductWhite);
             this.flowLayoutPanel1.Controls.Add(this.btnReceiveByProductRed);
             this.flowLayoutPanel1.Controls.Add(this.btnReceivePart);
+            this.flowLayoutPanel1.Controls.Add(this.btnConfirmStock);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 54);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -288,6 +291,7 @@
             this.btnIssuePart.TabIndex = 17;
             this.btnIssuePart.Text = "จ่ายชิ้นส่วน";
             this.btnIssuePart.UseVisualStyleBackColor = false;
+            this.btnIssuePart.Click += new System.EventHandler(this.BtnIssuePart_Click_1);
             // 
             // dragControl1
             // 
@@ -300,12 +304,43 @@
             this.flowLayoutPanel2.Controls.Add(this.btnIssueByProduct);
             this.flowLayoutPanel2.Controls.Add(this.btnIssuePart);
             this.flowLayoutPanel2.Controls.Add(this.btnIssueCarcassForSales);
+            this.flowLayoutPanel2.Controls.Add(this.btnIssueProductForSales);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 406);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(30);
             this.flowLayoutPanel2.Size = new System.Drawing.Size(1024, 362);
             this.flowLayoutPanel2.TabIndex = 3;
+            // 
+            // btnConfirmStock
+            // 
+            this.btnConfirmStock.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
+            this.btnConfirmStock.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnConfirmStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfirmStock.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnConfirmStock.ForeColor = System.Drawing.Color.White;
+            this.btnConfirmStock.Location = new System.Drawing.Point(33, 223);
+            this.btnConfirmStock.Name = "btnConfirmStock";
+            this.btnConfirmStock.Size = new System.Drawing.Size(285, 89);
+            this.btnConfirmStock.TabIndex = 19;
+            this.btnConfirmStock.Text = "รับเข้าคลังสินค้า";
+            this.btnConfirmStock.UseVisualStyleBackColor = false;
+            this.btnConfirmStock.Click += new System.EventHandler(this.BtnConfirmStock_Click);
+            // 
+            // btnIssueProductForSales
+            // 
+            this.btnIssueProductForSales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(66)))), ((int)(((byte)(54)))));
+            this.btnIssueProductForSales.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnIssueProductForSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIssueProductForSales.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnIssueProductForSales.ForeColor = System.Drawing.Color.White;
+            this.btnIssueProductForSales.Location = new System.Drawing.Point(615, 128);
+            this.btnIssueProductForSales.Name = "btnIssueProductForSales";
+            this.btnIssueProductForSales.Size = new System.Drawing.Size(285, 89);
+            this.btnIssueProductForSales.TabIndex = 18;
+            this.btnIssueProductForSales.Text = "จ่ายชิ้นส่วน-ขาย";
+            this.btnIssueProductForSales.UseVisualStyleBackColor = false;
+            this.btnIssueProductForSales.Click += new System.EventHandler(this.BtnIssueProductForSales_Click);
             // 
             // Form_Menu
             // 
@@ -346,5 +381,7 @@
         private DragControl dragControl1;
         private System.Windows.Forms.Button btnReceiveHead;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Button btnConfirmStock;
+        private System.Windows.Forms.Button btnIssueProductForSales;
     }
 }

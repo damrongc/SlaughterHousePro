@@ -68,7 +68,7 @@
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(934, 54);
+            this.panelHeader.Size = new System.Drawing.Size(1024, 54);
             this.panelHeader.TabIndex = 0;
             // 
             // lblCurrentDatetime
@@ -76,7 +76,7 @@
             this.lblCurrentDatetime.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblCurrentDatetime.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblCurrentDatetime.ForeColor = System.Drawing.Color.White;
-            this.lblCurrentDatetime.Location = new System.Drawing.Point(708, 0);
+            this.lblCurrentDatetime.Location = new System.Drawing.Point(798, 0);
             this.lblCurrentDatetime.Name = "lblCurrentDatetime";
             this.lblCurrentDatetime.Size = new System.Drawing.Size(150, 54);
             this.lblCurrentDatetime.TabIndex = 14;
@@ -95,7 +95,7 @@
             this.btnExit.ForeColor = System.Drawing.Color.White;
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(858, 0);
+            this.btnExit.Location = new System.Drawing.Point(948, 0);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(76, 54);
             this.btnExit.TabIndex = 13;
@@ -126,7 +126,7 @@
             this.lblWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblWeight.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblWeight.Font = new System.Drawing.Font("Kanit", 120F);
-            this.lblWeight.Location = new System.Drawing.Point(415, 90);
+            this.lblWeight.Location = new System.Drawing.Point(507, 90);
             this.lblWeight.Name = "lblWeight";
             this.lblWeight.Size = new System.Drawing.Size(505, 230);
             this.lblWeight.TabIndex = 5;
@@ -137,7 +137,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label4.Location = new System.Drawing.Point(753, 57);
+            this.label4.Location = new System.Drawing.Point(845, 57);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(169, 33);
             this.label4.TabIndex = 6;
@@ -334,9 +334,9 @@
             this.lblMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblMessage.Font = new System.Drawing.Font("Kanit", 16F);
             this.lblMessage.ForeColor = System.Drawing.Color.White;
-            this.lblMessage.Location = new System.Drawing.Point(0, 648);
+            this.lblMessage.Location = new System.Drawing.Point(0, 735);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(934, 33);
+            this.lblMessage.Size = new System.Drawing.Size(1024, 33);
             this.lblMessage.TabIndex = 28;
             this.lblMessage.Text = "Message";
             this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -393,11 +393,11 @@
             this.btnAccept.UseVisualStyleBackColor = false;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
-            // Form_CarcassIssued
+            // Form_Carcass
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(934, 681);
+            this.ClientSize = new System.Drawing.Size(1024, 768);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblLotNo);
@@ -425,7 +425,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_CarcassIssued";
+            this.Name = "Form_Carcass";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รับหมูเป็น";
             this.Load += new System.EventHandler(this.Form_SwineReceive_Load);

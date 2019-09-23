@@ -495,7 +495,7 @@ namespace SlaughterHouseServer
                 frmPrint.ShowDialog();
                 this.DialogResult = DialogResult.OK;
             }
-            catch (System.Exception ex)
+            catch (Exception)
             {
                 throw;
             }
