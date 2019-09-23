@@ -483,7 +483,10 @@ namespace SlaughterHouseLib
 								b.product_name,
 								a.sale_unit_method,
 								qty, wgh,  
-								unit_price, gross_amt
+								unit_price, 
+                                unit_disc,
+                                unit_net,
+                                gross_amt
 								from invoice_item a, product b
 								where a.product_code =b.product_code
 								and a.Invoice_no =@Invoice_no 

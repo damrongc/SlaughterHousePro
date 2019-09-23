@@ -95,9 +95,10 @@
             // panel5
             // 
             this.panel5.Controls.Add(this.gvDt);
-            this.panel5.Location = new System.Drawing.Point(6, 433);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(6, 366);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1368, 294);
+            this.panel5.Size = new System.Drawing.Size(1368, 358);
             this.panel5.TabIndex = 10;
             // 
             // gvDt
@@ -106,8 +107,8 @@
             this.gvDt.AllowUserToDeleteRows = false;
             this.gvDt.AllowUserToResizeColumns = false;
             this.gvDt.AllowUserToResizeRows = false;
-            this.gvDt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gvDt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gvDt.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -116,15 +117,16 @@
             this.gvDt.Name = "gvDt";
             this.gvDt.ReadOnly = true;
             this.gvDt.RowHeadersWidth = 10;
-            this.gvDt.Size = new System.Drawing.Size(1368, 294);
+            this.gvDt.Size = new System.Drawing.Size(1368, 358);
             this.gvDt.TabIndex = 10;
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.gv);
-            this.panel4.Location = new System.Drawing.Point(6, 67);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(6, 68);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1368, 364);
+            this.panel4.Size = new System.Drawing.Size(1368, 298);
             this.panel4.TabIndex = 9;
             // 
             // gv
@@ -133,9 +135,9 @@
             this.gv.AllowUserToDeleteRows = false;
             this.gv.AllowUserToResizeColumns = false;
             this.gv.AllowUserToResizeRows = false;
-            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.gv.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gv.BackgroundColor = System.Drawing.Color.Gray;
             this.gv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -145,7 +147,7 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(1368, 364);
+            this.gv.Size = new System.Drawing.Size(1368, 298);
             this.gv.TabIndex = 9;
             // 
             // Edit
