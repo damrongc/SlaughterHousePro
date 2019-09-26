@@ -21,6 +21,7 @@ namespace SlaughterHouseServer
         {
             gv.CellContentClick += Gv_CellContentClick;
             gv.DataBindingComplete += Gv_DataBindingComplete;
+            gv.EditingControlShowing += Gv_EditingControlShowing;
             //gv.ReadOnly = true;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
@@ -266,6 +267,25 @@ namespace SlaughterHouseServer
 
         }
 
+        private void Gv_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(ColumnNumber_KeyPress);
+            if (gv.CurrentCell.ColumnIndex == 5) //Desired Column
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(ColumnNumber_KeyPress);
+                }
+            }
+        }
+        private void ColumnNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
 
         #endregion
 

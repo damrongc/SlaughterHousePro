@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Farm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Unit));
             this.label1 = new System.Windows.Forms.Label();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -158,14 +158,14 @@
             this.BtnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnSearch.UseVisualStyleBackColor = false;
             // 
-            // Form_Farm
+            // Form_Unit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1400, 750);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Kanit", 15.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form_Farm";
+            this.Name = "Form_Unit";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Form_Farm";
             this.panel1.ResumeLayout(false);

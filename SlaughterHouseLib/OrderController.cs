@@ -512,6 +512,8 @@ namespace SlaughterHouseLib
 							case when a.bom_code = 0 then sum(a.unload_qty) else CEILING(sum(a.unload_qty) / sum(bmt.mutiply_qty)) end as qty,
 							sum(a.unload_wgh) as wgh,
 								0 as unit_price, 
+                                0 as unit_disc,
+                                0 as unit_net,
 								0 as gross_amt
 						FROM
 							orders_item a,
