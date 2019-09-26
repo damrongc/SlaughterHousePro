@@ -15,7 +15,7 @@ namespace ToastNotifications
     /// </remarks>
     public sealed class FormAnimator
     {
-#region Types
+        #region Types
 
         /// <summary>
         /// The methods of animation available.
@@ -73,9 +73,9 @@ namespace ToastNotifications
             Up = 0x8
         }
 
-#endregion // Types
+        #endregion // Types
 
-#region Constants
+        #region Constants
 
         /// <summary>
         /// Hide the form
@@ -90,9 +90,9 @@ namespace ToastNotifications
         /// </summary>
         private const int DefaultDuration = 250;
 
-#endregion // Constants
+        #endregion // Constants
 
-#region Variables
+        #region Variables
 
         /// <summary>
         /// The form to be animated
@@ -111,9 +111,9 @@ namespace ToastNotifications
         /// </summary>
         private int _duration;
 
-#endregion // Variables
+        #endregion // Variables
 
-#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets the animation method used to show and hide the form
@@ -189,9 +189,9 @@ namespace ToastNotifications
             }
         }
 
-#endregion // Properties
+        #endregion // Properties
 
-#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Creates a new <b>FormAnimator</b> object for the specified form
@@ -258,9 +258,9 @@ namespace ToastNotifications
             _direction = direction;
         }
 
-#endregion // Constructors
+        #endregion // Constructors
 
-#region Event Handlers
+        #region Event Handlers
 
         /// <summary>
         /// Animates the form automatically when it is loaded
@@ -312,6 +312,6 @@ namespace ToastNotifications
             }
         }
 
-#endregion // Event Handlers
+        #endregion // Event Handlers
     }
 }

@@ -134,28 +134,16 @@
         YII=
 </value>
   </data>
+  <metadata name="timerMinWeight.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>141, 17</value>
+  </metadata>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>282, 17</value>
+  </metadata>
   <metadata name="dragControl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="btnSettings.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAOeSURBVFhH1ZdraI5hHMa3YbPN8YuYQyKHspHzKfFFKRLlkBJZEYmcZkiiJNsHSQmFiRBflGhs
-        hFDkkGNOJa1kOeZ8bn7X0/Xepte7vQ77sKt+7f1f9/++n/t57vv+P89S6qWqqqpGw3EoN4ehtZvrXlxs
-        N1yD9eYdTHZz3YuLXYXlDhWfh7UO/48YcLYHzrUViTgN3sM4W/K2wSGHQXjj4Tr0s5Wc6DAHvsI5+Ajz
-        IRWaQD5IXZ2u/HnwGEaAJpgJW0Fj6CZeQX+n1ywSZ7njNMeazAfQQM9Bd78HGkQdEL87wWn4DjfhNjyC
-        oaAJ7QBNoo+7JBZJpaANlmZLXq79RdDEdpxo6wg7YRe0sC2/LXyGAluJRVI7eAmrbP2TGEdP4AxcgIa2
-        axaJU0HLMMjWX4sxFsJb6GwrOdHhFJQ6jBNt2mh50A3CclUXfgZoz6ywlZzo0Ay0DAtsBeG1hBLQ6Yjp
-        KSyFVKcF4Z2E/Q5rF8kNYS68gSzbkYibww24C1NAm6srFIDytzs1CG8MaAMmXgIaVdt1V1cgdmc73ByE
-        p7P9AFraCsIbCLrQBFuRiNOhEqQXoOO6Gbo7JUoqA5VX3Ykmo3P9y7oSZ4HWc6KtONGmiljuMAhPe6EX
-        TIbVoCULpTw2gWKHvxXtPUDKsRUn2nR6Kh0mFDmX4OfGJEhmAl1ASriWtKmKVjhMKHLiJnAEdFZV+7eA
-        XkQd3ByJWAXlCSyxFSfajsE+h0F4g0GnRCVcVfYbLHZzlKDdrMdXBBrkGZS5OQgvVlTiXix4eiF9gd62
-        IhHr2Gpz3oODsBLGQbZT4kXjKFAl/GW9ifVGVK3/BNpw2lTTQZMOL7DqwpsJqinptmoXyaoFmvFGW0F4
-        moSe1gnQ8aqAAzDAKUF4Wrb7UGQrOdEhG1RsSmz9lejfCB7CblvJSR1AM0/46k1WjNEXtDfybdUsEieB
-        dukwW38k+mmJGjmMRLwGXkPtb0SS9A13EaIvHv5qQO1wVUEd15EQvoZiwmsKMyD2NTTcTWrLAW3cDbYS
-        i6QhoBfLXmgP2uHqrBJ6FPR0tPEy3EV9dM712abP802gWqK8YtAY+ky7Ba3cpWaRqEnokWnt9PbLc5Pa
-        9PaTetqStwzuQGNb8saC6onGSP7iMdGhP2jgcKcx4elcT3GoWE/rdxWwDayDP7t4bWLAsxD+EeG37rDQ
-        Yd2Li6kK6vFeNqqCo91c9+Ji3aGwGnpHZLq5Pikl5Qf9M9RCUAU8lAAAAABJRU5ErkJggg==
-</value>
-  </data>
+  <metadata name="serialPort1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>446, 17</value>
+  </metadata>
 </root>

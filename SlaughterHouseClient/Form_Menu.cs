@@ -21,6 +21,7 @@ namespace SlaughterHouseClient
         private void btnReceiveSwine_Click(object sender, EventArgs e)
         {
             var frm = new Receiving.Form_SwineReceive();
+            frm.ShowInTaskbar = false;
             frm.ShowDialog();
 
             //var animationDirection = FormAnimator.AnimationDirection.Up;
@@ -34,12 +35,14 @@ namespace SlaughterHouseClient
         private void btnReceiveCarcass_Click(object sender, EventArgs e)
         {
 
-            var frm = new Receiving.Form_Carcass();
+            var frm = new Receiving.Form_CarcassReceive();
+            frm.ShowInTaskbar = false;
             frm.ShowDialog();
         }
         private void btnReceiveHead_Click(object sender, EventArgs e)
         {
             var frm = new Receiving.Form_ByProduct("รับหัว", 4, 0);
+            frm.ShowInTaskbar = false;
             frm.ShowDialog();
         }
 
@@ -47,6 +50,7 @@ namespace SlaughterHouseClient
         {
 
             var frm = new Receiving.Form_ByProduct("รับเครื่องในขาว", 3, 4);
+            frm.ShowInTaskbar = false;
             frm.ShowDialog();
         }
 
@@ -54,12 +58,14 @@ namespace SlaughterHouseClient
         {
 
             var frm = new Receiving.Form_ByProduct("รับเครื่องในแดง", 2, 3);
+            frm.ShowInTaskbar = false;
             frm.ShowDialog();
         }
 
         private void btnIssueCarcass_Click(object sender, EventArgs e)
         {
             var frm = new Receiving.Form_Carcass();
+            frm.ShowInTaskbar = false;
             frm.ShowDialog();
         }
 
@@ -72,6 +78,7 @@ namespace SlaughterHouseClient
         {
             //location code 7 :ห้องตัดแต่ง
             var frm = new Receiving.Form_ByProduct("รับผลได้ชิ้นส่วน", 5, 7);
+            frm.ShowInTaskbar = false;
             frm.ShowDialog();
         }
 
@@ -98,17 +105,21 @@ namespace SlaughterHouseClient
         private void BtnConfirmStock_Click(object sender, EventArgs e)
         {
             var frm = new Receiving.Form_ConfirmStock(new List<int> { 5, 6 });
+            frm.ShowInTaskbar = false;
             frm.ShowDialog();
-        }
-
-        private void BtnIssuePart_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void BtnIssueProductForSales_Click(object sender, EventArgs e)
         {
             var frm = new Issued.Form_MainProduct();
+            frm.ShowInTaskbar = false;
+            frm.ShowDialog();
+        }
+
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            var frm = new Form_Settings();
+            frm.ShowInTaskbar = false;
             frm.ShowDialog();
         }
     }

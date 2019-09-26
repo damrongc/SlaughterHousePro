@@ -113,6 +113,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAnimator.cs" />
+    <Compile Include="Form_Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Settings.Designer.cs">
+      <DependentUpon>Form_Settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="invoice.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -191,6 +197,12 @@
     <Compile Include="receive_item.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Receiving\Form_CarcassReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_CarcassReceive.Designer.cs">
+      <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receiving\Form_SwineReceive.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,12 +263,6 @@
     <Compile Include="Receiving\Form_Receive.Designer.cs">
       <DependentUpon>Form_Receive.cs</DependentUpon>
     </Compile>
-    <Compile Include="Receiving\Form_Swine.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Receiving\Form_Swine.Designer.cs">
-      <DependentUpon>Form_Swine.cs</DependentUpon>
-    </Compile>
     <Compile Include="MyExtension.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Notification.cs">
@@ -304,6 +310,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_Settings.resx">
+      <DependentUpon>Form_Settings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Issued\Form_MainProduct.resx">
       <DependentUpon>Form_MainProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -315,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Issued\Form_Issued.resx">
       <DependentUpon>Form_Issued.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_CarcassReceive.resx">
+      <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_SwineReceive.resx">
       <DependentUpon>Form_SwineReceive.cs</DependentUpon>
@@ -345,9 +357,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_Receive.resx">
       <DependentUpon>Form_Receive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_Swine.resx">
-      <DependentUpon>Form_Swine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Notification.resx">
       <DependentUpon>Notification.cs</DependentUpon>
@@ -428,6 +437,12 @@
     </PackageReference>
     <PackageReference Include="MySql.Data.EntityFramework">
       <Version>8.0.17</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="nucs.JsonSettings">
+      <Version>1.0.7</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
