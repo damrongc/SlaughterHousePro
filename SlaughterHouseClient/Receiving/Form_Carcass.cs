@@ -146,7 +146,7 @@ namespace SlaughterHouseClient.Receiving
             var frm = new Form_LookupSwine();
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                LoadData(frm.receiveNo);
+                LoadData(frm.ReceiveNo);
             }
         }
 

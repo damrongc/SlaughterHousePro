@@ -7,7 +7,7 @@ namespace SlaughterHouseClient.Receiving
     public partial class Form_LookupSwine : Form
     {
         //int ReceiveFlag { get; set; }
-        public string receiveNo { get; set; }
+        public string ReceiveNo { get; set; }
         public Form_LookupSwine()
         {
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace SlaughterHouseClient.Receiving
 
                 if (e.RowIndex >= 0)
                 {
-                    receiveNo = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    ReceiveNo = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
                     DialogResult = DialogResult.OK;
                     Close();
                 }
@@ -63,7 +63,7 @@ namespace SlaughterHouseClient.Receiving
 
                 if (e.RowIndex >= 0)
                 {
-                    receiveNo = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    ReceiveNo = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
                     DialogResult = DialogResult.OK;
                     Close();
                 }
@@ -85,6 +85,8 @@ namespace SlaughterHouseClient.Receiving
 
             using (var db = new SlaughterhouseEntities())
             {
+
+
                 var qry = db.receives.Where(p => p.receive_flag == 1).ToList();
                 var coll = qry.AsEnumerable().Select(p => new
                 {

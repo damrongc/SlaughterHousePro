@@ -27,6 +27,7 @@ public static class Constants
 
     public static string SCALEPORT = System.Configuration.ConfigurationManager.AppSettings["ScalePort"].ToString();
     public static string TWPORT = System.Configuration.ConfigurationManager.AppSettings["TowerlightPort"].ToString();
+    public static string STABLE_TARGET = System.Configuration.ConfigurationManager.AppSettings["StableTarget"].ToString();
 
 }
 

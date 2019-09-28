@@ -16,11 +16,13 @@ using System.IO.Ports;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using nucs.JsonSettings;
 
 namespace SlaughterHouseClient.Receiving
 {
     public partial class Form_ByProduct : Form
     {
+        SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
         product product;
         string productCode;
 
@@ -36,6 +38,8 @@ namespace SlaughterHouseClient.Receiving
         private bool isTare = false;
         private bool isZero = true;
         bool lockWeight = false;
+        int stableCount = 0;
+        int stableCountTarget = 0;
 
         //SerialPortManager _spManager;
         long barcode_no = 0;
@@ -113,16 +117,30 @@ namespace SlaughterHouseClient.Receiving
             serialPort1.DataBits = 8;
             serialPort1.Parity = Parity.None;
             serialPort1.StopBits = StopBits.One;
+            LoadSetting();
 
-            plSimulator.Visible = false;
+
             var reportPath = Application.StartupPath;
             doc.Load(reportPath + "\\Report\\Rpt\\barcode.rpt");
-
-
-
-
-
+            plSimulator.Visible = false;
         }
+
+
+        void LoadSetting()
+        {
+            if (MySettings.Data.Count > 0)
+            {
+                serialPort1.PortName = MySettings["Comport"].ToString();
+                serialPort1.BaudRate = MySettings["Baudrate"].ToString().ToInt16();
+                serialPort1.DataBits = 8;
+                serialPort1.Parity = Parity.None;
+                serialPort1.StopBits = StopBits.One;
+
+                stableCountTarget = MySettings["StableTarget"].ToString().ToInt16();
+            }
+        }
+
+
         string InputData = String.Empty;
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -135,45 +153,8 @@ namespace SlaughterHouseClient.Receiving
         }
 
 
-        //private void _spManager_NewSerialDataRecieved(object sender, SerialDataEventArgs e)
-        //{
-        //    Thread.Sleep(100);
-        //    if (this.InvokeRequired)
-        //    {
-        //        // Using this.Invoke causes deadlock when closing serial port, and BeginInvoke is good practice anyway.
-        //        this.BeginInvoke(new EventHandler<SerialDataEventArgs>(_spManager_NewSerialDataRecieved), new object[] { sender, e });
-        //        return;
-        //    }
 
-        //    //int maxTextLength = 1000; // maximum text length in text box
-        //    //if (tbData.TextLength > maxTextLength)
-        //    //    tbData.Text = tbData.Text.Remove(0, tbData.TextLength - maxTextLength);
-        //    //string str = Encoding.ASCII.GetString(e.Data);
-        //    //DisplayWeight(str);
 
-        //    for (int i = 0; i < e.Data.Length; i++)
-        //    {
-        //        char kk = (char)e.Data[i];
-        //        if (kk == 2)
-        //        {
-        //            //Found Start
-        //            sumText = "";
-        //        }
-        //        else if (kk == 3)
-        //        {
-        //            //Found Stop
-        //            DisplayWeight(sumText);
-        //        }
-        //        else
-        //        {
-        //            sumText += kk.ToString();
-        //        }
-        //    }
-
-        //}
-
-        int stableCount = 0;
-        int stableCountTarget = 20;
 
         private void DisplayWeight(string DataInvoke)
         {
@@ -403,7 +384,7 @@ namespace SlaughterHouseClient.Receiving
                     var btn = new Button
                     {
                         Text = item.product.product_name,
-                        Width = 150,
+                        Width = 200,
                         Height = 80,
                         FlatStyle = FlatStyle.Flat,
                         Font = new Font("Kanit", 14),
@@ -453,7 +434,7 @@ namespace SlaughterHouseClient.Receiving
 
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    LoadData(frm.receiveNo);
+                    LoadData(frm.ReceiveNo);
                     LoadBomItem(bom.bom_code);
 
                     lblMessage.Text = Constants.PRODUCT_WAITING;
