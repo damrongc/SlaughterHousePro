@@ -408,7 +408,7 @@ namespace SlaughterHouseServer
                     OrderController.Update(order);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -433,7 +433,7 @@ namespace SlaughterHouseServer
                 };
                 OrderController.Cancel(order);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -455,7 +455,7 @@ namespace SlaughterHouseServer
 
              
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

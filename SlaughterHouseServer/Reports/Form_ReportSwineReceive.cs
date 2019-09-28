@@ -46,10 +46,13 @@ namespace SlaughterHouseServer.Reports
 
 
 
-            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+            //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
-            ds.WriteXml(path + @"\xml\swinereceive.xml", XmlWriteMode.WriteSchema);
-            doc.Load(path + @"\swinereceive.rpt");
+            //ds.WriteXml(path + @"\xml\swinereceive.xml", XmlWriteMode.WriteSchema);
+            //doc.Load(path + @"\swinereceive.rpt");
+
+            var reportPath = Application.StartupPath;
+            doc.Load(reportPath + "\\Report\\swinereceive.rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;

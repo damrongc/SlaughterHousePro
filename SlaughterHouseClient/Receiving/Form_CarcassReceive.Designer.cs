@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseClient.Receiving
 {
-    partial class Form_SwineReceive
+    partial class Form_CarcassReceive
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_SwineReceive));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_CarcassReceive));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblCurrentDatetime = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
@@ -45,6 +45,12 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnZero = new System.Windows.Forms.Button();
+            this.lblQueueNo = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblBreeder = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lblTruckNo = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.lblMinWeight = new System.Windows.Forms.Label();
             this.lblMaxWeight = new System.Windows.Forms.Label();
             this.plSimulator = new System.Windows.Forms.GroupBox();
@@ -55,10 +61,6 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.dragControl1 = new DragControl();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.btnMale = new System.Windows.Forms.Button();
-            this.btnUndified = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnFemale = new System.Windows.Forms.Button();
             this.lblFactoryWgh = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.lblFactoryQty = new System.Windows.Forms.Label();
@@ -68,12 +70,8 @@
             this.lblFarmQty = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.btnAcceptWeight = new System.Windows.Forms.Button();
-            this.lblQueueNo = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.lblBreeder = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lblTruckNo = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblLastWgh = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
             this.plSimulator.SuspendLayout();
             this.SuspendLayout();
@@ -130,9 +128,9 @@
             this.lblCaption.ForeColor = System.Drawing.Color.White;
             this.lblCaption.Location = new System.Drawing.Point(0, 0);
             this.lblCaption.Name = "lblCaption";
-            this.lblCaption.Size = new System.Drawing.Size(266, 54);
+            this.lblCaption.Size = new System.Drawing.Size(119, 54);
             this.lblCaption.TabIndex = 0;
-            this.lblCaption.Text = "รับหมูเป็น";
+            this.lblCaption.Text = "รับหมูซีก";
             this.lblCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblWeight
@@ -236,7 +234,7 @@
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(734, 480);
+            this.btnStop.Location = new System.Drawing.Point(734, 364);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(136, 70);
             this.btnStop.TabIndex = 38;
@@ -250,7 +248,7 @@
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(592, 480);
+            this.btnStart.Location = new System.Drawing.Point(592, 364);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(136, 70);
             this.btnStart.TabIndex = 37;
@@ -267,6 +265,72 @@
             this.btnZero.Text = "Set Zero";
             this.btnZero.UseVisualStyleBackColor = true;
             this.btnZero.Click += new System.EventHandler(this.btnZero_Click);
+            // 
+            // lblQueueNo
+            // 
+            this.lblQueueNo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblQueueNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblQueueNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblQueueNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblQueueNo.ForeColor = System.Drawing.Color.Black;
+            this.lblQueueNo.Location = new System.Drawing.Point(279, 282);
+            this.lblQueueNo.Name = "lblQueueNo";
+            this.lblQueueNo.Size = new System.Drawing.Size(174, 43);
+            this.lblQueueNo.TabIndex = 47;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label14.Location = new System.Drawing.Point(273, 249);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(53, 33);
+            this.label14.TabIndex = 46;
+            this.label14.Text = "คิวที่";
+            // 
+            // lblBreeder
+            // 
+            this.lblBreeder.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblBreeder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblBreeder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblBreeder.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblBreeder.ForeColor = System.Drawing.Color.Black;
+            this.lblBreeder.Location = new System.Drawing.Point(18, 391);
+            this.lblBreeder.Name = "lblBreeder";
+            this.lblBreeder.Size = new System.Drawing.Size(248, 43);
+            this.lblBreeder.TabIndex = 45;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label12.Location = new System.Drawing.Point(12, 358);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(81, 33);
+            this.label12.TabIndex = 44;
+            this.label12.Text = "ประเภท";
+            // 
+            // lblTruckNo
+            // 
+            this.lblTruckNo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblTruckNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblTruckNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTruckNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblTruckNo.ForeColor = System.Drawing.Color.Black;
+            this.lblTruckNo.Location = new System.Drawing.Point(19, 282);
+            this.lblTruckNo.Name = "lblTruckNo";
+            this.lblTruckNo.Size = new System.Drawing.Size(248, 43);
+            this.lblTruckNo.TabIndex = 43;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label10.Location = new System.Drawing.Point(13, 249);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(106, 33);
+            this.label10.TabIndex = 42;
+            this.label10.Text = "ทะเบียนรถ";
             // 
             // lblMinWeight
             // 
@@ -300,7 +364,7 @@
             this.plSimulator.Controls.Add(this.btnSetWgh);
             this.plSimulator.Controls.Add(this.txtSimWeight);
             this.plSimulator.Controls.Add(this.btnZero);
-            this.plSimulator.Location = new System.Drawing.Point(278, 328);
+            this.plSimulator.Location = new System.Drawing.Point(320, 391);
             this.plSimulator.Name = "plSimulator";
             this.plSimulator.Size = new System.Drawing.Size(238, 126);
             this.plSimulator.TabIndex = 50;
@@ -348,58 +412,6 @@
             // dragControl1
             // 
             this.dragControl1.SelectControl = this.panelHeader;
-            // 
-            // btnMale
-            // 
-            this.btnMale.BackColor = System.Drawing.Color.Silver;
-            this.btnMale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMale.Font = new System.Drawing.Font("Kanit", 20F);
-            this.btnMale.ForeColor = System.Drawing.Color.White;
-            this.btnMale.Location = new System.Drawing.Point(159, 480);
-            this.btnMale.Name = "btnMale";
-            this.btnMale.Size = new System.Drawing.Size(136, 70);
-            this.btnMale.TabIndex = 65;
-            this.btnMale.Text = "ผู้";
-            this.btnMale.UseVisualStyleBackColor = false;
-            this.btnMale.Click += new System.EventHandler(this.BtnMale_Click);
-            // 
-            // btnUndified
-            // 
-            this.btnUndified.BackColor = System.Drawing.Color.Silver;
-            this.btnUndified.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUndified.Font = new System.Drawing.Font("Kanit", 20F);
-            this.btnUndified.ForeColor = System.Drawing.Color.White;
-            this.btnUndified.Location = new System.Drawing.Point(301, 480);
-            this.btnUndified.Name = "btnUndified";
-            this.btnUndified.Size = new System.Drawing.Size(136, 70);
-            this.btnUndified.TabIndex = 64;
-            this.btnUndified.Text = "ไม่ระบุ";
-            this.btnUndified.UseVisualStyleBackColor = false;
-            this.btnUndified.Click += new System.EventHandler(this.BtnUndified_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label2.Location = new System.Drawing.Point(11, 444);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 33);
-            this.label2.TabIndex = 63;
-            this.label2.Text = "เพศ";
-            // 
-            // btnFemale
-            // 
-            this.btnFemale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
-            this.btnFemale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFemale.Font = new System.Drawing.Font("Kanit", 20F);
-            this.btnFemale.ForeColor = System.Drawing.Color.White;
-            this.btnFemale.Location = new System.Drawing.Point(17, 480);
-            this.btnFemale.Name = "btnFemale";
-            this.btnFemale.Size = new System.Drawing.Size(136, 70);
-            this.btnFemale.TabIndex = 62;
-            this.btnFemale.Text = "เมีย";
-            this.btnFemale.UseVisualStyleBackColor = false;
-            this.btnFemale.Click += new System.EventHandler(this.BtnFemale_Click);
             // 
             // lblFactoryWgh
             // 
@@ -503,7 +515,7 @@
             this.btnAcceptWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAcceptWeight.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnAcceptWeight.ForeColor = System.Drawing.Color.White;
-            this.btnAcceptWeight.Location = new System.Drawing.Point(876, 480);
+            this.btnAcceptWeight.Location = new System.Drawing.Point(876, 364);
             this.btnAcceptWeight.Name = "btnAcceptWeight";
             this.btnAcceptWeight.Size = new System.Drawing.Size(136, 70);
             this.btnAcceptWeight.TabIndex = 74;
@@ -511,83 +523,37 @@
             this.btnAcceptWeight.UseVisualStyleBackColor = false;
             this.btnAcceptWeight.Click += new System.EventHandler(this.BtnAcceptWeight_Click);
             // 
-            // lblQueueNo
+            // lblLastWgh
             // 
-            this.lblQueueNo.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblQueueNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblQueueNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblQueueNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.lblQueueNo.ForeColor = System.Drawing.Color.Black;
-            this.lblQueueNo.Location = new System.Drawing.Point(278, 274);
-            this.lblQueueNo.Name = "lblQueueNo";
-            this.lblQueueNo.Size = new System.Drawing.Size(174, 43);
-            this.lblQueueNo.TabIndex = 80;
+            this.lblLastWgh.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblLastWgh.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblLastWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblLastWgh.Font = new System.Drawing.Font("Kanit", 48F);
+            this.lblLastWgh.ForeColor = System.Drawing.Color.Black;
+            this.lblLastWgh.Location = new System.Drawing.Point(680, 481);
+            this.lblLastWgh.Name = "lblLastWgh";
+            this.lblLastWgh.Size = new System.Drawing.Size(332, 97);
+            this.lblLastWgh.TabIndex = 76;
+            this.lblLastWgh.Text = "0";
+            this.lblLastWgh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label14
+            // label2
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label14.Location = new System.Drawing.Point(272, 241);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(53, 33);
-            this.label14.TabIndex = 79;
-            this.label14.Text = "คิวที่";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label2.Location = new System.Drawing.Point(887, 448);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(127, 33);
+            this.label2.TabIndex = 75;
+            this.label2.Text = "น้ำหนักล่าสุด";
             // 
-            // lblBreeder
-            // 
-            this.lblBreeder.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblBreeder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblBreeder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblBreeder.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.lblBreeder.ForeColor = System.Drawing.Color.Black;
-            this.lblBreeder.Location = new System.Drawing.Point(17, 383);
-            this.lblBreeder.Name = "lblBreeder";
-            this.lblBreeder.Size = new System.Drawing.Size(248, 43);
-            this.lblBreeder.TabIndex = 78;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label12.Location = new System.Drawing.Point(11, 350);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(81, 33);
-            this.label12.TabIndex = 77;
-            this.label12.Text = "ประเภท";
-            // 
-            // lblTruckNo
-            // 
-            this.lblTruckNo.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTruckNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTruckNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblTruckNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.lblTruckNo.ForeColor = System.Drawing.Color.Black;
-            this.lblTruckNo.Location = new System.Drawing.Point(18, 274);
-            this.lblTruckNo.Name = "lblTruckNo";
-            this.lblTruckNo.Size = new System.Drawing.Size(248, 43);
-            this.lblTruckNo.TabIndex = 76;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label10.Location = new System.Drawing.Point(12, 241);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(106, 33);
-            this.label10.TabIndex = 75;
-            this.label10.Text = "ทะเบียนรถ";
-            // 
-            // Form_SwineReceive
+            // Form_CarcassReceive
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1024, 768);
-            this.Controls.Add(this.lblQueueNo);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.lblBreeder);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.lblTruckNo);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lblLastWgh);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnAcceptWeight);
             this.Controls.Add(this.lblFactoryWgh);
             this.Controls.Add(this.label22);
@@ -597,14 +563,16 @@
             this.Controls.Add(this.label18);
             this.Controls.Add(this.lblFarmQty);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.btnMale);
-            this.Controls.Add(this.btnUndified);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnFemale);
             this.Controls.Add(this.lblStable);
             this.Controls.Add(this.plSimulator);
             this.Controls.Add(this.lblMaxWeight);
             this.Controls.Add(this.lblMinWeight);
+            this.Controls.Add(this.lblQueueNo);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.lblBreeder);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.lblTruckNo);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblMessage);
@@ -620,7 +588,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_SwineReceive";
+            this.Name = "Form_CarcassReceive";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รับหมูเป็น";
             this.Load += new System.EventHandler(this.Form_Load);
@@ -650,6 +618,12 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnZero;
+        private System.Windows.Forms.Label lblQueueNo;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblBreeder;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblTruckNo;
+        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblMinWeight;
         private System.Windows.Forms.Label lblMaxWeight;
         private System.Windows.Forms.GroupBox plSimulator;
@@ -659,10 +633,6 @@
         private System.Windows.Forms.Timer timerMinWeight;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.IO.Ports.SerialPort serialPort1;
-        private System.Windows.Forms.Button btnMale;
-        private System.Windows.Forms.Button btnUndified;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnFemale;
         private System.Windows.Forms.Label lblFactoryWgh;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lblFactoryQty;
@@ -672,12 +642,8 @@
         private System.Windows.Forms.Label lblFarmQty;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button btnAcceptWeight;
-        private System.Windows.Forms.Label lblQueueNo;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label lblBreeder;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label lblTruckNo;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblLastWgh;
+        private System.Windows.Forms.Label label2;
     }
 }
 

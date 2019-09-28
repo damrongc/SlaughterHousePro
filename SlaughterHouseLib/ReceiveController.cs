@@ -76,7 +76,7 @@ namespace SlaughterHouseLib
                     return coll;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -134,7 +134,7 @@ namespace SlaughterHouseLib
                     return coll;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -219,7 +219,7 @@ namespace SlaughterHouseLib
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -297,7 +297,7 @@ namespace SlaughterHouseLib
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -442,7 +442,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -491,7 +491,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //tr.Rollback();
                 throw;
@@ -547,7 +547,7 @@ namespace SlaughterHouseLib
 
                 return receiveItems;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -673,7 +673,7 @@ namespace SlaughterHouseLib
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 if (transaction != null)
                     transaction.Rollback();
@@ -775,7 +775,7 @@ namespace SlaughterHouseLib
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 if (transaction != null)
                     transaction.Rollback();
@@ -809,7 +809,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

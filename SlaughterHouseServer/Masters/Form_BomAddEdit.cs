@@ -265,7 +265,7 @@ namespace SlaughterHouseServer
                     BomController.Update(bom);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

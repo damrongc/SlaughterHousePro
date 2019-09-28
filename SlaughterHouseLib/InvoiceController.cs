@@ -21,7 +21,7 @@ namespace SlaughterHouseLib
                     var sb = new StringBuilder();
                     sb.Append("SELECT a.invoice_No, a.Invoice_date,");
                     sb.Append(" a.Ref_Document_No, a.customer_code,");
-                    sb.Append(" a.Gross_Amt, a.Discount,");
+                    sb.Append(" a.disc_amt, a.Gross_Amt, a.disc_amt_bill,");
                     sb.Append(" a.Vat_Rate, a.Vat_Amt,");
                     sb.Append(" a.Net_Amt, a.Invoice_Flag,");
                     sb.Append(" a.comments,");
@@ -54,7 +54,8 @@ namespace SlaughterHouseLib
                                     REF_DOCUMENT_NO = p.Field<string>("Ref_Document_No"),
                                     CUSTOMER_NAME = p.Field<string>("customer_name"),
                                     GROSS_AMT = p.Field<decimal>("gross_Amt"),
-                                    DISCOUNT = p.Field<decimal>("discount"),
+                                    DISC_AMT = p.Field<decimal>("disc_amt"),
+                                    DISC_AMT_BILL = p.Field<decimal>("disc_amt_bill"),
                                     //VatRate = p.Field<decimal>("vat_rate"),
                                     VAT_AMT = p.Field<decimal>("vat_amt"),
                                     NET_AMT = p.Field<decimal>("Net_Amt"),
@@ -67,7 +68,7 @@ namespace SlaughterHouseLib
                     return coll;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -84,7 +85,8 @@ namespace SlaughterHouseLib
 								ref_document_no,
 								customer_code,
 								gross_amt,
-								discount,
+								disc_amt,
+								disc_amt_bill,
 								vat_rate,
 								vat_amt,
 								net_amt,
@@ -114,7 +116,8 @@ namespace SlaughterHouseLib
                                 CustomerCode = (string)ds.Tables[0].Rows[0]["customer_code"]
                             },
                             GrossAmt = (decimal)ds.Tables[0].Rows[0]["gross_amt"],
-                            Discount = (decimal)ds.Tables[0].Rows[0]["discount"],
+                            DiscAmt  = (decimal)ds.Tables[0].Rows[0]["disc_amt"],
+                            DiscAmtBill  = (decimal)ds.Tables[0].Rows[0]["disc_amt_bill"],
                             VatRate = (decimal)ds.Tables[0].Rows[0]["vat_rate"],
                             VatAmt = (decimal)ds.Tables[0].Rows[0]["vat_amt"],
                             NetAmt = (decimal)ds.Tables[0].Rows[0]["net_amt"],
@@ -130,7 +133,7 @@ namespace SlaughterHouseLib
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -149,13 +152,13 @@ namespace SlaughterHouseLib
                     var sql = @"INSERT
 								INTO invoice(
 									invoice_no, invoice_date, ref_document_no,
-									customer_code, gross_amt, discount,
+									customer_code, gross_amt, disc_amt, disc_amt_bill,
 									vat_rate, vat_amt, net_amt, 
 									invoice_flag, comments, active,
 									create_by
 								)
 								VALUES( @invoice_no, @invoice_date, @ref_document_no,
-									@customer_code, @gross_amt, @discount,
+									@customer_code, @gross_amt, @disc_amt, @disc_amt_bill,
 									@vat_rate, @vat_amt, @net_amt,
 									@invoice_flag, @comments, @active,
 									@create_by)";
@@ -168,7 +171,8 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("ref_document_no", Invoice.RefDocumentNo);
                     cmd.Parameters.AddWithValue("customer_code", Invoice.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("gross_amt", Invoice.GrossAmt);
-                    cmd.Parameters.AddWithValue("discount", Invoice.Discount);
+                    cmd.Parameters.AddWithValue("disc_amt", Invoice.DiscAmt);
+                    cmd.Parameters.AddWithValue("disc_amt_bill", Invoice.DiscAmtBill);
                     cmd.Parameters.AddWithValue("vat_rate", Invoice.VatRate);
                     cmd.Parameters.AddWithValue("vat_amt", Invoice.VatAmt);
                     cmd.Parameters.AddWithValue("net_amt", Invoice.NetAmt);
@@ -222,7 +226,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 tr.Rollback();
                 throw;
@@ -252,7 +256,8 @@ namespace SlaughterHouseLib
 								customer_code=@customer_code,
 								
 								gross_amt=@gross_amt,
-								discount=@discount,
+								disc_amt=@disc_amt,
+								disc_amt_bill=@disc_amt_bill,
 								vat_rate=@vat_rate,
 								vat_amt=@vat_amt,
 								net_amt=@net_amt, 
@@ -272,7 +277,8 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("ref_document_no", Invoice.RefDocumentNo);
                     cmd.Parameters.AddWithValue("customer_code", Invoice.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("gross_amt", Invoice.GrossAmt);
-                    cmd.Parameters.AddWithValue("discount", Invoice.Discount);
+                    cmd.Parameters.AddWithValue("disc_amt", Invoice.DiscAmt );
+                    cmd.Parameters.AddWithValue("disc_amt_bill", Invoice.DiscAmtBill );
                     cmd.Parameters.AddWithValue("vat_rate", Invoice.VatRate);
                     cmd.Parameters.AddWithValue("vat_amt", Invoice.VatAmt);
                     cmd.Parameters.AddWithValue("net_amt", Invoice.NetAmt);
@@ -336,7 +342,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -384,7 +390,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -398,9 +404,10 @@ namespace SlaughterHouseLib
                     conn.Open();
                     var sql = @"select i.invoice_no,
 									i.invoice_date,	i.ref_document_no, i.customer_code,
+                                    i.disc_amt,
 									i.gross_amt as gross_amt_hd,
-									i.discount as discount_hd,
-									i.gross_amt - i.discount as before_vat,
+									i.disc_amt_bill as discount_hd,
+									i.gross_amt - i.disc_amt_bill as before_vat,
 									i.vat_rate as vat_rate_hd,
 									i.vat_amt as vat_amt_hd,
 									i.net_amt as net_amt_hd,
@@ -428,7 +435,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -462,7 +469,7 @@ namespace SlaughterHouseLib
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -486,6 +493,7 @@ namespace SlaughterHouseLib
 								unit_price, 
                                 unit_disc,
                                 unit_net,
+                                disc_amt,
                                 gross_amt
 								from invoice_item a, product b
 								where a.product_code =b.product_code
@@ -502,7 +510,7 @@ namespace SlaughterHouseLib
                     return ds.Tables[0];
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

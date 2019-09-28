@@ -96,7 +96,7 @@ namespace SlaughterHouseLib.Models
                     return coll;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -131,7 +131,7 @@ namespace SlaughterHouseLib.Models
                     return products;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -193,7 +193,7 @@ namespace SlaughterHouseLib.Models
                     return ds.Tables[0];
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -269,7 +269,7 @@ namespace SlaughterHouseLib.Models
                     return ds.Tables[0];
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -331,7 +331,7 @@ namespace SlaughterHouseLib.Models
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -380,7 +380,7 @@ namespace SlaughterHouseLib.Models
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -427,7 +427,7 @@ namespace SlaughterHouseLib.Models
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

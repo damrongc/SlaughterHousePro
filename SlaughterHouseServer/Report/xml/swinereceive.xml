@@ -65,26 +65,26 @@
     </xs:element>
   </xs:schema>
   <Table>
-    <receive_no>REV0000001</receive_no>
-    <receive_date>2019-09-06T00:00:00+07:00</receive_date>
-    <transport_doc_no>TS001</transport_doc_no>
+    <receive_no>REV0000003</receive_no>
+    <receive_date>2019-09-23T00:00:00+07:00</receive_date>
+    <transport_doc_no>TS20190923</transport_doc_no>
     <truck_no>1234</truck_no>
-    <farm_code>001</farm_code>
-    <coop_no>1</coop_no>
+    <farm_code>003</farm_code>
+    <coop_no>A1</coop_no>
     <queue_no>1</queue_no>
-    <lot_no>11924910609</lot_no>
+    <lot_no>11926612309</lot_no>
     <farm_qty>5</farm_qty>
     <farm_wgh>500.00</farm_wgh>
     <factory_qty>5</factory_qty>
-    <factory_wgh>500.00</factory_wgh>
-    <farm_name>ฟาร์มเอ</farm_name>
-    <address>120/15 บางใหญ่ กรุงเทพ 10111</address>
+    <factory_wgh>5.96</factory_wgh>
+    <farm_name>ฟาร์มทดสอบ</farm_name>
+    <address>ปปปปปปป</address>
     <breeder_name>หมูขาว</breeder_name>
   </Table>
   <TableItem>
     <SeqNo1>1</SeqNo1>
     <SexFlag1>F</SexFlag1>
-    <NetWeight1>100.00</NetWeight1>
+    <NetWeight1>1.19</NetWeight1>
     <SeqNo2>31</SeqNo2>
     <SeqNo3>61</SeqNo3>
     <SeqNo4>91</SeqNo4>
@@ -94,7 +94,7 @@
   <TableItem>
     <SeqNo1>2</SeqNo1>
     <SexFlag1>F</SexFlag1>
-    <NetWeight1>100.00</NetWeight1>
+    <NetWeight1>1.19</NetWeight1>
     <SeqNo2>32</SeqNo2>
     <SeqNo3>62</SeqNo3>
     <SeqNo4>92</SeqNo4>
@@ -103,8 +103,8 @@
   </TableItem>
   <TableItem>
     <SeqNo1>3</SeqNo1>
-    <SexFlag1>F</SexFlag1>
-    <NetWeight1>100.00</NetWeight1>
+    <SexFlag1>M</SexFlag1>
+    <NetWeight1>1.19</NetWeight1>
     <SeqNo2>33</SeqNo2>
     <SeqNo3>63</SeqNo3>
     <SeqNo4>93</SeqNo4>
@@ -113,8 +113,8 @@
   </TableItem>
   <TableItem>
     <SeqNo1>4</SeqNo1>
-    <SexFlag1>F</SexFlag1>
-    <NetWeight1>100.00</NetWeight1>
+    <SexFlag1>M</SexFlag1>
+    <NetWeight1>1.19</NetWeight1>
     <SeqNo2>34</SeqNo2>
     <SeqNo3>64</SeqNo3>
     <SeqNo4>94</SeqNo4>
@@ -123,8 +123,8 @@
   </TableItem>
   <TableItem>
     <SeqNo1>5</SeqNo1>
-    <SexFlag1>F</SexFlag1>
-    <NetWeight1>100.00</NetWeight1>
+    <SexFlag1>M</SexFlag1>
+    <NetWeight1>1.20</NetWeight1>
     <SeqNo2>35</SeqNo2>
     <SeqNo3>65</SeqNo3>
     <SeqNo4>95</SeqNo4>
@@ -332,9 +332,9 @@
     <SeqNo6>180</SeqNo6>
   </TableItem>
   <TableFooter>
-    <SumWeight>500.00</SumWeight>
-    <StartDatetime>19:57</StartDatetime>
-    <EndDatetime>20:01</EndDatetime>
-    <UsageTime>4</UsageTime>
+    <SumWeight>5.96</SumWeight>
+    <StartDatetime>16:26</StartDatetime>
+    <EndDatetime>16:29</EndDatetime>
+    <UsageTime>3</UsageTime>
   </TableFooter>
 </NewDataSet>

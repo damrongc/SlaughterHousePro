@@ -10,8 +10,9 @@ namespace SlaughterHouseLib.Models
         public int Qty { get; set; }
         public decimal Wgh { get; set; }
         public decimal UnitPrice { get; set; }
+        public decimal UnitDisc { get; set; }
+        public decimal UnitNet { get; set; }
         public decimal GrossAmt { get; set; }
-        public decimal DiscountAmt { get; set; }
         public decimal VatRate { get; set; }
         public decimal VatAmt { get; set; }
         public decimal NetAmt { get; set; }

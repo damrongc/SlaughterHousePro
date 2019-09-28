@@ -246,8 +246,8 @@ namespace SlaughterHouseServer
                     txtComment.Text = invoice.Comments;
                     chkActive.Checked = invoice.Active;
                     txtGrossAmt.Text = invoice.GrossAmt.ToString();
-                    txtDiscount.Text = invoice.Discount.ToString();
-                    txtBeforeVat.Text = (invoice.GrossAmt - invoice.Discount).ToString();
+                    txtDiscount.Text = invoice.DiscAmtBill.ToString();
+                    txtBeforeVat.Text = (invoice.GrossAmt - invoice.DiscAmtBill).ToString();
                     txtVatAmt.Text = invoice.VatAmt.ToString();
                     txtNetAmt.Text = invoice.NetAmt.ToString();
                     if (invoice.VatRate > 0)
@@ -348,6 +348,8 @@ namespace SlaughterHouseServer
                         Qty = Convert.ToInt16(row[GlobalsColumn.QTY]),
                         Wgh = Convert.ToDecimal(row[GlobalsColumn.WGH]),
                         UnitPrice = Convert.ToDecimal(row[GlobalsColumn.UNIT_PRICE]),
+                        UnitDisc = Convert.ToDecimal(row[GlobalsColumn.UNIT_DISC]),
+                        UnitNet = Convert.ToDecimal(row[GlobalsColumn.UNIT_NET]),
                         GrossAmt = Convert.ToDecimal(row[GlobalsColumn.GROSS_AMT]),
                         SaleUnitMethod = row[GlobalsColumn.SALE_UNIT_METHOD].ToString(),
                     });
@@ -368,7 +370,8 @@ namespace SlaughterHouseServer
                         CustomerCode = cboCustomer.SelectedValue.ToString()
                     },
                     GrossAmt = Convert.ToDecimal(txtGrossAmt.Text),
-                    Discount = Convert.ToDecimal(txtDiscount.Text),
+                    DiscAmt = 0,
+                    DiscAmtBill = Convert.ToDecimal(txtDiscount.Text),
                     VatRate = (chkVatFlag.Checked == true) ? Convert.ToDecimal(txtVatRate.Text) : 0,
                     VatAmt = Convert.ToDecimal(txtVatAmt.Text),
                     NetAmt = Convert.ToDecimal(txtNetAmt.Text),
@@ -389,7 +392,7 @@ namespace SlaughterHouseServer
                     InvoiceController.Update(invoice);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -415,7 +418,7 @@ namespace SlaughterHouseServer
 
                 InvoiceController.Cancel(invoice);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -447,7 +450,7 @@ namespace SlaughterHouseServer
                     throw new Exception($"ราคาสุทธิต้องมีค่ามากกวว่า 0");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -495,7 +498,7 @@ namespace SlaughterHouseServer
                 frmPrint.ShowDialog();
                 this.DialogResult = DialogResult.OK;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
