@@ -280,7 +280,7 @@ namespace SlaughterHouseServer
                 //ProductionOrderController.InsertOrUpdate(order);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -301,7 +301,7 @@ namespace SlaughterHouseServer
                 };
                 ProductionOrderController.Cancel(po);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

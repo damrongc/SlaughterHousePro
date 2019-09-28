@@ -102,7 +102,7 @@ namespace SlaughterHouseLib
         //            return boms;
         //        }
         //    }
-        //    catch (Exception)
+        //    catch (Exception ex)
         //    {
         //        throw;
         //    }
@@ -132,7 +132,7 @@ namespace SlaughterHouseLib
                     return ds.Tables[0];
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -179,7 +179,7 @@ namespace SlaughterHouseLib
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -249,7 +249,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 tr.Rollback();
                 throw;
@@ -359,7 +359,7 @@ namespace SlaughterHouseLib
         //        }
         //        return true;
         //    }
-        //    catch (Exception)
+        //    catch (Exception ex)
         //    {
         //        throw;
         //    }

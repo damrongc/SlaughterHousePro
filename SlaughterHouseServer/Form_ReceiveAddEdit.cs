@@ -221,7 +221,7 @@ namespace SlaughterHouseServer
                 ReceiveController.InsertOrUpdate(receive);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

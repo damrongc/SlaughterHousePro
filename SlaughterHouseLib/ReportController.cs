@@ -20,8 +20,8 @@ namespace SlaughterHouseLib
                                 i.ref_document_no,
                                 i.customer_code,
                                 i.gross_amt AS gross_amt_hd,
-                                i.discount AS discount_hd,
-                                i.gross_amt - i.discount AS before_vat_hd,
+                                i.disc_amt_bill AS discount_hd,
+                                i.gross_amt - i.disc_amt_bill AS before_vat_hd,
                                 i.vat_rate AS vat_rate_hd,
                                 i.vat_amt AS vat_amt_hd,
                                 i.net_amt AS net_amt_hd,
@@ -91,7 +91,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -153,7 +153,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -211,7 +211,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -259,7 +259,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -291,7 +291,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -432,7 +432,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

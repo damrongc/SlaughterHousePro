@@ -42,7 +42,7 @@ namespace SlaughterHouseLib.Models
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

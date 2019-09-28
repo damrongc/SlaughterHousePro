@@ -34,7 +34,8 @@ namespace SlaughterHouseServer
         public const string CUSTOMER_CODE = "CUSTOMER_CODE";
         public const string CUSTOMER_NAME = "CUSTOMER_NAME";
         public const string DESCRIPTION = "DESCRIPTION";
-        public const string DISCOUNT = "DISCOUNT";
+        public const string DISC_AMT = "DISC_AMT";
+        public const string DISC_AMT_BILL = "DISC_AMT_BILL";
         public const string DOCUMENT_TYPE = "DOCUMENT_TYPE";
         public const string DOC_NO = "DOC_NO";
         public const string END_DATE = "END_DATE";
@@ -115,6 +116,8 @@ namespace SlaughterHouseServer
         public const string UNIT_OF_QTY = "UNIT_OF_QTY";
         public const string UNIT_OF_WGH = "UNIT_OF_WGH";
         public const string UNIT_PRICE = "UNIT_PRICE";
+        public const string UNIT_DISC = "UNIT_DISC";
+        public const string UNIT_NET = "UNIT_NET";
         public const string UNLOAD_QTY = "UNLOAD_QTY";
         public const string UNLOAD_WGH = "UNLOAD_WGH";
         public const string VAT_AMT = "VAT_AMT";

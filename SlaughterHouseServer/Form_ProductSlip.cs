@@ -315,7 +315,7 @@ namespace SlaughterHouseServer
                     ProductSlipController.Update(productSlip);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -335,7 +335,7 @@ namespace SlaughterHouseServer
                 };
                 ProductSlipController.Cancel(productSlip);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
