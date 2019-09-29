@@ -316,11 +316,11 @@ namespace SlaughterHouseServer
             dtOrderItem = OrderItemController.GetOrderItems(orderNo, "Y");
 
             gv.DataSource = dtOrderItem;
-            gv.Columns[ConstColumns.SEQ].Visible = false;
-            gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
-            gv.Columns[ConstColumns.UNIT_CODE].Visible = false;
-            gv.Columns[ConstColumns.UNLOAD_QTY].Visible = false;
-            gv.Columns[ConstColumns.UNLOAD_WGH].Visible = false;
+            gv.Columns["seq"].Visible = false;
+            gv.Columns["issue_unit_method"].Visible = false;
+            gv.Columns["unit_code"].Visible = false;
+            gv.Columns["unload_qty"].Visible = false;
+            gv.Columns["unload_wgh"].Visible = false;
         }
         private void LoadCustomer()
         {
