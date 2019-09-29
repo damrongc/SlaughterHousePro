@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SlaughterHouseServer
 {
-    public static class GlobalsColumn
+    public static class ConstColumns
     { 
 
         public const string BTN_INVOICE = "BTN_INVOICE";
         public const string BTN_PRODUCT_SLIP = "BTN_PRODUCT_SLIP";
-        //public const string PRODUCT_SLIP = "PRODUCT_SLIP";
+
         public const string REQUEST_DATE = "REQUEST_DATE";
         public const string QTY_WGH = "QTY_WGH";
         public const string QTY_WGH_LOCATION = "QTY_WGH_LOCATION";
@@ -33,6 +33,7 @@ namespace SlaughterHouseServer
         public const string CREATE_BY = "CREATE_BY";
         public const string CUSTOMER_CODE = "CUSTOMER_CODE";
         public const string CUSTOMER_NAME = "CUSTOMER_NAME";
+        public const string DAY = "DAY";
         public const string DESCRIPTION = "DESCRIPTION";
         public const string DISC_AMT = "DISC_AMT";
         public const string DISC_AMT_BILL = "DISC_AMT_BILL";
@@ -124,5 +125,20 @@ namespace SlaughterHouseServer
         public const string VAT_RATE = "VAT_RATE";
         public const string WGH = "WGH";
 
+
+        public const string CustomerCode = "CustomerCode";
+        public const string CustomerName = "CustomerName";
+        public const string ProductCode = "ProductCode";
+        public const string ProductName = "ProductName";
+        public const string StartDate = "StartDate";
+        public const string EndDate = "EndDate";
+        public const string UnitPrice = "UnitPrice";
+        public const string Day = "Day";
+        public const string CreateAt = "CreateAt";
+        public const string CreateBy = "CreateBy";
+         
+
     }
+
+
 }

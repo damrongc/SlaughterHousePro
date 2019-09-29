@@ -36,12 +36,11 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
-
-
-
+             
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
+            this.comboxProductGroup.SelectedIndexChanged += ComboxProductGroup_SelectedIndexChanged;
 
         }
         private void Form_Shown(object sender, System.EventArgs e)
@@ -50,6 +49,7 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
+            FillProductGroup();
             LoadData();
         }
         private void BtnSearch_Click(object sender, EventArgs e)
@@ -65,20 +65,25 @@ namespace SlaughterHouseServer
         }
 
         #region Event Focus, KeyDown 
-        private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+
+        private void ComboxProductGroup_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            LoadData();
+        }
 
-            gv.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
-            gv.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-            gv.Columns[GlobalsColumn.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+        private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        { 
+            gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            gv.Columns[ConstColumns.UNIT_NAME].HeaderText = "หน่วยสินค้า";
 
-             gv.Columns[GlobalsColumn.UNIT_CODE].Visible = false;
-             gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
+             gv.Columns[ConstColumns.UNIT_CODE].Visible = false;
+             gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
 
-            gv.Columns[GlobalsColumn.PRODUCT_CODE].ReadOnly = true;
-            gv.Columns[GlobalsColumn.PRODUCT_NAME].ReadOnly = true;
-            gv.Columns[GlobalsColumn.UNIT_NAME].ReadOnly = true;
-            gv.Columns[GlobalsColumn.SELECT_COL].ReadOnly = false;
+            gv.Columns[ConstColumns.PRODUCT_CODE].ReadOnly = true;
+            gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
+            gv.Columns[ConstColumns.UNIT_NAME].ReadOnly = true;
+            gv.Columns[ConstColumns.SELECT_COL].ReadOnly = false;
 
             foreach (DataGridViewColumn column in gv.Columns)
             {
@@ -89,10 +94,7 @@ namespace SlaughterHouseServer
         #endregion
 
         #region Event Click
-
-
-
-
+         
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -109,17 +111,17 @@ namespace SlaughterHouseServer
                             //frm.orderNo = txtProductSlip.Text;
                             //frm.orderDate = dtpProductSlipDate.Value;
 
-                            //frm.productCode = dtOrderItem.Rows[e.RowIndex][GlobalsColumn.PRODUCT_CODE].ToString();
-                            //frm.qtyWgh = Convert.ToDecimal(dtOrderItem.Rows[e.RowIndex][GlobalsColumn.QTY_WGH]);
-                            //frm.issueUnitMethod = dtOrderItem.Rows[e.RowIndex][GlobalsColumn.ISSUE_UNIT_METHOD].ToString();
+                            //frm.productCode = dtOrderItem.Rows[e.RowIndex][ConstColumns.PRODUCT_CODE].ToString();
+                            //frm.qtyWgh = Convert.ToDecimal(dtOrderItem.Rows[e.RowIndex][ConstColumns.QTY_WGH]);
+                            //frm.issueUnitMethod = dtOrderItem.Rows[e.RowIndex][ConstColumns.ISSUE_UNIT_METHOD].ToString();
                             //frm.unitCode = Convert.ToInt16(dtOrderItem.Rows[e.RowIndex]["unit_code"]);
                             //frm.unitName = dtOrderItem.Rows[e.RowIndex]["unit_name"].ToString();
                             //if (frm.ShowDialog() == DialogResult.OK)
                             //{
-                            //    dtOrderItem.Rows[e.RowIndex][GlobalsColumn.PRODUCT_CODE] = frm.productCode;
+                            //    dtOrderItem.Rows[e.RowIndex][ConstColumns.PRODUCT_CODE] = frm.productCode;
                             //    dtOrderItem.Rows[e.RowIndex]["product_name"] = frm.productName;
-                            //    dtOrderItem.Rows[e.RowIndex][GlobalsColumn.QTY_WGH] = frm.qtyWgh;
-                            //    dtOrderItem.Rows[e.RowIndex][GlobalsColumn.ISSUE_UNIT_METHOD] = frm.issueUnitMethod;
+                            //    dtOrderItem.Rows[e.RowIndex][ConstColumns.QTY_WGH] = frm.qtyWgh;
+                            //    dtOrderItem.Rows[e.RowIndex][ConstColumns.ISSUE_UNIT_METHOD] = frm.issueUnitMethod;
                             //    dtOrderItem.Rows[e.RowIndex]["unit_code"] = frm.unitCode;
                             //    dtOrderItem.Rows[e.RowIndex]["unit_name"] = frm.unitName;
                             //    dtOrderItem.AcceptChanges();
@@ -147,20 +149,18 @@ namespace SlaughterHouseServer
             dtProduct = new DataTable();
             if (forSaleFlag == true)
             {
-                dtProduct = ProductController.GetProductsForSale(txtProductCode.Text, txtProductName.Text);
+                dtProduct = ProductController.GetProductsForSale(comboxProductGroup.SelectedValue.ToString(), txtProductCode.Text, txtProductName.Text);
             }
             else
             {
-                dtProduct = ProductController.GetProducts(txtProductCode.Text, txtProductName.Text, true);
+                bool mutiSelectFlag = true;
+                dtProduct = ProductController.GetProductActive(comboxProductGroup.SelectedValue.ToString(),txtProductCode.Text, txtProductName.Text, mutiSelectFlag);
             }
             
             if (dtProduct != null)
             {
                 gv.DataSource = dtProduct;
             }
-
-
-
         }
 
         private void BtnOk_Click(object sender, EventArgs e)
@@ -173,15 +173,15 @@ namespace SlaughterHouseServer
                 {
                     try
                     {
-                        if (int.Parse(row[GlobalsColumn.SELECT_COL].ToString()) == 1)
+                        if (int.Parse(row[ConstColumns.SELECT_COL].ToString()) == 1)
                         {
                             DataRow drNew = dtResultProduct.NewRow();
-                            drNew[GlobalsColumn.SELECT_COL] = row[GlobalsColumn.SELECT_COL];
-                            drNew[GlobalsColumn.PRODUCT_CODE] = row[GlobalsColumn.PRODUCT_CODE];
-                            drNew[GlobalsColumn.PRODUCT_NAME] = row[GlobalsColumn.PRODUCT_NAME];
-                            drNew[GlobalsColumn.ISSUE_UNIT_METHOD] = row[GlobalsColumn.ISSUE_UNIT_METHOD];
-                            drNew[GlobalsColumn.UNIT_CODE] = row[GlobalsColumn.UNIT_CODE];
-                            drNew[GlobalsColumn.UNIT_NAME] = row[GlobalsColumn.UNIT_NAME];
+                            drNew[ConstColumns.SELECT_COL] = row[ConstColumns.SELECT_COL];
+                            drNew[ConstColumns.PRODUCT_CODE] = row[ConstColumns.PRODUCT_CODE];
+                            drNew[ConstColumns.PRODUCT_NAME] = row[ConstColumns.PRODUCT_NAME];
+                            drNew[ConstColumns.ISSUE_UNIT_METHOD] = row[ConstColumns.ISSUE_UNIT_METHOD];
+                            drNew[ConstColumns.UNIT_CODE] = row[ConstColumns.UNIT_CODE];
+                            drNew[ConstColumns.UNIT_NAME] = row[ConstColumns.UNIT_NAME];
                             dtResultProduct.Rows.Add(drNew);
                         }
                     }
@@ -190,9 +190,6 @@ namespace SlaughterHouseServer
 
                     }
                 }
-
-                 
-
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -206,7 +203,22 @@ namespace SlaughterHouseServer
 
         }
 
- 
+        private void FillProductGroup()
+        {
+            //bool showSelectAllflag = true;
+            //comboxProductGroup.DataSource = ProductGroupController.GetAllProudctGroups(showSelectAllflag);
+            //comboxProductGroup.ValueMember = "ProductGroupCode";
+            //comboxProductGroup.DisplayMember = "ProductGroupName";
+            var coll = ProductGroupController.GetAllProudctGroups();
+            coll.Insert(0, new ProductGroup
+            {
+                ProductGroupCode = 0,
+                ProductGroupName = "--ทั้งหมด--"
+            });
+            comboxProductGroup.ValueMember = "ProductGroupCode"; 
+            comboxProductGroup.DisplayMember = "ProductGroupName";
+            comboxProductGroup.DataSource = coll;
+        }
 
     }
 }

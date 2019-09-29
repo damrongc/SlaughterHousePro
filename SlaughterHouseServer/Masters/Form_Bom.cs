@@ -43,20 +43,20 @@ namespace SlaughterHouseServer
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            //gv.Columns[GlobalsColumn.ORDER_NO].HeaderText = "เลขที่ใบสั่งขาย";
-            //gv.Columns[GlobalsColumn.REQUEST_DATE].HeaderText = "วันที่ต้องการสินค้า";
-            //gv.Columns[GlobalsColumn.CUSTOMER_NAME].HeaderText = "ลูกค้า";
-            //gv.Columns[GlobalsColumn.COMMENTS].HeaderText = "หมายเหตุ";
-            //gv.Columns[GlobalsColumn.ORDER_FLAG].HeaderText = "สถานะ";
-            //gv.Columns[GlobalsColumn.INVOICE_FLAG].HeaderText = "สถานะออกใบแจ้งหนี้";
-            //gv.Columns[GlobalsColumn.ACTIVE].HeaderText = "ใช้งาน";
-            //gv.Columns[GlobalsColumn.CREATE_AT].HeaderText = "วันเวลาสร้าง";
-            //gv.Columns[GlobalsColumn.CREATE_BY].HeaderText = "ผู้สร้าง";
+            //gv.Columns[ConstColumns.ORDER_NO].HeaderText = "เลขที่ใบสั่งขาย";
+            //gv.Columns[ConstColumns.REQUEST_DATE].HeaderText = "วันที่ต้องการสินค้า";
+            //gv.Columns[ConstColumns.CUSTOMER_NAME].HeaderText = "ลูกค้า";
+            //gv.Columns[ConstColumns.COMMENTS].HeaderText = "หมายเหตุ";
+            //gv.Columns[ConstColumns.ORDER_FLAG].HeaderText = "สถานะ";
+            //gv.Columns[ConstColumns.INVOICE_FLAG].HeaderText = "สถานะออกใบแจ้งหนี้";
+            //gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
+            //gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
+            //gv.Columns[ConstColumns.CREATE_BY].HeaderText = "ผู้สร้าง";
 
-            //gv.Columns[GlobalsColumn.ORDER_FLAG].Visible = false;
-            //gv.Columns[GlobalsColumn.INVOICE_FLAG].Visible = false;
-            //gv.Columns[GlobalsColumn.ACTIVE].Visible = false;
-            //gv.Columns[GlobalsColumn.CREATE_BY].Visible = false;
+            //gv.Columns[ConstColumns.ORDER_FLAG].Visible = false;
+            //gv.Columns[ConstColumns.INVOICE_FLAG].Visible = false;
+            //gv.Columns[ConstColumns.ACTIVE].Visible = false;
+            //gv.Columns[ConstColumns.CREATE_BY].Visible = false;
 
             
         }
@@ -64,23 +64,23 @@ namespace SlaughterHouseServer
 
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            //gvDt.Columns[GlobalsColumn.SEQ].HeaderText = "ลำดับ";
-            //gvDt.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            //gvDt.Columns[ConstColumns.SEQ].HeaderText = "ลำดับ";
+            //gvDt.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
  
 
-            //gvDt.Columns[GlobalsColumn.SEQ].Visible = false;
-            //gvDt.Columns[GlobalsColumn.PRODUCT_CODE].Visible = false;
-            //gvDt.Columns[GlobalsColumn.UNIT_CODE].Visible = false;
-            //gvDt.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
+            //gvDt.Columns[ConstColumns.SEQ].Visible = false;
+            //gvDt.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
+            //gvDt.Columns[ConstColumns.UNIT_CODE].Visible = false;
+            //gvDt.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
 
 
-            //gvDt.Columns[GlobalsColumn.QTY_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //gvDt.Columns[GlobalsColumn.UNLOAD_QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //gvDt.Columns[GlobalsColumn.UNLOAD_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gvDt.Columns[ConstColumns.QTY_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gvDt.Columns[ConstColumns.UNLOAD_QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gvDt.Columns[ConstColumns.UNLOAD_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            //gvDt.Columns[GlobalsColumn.QTY_WGH].DefaultCellStyle.Format = "N2";
-            //gvDt.Columns[GlobalsColumn.UNLOAD_QTY].DefaultCellStyle.Format = "N0";
-            //gvDt.Columns[GlobalsColumn.UNLOAD_WGH].DefaultCellStyle.Format = "N2";
+            //gvDt.Columns[ConstColumns.QTY_WGH].DefaultCellStyle.Format = "N2";
+            //gvDt.Columns[ConstColumns.UNLOAD_QTY].DefaultCellStyle.Format = "N0";
+            //gvDt.Columns[ConstColumns.UNLOAD_WGH].DefaultCellStyle.Format = "N2";
         }
 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)

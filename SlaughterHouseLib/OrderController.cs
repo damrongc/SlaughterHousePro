@@ -553,6 +553,7 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = "";
+                    //boy
                     sql = @"
                             select COALESCE(sum(case when p.issue_unit_method = 'Q' then a.unload_qty else a.unload_wgh end), 0) as qty_wgh_unload,
                              COALESCE(sum(case when p.issue_unit_method = 'Q' then a.order_qty else a.order_wgh end), 0) as qty_wgh

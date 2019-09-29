@@ -22,6 +22,7 @@ namespace SlaughterHouseLib.Models
         public decimal MinWeight { get; set; }
         public decimal MaxWeight { get; set; }
         public decimal StdYield { get; set; }
+        public decimal PackingSize { get; set; }
         public string SaleUnitMethod { get; set; }
         public string IssueUnitMethod { get; set; }
     }
@@ -46,15 +47,14 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" ,unit_of_wgh ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_wgh) as unit_name_of_wgh");
                     sb.Append(" ,min_weight, max_weight, std_yield ");
                     sb.Append(" ,sale_unit_method, issue_unit_method ");
-                    sb.Append(" ,a.active,a.create_at, a.create_by, a.modified_at, a.modified_by");
+                    sb.Append(" ,a.active, a.packing_size, a.create_at, a.create_by, a.modified_at, a.modified_by");
                     sb.Append(" from product a,product_group b");
-                    sb.Append(" where a.product_group_code=b.product_group_code");
+                    sb.Append(" where a.product_group_code=b.product_group_code and a.product_code <> 'NA' ");
 
                     if (!string.IsNullOrEmpty(keyword))
                     {
                         sb.Append(" and (product_code like @product_code");
-                        sb.Append(" or product_name like @product_name)");
-
+                        sb.Append(" or product_name like @product_name)"); 
                     }
                     sb.Append(" order by product_code asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
@@ -79,14 +79,12 @@ namespace SlaughterHouseLib.Models
                                     ProductGroupName = p.Field<string>("product_group_name"),
                                     UnitQtyName = p.Field<string>("unit_name_of_qty"),
                                     UnitWghName = p.Field<string>("unit_name_of_wgh"),
-
                                     MinWeight = p.Field<decimal>("min_weight"),
                                     MaxWeight = p.Field<decimal>("max_weight"),
                                     StdYield = p.Field<decimal>("std_yield"),
-
                                     SaleUnitMethod = p.Field<string>("sale_unit_method"),
                                     IssueUnitMethod = p.Field<string>("issue_unit_method"),
-
+                                    PackingSize = p.Field<decimal>("packing_size"),
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
@@ -110,7 +108,7 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT * FROM product WHERE active=1");
+                    sb.Append("SELECT * FROM product WHERE active=1 and product_code <> 'NA' ");
                     sb.Append(" ORDER BY product_code ASC");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
                     var da = new MySqlDataAdapter(cmd);
@@ -136,7 +134,7 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static DataTable GetProductsForSale(string productCode, string productName)
+        public static DataTable GetProductsForSale(string productGroup, string productCode, string productName)
         {
             try
             {
@@ -157,6 +155,11 @@ namespace SlaughterHouseLib.Models
                                 and p.active = 1 
                                 and case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end = u.unit_code
                               ";
+                    if (String.IsNullOrEmpty(productGroup) == false)
+                    {
+                        productGroup = (productGroup == "0") ? "" : productGroup;
+                        sql += $" and p.product_group_code like '%{productGroup}%' ";
+                    }
                     if (String.IsNullOrEmpty(productCode) == false)
                     {
                         sql += $" and p.product_code like '%{productCode}%' ";
@@ -198,7 +201,7 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static DataTable GetProducts(string productCode, string productName, bool mutiFlag = false)
+        public static DataTable GetProductActive(string productGroup, string productCode, string productName, bool mutiSelectFlag = false)
         {
             try
             {
@@ -206,7 +209,7 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sql = @"";
-                    if (mutiFlag == true)
+                    if (mutiSelectFlag == true)
                     {
                         sql = @"
                                 Select 0 as select_col,  p.product_code, product_name,
@@ -217,6 +220,7 @@ namespace SlaughterHouseLib.Models
                                 unit_of_measurement u
                                 where p.active = 1 
                                 and case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end = u.unit_code
+                                and p.product_code <> 'NA'
                               ";
                     }
                     else
@@ -230,9 +234,14 @@ namespace SlaughterHouseLib.Models
                                 unit_of_measurement u
                                 where p.active = 1 
                                 and case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end = u.unit_code
+                                and p.product_code <> 'NA'
                               ";
                     }
-                    
+                    if (String.IsNullOrEmpty(productGroup) == false)
+                    { 
+                        productGroup = (productGroup == "0") ? "" : productGroup;
+                        sql += $" and p.product_group_code like '%{productGroup}%' ";
+                    }
                     if (String.IsNullOrEmpty(productCode) == false)
                     {
                         sql += $" and p.product_code like '%{productCode}%' ";
@@ -319,6 +328,7 @@ namespace SlaughterHouseLib.Models
                             MinWeight = Convert.ToDecimal(ds.Tables[0].Rows[0]["min_weight"]),
                             MaxWeight = Convert.ToDecimal(ds.Tables[0].Rows[0]["max_weight"]),
                             StdYield = Convert.ToDecimal(ds.Tables[0].Rows[0]["std_yield"]),
+                            PackingSize = Convert.ToDecimal(ds.Tables[0].Rows[0]["packing_size"]),
                             SaleUnitMethod = ds.Tables[0].Rows[0]["sale_unit_method"].ToString(),
                             IssueUnitMethod = ds.Tables[0].Rows[0]["issue_unit_method"].ToString(),
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
@@ -352,6 +362,7 @@ namespace SlaughterHouseLib.Models
                                 unit_of_wgh,
                                 min_weight, max_weight, std_yield,
                                 sale_unit_method, issue_unit_method,
+                                packing_size,
                                 active,
                                 create_by)
                                 VALUES(@product_code,
@@ -361,6 +372,7 @@ namespace SlaughterHouseLib.Models
                                 @unit_of_wgh,
                                 @min_weight, @max_weight, @std_yield,
                                 @sale_unit_method, @issue_unit_method,
+                                @packing_size,
                                 @active,
                                 @create_by)";
                     var cmd = new MySqlCommand(sql, conn);
@@ -374,6 +386,7 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("std_yield", product.StdYield);
                     cmd.Parameters.AddWithValue("sale_unit_method", product.SaleUnitMethod);
                     cmd.Parameters.AddWithValue("issue_unit_method", product.IssueUnitMethod);
+                    cmd.Parameters.AddWithValue("packing_size", product.PackingSize);
                     cmd.Parameters.AddWithValue("active", product.Active);
                     cmd.Parameters.AddWithValue("create_by", product.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
@@ -404,6 +417,7 @@ namespace SlaughterHouseLib.Models
                                 sale_unit_method = @sale_unit_method, 
                                 issue_unit_method = @issue_unit_method,
                                 active=@active,
+                                packing_size=@packing_size,
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by
                                 WHERE product_code=@product_code";
@@ -420,6 +434,7 @@ namespace SlaughterHouseLib.Models
 
                     cmd.Parameters.AddWithValue("sale_unit_method", product.SaleUnitMethod);
                     cmd.Parameters.AddWithValue("issue_unit_method", product.IssueUnitMethod);
+                    cmd.Parameters.AddWithValue("packing_size", product.PackingSize);
 
                     cmd.Parameters.AddWithValue("active", product.Active);
                     cmd.Parameters.AddWithValue("modified_by", product.ModifiedBy);

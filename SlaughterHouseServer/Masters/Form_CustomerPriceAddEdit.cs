@@ -3,12 +3,13 @@ using System;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_ProductPriceAddEdit : Form
+    public partial class Form_CustomerPriceAddEdit : Form
     {
+        public string customerCode { get; set; }
         public string productCode { get; set; }
         public DateTime startDate { get; set; }
 
-        public Form_ProductPriceAddEdit()
+        public Form_CustomerPriceAddEdit()
         {
             InitializeComponent();
             UserSettingsComponent();
@@ -31,7 +32,8 @@ namespace SlaughterHouseServer
             dtpStartDate.Focus();
         }
         private void Form_Load(object sender, System.EventArgs e)
-        { 
+        {
+            LoadCustomer();
             LoadData();
         }
         private void DtpStartDate_KeyDown(object sender, KeyEventArgs e)
@@ -48,6 +50,7 @@ namespace SlaughterHouseServer
                 txtUnitPrice.Focus();
             }
         }
+        
 
         #region Event Focus, KeyDown 
         private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
@@ -104,13 +107,13 @@ namespace SlaughterHouseServer
                 SaveProductPrice();
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.productCode = "";
+                cboCustomer.SelectedIndex = 0; 
+                this.productCode = ""; 
                 txtProductName.Text = "";
                 txtUnitPrice.Text = "0";
-                txtDay.Text = "0";
-                dtpStartDate.Value = DateTime.Now;
+                txtDay.Text = "0"; 
+                dtpStartDate.Value = DateTime.Now; 
                 LoadData();
-
             }
             catch (System.Exception ex)
             {
@@ -122,24 +125,33 @@ namespace SlaughterHouseServer
 
         #endregion
  
-
+        private void LoadCustomer()
+        {
+            var coll = CustomerController.GetAllCustomers();
+            cboCustomer.DisplayMember = "CustomerName";
+            cboCustomer.ValueMember = "CustomerCode";
+            cboCustomer.DataSource = coll;
+        }
         private void LoadData()
         {
             if (String.IsNullOrEmpty(this.productCode) == false)
             {
                 btnLovProduct.Enabled = false;
-                txtProductName.Enabled = false; 
+                txtProductName.Enabled = false;
+                cboCustomer.Enabled = false;
             }
-            ProductPrice productPrice = ProductPriceController.GetProductPrice(this.productCode, this.startDate);
-            if (productPrice != null)
-            {
 
-                this.productCode = productPrice.Product.ProductCode;
-                txtProductName.Text = productPrice.Product.ProductName;
-                txtUnitPrice.Text = productPrice.UnitPrice.ToString();
-                txtDay.Text = productPrice.Day.ToString();
+            CustomerPrice customerPrice = CustomerPriceController.GetCustomerPrice(this.customerCode, this.productCode, this.startDate);
+            if (customerPrice != null)
+            {
+                cboCustomer.SelectedValue = customerPrice.Customer.CustomerCode;
+
+                this.productCode = customerPrice.Product.ProductCode;
+                txtProductName.Text = customerPrice.Product.ProductName;
+                txtUnitPrice.Text = customerPrice.UnitPrice.ToString();
+                txtDay.Text = customerPrice.Day.ToString();
                 
-                dtpStartDate.Value = productPrice.StartDate;
+                dtpStartDate.Value = customerPrice.StartDate;
                 dtpStartDate.Enabled = false;
                 BtnSaveAndNew.Visible = false;
             }
@@ -149,9 +161,12 @@ namespace SlaughterHouseServer
         {
             try
             {
-                
-                var productPrice = new ProductPrice
+                var customerPrice = new CustomerPrice
                 {
+                    Customer = new Customer
+                    {
+                        CustomerCode = cboCustomer.SelectedValue.ToString()
+                    },
                     Product = new Product
                     {
                         ProductCode = this.productCode
@@ -163,14 +178,15 @@ namespace SlaughterHouseServer
                     UnitPrice = Convert.ToDecimal(txtUnitPrice.Text),
                     CreateBy = "system",
                     ModifiedBy = "system"
-                }; 
-                if (btnLovProduct.Enabled == true && txtProductName.Enabled == true)
+                };
+
+                if (btnLovProduct.Enabled == true && cboCustomer.Enabled == true)
                 {
-                    ProductPriceController.Insert(productPrice);
+                    CustomerPriceController.Insert(customerPrice);
                 }
                 else
                 {
-                    ProductPriceController.Update(productPrice);
+                    CustomerPriceController.Update(customerPrice);
                 }
             }
             catch (Exception ex)

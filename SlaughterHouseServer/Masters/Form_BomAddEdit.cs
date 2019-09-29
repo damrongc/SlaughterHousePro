@@ -62,15 +62,15 @@ namespace SlaughterHouseServer
         #region Event Focus, KeyDown 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            gv.Columns[GlobalsColumn.BOM_CODE].HeaderText = "รหัส Bom";
-            gv.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
-            gv.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-            gv.Columns[GlobalsColumn.MUTIPLY_QTY].HeaderText = "Mutiply Qty";
-            gv.Columns[GlobalsColumn.MUTIPLY_WGH].HeaderText = "Mutiply Wgh";
+            gv.Columns[ConstColumns.BOM_CODE].HeaderText = "รหัส Bom";
+            gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            gv.Columns[ConstColumns.MUTIPLY_QTY].HeaderText = "Mutiply Qty";
+            gv.Columns[ConstColumns.MUTIPLY_WGH].HeaderText = "Mutiply Wgh";
 
-            gv.Columns[GlobalsColumn.BOM_CODE].Visible = false;
-            gv.Columns[GlobalsColumn.PRODUCT_CODE].Visible = false;
-            gv.Columns[GlobalsColumn.PRODUCT_NAME].ReadOnly = true;
+            gv.Columns[ConstColumns.BOM_CODE].Visible = false;
+            gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
+            gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
 
             foreach (DataGridViewColumn column in gv.Columns)
             {
@@ -144,15 +144,15 @@ namespace SlaughterHouseServer
                     DataRow dr;
                     foreach (DataRow row in frm.dtResultProduct.Rows)
                     {
-                        DataRow[] results = dtBomItem.Select($"product_code = '{row[GlobalsColumn.PRODUCT_CODE]}' ");
+                        DataRow[] results = dtBomItem.Select($"product_code = '{row[ConstColumns.PRODUCT_CODE]}' ");
 
                         if (results.Length == 0)
                         {
                             dr = dtBomItem.NewRow();
-                            dr[GlobalsColumn.PRODUCT_CODE] = row[GlobalsColumn.PRODUCT_CODE];
-                            dr[GlobalsColumn.PRODUCT_NAME] = row[GlobalsColumn.PRODUCT_NAME];
-                            dr[GlobalsColumn.MUTIPLY_QTY] = 1;
-                            dr[GlobalsColumn.MUTIPLY_WGH] = 1;
+                            dr[ConstColumns.PRODUCT_CODE] = row[ConstColumns.PRODUCT_CODE];
+                            dr[ConstColumns.PRODUCT_NAME] = row[ConstColumns.PRODUCT_NAME];
+                            dr[ConstColumns.MUTIPLY_QTY] = 1;
+                            dr[ConstColumns.MUTIPLY_WGH] = 1;
                             dtBomItem.Rows.Add(dr);
                             dtBomItem.AcceptChanges();
                         }
@@ -232,13 +232,13 @@ namespace SlaughterHouseServer
                         BomCode = String.IsNullOrEmpty(txtBomCode.Text) == true ? 0 : Convert.ToInt32(txtBomCode.Text),
                         Product = new Product
                         {
-                            ProductCode = row[GlobalsColumn.PRODUCT_CODE].ToString(),
-                            ProductName = row[GlobalsColumn.PRODUCT_NAME].ToString(),
+                            ProductCode = row[ConstColumns.PRODUCT_CODE].ToString(),
+                            ProductName = row[ConstColumns.PRODUCT_NAME].ToString(),
                         },
-                        MutiplyQty = Convert.ToInt16(row[GlobalsColumn.MUTIPLY_QTY]),
-                        MutiplyWgh = Convert.ToInt16(row[GlobalsColumn.MUTIPLY_WGH]),
-                        //MutiplyQty = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[GlobalsColumn.QTY_WGH]) : 0,
-                        //MutiplyWgh = row[GlobalsColumn.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[GlobalsColumn.QTY_WGH]) : 0,
+                        MutiplyQty = Convert.ToInt16(row[ConstColumns.MUTIPLY_QTY]),
+                        MutiplyWgh = Convert.ToInt16(row[ConstColumns.MUTIPLY_WGH]),
+                        //MutiplyQty = row[ConstColumns.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[ConstColumns.QTY_WGH]) : 0,
+                        //MutiplyWgh = row[ConstColumns.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[ConstColumns.QTY_WGH]) : 0,
                     });
                 }
 

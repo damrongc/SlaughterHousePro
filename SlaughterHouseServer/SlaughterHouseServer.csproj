@@ -110,6 +110,18 @@
     <Compile Include="Masters\Form_MasterMenu.Designer.cs">
       <DependentUpon>Form_MasterMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\Form_CustomerPriceAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerPriceAddEdit.Designer.cs">
+      <DependentUpon>Form_CustomerPriceAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_PriceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_PriceList.Designer.cs">
+      <DependentUpon>Form_PriceList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Form_ReportSoMapInv.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -378,6 +390,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_MasterMenu.resx">
       <DependentUpon>Form_MasterMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_CustomerPriceAddEdit.resx">
+      <DependentUpon>Form_CustomerPriceAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_PriceList.resx">
+      <DependentUpon>Form_PriceList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Form_ReportSoMapInv.resx">
       <DependentUpon>Form_ReportSoMapInv.cs</DependentUpon>

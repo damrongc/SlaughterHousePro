@@ -44,51 +44,51 @@ namespace SlaughterHouseServer
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            gv.Columns[GlobalsColumn.INVOICE_NO].HeaderText = "เลขที่ใบแจ้งหนี้";
-            gv.Columns[GlobalsColumn.INVOICE_DATE].HeaderText = "วันที่แจ้งหนี้";
-            gv.Columns[GlobalsColumn.REF_DOCUMENT_NO].HeaderText = "เลขที่ใบสั่งขาย";
-            gv.Columns[GlobalsColumn.CUSTOMER_NAME].HeaderText = "ลูกค้า";
-            gv.Columns[GlobalsColumn.GROSS_AMT].HeaderText = "ราคา";
-            gv.Columns[GlobalsColumn.DISC_AMT_BILL].HeaderText = "ส่วนลด";
-            gv.Columns[GlobalsColumn.VAT_AMT].HeaderText = "ภาษี";
-            gv.Columns[GlobalsColumn.NET_AMT].HeaderText = "ราคาสุทธิ";
-            gv.Columns[GlobalsColumn.ACTIVE].HeaderText = "ใช้งาน";
-            gv.Columns[GlobalsColumn.CREATE_AT].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[ConstColumns.INVOICE_NO].HeaderText = "เลขที่ใบแจ้งหนี้";
+            gv.Columns[ConstColumns.INVOICE_DATE].HeaderText = "วันที่แจ้งหนี้";
+            gv.Columns[ConstColumns.REF_DOCUMENT_NO].HeaderText = "เลขที่ใบสั่งขาย";
+            gv.Columns[ConstColumns.CUSTOMER_NAME].HeaderText = "ลูกค้า";
+            gv.Columns[ConstColumns.GROSS_AMT].HeaderText = "ราคา";
+            gv.Columns[ConstColumns.DISC_AMT_BILL].HeaderText = "ส่วนลด";
+            gv.Columns[ConstColumns.VAT_AMT].HeaderText = "ภาษี";
+            gv.Columns[ConstColumns.NET_AMT].HeaderText = "ราคาสุทธิ";
+            gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
+            gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
 
-            gv.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[GlobalsColumn.DISC_AMT_BILL].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[GlobalsColumn.VAT_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[GlobalsColumn.NET_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[ConstColumns.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[ConstColumns.DISC_AMT_BILL].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[ConstColumns.VAT_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[ConstColumns.NET_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
 
-            gv.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Format = "N2";
-            gv.Columns[GlobalsColumn.DISC_AMT_BILL].DefaultCellStyle.Format = "N2";
-            gv.Columns[GlobalsColumn.VAT_AMT].DefaultCellStyle.Format = "N2";
-            gv.Columns[GlobalsColumn.NET_AMT].DefaultCellStyle.Format = "N2";
+            gv.Columns[ConstColumns.GROSS_AMT].DefaultCellStyle.Format = "N2";
+            gv.Columns[ConstColumns.DISC_AMT_BILL].DefaultCellStyle.Format = "N2";
+            gv.Columns[ConstColumns.VAT_AMT].DefaultCellStyle.Format = "N2";
+            gv.Columns[ConstColumns.NET_AMT].DefaultCellStyle.Format = "N2";
         }
 
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            gvDt.Columns[GlobalsColumn.SEQ].HeaderText = "ลำดับ";
-            gvDt.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
-            gvDt.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "สินค้า";
-            gvDt.Columns[GlobalsColumn.SALE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
-            gvDt.Columns[GlobalsColumn.QTY].HeaderText = "ปริมาณ";
-            gvDt.Columns[GlobalsColumn.WGH].HeaderText = "น้ำหนัก";
-            gvDt.Columns[GlobalsColumn.UNIT_PRICE].HeaderText = "ราคาต่อหน่วย";
-            gvDt.Columns[GlobalsColumn.GROSS_AMT].HeaderText = "จำนวนเงิน";
+            gvDt.Columns[ConstColumns.SEQ].HeaderText = "ลำดับ";
+            gvDt.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gvDt.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "สินค้า";
+            gvDt.Columns[ConstColumns.SALE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
+            gvDt.Columns[ConstColumns.QTY].HeaderText = "ปริมาณ";
+            gvDt.Columns[ConstColumns.WGH].HeaderText = "น้ำหนัก";
+            gvDt.Columns[ConstColumns.UNIT_PRICE].HeaderText = "ราคาต่อหน่วย";
+            gvDt.Columns[ConstColumns.GROSS_AMT].HeaderText = "จำนวนเงิน";
 
-            gvDt.Columns[GlobalsColumn.SEQ].Visible = false;
+            gvDt.Columns[ConstColumns.SEQ].Visible = false;
 
-            gvDt.Columns[GlobalsColumn.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvDt.Columns[GlobalsColumn.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvDt.Columns[GlobalsColumn.UNIT_PRICE].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvDt.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[ConstColumns.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[ConstColumns.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[ConstColumns.UNIT_PRICE].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[ConstColumns.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            gvDt.Columns[GlobalsColumn.QTY].DefaultCellStyle.Format = "N0";
-            gvDt.Columns[GlobalsColumn.WGH].DefaultCellStyle.Format = "N2";
-            gvDt.Columns[GlobalsColumn.UNIT_PRICE].DefaultCellStyle.Format = "N2";
-            gvDt.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Format = "N2";
+            gvDt.Columns[ConstColumns.QTY].DefaultCellStyle.Format = "N0";
+            gvDt.Columns[ConstColumns.WGH].DefaultCellStyle.Format = "N2";
+            gvDt.Columns[ConstColumns.UNIT_PRICE].DefaultCellStyle.Format = "N2";
+            gvDt.Columns[ConstColumns.GROSS_AMT].DefaultCellStyle.Format = "N2";
         }
 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -174,7 +174,7 @@ namespace SlaughterHouseServer
             coll.Insert(0, new Customer
             {
                 CustomerCode = "",
-                CustomerName = "--เลือก--"
+                CustomerName = "--ทั้งหมด--"
             });
             cboCustomer.DisplayMember = "CustomerName";
             cboCustomer.ValueMember = "CustomerCode";

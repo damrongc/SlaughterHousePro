@@ -94,13 +94,12 @@ namespace SlaughterHouseServer
             coll.Insert(0, new Product
             {
                 ProductCode  = "",
-                ProductName  = "--เลือก--"
+                ProductName  = "--ทั้งหมด--"
             });
             cboProduct.DisplayMember = "ProductName";
             cboProduct.ValueMember = "ProductCode";
             cboProduct.DataSource = coll;
         }
-
 
         private void LoadOrder()
         {

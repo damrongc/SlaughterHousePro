@@ -54,6 +54,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rdbWghIssue = new System.Windows.Forms.RadioButton();
             this.rdbQtyIssue = new System.Windows.Forms.RadioButton();
+            this.txtPackingSize = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -96,7 +98,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(198, 365);
+            this.chkActive.Location = new System.Drawing.Point(198, 413);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 6;
@@ -112,7 +114,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(512, 421);
+            this.BtnSave.Location = new System.Drawing.Point(512, 469);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -129,7 +131,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(198, 421);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(198, 469);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -306,10 +308,29 @@
             this.rdbQtyIssue.Text = "ปริมาณ";
             this.rdbQtyIssue.UseVisualStyleBackColor = true;
             // 
+            // txtPackingSize
+            // 
+            this.txtPackingSize.Location = new System.Drawing.Point(198, 361);
+            this.txtPackingSize.MaxLength = 10;
+            this.txtPackingSize.Name = "txtPackingSize";
+            this.txtPackingSize.Size = new System.Drawing.Size(215, 36);
+            this.txtPackingSize.TabIndex = 41;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(62, 364);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(121, 29);
+            this.label8.TabIndex = 40;
+            this.label8.Text = "packing size";
+            // 
             // Form_ProductAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(802, 474);
+            this.ClientSize = new System.Drawing.Size(802, 525);
+            this.Controls.Add(this.txtPackingSize);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtStdYield);
@@ -374,5 +395,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton rdbWghIssue;
         private System.Windows.Forms.RadioButton rdbQtyIssue;
+        private System.Windows.Forms.TextBox txtPackingSize;
+        private System.Windows.Forms.Label label8;
     }
 }

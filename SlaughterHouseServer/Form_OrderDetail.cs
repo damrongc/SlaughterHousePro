@@ -1,4 +1,5 @@
-﻿using SlaughterHouseLib.Models;
+﻿using SlaughterHouseLib;
+using SlaughterHouseLib.Models;
 using System;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
@@ -80,7 +81,7 @@ namespace SlaughterHouseServer
 
         private void btnAddOrderItem_Click(object sender, System.EventArgs e)
         {
-            ProductPrice productPrice;
+            decimal unitPrice;
             try
             {
                 if (String.IsNullOrEmpty(txtQtyWgh.Text) || Convert.ToDecimal(txtQtyWgh.Text) <= 0)
@@ -88,8 +89,8 @@ namespace SlaughterHouseServer
                     MessageBox.Show("จำนวนต้องมากกว่า 0", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                productPrice = ProductPriceController.GetPriceList(cboProduct.SelectedValue.ToString(), this.orderDate);
-                if (productPrice.UnitPrice == 0)
+                unitPrice = Globals.GetPriceList("", cboProduct.SelectedValue.ToString(), this.orderDate);
+                if (unitPrice == 0)
                 {
                     MessageBox.Show("สินค้านี้ไม่มีราคาประกาศตามวันที่ต้องการสินค้า", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.plMenu = new System.Windows.Forms.Panel();
+            this.BtnBom = new System.Windows.Forms.Button();
             this.BtnPriceList = new System.Windows.Forms.Button();
             this.BtnCustomer = new System.Windows.Forms.Button();
             this.BtnUnit = new System.Windows.Forms.Button();
@@ -36,7 +37,6 @@
             this.BtnProduct = new System.Windows.Forms.Button();
             this.BtnFarm = new System.Windows.Forms.Button();
             this.plContainer = new System.Windows.Forms.Panel();
-            this.BtnBom = new System.Windows.Forms.Button();
             this.plMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +55,20 @@
             this.plMenu.Name = "plMenu";
             this.plMenu.Size = new System.Drawing.Size(165, 750);
             this.plMenu.TabIndex = 2;
+            // 
+            // BtnBom
+            // 
+            this.BtnBom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnBom.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnBom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBom.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnBom.ForeColor = System.Drawing.Color.White;
+            this.BtnBom.Location = new System.Drawing.Point(0, 300);
+            this.BtnBom.Name = "BtnBom";
+            this.BtnBom.Size = new System.Drawing.Size(165, 50);
+            this.BtnBom.TabIndex = 6;
+            this.BtnBom.Text = "Bom";
+            this.BtnBom.UseVisualStyleBackColor = false;
             // 
             // BtnPriceList
             // 
@@ -147,20 +161,6 @@
             this.plContainer.Name = "plContainer";
             this.plContainer.Size = new System.Drawing.Size(1235, 750);
             this.plContainer.TabIndex = 3;
-            // 
-            // BtnBom
-            // 
-            this.BtnBom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnBom.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnBom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBom.Font = new System.Drawing.Font("Kanit", 14.25F);
-            this.BtnBom.ForeColor = System.Drawing.Color.White;
-            this.BtnBom.Location = new System.Drawing.Point(0, 300);
-            this.BtnBom.Name = "BtnBom";
-            this.BtnBom.Size = new System.Drawing.Size(165, 50);
-            this.BtnBom.TabIndex = 6;
-            this.BtnBom.Text = "Bom";
-            this.BtnBom.UseVisualStyleBackColor = false;
             // 
             // Form_MasterMenu
             // 
