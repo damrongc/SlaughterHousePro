@@ -59,6 +59,9 @@ namespace SlaughterHouseServer
             LoadCustomer();
             LoadData();
         }
+
+
+        #region Event Focus, KeyDown, BindingComplete
         private void DtpRequestDate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -66,8 +69,6 @@ namespace SlaughterHouseServer
                 BtnSave.Focus();
             }
         }
-
-        #region Event Focus, KeyDown 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             //gv.Columns[ConstColumns.SEQ ].HeaderText = "ลำดับ";
@@ -157,8 +158,7 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -340,8 +340,7 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
-
-        private void PrintReport()
+private void PrintReport()
         {
             try
             {

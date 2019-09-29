@@ -101,22 +101,28 @@ namespace SlaughterHouseServer
             gvDt.Columns[ConstColumns.SEQ].HeaderText = "ลำดับ";
             gvDt.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gvDt.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "สินค้า";
-            gvDt.Columns[ConstColumns.QTY_WGH].HeaderText = "จำนวน";
+            gvDt.Columns[ConstColumns.QTY].HeaderText = "ปริมาณ";
+            gvDt.Columns[ConstColumns.WGH].HeaderText = "น้ำหนัก";
             gvDt.Columns[ConstColumns.ISSUE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
-            gvDt.Columns[ConstColumns.UNIT_CODE].HeaderText = "รหัสหน่วยสินค้า";
-            gvDt.Columns[ConstColumns.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+            gvDt.Columns[ConstColumns.UNIT_CODE_QTY].HeaderText = "รหัสหน่วยปริมาณ";
+            gvDt.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยปริมาณ";
+            gvDt.Columns[ConstColumns.UNIT_CODE_WGH].HeaderText = "รหัสหน่วยน้ำหนัก";
+            gvDt.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
             gvDt.Columns[ConstColumns.UNLOAD_QTY].HeaderText = "ปริมาณจ่าย";
             gvDt.Columns[ConstColumns.UNLOAD_WGH].HeaderText = "น้ำหนักจ่าย";
 
             gvDt.Columns[ConstColumns.SEQ].Visible = false;
             gvDt.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
-            gvDt.Columns[ConstColumns.UNIT_CODE].Visible = false;
-            gvDt.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
-            gvDt.Columns[ConstColumns.QTY_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
+            gvDt.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
+            gvDt.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false; 
+            gvDt.Columns[ConstColumns.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvDt.Columns[ConstColumns.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvDt.Columns[ConstColumns.UNLOAD_QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvDt.Columns[ConstColumns.UNLOAD_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            gvDt.Columns[ConstColumns.QTY_WGH].DefaultCellStyle.Format = "N2";
+             
+            gvDt.Columns[ConstColumns.QTY].DefaultCellStyle.Format = "N0";
+            gvDt.Columns[ConstColumns.WGH].DefaultCellStyle.Format = "N2";
             gvDt.Columns[ConstColumns.UNLOAD_QTY].DefaultCellStyle.Format ="N0";
             gvDt.Columns[ConstColumns.UNLOAD_WGH].DefaultCellStyle.Format = "N2";
         }

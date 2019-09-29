@@ -21,6 +21,7 @@ namespace SlaughterHouseServer
         {
             gv.CellContentClick += Gv_CellContentClick;
             gv.DataBindingComplete += Gv_DataBindingComplete;
+            gv.CellEndEdit += Gv_CellEndEdit;
             gv.EditingControlShowing += Gv_EditingControlShowing;
             //gv.ReadOnly = true;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
@@ -88,20 +89,27 @@ namespace SlaughterHouseServer
             gv.Columns["seq"].HeaderText = "ลำดับ";
             gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-            gv.Columns[ConstColumns.QTY_WGH].HeaderText = "จำนวน";
+            gv.Columns[ConstColumns.QTY].HeaderText = "ปริมาณ";
+            gv.Columns[ConstColumns.WGH].HeaderText = "น้ำหนัก";
             gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
-            gv.Columns[ConstColumns.UNIT_CODE].HeaderText = "รหัสหน่วยสินค้า";
-            gv.Columns[ConstColumns.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+            gv.Columns[ConstColumns.UNIT_CODE_QTY].HeaderText = "รหัสหน่วยปริมาณ";
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยปริมาณ";
+            gv.Columns[ConstColumns.UNIT_CODE_WGH].HeaderText = "รหัสหน่วยน้ำหนัก";
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
 
             gv.Columns["seq"].Visible = false;
             gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
-            gv.Columns[ConstColumns.UNIT_CODE].Visible = false;
+            gv.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
+            gv.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
 
 
             gv.Columns[ConstColumns.PRODUCT_CODE].ReadOnly = true;
             gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
-            gv.Columns[ConstColumns.UNIT_NAME].ReadOnly = true;
-            gv.Columns[ConstColumns.QTY_WGH].ReadOnly = false;
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].ReadOnly = true;
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].ReadOnly = true;
+            gv.Columns[ConstColumns.PACKING_SIZE].ReadOnly = true;
+            gv.Columns[ConstColumns.QTY].ReadOnly = false;
+            gv.Columns[ConstColumns.WGH].ReadOnly = false;
             foreach (DataGridViewColumn column in gv.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -195,7 +203,6 @@ namespace SlaughterHouseServer
                     foreach (DataRow row in frm.dtResultProduct.Rows)
                     {
                         DataRow[] results = dtOrderItem.Select($"product_code = '{row[ConstColumns.PRODUCT_CODE]}' ");
-
                         if (results.Length == 0)
                         {
                             dr = dtOrderItem.NewRow();
@@ -209,7 +216,6 @@ namespace SlaughterHouseServer
                             dtOrderItem.Rows.Add(dr);
                             dtOrderItem.AcceptChanges();
                         }
-
                     }
                 }
             }
@@ -230,7 +236,6 @@ namespace SlaughterHouseServer
                 {
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
                     {
-
                         //case "Edit":
                         //    var frm = new Form_OrderDetail();
                         //    frm.orderNo = txtOrderNo.Text;
@@ -257,7 +262,7 @@ namespace SlaughterHouseServer
                             dtOrderItem.Rows[e.RowIndex].Delete();
                             dtOrderItem.AcceptChanges();
                             gv.Refresh();
-                            break;
+                            break; 
                     }
                 }
             }
@@ -265,13 +270,39 @@ namespace SlaughterHouseServer
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
 
+        private void Gv_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            //do your checks to see RowIndex is not -1 and other good stuffs
+            //var row = gv.Rows[e.RowIndex];
+            int rowIdx = e.RowIndex;
+            int colIdx = e.ColumnIndex - 1;
+            DataGridView senderGrid = (DataGridView)sender;
+            switch (senderGrid.Columns[e.ColumnIndex].Name)
+            {
+                case "qty":
+                    dtOrderItem.Rows[rowIdx][ConstColumns.WGH] = MyExtension.ToInt32(dtOrderItem.Rows[rowIdx][ConstColumns.QTY].ToString()) * MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString());
+                    break;
+                case "wgh":
+                    decimal value;
+                    if (!decimal.TryParse(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString(), out value)) {
+                        break;
+                    }
+                    dtOrderItem.Rows[rowIdx][ConstColumns.QTY] = Math.Ceiling( MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.WGH].ToString()) / MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString()));
+                    break;
+            }
+
+            
+            dtOrderItem.AcceptChanges();
+            gv.Refresh();
+            //row.Cells[e.ColumnIndex].OwningColumn.Name
         }
 
         private void Gv_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress -= new KeyPressEventHandler(ColumnNumber_KeyPress);
-            if (gv.CurrentCell.ColumnIndex == 5) //Desired Column
+            if (gv.CurrentCell.ColumnIndex == 4 || gv.CurrentCell.ColumnIndex == 6) //Desired Column
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -279,6 +310,7 @@ namespace SlaughterHouseServer
                     tb.KeyPress += new KeyPressEventHandler(ColumnNumber_KeyPress);
                 }
             }
+
         }
         private void ColumnNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -318,9 +350,11 @@ namespace SlaughterHouseServer
             gv.DataSource = dtOrderItem;
             gv.Columns[ConstColumns.SEQ].Visible = false;
             gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
-            gv.Columns[ConstColumns.UNIT_CODE].Visible = false;
             gv.Columns[ConstColumns.UNLOAD_QTY].Visible = false;
+            gv.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
             gv.Columns[ConstColumns.UNLOAD_WGH].Visible = false;
+            gv.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
+
         }
         private void LoadCustomer()
         {
@@ -443,8 +477,6 @@ namespace SlaughterHouseServer
         {
             try
             {
-             
-
                 //Check UNIT_PRICE
                 for (int i = 0; i < dtOrderItem.Rows.Count; i++)
                 {
@@ -453,8 +485,6 @@ namespace SlaughterHouseServer
                         throw new Exception($"สินค้า {dtOrderItem.Rows[i][ConstColumns.PRODUCT_NAME]} ไม่ได้ระบุจำนวน");
                     }
                 }
-
-             
             }
             catch (Exception ex)
             {

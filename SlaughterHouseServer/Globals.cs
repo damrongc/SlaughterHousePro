@@ -69,6 +69,7 @@ namespace SlaughterHouseServer
         public const string ORDER_SET_QTY = "ORDER_SET_QTY";
         public const string ORDER_SET_WGH = "ORDER_SET_WGH";
         public const string ORDER_WGH = "ORDER_WGH";
+        public const string PACKING_SIZE = "PACKING_SIZE";
         public const string PLANT_ID = "PLANT_ID";
         public const string PLANT_NAME = "PLANT_NAME";
         public const string PO_DATE = "PO_DATE";
@@ -114,6 +115,10 @@ namespace SlaughterHouseServer
         public const string TRUCK_NO = "TRUCK_NO";
         public const string UNIT_CODE = "UNIT_CODE";
         public const string UNIT_NAME = "UNIT_NAME";
+        public const string UNIT_CODE_QTY = "UNIT_CODE_QTY";
+        public const string UNIT_NAME_QTY = "UNIT_NAME_QTY";
+        public const string UNIT_CODE_WGH = "UNIT_CODE_WGH";
+        public const string UNIT_NAME_WGH = "UNIT_NAME_WGH";
         public const string UNIT_OF_QTY = "UNIT_OF_QTY";
         public const string UNIT_OF_WGH = "UNIT_OF_WGH";
         public const string UNIT_PRICE = "UNIT_PRICE";

@@ -419,51 +419,59 @@ namespace SlaughterHouseLib
 							0 as seq,
 							p.product_code,
 							p.product_name, 
-							CASE
-								WHEN p.issue_unit_method = 'Q' 
-								THEN case when a.bom_code = 0 then a.order_qty else a.order_set_qty end
-								ELSE case when a.bom_code = 0 then a.order_wgh else a.order_set_wgh end
-							END qty_wgh,
-							p.issue_unit_method,
-							u.unit_code,
-							u.unit_name,
+							 case when a.bom_code = 0 then a.order_qty else a.order_set_qty end as qty,
+							uq.unit_code as unit_code_qty,
+							uq.unit_name as unit_name_qty,
+							 case when a.bom_code = 0 then a.order_wgh else a.order_set_wgh end as wgh,
+							uw.unit_code as unit_code_wgh,
+							uw.unit_name as unit_name_wgh,  
 							0 as unload_qty,
-							0 as unload_wgh 
+							0 as unload_wgh,
+                            p.issue_unit_method,
+                            p.packing_size
 						FROM
 							orders_item a,
 							product p,
-							unit_of_measurement u,
+							unit_of_measurement uq,
+							unit_of_measurement uw,
 							bom bm
 						WHERE
 							a.order_no = @order_no 
 							and a.bom_code = bm.bom_code
-							and p.product_code = case when a.bom_code = 0 then a.product_code else bm.product_code end
-							and CASE
-								WHEN p.issue_unit_method = 'Q' THEN unit_of_qty
-								ELSE unit_of_wgh
-							END = u.unit_code  ";
+							and p.product_code = case when a.bom_code = 0 then a.product_code else bm.product_code end 
+							and p.unit_of_wgh = uw.unit_code 
+							and p.unit_of_qty = uq.unit_code 
+                        ";
                     }
                     else
                     {
                         sql = @"select 
-							0 as seq,
-							a.product_code,
-							b.product_name,
-							sum(Case when b.issue_unit_method = 'Q' then order_qty else order_wgh end) qty_wgh,
-							b.issue_unit_method,
-							u.unit_code,
-							u.unit_name,
-							sum(unload_qty) as unload_qty,
-							sum(unload_wgh) as unload_wgh 
-							from orders_item a,product b, unit_of_measurement u
-							where a.product_code =b.product_code
-							and Case when b.issue_unit_method = 'Q' then unit_of_qty else unit_of_wgh end = u.unit_code
-							and a.order_no =@order_no 
+							    0 as seq,
+							    a.product_code,
+							    p.product_name,
+                                sum(a.order_qty) as qty,
+							    uq.unit_code as unit_code_qty,
+							    uq.unit_name as unit_name_qty,
+                                sum(a.order_wgh) as wgh,  
+							    uw.unit_code as unit_code_wgh,
+							    uw.unit_name as unit_name_wgh, 
+							    sum(unload_qty) as unload_qty,
+							    sum(unload_wgh) as unload_wgh,
+                                p.issue_unit_method,
+                                p.packing_size
+							from orders_item a,product p, 
+							    unit_of_measurement uq,
+							    unit_of_measurement uw
+							where a.product_code =p.product_code
+							    and p.unit_of_qty = uq.unit_code
+							    and p.unit_of_wgh = uw.unit_code
+							    and a.order_no =@order_no 
 							group by a.product_code,
-								b.product_name, 
-								b.issue_unit_method,
-								u.unit_code,
-								u.unit_name 
+								p.product_name, 
+								uq.unit_code,
+								uq.unit_name,
+                                uw.unit_code,
+								uw.unit_name
 							order by seq asc";
                     }
                     //case when a.bom_code = 0 then 0 else 1 end as product_set
@@ -508,7 +516,7 @@ namespace SlaughterHouseLib
 							0 as seq,
 							p.product_code,
 							p.product_name, 
-							'' as sale_unit_method, 
+							p.sale_unit_method, 
 							case when a.bom_code = 0 then sum(a.unload_qty) else CEILING(sum(a.unload_qty) / sum(bmt.mutiply_qty)) end as qty,
 							sum(a.unload_wgh) as wgh,
 								0 as unit_price, 
@@ -527,6 +535,7 @@ namespace SlaughterHouseLib
 							and p.product_code = case when a.bom_code = 0 then a.product_code else bm.product_code end
 						group by p.product_code,
 							p.product_name,
+                            p.sale_unit_method, 
                             a.bom_code ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("order_no", orderNo);
@@ -555,8 +564,10 @@ namespace SlaughterHouseLib
                     var sql = "";
                     //boy
                     sql = @"
-                            select COALESCE(sum(case when p.issue_unit_method = 'Q' then a.unload_qty else a.unload_wgh end), 0) as qty_wgh_unload,
-                             COALESCE(sum(case when p.issue_unit_method = 'Q' then a.order_qty else a.order_wgh end), 0) as qty_wgh
+                            select COALESCE(sum(a.unload_qty), 0) as qty_unload,
+                                COALESCE(sum(a.unload_wgh), 0) as wgh_unload,
+                                COALESCE(sum(a.order_qty), 0) as qty,
+                                COALESCE(sum(a.order_wgh), 0) as wgh
                             from orders_item a , product p
                             where a.order_no = @order_no
                             and a.product_code = p.product_code  
@@ -570,9 +581,11 @@ namespace SlaughterHouseLib
                     da.Fill(ds);
 
                     bool pickingCompleteFlag = false;
-                    decimal unloadQtyWgh = (decimal)ds.Tables[0].Rows[0]["qty_wgh_unload"];
-                    decimal qtyWgh = (decimal)ds.Tables[0].Rows[0]["qty_wgh"];
-                    if (unloadQtyWgh == qtyWgh)
+                    decimal unloadQty = (decimal)ds.Tables[0].Rows[0]["qty_unload"];
+                    decimal qty = (decimal)ds.Tables[0].Rows[0]["qty"];
+                    decimal unloadWgh = (decimal)ds.Tables[0].Rows[0]["wgh_unload"];
+                    decimal wgh = (decimal)ds.Tables[0].Rows[0]["wgh"];
+                    if (unloadQty == qty)
                     {
                         pickingCompleteFlag = true;
                     }
