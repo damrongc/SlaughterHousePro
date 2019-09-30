@@ -76,7 +76,7 @@
             this.BtnOk.ForeColor = System.Drawing.Color.White;
             this.BtnOk.Image = ((System.Drawing.Image)(resources.GetObject("BtnOk.Image")));
             this.BtnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnOk.Location = new System.Drawing.Point(287, 607);
+            this.BtnOk.Location = new System.Drawing.Point(321, 607);
             this.BtnOk.Name = "BtnOk";
             this.BtnOk.Size = new System.Drawing.Size(215, 36);
             this.BtnOk.TabIndex = 7;
@@ -87,9 +87,9 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.gv);
-            this.panel2.Location = new System.Drawing.Point(12, 186);
+            this.panel2.Location = new System.Drawing.Point(2, 186);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(698, 404);
+            this.panel2.Size = new System.Drawing.Size(753, 404);
             this.panel2.TabIndex = 43;
             // 
             // gv
@@ -111,7 +111,7 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(698, 404);
+            this.gv.Size = new System.Drawing.Size(753, 404);
             this.gv.TabIndex = 43;
             // 
             // select_col
@@ -151,9 +151,9 @@
             this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(12, 149);
+            this.panel1.Location = new System.Drawing.Point(2, 149);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(698, 36);
+            this.panel1.Size = new System.Drawing.Size(753, 36);
             this.panel1.TabIndex = 45;
             // 
             // BtnCancel
@@ -165,7 +165,7 @@
             this.BtnCancel.ForeColor = System.Drawing.Color.White;
             this.BtnCancel.Image = ((System.Drawing.Image)(resources.GetObject("BtnCancel.Image")));
             this.BtnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCancel.Location = new System.Drawing.Point(508, 607);
+            this.BtnCancel.Location = new System.Drawing.Point(542, 607);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(202, 36);
             this.BtnCancel.TabIndex = 47;
@@ -198,7 +198,7 @@
             this.BtnSearch.ForeColor = System.Drawing.Color.White;
             this.BtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("BtnSearch.Image")));
             this.BtnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSearch.Location = new System.Drawing.Point(568, 105);
+            this.BtnSearch.Location = new System.Drawing.Point(417, 105);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(142, 36);
             this.BtnSearch.TabIndex = 50;
@@ -227,7 +227,7 @@
             // Form_LovProductMuti
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(723, 656);
+            this.ClientSize = new System.Drawing.Size(759, 656);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboxProductGroup);
             this.Controls.Add(this.BtnSearch);

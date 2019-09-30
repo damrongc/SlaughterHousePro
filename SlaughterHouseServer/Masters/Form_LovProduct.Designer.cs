@@ -68,9 +68,9 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.gv);
-            this.panel2.Location = new System.Drawing.Point(12, 184);
+            this.panel2.Location = new System.Drawing.Point(2, 184);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(698, 449);
+            this.panel2.Size = new System.Drawing.Size(751, 449);
             this.panel2.TabIndex = 43;
             // 
             // gv
@@ -92,7 +92,7 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(698, 449);
+            this.gv.Size = new System.Drawing.Size(751, 449);
             this.gv.TabIndex = 43;
             // 
             // select_col
@@ -134,9 +134,9 @@
             this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(12, 147);
+            this.panel1.Location = new System.Drawing.Point(2, 147);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(698, 36);
+            this.panel1.Size = new System.Drawing.Size(751, 36);
             this.panel1.TabIndex = 45;
             // 
             // txtProductName
@@ -165,7 +165,7 @@
             this.BtnSearch.ForeColor = System.Drawing.Color.White;
             this.BtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("BtnSearch.Image")));
             this.BtnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSearch.Location = new System.Drawing.Point(568, 103);
+            this.BtnSearch.Location = new System.Drawing.Point(418, 103);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(142, 36);
             this.BtnSearch.TabIndex = 50;
@@ -194,7 +194,7 @@
             // Form_LovProduct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(723, 638);
+            this.ClientSize = new System.Drawing.Size(758, 638);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboxProductGroup);
             this.Controls.Add(this.BtnSearch);

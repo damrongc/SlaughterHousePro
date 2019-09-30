@@ -31,7 +31,7 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
-  
+
 
             this.Load += Form_Load;
             this.Shown += Form_Shown;
@@ -110,11 +110,17 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.PACKING_SIZE].ReadOnly = true;
             gv.Columns[ConstColumns.QTY].ReadOnly = false;
             gv.Columns[ConstColumns.WGH].ReadOnly = false;
+
+
+            gv.Columns[ConstColumns.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[ConstColumns.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[ConstColumns.QTY].DefaultCellStyle.Format = "N0";
+            gv.Columns[ConstColumns.WGH].DefaultCellStyle.Format = "N2";
+            gv.Columns[ConstColumns.PACKING_SIZE].DefaultCellStyle.Format = "N2";
             foreach (DataGridViewColumn column in gv.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
         }
 
         #endregion
@@ -209,10 +215,15 @@ namespace SlaughterHouseServer
                             dr[ConstColumns.SEQ] = 0;
                             dr[ConstColumns.PRODUCT_CODE] = row[ConstColumns.PRODUCT_CODE];
                             dr[ConstColumns.PRODUCT_NAME] = row[ConstColumns.PRODUCT_NAME];
-                            dr[ConstColumns.QTY_WGH] = 0;
+                            dr[ConstColumns.QTY] = 0;
+                            dr[ConstColumns.UNIT_CODE_QTY] = row[ConstColumns.UNIT_CODE_QTY];
+                            dr[ConstColumns.UNIT_NAME_QTY] = row[ConstColumns.UNIT_NAME_QTY];
+                            dr[ConstColumns.WGH] = 0;
+                            dr[ConstColumns.UNIT_CODE_WGH] = row[ConstColumns.UNIT_CODE_WGH];
+                            dr[ConstColumns.UNIT_NAME_WGH] = row[ConstColumns.UNIT_NAME_WGH];
                             dr[ConstColumns.ISSUE_UNIT_METHOD] = row[ConstColumns.ISSUE_UNIT_METHOD];
-                            dr[ConstColumns.UNIT_CODE] = row[ConstColumns.UNIT_CODE];
-                            dr[ConstColumns.UNIT_NAME] = row[ConstColumns.UNIT_NAME];
+                            dr[ConstColumns.PACKING_SIZE] = row[ConstColumns.PACKING_SIZE];
+
                             dtOrderItem.Rows.Add(dr);
                             dtOrderItem.AcceptChanges();
                         }
@@ -223,9 +234,8 @@ namespace SlaughterHouseServer
             {
                 MessageBox.Show(ex.Message);
             }
-
-
         }
+
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -262,7 +272,7 @@ namespace SlaughterHouseServer
                             dtOrderItem.Rows[e.RowIndex].Delete();
                             dtOrderItem.AcceptChanges();
                             gv.Refresh();
-                            break; 
+                            break;
                     }
                 }
             }
@@ -279,24 +289,25 @@ namespace SlaughterHouseServer
             int rowIdx = e.RowIndex;
             int colIdx = e.ColumnIndex - 1;
             DataGridView senderGrid = (DataGridView)sender;
+            decimal packingSize = 0;
+            decimal.TryParse(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString(), out packingSize);
+             
             switch (senderGrid.Columns[e.ColumnIndex].Name)
             {
                 case "qty":
-                    dtOrderItem.Rows[rowIdx][ConstColumns.WGH] = MyExtension.ToInt32(dtOrderItem.Rows[rowIdx][ConstColumns.QTY].ToString()) * MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString());
+                    dtOrderItem.Rows[rowIdx][ConstColumns.WGH] = MyExtension.ToInt32(dtOrderItem.Rows[rowIdx][ConstColumns.QTY].ToString()) * packingSize;
                     break;
                 case "wgh":
-                    decimal value;
-                    if (!decimal.TryParse(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString(), out value)) {
+                    if (packingSize ==0)
+                    {
                         break;
-                    }
-                    dtOrderItem.Rows[rowIdx][ConstColumns.QTY] = Math.Ceiling( MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.WGH].ToString()) / MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString()));
+                    } 
+                    dtOrderItem.Rows[rowIdx][ConstColumns.QTY] = Math.Ceiling(MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.WGH].ToString()) / packingSize);
                     break;
             }
-
-            
             dtOrderItem.AcceptChanges();
             gv.Refresh();
-            //row.Cells[e.ColumnIndex].OwningColumn.Name
+            //row.Cells[e.ColumnIndex].OwningColumn.Name  ##getName
         }
 
         private void Gv_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -310,8 +321,8 @@ namespace SlaughterHouseServer
                     tb.KeyPress += new KeyPressEventHandler(ColumnNumber_KeyPress);
                 }
             }
-
         }
+
         private void ColumnNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -373,7 +384,6 @@ namespace SlaughterHouseServer
                 foreach (DataRow row in dtOrderItem.Rows)
                 {
                     DataTable dtBom = BomController.GetBom(row[ConstColumns.PRODUCT_CODE].ToString());
-
                     if (dtBom.Rows.Count > 0)
                     {
                         foreach (DataRow dtBomRow in dtBom.Rows)
@@ -390,10 +400,10 @@ namespace SlaughterHouseServer
                                     ProductName = "",
                                 },
                                 BomCode = (int)dtBomRow["bom_code"],
-                                OrderSetQty = row[ConstColumns.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[ConstColumns.QTY_WGH]) : 0,
-                                OrderSetWgh = row[ConstColumns.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[ConstColumns.QTY_WGH]) : 0,
-                                OrderQty = row[ConstColumns.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[ConstColumns.QTY_WGH]) * Convert.ToInt16(dtBomRow["Mutiply_Qty"]) : 0,
-                                OrderWgh = row[ConstColumns.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[ConstColumns.QTY_WGH]) * Convert.ToDecimal(dtBomRow["Mutiply_Wgh"]) : 0,
+                                OrderSetQty = Convert.ToInt16(row[ConstColumns.QTY]) ,
+                                OrderSetWgh = Convert.ToInt16(row[ConstColumns.WGH]),
+                                OrderQty =  Convert.ToInt16(row[ConstColumns.QTY]) * Convert.ToInt16(dtBomRow[ConstColumns.MUTIPLY_QTY]) ,
+                                OrderWgh = Convert.ToInt16(row[ConstColumns.QTY]) * Convert.ToDecimal(dtBomRow[ConstColumns.PACKING_SIZE]) * Convert.ToDecimal(dtBomRow[ConstColumns.MUTIPLY_WGH]) ,
                             });
                         }
                     }
@@ -412,8 +422,8 @@ namespace SlaughterHouseServer
                             BomCode = 0,
                             OrderSetQty = 0,
                             OrderSetWgh = 0,
-                            OrderQty = row[ConstColumns.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[ConstColumns.QTY_WGH]) : 0,
-                            OrderWgh = row[ConstColumns.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[ConstColumns.QTY_WGH]) : 0,
+                            OrderQty =  Convert.ToInt16(row[ConstColumns.QTY]) ,
+                            OrderWgh =  Convert.ToDecimal(row[ConstColumns.WGH]),
                         });
                     }
                 }
@@ -480,9 +490,9 @@ namespace SlaughterHouseServer
                 //Check UNIT_PRICE
                 for (int i = 0; i < dtOrderItem.Rows.Count; i++)
                 {
-                    if (Convert.ToDecimal(dtOrderItem.Rows[i][ConstColumns.QTY_WGH]) == 0)
+                    if (Convert.ToDecimal(dtOrderItem.Rows[i][ConstColumns.QTY]) == 0 && Convert.ToDecimal(dtOrderItem.Rows[i][ConstColumns.WGH]) == 0)
                     {
-                        throw new Exception($"สินค้า {dtOrderItem.Rows[i][ConstColumns.PRODUCT_NAME]} ไม่ได้ระบุจำนวน");
+                        throw new Exception($"สินค้า {dtOrderItem.Rows[i][ConstColumns.PRODUCT_NAME]} ไม่ได้ระบุปริมาณหรือน้ำหนัก");
                     }
                 }
             }

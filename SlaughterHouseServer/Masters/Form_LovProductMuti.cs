@@ -56,13 +56,7 @@ namespace SlaughterHouseServer
         {
             LoadData();
         }
-        private void DtpRequestDate_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                BtnOk.Focus();
-            }
-        }
+     
 
         #region Event Focus, KeyDown 
 
@@ -75,14 +69,17 @@ namespace SlaughterHouseServer
         { 
             gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-            gv.Columns[ConstColumns.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยปริมาณ";
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
 
-             gv.Columns[ConstColumns.UNIT_CODE].Visible = false;
-             gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
+            gv.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
+            gv.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
+            gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
 
             gv.Columns[ConstColumns.PRODUCT_CODE].ReadOnly = true;
             gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
-            gv.Columns[ConstColumns.UNIT_NAME].ReadOnly = true;
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].ReadOnly = true;
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].ReadOnly = true;
             gv.Columns[ConstColumns.SELECT_COL].ReadOnly = false;
 
             foreach (DataGridViewColumn column in gv.Columns)
@@ -180,8 +177,11 @@ namespace SlaughterHouseServer
                             drNew[ConstColumns.PRODUCT_CODE] = row[ConstColumns.PRODUCT_CODE];
                             drNew[ConstColumns.PRODUCT_NAME] = row[ConstColumns.PRODUCT_NAME];
                             drNew[ConstColumns.ISSUE_UNIT_METHOD] = row[ConstColumns.ISSUE_UNIT_METHOD];
-                            drNew[ConstColumns.UNIT_CODE] = row[ConstColumns.UNIT_CODE];
-                            drNew[ConstColumns.UNIT_NAME] = row[ConstColumns.UNIT_NAME];
+                            drNew[ConstColumns.UNIT_CODE_QTY] = row[ConstColumns.UNIT_CODE_QTY];
+                            drNew[ConstColumns.UNIT_NAME_QTY] = row[ConstColumns.UNIT_NAME_QTY];
+                            drNew[ConstColumns.UNIT_CODE_WGH] = row[ConstColumns.UNIT_CODE_WGH];
+                            drNew[ConstColumns.UNIT_NAME_WGH] = row[ConstColumns.UNIT_NAME_WGH];
+                            drNew[ConstColumns.PACKING_SIZE] = row[ConstColumns.PACKING_SIZE];
                             dtResultProduct.Rows.Add(drNew);
                         }
                     }
@@ -193,9 +193,6 @@ namespace SlaughterHouseServer
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-
-             
-
             catch (Exception ex)
             {
 

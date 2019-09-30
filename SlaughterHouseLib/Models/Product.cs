@@ -142,18 +142,31 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sql = @"
-                                Select 0 as select_col, p.product_code, product_name,
-                                p.issue_unit_method, 
-                                case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end  as unit_code,
-                                u.unit_name
-                                From product p,
-                                product_price pp,
-                                unit_of_measurement u
-                                where p.product_code = pp.product_code
-                                and DATE_FORMAT(sysdate(),'%Y-%m-%d')  >= pp.start_date
-                                and DATE_FORMAT(sysdate(),'%Y-%m-%d')  <= pp.end_date
-                                and p.active = 1 
-                                and case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end = u.unit_code
+                                    Select 0 as select_col, p.product_code, product_name,
+	                                    p.issue_unit_method, 
+	                                    p.unit_of_qty as unit_code_qty,            
+	                                    uq.unit_name as unit_name_qty,
+	                                    p.unit_of_wgh as unit_code_wgh,
+	                                    uw.unit_name as unit_name_wgh,
+	                                    p.packing_size
+                                    From product p,
+	                                    (    select distinct pp.start_date, pp.end_date, pp.product_code
+                                        from product_price pp
+                                        Where  DATE_FORMAT(sysdate(),'%Y-%m-%d')  >= pp.start_date
+		                                    and DATE_FORMAT(sysdate(),'%Y-%m-%d')  <= pp.end_date
+                                        union
+	                                    select distinct cp.start_date, cp.end_date, cp.product_code
+                                        from customer_price cp
+	                                    Where  DATE_FORMAT(sysdate(),'%Y-%m-%d')  >= cp.start_date
+		                                    and DATE_FORMAT(sysdate(),'%Y-%m-%d')  <= cp.end_date) as price,
+	                                    unit_of_measurement uq,
+	                                    unit_of_measurement uw
+                                    where p.product_code = price.product_code
+	                                    and DATE_FORMAT(sysdate(),'%Y-%m-%d')  >= price.start_date
+	                                    and DATE_FORMAT(sysdate(),'%Y-%m-%d')  <= price.end_date
+	                                    and p.active = 1 
+	                                    and p.unit_of_qty = uq.unit_code
+	                                    and p.unit_of_wgh = uw.unit_code
                               ";
                     if (String.IsNullOrEmpty(productGroup) == false)
                     {
@@ -213,28 +226,38 @@ namespace SlaughterHouseLib.Models
                     {
                         sql = @"
                                 Select 0 as select_col,  p.product_code, product_name,
-                                p.issue_unit_method, 
-                                case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end  as unit_code,
-                                u.unit_name
+                                    p.issue_unit_method,  
+                                    p.unit_of_qty as unit_code_qty,            
+                                    uq.unit_name as unit_name_qty,
+                                    p.unit_of_wgh as unit_code_wgh,
+                                    uw.unit_name as unit_name_wgh,
+                                    p.packing_size
                                 From product p, 
-                                unit_of_measurement u
+                                    unit_of_measurement uq,
+                                    unit_of_measurement uw
                                 where p.active = 1 
-                                and case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end = u.unit_code
-                                and p.product_code <> 'NA'
+                                    and p.unit_of_qty = uq.unit_code
+                                    and p.unit_of_wgh = uw.unit_code
+                                    and p.product_code <> 'NA'
                               ";
                     }
                     else
                     {
                         sql = @"
                                 Select   p.product_code, product_name,
-                                p.issue_unit_method, 
-                                case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end  as unit_code,
-                                u.unit_name
+                                    p.issue_unit_method, 
+                                    p.unit_of_qty as unit_code_qty,            
+                                    uq.unit_name as unit_name_qty,
+                                    p.unit_of_wgh as unit_code_wgh,
+                                    uw.unit_name as unit_name_wgh,
+                                    p.packing_size
                                 From product p, 
-                                unit_of_measurement u
+                                    unit_of_measurement uq,
+                                    unit_of_measurement uw
                                 where p.active = 1 
-                                and case when p.issue_unit_method = 'Q' then p.unit_of_qty else p.unit_of_wgh end = u.unit_code
-                                and p.product_code <> 'NA'
+                                    and p.unit_of_qty = uq.unit_code
+                                    and p.unit_of_wgh = uw.unit_code
+                                    and p.product_code <> 'NA'
                               ";
                     }
                     if (String.IsNullOrEmpty(productGroup) == false)

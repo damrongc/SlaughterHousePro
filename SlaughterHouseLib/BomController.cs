@@ -116,9 +116,11 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"SELECT distinct bi.bom_code, bi.product_code, Mutiply_Qty, Mutiply_wgh, p.issue_unit_method as issue_unit_method
-                                    FROM bom b, bom_item bi, product p
-                                    Where b.product_code = @product_code
+                    var sql = @"SELECT distinct bi.bom_code, bi.product_code, 
+                                    Mutiply_Qty, Mutiply_wgh, p.issue_unit_method as issue_unit_method,
+                                    p.packing_size
+                                FROM bom b, bom_item bi, product p
+                                Where b.product_code = @product_code
                                     and b.bom_code = bi.bom_code
                                     and bi.product_code = p.product_code
                                 ";

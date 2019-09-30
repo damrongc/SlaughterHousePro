@@ -91,15 +91,18 @@ namespace SlaughterHouseServer
         {
             gvSo.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gvSo.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-            gvSo.Columns[ConstColumns.QTY_WGH].HeaderText = "จำนวน";
-            gvSo.Columns[ConstColumns.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+            gvSo.Columns[ConstColumns.QTY].HeaderText = "ปริมาณ";
+            gvSo.Columns[ConstColumns.WGH].HeaderText = "น้ำหนัก";
+            gvSo.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยปริมาณ";
+            gvSo.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
 
             gvSo.Columns[ConstColumns.SEQ].Visible = false;
             gvSo.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
             gvSo.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
             gvSo.Columns[ConstColumns.UNLOAD_QTY].Visible = false;
             gvSo.Columns[ConstColumns.UNLOAD_WGH].Visible = false;
-            gvSo.Columns[ConstColumns.UNIT_CODE].Visible = false;
+            gvSo.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
+            gvSo.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
         }
         #endregion
 

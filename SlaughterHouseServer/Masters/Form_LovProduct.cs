@@ -56,7 +56,6 @@ namespace SlaughterHouseServer
             LoadData();
         }
 
-
         #region Event Focus, KeyDown 
         private void ComboxProductGroup_SelectedIndexChanged(object sender, System.EventArgs e)
         {
@@ -85,11 +84,7 @@ namespace SlaughterHouseServer
 
         #endregion
 
-        #region Event Click
-
-
-
-
+        #region Event Click 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
