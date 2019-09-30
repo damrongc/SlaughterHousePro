@@ -419,10 +419,10 @@ namespace SlaughterHouseLib
 							0 as seq,
 							p.product_code,
 							p.product_name, 
-							 case when a.bom_code = 0 then a.order_qty else a.order_set_qty end as qty,
+							case when a.bom_code = 0 then a.order_qty else a.order_set_qty end as qty,
 							uq.unit_code as unit_code_qty,
 							uq.unit_name as unit_name_qty,
-							 case when a.bom_code = 0 then a.order_wgh else a.order_set_wgh end as wgh,
+							case when a.bom_code = 0 then a.order_wgh else a.order_set_wgh end as wgh,
 							uw.unit_code as unit_code_wgh,
 							uw.unit_name as unit_name_wgh,  
 							0 as unload_qty,
@@ -522,6 +522,7 @@ namespace SlaughterHouseLib
 								0 as unit_price, 
                                 0 as unit_disc,
                                 0 as unit_net,
+                                0 as disc_amt,
 								0 as gross_amt
 						FROM
 							orders_item a,

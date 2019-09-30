@@ -68,18 +68,22 @@ namespace SlaughterHouseServer
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         { 
             gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
-            gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า"; 
             gv.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยปริมาณ";
             gv.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
+            gv.Columns[ConstColumns.PACKING_SIZE].HeaderText = "ขนาดบรรจุ";
 
             gv.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
             gv.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].Visible = false;
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].Visible = false;
             gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
 
             gv.Columns[ConstColumns.PRODUCT_CODE].ReadOnly = true;
             gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
             gv.Columns[ConstColumns.UNIT_NAME_QTY].ReadOnly = true;
             gv.Columns[ConstColumns.UNIT_NAME_WGH].ReadOnly = true;
+             
             gv.Columns[ConstColumns.SELECT_COL].ReadOnly = false;
 
             foreach (DataGridViewColumn column in gv.Columns)

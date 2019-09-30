@@ -82,6 +82,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.LOCATION_CODE].HeaderText = "รหัสคลังสินค้า";
             gv.Columns[ConstColumns.LOCATION_NAME].HeaderText = "คลังสินค้า";
 
+            gv.Columns[ConstColumns.SEQ].Visible = false;
             gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
             gv.Columns[ConstColumns.QTY_WGH].Visible = false;
             gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
@@ -95,6 +96,7 @@ namespace SlaughterHouseServer
             gvSo.Columns[ConstColumns.WGH].HeaderText = "น้ำหนัก";
             gvSo.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยปริมาณ";
             gvSo.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
+            gvSo.Columns[ConstColumns.PACKING_SIZE].HeaderText = "ขนาดบรรจุ";
 
             gvSo.Columns[ConstColumns.SEQ].Visible = false;
             gvSo.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
@@ -103,6 +105,8 @@ namespace SlaughterHouseServer
             gvSo.Columns[ConstColumns.UNLOAD_WGH].Visible = false;
             gvSo.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
             gvSo.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
+            gvSo.Columns[ConstColumns.PACKING_SIZE].Visible = false;
+
         }
         #endregion
 
@@ -161,7 +165,7 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -211,7 +215,7 @@ private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         #endregion
 
         private void LoadData()
-        { 
+        {
             txtProductSlipNo.Enabled = false;
             Order order = OrderController.GetOrder(this.orderNo);
             if (order != null)
@@ -221,7 +225,7 @@ private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
                 dtpProductSlipDate.Value = order.RequestDate;
                 cboCustomer.SelectedValue = order.Customer.CustomerCode;
                 chkActive.Checked = order.Active;
-                dtpProductSlipDate.Enabled = false; 
+                dtpProductSlipDate.Enabled = false;
             }
             else
             {
@@ -286,11 +290,11 @@ private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
                     {
                         ProductCode = row[ConstColumns.PRODUCT_CODE].ToString(),
                         ProductName = row[ConstColumns.PRODUCT_NAME].ToString(),
-                    }; 
+                    };
                     xx.Location = new Location
                     {
                         LocationCode = int.Parse(row[ConstColumns.LOCATION_CODE].ToString()),
-                        LocationName =   row[ConstColumns.LOCATION_NAME].ToString(),
+                        LocationName = row[ConstColumns.LOCATION_NAME].ToString(),
                     };
                     xx.LotNo = row[ConstColumns.LOT_NO].ToString();
                     xx.Qty = row[ConstColumns.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[ConstColumns.QTY_WGH_LOCATION]) : 0;
@@ -330,7 +334,7 @@ private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
                 var productSlip = new ProductSlip
                 {
                     ProductSlipNo = txtProductSlipNo.Text,
-                    ProductSlipDate = dtpProductSlipDate.Value, 
+                    ProductSlipDate = dtpProductSlipDate.Value,
                     ProductSlipFlag = 0,
                     Active = false,
                     CreateBy = "system",
@@ -343,7 +347,7 @@ private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
                 throw;
             }
         }
-private void PrintReport()
+        private void PrintReport()
         {
             try
             {

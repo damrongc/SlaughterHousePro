@@ -174,6 +174,11 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.SEQ].Visible = false;
             gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
 
+            gv.Columns[ConstColumns.UNIT_DISC].Visible = false;
+            gv.Columns[ConstColumns.UNIT_NET].Visible = false;
+            gv.Columns[ConstColumns.DISC_AMT].Visible = false;
+
+
             gv.Columns[ConstColumns.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gv.Columns[ConstColumns.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gv.Columns[ConstColumns.UNIT_PRICE].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;

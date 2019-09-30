@@ -27,7 +27,7 @@ namespace SlaughterHouseServer
         {
             gv.CellContentClick += Gv_CellContentClick;
             gv.DataBindingComplete += Gv_DataBindingComplete;
-           
+
             gv.ReadOnly = false;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
@@ -66,14 +66,24 @@ namespace SlaughterHouseServer
 
             gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-            gv.Columns[ConstColumns.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+            //gv.Columns[ConstColumns.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยปริมาณ";
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
+            gv.Columns[ConstColumns.PACKING_SIZE].HeaderText = "ขนาดบรรจุ";
 
-             gv.Columns[ConstColumns.UNIT_CODE].Visible = false;
-             gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
+
+
+            gv.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
+            gv.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].Visible = false;
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].Visible = false;
+            gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
 
             gv.Columns[ConstColumns.PRODUCT_CODE].ReadOnly = true;
             gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
-            gv.Columns[ConstColumns.UNIT_NAME].ReadOnly = true;
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].ReadOnly = true;
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].ReadOnly = true;
+
             gv.Columns[ConstColumns.SELECT_COL].ReadOnly = false;
 
             foreach (DataGridViewColumn column in gv.Columns)
@@ -127,7 +137,7 @@ namespace SlaughterHouseServer
             if (dtProduct != null)
             {
                 gv.DataSource = dtProduct;
-            } 
+            }
         }
         private void FillProductGroup()
         {
