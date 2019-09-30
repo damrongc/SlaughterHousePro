@@ -71,8 +71,6 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
             gv.Columns[ConstColumns.PACKING_SIZE].HeaderText = "ขนาดบรรจุ";
 
-
-
             gv.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
             gv.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
             gv.Columns[ConstColumns.UNIT_NAME_QTY].Visible = false;
@@ -100,25 +98,38 @@ namespace SlaughterHouseServer
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-
-                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
+                //if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
+                //{
+                //    switch (senderGrid.Columns[e.ColumnIndex].Name)
+                //    {
+                //        case "select_col":
+                //            try
+                //            {
+                //                this.productCode = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_CODE].Value.ToString();
+                //                this.productName = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_NAME].Value.ToString();
+                //                this.DialogResult = DialogResult.OK;
+                //                this.Close();
+                //            }
+                //            catch (System.Exception ex)
+                //            {
+                //                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //            }
+                //            break;
+                //    }
+                //}
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewLinkColumn)
                 {
-                    switch (senderGrid.Columns[e.ColumnIndex].Name)
+                    try
                     {
-                        case "select_col":
-                            try
-                            {
-                                this.productCode = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_CODE].Value.ToString();
-                                this.productName = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_NAME].Value.ToString();
+                        this.productCode = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_CODE].Value.ToString();
+                        this.productName = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_NAME].Value.ToString();
 
-                                this.DialogResult = DialogResult.OK;
-                                this.Close();
-                            }
-                            catch (System.Exception ex)
-                            {
-                                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            break;
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    catch (System.Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -126,7 +137,6 @@ namespace SlaughterHouseServer
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
         #endregion
 

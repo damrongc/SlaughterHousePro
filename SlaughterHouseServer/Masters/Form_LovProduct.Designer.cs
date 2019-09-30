@@ -33,9 +33,6 @@
             this.txtProductCode = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
-            this.select_col = new System.Windows.Forms.DataGridViewImageColumn();
-            this.product_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtProductName = new System.Windows.Forms.TextBox();
@@ -43,6 +40,9 @@
             this.BtnSearch = new System.Windows.Forms.Button();
             this.comboxProductGroup = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.select_col = new System.Windows.Forms.DataGridViewImageColumn();
+            this.product_code = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
@@ -94,31 +94,6 @@
             this.gv.RowHeadersWidth = 10;
             this.gv.Size = new System.Drawing.Size(751, 449);
             this.gv.TabIndex = 43;
-            // 
-            // select_col
-            // 
-            this.select_col.DataPropertyName = "select_col";
-            this.select_col.HeaderText = "select_col";
-            this.select_col.Image = ((System.Drawing.Image)(resources.GetObject("select_col.Image")));
-            this.select_col.Name = "select_col";
-            this.select_col.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.select_col.Width = 102;
-            // 
-            // product_code
-            // 
-            this.product_code.DataPropertyName = "product_code";
-            this.product_code.HeaderText = "product_code";
-            this.product_code.Name = "product_code";
-            this.product_code.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.product_code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.product_code.Width = 135;
-            // 
-            // product_name
-            // 
-            this.product_name.DataPropertyName = "product_name";
-            this.product_name.HeaderText = "product_name";
-            this.product_name.Name = "product_name";
-            this.product_name.Width = 161;
             // 
             // label2
             // 
@@ -191,6 +166,31 @@
             this.label4.TabIndex = 52;
             this.label4.Text = "กลุ่มสินค้า";
             // 
+            // select_col
+            // 
+            this.select_col.DataPropertyName = "select_col";
+            this.select_col.HeaderText = "select_col";
+            this.select_col.Image = ((System.Drawing.Image)(resources.GetObject("select_col.Image")));
+            this.select_col.Name = "select_col";
+            this.select_col.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.select_col.Visible = false;
+            this.select_col.Width = 102;
+            // 
+            // product_code
+            // 
+            this.product_code.DataPropertyName = "product_code";
+            this.product_code.HeaderText = "product_code";
+            this.product_code.Name = "product_code";
+            this.product_code.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.product_code.Width = 135;
+            // 
+            // product_name
+            // 
+            this.product_name.DataPropertyName = "product_name";
+            this.product_name.HeaderText = "product_name";
+            this.product_name.Name = "product_name";
+            this.product_name.Width = 161;
+            // 
             // Form_LovProduct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -231,10 +231,10 @@
         private System.Windows.Forms.TextBox txtProductName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button BtnSearch;
-        private System.Windows.Forms.DataGridViewImageColumn select_col;
-        private System.Windows.Forms.DataGridViewTextBoxColumn product_code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
         private System.Windows.Forms.ComboBox comboxProductGroup;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewImageColumn select_col;
+        private System.Windows.Forms.DataGridViewLinkColumn product_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
     }
 }
