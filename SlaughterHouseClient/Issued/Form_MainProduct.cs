@@ -49,7 +49,7 @@ namespace SlaughterHouseClient.Issued
         {
             try
             {
-                var frm = new Form_Orders();
+                var frm = new Form_Orders(string.Empty);
 
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
@@ -230,7 +230,7 @@ namespace SlaughterHouseClient.Issued
                 //            db.Entry(productionItem).State = EntityState.Modified;
 
 
-                //            //update receive item 
+                //            //update receive item
                 //            receiveItem.chill_qty = 1;
                 //            receiveItem.chill_wgh = unloadWeight;
                 //            receiveItem.modified_at = DateTime.Now;

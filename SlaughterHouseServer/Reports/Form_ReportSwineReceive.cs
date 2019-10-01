@@ -41,7 +41,7 @@ namespace SlaughterHouseServer.Reports
         private void LoadReport()
         {
             ReportDocument doc = new ReportDocument();
-            DataSet ds = ReportController.GetDataReportSwineReceiveHeader(ReceiveNo);
+            DataSet ds = ReportController.GetDataReportSwineReceive(ReceiveNo);
 
 
 

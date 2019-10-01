@@ -7,16 +7,15 @@ namespace SlaughterHouseClient.Issued
     public partial class Form_Orders : Form
     {
         public string OrderNo { get; set; }
-        public Form_Orders()
+
+        private readonly string _productCode;
+        public Form_Orders(string productCode)
         {
             InitializeComponent();
+
+            _productCode = productCode;
             Load += Form_Load;
-
-
-
             UserSettingsComponent();
-
-
         }
 
         private void UserSettingsComponent()
@@ -30,9 +29,6 @@ namespace SlaughterHouseClient.Issued
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             //gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
-
-
-
         }
 
         private void Gv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -46,8 +42,6 @@ namespace SlaughterHouseClient.Issued
                     OrderNo = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
                     DialogResult = DialogResult.OK;
                     Close();
-
-
                 }
             }
             catch (Exception ex)
@@ -66,27 +60,46 @@ namespace SlaughterHouseClient.Issued
 
         private void LoadData()
         {
-
             using (var db = new SlaughterhouseEntities())
             {
-                var qry = db.orders.Where(p => p.order_flag == 0).ToList();
-                var coll = qry.AsEnumerable().Select(p => new
+
+                if (!string.IsNullOrEmpty(_productCode))
                 {
-                    p.order_no,
-                    order_date = p.order_date.ToString("dd-MM-yyyy"),
-                    p.customer.customer_name,
-                    p.comments
-                }).ToList();
+                    var qry = (from o in db.orders
+                               join item in db.orders_item
+                               on o.order_no equals item.order_no
+                               where o.order_flag.Equals(0) && item.product_code.Equals(_productCode)
+                               select o).ToList();
+                    var coll = qry.AsEnumerable().Select(p => new
+                    {
+                        p.order_no,
+                        order_date = p.order_date.ToString("dd-MM-yyyy"),
+                        p.customer.customer_name,
+                        p.comments
+                    }).ToList();
+                    gv.DataSource = coll;
+                }
+                else
+                {
+                    var qry = (from o in db.orders
+                               join item in db.orders_item
+                               on o.order_no equals item.order_no
+                               where o.order_flag.Equals(0)
+                               select o).ToList();
+                    var coll = qry.AsEnumerable().Select(p => new
+                    {
+                        p.order_no,
+                        order_date = p.order_date.ToString("dd-MM-yyyy"),
+                        p.customer.customer_name,
+                        p.comments
+                    }).ToList();
+                    gv.DataSource = coll;
 
-
-                gv.DataSource = coll;
-
+                }
                 gv.Columns[0].HeaderText = "เลขที่ SO";
                 gv.Columns[1].HeaderText = "วันที่เอกสาร";
                 gv.Columns[2].HeaderText = "ลูกค้า";
                 gv.Columns[3].HeaderText = "หมายเหตุ";
-
-
             }
         }
 

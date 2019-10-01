@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Menu));
             this.btnExit = new System.Windows.Forms.Button();
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.lblCurrentDatetime = new System.Windows.Forms.Label();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnReceiveSwine = new System.Windows.Forms.Button();
@@ -41,15 +43,12 @@
             this.btnReceivePart = new System.Windows.Forms.Button();
             this.btnConfirmStock = new System.Windows.Forms.Button();
             this.btnIssueCarcass = new System.Windows.Forms.Button();
-            this.btnIssueCarcassForSales = new System.Windows.Forms.Button();
             this.btnIssueHead = new System.Windows.Forms.Button();
             this.btnIssueByProduct = new System.Windows.Forms.Button();
             this.btnIssuePart = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnIssueProductForSales = new System.Windows.Forms.Button();
-            this.btnSettings = new System.Windows.Forms.Button();
-            this.lblCurrentDatetime = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -88,6 +87,37 @@
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(1024, 54);
             this.panelHeader.TabIndex = 1;
+            // 
+            // lblCurrentDatetime
+            // 
+            this.lblCurrentDatetime.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblCurrentDatetime.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblCurrentDatetime.ForeColor = System.Drawing.Color.White;
+            this.lblCurrentDatetime.Location = new System.Drawing.Point(738, 0);
+            this.lblCurrentDatetime.Name = "lblCurrentDatetime";
+            this.lblCurrentDatetime.Size = new System.Drawing.Size(150, 54);
+            this.lblCurrentDatetime.TabIndex = 16;
+            this.lblCurrentDatetime.Text = "-";
+            this.lblCurrentDatetime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.BackColor = System.Drawing.Color.Gray;
+            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSettings.FlatAppearance.BorderSize = 0;
+            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettings.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnSettings.ForeColor = System.Drawing.Color.White;
+            this.btnSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnSettings.Image")));
+            this.btnSettings.Location = new System.Drawing.Point(888, 0);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(56, 54);
+            this.btnSettings.TabIndex = 15;
+            this.btnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSettings.UseVisualStyleBackColor = false;
+            this.btnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // label1
             // 
@@ -234,24 +264,9 @@
             this.btnIssueCarcass.Name = "btnIssueCarcass";
             this.btnIssueCarcass.Size = new System.Drawing.Size(285, 89);
             this.btnIssueCarcass.TabIndex = 12;
-            this.btnIssueCarcass.Text = "จ่ายหมูซีก-ตัดแต่ง";
+            this.btnIssueCarcass.Text = "จ่ายหมูซีก";
             this.btnIssueCarcass.UseVisualStyleBackColor = false;
             this.btnIssueCarcass.Click += new System.EventHandler(this.btnIssueCarcass_Click);
-            // 
-            // btnIssueCarcassForSales
-            // 
-            this.btnIssueCarcassForSales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(66)))), ((int)(((byte)(54)))));
-            this.btnIssueCarcassForSales.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnIssueCarcassForSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIssueCarcassForSales.Font = new System.Drawing.Font("Kanit", 20F);
-            this.btnIssueCarcassForSales.ForeColor = System.Drawing.Color.White;
-            this.btnIssueCarcassForSales.Location = new System.Drawing.Point(324, 128);
-            this.btnIssueCarcassForSales.Name = "btnIssueCarcassForSales";
-            this.btnIssueCarcassForSales.Size = new System.Drawing.Size(285, 89);
-            this.btnIssueCarcassForSales.TabIndex = 13;
-            this.btnIssueCarcassForSales.Text = "จ่ายหมูซีก-ขาย";
-            this.btnIssueCarcassForSales.UseVisualStyleBackColor = false;
-            this.btnIssueCarcassForSales.Click += new System.EventHandler(this.btnIssueCarcassForSales_Click);
             // 
             // btnIssueHead
             // 
@@ -307,7 +322,6 @@
             this.flowLayoutPanel2.Controls.Add(this.btnIssueCarcass);
             this.flowLayoutPanel2.Controls.Add(this.btnIssueByProduct);
             this.flowLayoutPanel2.Controls.Add(this.btnIssuePart);
-            this.flowLayoutPanel2.Controls.Add(this.btnIssueCarcassForSales);
             this.flowLayoutPanel2.Controls.Add(this.btnIssueProductForSales);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 406);
@@ -323,46 +337,13 @@
             this.btnIssueProductForSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssueProductForSales.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnIssueProductForSales.ForeColor = System.Drawing.Color.White;
-            this.btnIssueProductForSales.Location = new System.Drawing.Point(615, 128);
+            this.btnIssueProductForSales.Location = new System.Drawing.Point(324, 128);
             this.btnIssueProductForSales.Name = "btnIssueProductForSales";
             this.btnIssueProductForSales.Size = new System.Drawing.Size(285, 89);
             this.btnIssueProductForSales.TabIndex = 18;
             this.btnIssueProductForSales.Text = "จ่ายชิ้นส่วน-ขาย";
             this.btnIssueProductForSales.UseVisualStyleBackColor = false;
             this.btnIssueProductForSales.Click += new System.EventHandler(this.BtnIssueProductForSales_Click);
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.BackColor = System.Drawing.Color.Gray;
-            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSettings.FlatAppearance.BorderSize = 0;
-            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettings.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.btnSettings.ForeColor = System.Drawing.Color.White;
-            this.btnSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnSettings.Image")));
-            this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSettings.Location = new System.Drawing.Point(826, 0);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(118, 54);
-            this.btnSettings.TabIndex = 15;
-            this.btnSettings.Text = "Settings";
-            this.btnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSettings.UseVisualStyleBackColor = false;
-            this.btnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
-            // 
-            // lblCurrentDatetime
-            // 
-            this.lblCurrentDatetime.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblCurrentDatetime.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.lblCurrentDatetime.ForeColor = System.Drawing.Color.White;
-            this.lblCurrentDatetime.Location = new System.Drawing.Point(676, 0);
-            this.lblCurrentDatetime.Name = "lblCurrentDatetime";
-            this.lblCurrentDatetime.Size = new System.Drawing.Size(150, 54);
-            this.lblCurrentDatetime.TabIndex = 16;
-            this.lblCurrentDatetime.Text = "-";
-            this.lblCurrentDatetime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form_Menu
             // 
@@ -394,7 +375,6 @@
         private System.Windows.Forms.Button btnReceiveByProductWhite;
         private System.Windows.Forms.Button btnReceiveByProductRed;
         private System.Windows.Forms.Button btnIssueCarcass;
-        private System.Windows.Forms.Button btnIssueCarcassForSales;
         private System.Windows.Forms.Button btnReceivePart;
         private System.Windows.Forms.Button btnIssueHead;
         private System.Windows.Forms.Button btnIssueByProduct;

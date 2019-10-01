@@ -102,14 +102,34 @@ namespace SlaughterHouseClient.Receiving
                 InputData = serialPort1.ReadExisting();
             if (InputData != String.Empty)
             {
-                this.BeginInvoke(new SetTextCallback(DisplayWeight), new object[] { InputData });
+                this.BeginInvoke(new SetTextCallback(DisplayWeightJedever), new object[] { InputData });
+            }
+        }
+        private void DisplayWeightJedever(string DataInvoke)
+        {
+            if (lockWeight == false)
+            {
+                double num = 0.0;
+                if (DataInvoke.Length == 19)
+                {
+                    string stateOfScale = DataInvoke.Substring(6, 1);
+                    string weightText = DataInvoke.Substring(7, 8);
+                    if (stateOfScale == "+")
+                    {
+                        num = weightText.ToDouble();
+                    }
+                    else
+                    {
+                        num = -1.0 * weightText.ToDouble();
+                    }
+
+                    lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
+                }
+
             }
         }
 
-
-
-
-        private void DisplayWeight(string DataInvoke)
+        private void DisplayWeightIWX(string DataInvoke)
         {
             if (lockWeight == false)
             {
@@ -189,7 +209,6 @@ namespace SlaughterHouseClient.Receiving
             }
         }
 
-
         private void ProcessData()
         {
             try
@@ -213,7 +232,6 @@ namespace SlaughterHouseClient.Receiving
             }
 
         }
-
 
         private void LoadData()
         {
@@ -253,8 +271,6 @@ namespace SlaughterHouseClient.Receiving
 
             lblMessage.Text = Constants.START_WAITING;
         }
-
-
 
         private void btnExit_Click(object sender, EventArgs e)
         {

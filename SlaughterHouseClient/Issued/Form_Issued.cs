@@ -6,17 +6,12 @@ namespace SlaughterHouseClient.Issued
 {
     public partial class Form_Issued : Form
     {
-        public string issuedNo { get; set; }
+        public string ProductionNo { get; set; }
         public Form_Issued()
         {
             InitializeComponent();
             Load += Form_Load;
-
-
-
             UserSettingsComponent();
-
-
         }
 
         private void UserSettingsComponent()
@@ -43,7 +38,7 @@ namespace SlaughterHouseClient.Issued
 
                 if (e.RowIndex >= 0)
                 {
-                    issuedNo = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    ProductionNo = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
                     DialogResult = DialogResult.OK;
                     Close();
 
@@ -77,14 +72,10 @@ namespace SlaughterHouseClient.Issued
                     p.comments,
                 }).ToList();
 
-
                 gv.DataSource = coll;
-
-                gv.Columns[0].HeaderText = "เลขที่ใบเบิก";
+                gv.Columns[0].HeaderText = "เลขที่เอกสาร";
                 gv.Columns[1].HeaderText = "วันที่เอกสาร";
                 gv.Columns[2].HeaderText = "หมายเหตุ";
-
-
             }
         }
 

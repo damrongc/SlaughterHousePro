@@ -69,7 +69,7 @@ namespace SlaughterHouseLib
                                     FarmWgh = p.Field<decimal>("farm_wgh"),
                                     FactoryQty = p.Field<int>("factory_qty"),
                                     FactoryWgh = p.Field<decimal>("factory_wgh"),
-                                    ReceiveFlag = p.Field<int>("factory_qty") == 0 ? "New" : (p.Field<int>("receive_flag") == 1 ? "Close" : "In Process"),
+                                    ReceiveFlag = p.Field<int>("factory_qty") == 0 ? "New" : (p.Field<int>("receive_flag") == 1 ? "In Process" : "Close"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                 }).ToList();
 

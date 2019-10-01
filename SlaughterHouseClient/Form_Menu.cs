@@ -64,15 +64,11 @@ namespace SlaughterHouseClient
 
         private void btnIssueCarcass_Click(object sender, EventArgs e)
         {
-            var frm = new Receiving.Form_Carcass();
+            var frm = new Issued.Form_Carcass();
             frm.ShowInTaskbar = false;
             frm.ShowDialog();
         }
 
-        private void btnIssueCarcassForSales_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnReceivePart_Click(object sender, EventArgs e)
         {

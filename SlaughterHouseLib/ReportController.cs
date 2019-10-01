@@ -297,7 +297,7 @@ namespace SlaughterHouseLib
             }
         }
 
-        public static DataSet GetDataReportSwineReceiveHeader(string receiveNo)
+        public static DataSet GetDataReportSwineReceive(string receiveNo)
         {
             try
             {
@@ -428,6 +428,53 @@ namespace SlaughterHouseLib
 
                         ds.Tables.Add(dtFooter);
                     }
+
+                    return ds;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static DataSet GetDataReportSwineYield(DateTime receiveDate)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"SELECT receive_date,transport_doc_no,truck_no
+                                ,queue_no,lot_no,farm_qty,farm_wgh
+                                ,factory_qty
+                                ,factory_wgh
+                                ,(select sum(receive_qty) from receive_item where receive_item.receive_no =a.receive_no and product_code ='P002') as carcass_qty
+                                ,(select sum(receive_wgh) from receive_item where receive_item.receive_no =a.receive_no and product_code ='P002') as carcass_wgh
+                                ,b.farm_name
+                                ,c.breeder_name
+                                ,(SELECT std_yield from product WHERE product_code ='P002') as std_yield
+                                ,0.0 as yeild
+                                FROM receives a,farm b,breeder c
+                                WHERE receive_date =@receive_date
+                                AND a.farm_code =b.farm_code
+                                AND a.breeder_code =c.breeder_code";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("receive_date", receiveDate.ToString("yyyy-MM-dd"));
+
+                    var da = new MySqlDataAdapter(cmd);
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+
+
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        double factory_wgh = ds.Tables[0].Rows[i]["factory_wgh"].ToString().ToDouble();
+                        double carcass_wgh = ds.Tables[0].Rows[i]["carcass_wgh"].ToString().ToDouble();
+                        ds.Tables[0].Rows[i]["yeild"] = ((carcass_wgh * 100) / 100).ToFormat2Double();
+                    }
+
 
                     return ds;
                 }

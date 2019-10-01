@@ -14,6 +14,7 @@ namespace SlaughterHouseServer
 
         private void UserSettingComponent()
         {
+            this.WindowState = FormWindowState.Maximized;
             BtnMaster.Click += Btn_Click;
             BtnOrder.Click += Btn_Click;
             BtnProductionOrder.Click += Btn_Click;
@@ -85,6 +86,11 @@ namespace SlaughterHouseServer
             //fh.WindowState = FormWindowState.Maximized;
             //this.plContainer.Tag = fh;
             fh.Show();
+        }
+
+        private void BtnMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

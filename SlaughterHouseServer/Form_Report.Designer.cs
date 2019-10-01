@@ -33,7 +33,7 @@
             this.btnReportDailySales = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.btnReportSoWithInv = new System.Windows.Forms.Button();
-            this.btn1 = new System.Windows.Forms.Button();
+            this.btnSwineYield = new System.Windows.Forms.Button();
             this.btnReportStockMovement = new System.Windows.Forms.Button();
             this.btnStockBalance = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -45,7 +45,7 @@
             this.groupBox1.Controls.Add(this.btnReportDailySales);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.btnReportSoWithInv);
-            this.groupBox1.Controls.Add(this.btn1);
+            this.groupBox1.Controls.Add(this.btnSwineYield);
             this.groupBox1.Controls.Add(this.btnReportStockMovement);
             this.groupBox1.Controls.Add(this.btnStockBalance);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -97,15 +97,15 @@
             this.btnReportSoWithInv.Text = "รายงานเปรียบเทียบใบสั่งขายกับใบแจ้งหนี้";
             this.btnReportSoWithInv.UseVisualStyleBackColor = false;
             // 
-            // btn1
+            // btnSwineYield
             // 
-            this.btn1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btn1.Location = new System.Drawing.Point(318, 414);
-            this.btn1.Name = "btn1";
-            this.btn1.Size = new System.Drawing.Size(666, 59);
-            this.btn1.TabIndex = 3;
-            this.btn1.Text = "report xxx";
-            this.btn1.UseVisualStyleBackColor = false;
+            this.btnSwineYield.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSwineYield.Location = new System.Drawing.Point(318, 414);
+            this.btnSwineYield.Name = "btnSwineYield";
+            this.btnSwineYield.Size = new System.Drawing.Size(666, 59);
+            this.btnSwineYield.TabIndex = 3;
+            this.btnSwineYield.Text = "รายงานหมูเป็นเทียบหมูซีก";
+            this.btnSwineYield.UseVisualStyleBackColor = false;
             // 
             // btnReportStockMovement
             // 
@@ -149,7 +149,7 @@
         private System.Windows.Forms.Button btnReportDailySales;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button btnReportSoWithInv;
-        private System.Windows.Forms.Button btn1;
+        private System.Windows.Forms.Button btnSwineYield;
         private System.Windows.Forms.Button btnReportStockMovement;
         private System.Windows.Forms.Button btnStockBalance;
     }

@@ -56,9 +56,9 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 44);
+            this.label1.Size = new System.Drawing.Size(234, 44);
             this.label1.TabIndex = 16;
-            this.label1.Text = "เอกสารเบิก";
+            this.label1.Text = "เอกสารใบสั่งผลิต";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnClose

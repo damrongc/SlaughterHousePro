@@ -42,6 +42,7 @@
             this.BtnMaster = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.plContainer = new System.Windows.Forms.Panel();
+            this.btnMinimize = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
             this.plHeader.SuspendLayout();
             this.plMenu.SuspendLayout();
@@ -50,6 +51,7 @@
             // plHeader
             // 
             this.plHeader.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.plHeader.Controls.Add(this.btnMinimize);
             this.plHeader.Controls.Add(this.btnExit);
             this.plHeader.Controls.Add(this.label1);
             this.plHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -276,6 +278,25 @@
             this.plContainer.Size = new System.Drawing.Size(1253, 846);
             this.plContainer.TabIndex = 10;
             // 
+            // btnMinimize
+            // 
+            this.btnMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.btnMinimize.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMinimize.FlatAppearance.BorderSize = 0;
+            this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinimize.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnMinimize.ForeColor = System.Drawing.Color.White;
+            this.btnMinimize.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimize.Image")));
+            this.btnMinimize.Location = new System.Drawing.Point(1276, 0);
+            this.btnMinimize.Name = "btnMinimize";
+            this.btnMinimize.Size = new System.Drawing.Size(48, 54);
+            this.btnMinimize.TabIndex = 14;
+            this.btnMinimize.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMinimize.UseVisualStyleBackColor = false;
+            this.btnMinimize.Click += new System.EventHandler(this.BtnMinimize_Click);
+            // 
             // dragControl1
             // 
             this.dragControl1.SelectControl = this.plHeader;
@@ -316,5 +337,6 @@
         private System.Windows.Forms.Button BtnOrder;
         private System.Windows.Forms.Button BtnCarcass;
         private System.Windows.Forms.Button BtnReceive;
+        private System.Windows.Forms.Button btnMinimize;
     }
 }
