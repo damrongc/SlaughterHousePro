@@ -352,6 +352,22 @@ namespace SlaughterHouseServer
                 BtnCancel.Visible = false;
             }
             LoadDetail();
+
+            if (!String.IsNullOrEmpty(txtOrderNo.Text))
+            {
+                bool res = OrderController.CheckUseOrder(this.orderNo);
+                if (res == true)
+                {
+                    btnAddOrderItem.Enabled = false;
+                    BtnSave.Enabled = false;
+                    BtnSaveAndNew.Enabled = false;
+                    BtnCancel.Enabled = false;
+                    cboCustomer.Enabled = false;
+                    txtComment.Enabled = false;
+                    gv.Enabled = false;
+                }
+            }
+            
         }
         private void LoadDetail()
         {
