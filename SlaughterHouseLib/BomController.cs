@@ -195,7 +195,41 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     tr = conn.BeginTransaction();
-                    var sql = @"INSERT INTO slaughterhouse.bom
+                    var sql = @"SELECT count(1) as check_duup FROM bom WHERE product_code=@product_code";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_code", bom.Product.ProductCode);
+                    int checkDup = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    if (checkDup > 0)
+                    {
+                        throw new Exception("สินค้านี้มีการบันทึกไปแล้ว ไม่สามารถบันทึกซ้ำได้");
+                    }
+                }
+                    
+            }
+            catch (Exception ex)
+            { 
+                throw;
+            }
+
+
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    tr = conn.BeginTransaction();
+                    var sql = @"SELECT active as check_duup FROM bom WHERE product_code=@product_code";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_code", bom.Product.ProductCode);
+                    int checkDup = Convert.ToInt32(cmd.ExecuteScalar()); 
+
+                    if (checkDup > 0)
+                    {
+                        throw new Exception("สินค้านี้มีการบันทึกไปแล้ว ไม่สามารถบันทึกซ้ำได้");
+                    }
+
+                    sql = @"INSERT INTO slaughterhouse.bom
                                 (
                                 product_code,
                                 active, 
@@ -204,7 +238,7 @@ namespace SlaughterHouseLib
 								@product_code, 
 								@active,
 								@create_by)";
-                    var cmd = new MySqlCommand(sql, conn)
+                    cmd = new MySqlCommand(sql, conn)
                     {
                         Transaction = tr
                     }; 

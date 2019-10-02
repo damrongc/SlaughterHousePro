@@ -203,6 +203,8 @@ namespace SlaughterHouseServer
                 txtProductName.Text = bom.Product.ProductName;
                 productCode = bom.Product.ProductCode;
                 BtnSaveAndNew.Visible = false;
+                txtProductName.Enabled = false;
+                btnLovProduct.Enabled = false;
             }
             else
             {
