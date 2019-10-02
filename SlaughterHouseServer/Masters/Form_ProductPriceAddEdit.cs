@@ -21,29 +21,31 @@ namespace SlaughterHouseServer
 
             //KeyDown  
             dtpStartDate.KeyDown += DtpStartDate_KeyDown;
-            cboProduct.KeyDown += CboProduct_KeyDown;
+            txtDay.KeyDown += TxtDay_KeyDown;
+
+            //Click
+            btnLovProduct.Click += BtnLovProduct_Click;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
             dtpStartDate.Focus();
         }
         private void Form_Load(object sender, System.EventArgs e)
-        {
-            LoadProduct();
+        { 
             LoadData();
         }
         private void DtpStartDate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cboProduct.Focus();
+                txtDay.Focus();
             }
         }
-        private void CboProduct_KeyDown(object sender, KeyEventArgs e)
+        private void TxtDay_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cboProduct.Focus();
+                txtUnitPrice.Focus();
             }
         }
 
@@ -63,6 +65,22 @@ namespace SlaughterHouseServer
         #endregion
 
         #region Event Click
+        private void BtnLovProduct_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                var frm = new Form_LovProduct();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    txtProductName.Text = frm.productName;
+                    this.productCode = frm.productCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
@@ -86,13 +104,13 @@ namespace SlaughterHouseServer
                 SaveProductPrice();
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                //orderNo = "";
-                //txtOrderNo.Text = "";
-                //txtOrderNo.Focus();
-                //cboCustomer.SelectedIndex = 0;
-                //txtComment.Text = "";
-                //chkActive.Checked = true;
-                //LoadDetail();
+                this.productCode = "";
+                txtProductName.Text = "";
+                txtUnitPrice.Text = "0";
+                txtDay.Text = "0";
+                dtpStartDate.Value = DateTime.Now;
+                LoadData();
+
             }
             catch (System.Exception ex)
             {
@@ -103,25 +121,21 @@ namespace SlaughterHouseServer
 
 
         #endregion
-        private void LoadProduct()
-        {
-            var coll = ProductController.GetAllProducts();
-            cboProduct.DisplayMember = "ProductName";
-            cboProduct.ValueMember = "ProductCode";
-            cboProduct.DataSource = coll;
-        }
+ 
 
         private void LoadData()
         {
-            if (productCode != null)
+            if (String.IsNullOrEmpty(this.productCode) == false)
             {
-                cboProduct.Enabled = false;
+                btnLovProduct.Enabled = false;
+                txtProductName.Enabled = false; 
             }
             ProductPrice productPrice = ProductPriceController.GetProductPrice(this.productCode, this.startDate);
             if (productPrice != null)
             {
 
-                cboProduct.SelectedValue = productPrice.Product.ProductCode;
+                this.productCode = productPrice.Product.ProductCode;
+                txtProductName.Text = productPrice.Product.ProductName;
                 txtUnitPrice.Text = productPrice.UnitPrice.ToString();
                 txtDay.Text = productPrice.Day.ToString();
                 
@@ -140,7 +154,7 @@ namespace SlaughterHouseServer
                 {
                     Product = new Product
                     {
-                        ProductCode = cboProduct.SelectedValue.ToString()
+                        ProductCode = this.productCode
                     },
                     StartDate = dtpStartDate.Value,
                     EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
@@ -149,9 +163,8 @@ namespace SlaughterHouseServer
                     UnitPrice = Convert.ToDecimal(txtUnitPrice.Text),
                     CreateBy = "system",
                     ModifiedBy = "system"
-                };
-
-                if (cboProduct.Enabled == true)
+                }; 
+                if (btnLovProduct.Enabled == true && txtProductName.Enabled == true)
                 {
                     ProductPriceController.Insert(productPrice);
                 }
@@ -160,7 +173,7 @@ namespace SlaughterHouseServer
                     ProductPriceController.Update(productPrice);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

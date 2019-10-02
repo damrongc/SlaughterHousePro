@@ -38,7 +38,7 @@ namespace SlaughterHouseLib.Models
                     return documentNo;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -72,7 +72,7 @@ namespace SlaughterHouseLib.Models
                     return documentNo;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -107,7 +107,7 @@ namespace SlaughterHouseLib.Models
                     return documentNo;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

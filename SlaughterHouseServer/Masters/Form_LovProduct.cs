@@ -27,7 +27,7 @@ namespace SlaughterHouseServer
         {
             gv.CellContentClick += Gv_CellContentClick;
             gv.DataBindingComplete += Gv_DataBindingComplete;
-           
+
             gv.ReadOnly = false;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
@@ -37,12 +37,10 @@ namespace SlaughterHouseServer
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
 
-
-
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
-
+            this.comboxProductGroup.SelectedIndexChanged += ComboxProductGroup_SelectedIndexChanged;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
@@ -50,29 +48,41 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
+            FillProductGroup();
             LoadData();
         }
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             LoadData();
         }
-      
 
         #region Event Focus, KeyDown 
+        private void ComboxProductGroup_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            LoadData();
+        }
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
 
-            gv.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
-            gv.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-            gv.Columns[GlobalsColumn.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+            gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            //gv.Columns[ConstColumns.UNIT_NAME].HeaderText = "หน่วยสินค้า";
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยปริมาณ";
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
+            gv.Columns[ConstColumns.PACKING_SIZE].HeaderText = "ขนาดบรรจุ";
 
-             gv.Columns[GlobalsColumn.UNIT_CODE].Visible = false;
-             gv.Columns[GlobalsColumn.ISSUE_UNIT_METHOD].Visible = false;
+            gv.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
+            gv.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].Visible = false;
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].Visible = false;
+            gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
 
-            gv.Columns[GlobalsColumn.PRODUCT_CODE].ReadOnly = true;
-            gv.Columns[GlobalsColumn.PRODUCT_NAME].ReadOnly = true;
-            gv.Columns[GlobalsColumn.UNIT_NAME].ReadOnly = true;
-            gv.Columns[GlobalsColumn.SELECT_COL].ReadOnly = false;
+            gv.Columns[ConstColumns.PRODUCT_CODE].ReadOnly = true;
+            gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].ReadOnly = true;
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].ReadOnly = true;
+
+            gv.Columns[ConstColumns.SELECT_COL].ReadOnly = false;
 
             foreach (DataGridViewColumn column in gv.Columns)
             {
@@ -82,35 +92,44 @@ namespace SlaughterHouseServer
 
         #endregion
 
-        #region Event Click
-
-
-
-
+        #region Event Click 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-
-                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
+                //if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
+                //{
+                //    switch (senderGrid.Columns[e.ColumnIndex].Name)
+                //    {
+                //        case "select_col":
+                //            try
+                //            {
+                //                this.productCode = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_CODE].Value.ToString();
+                //                this.productName = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_NAME].Value.ToString();
+                //                this.DialogResult = DialogResult.OK;
+                //                this.Close();
+                //            }
+                //            catch (System.Exception ex)
+                //            {
+                //                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //            }
+                //            break;
+                //    }
+                //}
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewLinkColumn)
                 {
-                    switch (senderGrid.Columns[e.ColumnIndex].Name)
+                    try
                     {
-                        case "select_col":
-                            try
-                            {
-                                this.productCode = gv.Rows[e.RowIndex].Cells[GlobalsColumn.PRODUCT_CODE].Value.ToString();
-                                this.productName = gv.Rows[e.RowIndex].Cells[GlobalsColumn.PRODUCT_NAME].Value.ToString();
+                        this.productCode = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_CODE].Value.ToString();
+                        this.productName = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_NAME].Value.ToString();
 
-                                this.DialogResult = DialogResult.OK;
-                                this.Close();
-                            }
-                            catch (System.Exception ex)
-                            {
-                                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            break;
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    catch (System.Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -118,20 +137,37 @@ namespace SlaughterHouseServer
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
         #endregion
 
         private void LoadData()
         {
             dtProduct = new DataTable();
-            dtProduct = ProductController.GetProducts(txtProductCode.Text, txtProductName.Text);
+            dtProduct = ProductController.GetProductActive(comboxProductGroup.SelectedValue.ToString(), txtProductCode.Text, txtProductName.Text);
             if (dtProduct != null)
             {
                 gv.DataSource = dtProduct;
             }
+        }
+        private void FillProductGroup()
+        {
+            //bool showSelectAllflag = true;
+            //var coll = ProductGroupController.GetAllProudctGroups(showSelectAllflag);
+            //comboxProductGroup.ValueMember = "ProductGroupCode";
+            //comboxProductGroup.DisplayMember = "ProductGroupName"; 
+
+            var coll = ProductGroupController.GetAllProudctGroups();
+            coll.Insert(0, new ProductGroup
+            {
+                ProductGroupCode = 0,
+                ProductGroupName = "--ทั้งหมด--"
+            });
+            comboxProductGroup.ValueMember = "ProductGroupCode";
+            comboxProductGroup.DisplayMember = "ProductGroupName";
+            comboxProductGroup.DataSource = coll;
+
 
         }
-                
+
     }
 }

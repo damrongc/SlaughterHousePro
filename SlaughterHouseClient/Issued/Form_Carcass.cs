@@ -1,6 +1,9 @@
 ﻿
+using SlaughterHouseClient.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -9,10 +12,15 @@ namespace SlaughterHouseClient.Issued
     public partial class Form_Carcass : Form
     {
         private string productCode = "P002";
+        private string lotNo = "";
         private bool IsStart = false;
         private const string CHOOSE_DATA = "กรุณาเลือกข้อมูล";
         private const string START_WAITING = "กรุณาเริ่มชั่ง";
         private const string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
+
+        List<Button> buttons;
+        private int Index;
+        private int PAGE_SIZE = 15;
         public Form_Carcass()
         {
             InitializeComponent();
@@ -70,16 +78,95 @@ namespace SlaughterHouseClient.Issued
 
             using (var db = new SlaughterhouseEntities())
             {
-                var oreder = db.orders.Where(p => p.order_no == orderNo).SingleOrDefault();
-                var orderItems = oreder.orders_item.Where(p => p.product_code == productCode).ToList();
-                lblOrderNo.Text = oreder.order_no;
+                var order = db.orders.Where(p => p.order_no == orderNo).SingleOrDefault();
+                var orderItems = order.orders_item.Where(p => p.product_code == productCode).ToList();
+
                 lblProduct.Text = orderItems[0].product.product_name;
                 lblOrderQty.Text = orderItems[0].order_qty.ToComma();
                 lblOrderWgh.Text = orderItems[0].order_wgh.ToFormat2Decimal();
                 lblUnloadedQty.Text = orderItems[0].unload_qty.ToComma();
                 lblUnloadedWgh.Text = orderItems[0].unload_wgh.ToFormat2Decimal();
+
+                lblOrderNo.Text = order.order_no;
+                lblCustomer.Text = order.customer.customer_name;
+
+                LoadLotNo();
             }
             lblMessage.Text = START_WAITING;
+        }
+
+        private void LoadLotNo()
+        {
+            try
+            {
+                var sql = @"SELECT lot_no,(qty_in-qty_out ) as stock_qty,
+                                (wgh_in-wgh_out ) as stock_wgh
+                                FROM (
+                                    SELECT
+                                    product_code,
+                                    sum(case when transaction_type = 1 then stock_qty else 0 end) as qty_in,
+                                    sum(case when transaction_type = 1 then stock_wgh else 0 end) as wgh_in,
+                                    sum(case when transaction_type = 2 then stock_qty else 0 end) as qty_out,
+                                    sum(case when transaction_type = 2 then stock_wgh else 0 end) as wgh_out,
+                                    0 as qty_cf,
+                                    0 as wgh_cf,
+                                    lot_no
+                                    FROM stock
+                                    WHERE DATE_FORMAT(stock_date, '%Y-%m-01') = DATE_FORMAT('2019-09-26', '%Y-%m-01')
+                                    AND product_code = 'P002'
+                                    GROUP BY product_code,lot_no) x
+                                WHERE qty_in-qty_out >0
+                                ORDER BY lot_no";
+                using (var db = new SlaughterhouseEntities())
+                {
+                    var stockLots = db.Database.SqlQuery<StockLot>(sql).ToList();
+
+                    flowLayoutPanel1.Controls.Clear();
+
+                    buttons = new List<Button>();
+                    foreach (var item in stockLots)
+                    {
+                        var btn = new Button
+                        {
+                            Text = string.Format("{0}\r\n{1} : {2} kg.", item.lot_no, item.stock_qty.ToComma(), item.stock_wgh.ToFormat2Double()),
+                            Width = 200,
+                            Height = 80,
+                            FlatStyle = FlatStyle.Flat,
+                            Font = new Font("Kanit", 16),
+                            BackColor = Color.WhiteSmoke,
+                            Tag = item.lot_no
+                        };
+
+                        buttons.Add(btn);
+
+                        btn.Click += Btn_Click;
+                        //flowLayoutPanel1.Controls.Add(btn);
+
+                    }
+                    DisplayPaging();
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        private void Btn_Click(object sender, EventArgs e)
+        {
+            foreach (Control ctrl in flowLayoutPanel1.Controls)
+            {
+                var b = (Button)ctrl;
+                b.BackColor = Color.WhiteSmoke;
+                b.ForeColor = Color.Black;
+            }
+            var btn = (Button)sender;
+            btn.BackColor = ColorTranslator.FromHtml("#2D9CDB");
+            btn.ForeColor = Color.White;
+            lotNo = btn.Tag.ToString();
         }
 
         private bool SaveData()
@@ -265,6 +352,48 @@ namespace SlaughterHouseClient.Issued
 
 
             }
+        }
+
+        private void BtnUp_Click(object sender, EventArgs e)
+        {
+            if (Index > 0)
+            {
+                Index = Index - PAGE_SIZE;
+                if (Index < 0)
+                {
+                    Index = 0;
+                }
+                DisplayPaging();
+            }
+        }
+
+        private void BtnDown_Click(object sender, EventArgs e)
+        {
+            if (Index < buttons.Count - 1)
+            {
+                Index = Index + PAGE_SIZE;
+                if (Index > buttons.Count - 1)
+                {
+                    Index = buttons.Count - 1;
+                }
+
+            }
+            DisplayPaging();
+        }
+
+        private void DisplayPaging()
+        {
+            flowLayoutPanel1.Controls.Clear();
+            for (int i = Index; i <= (Index + PAGE_SIZE); i++)
+            {
+                if (i < buttons.Count)
+                {
+                    flowLayoutPanel1.Controls.Add(buttons[i]);
+                }
+            }
+            flowLayoutPanel1.Visible = true;
+            //btnPageUp.Enabled = (Index > 0);
+            //btnPageDown.Enabled = ((Index + (PAGE_SIZE + 1)) <= (lables.Count - 1));
         }
     }
 }

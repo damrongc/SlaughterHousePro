@@ -35,10 +35,11 @@
             this.BtnSaveAndNew = new System.Windows.Forms.Button();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
-            this.cboProduct = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtUnitPrice = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnLovProduct = new System.Windows.Forms.Button();
+            this.txtProductName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -112,14 +113,6 @@
             this.label11.TabIndex = 33;
             this.label11.Text = "วันที่เริ่มต้น:";
             // 
-            // cboProduct
-            // 
-            this.cboProduct.FormattingEnabled = true;
-            this.cboProduct.Location = new System.Drawing.Point(182, 21);
-            this.cboProduct.Name = "cboProduct";
-            this.cboProduct.Size = new System.Drawing.Size(310, 37);
-            this.cboProduct.TabIndex = 36;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -146,13 +139,39 @@
             this.label2.TabIndex = 38;
             this.label2.Text = "ราคา:";
             // 
+            // btnLovProduct
+            // 
+            this.btnLovProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.btnLovProduct.FlatAppearance.BorderSize = 0;
+            this.btnLovProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLovProduct.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLovProduct.ForeColor = System.Drawing.Color.White;
+            this.btnLovProduct.Image = ((System.Drawing.Image)(resources.GetObject("btnLovProduct.Image")));
+            this.btnLovProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLovProduct.Location = new System.Drawing.Point(629, 21);
+            this.btnLovProduct.Name = "btnLovProduct";
+            this.btnLovProduct.Size = new System.Drawing.Size(39, 36);
+            this.btnLovProduct.TabIndex = 52;
+            this.btnLovProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLovProduct.UseVisualStyleBackColor = false;
+            // 
+            // txtProductName
+            // 
+            this.txtProductName.Location = new System.Drawing.Point(182, 21);
+            this.txtProductName.MaxLength = 10;
+            this.txtProductName.Name = "txtProductName";
+            this.txtProductName.ReadOnly = true;
+            this.txtProductName.Size = new System.Drawing.Size(447, 36);
+            this.txtProductName.TabIndex = 51;
+            // 
             // Form_ProductPriceAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(730, 267);
+            this.Controls.Add(this.btnLovProduct);
+            this.Controls.Add(this.txtProductName);
             this.Controls.Add(this.txtUnitPrice);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.cboProduct);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dtpStartDate);
             this.Controls.Add(this.label11);
@@ -180,9 +199,10 @@
         private System.Windows.Forms.Button BtnSaveAndNew;
         private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cboProduct;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtUnitPrice;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnLovProduct;
+        private System.Windows.Forms.TextBox txtProductName;
     }
 }

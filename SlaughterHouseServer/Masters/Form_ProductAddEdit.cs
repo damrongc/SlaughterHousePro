@@ -94,6 +94,7 @@ namespace SlaughterHouseServer
                     txtMinWgh.Text = product.MinWeight.ToString();
                     txtMaxWgh.Text = product.MaxWeight.ToString();
                     txtStdYield.Text = product.StdYield.ToString();
+                    txtPackingSize.Text = product.PackingSize.ToString();
                     if (product.SaleUnitMethod.ToUpper() == "Q")
                     {
                         rdbQtySale.Checked = true;
@@ -216,6 +217,7 @@ namespace SlaughterHouseServer
                         MinWeight = Convert.ToDecimal(txtMinWgh.Text),
                         MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
                         StdYield  = Convert.ToDecimal(txtStdYield.Text),
+                        PackingSize  = Convert.ToDecimal(txtPackingSize.Text),
                         SaleUnitMethod = (rdbQtySale.Checked == true) ? "Q" : "W",
                         IssueUnitMethod = (rdbQtyIssue.Checked == true) ? "Q" : "W",
                         Active = chkActive.Checked,
@@ -247,7 +249,8 @@ namespace SlaughterHouseServer
                         },
                         MinWeight = Convert.ToDecimal(txtMinWgh.Text),
                         MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
-                        StdYield = Convert.ToDecimal(txtStdYield.Text), 
+                        StdYield = Convert.ToDecimal(txtStdYield.Text),
+                        PackingSize = Convert.ToDecimal(txtPackingSize.Text), 
                         SaleUnitMethod = (rdbQtySale.Checked == true) ? "Q" : "W",
                         IssueUnitMethod = (rdbQtyIssue.Checked == true) ? "Q" : "W",
                         Active = chkActive.Checked,
@@ -262,10 +265,8 @@ namespace SlaughterHouseServer
             }
             catch (System.Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void BtnSaveAndNew_Click(object sender, System.EventArgs e)
@@ -294,6 +295,7 @@ namespace SlaughterHouseServer
                     MinWeight = Convert.ToDecimal(txtMinWgh.Text),
                     MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
                     StdYield = Convert.ToDecimal(txtStdYield.Text),
+                    PackingSize = Convert.ToDecimal(txtPackingSize.Text), 
                     SaleUnitMethod = (rdbQtySale.Checked == true) ? "Q" : "W",
                     IssueUnitMethod = (rdbQtyIssue.Checked == true) ? "Q" : "W",
                     Active = chkActive.Checked,
@@ -316,13 +318,11 @@ namespace SlaughterHouseServer
             }
             catch (System.Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void  FillProductGroup()
-        {
+        { 
             comboxProductGroup.DataSource = ProductGroupController.GetAllProudctGroups();
             comboxProductGroup.ValueMember = "ProductGroupCode";
             comboxProductGroup.DisplayMember = "ProductGroupName";
@@ -337,6 +337,5 @@ namespace SlaughterHouseServer
             comboxUnitWgh.ValueMember = "UnitCode";
             comboxUnitWgh.DisplayMember = "UnitName";
         }
-
     }
 }

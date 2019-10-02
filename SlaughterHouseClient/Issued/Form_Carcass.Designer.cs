@@ -56,6 +56,8 @@
             this.lblCustomer = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -222,7 +224,7 @@
             this.lblOrderQty.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblOrderQty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblOrderQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblOrderQty.Font = new System.Drawing.Font("Kanit", 50F);
+            this.lblOrderQty.Font = new System.Drawing.Font("Kanit", 40F);
             this.lblOrderQty.ForeColor = System.Drawing.Color.Black;
             this.lblOrderQty.Location = new System.Drawing.Point(18, 625);
             this.lblOrderQty.Name = "lblOrderQty";
@@ -246,7 +248,7 @@
             this.lblOrderWgh.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblOrderWgh.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblOrderWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblOrderWgh.Font = new System.Drawing.Font("Kanit", 50F);
+            this.lblOrderWgh.Font = new System.Drawing.Font("Kanit", 40F);
             this.lblOrderWgh.ForeColor = System.Drawing.Color.Black;
             this.lblOrderWgh.Location = new System.Drawing.Point(199, 625);
             this.lblOrderWgh.Name = "lblOrderWgh";
@@ -270,7 +272,7 @@
             this.lblUnloadedQty.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblUnloadedQty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblUnloadedQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblUnloadedQty.Font = new System.Drawing.Font("Kanit", 50F);
+            this.lblUnloadedQty.Font = new System.Drawing.Font("Kanit", 40F);
             this.lblUnloadedQty.ForeColor = System.Drawing.Color.Black;
             this.lblUnloadedQty.Location = new System.Drawing.Point(537, 625);
             this.lblUnloadedQty.Name = "lblUnloadedQty";
@@ -294,7 +296,7 @@
             this.lblUnloadedWgh.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblUnloadedWgh.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblUnloadedWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblUnloadedWgh.Font = new System.Drawing.Font("Kanit", 50F);
+            this.lblUnloadedWgh.Font = new System.Drawing.Font("Kanit", 40F);
             this.lblUnloadedWgh.ForeColor = System.Drawing.Color.Black;
             this.lblUnloadedWgh.Location = new System.Drawing.Point(718, 625);
             this.lblUnloadedWgh.Name = "lblUnloadedWgh";
@@ -379,14 +381,44 @@
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 342);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(994, 247);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(879, 247);
             this.flowLayoutPanel1.TabIndex = 52;
+            // 
+            // btnUp
+            // 
+            this.btnUp.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUp.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnUp.ForeColor = System.Drawing.Color.White;
+            this.btnUp.Image = ((System.Drawing.Image)(resources.GetObject("btnUp.Image")));
+            this.btnUp.Location = new System.Drawing.Point(903, 342);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(109, 70);
+            this.btnUp.TabIndex = 57;
+            this.btnUp.UseVisualStyleBackColor = false;
+            this.btnUp.Click += new System.EventHandler(this.BtnUp_Click);
+            // 
+            // btnDown
+            // 
+            this.btnDown.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDown.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnDown.ForeColor = System.Drawing.Color.White;
+            this.btnDown.Image = ((System.Drawing.Image)(resources.GetObject("btnDown.Image")));
+            this.btnDown.Location = new System.Drawing.Point(903, 418);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(109, 70);
+            this.btnDown.TabIndex = 56;
+            this.btnDown.UseVisualStyleBackColor = false;
+            this.btnDown.Click += new System.EventHandler(this.BtnDown_Click);
             // 
             // Form_Carcass
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.btnUp);
+            this.Controls.Add(this.btnDown);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.lblCustomer);
             this.Controls.Add(this.label6);
@@ -453,6 +485,8 @@
         private System.Windows.Forms.Label lblCustomer;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnDown;
     }
 }
 

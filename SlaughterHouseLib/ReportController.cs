@@ -20,8 +20,8 @@ namespace SlaughterHouseLib
                                 i.ref_document_no,
                                 i.customer_code,
                                 i.gross_amt AS gross_amt_hd,
-                                i.discount AS discount_hd,
-                                i.gross_amt - i.discount AS before_vat_hd,
+                                i.disc_amt_bill AS discount_hd,
+                                i.gross_amt - i.disc_amt_bill AS before_vat_hd,
                                 i.vat_rate AS vat_rate_hd,
                                 i.vat_amt AS vat_amt_hd,
                                 i.net_amt AS net_amt_hd,
@@ -91,7 +91,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -153,7 +153,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -170,17 +170,17 @@ namespace SlaughterHouseLib
 	                                sk.product_code,
 	                                p.product_name,
 	                                sum(case when sk.transaction_type = 1 then sk.stock_qty else 0 end) as qty_in,
-	                                sum(case when sk.transaction_type = 1 then sk.stock_wgh else 0 end) as wgh_in, 
+	                                sum(case when sk.transaction_type = 1 then sk.stock_wgh else 0 end) as wgh_in,
 	                                sum(case when sk.transaction_type = 2 then sk.stock_qty else 0 end) as qty_out,
-	                                sum(case when sk.transaction_type = 2 then sk.stock_wgh else 0 end) as wgh_out,     
+	                                sum(case when sk.transaction_type = 2 then sk.stock_wgh else 0 end) as wgh_out,
                                     0 as qty_cf,
                                     0 as wgh_cf,
-	                                sk.lot_no, 
+	                                sk.lot_no,
                                     uq.unit_name as unit_name_qty,
                                     uw.unit_name as unit_name_wgh,
                                 pl.plant_name,
                                 pl.address AS plant_address,
-	                                DATE_FORMAT(@date_period, '%m-%Y')  as show_date_period 
+	                                DATE_FORMAT(@date_period, '%m-%Y')  as show_date_period
                                 FROM
 	                                stock sk,
                                     product p,
@@ -188,13 +188,13 @@ namespace SlaughterHouseLib
 	                                unit_of_measurement uw,
                                     plant pl
                                 where 1=1
-                                and DATE_FORMAT(sk.stock_date, '%Y-%m-01') = DATE_FORMAT(@date_period, '%Y-%m-01') 
-                                and sk.product_code = p.product_code 
-                                and uq.unit_code = p.unit_of_qty 
-                                and uw.unit_code = p.unit_of_wgh 
+                                and DATE_FORMAT(sk.stock_date, '%Y-%m-01') = DATE_FORMAT(@date_period, '%Y-%m-01')
+                                and sk.product_code = p.product_code
+                                and uq.unit_code = p.unit_of_qty
+                                and uw.unit_code = p.unit_of_wgh
                                 AND pl.plant_id = 1
                                 group by sk.product_code,
-	                                p.product_name, 
+	                                p.product_name,
 	                                sk.lot_no
                                 ";
                     var cmd = new MySqlCommand(sql, conn);
@@ -224,7 +224,7 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"select o.order_no, o.order_date, otm.product_code, po.product_name, 
+                    var sql = @"select o.order_no, o.order_date, otm.product_code, po.product_name,
                                 CASE WHEN po.issue_unit_method = 'Q' THEN otm.order_qty ELSE otm.order_wgh END as qty_wgh, uo.unit_name,
                                 i.invoice_no, i.invoice_date , itm.product_code as product_code_inv, pi.product_name as product_name_inv ,
                                 itm.qty, itm.wgh, uiq.unit_name as unit_name_qty_inv, uiw.unit_name as unit_name_wgh_inv,
@@ -242,9 +242,9 @@ namespace SlaughterHouseLib
                                     left join product as pi ON pi.product_code = itm.product_code
                                     left join unit_of_measurement as uiq on uiq.unit_code = pi.unit_of_qty
                                     left join unit_of_measurement as uiw on uiw.unit_code = pi.unit_of_wgh
-                                 WHERE o.order_date >= @date_str 
-                                    AND o.order_date <= @date_end  
-                                 order by o.order_date, o.order_no, i.invoice_date, i.invoice_no 
+                                 WHERE o.order_date >= @date_str
+                                    AND o.order_date <= @date_end
+                                 order by o.order_date, o.order_no, i.invoice_date, i.invoice_no
                                 ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("date_str", invoiceDateStr.ToString("yyyy-MM-dd"));
@@ -259,7 +259,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -291,7 +291,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -432,7 +432,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

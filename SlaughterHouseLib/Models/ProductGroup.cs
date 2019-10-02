@@ -22,12 +22,10 @@ namespace SlaughterHouseLib.Models
 
     public static class ProductGroupController
     {
-
         public static object GetAllProudctGroups(string keyword)
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -38,7 +36,6 @@ namespace SlaughterHouseLib.Models
                         sb.Append(" where product_group_name like @product_group_name");
 
                     }
-
                     sb.Append(" order by product_group_code asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
 
@@ -46,7 +43,6 @@ namespace SlaughterHouseLib.Models
                     {
                         cmd.Parameters.AddWithValue("product_group_name", string.Format("%{0}%", keyword));
                     }
-
 
                     var da = new MySqlDataAdapter(cmd);
 
@@ -68,13 +64,12 @@ namespace SlaughterHouseLib.Models
                     return coll;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
         }
-        public static List<ProductGroup> GetAllProudctGroups()
+        public static List<ProductGroup> GetAllProudctGroups() //bool showSelectAllflag = false
         {
             try
             {
@@ -82,7 +77,14 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT * FROM product_group WHERE active=1");
+                    //if (showSelectAllflag == true)
+                    //{
+                    //    sb.Append("SELECT '0' as product_group_code, '--ทั้งหมด--' as  product_group_name ");
+                    //    sb.Append(" FROM dual ");
+                    //    sb.Append(" union all ");
+                    //}
+                    sb.Append("SELECT product_group_code, product_group_name ");
+                    sb.Append(" FROM product_group WHERE active=1 ");
                     sb.Append(" ORDER BY product_group_code ASC");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
                     var da = new MySqlDataAdapter(cmd);
@@ -100,11 +102,10 @@ namespace SlaughterHouseLib.Models
 
                         });
                     }
-
                     return productgroups;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -113,7 +114,6 @@ namespace SlaughterHouseLib.Models
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -145,7 +145,7 @@ namespace SlaughterHouseLib.Models
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -154,7 +154,6 @@ namespace SlaughterHouseLib.Models
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -176,9 +175,8 @@ namespace SlaughterHouseLib.Models
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
         }
@@ -204,7 +202,7 @@ namespace SlaughterHouseLib.Models
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

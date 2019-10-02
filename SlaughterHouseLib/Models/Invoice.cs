@@ -11,7 +11,8 @@ namespace SlaughterHouseLib.Models
         public string RefDocumentNo { get; set; } 
         public Customer Customer { get; set; }
         public decimal GrossAmt { get; set; }
-        public decimal Discount { get; set; }
+        public decimal DiscAmt { get; set; }
+        public decimal DiscAmtBill { get; set; }
         public decimal VatRate { get; set; }
         public decimal VatAmt { get; set; }
         public decimal NetAmt { get; set; }

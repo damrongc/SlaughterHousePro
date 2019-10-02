@@ -11,6 +11,7 @@ namespace SlaughterHouseServer
     {
         public string orderNo { get; set; }
         public string invoiceNo { get; set; }
+        //private string customerCode { get; set; }
         DataTable dtInvoiceItem;
         public Form_InvoiceAddEdit()
         {
@@ -161,27 +162,32 @@ namespace SlaughterHouseServer
         //}
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            gv.Columns[GlobalsColumn.SEQ].HeaderText = "ลำดับ";
-            gv.Columns[GlobalsColumn.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
-            gv.Columns[GlobalsColumn.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-            gv.Columns[GlobalsColumn.SALE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
-            gv.Columns[GlobalsColumn.QTY].HeaderText = "ปริมาณจ่าย";
-            gv.Columns[GlobalsColumn.WGH].HeaderText = "น้ำหนักจ่าย";
-            gv.Columns[GlobalsColumn.UNIT_PRICE].HeaderText = "ราคาต่อหน่วย";
-            gv.Columns[GlobalsColumn.GROSS_AMT].HeaderText = "ราคา";
+            gv.Columns[ConstColumns.SEQ].HeaderText = "ลำดับ";
+            gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            gv.Columns[ConstColumns.SALE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
+            gv.Columns[ConstColumns.QTY].HeaderText = "ปริมาณจ่าย";
+            gv.Columns[ConstColumns.WGH].HeaderText = "น้ำหนักจ่าย";
+            gv.Columns[ConstColumns.UNIT_PRICE].HeaderText = "ราคาต่อหน่วย";
+            gv.Columns[ConstColumns.GROSS_AMT].HeaderText = "ราคา";
 
-            gv.Columns[GlobalsColumn.SEQ].Visible = false;
-            gv.Columns[GlobalsColumn.PRODUCT_CODE].Visible = false;
+            gv.Columns[ConstColumns.SEQ].Visible = false;
+            gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
 
-            gv.Columns[GlobalsColumn.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[GlobalsColumn.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[GlobalsColumn.UNIT_PRICE].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[ConstColumns.UNIT_DISC].Visible = false;
+            gv.Columns[ConstColumns.UNIT_NET].Visible = false;
+            gv.Columns[ConstColumns.DISC_AMT].Visible = false;
 
-            gv.Columns[GlobalsColumn.QTY].DefaultCellStyle.Format = "N0";
-            gv.Columns[GlobalsColumn.WGH].DefaultCellStyle.Format = "N2";
-            gv.Columns[GlobalsColumn.UNIT_PRICE].DefaultCellStyle.Format = "N2";
-            gv.Columns[GlobalsColumn.GROSS_AMT].DefaultCellStyle.Format = "N2";
+
+            gv.Columns[ConstColumns.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[ConstColumns.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[ConstColumns.UNIT_PRICE].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gv.Columns[ConstColumns.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            gv.Columns[ConstColumns.QTY].DefaultCellStyle.Format = "N0";
+            gv.Columns[ConstColumns.WGH].DefaultCellStyle.Format = "N2";
+            gv.Columns[ConstColumns.UNIT_PRICE].DefaultCellStyle.Format = "N2";
+            gv.Columns[ConstColumns.GROSS_AMT].DefaultCellStyle.Format = "N2";
         }
         #endregion
 
@@ -228,6 +234,7 @@ namespace SlaughterHouseServer
                     txtInvoiceNo.Text = "";
                     dtpInvoiceDate.Value = order.RequestDate;
                     cboCustomer.SelectedValue = order.Customer.CustomerCode;
+                    //customerCode = order.Customer.CustomerCode;
                     txtComment.Text = "";
                     chkActive.Checked = order.Active;
                 }
@@ -246,8 +253,8 @@ namespace SlaughterHouseServer
                     txtComment.Text = invoice.Comments;
                     chkActive.Checked = invoice.Active;
                     txtGrossAmt.Text = invoice.GrossAmt.ToString();
-                    txtDiscount.Text = invoice.Discount.ToString();
-                    txtBeforeVat.Text = (invoice.GrossAmt - invoice.Discount).ToString();
+                    txtDiscount.Text = invoice.DiscAmtBill.ToString();
+                    txtBeforeVat.Text = (invoice.GrossAmt - invoice.DiscAmtBill).ToString();
                     txtVatAmt.Text = invoice.VatAmt.ToString();
                     txtNetAmt.Text = invoice.NetAmt.ToString();
                     if (invoice.VatRate > 0)
@@ -285,23 +292,23 @@ namespace SlaughterHouseServer
 
                 if (dtInvoiceItem.Rows.Count > 0)
                 {
-                    ProductPrice productPrice;
+                    decimal unitPrice;
                     Product product;
                     for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
                     {
-                        string productCode = dtInvoiceItem.Rows[i][GlobalsColumn.PRODUCT_CODE].ToString();
-                        productPrice = ProductPriceController.GetPriceList(productCode, dtpInvoiceDate.Value);
+                        string productCode = dtInvoiceItem.Rows[i][ConstColumns.PRODUCT_CODE].ToString();
+                        unitPrice = Globals.GetPriceList(cboCustomer.SelectedValue.ToString(), productCode, dtpInvoiceDate.Value);
                         product = ProductController.GetProduct(productCode);
 
-                        dtInvoiceItem.Rows[i][GlobalsColumn.UNIT_PRICE] = productPrice.UnitPrice;
-                        dtInvoiceItem.Rows[i][GlobalsColumn.SALE_UNIT_METHOD] = product.SaleUnitMethod;
-                        if (dtInvoiceItem.Rows[i][GlobalsColumn.SALE_UNIT_METHOD].ToString() == "Q")
+                        dtInvoiceItem.Rows[i][ConstColumns.UNIT_PRICE] = unitPrice;
+                        dtInvoiceItem.Rows[i][ConstColumns.SALE_UNIT_METHOD] = product.SaleUnitMethod;
+                        if (dtInvoiceItem.Rows[i][ConstColumns.SALE_UNIT_METHOD].ToString() == "Q")
                         {
-                            dtInvoiceItem.Rows[i][GlobalsColumn.GROSS_AMT] = Convert.ToDecimal(dtInvoiceItem.Rows[i][GlobalsColumn.UNIT_PRICE]) * Convert.ToDecimal(dtInvoiceItem.Rows[i][GlobalsColumn.QTY]);
+                            dtInvoiceItem.Rows[i][ConstColumns.GROSS_AMT] = Convert.ToDecimal(dtInvoiceItem.Rows[i][ConstColumns.UNIT_PRICE]) * Convert.ToDecimal(dtInvoiceItem.Rows[i][ConstColumns.QTY]);
                         }
                         else
                         {
-                            dtInvoiceItem.Rows[i][GlobalsColumn.GROSS_AMT] = Convert.ToDecimal(dtInvoiceItem.Rows[i][GlobalsColumn.UNIT_PRICE]) * Convert.ToDecimal(dtInvoiceItem.Rows[i][GlobalsColumn.WGH]);
+                            dtInvoiceItem.Rows[i][ConstColumns.GROSS_AMT] = Convert.ToDecimal(dtInvoiceItem.Rows[i][ConstColumns.UNIT_PRICE]) * Convert.ToDecimal(dtInvoiceItem.Rows[i][ConstColumns.WGH]);
                         }
                     }
                     dtInvoiceItem.AcceptChanges();
@@ -342,19 +349,21 @@ namespace SlaughterHouseServer
                         Seq = seq,
                         Product = new Product
                         {
-                            ProductCode = row[GlobalsColumn.PRODUCT_CODE].ToString(),
-                            ProductName = row[GlobalsColumn.PRODUCT_NAME].ToString(),
+                            ProductCode = row[ConstColumns.PRODUCT_CODE].ToString(),
+                            ProductName = row[ConstColumns.PRODUCT_NAME].ToString(),
                         },
-                        Qty = Convert.ToInt16(row[GlobalsColumn.QTY]),
-                        Wgh = Convert.ToDecimal(row[GlobalsColumn.WGH]),
-                        UnitPrice = Convert.ToDecimal(row[GlobalsColumn.UNIT_PRICE]),
-                        GrossAmt = Convert.ToDecimal(row[GlobalsColumn.GROSS_AMT]),
-                        SaleUnitMethod = row[GlobalsColumn.SALE_UNIT_METHOD].ToString(),
+                        Qty = Convert.ToInt16(row[ConstColumns.QTY]),
+                        Wgh = Convert.ToDecimal(row[ConstColumns.WGH]),
+                        UnitPrice = Convert.ToDecimal(row[ConstColumns.UNIT_PRICE]),
+                        UnitDisc = Convert.ToDecimal(row[ConstColumns.UNIT_DISC]),
+                        UnitNet = Convert.ToDecimal(row[ConstColumns.UNIT_NET]),
+                        GrossAmt = Convert.ToDecimal(row[ConstColumns.GROSS_AMT]),
+                        SaleUnitMethod = row[ConstColumns.SALE_UNIT_METHOD].ToString(),
                     });
 
-                    if (Convert.ToDecimal(row[GlobalsColumn.UNIT_PRICE]) == 0)
+                    if (Convert.ToDecimal(row[ConstColumns.UNIT_PRICE]) == 0)
                     {
-                        throw new Exception($"สินค้า {row[GlobalsColumn.PRODUCT_NAME].ToString()} ไม่มีการตั้งราคา");
+                        throw new Exception($"สินค้า {row[ConstColumns.PRODUCT_NAME].ToString()} ไม่มีการตั้งราคา");
                     }
                 }
 
@@ -368,7 +377,8 @@ namespace SlaughterHouseServer
                         CustomerCode = cboCustomer.SelectedValue.ToString()
                     },
                     GrossAmt = Convert.ToDecimal(txtGrossAmt.Text),
-                    Discount = Convert.ToDecimal(txtDiscount.Text),
+                    DiscAmt = 0,
+                    DiscAmtBill = Convert.ToDecimal(txtDiscount.Text),
                     VatRate = (chkVatFlag.Checked == true) ? Convert.ToDecimal(txtVatRate.Text) : 0,
                     VatAmt = Convert.ToDecimal(txtVatAmt.Text),
                     NetAmt = Convert.ToDecimal(txtNetAmt.Text),
@@ -389,7 +399,7 @@ namespace SlaughterHouseServer
                     InvoiceController.Update(invoice);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -415,7 +425,7 @@ namespace SlaughterHouseServer
 
                 InvoiceController.Cancel(invoice);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -435,9 +445,9 @@ namespace SlaughterHouseServer
                 //Check UNIT_PRICE
                 for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
                 {
-                    if (Convert.ToDecimal(dtInvoiceItem.Rows[i][GlobalsColumn.UNIT_PRICE]) == 0)
+                    if (Convert.ToDecimal(dtInvoiceItem.Rows[i][ConstColumns.UNIT_PRICE]) == 0)
                     {
-                        throw new Exception($"สินค้า {dtInvoiceItem.Rows[i][GlobalsColumn.PRODUCT_NAME]} ไม่มีราคาประกาศ");
+                        throw new Exception($"สินค้า {dtInvoiceItem.Rows[i][ConstColumns.PRODUCT_NAME]} ไม่มีราคาประกาศ");
                     }
                 }
 
@@ -447,7 +457,7 @@ namespace SlaughterHouseServer
                     throw new Exception($"ราคาสุทธิต้องมีค่ามากกวว่า 0");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -495,7 +505,7 @@ namespace SlaughterHouseServer
                 frmPrint.ShowDialog();
                 this.DialogResult = DialogResult.OK;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -504,8 +514,9 @@ namespace SlaughterHouseServer
                 this.Close();
             }
         }
+
         #endregion
 
-       
+        
     }
 }

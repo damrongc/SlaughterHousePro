@@ -83,7 +83,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(785, 570);
+            this.BtnSave.Location = new System.Drawing.Point(940, 570);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -113,9 +113,9 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.gv);
-            this.panel2.Location = new System.Drawing.Point(405, 146);
+            this.panel2.Location = new System.Drawing.Point(580, 146);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(595, 404);
+            this.panel2.Size = new System.Drawing.Size(575, 404);
             this.panel2.TabIndex = 43;
             // 
             // gv
@@ -133,7 +133,7 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(595, 404);
+            this.gv.Size = new System.Drawing.Size(575, 404);
             this.gv.TabIndex = 43;
             // 
             // label2
@@ -150,9 +150,9 @@
             this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(405, 109);
+            this.panel1.Location = new System.Drawing.Point(580, 109);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(595, 36);
+            this.panel1.Size = new System.Drawing.Size(575, 36);
             this.panel1.TabIndex = 45;
             // 
             // chkActive
@@ -161,7 +161,7 @@
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkActive.Enabled = false;
-            this.chkActive.Location = new System.Drawing.Point(848, 24);
+            this.chkActive.Location = new System.Drawing.Point(926, 24);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 46;
@@ -177,7 +177,7 @@
             this.BtnCancel.ForeColor = System.Drawing.Color.White;
             this.BtnCancel.Image = ((System.Drawing.Image)(resources.GetObject("BtnCancel.Image")));
             this.BtnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCancel.Location = new System.Drawing.Point(577, 570);
+            this.BtnCancel.Location = new System.Drawing.Point(732, 570);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(202, 36);
             this.BtnCancel.TabIndex = 47;
@@ -188,7 +188,7 @@
             // txtOrderNo
             // 
             this.txtOrderNo.Enabled = false;
-            this.txtOrderNo.Location = new System.Drawing.Point(604, 22);
+            this.txtOrderNo.Location = new System.Drawing.Point(682, 22);
             this.txtOrderNo.MaxLength = 10;
             this.txtOrderNo.Name = "txtOrderNo";
             this.txtOrderNo.Size = new System.Drawing.Size(215, 36);
@@ -197,7 +197,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(472, 26);
+            this.label4.Location = new System.Drawing.Point(550, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(126, 29);
             this.label4.TabIndex = 48;
@@ -208,7 +208,7 @@
             // 
             this.cboCustomer.Enabled = false;
             this.cboCustomer.FormattingEnabled = true;
-            this.cboCustomer.Location = new System.Drawing.Point(604, 64);
+            this.cboCustomer.Location = new System.Drawing.Point(682, 64);
             this.cboCustomer.Name = "cboCustomer";
             this.cboCustomer.Size = new System.Drawing.Size(310, 37);
             this.cboCustomer.TabIndex = 51;
@@ -216,7 +216,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(543, 68);
+            this.label5.Location = new System.Drawing.Point(621, 68);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 29);
             this.label5.TabIndex = 50;
@@ -229,7 +229,7 @@
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(12, 109);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(385, 36);
+            this.panel3.Size = new System.Drawing.Size(562, 36);
             this.panel3.TabIndex = 53;
             // 
             // label3
@@ -246,7 +246,7 @@
             this.panel4.Controls.Add(this.gvSo);
             this.panel4.Location = new System.Drawing.Point(12, 146);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(385, 404);
+            this.panel4.Size = new System.Drawing.Size(562, 404);
             this.panel4.TabIndex = 52;
             // 
             // gvSo
@@ -264,13 +264,13 @@
             this.gvSo.Location = new System.Drawing.Point(0, 0);
             this.gvSo.Name = "gvSo";
             this.gvSo.RowHeadersWidth = 10;
-            this.gvSo.Size = new System.Drawing.Size(385, 404);
+            this.gvSo.Size = new System.Drawing.Size(562, 404);
             this.gvSo.TabIndex = 43;
             // 
             // Form_ProductSlip
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1013, 632);
+            this.ClientSize = new System.Drawing.Size(1162, 636);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.cboCustomer);

@@ -14,7 +14,6 @@ namespace SlaughterHouseClient
         {
             InitializeComponent();
             Load += Form_Load;
-
         }
 
         private void Form_Load(object sender, EventArgs e)

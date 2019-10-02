@@ -76,7 +76,7 @@ namespace SlaughterHouseLib.Models
                     return coll;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -110,7 +110,7 @@ namespace SlaughterHouseLib.Models
                     return customers;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -155,7 +155,7 @@ namespace SlaughterHouseLib.Models
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -190,7 +190,7 @@ namespace SlaughterHouseLib.Models
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -227,7 +227,7 @@ namespace SlaughterHouseLib.Models
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

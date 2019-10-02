@@ -57,7 +57,7 @@ namespace SlaughterHouseServer.Masters
                     AddFormToContainer(new Form_Unit());
                     break;
                 case "BtnPriceList":
-                    AddFormToContainer(new Form_ProductPrice());
+                    AddFormToContainer(new Form_PriceList());
                     break;
                 case "BtnBom":
                     AddFormToContainer(new Form_Bom());

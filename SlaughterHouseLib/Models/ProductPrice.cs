@@ -37,13 +37,13 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" a.start_date,");
                     sb.Append(" a.end_date,");
                     sb.Append(" a.unit_price,"); 
-                    sb.Append(" a.end_date - a.start_date as day,");
+                    sb.Append(" DATEDIFF(a.end_date, a.start_date) as day,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by");
                     sb.Append(" FROM product_price a, product b");
                     sb.Append(" WHERE a.product_code = b.product_code");
-                    sb.Append(" AND a.start_date <= @start_date");
-                    sb.Append(" AND a.end_date >= @start_date");
+                    sb.Append(" AND a.start_date <= '" + startDate.ToString("yyyy-MM-dd") + "'" );
+                    sb.Append(" AND a.end_date >= '" + startDate.ToString("yyyy-MM-dd") + "'" );
                     if (!string.IsNullOrEmpty(productCode))
                         sb.Append(" AND a.product_code =@product_code");
                     sb.Append(" ORDER BY a.start_date, a.product_code ASC");
@@ -68,10 +68,11 @@ namespace SlaughterHouseLib.Models
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
                                 }).ToList();
+
                     return coll;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -128,59 +129,59 @@ namespace SlaughterHouseLib.Models
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
         }
 
-        public static ProductPrice GetPriceList(string productCode, DateTime priceDate)
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(Globals.CONN_STR))
-                {
+        //public static ProductPrice GetPriceList(string productCode, DateTime priceDate)
+        //{
+        //    try
+        //    {
+        //        using (var conn = new MySqlConnection(Globals.CONN_STR))
+        //        {
 
-                    conn.Open();
-                    var sql = "";
+        //            conn.Open();
+        //            var sql = "";
 
-                    sql = @"select COALESCE(unit_price) as unit_price
-	                        from product_price p
-                            where start_date <=@start_date
-                             and end_date >=@end_date
-                             and product_code =@product_code
-                            order by end_date asc LIMIT 1 ";
-                    var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("product_code", productCode);
-                    cmd.Parameters.AddWithValue("start_date", priceDate);
-                    cmd.Parameters.AddWithValue("end_date", priceDate);
+        //            sql = @"select COALESCE(unit_price) as unit_price
+	       //                 from product_price p
+        //                    where start_date <=@start_date
+        //                     and end_date >=@end_date
+        //                     and product_code =@product_code
+        //                    order by end_date asc LIMIT 1 ";
+        //            var cmd = new MySqlCommand(sql, conn);
+        //            cmd.Parameters.AddWithValue("product_code", productCode);
+        //            cmd.Parameters.AddWithValue("start_date", priceDate);
+        //            cmd.Parameters.AddWithValue("end_date", priceDate);
 
-                    var da = new MySqlDataAdapter(cmd);
+        //            var da = new MySqlDataAdapter(cmd);
 
-                    var ds = new DataSet();
-                    da.Fill(ds);
+        //            var ds = new DataSet();
+        //            da.Fill(ds);
 
-                    if (ds.Tables[0].Rows.Count > 0)
-                    {
-                        return new ProductPrice
-                        { 
-                            UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"],
-                        };
-                    }
-                    else
-                    {
-                        return new ProductPrice
-                        {
-                            UnitPrice = 0,
-                        };
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //            if (ds.Tables[0].Rows.Count > 0)
+        //            {
+        //                return new ProductPrice
+        //                { 
+        //                    UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"],
+        //                };
+        //            }
+        //            else
+        //            {
+        //                return new ProductPrice
+        //                {
+        //                    UnitPrice = 0,
+        //                };
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         public static bool Insert(ProductPrice productPrice)
         {
@@ -206,7 +207,7 @@ namespace SlaughterHouseLib.Models
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -236,7 +237,7 @@ namespace SlaughterHouseLib.Models
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

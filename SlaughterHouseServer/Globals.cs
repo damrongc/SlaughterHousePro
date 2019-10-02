@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SlaughterHouseServer
 {
-    public static class GlobalsColumn
+    public static class ConstColumns
     { 
 
         public const string BTN_INVOICE = "BTN_INVOICE";
         public const string BTN_PRODUCT_SLIP = "BTN_PRODUCT_SLIP";
-        //public const string PRODUCT_SLIP = "PRODUCT_SLIP";
+
         public const string REQUEST_DATE = "REQUEST_DATE";
         public const string QTY_WGH = "QTY_WGH";
         public const string QTY_WGH_LOCATION = "QTY_WGH_LOCATION";
@@ -33,8 +33,10 @@ namespace SlaughterHouseServer
         public const string CREATE_BY = "CREATE_BY";
         public const string CUSTOMER_CODE = "CUSTOMER_CODE";
         public const string CUSTOMER_NAME = "CUSTOMER_NAME";
+        public const string DAY = "DAY";
         public const string DESCRIPTION = "DESCRIPTION";
-        public const string DISCOUNT = "DISCOUNT";
+        public const string DISC_AMT = "DISC_AMT";
+        public const string DISC_AMT_BILL = "DISC_AMT_BILL";
         public const string DOCUMENT_TYPE = "DOCUMENT_TYPE";
         public const string DOC_NO = "DOC_NO";
         public const string END_DATE = "END_DATE";
@@ -67,6 +69,7 @@ namespace SlaughterHouseServer
         public const string ORDER_SET_QTY = "ORDER_SET_QTY";
         public const string ORDER_SET_WGH = "ORDER_SET_WGH";
         public const string ORDER_WGH = "ORDER_WGH";
+        public const string PACKING_SIZE = "PACKING_SIZE";
         public const string PLANT_ID = "PLANT_ID";
         public const string PLANT_NAME = "PLANT_NAME";
         public const string PO_DATE = "PO_DATE";
@@ -112,14 +115,35 @@ namespace SlaughterHouseServer
         public const string TRUCK_NO = "TRUCK_NO";
         public const string UNIT_CODE = "UNIT_CODE";
         public const string UNIT_NAME = "UNIT_NAME";
+        public const string UNIT_CODE_QTY = "UNIT_CODE_QTY";
+        public const string UNIT_NAME_QTY = "UNIT_NAME_QTY";
+        public const string UNIT_CODE_WGH = "UNIT_CODE_WGH";
+        public const string UNIT_NAME_WGH = "UNIT_NAME_WGH";
         public const string UNIT_OF_QTY = "UNIT_OF_QTY";
         public const string UNIT_OF_WGH = "UNIT_OF_WGH";
         public const string UNIT_PRICE = "UNIT_PRICE";
+        public const string UNIT_DISC = "UNIT_DISC";
+        public const string UNIT_NET = "UNIT_NET";
         public const string UNLOAD_QTY = "UNLOAD_QTY";
         public const string UNLOAD_WGH = "UNLOAD_WGH";
         public const string VAT_AMT = "VAT_AMT";
         public const string VAT_RATE = "VAT_RATE";
         public const string WGH = "WGH";
 
+
+        public const string CustomerCode = "CustomerCode";
+        public const string CustomerName = "CustomerName";
+        public const string ProductCode = "ProductCode";
+        public const string ProductName = "ProductName";
+        public const string StartDate = "StartDate";
+        public const string EndDate = "EndDate";
+        public const string UnitPrice = "UnitPrice";
+        public const string Day = "Day";
+        public const string CreateAt = "CreateAt";
+        public const string CreateBy = "CreateBy";
+         
+
     }
+
+
 }
