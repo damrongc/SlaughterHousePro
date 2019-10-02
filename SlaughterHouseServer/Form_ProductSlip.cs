@@ -76,13 +76,14 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
             gv.Columns[ConstColumns.QTY_WGH].HeaderText = "จำนวน";
             gv.Columns[ConstColumns.QTY_WGH_LOCATION].HeaderText = "จำนวน";
+            gv.Columns[ConstColumns.LOT_NO].HeaderText = "Lot No.";
             //gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].HeaderText = "หน่วยคำนวณ";
             //gv.Columns[ConstColumns.UNIT_CODE ].HeaderText = "รหัสหน่วยสินค้า";
             gv.Columns[ConstColumns.UNIT_NAME].HeaderText = "หน่วยสินค้า";
             gv.Columns[ConstColumns.LOCATION_CODE].HeaderText = "รหัสคลังสินค้า";
             gv.Columns[ConstColumns.LOCATION_NAME].HeaderText = "คลังสินค้า";
 
-            gv.Columns[ConstColumns.SEQ].Visible = false;
+            //gv.Columns[ConstColumns.SEQ].Visible = false;
             gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
             gv.Columns[ConstColumns.QTY_WGH].Visible = false;
             gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;

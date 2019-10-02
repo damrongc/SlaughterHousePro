@@ -116,6 +116,8 @@ namespace SlaughterHouseServer
             gvDt.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
             gvDt.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
             gvDt.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false; 
+            gvDt.Columns[ConstColumns.PACKING_SIZE].Visible = false;
+
             gvDt.Columns[ConstColumns.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvDt.Columns[ConstColumns.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvDt.Columns[ConstColumns.UNLOAD_QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -160,6 +162,7 @@ namespace SlaughterHouseServer
                             bool pickingCompleteFlag = OrderItemController.CheckPickingComplete(orderNo);
                             if (pickingCompleteFlag == false )
                             {
+                                LoadItem(orderNo);
                                 DialogResult result = MessageBox.Show("จำนวนสินยังไม่ครบตามใบสั่งขาย ท่านยังต้องขายใช่ไหม", "Warning ", MessageBoxButtons.YesNo);
                                 if (result == DialogResult.Yes )
                                 {
@@ -173,8 +176,7 @@ namespace SlaughterHouseServer
                                     }
                                 } 
                                 else
-                                {
-                                    LoadItem(orderNo);
+                                { 
                                     return;
                                 }
                             }

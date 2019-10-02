@@ -124,8 +124,7 @@ namespace SlaughterHouseLib
 
                 throw;
             }
-        }
-
+        } 
         public static object GetOrderReadyToSell(DateTime requestDate, string customerCode = "")
         {
             try
@@ -380,12 +379,25 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     tr = conn.BeginTransaction();
-                    var sql = "";
+                    var sql = @"SELECT order_flag FROM orders WHERE order_no=@order_no";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("order_no", order.OrderNo);
+                    var orderFlag = (int)cmd.ExecuteScalar();
+
+
+                    sql = @"SELECT sum(unload_wgh) as unload_wgh FROM orders_item WHERE order_no=@order_no";
+                    cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("order_no", order.OrderNo);
+                    var unloadWgh = (decimal)cmd.ExecuteScalar();
+                    if (orderFlag > 0 || unloadWgh > 0)
+                    {
+                        throw new Exception("ไม่สามารถบันทึกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
+                    } 
 
                     sql = @"UPDATE orders
 								SET  active=@active 
 								WHERE order_no=@order_no";
-                    var cmd = new MySqlCommand(sql, conn)
+                    cmd = new MySqlCommand(sql, conn)
                     {
                         Transaction = tr
                     };
@@ -402,6 +414,40 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+
+        public static bool CheckUseOrder(string orderNo)
+        {
+            bool res = false;
+            MySqlTransaction tr = null;
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    tr = conn.BeginTransaction();
+                    var sql = @"SELECT order_flag FROM orders WHERE order_no=@order_no";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("order_no", orderNo);
+                    var orderFlag = (int)cmd.ExecuteScalar();
+
+
+                    sql = @"SELECT sum(unload_wgh) as unload_wgh FROM orders_item WHERE order_no=@order_no";
+                    cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("order_no", orderNo);
+                    var unloadWgh = (decimal)cmd.ExecuteScalar();
+                    if (orderFlag > 0 || unloadWgh > 0)
+                    {
+                        res = true;
+                    } 
+                }
+                return res;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
     }
     public static class OrderItemController
     {
@@ -533,6 +579,7 @@ namespace SlaughterHouseLib
 							a.order_no = @order_no
 							and a.bom_code = bm.bom_code
 							and bm.bom_code = bmt.bom_code
+                            and a.product_code = case when a.bom_code = 0 then bm.product_code else bmt.product_code end
 							and p.product_code = case when a.bom_code = 0 then a.product_code else bm.product_code end
 						group by p.product_code,
 							p.product_name,
@@ -586,7 +633,7 @@ namespace SlaughterHouseLib
                     decimal qty = (decimal)ds.Tables[0].Rows[0]["qty"];
                     decimal unloadWgh = (decimal)ds.Tables[0].Rows[0]["wgh_unload"];
                     decimal wgh = (decimal)ds.Tables[0].Rows[0]["wgh"];
-                    if (unloadQty == qty)
+                    if (unloadQty >= qty)
                     {
                         pickingCompleteFlag = true;
                     }

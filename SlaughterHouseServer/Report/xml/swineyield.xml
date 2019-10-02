@@ -1,0 +1,100 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="receive_date" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="transport_doc_no" type="xs:string" minOccurs="0" />
+                <xs:element name="truck_no" type="xs:string" minOccurs="0" />
+                <xs:element name="queue_no" type="xs:int" minOccurs="0" />
+                <xs:element name="lot_no" type="xs:string" minOccurs="0" />
+                <xs:element name="farm_qty" type="xs:int" minOccurs="0" />
+                <xs:element name="farm_wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="factory_qty" type="xs:int" minOccurs="0" />
+                <xs:element name="factory_wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="carcass_qty" type="xs:decimal" minOccurs="0" />
+                <xs:element name="carcass_wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="farm_name" type="xs:string" minOccurs="0" />
+                <xs:element name="breeder_name" type="xs:string" minOccurs="0" />
+                <xs:element name="std_yield" type="xs:decimal" minOccurs="0" />
+                <xs:element name="yeild" type="xs:decimal" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <receive_date>2019-09-23T00:00:00+07:00</receive_date>
+    <transport_doc_no>TS20190923</transport_doc_no>
+    <truck_no>1234</truck_no>
+    <queue_no>1</queue_no>
+    <lot_no>11926612309</lot_no>
+    <farm_qty>10</farm_qty>
+    <farm_wgh>500.00</farm_wgh>
+    <factory_qty>10</factory_qty>
+    <factory_wgh>100.00</factory_wgh>
+    <carcass_qty>10</carcass_qty>
+    <carcass_wgh>82.34</carcass_wgh>
+    <farm_name>ฟาร์มทดสอบ</farm_name>
+    <breeder_name>หมูขาว</breeder_name>
+    <std_yield>78.50</std_yield>
+    <yeild>82.34</yeild>
+  </Table>
+    <Table>
+    <receive_date>2019-09-23T00:00:00+07:00</receive_date>
+    <transport_doc_no>TS20190923</transport_doc_no>
+    <truck_no>1234</truck_no>
+    <queue_no>1</queue_no>
+    <lot_no>11926612309</lot_no>
+    <farm_qty>10</farm_qty>
+    <farm_wgh>500.00</farm_wgh>
+    <factory_qty>10</factory_qty>
+    <factory_wgh>100.00</factory_wgh>
+    <carcass_qty>10</carcass_qty>
+    <carcass_wgh>82.34</carcass_wgh>
+    <farm_name>ฟาร์มทดสอบ</farm_name>
+    <breeder_name>หมูขาว</breeder_name>
+    <std_yield>78.50</std_yield>
+    <yeild>82.34</yeild>
+  </Table>
+    <Table>
+    <receive_date>2019-09-23T00:00:00+07:00</receive_date>
+    <transport_doc_no>TS20190923</transport_doc_no>
+    <truck_no>1234</truck_no>
+    <queue_no>1</queue_no>
+    <lot_no>11926612309</lot_no>
+    <farm_qty>10</farm_qty>
+    <farm_wgh>500.00</farm_wgh>
+    <factory_qty>10</factory_qty>
+    <factory_wgh>100.00</factory_wgh>
+    <carcass_qty>10</carcass_qty>
+    <carcass_wgh>82.34</carcass_wgh>
+    <farm_name>ฟาร์มทดสอบ</farm_name>
+    <breeder_name>หมูขาว</breeder_name>
+    <std_yield>78.50</std_yield>
+    <yeild>82.34</yeild>
+  </Table>
+    <Table>
+    <receive_date>2019-09-23T00:00:00+07:00</receive_date>
+    <transport_doc_no>TS20190923</transport_doc_no>
+    <truck_no>1234</truck_no>
+    <queue_no>1</queue_no>
+    <lot_no>11926612309</lot_no>
+    <farm_qty>200</farm_qty>
+    <farm_wgh>200000.00</farm_wgh>
+    <factory_qty>200</factory_qty>
+    <factory_wgh>480000.00</factory_wgh>
+    <carcass_qty>10</carcass_qty>
+    <carcass_wgh>82.34</carcass_wgh>
+    <farm_name>ฟาร์มทดสอบ</farm_name>
+    <breeder_name>หมูขาว</breeder_name>
+    <std_yield>78.50</std_yield>
+    <yeild>82.34</yeild>
+  </Table>
+</NewDataSet>

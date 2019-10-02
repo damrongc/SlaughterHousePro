@@ -11,6 +11,7 @@
                 <xs:element name="invoice_date" type="xs:dateTime" minOccurs="0" />
                 <xs:element name="ref_document_no" type="xs:string" minOccurs="0" />
                 <xs:element name="customer_code" type="xs:string" minOccurs="0" />
+                <xs:element name="disc_amt" type="xs:decimal" minOccurs="0" />
                 <xs:element name="gross_amt_hd" type="xs:decimal" minOccurs="0" />
                 <xs:element name="discount_hd" type="xs:decimal" minOccurs="0" />
                 <xs:element name="before_vat" type="xs:decimal" minOccurs="0" />
@@ -44,65 +45,33 @@
     </xs:element>
   </xs:schema>
   <Table>
-    <invoice_no>INV0000018</invoice_no>
-    <invoice_date>2019-09-01T00:00:00+07:00</invoice_date>
-    <ref_document_no>SO00000015</ref_document_no>
-    <customer_code>001</customer_code>
-    <gross_amt_hd>437823.00</gross_amt_hd>
-    <discount_hd>576.00</discount_hd>
-    <before_vat>437247.00</before_vat>
-    <vat_rate_hd>7.00</vat_rate_hd>
-    <vat_amt_hd>30607.29</vat_amt_hd>
-    <net_amt_hd>467854.29</net_amt_hd>
+    <invoice_no>INV0000002</invoice_no>
+    <invoice_date>2019-10-01T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000028</ref_document_no>
+    <customer_code>002</customer_code>
+    <disc_amt>0.00</disc_amt>
+    <gross_amt_hd>2240.00</gross_amt_hd>
+    <discount_hd>0.00</discount_hd>
+    <before_vat>2240.00</before_vat>
+    <vat_rate_hd>0.00</vat_rate_hd>
+    <vat_amt_hd>0.00</vat_amt_hd>
+    <net_amt_hd>2240.00</net_amt_hd>
     <invoice_flag>0</invoice_flag>
     <comments />
-    <product_code>P002</product_code>
-    <product_name>หมูซีก</product_name>
+    <product_code>P004</product_code>
+    <product_name>เครื่องในขาว-ชุด</product_name>
     <unit_name>กิโลกรัม</unit_name>
     <seq>1</seq>
-    <qty_wgh>1230.00</qty_wgh>
-    <qty>4</qty>
-    <wgh>1230.00</wgh>
-    <unit_price>280.00</unit_price>
-    <gross_amt>344400.00</gross_amt>
-    <customer_name>Iron Man</customer_name>
-    <address>10880 Malibu Point, Florida United Sta
-320032</address>
-    <ship_to>Malibu</ship_to>
-    <tax_id>1234455587</tax_id>
-    <contact_no>0981562333</contact_no>
-    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
-    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
-    <active>true</active>
-  </Table>
-  <Table>
-    <invoice_no>INV0000018</invoice_no>
-    <invoice_date>2019-09-01T00:00:00+07:00</invoice_date>
-    <ref_document_no>SO00000015</ref_document_no>
-    <customer_code>001</customer_code>
-    <gross_amt_hd>437823.00</gross_amt_hd>
-    <discount_hd>576.00</discount_hd>
-    <before_vat>437247.00</before_vat>
-    <vat_rate_hd>7.00</vat_rate_hd>
-    <vat_amt_hd>30607.29</vat_amt_hd>
-    <net_amt_hd>467854.29</net_amt_hd>
-    <invoice_flag>0</invoice_flag>
-    <comments />
-    <product_code>P008</product_code>
-    <product_name>หมูชุด ซีกและเครื่องใน</product_name>
-    <unit_name>กิโลกรัม</unit_name>
-    <seq>2</seq>
-    <qty_wgh>1639.00</qty_wgh>
+    <qty_wgh>7.00</qty_wgh>
     <qty>1</qty>
-    <wgh>1639.00</wgh>
-    <unit_price>57.00</unit_price>
-    <gross_amt>93423.00</gross_amt>
-    <customer_name>Iron Man</customer_name>
-    <address>10880 Malibu Point, Florida United Sta
-320032</address>
-    <ship_to>Malibu</ship_to>
-    <tax_id>1234455587</tax_id>
-    <contact_no>0981562333</contact_no>
+    <wgh>7.00</wgh>
+    <unit_price>320.00</unit_price>
+    <gross_amt>2240.00</gross_amt>
+    <customer_name>จอนวิค</customer_name>
+    <address>1880 สารทร กรุงเทพ 120520</address>
+    <ship_to>บางรัก</ship_to>
+    <tax_id>1759000021</tax_id>
+    <contact_no>0981562200</contact_no>
     <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
     <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
     <active>true</active>
