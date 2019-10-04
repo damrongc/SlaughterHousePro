@@ -38,7 +38,7 @@ namespace SlaughterHouseServer
             ReportDocument doc = new ReportDocument();
             DataSet ds = ProductSlipController.GetDataPrintProductSlip(productSlipNo);
             string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
-            ds.WriteXml(path + @"\xml\productSlip.xml", XmlWriteMode.WriteSchema);
+            //ds.WriteXml(path + @"\xml\productSlip.xml", XmlWriteMode.WriteSchema);
             doc.Load(path + @"\productSlip.rpt");
             doc.SetDataSource(ds);
 
