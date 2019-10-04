@@ -96,6 +96,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยปริมาณ";
             gv.Columns[ConstColumns.UNIT_CODE_WGH].HeaderText = "รหัสหน่วยน้ำหนัก";
             gv.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
+            gv.Columns[ConstColumns.PACKING_SIZE].HeaderText = "ขนาดบรรจุ";
 
             gv.Columns["seq"].Visible = false;
             gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;

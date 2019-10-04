@@ -66,7 +66,9 @@ namespace SlaughterHouseServer
         }
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        { 
+        {
+            gv.Columns[ConstColumns.SELECT_COL].HeaderText = "เลือก";
+
             gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า"; 
             gv.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยปริมาณ";

@@ -35,16 +35,16 @@ namespace SlaughterHouseServer
          
         private void LoadReport()
         {
-            //ReportDocument doc = new ReportDocument();
-            //DataSet ds = ProductSlipController.GetDataPrintProductSlip(productSlipNo); 
-            //string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
-            //ds.WriteXml(path + @"\xml\productSlip.xml", XmlWriteMode.WriteSchema);
-            //doc.Load(path + @"\productSlip.rpt");
-            //doc.SetDataSource(ds);
+            ReportDocument doc = new ReportDocument();
+            DataSet ds = ProductSlipController.GetDataPrintProductSlip(productSlipNo);
+            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+            ds.WriteXml(path + @"\xml\productSlip.xml", XmlWriteMode.WriteSchema);
+            doc.Load(path + @"\productSlip.rpt");
+            doc.SetDataSource(ds);
 
-            //rptViewer.ReportSource = doc;
-            //rptViewer.Zoom(100);
-            //rptViewer.RefreshReport();
+            rptViewer.ReportSource = doc;
+            rptViewer.Zoom(100);
+            rptViewer.RefreshReport();
         }
     }
 }
