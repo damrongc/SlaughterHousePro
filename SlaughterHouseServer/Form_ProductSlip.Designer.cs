@@ -87,7 +87,7 @@
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
-            this.BtnSave.Text = "บันทึกแล้วปริ้น";
+            this.BtnSave.Text = "บันทึกแล้วพิมพ์";
             this.BtnSave.UseVisualStyleBackColor = false;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 

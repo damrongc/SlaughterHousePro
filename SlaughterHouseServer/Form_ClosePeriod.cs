@@ -25,8 +25,15 @@ namespace SlaughterHouseServer
         {
             try
             {
-                int res = StockController.GenStockBf(dtpPeriodDate.Value);
-                MessageBox.Show($"สร้างสต็อกยกมาเดือน {Convert.ToDateTime(dtpPeriodDate.Value).AddMonths(1).ToString(("MM/yyyy"))} ทั้งหมด {res} รายการ" , "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult result = MessageBox.Show("ต้องการยกยอดสต็อกใช่ไหม ?", "ยืนยัน ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    int res = StockController.GenStockBf(dtpPeriodDate.Value);
+                    MessageBox.Show($"สร้างสต็อกยกมาเดือน {Convert.ToDateTime(dtpPeriodDate.Value).AddMonths(1).ToString(("MM/yyyy"))} ทั้งหมด {res} รายการ",
+                        "Complete",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
             }
             catch (Exception)
             {

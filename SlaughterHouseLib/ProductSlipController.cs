@@ -11,7 +11,7 @@ namespace SlaughterHouseLib
 
     public static class ProductSlipController
     {
-        public static bool Insert(ProductSlip productSlip)
+        public static string Insert(ProductSlip productSlip)
         {
             MySqlTransaction tr = null;
             try
@@ -82,7 +82,7 @@ namespace SlaughterHouseLib
                     }
                     tr.Commit();
                 }
-                return true;
+                return productSlip.ProductSlipNo;
             }
             catch (Exception ex)
             {
@@ -238,8 +238,8 @@ namespace SlaughterHouseLib
                         {
 
                             ProductSlipNo = (string)ds.Tables[0].Rows[0]["product_slip_no"],
-                            ProductSlipDate = (DateTime)ds.Tables[0].Rows[0]["product_slip_date"], 
-                            RefDocumentNo = (string)ds.Tables[0].Rows[0]["ref_document_no"], 
+                            ProductSlipDate = (DateTime)ds.Tables[0].Rows[0]["product_slip_date"],
+                            RefDocumentNo = (string)ds.Tables[0].Rows[0]["ref_document_no"],
                         };
                     }
                     else
@@ -303,7 +303,7 @@ namespace SlaughterHouseLib
         public static DataTable GetProductSlipItemByOrderNo(string orderNo)
         {
             try
-            { 
+            {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -369,9 +369,9 @@ namespace SlaughterHouseLib
                                             dt.Rows[row]["QTY_WGH_LOCATION"] = Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]);
 
                                             qtyWghSo = qtyWghSo - Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]);
-                                            row = Create_Row(ref dt, i, qtyWghSo); 
-                                        } 
-                                    } 
+                                            row = Create_Row(ref dt, i, qtyWghSo);
+                                        }
+                                    }
                                 }
                                 else
                                 {
@@ -447,15 +447,15 @@ namespace SlaughterHouseLib
                                 order by a.seq 
     
                             ";
-                     
+
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("product_slip_no", productSlipNo);
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();
                     da.Fill(ds);
-                    
-                     
+
+
 
                     return ds.Tables[0];
                 }
@@ -477,7 +477,7 @@ namespace SlaughterHouseLib
             drNew["LOCATION_CODE"] = 0;
             drNew["LOCATION_NAME"] = "NA";
             drNew["QTY_WGH"] = Convert.ToDecimal(dt.Rows[idxRow]["QTY_WGH"]);
-            drNew["UNIT_NAME"] = dt.Rows[idxRow]["UNIT_NAME"]; 
+            drNew["UNIT_NAME"] = dt.Rows[idxRow]["UNIT_NAME"];
             drNew["ISSUE_UNIT_METHOD"] = dt.Rows[idxRow]["ISSUE_UNIT_METHOD"];
             drNew["QTY_WGH_LOCATION"] = cfQtyWgh;
             dt.Rows.Add(drNew);

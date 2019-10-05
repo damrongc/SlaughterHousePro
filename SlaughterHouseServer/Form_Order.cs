@@ -163,7 +163,7 @@ namespace SlaughterHouseServer
                             if (pickingCompleteFlag == false)
                             {
                                 LoadItem(orderNo);
-                                DialogResult result = MessageBox.Show("จำนวนสินยังไม่ครบตามใบสั่งขาย ท่านยังต้องขายใช่ไหม", "Warning ", MessageBoxButtons.YesNo);
+                                DialogResult result = MessageBox.Show("จำนวนสินยังไม่ครบตามใบสั่งขาย ท่านยังต้องขายใช่ไหม", "Warning :", MessageBoxButtons.YesNo);
                                 if (result == DialogResult.Yes)
                                 {
                                     var frmInv = new Form_InvoiceAddEdit

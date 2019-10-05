@@ -316,7 +316,7 @@ namespace SlaughterHouseServer
 
                 if (string.IsNullOrEmpty(txtProductSlipNo.Text))
                 {
-                    ProductSlipController.Insert(productSlip);
+                    txtProductSlipNo.Text = ProductSlipController.Insert(productSlip);
                 }
                 else
                 {
