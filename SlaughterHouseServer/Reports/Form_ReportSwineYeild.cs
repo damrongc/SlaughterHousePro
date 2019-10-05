@@ -39,7 +39,7 @@ namespace SlaughterHouseServer.Reports
             //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
             var reportPath = Application.StartupPath;
-            ds.WriteXml(reportPath + @"\Report\xml\swineyield.xml", XmlWriteMode.WriteSchema);
+            //ds.WriteXml(reportPath + @"\Report\xml\swineyield.xml", XmlWriteMode.WriteSchema);
 
 
             doc.Load(reportPath + @"\Report\swineyield.rpt");

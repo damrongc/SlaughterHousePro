@@ -126,7 +126,10 @@ namespace SlaughterHouseClient.Receiving
 
             var reportPath = Application.StartupPath;
             doc.Load(reportPath + "\\Report\\Rpt\\barcode.rpt");
-            plSimulator.Visible = true;
+            if (System.Diagnostics.Debugger.IsAttached)
+                plSimulator.Visible = true;
+            else
+                plSimulator.Visible = false;
         }
 
 
@@ -188,7 +191,7 @@ namespace SlaughterHouseClient.Receiving
 
                     //string strFormatWt = scaleDecimal == 0 ? "#0" : "#0." + "0".PadRight(scaleDecimal, '0');
                     short stateOfScale = DataInvoke.Substring(7, 1).ToInt16();
-                    short stableWt = DataInvoke.Substring(5, 1).ToInt16();
+                    short stableWt = DataInvoke.Substring(6, 1).ToInt16();
 
                     if (stableWt == 2)
                     {

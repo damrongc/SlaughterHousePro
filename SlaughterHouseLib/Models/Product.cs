@@ -32,7 +32,7 @@ namespace SlaughterHouseLib.Models
 
     public static class ProductController
     {
-        public static object GetAllProducts(string keyword)
+        public static DataTable GetAllProducts(string keyword)
         {
             try
             {
@@ -43,11 +43,11 @@ namespace SlaughterHouseLib.Models
                     var sb = new StringBuilder();
                     sb.Append("select a.product_code,a.product_name");
                     sb.Append(" ,b.product_group_name");
-                    sb.Append(" ,unit_of_qty ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_qty) as unit_name_of_qty");
-                    sb.Append(" ,unit_of_wgh ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_wgh) as unit_name_of_wgh");
+                    sb.Append(" ,unit_of_qty ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_qty) as unit_code_qty");
+                    sb.Append(" ,unit_of_wgh ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_wgh) as unit_code_wgh");
                     sb.Append(" ,min_weight, max_weight, std_yield ");
                     sb.Append(" ,sale_unit_method, issue_unit_method ");
-                    sb.Append(" ,a.active, a.packing_size, a.create_at, a.create_by, a.modified_at, a.modified_by");
+                    sb.Append(" ,a.packing_size, a.active,  a.create_at, a.create_by, a.modified_at, a.modified_by");
                     sb.Append(" from product a,product_group b");
                     sb.Append(" where a.product_group_code=b.product_group_code and a.product_code <> 'NA' ");
 
@@ -71,27 +71,27 @@ namespace SlaughterHouseLib.Models
                     da.Fill(ds);
 
 
-                    var coll = (from p in ds.Tables[0].AsEnumerable()
-                                select new
-                                {
-                                    ProductCode = p.Field<string>("product_code"),
-                                    ProductName = p.Field<string>("product_name"),
-                                    ProductGroupName = p.Field<string>("product_group_name"),
-                                    UnitQtyName = p.Field<string>("unit_name_of_qty"),
-                                    UnitWghName = p.Field<string>("unit_name_of_wgh"),
-                                    MinWeight = p.Field<decimal>("min_weight"),
-                                    MaxWeight = p.Field<decimal>("max_weight"),
-                                    StdYield = p.Field<decimal>("std_yield"),
-                                    SaleUnitMethod = p.Field<string>("sale_unit_method"),
-                                    IssueUnitMethod = p.Field<string>("issue_unit_method"),
-                                    PackingSize = p.Field<decimal>("packing_size"),
-                                    Active = p.Field<bool>("active"),
-                                    CreateAt = p.Field<DateTime>("create_at"),
-                                    CreateBy = p.Field<string>("create_by"),
-                                    ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
-                                    ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
-                                }).ToList();
-                    return coll;
+                    //var coll = (from p in ds.Tables[0].AsEnumerable()
+                    //            select new
+                    //            {
+                    //                ProductCode = p.Field<string>("product_code"),
+                    //                ProductName = p.Field<string>("product_name"),
+                    //                ProductGroupName = p.Field<string>("product_group_name"),
+                    //                UnitQtyName = p.Field<string>("unit_name_of_qty"),
+                    //                UnitWghName = p.Field<string>("unit_name_of_wgh"),
+                    //                MinWeight = p.Field<decimal>("min_weight"),
+                    //                MaxWeight = p.Field<decimal>("max_weight"),
+                    //                StdYield = p.Field<decimal>("std_yield"),
+                    //                SaleUnitMethod = p.Field<string>("sale_unit_method"),
+                    //                IssueUnitMethod = p.Field<string>("issue_unit_method"),
+                    //                PackingSize = p.Field<decimal>("packing_size"),
+                    //                Active = p.Field<bool>("active"),
+                    //                CreateAt = p.Field<DateTime>("create_at"),
+                    //                CreateBy = p.Field<string>("create_by"),
+                    //                ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
+                    //                ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
+                    //            }).ToList();
+                    return ds.Tables[0];
                 }
             }
             catch (Exception ex)

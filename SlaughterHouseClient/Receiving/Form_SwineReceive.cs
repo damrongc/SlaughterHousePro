@@ -23,6 +23,7 @@ namespace SlaughterHouseClient.Receiving
         private bool isTare = false;
         private bool isZero = true;
         bool lockWeight = false;
+        string color = "#1C6BBC";
 
         int stableCount = 0;
 
@@ -76,7 +77,10 @@ namespace SlaughterHouseClient.Receiving
             LoadSetting();
 
 
-            plSimulator.Visible = false;
+            if (System.Diagnostics.Debugger.IsAttached)
+                plSimulator.Visible = true;
+            else
+                plSimulator.Visible = false;
 
         }
 
@@ -102,10 +106,10 @@ namespace SlaughterHouseClient.Receiving
                 InputData = serialPort1.ReadExisting();
             if (InputData != String.Empty)
             {
-                this.BeginInvoke(new SetTextCallback(DisplayWeightJedever), new object[] { InputData });
+                this.BeginInvoke(new SetTextCallback(DisplayWeightJadever), new object[] { InputData });
             }
         }
-        private void DisplayWeightJedever(string DataInvoke)
+        private void DisplayWeightJadever(string DataInvoke)
         {
             if (lockWeight == false)
             {
@@ -114,16 +118,22 @@ namespace SlaughterHouseClient.Receiving
                 {
                     string stateOfScale = DataInvoke.Substring(6, 1);
                     string weightText = DataInvoke.Substring(7, 8);
+                    if (double.TryParse(weightText, out num))
+                    {
+
+                    }
                     if (stateOfScale == "+")
                     {
-                        num = weightText.ToDouble();
+
+                        //num = weightText.ToDouble();
+
                     }
                     else
                     {
-                        num = -1.0 * weightText.ToDouble();
+                        num = -1.0 * num;
                     }
 
-                    lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
+                    lblWeight.Text = num.ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
                 }
 
             }
@@ -259,14 +269,14 @@ namespace SlaughterHouseClient.Receiving
                 var remain_qty = receive.farm_qty - receive.factory_qty;
                 lblRemainQty.Text = remain_qty.ToComma();
 
-                if (remain_qty == 0)
-                {
-                    btnStart.Enabled = false;
-                }
-                else
-                {
-                    btnStart.Enabled = true;
-                }
+                //if (remain_qty == 0)
+                //{
+                //    btnStart.Enabled = false;
+                //}
+                //else
+                //{
+                //    btnStart.Enabled = true;
+                //}
             }
 
             lblMessage.Text = Constants.START_WAITING;
@@ -347,6 +357,7 @@ namespace SlaughterHouseClient.Receiving
                 btnReceiveNo.Enabled = true;
                 btnStart.Enabled = true;
                 btnStop.Enabled = false;
+                btnAcceptWeight.Enabled = false;
             }
             catch (IOException ex)
             {
@@ -534,7 +545,7 @@ namespace SlaughterHouseClient.Receiving
         private void BtnFemale_Click(object sender, EventArgs e)
         {
             sexFlag = "F";
-            btnFemale.BackColor = ColorTranslator.FromHtml("#459CDB");
+            btnFemale.BackColor = ColorTranslator.FromHtml(color);
             btnFemale.ForeColor = Color.White;
             btnMale.BackColor = Color.Silver;
             btnUndified.BackColor = Color.Silver;
@@ -544,7 +555,7 @@ namespace SlaughterHouseClient.Receiving
         {
             sexFlag = "M";
             btnFemale.BackColor = Color.Silver;
-            btnMale.BackColor = ColorTranslator.FromHtml("#459CDB");
+            btnMale.BackColor = ColorTranslator.FromHtml(color);
             btnMale.ForeColor = Color.White;
             btnUndified.BackColor = Color.Silver;
         }
@@ -554,7 +565,7 @@ namespace SlaughterHouseClient.Receiving
             sexFlag = "NA";
             btnFemale.BackColor = Color.Silver;
             btnMale.BackColor = Color.Silver;
-            btnUndified.BackColor = ColorTranslator.FromHtml("#459CDB");
+            btnUndified.BackColor = ColorTranslator.FromHtml(color);
             btnUndified.ForeColor = Color.White;
         }
 

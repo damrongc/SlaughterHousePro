@@ -75,7 +75,7 @@
             // 
             // panelHeader
             // 
-            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.panelHeader.Controls.Add(this.lblCurrentDatetime);
             this.panelHeader.Controls.Add(this.btnSettings);
             this.panelHeader.Controls.Add(this.btnExit);
@@ -322,6 +322,7 @@
             this.Controls.Add(this.panelHeader);
             this.Font = new System.Drawing.Font("Kanit", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Name = "Form_Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

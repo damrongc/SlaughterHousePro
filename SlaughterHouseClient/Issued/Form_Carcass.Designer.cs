@@ -76,7 +76,7 @@
             // 
             // panelHeader
             // 
-            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.panelHeader.Controls.Add(this.lblCurrentDatetime);
             this.panelHeader.Controls.Add(this.btnExit);
             this.panelHeader.Controls.Add(this.label1);
@@ -160,7 +160,7 @@
             // 
             // btnOrderNo
             // 
-            this.btnOrderNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.btnOrderNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.btnOrderNo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnOrderNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrderNo.Font = new System.Drawing.Font("Kanit", 16F);
@@ -466,7 +466,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStart.ForeColor = System.Drawing.Color.White;

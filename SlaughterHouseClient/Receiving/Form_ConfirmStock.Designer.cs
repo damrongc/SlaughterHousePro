@@ -62,7 +62,7 @@
             // 
             // panelHeader
             // 
-            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.panelHeader.Controls.Add(this.lblCurrentDatetime);
             this.panelHeader.Controls.Add(this.btnExit);
             this.panelHeader.Controls.Add(this.lblCaption);
@@ -260,7 +260,7 @@
             // 
             // txtBarcodeNo
             // 
-            this.txtBarcodeNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.txtBarcodeNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.txtBarcodeNo.Font = new System.Drawing.Font("Kanit", 16F);
             this.txtBarcodeNo.ForeColor = System.Drawing.Color.White;
             this.txtBarcodeNo.Location = new System.Drawing.Point(18, 245);

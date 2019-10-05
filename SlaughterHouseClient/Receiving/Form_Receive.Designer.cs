@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Receive));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.gv = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.SuspendLayout();
@@ -46,6 +46,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1024, 44);
             this.panel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("Kanit", 20.25F);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(928, 44);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "ข้อมูลการรับ";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnClose
             // 
@@ -87,18 +99,6 @@
             this.gv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv.Size = new System.Drawing.Size(1024, 724);
             this.gv.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Kanit", 20.25F);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(928, 44);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "ข้อมูลการรับ";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form_Receive
             // 

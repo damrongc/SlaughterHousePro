@@ -1,0 +1,111 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="product_slip_no" type="xs:string" minOccurs="0" />
+                <xs:element name="product_slip_date" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="order_no" type="xs:string" minOccurs="0" />
+                <xs:element name="customer_code" type="xs:string" minOccurs="0" />
+                <xs:element name="customer_name" type="xs:string" minOccurs="0" />
+                <xs:element name="product_code" type="xs:string" minOccurs="0" />
+                <xs:element name="product_name" type="xs:string" minOccurs="0" />
+                <xs:element name="lot_no" type="xs:string" minOccurs="0" />
+                <xs:element name="qty" type="xs:int" minOccurs="0" />
+                <xs:element name="wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="location_code" type="xs:int" minOccurs="0" />
+                <xs:element name="location_name" type="xs:string" minOccurs="0" />
+                <xs:element name="unit_name_qty" type="xs:string" minOccurs="0" />
+                <xs:element name="unit_name_wgh" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <product_slip_no>PDS0000010</product_slip_no>
+    <product_slip_date>2019-10-04T00:00:00+07:00</product_slip_date>
+    <order_no>SO00000031</order_no>
+    <customer_code>001</customer_code>
+    <customer_name>Iron Man</customer_name>
+    <product_code>P0021</product_code>
+    <product_name>สะโพก- Raw</product_name>
+    <lot_no>NA</lot_no>
+    <qty>0</qty>
+    <wgh>0</wgh>
+    <location_code>0</location_code>
+    <location_name>NA</location_name>
+    <unit_name_qty>กิโลกรัม</unit_name_qty>
+    <unit_name_wgh>กิโลกรัม</unit_name_wgh>
+  </Table>
+  <Table>
+    <product_slip_no>PDS0000010</product_slip_no>
+    <product_slip_date>2019-10-04T00:00:00+07:00</product_slip_date>
+    <order_no>SO00000031</order_no>
+    <customer_code>001</customer_code>
+    <customer_name>Iron Man</customer_name>
+    <product_code>P0022</product_code>
+    <product_name>สามชั้น- Raw</product_name>
+    <lot_no>NA</lot_no>
+    <qty>0</qty>
+    <wgh>0</wgh>
+    <location_code>0</location_code>
+    <location_name>NA</location_name>
+    <unit_name_qty>กิโลกรัม</unit_name_qty>
+    <unit_name_wgh>กิโลกรัม</unit_name_wgh>
+  </Table>
+  <Table>
+    <product_slip_no>PDS0000010</product_slip_no>
+    <product_slip_date>2019-10-04T00:00:00+07:00</product_slip_date>
+    <order_no>SO00000031</order_no>
+    <customer_code>001</customer_code>
+    <customer_name>Iron Man</customer_name>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>NA</lot_no>
+    <qty>0</qty>
+    <wgh>0</wgh>
+    <location_code>0</location_code>
+    <location_name>NA</location_name>
+    <unit_name_qty>ซีก</unit_name_qty>
+    <unit_name_wgh>กิโลกรัม</unit_name_wgh>
+  </Table>
+  <Table>
+    <product_slip_no>PDS0000010</product_slip_no>
+    <product_slip_date>2019-10-04T00:00:00+07:00</product_slip_date>
+    <order_no>SO00000031</order_no>
+    <customer_code>001</customer_code>
+    <customer_name>Iron Man</customer_name>
+    <product_code>P0031</product_code>
+    <product_name>ตับ</product_name>
+    <lot_no>NA</lot_no>
+    <qty>0</qty>
+    <wgh>0</wgh>
+    <location_code>0</location_code>
+    <location_name>NA</location_name>
+    <unit_name_qty>ชุด</unit_name_qty>
+    <unit_name_wgh>กิโลกรัม</unit_name_wgh>
+  </Table>
+  <Table>
+    <product_slip_no>PDS0000010</product_slip_no>
+    <product_slip_date>2019-10-04T00:00:00+07:00</product_slip_date>
+    <order_no>SO00000031</order_no>
+    <customer_code>001</customer_code>
+    <customer_name>Iron Man</customer_name>
+    <product_code>P0032</product_code>
+    <product_name>ปอด</product_name>
+    <lot_no>NA</lot_no>
+    <qty>0</qty>
+    <wgh>0</wgh>
+    <location_code>0</location_code>
+    <location_name>NA</location_name>
+    <unit_name_qty>พวง</unit_name_qty>
+    <unit_name_wgh>กิโลกรัม</unit_name_wgh>
+  </Table>
+</NewDataSet>

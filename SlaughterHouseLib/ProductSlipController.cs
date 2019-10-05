@@ -262,7 +262,25 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = @" 
-
+                            Select distinct ps.product_slip_no, ps.product_slip_date, o.order_no,
+                                c.customer_code, c.customer_name, p.product_code, p.product_name,
+                                psi.lot_no, psi.qty, psi.wgh,
+                                l.location_code, l.location_name,
+                                uq.unit_name as unit_name_qty, uw.unit_name as unit_name_wgh
+                            from orders o, 
+                                product_slip ps, 
+                                product_slip_item psi,
+                                product p, location l, customer c,
+                                unit_of_measurement uq,
+                                unit_of_measurement uw
+                            where ps.product_slip_no = psi.product_slip_no
+                                and psi.product_code = p.product_code
+                                and psi.location_code = l.location_code
+                                and ps.ref_document_no = o.order_no 
+                                and o.customer_code = c.customer_code
+                                and p.unit_of_qty = uq.unit_code
+                                and p.unit_of_wgh = uw.unit_code    
+                                and ps.product_slip_no =  @product_slip_no
 								";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("product_slip_no", productSlip);

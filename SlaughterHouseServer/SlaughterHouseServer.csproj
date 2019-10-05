@@ -122,6 +122,12 @@
     <Compile Include="Masters\Form_PriceList.Designer.cs">
       <DependentUpon>Form_PriceList.cs</DependentUpon>
     </Compile>
+    <Compile Include="MDIMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MDIMain.Designer.cs">
+      <DependentUpon>MDIMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Form_ReportSoMapInv.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -373,6 +379,13 @@
       <SubType>Component</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Report\swineyield.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>swineyield.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <EmbeddedResource Include="Masters\Form_LovProduct.resx">
       <DependentUpon>Form_LovProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -402,6 +415,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_PriceList.resx">
       <DependentUpon>Form_PriceList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MDIMain.resx">
+      <DependentUpon>MDIMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Form_ReportSoMapInv.resx">
       <DependentUpon>Form_ReportSoMapInv.cs</DependentUpon>
@@ -548,6 +564,11 @@
     <Content Include="Report\swinereceive.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>swinereceive.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\swineyield.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>swineyield.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\Settings.settings">

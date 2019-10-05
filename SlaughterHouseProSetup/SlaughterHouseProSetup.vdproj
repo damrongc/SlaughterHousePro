@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:SlaughterHouseProSetup"
+"ProjectName" = "8:SlaughterHouseClientSetup"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -13,6 +13,18 @@
 "SccProvider" = "8:"
     "Hierarchy"
     {
+        "Entry"
+        {
+        "MsmKey" = "8:_034A91591A7D1D8B7D1D5359D3A2D432"
+        "OwnerKey" = "8:_D985E96E4A29442C8228046A6DC9C6BA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_034A91591A7D1D8B7D1D5359D3A2D432"
+        "OwnerKey" = "8:_8A3C97E95A205356DB394EA6C5A101B0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
         "Entry"
         {
         "MsmKey" = "8:_07A497F502E5C655A85D9DBB4DDE8FAD"
@@ -117,6 +129,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8A3C97E95A205356DB394EA6C5A101B0"
+        "OwnerKey" = "8:_D985E96E4A29442C8228046A6DC9C6BA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_96F19B426B34C6EA493A28CCA705B00A"
         "OwnerKey" = "8:_D985E96E4A29442C8228046A6DC9C6BA"
         "MsmSig" = "8:_UNDEFINED"
@@ -177,6 +195,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E135B1AF12A04CA7A9080B90B6718992"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EDABAB91266B6E15F24947F651DB12C9"
         "OwnerKey" = "8:_D985E96E4A29442C8228046A6DC9C6BA"
         "MsmSig" = "8:_UNDEFINED"
@@ -190,19 +214,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_96F19B426B34C6EA493A28CCA705B00A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D985E96E4A29442C8228046A6DC9C6BA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_8A3C97E95A205356DB394EA6C5A101B0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_6BA8CB438BBEFBCA6569237FBC0CE9FD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_034A91591A7D1D8B7D1D5359D3A2D432"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -289,6 +319,12 @@
         "OwnerKey" = "8:_12DD40133F59063A34EED3DE79B320A8"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_96F19B426B34C6EA493A28CCA705B00A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -334,7 +370,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\SlaughterHouseProSetup.msi"
+        "OutputFilename" = "8:Release\\SlaughterHouseClientSetup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -344,6 +380,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
     }
     "Deployable"
@@ -373,6 +420,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_034A91591A7D1D8B7D1D5359D3A2D432"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_034A91591A7D1D8B7D1D5359D3A2D432"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_D6CEB72A05B3477F9CB34E194BFF2EDF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_07A497F502E5C655A85D9DBB4DDE8FAD"
             {
             "AssemblyRegister" = "3:1"
@@ -641,6 +719,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8A3C97E95A205356DB394EA6C5A101B0"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:nucs.JsonSettings, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_8A3C97E95A205356DB394EA6C5A101B0"
+                    {
+                    "Name" = "8:nucs.JsonSettings.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:nucs.JsonSettings.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_D6CEB72A05B3477F9CB34E194BFF2EDF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_96F19B426B34C6EA493A28CCA705B00A"
             {
             "AssemblyRegister" = "3:1"
@@ -827,6 +936,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E135B1AF12A04CA7A9080B90B6718992"
+            {
+            "SourcePath" = "8:D:\\_Project\\Images\\app.ico"
+            "TargetName" = "8:app.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_D6CEB72A05B3477F9CB34E194BFF2EDF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EDABAB91266B6E15F24947F651DB12C9"
             {
             "AssemblyRegister" = "3:1"
@@ -904,6 +1033,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_8354125CBD964B0EB7A538901D126B3A"
+                    {
+                    "Name" = "8:App"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_1CDF265FBA1F4AF38E6482241AEE267D"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_D6CEB72A05B3477F9CB34E194BFF2EDF"
@@ -946,7 +1086,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SlaughterHousePro Client"
         "ProductCode" = "8:{4255C4A5-9844-496B-8404-35C5C7D5906A}"
-        "PackageCode" = "8:{813E1D83-6CB4-4282-AF7C-890C5DFDD071}"
+        "PackageCode" = "8:{8B3E7F03-3BDB-4F80-9540-0758EEE93FA5}"
         "UpgradeCode" = "8:{014D9D61-0DFF-48EF-853C-D1345EFD5394}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -963,7 +1103,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:SlaughterHouse Client"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_E135B1AF12A04CA7A9080B90B6718992"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -1066,6 +1206,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_112AC77ED270449080FE02A60C31DA89"
+            {
+            "Name" = "8:SlaughterHouse Client"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_D985E96E4A29442C8228046A6DC9C6BA"
+            "Folder" = "8:_E3D511A27A784D7EA0CDD84E33518243"
+            "WorkingFolder" = "8:_D6CEB72A05B3477F9CB34E194BFF2EDF"
+            "Icon" = "8:_E135B1AF12A04CA7A9080B90B6718992"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E65864F2F12340BD881B83B035660FBD"
+            {
+            "Name" = "8:SlaughterHouse Client"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_D985E96E4A29442C8228046A6DC9C6BA"
+            "Folder" = "8:_8354125CBD964B0EB7A538901D126B3A"
+            "WorkingFolder" = "8:_D6CEB72A05B3477F9CB34E194BFF2EDF"
+            "Icon" = "8:_E135B1AF12A04CA7A9080B90B6718992"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {

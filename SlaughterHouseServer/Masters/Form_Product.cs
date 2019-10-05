@@ -1,6 +1,7 @@
 ﻿using SlaughterHouseLib;
 using SlaughterHouseLib.Models;
 using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
@@ -41,7 +42,7 @@ namespace SlaughterHouseServer
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-                    string productCode = gv.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    string productCode = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_CODE].Value.ToString();
                     var frm = new Form_ProductAddEdit
                     {
                         productCode = productCode
@@ -79,24 +80,25 @@ namespace SlaughterHouseServer
         private void Populate()
         {
 
-            var coll = ProductController.GetAllProducts(TxtFilter.Text.Trim());
-            gv.DataSource = coll;
+            DataTable dt = ProductController.GetAllProducts(TxtFilter.Text.Trim());
+            gv.DataSource = dt;
 
-            gv.Columns[1].HeaderText = "รหัสสินค้า";
-            gv.Columns[2].HeaderText = "ชื่อสินค้า";
-            gv.Columns[3].HeaderText = "ชื่อกลุ่มสินค้า";
-            gv.Columns[4].HeaderText = "หน่วยนับปริมาณ";
-            gv.Columns[5].HeaderText = "หน่วยนับน้ำหนัก";
-            gv.Columns[6].HeaderText = "น้ำหนักต่าสุด";
-            gv.Columns[7].HeaderText = "น้ำหนักสูงสุด";
-            gv.Columns[8].HeaderText = "std. yield";
-            gv.Columns[9].HeaderText = "หน่วยคำนวณขาย";
-            gv.Columns[10].HeaderText = "หน่วยคำนวณเบิก";
-            gv.Columns[11].HeaderText = "ใช้งาน";
-            gv.Columns[12].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[13].HeaderText = "ผู้สร้าง";
-            gv.Columns[14].HeaderText = "วันเวลาแก้ไข";
-            gv.Columns[15].HeaderText = "ผู้แก้ไข"; 
+            gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            gv.Columns[ConstColumns.PRODUCT_GROUP_NAME].HeaderText = "ชื่อกลุ่มสินค้า";
+            gv.Columns[ConstColumns.UNIT_CODE_QTY].HeaderText = "หน่วยนับปริมาณ";
+            gv.Columns[ConstColumns.UNIT_CODE_WGH].HeaderText = "หน่วยนับน้ำหนัก";
+            gv.Columns[ConstColumns.MIN_WEIGHT].HeaderText = "น้ำหนักต่าสุด";
+            gv.Columns[ConstColumns.MAX_WEIGHT].HeaderText = "น้ำหนักสูงสุด";
+            gv.Columns[ConstColumns.STD_YIELD].HeaderText = "std. yield";
+            gv.Columns[ConstColumns.SALE_UNIT_METHOD].HeaderText = "หน่วยคำนวณขาย";
+            gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].HeaderText = "หน่วยคำนวณเบิก";
+            gv.Columns[ConstColumns.PACKING_SIZE].HeaderText = "ขนาดบรรจุ";
+            gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
+            gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[ConstColumns.CREATE_BY].HeaderText = "ผู้สร้าง";
+            gv.Columns[ConstColumns.MODIFIED_AT].HeaderText = "วันเวลาแก้ไข";
+            gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข"; 
         }
     }
 }

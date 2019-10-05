@@ -84,7 +84,12 @@ namespace SlaughterHouseClient.Receiving
 
             var reportPath = Application.StartupPath;
             doc.Load(reportPath + "\\Report\\Rpt\\barcode.rpt");
-            plSimulator.Visible = true;
+
+
+            if (System.Diagnostics.Debugger.IsAttached)
+                plSimulator.Visible = true;
+            else
+                plSimulator.Visible = false;
 
         }
 
@@ -144,7 +149,7 @@ namespace SlaughterHouseClient.Receiving
                     //double scaleDivision = Math.Pow(10.0, scaleDecimal);
 
                     //string strFormatWt = scaleDecimal == 0 ? "#0" : "#0." + "0".PadRight(scaleDecimal, '0');
-                    short stateOfScale = DataInvoke.Substring(7, 1).ToInt16();
+                    short stateOfScale = DataInvoke.Substring(6, 1).ToInt16();
                     short stableWt = DataInvoke.Substring(5, 1).ToInt16();
 
                     if (stableWt == 2)
@@ -208,7 +213,7 @@ namespace SlaughterHouseClient.Receiving
                 //timerMinWeight.Enabled = true;
                 if (isStart && isZero)
                 {
-
+                    btnAcceptWeight.Enabled = false;
                     decimal scaleWeight = lblWeight.Text.ToDecimal();
 
                     if (scaleWeight < 0)
@@ -224,7 +229,7 @@ namespace SlaughterHouseClient.Receiving
                     {
                         throw new Exception(string.Format("น้ำหนัก มากกว่า Max: {0}", product.max_weight));
                     }
-                    btnAcceptWeight.Enabled = false;
+
                     lblMessage.Text = Constants.PROCESSING;
                     SaveData();
                     var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", 3, Color.Green, animationMethod, animationDirection);
@@ -245,6 +250,10 @@ namespace SlaughterHouseClient.Receiving
 
                 var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
+            }
+            finally
+            {
+                btnAcceptWeight.Enabled = true;
             }
 
         }
@@ -336,7 +345,7 @@ namespace SlaughterHouseClient.Receiving
                 btnAcceptWeight.Enabled = true;
 
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -364,8 +373,9 @@ namespace SlaughterHouseClient.Receiving
                 btnReceiveNo.Enabled = true;
                 btnStart.Enabled = true;
                 btnStop.Enabled = false;
+                btnAcceptWeight.Enabled = false;
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }

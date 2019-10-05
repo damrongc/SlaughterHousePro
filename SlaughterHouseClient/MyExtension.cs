@@ -11,25 +11,25 @@ public static class MyExtension
 
     public static double ToDouble(this string a)
     {
-        return double.Parse(a);
+        return double.Parse(a.Replace(" ", "").Trim());
     }
     public static short ToInt16(this string a)
     {
-        return short.Parse(a);
+        return short.Parse(a.Replace(" ", "").Trim());
     }
     public static int ToInt32(this string a)
     {
-        return int.Parse(a);
+        return int.Parse(a.Replace(" ", "").Trim());
     }
 
     public static long ToLong(this string a)
     {
-        return long.Parse(a);
+        return long.Parse(a.Replace(" ", "").Trim());
     }
 
     public static decimal ToDecimal(this string a)
     {
-        return decimal.Parse(a);
+        return decimal.Parse(a.Replace(" ", "").Trim());
     }
 
     /// <summary>
