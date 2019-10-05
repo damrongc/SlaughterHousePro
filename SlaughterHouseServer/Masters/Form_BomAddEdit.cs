@@ -36,7 +36,7 @@ namespace SlaughterHouseServer
 
             btnAddOrderItem.Click += BtnAddOrderItem_Click;
             btnLovProduct.Click += BtnLovProduct_Click;
-            //KeyDown   
+            //KeyDown
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
@@ -48,7 +48,7 @@ namespace SlaughterHouseServer
         }
 
 
-        #region Event Focus, KeyDown 
+        #region Event Focus, KeyDown
         private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -59,15 +59,14 @@ namespace SlaughterHouseServer
 
         #endregion
 
-        #region Event Focus, KeyDown 
+        #region Event Focus, KeyDown
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            gv.Columns[ConstColumns.BOM_CODE].HeaderText = "รหัส Bom";
+            gv.Columns[ConstColumns.BOM_CODE ].HeaderText = "รหัส Bom";
             gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-            gv.Columns[ConstColumns.MUTIPLY_QTY].HeaderText = "Mutiply Qty";
-            gv.Columns[ConstColumns.MUTIPLY_WGH].HeaderText = "Mutiply Wgh";
-
+            gv.Columns[ConstColumns.MUTIPLY_QTY].Visible = false;
+            gv.Columns[ConstColumns.MUTIPLY_WGH].Visible = false;
             gv.Columns[ConstColumns.BOM_CODE].Visible = false;
             gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
             gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
@@ -237,8 +236,8 @@ namespace SlaughterHouseServer
                             ProductCode = row[ConstColumns.PRODUCT_CODE].ToString(),
                             ProductName = row[ConstColumns.PRODUCT_NAME].ToString(),
                         },
-                        MutiplyQty = Convert.ToInt16(row[ConstColumns.MUTIPLY_QTY]),
-                        MutiplyWgh = Convert.ToInt16(row[ConstColumns.MUTIPLY_WGH]),
+                        MutiplyQty = 1,
+                        MutiplyWgh = 1,
                         //MutiplyQty = row[ConstColumns.ISSUE_UNIT_METHOD].ToString() == "Q" ? Convert.ToInt16(row[ConstColumns.QTY_WGH]) : 0,
                         //MutiplyWgh = row[ConstColumns.ISSUE_UNIT_METHOD].ToString() == "W" ? Convert.ToDecimal(row[ConstColumns.QTY_WGH]) : 0,
                     });

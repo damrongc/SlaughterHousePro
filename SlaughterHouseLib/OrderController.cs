@@ -579,7 +579,7 @@ namespace SlaughterHouseLib
 							a.order_no = @order_no
 							and a.bom_code = bm.bom_code
 							and bm.bom_code = bmt.bom_code
-                            and a.product_code = case when a.bom_code = 0 then bm.product_code else bmt.product_code end
+                            and a.product_code = case when a.bom_code = 0 then a.product_code else bmt.product_code end
 							and p.product_code = case when a.bom_code = 0 then a.product_code else bm.product_code end
 						group by p.product_code,
 							p.product_name,

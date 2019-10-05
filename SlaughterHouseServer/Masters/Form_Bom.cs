@@ -37,7 +37,7 @@ namespace SlaughterHouseServer
             gvDt.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gvDt.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gvDt.EnableHeadersVisualStyles = false;
-             
+
             LoadBom();
         }
 
@@ -49,38 +49,35 @@ namespace SlaughterHouseServer
             //gv.Columns[ConstColumns.COMMENTS].HeaderText = "หมายเหตุ";
             //gv.Columns[ConstColumns.ORDER_FLAG].HeaderText = "สถานะ";
             //gv.Columns[ConstColumns.INVOICE_FLAG].HeaderText = "สถานะออกใบแจ้งหนี้";
-            //gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
-            //gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
-            //gv.Columns[ConstColumns.CREATE_BY].HeaderText = "ผู้สร้าง";
+            //gv.Columns[ConstColumns.COMMENTS].HeaderText = "หมายเหตุ";
+
+            gv.Columns[ConstColumns.BomCode].HeaderText = "รหัส Bom";
+
+            gv.Columns[ConstColumns.ProductCode].HeaderText = "รหัสสินค้า";
+            gv.Columns[ConstColumns.ProductName].HeaderText = "ชื่อสินค้า";
+            gv.Columns[ConstColumns.Active].HeaderText = "ใช้งาน";
+            gv.Columns[ConstColumns.CreateAt].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[ConstColumns.CreateBy].HeaderText = "ผู้สร้าง";
 
             //gv.Columns[ConstColumns.ORDER_FLAG].Visible = false;
             //gv.Columns[ConstColumns.INVOICE_FLAG].Visible = false;
             //gv.Columns[ConstColumns.ACTIVE].Visible = false;
             //gv.Columns[ConstColumns.CREATE_BY].Visible = false;
 
-            
+
         }
 
 
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            //gvDt.Columns[ConstColumns.SEQ].HeaderText = "ลำดับ";
-            //gvDt.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
- 
+            gv.Columns[ConstColumns.ProductCode].HeaderText = "รหัสสินค้า";
+            gv.Columns[ConstColumns.ProductName].HeaderText = "ชื่อสินค้า";
 
-            //gvDt.Columns[ConstColumns.SEQ].Visible = false;
-            //gvDt.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
+            gvDt.Columns[ConstColumns.MUTIPLY_QTY].Visible = false;
+            gvDt.Columns[ConstColumns.MUTIPLY_WGH].Visible = false;
             //gvDt.Columns[ConstColumns.UNIT_CODE].Visible = false;
             //gvDt.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
 
-
-            //gvDt.Columns[ConstColumns.QTY_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //gvDt.Columns[ConstColumns.UNLOAD_QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //gvDt.Columns[ConstColumns.UNLOAD_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            //gvDt.Columns[ConstColumns.QTY_WGH].DefaultCellStyle.Format = "N2";
-            //gvDt.Columns[ConstColumns.UNLOAD_QTY].DefaultCellStyle.Format = "N0";
-            //gvDt.Columns[ConstColumns.UNLOAD_WGH].DefaultCellStyle.Format = "N2";
         }
 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -135,7 +132,7 @@ namespace SlaughterHouseServer
             LoadBom();
         }
 
-      
+
 
         private void LoadBom()
         {
@@ -151,6 +148,6 @@ namespace SlaughterHouseServer
             gvDt.DataSource = dtBomItem;
         }
 
-      
+
     }
 }

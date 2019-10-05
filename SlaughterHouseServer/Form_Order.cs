@@ -30,7 +30,7 @@ namespace SlaughterHouseServer
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
 
-            gvDt.DataBindingComplete += GvDt_DataBindingComplete; 
+            gvDt.DataBindingComplete += GvDt_DataBindingComplete;
             gvDt.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             gvDt.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
             gvDt.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
@@ -75,7 +75,7 @@ namespace SlaughterHouseServer
                 string invocieFlag = gv.Rows[row.Index].Cells[ConstColumns.INVOICE_FLAG].Value.ToString();
                 if (invocieFlag == "1")
                 {
-                    gv.Rows[row.Index].Cells[ConstColumns.BTN_INVOICE].Style.BackColor = Color.Gray; 
+                    gv.Rows[row.Index].Cells[ConstColumns.BTN_INVOICE].Style.BackColor = Color.Gray;
                 }
                 else
                 {
@@ -87,14 +87,14 @@ namespace SlaughterHouseServer
             printProductSlipBtnColumn.Name = ConstColumns.BTN_PRODUCT_SLIP;
             printProductSlipBtnColumn.Text = "ปริ้นใบจัดสินค้า";
             printProductSlipBtnColumn.UseColumnTextForButtonValue = true; //dont forget this line
-            printProductSlipBtnColumn.FlatStyle = FlatStyle.Flat; 
+            printProductSlipBtnColumn.FlatStyle = FlatStyle.Flat;
             if (gv.Columns[ConstColumns.BTN_PRODUCT_SLIP] == null)
             {
                 gv.Columns.Insert(gv.ColumnCount, printProductSlipBtnColumn);
                 gv.Columns[ConstColumns.BTN_PRODUCT_SLIP].HeaderText = "ปริ้นใบจัดสินค้า";
             }
         }
- 
+
 
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
@@ -115,17 +115,17 @@ namespace SlaughterHouseServer
             gvDt.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
             gvDt.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
             gvDt.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
-            gvDt.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false; 
+            gvDt.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
             gvDt.Columns[ConstColumns.PACKING_SIZE].Visible = false;
 
             gvDt.Columns[ConstColumns.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvDt.Columns[ConstColumns.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvDt.Columns[ConstColumns.UNLOAD_QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvDt.Columns[ConstColumns.UNLOAD_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-             
+
             gvDt.Columns[ConstColumns.QTY].DefaultCellStyle.Format = "N0";
             gvDt.Columns[ConstColumns.WGH].DefaultCellStyle.Format = "N2";
-            gvDt.Columns[ConstColumns.UNLOAD_QTY].DefaultCellStyle.Format ="N0";
+            gvDt.Columns[ConstColumns.UNLOAD_QTY].DefaultCellStyle.Format = "N0";
             gvDt.Columns[ConstColumns.UNLOAD_WGH].DefaultCellStyle.Format = "N2";
         }
 
@@ -156,15 +156,15 @@ namespace SlaughterHouseServer
                         case ConstColumns.BTN_INVOICE:
                             string invocieFlag = gv.Rows[e.RowIndex].Cells[ConstColumns.INVOICE_FLAG].Value.ToString();
                             if (invocieFlag == "1")
-                            { 
+                            {
                                 return;
                             }
                             bool pickingCompleteFlag = OrderItemController.CheckPickingComplete(orderNo);
-                            if (pickingCompleteFlag == false )
+                            if (pickingCompleteFlag == false)
                             {
                                 LoadItem(orderNo);
                                 DialogResult result = MessageBox.Show("จำนวนสินยังไม่ครบตามใบสั่งขาย ท่านยังต้องขายใช่ไหม", "Warning ", MessageBoxButtons.YesNo);
-                                if (result == DialogResult.Yes )
+                                if (result == DialogResult.Yes)
                                 {
                                     var frmInv = new Form_InvoiceAddEdit
                                     {
@@ -174,9 +174,9 @@ namespace SlaughterHouseServer
                                     {
                                         LoadOrder();
                                     }
-                                } 
+                                }
                                 else
-                                { 
+                                {
                                     return;
                                 }
                             }
@@ -223,9 +223,9 @@ namespace SlaughterHouseServer
         private void BtnAdd_Click(object sender, System.EventArgs e)
         {
             var frm = new Form_OrderAddEdit();
-            if (frm.ShowDialog() == DialogResult.OK  )
+            if (frm.ShowDialog() == DialogResult.OK)
             {
-              
+
             }
             LoadOrder();
         }
@@ -247,16 +247,16 @@ namespace SlaughterHouseServer
         {
             //var farmCtrl = new FarmController();
             var coll = OrderController.GetAllOrders(dtpRequestDate.Value, cboCustomer.SelectedValue.ToString());
-            gv.DataSource = coll; 
+            gv.DataSource = coll;
             LoadItem("");
         }
         private void LoadItem(string orderNo)
         {
             DataTable dtOrderItem = new DataTable("ORDERS_ITEM");
             dtOrderItem = OrderItemController.GetOrderItems(orderNo, "N");
-            gvDt.DataSource = dtOrderItem;  
+            gvDt.DataSource = dtOrderItem;
         }
 
-     
+
     }
 }

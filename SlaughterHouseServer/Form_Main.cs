@@ -22,6 +22,7 @@ namespace SlaughterHouseServer
             BtnCarcass.Click += Btn_Click;
             BtnInvoice.Click += Btn_Click;
             BtnReport.Click += Btn_Click;
+            BtnClosePeriod.Click += Btn_Click;
         }
 
 
@@ -59,7 +60,9 @@ namespace SlaughterHouseServer
                 case "BtnReport":
                     AddFormToContainer(new Form_Report());
                     break;
-
+                case "BtnClosePeriod":
+                    AddFormToContainer(new Form_ClosePeriod());
+                    break;
             }
         }
 

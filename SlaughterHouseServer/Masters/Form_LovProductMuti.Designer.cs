@@ -171,6 +171,7 @@
             this.BtnCancel.TabIndex = 47;
             this.BtnCancel.Text = "ยกเลิก";
             this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // txtProductName
             // 

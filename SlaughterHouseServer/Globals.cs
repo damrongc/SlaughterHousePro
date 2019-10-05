@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SlaughterHouseServer
 {
     public static class ConstColumns
-    { 
+    {
 
         public const string BTN_INVOICE = "BTN_INVOICE";
         public const string BTN_PRODUCT_SLIP = "BTN_PRODUCT_SLIP";
@@ -130,7 +130,7 @@ namespace SlaughterHouseServer
         public const string VAT_RATE = "VAT_RATE";
         public const string WGH = "WGH";
 
-
+        public const string BomCode = "BomCode";
         public const string CustomerCode = "CustomerCode";
         public const string CustomerName = "CustomerName";
         public const string ProductCode = "ProductCode";
@@ -139,9 +139,10 @@ namespace SlaughterHouseServer
         public const string EndDate = "EndDate";
         public const string UnitPrice = "UnitPrice";
         public const string Day = "Day";
+        public const string Active = "Active";
         public const string CreateAt = "CreateAt";
         public const string CreateBy = "CreateBy";
-         
+
 
     }
 

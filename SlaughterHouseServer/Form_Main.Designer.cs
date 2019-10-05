@@ -30,9 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
             this.plHeader = new System.Windows.Forms.Panel();
+            this.btnMinimize = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.plMenu = new System.Windows.Forms.Panel();
+            this.BtnClosePeriod = new System.Windows.Forms.Button();
             this.BtnReport = new System.Windows.Forms.Button();
             this.BtnInvoice = new System.Windows.Forms.Button();
             this.BtnProductionOrder = new System.Windows.Forms.Button();
@@ -42,7 +44,6 @@
             this.BtnMaster = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.plContainer = new System.Windows.Forms.Panel();
-            this.btnMinimize = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
             this.plHeader.SuspendLayout();
             this.plMenu.SuspendLayout();
@@ -59,6 +60,25 @@
             this.plHeader.Name = "plHeader";
             this.plHeader.Size = new System.Drawing.Size(1400, 54);
             this.plHeader.TabIndex = 8;
+            // 
+            // btnMinimize
+            // 
+            this.btnMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.btnMinimize.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMinimize.FlatAppearance.BorderSize = 0;
+            this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinimize.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnMinimize.ForeColor = System.Drawing.Color.White;
+            this.btnMinimize.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimize.Image")));
+            this.btnMinimize.Location = new System.Drawing.Point(1276, 0);
+            this.btnMinimize.Name = "btnMinimize";
+            this.btnMinimize.Size = new System.Drawing.Size(48, 54);
+            this.btnMinimize.TabIndex = 14;
+            this.btnMinimize.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMinimize.UseVisualStyleBackColor = false;
+            this.btnMinimize.Click += new System.EventHandler(this.BtnMinimize_Click);
             // 
             // btnExit
             // 
@@ -95,6 +115,7 @@
             // plMenu
             // 
             this.plMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.plMenu.Controls.Add(this.BtnClosePeriod);
             this.plMenu.Controls.Add(this.BtnReport);
             this.plMenu.Controls.Add(this.BtnInvoice);
             this.plMenu.Controls.Add(this.BtnProductionOrder);
@@ -109,6 +130,26 @@
             this.plMenu.Name = "plMenu";
             this.plMenu.Size = new System.Drawing.Size(147, 846);
             this.plMenu.TabIndex = 9;
+            // 
+            // BtnClosePeriod
+            // 
+            this.BtnClosePeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnClosePeriod.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnClosePeriod.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.BtnClosePeriod.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnClosePeriod.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnClosePeriod.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnClosePeriod.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnClosePeriod.ForeColor = System.Drawing.Color.White;
+            this.BtnClosePeriod.Image = ((System.Drawing.Image)(resources.GetObject("BtnClosePeriod.Image")));
+            this.BtnClosePeriod.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnClosePeriod.Location = new System.Drawing.Point(0, 350);
+            this.BtnClosePeriod.Name = "BtnClosePeriod";
+            this.BtnClosePeriod.Size = new System.Drawing.Size(147, 50);
+            this.BtnClosePeriod.TabIndex = 34;
+            this.BtnClosePeriod.Text = "ยกสต็อก";
+            this.BtnClosePeriod.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnClosePeriod.UseVisualStyleBackColor = false;
             // 
             // BtnReport
             // 
@@ -169,6 +210,7 @@
             this.BtnProductionOrder.Text = "ใบสั่งผลิต";
             this.BtnProductionOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnProductionOrder.UseVisualStyleBackColor = false;
+            this.BtnProductionOrder.Visible = false;
             // 
             // BtnOrder
             // 
@@ -278,25 +320,6 @@
             this.plContainer.Size = new System.Drawing.Size(1253, 846);
             this.plContainer.TabIndex = 10;
             // 
-            // btnMinimize
-            // 
-            this.btnMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.btnMinimize.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMinimize.FlatAppearance.BorderSize = 0;
-            this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimize.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.btnMinimize.ForeColor = System.Drawing.Color.White;
-            this.btnMinimize.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimize.Image")));
-            this.btnMinimize.Location = new System.Drawing.Point(1276, 0);
-            this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(48, 54);
-            this.btnMinimize.TabIndex = 14;
-            this.btnMinimize.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMinimize.UseVisualStyleBackColor = false;
-            this.btnMinimize.Click += new System.EventHandler(this.BtnMinimize_Click);
-            // 
             // dragControl1
             // 
             this.dragControl1.SelectControl = this.plHeader;
@@ -338,5 +361,6 @@
         private System.Windows.Forms.Button BtnCarcass;
         private System.Windows.Forms.Button BtnReceive;
         private System.Windows.Forms.Button btnMinimize;
+        private System.Windows.Forms.Button BtnClosePeriod;
     }
 }

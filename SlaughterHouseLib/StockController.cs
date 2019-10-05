@@ -2,6 +2,7 @@
 using SlaughterHouseLib.Models;
 using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace SlaughterHouseLib
@@ -306,7 +307,7 @@ namespace SlaughterHouseLib
                     string sql = @"
                                 Select  p.product_name, stk.lot_no, loc.location_code, loc.location_name, 
                                 case when p.issue_unit_method = 'W' 
-	                                then sum(case when stk.transaction_type = '1' then stk.stock_wgh else stk.stock_wgh*-1 end)
+                                    then sum(case when stk.transaction_type = '1' then stk.stock_wgh else stk.stock_wgh*-1 end)
                                     else sum(case when stk.transaction_type = '1' then stk.stock_qty else stk.stock_qty*-1 end)
                                     end as qty_wgh, p.issue_unit_method
                                 From stock stk, product p, location loc
@@ -317,11 +318,11 @@ namespace SlaughterHouseLib
                                  and stk.location_code = loc.location_code
                                  group by p.product_name, stk.lot_no,  stk.transaction_type, loc.location_code, loc.location_name, p.issue_unit_method, p.sale_unit_method
                                  having case when p.sale_unit_method = 'W' 
-	                                then sum(case when stk.transaction_type = '1' then stk.stock_wgh else stk.stock_wgh*-1 end) 
+                                    then sum(case when stk.transaction_type = '1' then stk.stock_wgh else stk.stock_wgh*-1 end) 
                                     else sum(case when stk.transaction_type = '1' then stk.stock_qty else stk.stock_qty*-1 end) 
                                     end > 0
                                  order by stk.lot_no
-                                            "; 
+                                            ";
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("product_code", productCode);
@@ -356,5 +357,27 @@ namespace SlaughterHouseLib
             }
 
         }
+
+        public static int GenStockBf(DateTime period)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    MySqlCommand cmd = new MySqlCommand("GenStockBf", conn);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new MySqlParameter("pPeriod", period.ToString("yyyy-MM-dd")));
+                    conn.Open();
+                    return cmd.ExecuteNonQuery();  
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
     }
 }
