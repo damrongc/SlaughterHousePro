@@ -39,7 +39,6 @@
             this.BtnInvoice = new System.Windows.Forms.Button();
             this.BtnProductionOrder = new System.Windows.Forms.Button();
             this.BtnOrder = new System.Windows.Forms.Button();
-            this.BtnCarcass = new System.Windows.Forms.Button();
             this.BtnReceive = new System.Windows.Forms.Button();
             this.BtnMaster = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -120,7 +119,6 @@
             this.plMenu.Controls.Add(this.BtnInvoice);
             this.plMenu.Controls.Add(this.BtnProductionOrder);
             this.plMenu.Controls.Add(this.BtnOrder);
-            this.plMenu.Controls.Add(this.BtnCarcass);
             this.plMenu.Controls.Add(this.BtnReceive);
             this.plMenu.Controls.Add(this.BtnMaster);
             this.plMenu.Controls.Add(this.button2);
@@ -163,7 +161,7 @@
             this.BtnReport.ForeColor = System.Drawing.Color.White;
             this.BtnReport.Image = ((System.Drawing.Image)(resources.GetObject("BtnReport.Image")));
             this.BtnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnReport.Location = new System.Drawing.Point(0, 300);
+            this.BtnReport.Location = new System.Drawing.Point(0, 250);
             this.BtnReport.Name = "BtnReport";
             this.BtnReport.Size = new System.Drawing.Size(147, 50);
             this.BtnReport.TabIndex = 33;
@@ -183,7 +181,7 @@
             this.BtnInvoice.ForeColor = System.Drawing.Color.White;
             this.BtnInvoice.Image = ((System.Drawing.Image)(resources.GetObject("BtnInvoice.Image")));
             this.BtnInvoice.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnInvoice.Location = new System.Drawing.Point(0, 250);
+            this.BtnInvoice.Location = new System.Drawing.Point(0, 200);
             this.BtnInvoice.Name = "BtnInvoice";
             this.BtnInvoice.Size = new System.Drawing.Size(147, 50);
             this.BtnInvoice.TabIndex = 32;
@@ -203,7 +201,7 @@
             this.BtnProductionOrder.ForeColor = System.Drawing.Color.White;
             this.BtnProductionOrder.Image = ((System.Drawing.Image)(resources.GetObject("BtnProductionOrder.Image")));
             this.BtnProductionOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnProductionOrder.Location = new System.Drawing.Point(0, 200);
+            this.BtnProductionOrder.Location = new System.Drawing.Point(0, 150);
             this.BtnProductionOrder.Name = "BtnProductionOrder";
             this.BtnProductionOrder.Size = new System.Drawing.Size(147, 50);
             this.BtnProductionOrder.TabIndex = 31;
@@ -224,33 +222,13 @@
             this.BtnOrder.ForeColor = System.Drawing.Color.White;
             this.BtnOrder.Image = ((System.Drawing.Image)(resources.GetObject("BtnOrder.Image")));
             this.BtnOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnOrder.Location = new System.Drawing.Point(0, 150);
+            this.BtnOrder.Location = new System.Drawing.Point(0, 100);
             this.BtnOrder.Name = "BtnOrder";
             this.BtnOrder.Size = new System.Drawing.Size(147, 50);
             this.BtnOrder.TabIndex = 30;
             this.BtnOrder.Text = "ใบสั่งขาย";
             this.BtnOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnOrder.UseVisualStyleBackColor = false;
-            // 
-            // BtnCarcass
-            // 
-            this.BtnCarcass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnCarcass.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnCarcass.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.BtnCarcass.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnCarcass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnCarcass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCarcass.Font = new System.Drawing.Font("Kanit", 14.25F);
-            this.BtnCarcass.ForeColor = System.Drawing.Color.White;
-            this.BtnCarcass.Image = ((System.Drawing.Image)(resources.GetObject("BtnCarcass.Image")));
-            this.BtnCarcass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCarcass.Location = new System.Drawing.Point(0, 100);
-            this.BtnCarcass.Name = "BtnCarcass";
-            this.BtnCarcass.Size = new System.Drawing.Size(147, 50);
-            this.BtnCarcass.TabIndex = 29;
-            this.BtnCarcass.Text = "รับหมูซีก";
-            this.BtnCarcass.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnCarcass.UseVisualStyleBackColor = false;
             // 
             // BtnReceive
             // 
@@ -358,7 +336,6 @@
         private System.Windows.Forms.Button BtnInvoice;
         private System.Windows.Forms.Button BtnProductionOrder;
         private System.Windows.Forms.Button BtnOrder;
-        private System.Windows.Forms.Button BtnCarcass;
         private System.Windows.Forms.Button BtnReceive;
         private System.Windows.Forms.Button btnMinimize;
         private System.Windows.Forms.Button BtnClosePeriod;

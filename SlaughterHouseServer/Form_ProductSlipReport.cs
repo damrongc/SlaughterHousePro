@@ -35,6 +35,7 @@ namespace SlaughterHouseServer
 
         private void LoadReport()
         {
+
             ReportDocument doc = new ReportDocument();
             DataSet ds = ProductSlipController.GetDataPrintProductSlip(productSlipNo);
             string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));

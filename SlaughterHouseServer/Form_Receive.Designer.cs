@@ -33,15 +33,15 @@
             this.BtnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Print = new System.Windows.Forms.DataGridViewImageColumn();
+            this.CloseFlag = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cboFarm = new System.Windows.Forms.ComboBox();
             this.dtpReceiveDate = new System.Windows.Forms.DateTimePicker();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Print = new System.Windows.Forms.DataGridViewImageColumn();
-            this.CloseFlag = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
@@ -107,8 +107,30 @@
             this.gv.Location = new System.Drawing.Point(6, 68);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
+            this.gv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv.Size = new System.Drawing.Size(1368, 656);
             this.gv.TabIndex = 8;
+            // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "แก้ไข";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.Name = "Edit";
+            this.Edit.Width = 58;
+            // 
+            // Print
+            // 
+            this.Print.HeaderText = "พิมพ์";
+            this.Print.Image = ((System.Drawing.Image)(resources.GetObject("Print.Image")));
+            this.Print.Name = "Print";
+            this.Print.Width = 58;
+            // 
+            // CloseFlag
+            // 
+            this.CloseFlag.HeaderText = "จบคิว";
+            this.CloseFlag.Image = ((System.Drawing.Image)(resources.GetObject("CloseFlag.Image")));
+            this.CloseFlag.Name = "CloseFlag";
+            this.CloseFlag.Width = 63;
             // 
             // panel3
             // 
@@ -177,37 +199,18 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "ฟาร์ม:";
             // 
-            // Edit
-            // 
-            this.Edit.HeaderText = "แก้ไข";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.Name = "Edit";
-            this.Edit.Width = 58;
-            // 
-            // Print
-            // 
-            this.Print.HeaderText = "พิมพ์";
-            this.Print.Image = ((System.Drawing.Image)(resources.GetObject("Print.Image")));
-            this.Print.Name = "Print";
-            this.Print.Width = 58;
-            // 
-            // CloseFlag
-            // 
-            this.CloseFlag.HeaderText = "จบคิว";
-            this.CloseFlag.Image = ((System.Drawing.Image)(resources.GetObject("CloseFlag.Image")));
-            this.CloseFlag.Name = "CloseFlag";
-            this.CloseFlag.Width = 63;
-            // 
             // Form_Receive
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1400, 750);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Kanit", 15.75F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form_Receive";
             this.Padding = new System.Windows.Forms.Padding(10);
-            this.Text = "Form_Farm";
+            this.Text = "เอกสารการรับ";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
             this.panel2.ResumeLayout(false);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Carcass));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblCurrentDatetime = new System.Windows.Forms.Label();
@@ -36,12 +37,11 @@
             this.dragControl1 = new DragControl();
             this.lblWeight = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnReceiveNo = new System.Windows.Forms.Button();
+            this.btnOrderNo = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.lblOrderNo = new System.Windows.Forms.Label();
             this.lblProduct = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnStart = new System.Windows.Forms.Button();
             this.lblOrderQty = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.lblOrderWgh = new System.Windows.Forms.Label();
@@ -52,18 +52,31 @@
             this.label22 = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnAccept = new System.Windows.Forms.Button();
             this.lblCustomer = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnUp = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
+            this.plSimulator = new System.Windows.Forms.GroupBox();
+            this.btnSetWgh = new System.Windows.Forms.Button();
+            this.txtSimWeight = new System.Windows.Forms.TextBox();
+            this.btnZero = new System.Windows.Forms.Button();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.btnAcceptWeight = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.timerMinWeight = new System.Windows.Forms.Timer(this.components);
+            this.lblStable = new System.Windows.Forms.Label();
+            this.lblMaxWeight = new System.Windows.Forms.Label();
+            this.lblMinWeight = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
+            this.plSimulator.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelHeader
             // 
-            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.panelHeader.Controls.Add(this.lblCurrentDatetime);
             this.panelHeader.Controls.Add(this.btnExit);
             this.panelHeader.Controls.Add(this.label1);
@@ -130,7 +143,7 @@
             this.lblWeight.Font = new System.Drawing.Font("Kanit", 120F);
             this.lblWeight.Location = new System.Drawing.Point(507, 90);
             this.lblWeight.Name = "lblWeight";
-            this.lblWeight.Size = new System.Drawing.Size(505, 195);
+            this.lblWeight.Size = new System.Drawing.Size(505, 219);
             this.lblWeight.TabIndex = 5;
             this.lblWeight.Text = "0.00";
             this.lblWeight.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -145,20 +158,20 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "น้ำหนัก (กิโลกรัม)";
             // 
-            // btnReceiveNo
+            // btnOrderNo
             // 
-            this.btnReceiveNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
-            this.btnReceiveNo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnReceiveNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReceiveNo.Font = new System.Drawing.Font("Kanit", 16F);
-            this.btnReceiveNo.ForeColor = System.Drawing.Color.White;
-            this.btnReceiveNo.Location = new System.Drawing.Point(355, 90);
-            this.btnReceiveNo.Name = "btnReceiveNo";
-            this.btnReceiveNo.Size = new System.Drawing.Size(146, 43);
-            this.btnReceiveNo.TabIndex = 7;
-            this.btnReceiveNo.Text = "เลือกข้อมูล";
-            this.btnReceiveNo.UseVisualStyleBackColor = false;
-            this.btnReceiveNo.Click += new System.EventHandler(this.btnReceiveNo_Click);
+            this.btnOrderNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
+            this.btnOrderNo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnOrderNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrderNo.Font = new System.Drawing.Font("Kanit", 16F);
+            this.btnOrderNo.ForeColor = System.Drawing.Color.White;
+            this.btnOrderNo.Location = new System.Drawing.Point(355, 90);
+            this.btnOrderNo.Name = "btnOrderNo";
+            this.btnOrderNo.Size = new System.Drawing.Size(146, 43);
+            this.btnOrderNo.TabIndex = 7;
+            this.btnOrderNo.Text = "เลือกข้อมูล";
+            this.btnOrderNo.UseVisualStyleBackColor = false;
+            this.btnOrderNo.Click += new System.EventHandler(this.btnOrderNo_Click);
             // 
             // label5
             // 
@@ -203,21 +216,6 @@
             this.label8.Size = new System.Drawing.Size(65, 33);
             this.label8.TabIndex = 10;
             this.label8.Text = "สินค้า";
-            // 
-            // btnStart
-            // 
-            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
-            this.btnStart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Font = new System.Drawing.Font("Kanit", 16F);
-            this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(507, 293);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(146, 43);
-            this.btnStart.TabIndex = 18;
-            this.btnStart.Text = "เริ่มชั่ง";
-            this.btnStart.UseVisualStyleBackColor = false;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // lblOrderQty
             // 
@@ -332,26 +330,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label3.Location = new System.Drawing.Point(18, 306);
+            this.label3.Location = new System.Drawing.Point(18, 285);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 33);
             this.label3.TabIndex = 31;
             this.label3.Text = "Lot No";
-            // 
-            // btnAccept
-            // 
-            this.btnAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
-            this.btnAccept.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAccept.Font = new System.Drawing.Font("Kanit", 16F);
-            this.btnAccept.ForeColor = System.Drawing.Color.White;
-            this.btnAccept.Location = new System.Drawing.Point(659, 293);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(146, 43);
-            this.btnAccept.TabIndex = 32;
-            this.btnAccept.Text = "ตกลง";
-            this.btnAccept.UseVisualStyleBackColor = false;
-            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // lblCustomer
             // 
@@ -379,9 +362,9 @@
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 342);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 312);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(879, 247);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(800, 268);
             this.flowLayoutPanel1.TabIndex = 52;
             // 
             // btnUp
@@ -391,9 +374,9 @@
             this.btnUp.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnUp.ForeColor = System.Drawing.Color.White;
             this.btnUp.Image = ((System.Drawing.Image)(resources.GetObject("btnUp.Image")));
-            this.btnUp.Location = new System.Drawing.Point(903, 342);
+            this.btnUp.Location = new System.Drawing.Point(824, 312);
             this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(109, 70);
+            this.btnUp.Size = new System.Drawing.Size(73, 70);
             this.btnUp.TabIndex = 57;
             this.btnUp.UseVisualStyleBackColor = false;
             this.btnUp.Click += new System.EventHandler(this.BtnUp_Click);
@@ -405,24 +388,159 @@
             this.btnDown.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnDown.ForeColor = System.Drawing.Color.White;
             this.btnDown.Image = ((System.Drawing.Image)(resources.GetObject("btnDown.Image")));
-            this.btnDown.Location = new System.Drawing.Point(903, 418);
+            this.btnDown.Location = new System.Drawing.Point(824, 510);
             this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(109, 70);
+            this.btnDown.Size = new System.Drawing.Size(73, 70);
             this.btnDown.TabIndex = 56;
             this.btnDown.UseVisualStyleBackColor = false;
             this.btnDown.Click += new System.EventHandler(this.BtnDown_Click);
+            // 
+            // plSimulator
+            // 
+            this.plSimulator.Controls.Add(this.btnSetWgh);
+            this.plSimulator.Controls.Add(this.txtSimWeight);
+            this.plSimulator.Controls.Add(this.btnZero);
+            this.plSimulator.Location = new System.Drawing.Point(199, 158);
+            this.plSimulator.Name = "plSimulator";
+            this.plSimulator.Size = new System.Drawing.Size(238, 126);
+            this.plSimulator.TabIndex = 58;
+            this.plSimulator.TabStop = false;
+            this.plSimulator.Text = "Simulator";
+            // 
+            // btnSetWgh
+            // 
+            this.btnSetWgh.Location = new System.Drawing.Point(112, 37);
+            this.btnSetWgh.Name = "btnSetWgh";
+            this.btnSetWgh.Size = new System.Drawing.Size(98, 31);
+            this.btnSetWgh.TabIndex = 43;
+            this.btnSetWgh.Text = "Set Wgh";
+            this.btnSetWgh.UseVisualStyleBackColor = true;
+            this.btnSetWgh.Click += new System.EventHandler(this.btnSetWgh_Click);
+            // 
+            // txtSimWeight
+            // 
+            this.txtSimWeight.Location = new System.Drawing.Point(6, 37);
+            this.txtSimWeight.Name = "txtSimWeight";
+            this.txtSimWeight.Size = new System.Drawing.Size(100, 31);
+            this.txtSimWeight.TabIndex = 42;
+            this.txtSimWeight.Text = "0";
+            this.txtSimWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // btnZero
+            // 
+            this.btnZero.Location = new System.Drawing.Point(112, 74);
+            this.btnZero.Name = "btnZero";
+            this.btnZero.Size = new System.Drawing.Size(98, 31);
+            this.btnZero.TabIndex = 41;
+            this.btnZero.Text = "Set Zero";
+            this.btnZero.UseVisualStyleBackColor = true;
+            this.btnZero.Click += new System.EventHandler(this.btnZero_Click);
+            // 
+            // btnAcceptWeight
+            // 
+            this.btnAcceptWeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
+            this.btnAcceptWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAcceptWeight.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnAcceptWeight.ForeColor = System.Drawing.Color.White;
+            this.btnAcceptWeight.Location = new System.Drawing.Point(903, 510);
+            this.btnAcceptWeight.Name = "btnAcceptWeight";
+            this.btnAcceptWeight.Size = new System.Drawing.Size(109, 70);
+            this.btnAcceptWeight.TabIndex = 77;
+            this.btnAcceptWeight.Text = "ตกลง";
+            this.btnAcceptWeight.UseVisualStyleBackColor = false;
+            this.btnAcceptWeight.Click += new System.EventHandler(this.btnAcceptWeight_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnStop.ForeColor = System.Drawing.Color.White;
+            this.btnStop.Location = new System.Drawing.Point(903, 388);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(109, 70);
+            this.btnStop.TabIndex = 76;
+            this.btnStop.Text = "ยกเลิก";
+            this.btnStop.UseVisualStyleBackColor = false;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnStart.ForeColor = System.Drawing.Color.White;
+            this.btnStart.Location = new System.Drawing.Point(903, 312);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(109, 70);
+            this.btnStart.TabIndex = 75;
+            this.btnStart.Text = "เริ่มชั่ง";
+            this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // timerMinWeight
+            // 
+            this.timerMinWeight.Interval = 1000;
+            this.timerMinWeight.Tick += new System.EventHandler(this.timerMinWeight_Tick);
+            // 
+            // lblStable
+            // 
+            this.lblStable.AutoSize = true;
+            this.lblStable.Location = new System.Drawing.Point(991, 284);
+            this.lblStable.Name = "lblStable";
+            this.lblStable.Size = new System.Drawing.Size(20, 24);
+            this.lblStable.TabIndex = 78;
+            this.lblStable.Text = "0";
+            // 
+            // lblMaxWeight
+            // 
+            this.lblMaxWeight.BackColor = System.Drawing.Color.Red;
+            this.lblMaxWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMaxWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblMaxWeight.Font = new System.Drawing.Font("Kanit", 16F);
+            this.lblMaxWeight.ForeColor = System.Drawing.Color.White;
+            this.lblMaxWeight.Location = new System.Drawing.Point(507, 90);
+            this.lblMaxWeight.Name = "lblMaxWeight";
+            this.lblMaxWeight.Size = new System.Drawing.Size(99, 43);
+            this.lblMaxWeight.TabIndex = 80;
+            this.lblMaxWeight.Text = "0.00";
+            this.lblMaxWeight.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblMinWeight
+            // 
+            this.lblMinWeight.BackColor = System.Drawing.Color.Yellow;
+            this.lblMinWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMinWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblMinWeight.Font = new System.Drawing.Font("Kanit", 16F);
+            this.lblMinWeight.Location = new System.Drawing.Point(507, 266);
+            this.lblMinWeight.Name = "lblMinWeight";
+            this.lblMinWeight.Size = new System.Drawing.Size(99, 43);
+            this.lblMinWeight.TabIndex = 79;
+            this.lblMinWeight.Text = "0.00";
+            this.lblMinWeight.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Form_Carcass
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.lblMaxWeight);
+            this.Controls.Add(this.lblMinWeight);
+            this.Controls.Add(this.plSimulator);
+            this.Controls.Add(this.lblStable);
+            this.Controls.Add(this.btnAcceptWeight);
+            this.Controls.Add(this.btnStop);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.lblCustomer);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.lblUnloadedWgh);
@@ -433,12 +551,11 @@
             this.Controls.Add(this.label18);
             this.Controls.Add(this.lblOrderQty);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblProduct);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lblOrderNo);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.btnReceiveNo);
+            this.Controls.Add(this.btnOrderNo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblWeight);
             this.Controls.Add(this.panelHeader);
@@ -449,8 +566,9 @@
             this.Name = "Form_Carcass";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รับหมูเป็น";
-            this.Load += new System.EventHandler(this.Form_SwineReceive_Load);
             this.panelHeader.ResumeLayout(false);
+            this.plSimulator.ResumeLayout(false);
+            this.plSimulator.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -464,12 +582,11 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblWeight;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnReceiveNo;
+        private System.Windows.Forms.Button btnOrderNo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblOrderNo;
         private System.Windows.Forms.Label lblProduct;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label lblOrderQty;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label lblOrderWgh;
@@ -481,12 +598,24 @@
         private System.Windows.Forms.Label lblCurrentDatetime;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Label lblCustomer;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.GroupBox plSimulator;
+        private System.Windows.Forms.Button btnSetWgh;
+        private System.Windows.Forms.TextBox txtSimWeight;
+        private System.Windows.Forms.Button btnZero;
+        private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Button btnAcceptWeight;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnStart;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Timer timerMinWeight;
+        private System.Windows.Forms.Label lblStable;
+        private System.Windows.Forms.Label lblMaxWeight;
+        private System.Windows.Forms.Label lblMinWeight;
     }
 }
 

@@ -18,7 +18,7 @@ namespace SlaughterHouseClient
 
                 string strFormatWt = scaleDecimal == 0 ? "#0" : "#0." + "0".PadRight(scaleDecimal, '0');
                 short stateOfScale = DataInvoke.Substring(2, 1).ToInt16();
-                short stableWt = DataInvoke.Substring(2, 1).ToInt16();
+                //short stableWt = DataInvoke.Substring(2, 1).ToInt16();
 
                 if (stateOfScale == 0)
                 {

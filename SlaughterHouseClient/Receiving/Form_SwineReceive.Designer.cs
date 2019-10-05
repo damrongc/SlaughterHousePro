@@ -80,7 +80,7 @@
             // 
             // panelHeader
             // 
-            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.panelHeader.Controls.Add(this.lblCurrentDatetime);
             this.panelHeader.Controls.Add(this.btnExit);
             this.panelHeader.Controls.Add(this.lblCaption);
@@ -160,7 +160,7 @@
             // 
             // btnReceiveNo
             // 
-            this.btnReceiveNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.btnReceiveNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.btnReceiveNo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnReceiveNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceiveNo.Font = new System.Drawing.Font("Kanit", 16F);
@@ -246,7 +246,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStart.ForeColor = System.Drawing.Color.White;
@@ -389,7 +389,7 @@
             // 
             // btnFemale
             // 
-            this.btnFemale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.btnFemale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.btnFemale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFemale.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnFemale.ForeColor = System.Drawing.Color.White;
@@ -580,7 +580,7 @@
             // Form_SwineReceive
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1024, 768);
             this.Controls.Add(this.lblQueueNo);
             this.Controls.Add(this.label14);

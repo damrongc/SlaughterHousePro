@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseClient.Issued
 {
-    partial class Form_MainProduct
+    partial class Form_ByProduct
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_MainProduct));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ByProduct));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblCurrentDatetime = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
@@ -105,9 +105,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(291, 54);
+            this.label1.Size = new System.Drawing.Size(232, 54);
             this.label1.TabIndex = 0;
-            this.label1.Text = "จ่ายชิ้นส่วน";
+            this.label1.Text = "จ่ายหัวและเครื่องใน";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dragControl1
@@ -266,8 +266,8 @@
             this.gv.AllowUserToDeleteRows = false;
             this.gv.AllowUserToResizeColumns = false;
             this.gv.AllowUserToResizeRows = false;
-            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gv.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.gv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -281,7 +281,7 @@
             this.gv.Size = new System.Drawing.Size(984, 507);
             this.gv.TabIndex = 11;
             // 
-            // Form_MainProduct
+            // Form_ByProduct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
@@ -304,7 +304,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_MainProduct";
+            this.Name = "Form_ByProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รับหมูเป็น";
             this.panelHeader.ResumeLayout(false);

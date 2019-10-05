@@ -117,33 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnExit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAk1JREFUWEft
-        ls9LFGEcxrdbFp0Kao0wiUL8WxIlCKFDHq08SBRFCJ79B4KOiUhRKWKF+pdEh4jOCyr7Y2a0bP08w+Nh
-        2313dnb21n7gy8487/M+852Zd2anNGRIHhqNxqg3U9hvqryb8q9nIBBajqJojd9jSymBBo6o1Xq9fs1S
-        MTjwPQIPfLDEcoq1Tg1I36emLfcHAQvUiQM/xXE85qEU6y0NyIO26bE/1LyH8sHEGUoH/8vlfG65Bcba
-        GjiDOS811xlTlnuDCWXqkGoS9MxyGxpXebcN5r6w54Dtq5az8YLTwd9b6khWA4Lxj/a9tdQdDn4D828q
-        1rbljji4awNeE1qYx1T2I+p71+Tg65aCyKfybhBdSfn47biWWsD41Q3ctxSk1wbImrV321IYTL9k5tLd
-        tBTEoZkNJElyy96flsJgimSGEUtBHJrZAFkX7G1YCoOnJjNctFSYSqVySZnciqqlMCyU7zJz2e5YKky1
-        Wp1wA98shcG4Y/OspcJwUg+USX2xFAaT3v96ZN5ZKgx5H9zAI0thOPPrGPUiOtLqtdw3ZNwmSy8hVdly
-        dzC+odTxFovxnOXcaC4Zn5312nI2mEe1Yj1xyXJumLvsjENuab4PFCZNU2d/x68s9wzzljTXGXct54Or
-        8NQhOgt9kGS+HfGM493wnBMyFj3UHwTok6zuwERPB/WwVqtNco/PUyPaRpuj9KeT2KsX2oxjisGL5AqN
-        rBAYO7xbYY1WmHPZ0wcH4fpSekLtUT8ona1K27vUY67CYL6Gh/wnlEqn4ObsHwC4K4IAAAAASUVORK5C
-        YII=
-</value>
-  </data>
-  <metadata name="timerMinWeight.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>141, 17</value>
-  </metadata>
-  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>282, 17</value>
-  </metadata>
-  <metadata name="serialPort1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>446, 17</value>
-  </metadata>
-  <metadata name="dragControl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>51</value>
   </metadata>
 </root>

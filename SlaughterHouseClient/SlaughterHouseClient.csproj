@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SlaughterHouseClient</RootNamespace>
     <AssemblyName>SlaughterHouseClient</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -27,6 +27,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,6 +47,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -125,6 +129,13 @@
     <Compile Include="invoice_item.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Issued\CustomerOrder.cs" />
+    <Compile Include="Issued\Form_ByProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Issued\Form_ByProduct.Designer.cs">
+      <DependentUpon>Form_ByProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Issued\Form_MainProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +209,18 @@
     <Compile Include="receive_item.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Receiving\Form_ByProductReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_ByProductReceive.Designer.cs">
+      <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Receiving\Form_HeadReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_HeadReceive.Designer.cs">
+      <DependentUpon>Form_HeadReceive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receiving\Form_CarcassReceive.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,23 +239,11 @@
     <Compile Include="Receiving\Form_ConfirmStock.Designer.cs">
       <DependentUpon>Form_ConfirmStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Receiving\Form_ByProductWithParts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Receiving\Form_ByProductWithParts.Designer.cs">
-      <DependentUpon>Form_ByProductWithParts.cs</DependentUpon>
-    </Compile>
     <Compile Include="Receiving\Form_ByProduct.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Receiving\Form_ByProduct.Designer.cs">
       <DependentUpon>Form_ByProduct.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Receiving\Form_Carcass.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Receiving\Form_Carcass.Designer.cs">
-      <DependentUpon>Form_Carcass.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Lot.cs">
       <SubType>Form</SubType>
@@ -287,7 +298,7 @@
       <SubType>Component</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="ScaleHelper.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="SerialPortManager.cs" />
     <Compile Include="SerialSettings.cs" />
     <Compile Include="stock.cs">
@@ -314,6 +325,9 @@
     <EmbeddedResource Include="Form_Settings.resx">
       <DependentUpon>Form_Settings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_ByProduct.resx">
+      <DependentUpon>Form_ByProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Issued\Form_MainProduct.resx">
       <DependentUpon>Form_MainProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -326,6 +340,12 @@
     <EmbeddedResource Include="Issued\Form_Issued.resx">
       <DependentUpon>Form_Issued.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_ByProductReceive.resx">
+      <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_HeadReceive.resx">
+      <DependentUpon>Form_HeadReceive.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_CarcassReceive.resx">
       <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
     </EmbeddedResource>
@@ -335,14 +355,8 @@
     <EmbeddedResource Include="Receiving\Form_ConfirmStock.resx">
       <DependentUpon>Form_ConfirmStock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_ByProductWithParts.resx">
-      <DependentUpon>Form_ByProductWithParts.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_ByProduct.resx">
       <DependentUpon>Form_ByProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_Carcass.resx">
-      <DependentUpon>Form_Carcass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Lot.resx">
       <DependentUpon>Form_Lot.cs</DependentUpon>
@@ -370,6 +384,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Report\Form_Barcode.resx">
       <DependentUpon>Form_Barcode.cs</DependentUpon>
@@ -383,6 +398,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MyModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include=".editorconfig" />
     <None Include="MyModel.edmx.diagram">
       <DependentUpon>MyModel.edmx</DependentUpon>
     </None>
@@ -400,6 +416,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.ico" />
     <Content Include="MyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MyModel.edmx</DependentUpon>

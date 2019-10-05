@@ -41,24 +41,37 @@ namespace SlaughterHouseClient
         }
         private void btnReceiveHead_Click(object sender, EventArgs e)
         {
-            var frm = new Receiving.Form_ByProduct("รับหัว", 4, 0);
+            //var frm = new Receiving.Form_ByProduct("รับหัว", 4, 0);
+            //frm.ShowInTaskbar = false;
+            //frm.ShowDialog();
+
+            var frm = new Receiving.Form_HeadReceive();
             frm.ShowInTaskbar = false;
             frm.ShowDialog();
+
         }
 
         private void btnReceiveByProductWhite_Click(object sender, EventArgs e)
         {
-
-            var frm = new Receiving.Form_ByProduct("รับเครื่องในขาว", 3, 4);
-            frm.ShowInTaskbar = false;
+            var frm = new Receiving.Form_ByProductReceive
+            {
+                LocationCode = 4,
+                ProductCode = "P004",
+                //var frm = new Receiving.Form_ByProduct("รับเครื่องในขาว", 3, 4);
+                ShowInTaskbar = false
+            };
             frm.ShowDialog();
         }
 
         private void btnReceiveByProductRed_Click(object sender, EventArgs e)
         {
-
-            var frm = new Receiving.Form_ByProduct("รับเครื่องในแดง", 2, 3);
-            frm.ShowInTaskbar = false;
+            var frm = new Receiving.Form_ByProductReceive
+            {
+                LocationCode = 3,
+                ProductCode = "P003",
+                //var frm = new Receiving.Form_ByProduct("รับเครื่องในแดง", 2, 3);
+                ShowInTaskbar = false
+            };
             frm.ShowDialog();
         }
 
@@ -72,21 +85,13 @@ namespace SlaughterHouseClient
 
         private void btnReceivePart_Click(object sender, EventArgs e)
         {
-            //location code 7 :ห้องตัดแต่ง
-            var frm = new Receiving.Form_ByProduct("รับผลได้ชิ้นส่วน", 5, 7);
-            frm.ShowInTaskbar = false;
-            frm.ShowDialog();
+            ////location code 7 :ห้องตัดแต่ง
+            //var frm = new Receiving.Form_ByProduct("รับผลได้ชิ้นส่วน", 5, 7);
+            //frm.ShowInTaskbar = false;
+            //frm.ShowDialog();
         }
 
-        private void btnIssueHead_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void btnIssueByProduct_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnIssuePart_Click(object sender, EventArgs e)
         {
@@ -107,8 +112,10 @@ namespace SlaughterHouseClient
 
         private void BtnIssueProductForSales_Click(object sender, EventArgs e)
         {
-            var frm = new Issued.Form_MainProduct();
-            frm.ShowInTaskbar = false;
+            var frm = new Issued.Form_MainProduct
+            {
+                ShowInTaskbar = false
+            };
             frm.ShowDialog();
         }
 
@@ -116,6 +123,15 @@ namespace SlaughterHouseClient
         {
             var frm = new Form_Settings();
             frm.ShowInTaskbar = false;
+            frm.ShowDialog();
+        }
+
+        private void btnIssueByProduct_Click(object sender, EventArgs e)
+        {
+            var frm = new Issued.Form_ByProduct
+            {
+                ShowInTaskbar = false
+            };
             frm.ShowDialog();
         }
     }

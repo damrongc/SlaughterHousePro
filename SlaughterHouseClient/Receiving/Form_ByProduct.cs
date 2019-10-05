@@ -46,6 +46,10 @@ namespace SlaughterHouseClient.Receiving
         ReportDocument doc = new ReportDocument();
 
 
+        FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
+        FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
+
+
         delegate void SetTextCallback(string text);
         public Form_ByProduct(string title, int bomCode, int locationCode)
         {
@@ -122,7 +126,10 @@ namespace SlaughterHouseClient.Receiving
 
             var reportPath = Application.StartupPath;
             doc.Load(reportPath + "\\Report\\Rpt\\barcode.rpt");
-            plSimulator.Visible = false;
+            if (System.Diagnostics.Debugger.IsAttached)
+                plSimulator.Visible = true;
+            else
+                plSimulator.Visible = false;
         }
 
 
@@ -152,10 +159,6 @@ namespace SlaughterHouseClient.Receiving
             }
         }
 
-
-
-
-
         private void DisplayWeight(string DataInvoke)
         {
             if (lockWeight == false)
@@ -183,12 +186,12 @@ namespace SlaughterHouseClient.Receiving
                     //    num = -1.0 * DataInvoke.Substring(14, 6).ToDouble() / scaleDivision;
                     //}
 
-                    int scaleDecimal = DataInvoke.Substring(22, 2).ToInt32();
-                    int scaleDivision = (int)Math.Round(Math.Pow(10.0, unchecked(scaleDecimal)));
+                    //int scaleDecimal = DataInvoke.Substring(22, 2).ToInt32();
+                    //int scaleDivision = (int)Math.Round(Math.Pow(10.0, unchecked(scaleDecimal)));
 
-                    string strFormatWt = scaleDecimal == 0 ? "#0" : "#0." + "0".PadRight(scaleDecimal, '0');
+                    //string strFormatWt = scaleDecimal == 0 ? "#0" : "#0." + "0".PadRight(scaleDecimal, '0');
                     short stateOfScale = DataInvoke.Substring(7, 1).ToInt16();
-                    short stableWt = DataInvoke.Substring(5, 1).ToInt16();
+                    short stableWt = DataInvoke.Substring(6, 1).ToInt16();
 
                     if (stableWt == 2)
                     {
@@ -208,7 +211,7 @@ namespace SlaughterHouseClient.Receiving
                         lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
                         if (isStart && isZero)
                         {
-                            if (num > 0 && num > lblMinWeight.Text.ToDouble())
+                            if (num > lblMinWeight.Text.ToDouble())
                             {
                                 if (stableWt == 0)
                                     stableCount += 1;
@@ -221,18 +224,14 @@ namespace SlaughterHouseClient.Receiving
                             {
                                 lockWeight = true;
                                 isZero = false;
-
                                 ProcessData();
                             }
                         }
                     }
-
-
                 }
 
             }
         }
-
 
         private void ProcessData()
         {
@@ -240,12 +239,11 @@ namespace SlaughterHouseClient.Receiving
             {
 
                 lblMessage.Text = Constants.PROCESSING;
+
+
                 SaveData();
-
-
                 //PlayNotificationSound("normal");
-                var animationDirection = FormAnimator.AnimationDirection.Up;
-                var animationMethod = FormAnimator.AnimationMethod.Slide;
+
                 var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณายกสินค้าออก", 2, Color.Green, animationMethod, animationDirection);
                 toastNotification.Show();
                 LoadProduct();
@@ -267,7 +265,8 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                toastNotification.Show();
             }
 
         }
@@ -449,7 +448,8 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                toastNotification.Show();
             }
         }
 
@@ -463,6 +463,11 @@ namespace SlaughterHouseClient.Receiving
 
             try
             {
+
+                if (product == null)
+                {
+                    throw new Exception("กรุณาเลือกสินค้า!");
+                }
                 if (!serialPort1.IsOpen)
                     serialPort1.Open();
 
@@ -479,9 +484,10 @@ namespace SlaughterHouseClient.Receiving
 
                 lblMessage.Text = Constants.WEIGHT_WAITING;
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                toastNotification.Show();
             }
 
 
@@ -512,9 +518,10 @@ namespace SlaughterHouseClient.Receiving
                 btnStop.Enabled = isStart;
                 btnPrint.Enabled = !isStart;
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                toastNotification.Show();
             }
 
         }
@@ -523,16 +530,18 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
+                decimal receive_wgh = lblWeight.Text.ToDecimal();
+                string create_by = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
-                    decimal weight = lblWeight.Text.ToDecimal();
+
                     //update receive
                     var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
                     int seq = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Count();
 
                     barcode_no = db.barcodes.Max(p => p.barcode_no) + 1;
                     //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
-                    string create_by = Helper.GetLocalIPAddress();
+
                     seq += 1;
                     var item = new receive_item
                     {
@@ -542,7 +551,9 @@ namespace SlaughterHouseClient.Receiving
                         sex_flag = "",
                         lot_no = receive.lot_no,
                         receive_qty = 1,
-                        receive_wgh = weight,
+                        receive_wgh = receive_wgh,
+                        chill_qty = 0,
+                        chill_wgh = 0,
                         barcode_no = barcode_no,
                         create_by = create_by
                     };
@@ -561,7 +572,7 @@ namespace SlaughterHouseClient.Receiving
                                 production_date = DateTime.Today,
                                 lot_no = receive.lot_no,
                                 qty = 1,
-                                wgh = weight,
+                                wgh = receive_wgh,
                                 create_by = create_by
                             };
 
@@ -664,8 +675,33 @@ namespace SlaughterHouseClient.Receiving
 
         private void btnSetWgh_Click(object sender, EventArgs e)
         {
-            lblWeight.Text = txtSimWeight.Text.ToDecimal().ToFormat2Decimal();
-            ProcessData();
+            try
+            {
+                if (product == null)
+                {
+                    throw new Exception("กรุณาเลือกสินค้า!");
+                }
+                isStart = true;
+                isZero = true;
+                lblMessage.Text = Constants.WEIGHT_WAITING;
+
+                lblWeight.Text = "0.00";
+                btnReceiveNo.Enabled = !isStart;
+                btnStart.Enabled = !isStart;
+                btnStop.Enabled = isStart;
+                btnPrint.Enabled = !isStart;
+
+                lblMessage.Text = Constants.WEIGHT_WAITING;
+                lblWeight.Text = txtSimWeight.Text.ToDecimal().ToFormat2Decimal();
+                ProcessData();
+            }
+            catch (Exception ex)
+            {
+                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                toastNotification.Show();
+            }
+
+
         }
 
         private void btnZero_Click(object sender, EventArgs e)
@@ -797,7 +833,8 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                toastNotification.Show();
             }
         }
 

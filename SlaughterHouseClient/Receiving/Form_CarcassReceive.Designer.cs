@@ -59,7 +59,6 @@
             this.lblStable = new System.Windows.Forms.Label();
             this.timerMinWeight = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.dragControl1 = new DragControl();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.lblFactoryWgh = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -72,13 +71,14 @@
             this.btnAcceptWeight = new System.Windows.Forms.Button();
             this.lblLastWgh = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.dragControl1 = new DragControl();
             this.panelHeader.SuspendLayout();
             this.plSimulator.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelHeader
             // 
-            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.panelHeader.Controls.Add(this.lblCurrentDatetime);
             this.panelHeader.Controls.Add(this.btnExit);
             this.panelHeader.Controls.Add(this.lblCaption);
@@ -158,7 +158,7 @@
             // 
             // btnReceiveNo
             // 
-            this.btnReceiveNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.btnReceiveNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.btnReceiveNo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnReceiveNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceiveNo.Font = new System.Drawing.Font("Kanit", 16F);
@@ -234,9 +234,9 @@
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(734, 364);
+            this.btnStop.Location = new System.Drawing.Point(732, 337);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(136, 70);
+            this.btnStop.Size = new System.Drawing.Size(136, 97);
             this.btnStop.TabIndex = 38;
             this.btnStop.Text = "ยกเลิก";
             this.btnStop.UseVisualStyleBackColor = false;
@@ -244,13 +244,13 @@
             // 
             // btnStart
             // 
-            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(156)))), ((int)(((byte)(219)))));
+            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(592, 364);
+            this.btnStart.Location = new System.Drawing.Point(590, 337);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(136, 70);
+            this.btnStart.Size = new System.Drawing.Size(136, 97);
             this.btnStart.TabIndex = 37;
             this.btnStart.Text = "เริ่มชั่ง";
             this.btnStart.UseVisualStyleBackColor = false;
@@ -393,7 +393,7 @@
             // lblStable
             // 
             this.lblStable.AutoSize = true;
-            this.lblStable.Location = new System.Drawing.Point(989, 298);
+            this.lblStable.Location = new System.Drawing.Point(990, 298);
             this.lblStable.Name = "lblStable";
             this.lblStable.Size = new System.Drawing.Size(20, 24);
             this.lblStable.TabIndex = 53;
@@ -408,10 +408,6 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
-            // 
-            // dragControl1
-            // 
-            this.dragControl1.SelectControl = this.panelHeader;
             // 
             // lblFactoryWgh
             // 
@@ -446,7 +442,7 @@
             this.lblFactoryQty.ForeColor = System.Drawing.Color.Black;
             this.lblFactoryQty.Location = new System.Drawing.Point(458, 611);
             this.lblFactoryQty.Name = "lblFactoryQty";
-            this.lblFactoryQty.Size = new System.Drawing.Size(175, 97);
+            this.lblFactoryQty.Size = new System.Drawing.Size(208, 97);
             this.lblFactoryQty.TabIndex = 71;
             this.lblFactoryQty.Text = "0";
             this.lblFactoryQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -470,7 +466,7 @@
             this.lblRemainQty.ForeColor = System.Drawing.Color.Black;
             this.lblRemainQty.Location = new System.Drawing.Point(238, 611);
             this.lblRemainQty.Name = "lblRemainQty";
-            this.lblRemainQty.Size = new System.Drawing.Size(175, 97);
+            this.lblRemainQty.Size = new System.Drawing.Size(208, 97);
             this.lblRemainQty.TabIndex = 69;
             this.lblRemainQty.Text = "0";
             this.lblRemainQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -494,7 +490,7 @@
             this.lblFarmQty.ForeColor = System.Drawing.Color.Black;
             this.lblFarmQty.Location = new System.Drawing.Point(18, 611);
             this.lblFarmQty.Name = "lblFarmQty";
-            this.lblFarmQty.Size = new System.Drawing.Size(175, 97);
+            this.lblFarmQty.Size = new System.Drawing.Size(208, 97);
             this.lblFarmQty.TabIndex = 67;
             this.lblFarmQty.Text = "0";
             this.lblFarmQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -515,9 +511,9 @@
             this.btnAcceptWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAcceptWeight.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnAcceptWeight.ForeColor = System.Drawing.Color.White;
-            this.btnAcceptWeight.Location = new System.Drawing.Point(876, 364);
+            this.btnAcceptWeight.Location = new System.Drawing.Point(874, 337);
             this.btnAcceptWeight.Name = "btnAcceptWeight";
-            this.btnAcceptWeight.Size = new System.Drawing.Size(136, 70);
+            this.btnAcceptWeight.Size = new System.Drawing.Size(136, 97);
             this.btnAcceptWeight.TabIndex = 74;
             this.btnAcceptWeight.Text = "ตกลง";
             this.btnAcceptWeight.UseVisualStyleBackColor = false;
@@ -534,7 +530,7 @@
             this.lblLastWgh.Name = "lblLastWgh";
             this.lblLastWgh.Size = new System.Drawing.Size(332, 97);
             this.lblLastWgh.TabIndex = 76;
-            this.lblLastWgh.Text = "0";
+            this.lblLastWgh.Text = "0.00";
             this.lblLastWgh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
@@ -547,10 +543,14 @@
             this.label2.TabIndex = 75;
             this.label2.Text = "น้ำหนักล่าสุด";
             // 
+            // dragControl1
+            // 
+            this.dragControl1.SelectControl = this.panelHeader;
+            // 
             // Form_CarcassReceive
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1024, 768);
             this.Controls.Add(this.lblLastWgh);
             this.Controls.Add(this.label2);

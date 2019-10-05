@@ -19,7 +19,7 @@ namespace SlaughterHouseServer
             BtnOrder.Click += Btn_Click;
             BtnProductionOrder.Click += Btn_Click;
             BtnReceive.Click += Btn_Click;
-            BtnCarcass.Click += Btn_Click;
+
             BtnInvoice.Click += Btn_Click;
             BtnReport.Click += Btn_Click;
             BtnClosePeriod.Click += Btn_Click;
@@ -44,9 +44,7 @@ namespace SlaughterHouseServer
                 case "BtnReceive":
                     AddFormToContainer(new Form_Receive());
                     break;
-                case "BtnCarcass":
-                    AddFormToContainer(new Form_ReceiveCarcass());
-                    break;
+
                 case "BtnOrder":
                     AddFormToContainer(new Form_Order());
                     break;

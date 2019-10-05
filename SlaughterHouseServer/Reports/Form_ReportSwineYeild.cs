@@ -19,6 +19,12 @@ namespace SlaughterHouseServer.Reports
         private void UserSettingsComponent()
         {
             BtnShowReport.Click += BtnShowReport_Click;
+            rptViewer.ShowCloseButton = false;
+            rptViewer.ShowCopyButton = false;
+            rptViewer.ShowGroupTreeButton = false;
+            rptViewer.ShowParameterPanelButton = false;
+            rptViewer.ShowTextSearchButton = false;
+            rptViewer.ShowLogo = false;
         }
 
         private void BtnShowReport_Click(object sender, EventArgs e)

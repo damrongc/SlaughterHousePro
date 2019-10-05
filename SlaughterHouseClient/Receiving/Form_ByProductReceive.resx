@@ -140,10 +140,29 @@
   <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>282, 17</value>
   </metadata>
-  <metadata name="serialPort1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>446, 17</value>
-  </metadata>
   <metadata name="dragControl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="serialPort1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>446, 17</value>
+  </metadata>
+  <data name="btnPrint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAwVJREFUaEPt
+        mrtrFFEUh4NGJIKFIpIE1CjaWImFUWsLwWijNmJEY2MhthEszP/gE7UQRQRtBQsDsY+iRuwUxELFFxY+
+        EMT1O/f+ZpjsTHZnkzu7Wbgf/Mjc87hnzmzuzN5JejpNrVbrQ/vRFfQEvUPf9HMaXUYjqE8pDsZDKEXm
+        9kPtlWgCfbUTKcEXNI5WKL/zjVB3E3rpzqB1XqCNqLONUHM3squb5Re6h0bRDmSNDqNj6D76jbJ8Rgf9
+        oUfTtwfqbUCfXGXPP3QB9SukEPwD6JLiE2wdpSi0eqi1DD11VT1/0FG5S0G8fWKWl0Mh1UOtM76kw67s
+        IbkaQtxe9DijVyiHwquFOnaL/eAqem7I1RRij/uUxii8WqhzwJdz/EADcjWF2EXVyHVfznFb5lIQvxlZ
+        Mw2l8Gqh0DOUMCpz98HJf/Q9OIZl7j44+ewtc4vM3Qcnn71j7ZR5QTCPPVzPozG0R+Y8OB+g79IRmc1+
+        NmOfSzMKdzAOvkaYxxZ5wrTMeXDawychvStwbN9Ym/FW4Q7GV73ZcUfmBcE8d/10jmsy58EZspF93uxo
+        6TlSBPlr0E+bTIzIlQdnyEaWI9soJZR+shdh+X4ax3vUK1cenMEaMbCd8K6UU3K1hOX59JQxuYohIHQj
+        Rd9+G59EHcSfVF6CbY2Xyl0MAUEbMbDX70eMm2idQgrBvx7dsuAMtrkaUsjcEBRyjaRXjWPbIdpJZLEd
+        oO0EbUdYdoe4S1M2hsCQjcxa3Ixtzz1jgfPgOWr+SSQQHLIR45yGDsa9yK74G3OW4DU6jJZoinKQELoR
+        4yKatTgZz+u9VmlIrKIRo/yvRQgoWHkjHLd0lYl3L+dagqR2NDKJHiJ7MbEd5RrDthadRo/QpMzlIakd
+        jUx5U8pfZOtjXCEWk/2WOyVzeUjqRCMJEwqJjaSQFBuB2IiIjeQgKTYCsRERG8lBUmwEYiMiaCP2B5Zt
+        0mqZzd6fsc+lrQp3MLaXCYnSl2kcD9b5Eq1SiMXYPxYk9kGZI5FIJLIY6On5D1AUgQCmzt5zAAAAAElF
+        TkSuQmCC
+</value>
+  </data>
 </root>
