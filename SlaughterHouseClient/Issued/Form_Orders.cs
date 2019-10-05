@@ -63,43 +63,75 @@ namespace SlaughterHouseClient.Issued
             using (var db = new SlaughterhouseEntities())
             {
 
-                if (!string.IsNullOrEmpty(_productCode))
+                var sql = @"select distinct ord.order_no,ord.order_date,ord.customer_code,ord.comments,cus.customer_name,cus.address
+                                from orders  as ord,orders_item  as ord_item,customer cus
+                                where ord.order_no = ord_item.order_no
+                                and ord.customer_code =cus.customer_code
+                                and ord.order_flag =0
+                                and ord_item.product_code ={0}
+                                and (ord_item.order_qty -ord_item.unload_qty)>0";
+
+                if (string.IsNullOrEmpty(_productCode))
                 {
-                    var qry = (from o in db.orders
-                               join item in db.orders_item
-                               on o.order_no equals item.order_no
-                               where o.order_flag.Equals(0) && item.product_code.Equals(_productCode)
-                               select o).ToList();
-                    var coll = qry.AsEnumerable().Select(p => new
-                    {
-                        p.order_no,
-                        order_date = p.order_date.ToString("dd-MM-yyyy"),
-                        p.customer.customer_name,
-                        p.comments
-                    }).ToList();
-                    gv.DataSource = coll;
-                }
-                else
-                {
-                    var qry = (from o in db.orders
-                               join item in db.orders_item
-                               on o.order_no equals item.order_no
-                               where o.order_flag.Equals(0)
-                               select o).ToList();
-                    var coll = qry.AsEnumerable().Select(p => new
-                    {
-                        p.order_no,
-                        order_date = p.order_date.ToString("dd-MM-yyyy"),
-                        p.customer.customer_name,
-                        p.comments
-                    }).ToList();
-                    gv.DataSource = coll;
+                    sql = @"select distinct ord.order_no,ord.order_date,ord.customer_code,ord.comments,cus.customer_name,cus.address
+                                from orders  as ord,orders_item  as ord_item,customer cus
+                                where ord.order_no = ord_item.order_no
+                                and ord.customer_code =cus.customer_code
+                                and ord.order_flag =0
+                                and (ord_item.order_qty -ord_item.unload_qty)>0";
 
                 }
-                gv.Columns[0].HeaderText = "เลขที่ SO";
+
+                var qry = db.Database.SqlQuery<CustomerOrder>(sql, _productCode).ToList();
+
+                //if (!string.IsNullOrEmpty(_productCode))
+                //{
+                //    var qry = (from o in db.orders
+                //               join item in db.orders_item
+                //               on o.order_no equals item.order_no
+                //               where o.order_flag.Equals(0) && item.product_code.Equals(_productCode)
+                //               select o).ToList();
+                //    var coll = qry.AsEnumerable().Select(p => new
+                //    {
+                //        p.order_no,
+                //        order_date = p.order_date.ToString("dd-MM-yyyy"),
+                //        p.customer.customer_name,
+                //        p.comments
+                //    }).ToList();
+                //    gv.DataSource = coll;
+                //}
+                //else
+                //{
+                //    var qry = (from o in db.orders
+                //               join item in db.orders_item
+                //               on o.order_no equals item.order_no
+                //               where o.order_flag.Equals(0)
+                //               select o).ToList();
+                //    var coll = qry.AsEnumerable().Select(p => new
+                //    {
+                //        p.order_no,
+                //        order_date = p.order_date.ToString("dd-MM-yyyy"),
+                //        p.customer.customer_name,
+                //        p.comments
+                //    }).ToList();
+                //    gv.DataSource = coll;
+
+                //}
+
+                var coll = qry.AsEnumerable().Select(p => new
+                {
+                    p.order_no,
+                    order_date = p.order_date.ToString("dd-MM-yyyy"),
+                    p.customer_name,
+                    p.address,
+                    p.comments
+                }).ToList();
+                gv.DataSource = coll;
+                gv.Columns[0].HeaderText = "เลขที่";
                 gv.Columns[1].HeaderText = "วันที่เอกสาร";
                 gv.Columns[2].HeaderText = "ลูกค้า";
-                gv.Columns[3].HeaderText = "หมายเหตุ";
+                gv.Columns[3].HeaderText = "ที่อยู่";
+                gv.Columns[4].HeaderText = "หมายเหตุ";
             }
         }
 

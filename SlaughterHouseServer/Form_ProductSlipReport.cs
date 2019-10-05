@@ -11,8 +11,8 @@ namespace SlaughterHouseServer
 {
     public partial class Form_ProductSlipReport : Form
     {
-        public string productSlipNo { get; set; } 
-         
+        public string productSlipNo { get; set; }
+
         public Form_ProductSlipReport()
         {
             InitializeComponent();
@@ -26,17 +26,17 @@ namespace SlaughterHouseServer
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
-             
+
         }
         private void Form_Load(object sender, System.EventArgs e)
-        { 
+        {
             LoadReport();
         }
-         
+
         private void LoadReport()
         {
             //ReportDocument doc = new ReportDocument();
-            //DataSet ds = ProductSlipController.GetDataPrintProductSlip(productSlipNo); 
+            //DataSet ds = ProductSlipController.GetDataPrintProductSlip(productSlipNo);
             //string path =  Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
             //ds.WriteXml(path + @"\xml\productSlip.xml", XmlWriteMode.WriteSchema);
             //doc.Load(path + @"\productSlip.rpt");

@@ -43,9 +43,7 @@
             this.btnReceivePart = new System.Windows.Forms.Button();
             this.btnConfirmStock = new System.Windows.Forms.Button();
             this.btnIssueCarcass = new System.Windows.Forms.Button();
-            this.btnIssueHead = new System.Windows.Forms.Button();
             this.btnIssueByProduct = new System.Windows.Forms.Button();
-            this.btnIssuePart = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnIssueProductForSales = new System.Windows.Forms.Button();
@@ -260,28 +258,13 @@
             this.btnIssueCarcass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssueCarcass.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnIssueCarcass.ForeColor = System.Drawing.Color.White;
-            this.btnIssueCarcass.Location = new System.Drawing.Point(324, 33);
+            this.btnIssueCarcass.Location = new System.Drawing.Point(33, 33);
             this.btnIssueCarcass.Name = "btnIssueCarcass";
             this.btnIssueCarcass.Size = new System.Drawing.Size(285, 89);
             this.btnIssueCarcass.TabIndex = 12;
             this.btnIssueCarcass.Text = "จ่ายหมูซีก";
             this.btnIssueCarcass.UseVisualStyleBackColor = false;
             this.btnIssueCarcass.Click += new System.EventHandler(this.btnIssueCarcass_Click);
-            // 
-            // btnIssueHead
-            // 
-            this.btnIssueHead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(66)))), ((int)(((byte)(54)))));
-            this.btnIssueHead.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnIssueHead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIssueHead.Font = new System.Drawing.Font("Kanit", 20F);
-            this.btnIssueHead.ForeColor = System.Drawing.Color.White;
-            this.btnIssueHead.Location = new System.Drawing.Point(33, 33);
-            this.btnIssueHead.Name = "btnIssueHead";
-            this.btnIssueHead.Size = new System.Drawing.Size(285, 89);
-            this.btnIssueHead.TabIndex = 15;
-            this.btnIssueHead.Text = "จ่ายหัว";
-            this.btnIssueHead.UseVisualStyleBackColor = false;
-            this.btnIssueHead.Click += new System.EventHandler(this.btnIssueHead_Click);
             // 
             // btnIssueByProduct
             // 
@@ -290,27 +273,13 @@
             this.btnIssueByProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssueByProduct.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnIssueByProduct.ForeColor = System.Drawing.Color.White;
-            this.btnIssueByProduct.Location = new System.Drawing.Point(615, 33);
+            this.btnIssueByProduct.Location = new System.Drawing.Point(324, 33);
             this.btnIssueByProduct.Name = "btnIssueByProduct";
             this.btnIssueByProduct.Size = new System.Drawing.Size(285, 89);
-            this.btnIssueByProduct.TabIndex = 16;
-            this.btnIssueByProduct.Text = "จ่ายเครื่องใน";
+            this.btnIssueByProduct.TabIndex = 15;
+            this.btnIssueByProduct.Text = "จ่ายหัว-เครื่องใน";
             this.btnIssueByProduct.UseVisualStyleBackColor = false;
             this.btnIssueByProduct.Click += new System.EventHandler(this.btnIssueByProduct_Click);
-            // 
-            // btnIssuePart
-            // 
-            this.btnIssuePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(66)))), ((int)(((byte)(54)))));
-            this.btnIssuePart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnIssuePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIssuePart.Font = new System.Drawing.Font("Kanit", 20F);
-            this.btnIssuePart.ForeColor = System.Drawing.Color.White;
-            this.btnIssuePart.Location = new System.Drawing.Point(33, 128);
-            this.btnIssuePart.Name = "btnIssuePart";
-            this.btnIssuePart.Size = new System.Drawing.Size(285, 89);
-            this.btnIssuePart.TabIndex = 17;
-            this.btnIssuePart.Text = "จ่ายชิ้นส่วน";
-            this.btnIssuePart.UseVisualStyleBackColor = false;
             // 
             // dragControl1
             // 
@@ -318,10 +287,8 @@
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.Controls.Add(this.btnIssueHead);
             this.flowLayoutPanel2.Controls.Add(this.btnIssueCarcass);
             this.flowLayoutPanel2.Controls.Add(this.btnIssueByProduct);
-            this.flowLayoutPanel2.Controls.Add(this.btnIssuePart);
             this.flowLayoutPanel2.Controls.Add(this.btnIssueProductForSales);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 406);
@@ -337,17 +304,18 @@
             this.btnIssueProductForSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssueProductForSales.Font = new System.Drawing.Font("Kanit", 20F);
             this.btnIssueProductForSales.ForeColor = System.Drawing.Color.White;
-            this.btnIssueProductForSales.Location = new System.Drawing.Point(324, 128);
+            this.btnIssueProductForSales.Location = new System.Drawing.Point(615, 33);
             this.btnIssueProductForSales.Name = "btnIssueProductForSales";
             this.btnIssueProductForSales.Size = new System.Drawing.Size(285, 89);
             this.btnIssueProductForSales.TabIndex = 18;
-            this.btnIssueProductForSales.Text = "จ่ายชิ้นส่วน-ขาย";
+            this.btnIssueProductForSales.Text = "จ่ายชิ้นส่วน";
             this.btnIssueProductForSales.UseVisualStyleBackColor = false;
             this.btnIssueProductForSales.Click += new System.EventHandler(this.BtnIssueProductForSales_Click);
             // 
             // Form_Menu
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1024, 768);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -376,9 +344,7 @@
         private System.Windows.Forms.Button btnReceiveByProductRed;
         private System.Windows.Forms.Button btnIssueCarcass;
         private System.Windows.Forms.Button btnReceivePart;
-        private System.Windows.Forms.Button btnIssueHead;
         private System.Windows.Forms.Button btnIssueByProduct;
-        private System.Windows.Forms.Button btnIssuePart;
         private DragControl dragControl1;
         private System.Windows.Forms.Button btnReceiveHead;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;

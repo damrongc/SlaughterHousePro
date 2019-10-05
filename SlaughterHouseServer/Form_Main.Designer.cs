@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
             this.plHeader = new System.Windows.Forms.Panel();
+            this.btnMinimize = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.plMenu = new System.Windows.Forms.Panel();
@@ -37,12 +38,10 @@
             this.BtnInvoice = new System.Windows.Forms.Button();
             this.BtnProductionOrder = new System.Windows.Forms.Button();
             this.BtnOrder = new System.Windows.Forms.Button();
-            this.BtnCarcass = new System.Windows.Forms.Button();
             this.BtnReceive = new System.Windows.Forms.Button();
             this.BtnMaster = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.plContainer = new System.Windows.Forms.Panel();
-            this.btnMinimize = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
             this.plHeader.SuspendLayout();
             this.plMenu.SuspendLayout();
@@ -59,6 +58,25 @@
             this.plHeader.Name = "plHeader";
             this.plHeader.Size = new System.Drawing.Size(1400, 54);
             this.plHeader.TabIndex = 8;
+            // 
+            // btnMinimize
+            // 
+            this.btnMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.btnMinimize.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMinimize.FlatAppearance.BorderSize = 0;
+            this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinimize.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnMinimize.ForeColor = System.Drawing.Color.White;
+            this.btnMinimize.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimize.Image")));
+            this.btnMinimize.Location = new System.Drawing.Point(1276, 0);
+            this.btnMinimize.Name = "btnMinimize";
+            this.btnMinimize.Size = new System.Drawing.Size(48, 54);
+            this.btnMinimize.TabIndex = 14;
+            this.btnMinimize.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMinimize.UseVisualStyleBackColor = false;
+            this.btnMinimize.Click += new System.EventHandler(this.BtnMinimize_Click);
             // 
             // btnExit
             // 
@@ -99,7 +117,6 @@
             this.plMenu.Controls.Add(this.BtnInvoice);
             this.plMenu.Controls.Add(this.BtnProductionOrder);
             this.plMenu.Controls.Add(this.BtnOrder);
-            this.plMenu.Controls.Add(this.BtnCarcass);
             this.plMenu.Controls.Add(this.BtnReceive);
             this.plMenu.Controls.Add(this.BtnMaster);
             this.plMenu.Controls.Add(this.button2);
@@ -122,7 +139,7 @@
             this.BtnReport.ForeColor = System.Drawing.Color.White;
             this.BtnReport.Image = ((System.Drawing.Image)(resources.GetObject("BtnReport.Image")));
             this.BtnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnReport.Location = new System.Drawing.Point(0, 300);
+            this.BtnReport.Location = new System.Drawing.Point(0, 250);
             this.BtnReport.Name = "BtnReport";
             this.BtnReport.Size = new System.Drawing.Size(147, 50);
             this.BtnReport.TabIndex = 33;
@@ -142,7 +159,7 @@
             this.BtnInvoice.ForeColor = System.Drawing.Color.White;
             this.BtnInvoice.Image = ((System.Drawing.Image)(resources.GetObject("BtnInvoice.Image")));
             this.BtnInvoice.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnInvoice.Location = new System.Drawing.Point(0, 250);
+            this.BtnInvoice.Location = new System.Drawing.Point(0, 200);
             this.BtnInvoice.Name = "BtnInvoice";
             this.BtnInvoice.Size = new System.Drawing.Size(147, 50);
             this.BtnInvoice.TabIndex = 32;
@@ -162,7 +179,7 @@
             this.BtnProductionOrder.ForeColor = System.Drawing.Color.White;
             this.BtnProductionOrder.Image = ((System.Drawing.Image)(resources.GetObject("BtnProductionOrder.Image")));
             this.BtnProductionOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnProductionOrder.Location = new System.Drawing.Point(0, 200);
+            this.BtnProductionOrder.Location = new System.Drawing.Point(0, 150);
             this.BtnProductionOrder.Name = "BtnProductionOrder";
             this.BtnProductionOrder.Size = new System.Drawing.Size(147, 50);
             this.BtnProductionOrder.TabIndex = 31;
@@ -182,33 +199,13 @@
             this.BtnOrder.ForeColor = System.Drawing.Color.White;
             this.BtnOrder.Image = ((System.Drawing.Image)(resources.GetObject("BtnOrder.Image")));
             this.BtnOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnOrder.Location = new System.Drawing.Point(0, 150);
+            this.BtnOrder.Location = new System.Drawing.Point(0, 100);
             this.BtnOrder.Name = "BtnOrder";
             this.BtnOrder.Size = new System.Drawing.Size(147, 50);
             this.BtnOrder.TabIndex = 30;
             this.BtnOrder.Text = "ใบสั่งขาย";
             this.BtnOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnOrder.UseVisualStyleBackColor = false;
-            // 
-            // BtnCarcass
-            // 
-            this.BtnCarcass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnCarcass.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnCarcass.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.BtnCarcass.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnCarcass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.BtnCarcass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCarcass.Font = new System.Drawing.Font("Kanit", 14.25F);
-            this.BtnCarcass.ForeColor = System.Drawing.Color.White;
-            this.BtnCarcass.Image = ((System.Drawing.Image)(resources.GetObject("BtnCarcass.Image")));
-            this.BtnCarcass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCarcass.Location = new System.Drawing.Point(0, 100);
-            this.BtnCarcass.Name = "BtnCarcass";
-            this.BtnCarcass.Size = new System.Drawing.Size(147, 50);
-            this.BtnCarcass.TabIndex = 29;
-            this.BtnCarcass.Text = "รับหมูซีก";
-            this.BtnCarcass.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnCarcass.UseVisualStyleBackColor = false;
             // 
             // BtnReceive
             // 
@@ -278,25 +275,6 @@
             this.plContainer.Size = new System.Drawing.Size(1253, 846);
             this.plContainer.TabIndex = 10;
             // 
-            // btnMinimize
-            // 
-            this.btnMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.btnMinimize.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMinimize.FlatAppearance.BorderSize = 0;
-            this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimize.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.btnMinimize.ForeColor = System.Drawing.Color.White;
-            this.btnMinimize.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimize.Image")));
-            this.btnMinimize.Location = new System.Drawing.Point(1276, 0);
-            this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(48, 54);
-            this.btnMinimize.TabIndex = 14;
-            this.btnMinimize.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMinimize.UseVisualStyleBackColor = false;
-            this.btnMinimize.Click += new System.EventHandler(this.BtnMinimize_Click);
-            // 
             // dragControl1
             // 
             this.dragControl1.SelectControl = this.plHeader;
@@ -335,7 +313,6 @@
         private System.Windows.Forms.Button BtnInvoice;
         private System.Windows.Forms.Button BtnProductionOrder;
         private System.Windows.Forms.Button BtnOrder;
-        private System.Windows.Forms.Button BtnCarcass;
         private System.Windows.Forms.Button BtnReceive;
         private System.Windows.Forms.Button btnMinimize;
     }
