@@ -20,7 +20,7 @@ namespace SlaughterHouseServer
         }
         private void UserSettingsComponent()
         {
-            //GridView 
+            //GridView
             gv.DataBindingComplete += Gv_DataBindingComplete;
             gv.ReadOnly = true;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
@@ -42,7 +42,7 @@ namespace SlaughterHouseServer
             txtDiscount.KeyPress += TxtDiscount_KeyPress;
             txtVatRate.KeyPress += TxtVatRate_KeyPress;
 
-            //KeyDown  
+            //KeyDown
             dtpInvoiceDate.KeyDown += DtpRequestDate_KeyDown;
             cboCustomer.KeyDown += CboCustomer_KeyDown;
             txtDiscount.KeyDown += TxtDiscount_KeyDown;
@@ -69,7 +69,7 @@ namespace SlaughterHouseServer
             txtNetAmt.Text = 0.ToString();
         }
 
-        #region Event Focus, KeyDown 
+        #region Event Focus, KeyDown
         private void TxtDiscount_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
@@ -203,7 +203,7 @@ namespace SlaughterHouseServer
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            } 
+            }
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
@@ -242,7 +242,7 @@ namespace SlaughterHouseServer
             }
             else
             {
-              
+
                 Invoice invoice = InvoiceController.GetInvoice(this.invoiceNo);
                 if (invoice != null)
                 {
@@ -517,6 +517,6 @@ namespace SlaughterHouseServer
 
         #endregion
 
-        
+
     }
 }

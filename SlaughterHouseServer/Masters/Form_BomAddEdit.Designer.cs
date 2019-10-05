@@ -97,7 +97,7 @@
             this.btnAddOrderItem.TabIndex = 39;
             this.btnAddOrderItem.Text = "เพิ่ม";
             this.btnAddOrderItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddOrderItem.UseVisualStyleBackColor = false; 
+            this.btnAddOrderItem.UseVisualStyleBackColor = false;
             // 
             // panel2
             // 
@@ -113,8 +113,8 @@
             this.gv.AllowUserToDeleteRows = false;
             this.gv.AllowUserToResizeColumns = false;
             this.gv.AllowUserToResizeRows = false;
-            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gv.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.gv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

@@ -142,7 +142,7 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sql = @"
-                                    Select 0 as select_col, p.product_code, product_name,
+                                    Select distinct 0 as select_col, p.product_code, product_name,
 	                                    p.issue_unit_method, 
 	                                    p.unit_of_qty as unit_code_qty,            
 	                                    uq.unit_name as unit_name_qty,
@@ -225,7 +225,7 @@ namespace SlaughterHouseLib.Models
                     if (mutiSelectFlag == true)
                     {
                         sql = @"
-                                Select 0 as select_col,  p.product_code, product_name,
+                                Select distinct 0 as select_col,  p.product_code, product_name,
                                     p.issue_unit_method,  
                                     p.unit_of_qty as unit_code_qty,            
                                     uq.unit_name as unit_name_qty,
@@ -244,7 +244,7 @@ namespace SlaughterHouseLib.Models
                     else
                     {
                         sql = @"
-                                Select   p.product_code, product_name,
+                                Select distinct  p.product_code, product_name,
                                     p.issue_unit_method, 
                                     p.unit_of_qty as unit_code_qty,            
                                     uq.unit_name as unit_name_qty,

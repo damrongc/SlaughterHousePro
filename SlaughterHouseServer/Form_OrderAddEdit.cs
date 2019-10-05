@@ -39,7 +39,7 @@ namespace SlaughterHouseServer
             btnAddOrderItem.Click += BtnAddOrderItem_Click;
 
 
-            //KeyDown  
+            //KeyDown
             dtpRequestDate.KeyDown += DtpRequestDate_KeyDown;
             cboCustomer.KeyDown += CboCustomer_KeyDown;
         }
@@ -66,7 +66,7 @@ namespace SlaughterHouseServer
                 txtComment.Focus();
             }
         }
-        #region Event Focus, KeyDown 
+        #region Event Focus, KeyDown
         private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -83,7 +83,7 @@ namespace SlaughterHouseServer
         }
         #endregion
 
-        #region Event Focus, KeyDown 
+        #region Event Focus, KeyDown
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             gv.Columns["seq"].HeaderText = "ลำดับ";
@@ -98,7 +98,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
             gv.Columns[ConstColumns.PACKING_SIZE].HeaderText = "ขนาดบรรจุ";
 
-            gv.Columns["seq"].Visible = false;
+            gv.Columns[ConstColumns.SEQ].Visible = false;
             gv.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
             gv.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
             gv.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
@@ -122,6 +122,12 @@ namespace SlaughterHouseServer
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+
+            foreach (DataGridViewRow row in gv.Rows)
+            {
+                row.Cells[ConstColumns.QTY].Style.BackColor = Color.Bisque;
+                row.Cells[ConstColumns.WGH].Style.BackColor = Color.Bisque;
+            } 
         }
 
         #endregion
@@ -292,17 +298,17 @@ namespace SlaughterHouseServer
             DataGridView senderGrid = (DataGridView)sender;
             decimal packingSize = 0;
             decimal.TryParse(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString(), out packingSize);
-             
+
             switch (senderGrid.Columns[e.ColumnIndex].Name)
             {
                 case "qty":
                     dtOrderItem.Rows[rowIdx][ConstColumns.WGH] = MyExtension.ToInt32(dtOrderItem.Rows[rowIdx][ConstColumns.QTY].ToString()) * packingSize;
                     break;
                 case "wgh":
-                    if (packingSize ==0)
+                    if (packingSize == 0)
                     {
                         break;
-                    } 
+                    }
                     dtOrderItem.Rows[rowIdx][ConstColumns.QTY] = Math.Ceiling(MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.WGH].ToString()) / packingSize);
                     break;
             }
@@ -368,7 +374,7 @@ namespace SlaughterHouseServer
                     gv.Enabled = false;
                 }
             }
-            
+
         }
         private void LoadDetail()
         {
@@ -417,10 +423,10 @@ namespace SlaughterHouseServer
                                     ProductName = "",
                                 },
                                 BomCode = (int)dtBomRow["bom_code"],
-                                OrderSetQty = Convert.ToInt16(row[ConstColumns.QTY]) ,
+                                OrderSetQty = Convert.ToInt16(row[ConstColumns.QTY]),
                                 OrderSetWgh = Convert.ToInt16(row[ConstColumns.WGH]),
-                                OrderQty =  Convert.ToInt16(row[ConstColumns.QTY]) * Convert.ToInt16(dtBomRow[ConstColumns.MUTIPLY_QTY]) ,
-                                OrderWgh = Convert.ToInt16(row[ConstColumns.QTY]) * Convert.ToDecimal(dtBomRow[ConstColumns.PACKING_SIZE]) * Convert.ToDecimal(dtBomRow[ConstColumns.MUTIPLY_WGH]) ,
+                                OrderQty = Convert.ToInt16(row[ConstColumns.QTY]) * Convert.ToInt16(dtBomRow[ConstColumns.MUTIPLY_QTY]),
+                                OrderWgh = Convert.ToInt16(row[ConstColumns.QTY]) * Convert.ToInt16(dtBomRow[ConstColumns.MUTIPLY_QTY]) * Convert.ToDecimal(dtBomRow[ConstColumns.PACKING_SIZE]),
                             });
                         }
                     }
@@ -439,8 +445,8 @@ namespace SlaughterHouseServer
                             BomCode = 0,
                             OrderSetQty = 0,
                             OrderSetWgh = 0,
-                            OrderQty =  Convert.ToInt16(row[ConstColumns.QTY]) ,
-                            OrderWgh =  Convert.ToDecimal(row[ConstColumns.WGH]),
+                            OrderQty = Convert.ToInt16(row[ConstColumns.QTY]),
+                            OrderWgh = Convert.ToDecimal(row[ConstColumns.WGH]),
                         });
                     }
                 }

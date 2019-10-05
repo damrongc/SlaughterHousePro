@@ -62,6 +62,12 @@
     <Compile Include="DragControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Form_ClosePeriod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ClosePeriod.Designer.cs">
+      <DependentUpon>Form_ClosePeriod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Masters\Form_LovProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -386,6 +392,9 @@
       <SubType>Component</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <EmbeddedResource Include="Form_ClosePeriod.resx">
+      <DependentUpon>Form_ClosePeriod.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_LovProduct.resx">
       <DependentUpon>Form_LovProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -580,6 +589,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Report\productSlip.rpt" />
+    <None Include="Report\swineyield.rpt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -606,6 +617,9 @@
     </PackageReference>
     <PackageReference Include="MySql.Data.EntityFramework">
       <Version>8.0.17</Version>
+    </PackageReference>
+    <PackageReference Include="NPOI">
+      <Version>2.4.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

@@ -34,6 +34,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.plMenu = new System.Windows.Forms.Panel();
+            this.BtnClosePeriod = new System.Windows.Forms.Button();
             this.BtnReport = new System.Windows.Forms.Button();
             this.BtnInvoice = new System.Windows.Forms.Button();
             this.BtnProductionOrder = new System.Windows.Forms.Button();
@@ -113,6 +114,7 @@
             // plMenu
             // 
             this.plMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.plMenu.Controls.Add(this.BtnClosePeriod);
             this.plMenu.Controls.Add(this.BtnReport);
             this.plMenu.Controls.Add(this.BtnInvoice);
             this.plMenu.Controls.Add(this.BtnProductionOrder);
@@ -126,6 +128,26 @@
             this.plMenu.Name = "plMenu";
             this.plMenu.Size = new System.Drawing.Size(147, 846);
             this.plMenu.TabIndex = 9;
+            // 
+            // BtnClosePeriod
+            // 
+            this.BtnClosePeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnClosePeriod.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnClosePeriod.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.BtnClosePeriod.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnClosePeriod.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnClosePeriod.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnClosePeriod.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnClosePeriod.ForeColor = System.Drawing.Color.White;
+            this.BtnClosePeriod.Image = ((System.Drawing.Image)(resources.GetObject("BtnClosePeriod.Image")));
+            this.BtnClosePeriod.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnClosePeriod.Location = new System.Drawing.Point(0, 350);
+            this.BtnClosePeriod.Name = "BtnClosePeriod";
+            this.BtnClosePeriod.Size = new System.Drawing.Size(147, 50);
+            this.BtnClosePeriod.TabIndex = 34;
+            this.BtnClosePeriod.Text = "ยกสต็อก";
+            this.BtnClosePeriod.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnClosePeriod.UseVisualStyleBackColor = false;
             // 
             // BtnReport
             // 
@@ -186,6 +208,7 @@
             this.BtnProductionOrder.Text = "ใบสั่งผลิต";
             this.BtnProductionOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnProductionOrder.UseVisualStyleBackColor = false;
+            this.BtnProductionOrder.Visible = false;
             // 
             // BtnOrder
             // 
@@ -315,5 +338,6 @@
         private System.Windows.Forms.Button BtnOrder;
         private System.Windows.Forms.Button BtnReceive;
         private System.Windows.Forms.Button btnMinimize;
+        private System.Windows.Forms.Button BtnClosePeriod;
     }
 }

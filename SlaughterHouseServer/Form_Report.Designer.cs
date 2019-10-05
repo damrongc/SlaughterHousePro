@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button7 = new System.Windows.Forms.Button();
             this.btnReportDailySales = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.btnReportSoWithInv = new System.Windows.Forms.Button();
             this.btnSwineYield = new System.Windows.Forms.Button();
             this.btnReportStockMovement = new System.Windows.Forms.Button();
@@ -41,9 +39,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.btnReportDailySales);
-            this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.btnReportSoWithInv);
             this.groupBox1.Controls.Add(this.btnSwineYield);
             this.groupBox1.Controls.Add(this.btnReportStockMovement);
@@ -57,40 +53,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "รายงาน";
             // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.button7.Location = new System.Drawing.Point(318, 589);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(666, 59);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "report xxx";
-            this.button7.UseVisualStyleBackColor = false;
-            // 
             // btnReportDailySales
             // 
             this.btnReportDailySales.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnReportDailySales.Location = new System.Drawing.Point(318, 62);
+            this.btnReportDailySales.Location = new System.Drawing.Point(318, 154);
             this.btnReportDailySales.Name = "btnReportDailySales";
             this.btnReportDailySales.Size = new System.Drawing.Size(666, 59);
             this.btnReportDailySales.TabIndex = 0;
             this.btnReportDailySales.Text = "รายงานรายวันขาย";
             this.btnReportDailySales.UseVisualStyleBackColor = false;
             // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.button5.Location = new System.Drawing.Point(318, 501);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(666, 59);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "report xxx";
-            this.button5.UseVisualStyleBackColor = false;
-            // 
             // btnReportSoWithInv
             // 
             this.btnReportSoWithInv.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnReportSoWithInv.Location = new System.Drawing.Point(318, 150);
+            this.btnReportSoWithInv.Location = new System.Drawing.Point(318, 246);
             this.btnReportSoWithInv.Name = "btnReportSoWithInv";
             this.btnReportSoWithInv.Size = new System.Drawing.Size(666, 59);
             this.btnReportSoWithInv.TabIndex = 2;
@@ -100,7 +76,7 @@
             // btnSwineYield
             // 
             this.btnSwineYield.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSwineYield.Location = new System.Drawing.Point(318, 414);
+            this.btnSwineYield.Location = new System.Drawing.Point(318, 64);
             this.btnSwineYield.Name = "btnSwineYield";
             this.btnSwineYield.Size = new System.Drawing.Size(666, 59);
             this.btnSwineYield.TabIndex = 3;
@@ -110,7 +86,7 @@
             // btnReportStockMovement
             // 
             this.btnReportStockMovement.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnReportStockMovement.Location = new System.Drawing.Point(318, 237);
+            this.btnReportStockMovement.Location = new System.Drawing.Point(318, 333);
             this.btnReportStockMovement.Name = "btnReportStockMovement";
             this.btnReportStockMovement.Size = new System.Drawing.Size(666, 59);
             this.btnReportStockMovement.TabIndex = 4;
@@ -120,7 +96,7 @@
             // btnStockBalance
             // 
             this.btnStockBalance.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnStockBalance.Location = new System.Drawing.Point(318, 326);
+            this.btnStockBalance.Location = new System.Drawing.Point(318, 422);
             this.btnStockBalance.Name = "btnStockBalance";
             this.btnStockBalance.Size = new System.Drawing.Size(666, 59);
             this.btnStockBalance.TabIndex = 1;
@@ -145,9 +121,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button btnReportDailySales;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button btnReportSoWithInv;
         private System.Windows.Forms.Button btnSwineYield;
         private System.Windows.Forms.Button btnReportStockMovement;

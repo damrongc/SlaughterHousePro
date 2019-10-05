@@ -165,11 +165,11 @@ namespace SlaughterHouseLib
                         return new Bom
                         {
 
-                            BomCode  = (int)ds.Tables[0].Rows[0]["bom_code"], 
-                            Product  = new Product 
+                            BomCode = (int)ds.Tables[0].Rows[0]["bom_code"],
+                            Product = new Product
                             {
-                                ProductCode  = (string)ds.Tables[0].Rows[0]["product_code"],
-                                ProductName  = (string)ds.Tables[0].Rows[0]["product_name"],
+                                ProductCode = (string)ds.Tables[0].Rows[0]["product_code"],
+                                ProductName = (string)ds.Tables[0].Rows[0]["product_name"],
                             },
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
@@ -205,10 +205,10 @@ namespace SlaughterHouseLib
                         throw new Exception("สินค้านี้มีการบันทึกไปแล้ว ไม่สามารถบันทึกซ้ำได้");
                     }
                 }
-                    
+
             }
             catch (Exception ex)
-            { 
+            {
                 throw;
             }
 
@@ -222,7 +222,7 @@ namespace SlaughterHouseLib
                     var sql = @"SELECT active as check_duup FROM bom WHERE product_code=@product_code";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("product_code", bom.Product.ProductCode);
-                    int checkDup = Convert.ToInt32(cmd.ExecuteScalar()); 
+                    int checkDup = Convert.ToInt32(cmd.ExecuteScalar());
 
                     if (checkDup > 0)
                     {
@@ -241,7 +241,7 @@ namespace SlaughterHouseLib
                     cmd = new MySqlCommand(sql, conn)
                     {
                         Transaction = tr
-                    }; 
+                    };
                     cmd.Parameters.AddWithValue("product_code", bom.Product.ProductCode);
                     cmd.Parameters.AddWithValue("active", bom.Active);
                     cmd.Parameters.AddWithValue("create_by", bom.CreateBy);
@@ -251,7 +251,7 @@ namespace SlaughterHouseLib
                     sql = @"SELECT max(bom_code) as bom_code
                                     FROM bom b ";
 
-                    cmd = new MySqlCommand(sql, conn); 
+                    cmd = new MySqlCommand(sql, conn);
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);
@@ -324,7 +324,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("bom_code", bom.BomCode);
                     cmd.Parameters.AddWithValue("product_code", bom.Product.ProductCode);
                     cmd.Parameters.AddWithValue("active", bom.Active);
-                    cmd.Parameters.AddWithValue("modified_by", bom.ModifiedBy );
+                    cmd.Parameters.AddWithValue("modified_by", bom.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
 
                     sql = @"Delete From bom_item 

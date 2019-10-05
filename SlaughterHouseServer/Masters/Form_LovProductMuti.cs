@@ -27,7 +27,7 @@ namespace SlaughterHouseServer
         {
             gv.CellContentClick += Gv_CellContentClick;
             gv.DataBindingComplete += Gv_DataBindingComplete;
-           
+
             gv.ReadOnly = false;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
@@ -36,7 +36,7 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
-             
+
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
@@ -56,9 +56,9 @@ namespace SlaughterHouseServer
         {
             LoadData();
         }
-     
 
-        #region Event Focus, KeyDown 
+
+        #region Event Focus, KeyDown
 
         private void ComboxProductGroup_SelectedIndexChanged(object sender, System.EventArgs e)
         {
@@ -70,7 +70,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.SELECT_COL].HeaderText = "เลือก";
 
             gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
-            gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า"; 
+            gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
             gv.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยปริมาณ";
             gv.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยน้ำหนัก";
             gv.Columns[ConstColumns.PACKING_SIZE].HeaderText = "ขนาดบรรจุ";
@@ -85,7 +85,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
             gv.Columns[ConstColumns.UNIT_NAME_QTY].ReadOnly = true;
             gv.Columns[ConstColumns.UNIT_NAME_WGH].ReadOnly = true;
-             
+
             gv.Columns[ConstColumns.SELECT_COL].ReadOnly = false;
 
             foreach (DataGridViewColumn column in gv.Columns)
@@ -97,7 +97,7 @@ namespace SlaughterHouseServer
         #endregion
 
         #region Event Click
-         
+
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -157,9 +157,9 @@ namespace SlaughterHouseServer
             else
             {
                 bool mutiSelectFlag = true;
-                dtProduct = ProductController.GetProductActive(comboxProductGroup.SelectedValue.ToString(),txtProductCode.Text, txtProductName.Text, mutiSelectFlag);
+                dtProduct = ProductController.GetProductActive(comboxProductGroup.SelectedValue.ToString(), txtProductCode.Text, txtProductName.Text, mutiSelectFlag);
             }
-            
+
             if (dtProduct != null)
             {
                 gv.DataSource = dtProduct;
@@ -218,10 +218,15 @@ namespace SlaughterHouseServer
                 ProductGroupCode = 0,
                 ProductGroupName = "--ทั้งหมด--"
             });
-            comboxProductGroup.ValueMember = "ProductGroupCode"; 
+            comboxProductGroup.ValueMember = "ProductGroupCode";
             comboxProductGroup.DisplayMember = "ProductGroupName";
             comboxProductGroup.DataSource = coll;
         }
 
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
     }
 }
