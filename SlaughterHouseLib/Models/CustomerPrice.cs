@@ -8,7 +8,7 @@ namespace SlaughterHouseLib.Models
 {
     public class CustomerPrice
     {
-        public Customer Customer { get; set; } 
+        public Customer Customer { get; set; }
         public Product Product { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -30,15 +30,12 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-
-
-
                     sb.Append("SELECT a.customer_code, c.customer_name, a.product_code,");
                     sb.Append(" b.product_name,");
                     sb.Append(" a.start_date,");
                     sb.Append(" a.end_date,");
-                    sb.Append(" a.unit_price,"); 
-                    sb.Append(" DATEDIFF(a.end_date, a.start_date) as day,");
+                    sb.Append(" a.unit_price,");
+                    sb.Append(" CAST(DATEDIFF(a.end_date, a.start_date) AS SIGNED) as day,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by");
                     sb.Append(" FROM customer_price a, product b, customer c");
@@ -58,7 +55,7 @@ namespace SlaughterHouseLib.Models
                     var ds = new DataSet();
                     da.Fill(ds);
 
-                   var coll = (from p in ds.Tables[0].AsEnumerable()
+                    var coll = (from p in ds.Tables[0].AsEnumerable()
                                 select new
                                 {
                                     CustomerCode = p.Field<string>("customer_code"),
@@ -67,8 +64,8 @@ namespace SlaughterHouseLib.Models
                                     ProductName = p.Field<string>("product_name"),
                                     StartDate = p.Field<DateTime>("start_date"),
                                     EndDate = p.Field<DateTime>("end_date"),
-                                    UnitPrice = p.Field<decimal>("unit_price"), 
-                                    Day = p.Field<Int64>("day"),
+                                    UnitPrice = p.Field<decimal>("unit_price"),
+                                    Day = p.Field<long>("day"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
                                 }).ToList();
@@ -94,7 +91,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" b.product_name,");
                     sb.Append(" a.start_date,");
                     sb.Append(" a.end_date,");
-                    sb.Append(" a.unit_price,"); 
+                    sb.Append(" a.unit_price,");
                     sb.Append(" DATEDIFF(a.end_date, a.start_date) as day,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by");
@@ -129,8 +126,8 @@ namespace SlaughterHouseLib.Models
                             },
                             StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
                             EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
-                            UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"], 
-                            Day = (int)(Int64)ds.Tables[0].Rows[0]["day"],
+                            UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"],
+                            Day = (Int32)ds.Tables[0].Rows[0]["day"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }
@@ -144,7 +141,7 @@ namespace SlaughterHouseLib.Models
             {
                 throw;
             }
-        } 
+        }
         public static bool Insert(CustomerPrice customerPrice)
         {
             try
@@ -160,12 +157,12 @@ namespace SlaughterHouseLib.Models
                                     @unit_price, @create_by) ";
 
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("customer_code", customerPrice.Customer.CustomerCode); 
+                    cmd.Parameters.AddWithValue("customer_code", customerPrice.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("product_code", customerPrice.Product.ProductCode);
                     cmd.Parameters.AddWithValue("start_date", customerPrice.StartDate);
                     cmd.Parameters.AddWithValue("end_date", customerPrice.EndDate);
                     cmd.Parameters.AddWithValue("unit_price", customerPrice.UnitPrice);
-                    cmd.Parameters.AddWithValue("create_by", customerPrice.CreateBy); 
+                    cmd.Parameters.AddWithValue("create_by", customerPrice.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
                 }
                 return true;
@@ -196,7 +193,7 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("product_code", customerPrice.Product.ProductCode);
                     cmd.Parameters.AddWithValue("start_date", customerPrice.StartDate);
                     cmd.Parameters.AddWithValue("end_date", customerPrice.EndDate);
-                    cmd.Parameters.AddWithValue("unit_price", customerPrice.UnitPrice); 
+                    cmd.Parameters.AddWithValue("unit_price", customerPrice.UnitPrice);
                     cmd.Parameters.AddWithValue("modified_by", customerPrice.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
                 }
