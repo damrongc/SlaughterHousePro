@@ -143,6 +143,9 @@ namespace SlaughterHouseServer
         public const string CreateAt = "CreateAt";
         public const string CreateBy = "CreateBy";
 
+        public const string ModifiedAt = "ModifiedAt";
+        public const string ModifiedBy = "ModifiedBy";
+
 
     }
 
