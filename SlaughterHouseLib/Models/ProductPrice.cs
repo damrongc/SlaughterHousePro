@@ -37,7 +37,6 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" a.start_date,");
                     sb.Append(" a.end_date,");
                     sb.Append(" a.unit_price,");
-                    sb.Append(" cast(DATEDIFF(a.end_date, a.start_date) as SIGNED) as day,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by, a.modified_at, a.modified_by");
                     sb.Append(" FROM product_price a, product b");
@@ -93,7 +92,6 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" a.start_date,");
                     sb.Append(" a.end_date,");
                     sb.Append(" a.unit_price,");
-                    sb.Append(" DATEDIFF(a.end_date, a.start_date) as day,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by");
                     sb.Append(" FROM product_price a, product b");
@@ -120,7 +118,7 @@ namespace SlaughterHouseLib.Models
                             StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
                             EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
                             UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"],
-                            Day = Convert.ToInt32(ds.Tables[0].Rows[0]["day"]),
+                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays),
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }
