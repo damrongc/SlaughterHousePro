@@ -59,10 +59,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.CreateAt].HeaderText = "วันเวลาสร้าง";
             gv.Columns[ConstColumns.CreateBy].HeaderText = "ผู้สร้าง";
 
-            //gv.Columns[ConstColumns.ORDER_FLAG].Visible = false;
-            //gv.Columns[ConstColumns.INVOICE_FLAG].Visible = false;
-            //gv.Columns[ConstColumns.ACTIVE].Visible = false;
-            //gv.Columns[ConstColumns.CREATE_BY].Visible = false;
+            gv.Columns[ConstColumns.ProductCode].Visible = false;
 
 
         }
@@ -70,11 +67,13 @@ namespace SlaughterHouseServer
 
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            gv.Columns[ConstColumns.ProductCode].HeaderText = "รหัสสินค้า";
-            gv.Columns[ConstColumns.ProductName].HeaderText = "ชื่อสินค้า";
+            gvDt.Columns[ConstColumns.BOM_CODE].HeaderText = "รหัส Bom";
+            gvDt.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gvDt.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
 
             gvDt.Columns[ConstColumns.MUTIPLY_QTY].Visible = false;
             gvDt.Columns[ConstColumns.MUTIPLY_WGH].Visible = false;
+            gvDt.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
             //gvDt.Columns[ConstColumns.UNIT_CODE].Visible = false;
             //gvDt.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
 

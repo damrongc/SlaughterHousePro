@@ -29,8 +29,9 @@ namespace SlaughterHouseServer
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
 
-
-
+            this.comboxProductGroup.SelectedIndexChanged += ComboxProductGroup_SelectedIndexChanged;
+            FillProductGroup();
+            comboxProductGroup.SelectedIndex = 1;
             Populate();
         }
 
@@ -60,6 +61,11 @@ namespace SlaughterHouseServer
             }
         }
 
+        private void ComboxProductGroup_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            Populate();
+        }
+
         private void BtnSearch_Click(object sender, System.EventArgs e)
         {
             Populate();
@@ -80,14 +86,14 @@ namespace SlaughterHouseServer
         private void Populate()
         {
 
-            DataTable dt = ProductController.GetAllProducts(TxtFilter.Text.Trim());
+            DataTable dt = ProductController.GetAllProducts(comboxProductGroup.SelectedValue.ToString(), TxtFilter.Text.Trim());
             gv.DataSource = dt;
 
             gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
             gv.Columns[ConstColumns.PRODUCT_GROUP_NAME].HeaderText = "ชื่อกลุ่มสินค้า";
-            gv.Columns[ConstColumns.UNIT_CODE_QTY].HeaderText = "หน่วยนับปริมาณ";
-            gv.Columns[ConstColumns.UNIT_CODE_WGH].HeaderText = "หน่วยนับน้ำหนัก";
+            gv.Columns[ConstColumns.UNIT_NAME_QTY].HeaderText = "หน่วยนับปริมาณ";
+            gv.Columns[ConstColumns.UNIT_NAME_WGH].HeaderText = "หน่วยนับน้ำหนัก";
             gv.Columns[ConstColumns.MIN_WEIGHT].HeaderText = "น้ำหนักต่าสุด";
             gv.Columns[ConstColumns.MAX_WEIGHT].HeaderText = "น้ำหนักสูงสุด";
             gv.Columns[ConstColumns.STD_YIELD].HeaderText = "std. yield";
@@ -100,8 +106,23 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.MODIFIED_AT].HeaderText = "วันเวลาแก้ไข";
             gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข";
 
-            gv.Columns[ConstColumns.UNIT_CODE_QTY].Visible  = false ;
-            gv.Columns[ConstColumns.UNIT_CODE_WGH].Visible  = false ;
+            gv.Columns[ConstColumns.UNIT_OF_QTY].Visible = false;
+            gv.Columns[ConstColumns.UNIT_OF_WGH].Visible = false;
+
+        }
+
+        private void FillProductGroup()
+        {
+            var coll = ProductGroupController.GetAllProudctGroups();
+            coll.Insert(0, new ProductGroup
+            {
+                ProductGroupCode = 0,
+                ProductGroupName = "--ทั้งหมด--"
+            });
+            comboxProductGroup.ValueMember = "ProductGroupCode";
+            comboxProductGroup.DisplayMember = "ProductGroupName";
+            comboxProductGroup.DataSource = coll;
+
 
         }
     }
