@@ -72,6 +72,8 @@
             this.lblLastWgh = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dragControl1 = new DragControl();
+            this.lblLotNo = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
             this.plSimulator.SuspendLayout();
             this.SuspendLayout();
@@ -547,11 +549,35 @@
             // 
             this.dragControl1.SelectControl = this.panelHeader;
             // 
+            // lblLotNo
+            // 
+            this.lblLotNo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblLotNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblLotNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblLotNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblLotNo.ForeColor = System.Drawing.Color.Black;
+            this.lblLotNo.Location = new System.Drawing.Point(19, 496);
+            this.lblLotNo.Name = "lblLotNo";
+            this.lblLotNo.Size = new System.Drawing.Size(248, 43);
+            this.lblLotNo.TabIndex = 78;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label3.Location = new System.Drawing.Point(13, 463);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 33);
+            this.label3.TabIndex = 77;
+            this.label3.Text = "Lot No";
+            // 
             // Form_CarcassReceive
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.lblLotNo);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.lblLastWgh);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnAcceptWeight);
@@ -644,6 +670,8 @@
         private System.Windows.Forms.Button btnAcceptWeight;
         private System.Windows.Forms.Label lblLastWgh;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblLotNo;
+        private System.Windows.Forms.Label label3;
     }
 }
 

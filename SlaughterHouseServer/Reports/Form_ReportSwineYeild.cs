@@ -38,13 +38,11 @@ namespace SlaughterHouseServer.Reports
             DataSet ds = ReportController.GetDataReportSwineYield(dtpReceiveDate.Value);
             //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
-            var reportPath = Application.StartupPath;
+
             //ds.WriteXml(reportPath + @"\Report\xml\swineyield.xml", XmlWriteMode.WriteSchema);
 
-
+            var reportPath = Application.StartupPath;
             doc.Load(reportPath + @"\Report\swineyield.rpt");
-
-
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;

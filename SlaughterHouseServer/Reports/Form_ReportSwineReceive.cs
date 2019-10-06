@@ -1,11 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using SlaughterHouseLib;
-using SlaughterHouseLib.Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer.Reports
 {
@@ -42,17 +37,13 @@ namespace SlaughterHouseServer.Reports
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = ReportController.GetDataReportSwineReceive(ReceiveNo);
-
-
-
-
             //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
             //ds.WriteXml(path + @"\xml\swinereceive.xml", XmlWriteMode.WriteSchema);
             //doc.Load(path + @"\swinereceive.rpt");
 
             var reportPath = Application.StartupPath;
-            doc.Load(reportPath + "\\Report\\swinereceive.rpt");
+            doc.Load(reportPath + @"\Report\swinereceive.rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;

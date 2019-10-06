@@ -1,5 +1,6 @@
 ﻿using SlaughterHouseLib;
 using SlaughterHouseLib.Models;
+using SlaughterHouseServer.Report;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -45,7 +46,7 @@ namespace SlaughterHouseServer
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
-            //KeyDown  
+            //KeyDown
             dtpProductSlipDate.KeyDown += DtpRequestDate_KeyDown;
 
 
@@ -323,7 +324,7 @@ namespace SlaughterHouseServer
                     ProductSlipController.Update(productSlip);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -343,7 +344,7 @@ namespace SlaughterHouseServer
                 };
                 ProductSlipController.Cancel(productSlip);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -358,7 +359,7 @@ namespace SlaughterHouseServer
                 frmPrint.ShowDialog();
                 this.DialogResult = DialogResult.OK;
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 throw;
             }

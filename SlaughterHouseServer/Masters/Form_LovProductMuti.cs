@@ -199,7 +199,7 @@ namespace SlaughterHouseServer
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

@@ -75,6 +75,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6A3AFDD1A8F54B5E921B27099B09ECF0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6F269ED966D068DBF62C6248B58F082E"
         "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
         "MsmSig" = "8:_UNDEFINED"
@@ -190,12 +196,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_232E7AF3C245F8E0CE44EF90062F7513"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -287,6 +287,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F44BC48FF7867E9EFB2149E87CCA28F6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_232E7AF3C245F8E0CE44EF90062F7513"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -547,6 +553,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6A3AFDD1A8F54B5E921B27099B09ECF0"
+            {
+            "SourcePath" = "8:D:\\_Project\\Images\\server.ico"
+            "TargetName" = "8:server.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_5C3790145DF94ECCAA178CDF8F2656FF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6F269ED966D068DBF62C6248B58F082E"
@@ -925,6 +951,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_B0393311C135498BB5C89DC19B5813EA"
+                    {
+                    "Name" = "8:App"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_96A6256DD63F49BCA697481ED52DF357"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_5C3790145DF94ECCAA178CDF8F2656FF"
@@ -965,7 +1002,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:SlaughterHouseServer"
+        "ProductName" = "8:SlaughterHouse Server"
         "ProductCode" = "8:{9E8739FF-B260-4350-8C61-1FD33AFC8463}"
         "PackageCode" = "8:{0F8A49E6-69C9-46CE-ACDB-9CFC01612562}"
         "UpgradeCode" = "8:{20C0DE35-33AD-4276-9DCE-1D31D65FF090}"
@@ -978,13 +1015,13 @@
         "Manufacturer" = "8:NAV Project"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:SlaughterHouseServer Setup"
+        "Title" = "8:SlaughterHouse Server"
         "Subject" = "8:"
         "ARPCONTACT" = "8:NAV Project"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_6A3AFDD1A8F54B5E921B27099B09ECF0"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -1087,6 +1124,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_150A4BCA41C74CFF9205570F48C902A6"
+            {
+            "Name" = "8:SlaughterHouse Server"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
+            "Folder" = "8:_B0393311C135498BB5C89DC19B5813EA"
+            "WorkingFolder" = "8:_5C3790145DF94ECCAA178CDF8F2656FF"
+            "Icon" = "8:_6A3AFDD1A8F54B5E921B27099B09ECF0"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3BCBFEC51EC94B75A81B79C6D041D4EA"
+            {
+            "Name" = "8:SlaughterHouse Server"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
+            "Folder" = "8:_B465DA9525304D07A716503E36AB6063"
+            "WorkingFolder" = "8:_5C3790145DF94ECCAA178CDF8F2656FF"
+            "Icon" = "8:_6A3AFDD1A8F54B5E921B27099B09ECF0"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {

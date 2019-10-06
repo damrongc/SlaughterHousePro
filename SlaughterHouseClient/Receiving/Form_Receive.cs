@@ -70,7 +70,7 @@ namespace SlaughterHouseClient.Receiving
                 var coll = qry.AsEnumerable().Select(p => new
                 {
                     p.receive_no,
-                    p.receive_date,
+                    receive_date = p.receive_date.ToString("dd-MM-yyyy"),
                     p.transport_doc_no,
                     p.truck_no,
                     p.farm.farm_name,

@@ -2,7 +2,6 @@
 using SlaughterHouseLib;
 using System;
 using System.Data;
-using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer.Reports
 {
@@ -22,6 +21,12 @@ namespace SlaughterHouseServer.Reports
             this.Shown += Form_Shown;
 
             this.BtnShowReport.Click += BtnShowReport_Click;
+            rptViewer.ShowCloseButton = false;
+            rptViewer.ShowCopyButton = false;
+            rptViewer.ShowGroupTreeButton = false;
+            rptViewer.ShowParameterPanelButton = false;
+            rptViewer.ShowTextSearchButton = false;
+            rptViewer.ShowLogo = false;
         }
 
         private void BtnShowReport_Click(object sender, EventArgs e)
@@ -42,11 +47,16 @@ namespace SlaughterHouseServer.Reports
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = ReportController.GetDataReportDailySales(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
-            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+            //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
             //ds.DataSetName = "NewDataSet";
             //ds.Tables[0].TableName = "Table";
             //ds.WriteXml(path + @"\xml\dailysales.xml", XmlWriteMode.WriteSchema);
-            doc.Load(path + @"\dailysales.rpt");
+
+
+            var reportPath = Application.StartupPath;
+            doc.Load(reportPath + @"\Report\dailysales.rpt");
+
+
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;

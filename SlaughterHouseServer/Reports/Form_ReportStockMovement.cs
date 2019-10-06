@@ -25,6 +25,13 @@ namespace SlaughterHouseServer.Reports
             this.Shown += Form_Shown;
 
             this.BtnShowReport.Click += BtnShowReport_Click;
+
+            rptViewer.ShowCloseButton = false;
+            rptViewer.ShowCopyButton = false;
+            rptViewer.ShowGroupTreeButton = false;
+            rptViewer.ShowParameterPanelButton = false;
+            rptViewer.ShowTextSearchButton = false;
+            rptViewer.ShowLogo = false;
         }
 
         private void BtnShowReport_Click(object sender, EventArgs e)
@@ -45,10 +52,11 @@ namespace SlaughterHouseServer.Reports
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = ReportController.GetDataReportStockMovement(dtpInvoiceDateStr.Value, dtpInvoiceDateEnd.Value);
-            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+            //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
-            ds.WriteXml(path + @"\xml\stockmovement.xml", XmlWriteMode.WriteSchema);
-            doc.Load(path + @"\stockmovement.rpt");
+            //ds.WriteXml(path + @"\xml\stockmovement.xml", XmlWriteMode.WriteSchema);
+            var reportPath = Application.StartupPath;
+            doc.Load(reportPath + @"\Report\stockmovement.rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;

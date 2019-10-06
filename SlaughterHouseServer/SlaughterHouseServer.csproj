@@ -92,10 +92,10 @@
     <Compile Include="Masters\Form_BomAddEdit.Designer.cs">
       <DependentUpon>Form_BomAddEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_ProductSlipReport.cs">
+    <Compile Include="Reports\Form_ProductSlipReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_ProductSlipReport.Designer.cs">
+    <Compile Include="Reports\Form_ProductSlipReport.Designer.cs">
       <DependentUpon>Form_ProductSlipReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Masters\Form_Customer.cs">
@@ -188,10 +188,10 @@
     <Compile Include="Form_Invoice.Designer.cs">
       <DependentUpon>Form_Invoice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_InvoiceReport.cs">
+    <Compile Include="Reports\Form_InvoiceReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_InvoiceReport.Designer.cs">
+    <Compile Include="Reports\Form_InvoiceReport.Designer.cs">
       <DependentUpon>Form_InvoiceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_InvoiceNew.cs">
@@ -407,7 +407,7 @@
     <EmbeddedResource Include="Masters\Form_BomAddEdit.resx">
       <DependentUpon>Form_BomAddEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_ProductSlipReport.resx">
+    <EmbeddedResource Include="Reports\Form_ProductSlipReport.resx">
       <DependentUpon>Form_ProductSlipReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_Customer.resx">
@@ -455,7 +455,7 @@
     <EmbeddedResource Include="Form_Invoice.resx">
       <DependentUpon>Form_Invoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_InvoiceReport.resx">
+    <EmbeddedResource Include="Reports\Form_InvoiceReport.resx">
       <DependentUpon>Form_InvoiceReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_InvoiceNew.resx">

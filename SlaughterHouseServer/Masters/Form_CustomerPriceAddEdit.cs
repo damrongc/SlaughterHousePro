@@ -20,7 +20,7 @@ namespace SlaughterHouseServer
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
-            //KeyDown  
+            //KeyDown
             dtpStartDate.KeyDown += DtpStartDate_KeyDown;
             txtDay.KeyDown += TxtDay_KeyDown;
 
@@ -50,9 +50,9 @@ namespace SlaughterHouseServer
                 txtUnitPrice.Focus();
             }
         }
-        
 
-        #region Event Focus, KeyDown 
+
+        #region Event Focus, KeyDown
         private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -107,12 +107,12 @@ namespace SlaughterHouseServer
                 SaveProductPrice();
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                cboCustomer.SelectedIndex = 0; 
-                this.productCode = ""; 
+                cboCustomer.SelectedIndex = 0;
+                this.productCode = "";
                 txtProductName.Text = "";
                 txtUnitPrice.Text = "0";
-                txtDay.Text = "0"; 
-                dtpStartDate.Value = DateTime.Now; 
+                txtDay.Text = "0";
+                dtpStartDate.Value = DateTime.Now;
                 LoadData();
             }
             catch (System.Exception ex)
@@ -124,7 +124,7 @@ namespace SlaughterHouseServer
 
 
         #endregion
- 
+
         private void LoadCustomer()
         {
             var coll = CustomerController.GetAllCustomers();
@@ -150,7 +150,7 @@ namespace SlaughterHouseServer
                 txtProductName.Text = customerPrice.Product.ProductName;
                 txtUnitPrice.Text = customerPrice.UnitPrice.ToString();
                 txtDay.Text = customerPrice.Day.ToString();
-                
+
                 dtpStartDate.Value = customerPrice.StartDate;
                 dtpStartDate.Enabled = false;
                 BtnSaveAndNew.Visible = false;
@@ -189,7 +189,7 @@ namespace SlaughterHouseServer
                     CustomerPriceController.Update(customerPrice);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

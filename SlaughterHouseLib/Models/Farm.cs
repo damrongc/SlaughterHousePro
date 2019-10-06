@@ -86,7 +86,7 @@ namespace SlaughterHouseLib.Models
                     return coll;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -122,7 +122,7 @@ namespace SlaughterHouseLib.Models
                     return farms;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -163,7 +163,7 @@ namespace SlaughterHouseLib.Models
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -196,7 +196,7 @@ namespace SlaughterHouseLib.Models
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -225,7 +225,7 @@ namespace SlaughterHouseLib.Models
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

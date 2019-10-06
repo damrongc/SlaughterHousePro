@@ -1,5 +1,6 @@
 ﻿using SlaughterHouseLib;
 using SlaughterHouseLib.Models;
+using SlaughterHouseServer.Report;
 using System;
 using System.Data;
 using System.Drawing;
@@ -93,17 +94,17 @@ namespace SlaughterHouseServer
 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
                 string invoiceNo = gv.Rows[e.RowIndex].Cells[2].Value.ToString();
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-                    
+
 
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
-                    { 
+                    {
                         case "Edit":
                             var frm = new Form_InvoiceAddEdit
                             {
@@ -125,7 +126,7 @@ namespace SlaughterHouseServer
                             //    LoadInvoice();
                             //}
                             break;
-                    } 
+                    }
                 }
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewLinkColumn)
                 {
@@ -142,7 +143,7 @@ namespace SlaughterHouseServer
         {
             LoadInvoice();
         }
-        
+
         //private void BtnAdd_Click(object sender, System.EventArgs e)
         //{
         //    var frm = new Form_InvoiceAddEdit();
@@ -150,7 +151,7 @@ namespace SlaughterHouseServer
         //    {
         //        LoadInvoice();
         //    }
-        //} 
+        //}
         private void BtnRefSo_Click(object sender, System.EventArgs e)
         {
             var frmNew = new Form_InvoiceNew();
@@ -185,8 +186,8 @@ namespace SlaughterHouseServer
         {
             //var farmCtrl = new FarmController();
             var coll = InvoiceController.GetAllInvoices(dtpInvoiceDate.Value, cboCustomer.SelectedValue.ToString());
-            gv.DataSource = coll; 
-             
+            gv.DataSource = coll;
+
             LoadItem("");
         }
         private void LoadItem(string invoiceNo)
@@ -195,8 +196,8 @@ namespace SlaughterHouseServer
             dtInvoiceItem = InvoiceItemController.GetInvoiceItems(invoiceNo);
 
             gvDt.DataSource = dtInvoiceItem;
-            
+
         }
-         
+
     }
 }

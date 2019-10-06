@@ -173,7 +173,7 @@ namespace SlaughterHouseServer
                     ProductPriceController.Update(productPrice);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

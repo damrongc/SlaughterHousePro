@@ -100,8 +100,8 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.MODIFIED_AT].HeaderText = "วันเวลาแก้ไข";
             gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข";
 
-            gv.Columns[ConstColumns.UNIT_CODE_QTY].Visible  = false ;
-            gv.Columns[ConstColumns.UNIT_CODE_WGH].Visible  = false ;
+            gv.Columns[ConstColumns.UNIT_CODE_QTY].Visible = false;
+            gv.Columns[ConstColumns.UNIT_CODE_WGH].Visible = false;
 
         }
     }

@@ -91,13 +91,14 @@ namespace SlaughterHouseClient.Receiving
                 var coll = qry.AsEnumerable().Select(p => new
                 {
                     p.receive_no,
-                    p.receive_date,
+                    receive_date = p.receive_date.ToString("dd-MM-yyyy"),
                     p.transport_doc_no,
                     p.truck_no,
                     p.farm.farm_name,
                     p.coop_no,
                     p.queue_no,
                     p.breeder.breeder_name,
+                    p.lot_no,
                     farm_qty = p.farm_qty.ToComma(),
                     farm_wgh = p.farm_wgh.ToFormat2Decimal()
                 }).ToList();
@@ -115,11 +116,12 @@ namespace SlaughterHouseClient.Receiving
                 gv.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
                 gv.Columns[7].HeaderText = "ประเภท";
+                gv.Columns[8].HeaderText = "Lot No";
 
-                gv.Columns[8].HeaderText = "จำนวน";
-                gv.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                gv.Columns[9].HeaderText = "น้ำหนัก";
+                gv.Columns[9].HeaderText = "จำนวน";
                 gv.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                gv.Columns[10].HeaderText = "น้ำหนัก";
+                gv.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             }
         }
