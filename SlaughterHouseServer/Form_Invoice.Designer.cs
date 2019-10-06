@@ -31,12 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Invoice));
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.gvDt = new System.Windows.Forms.DataGridView();
             this.gv = new System.Windows.Forms.DataGridView();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Print = new System.Windows.Forms.DataGridViewImageColumn();
             this.INVOICE_NO = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.gvDt = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnRefSo = new System.Windows.Forms.Button();
@@ -45,12 +44,13 @@
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -66,8 +66,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel5);
+            this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -77,33 +77,6 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(6);
             this.panel1.Size = new System.Drawing.Size(1378, 730);
             this.panel1.TabIndex = 3;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.gvDt);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(6, 68);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1366, 656);
-            this.panel5.TabIndex = 10;
-            // 
-            // gvDt
-            // 
-            this.gvDt.AllowUserToAddRows = false;
-            this.gvDt.AllowUserToDeleteRows = false;
-            this.gvDt.AllowUserToResizeColumns = false;
-            this.gvDt.AllowUserToResizeRows = false;
-            this.gvDt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.gvDt.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvDt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvDt.Location = new System.Drawing.Point(0, 0);
-            this.gvDt.Name = "gvDt";
-            this.gvDt.RowHeadersWidth = 10;
-            this.gvDt.Size = new System.Drawing.Size(1366, 656);
-            this.gvDt.TabIndex = 10;
             // 
             // gv
             // 
@@ -124,7 +97,7 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(1366, 290);
+            this.gv.Size = new System.Drawing.Size(1366, 292);
             this.gv.TabIndex = 9;
             // 
             // Edit
@@ -149,6 +122,24 @@
             this.INVOICE_NO.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.INVOICE_NO.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.INVOICE_NO.Width = 110;
+            // 
+            // gvDt
+            // 
+            this.gvDt.AllowUserToAddRows = false;
+            this.gvDt.AllowUserToDeleteRows = false;
+            this.gvDt.AllowUserToResizeColumns = false;
+            this.gvDt.AllowUserToResizeRows = false;
+            this.gvDt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gvDt.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvDt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvDt.Location = new System.Drawing.Point(0, 0);
+            this.gvDt.Name = "gvDt";
+            this.gvDt.RowHeadersWidth = 10;
+            this.gvDt.Size = new System.Drawing.Size(1366, 364);
+            this.gvDt.TabIndex = 10;
             // 
             // panel3
             // 
@@ -241,8 +232,17 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(6, 68);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1366, 290);
+            this.panel4.Size = new System.Drawing.Size(1366, 292);
             this.panel4.TabIndex = 11;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.gvDt);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(6, 360);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1366, 364);
+            this.panel5.TabIndex = 12;
             // 
             // Form_Invoice
             // 
@@ -255,12 +255,12 @@
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Form_Farm";
             this.panel1.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -277,11 +277,11 @@
         private System.Windows.Forms.ComboBox cboCustomer;
         private System.Windows.Forms.Button BtnRefSo;
         private System.Windows.Forms.DataGridView gv;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.DataGridView gvDt;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Print;
         private System.Windows.Forms.DataGridViewLinkColumn INVOICE_NO;
+        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
     }
 }

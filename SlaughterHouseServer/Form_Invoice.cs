@@ -61,6 +61,9 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.VAT_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gv.Columns[ConstColumns.NET_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+            gv.Columns[ConstColumns.DISC_AMT].Visible = false; 
+
+
 
             gv.Columns[ConstColumns.GROSS_AMT].DefaultCellStyle.Format = "N2";
             gv.Columns[ConstColumns.DISC_AMT_BILL].DefaultCellStyle.Format = "N2";
@@ -196,6 +199,7 @@ namespace SlaughterHouseServer
             dtInvoiceItem = InvoiceItemController.GetInvoiceItems(invoiceNo);
 
             gvDt.DataSource = dtInvoiceItem;
+            gvDt.Visible = true;
 
         }
 

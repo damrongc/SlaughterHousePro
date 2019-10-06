@@ -57,7 +57,7 @@ namespace SlaughterHouseLib.Models
                     var ds = new DataSet();
                     da.Fill(ds);
 
-                   var coll = (from p in ds.Tables[0].AsEnumerable()
+                    var coll = (from p in ds.Tables[0].AsEnumerable()
                                 select new
                                 {
                                     CustomerCode = p.Field<string>("customer_code"),
