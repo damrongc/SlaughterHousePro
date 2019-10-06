@@ -37,7 +37,7 @@
   </xs:schema>
   <Table>
     <stock_date>2019-11-01T00:00:00+07:00</stock_date>
-    <stock_no>BF001</stock_no>
+    <stock_no>BF20191001</stock_no>
     <stock_item>1</stock_item>
     <product_code>P001</product_code>
     <product_name>หมูเป็น</product_name>
@@ -59,7 +59,7 @@
   </Table>
   <Table>
     <stock_date>2019-11-01T00:00:00+07:00</stock_date>
-    <stock_no>BF001</stock_no>
+    <stock_no>BF20191001</stock_no>
     <stock_item>2</stock_item>
     <product_code>P004</product_code>
     <product_name>เครื่องในขาว-ชุด</product_name>
@@ -81,7 +81,7 @@
   </Table>
   <Table>
     <stock_date>2019-11-01T00:00:00+07:00</stock_date>
-    <stock_no>BF001</stock_no>
+    <stock_no>BF20191001</stock_no>
     <stock_item>3</stock_item>
     <product_code>P005</product_code>
     <product_name>หัวหมู</product_name>
@@ -103,7 +103,7 @@
   </Table>
   <Table>
     <stock_date>2019-11-01T00:00:00+07:00</stock_date>
-    <stock_no>BF001</stock_no>
+    <stock_no>BF20191001</stock_no>
     <stock_item>4</stock_item>
     <product_code>P005</product_code>
     <product_name>หัวหมู</product_name>
