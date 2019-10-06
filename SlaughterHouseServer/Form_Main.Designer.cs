@@ -141,7 +141,7 @@
             this.BtnClosePeriod.ForeColor = System.Drawing.Color.White;
             this.BtnClosePeriod.Image = ((System.Drawing.Image)(resources.GetObject("BtnClosePeriod.Image")));
             this.BtnClosePeriod.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnClosePeriod.Location = new System.Drawing.Point(0, 350);
+            this.BtnClosePeriod.Location = new System.Drawing.Point(0, 300);
             this.BtnClosePeriod.Name = "BtnClosePeriod";
             this.BtnClosePeriod.Size = new System.Drawing.Size(147, 50);
             this.BtnClosePeriod.TabIndex = 34;
@@ -311,6 +311,7 @@
             this.Controls.Add(this.plHeader);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Form_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

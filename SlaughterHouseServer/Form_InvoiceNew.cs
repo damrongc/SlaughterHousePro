@@ -12,7 +12,7 @@ namespace SlaughterHouseServer
         public string orderNo { get; set; }
         public DateTime requestDate { get; set; }
         public string customerCode { get; set; }
-         
+
         public Form_InvoiceNew()
         {
             InitializeComponent();
@@ -38,17 +38,17 @@ namespace SlaughterHouseServer
             gvDt.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gvDt.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gvDt.EnableHeadersVisualStyles = false;
-             
+
             //BtnRefresh.Click += BtnRefresh_Click;
             this.Load += Form_Load;
             this.Shown += Form_Shown;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
-             
+
         }
         private void Form_Load(object sender, System.EventArgs e)
-        { 
+        {
             LoadData();
         }
 
@@ -101,8 +101,8 @@ namespace SlaughterHouseServer
                             {
                                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-                            break; 
-                    } 
+                            break;
+                    }
                 }
                 //else
                 //{
@@ -117,10 +117,10 @@ namespace SlaughterHouseServer
                 //    {
 
                 //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    } 
+                //    }
                 //}
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewLinkColumn)
-                { 
+                {
                     LoadDataDetail(gv.Rows[gv.CurrentCell.RowIndex].Cells[1].Value.ToString());
                 }
             }
@@ -128,11 +128,11 @@ namespace SlaughterHouseServer
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
         #endregion
 
-         
+
         private void LoadData()
         {
             var coll = OrderController.GetOrderReadyToSell(this.requestDate, this.customerCode);
@@ -143,19 +143,19 @@ namespace SlaughterHouseServer
             gv.Columns[3].HeaderText = "ลูกค้า";
             gv.Columns[4].HeaderText = "วันเวลาสร้าง";
             gv.Columns[5].HeaderText = "ผู้สร้าง";
-             
+
             if (gv.Rows.Count > 0)
             {
                 LoadDataDetail("");
             }
         }
         private void LoadDataDetail(string orderNo)
-        { 
+        {
             DataTable dt = new DataTable();
             dt = OrderItemController.GetOrderItemReadyToSell(orderNo);
             gvDt.DataSource = dt;
             gvDt.Columns[0].HeaderText = "ลำดับ";
-            gvDt.Columns[1].HeaderText = "รหัสสินค้า"; 
+            gvDt.Columns[1].HeaderText = "รหัสสินค้า";
             gvDt.Columns[2].HeaderText = "ชื่อสินค้า";
             gvDt.Columns[3].HeaderText = "หน่วยคำนวณ";
             gvDt.Columns[4].HeaderText = "ปริมาณ";
@@ -164,12 +164,11 @@ namespace SlaughterHouseServer
             gvDt.Columns[7].HeaderText = "น้ำหนักจ่าย";
             gvDt.Columns[8].HeaderText = "ราคาต่อหน่วย";
             gvDt.Columns[9].HeaderText = "ราคา";
-            
+
             gvDt.Columns[1].Visible = false;
             gvDt.Columns[3].Visible = false;
             gvDt.Columns[8].Visible = false;
             gvDt.Columns[9].Visible = false;
-        } 
+        }
     }
 }
- 

@@ -224,6 +224,8 @@ namespace SlaughterHouseClient.Receiving
                 lblBreeder.Text = receive.breeder.breeder_name;
                 lblTruckNo.Text = receive.truck_no;
                 lblQueueNo.Text = receive.queue_no.ToString();
+                lblLotNo.Text = receive.lot_no;
+
                 lblFarmQty.Text = receive.farm_qty.ToComma();
                 lblFactoryQty.Text = stock_qty.ToComma();
                 lblFactoryWgh.Text = stock_wgh.ToFormat2Decimal();

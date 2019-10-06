@@ -1,13 +1,8 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using SlaughterHouseLib;
-using SlaughterHouseLib.Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
-namespace SlaughterHouseServer
+namespace SlaughterHouseServer.Report
 {
     public partial class Form_ProductSlipReport : Form
     {
@@ -22,12 +17,15 @@ namespace SlaughterHouseServer
         {
             //BtnRefresh.Click += BtnRefresh_Click;
             this.Load += Form_Load;
-            this.Shown += Form_Shown;
-        }
-        private void Form_Shown(object sender, System.EventArgs e)
-        {
+            rptViewer.ShowCloseButton = false;
+            rptViewer.ShowCopyButton = false;
+            rptViewer.ShowGroupTreeButton = false;
+            rptViewer.ShowParameterPanelButton = false;
+            rptViewer.ShowTextSearchButton = false;
+            rptViewer.ShowLogo = false;
 
         }
+
         private void Form_Load(object sender, System.EventArgs e)
         {
             LoadReport();
@@ -38,9 +36,11 @@ namespace SlaughterHouseServer
 
             ReportDocument doc = new ReportDocument();
             DataSet ds = ProductSlipController.GetDataPrintProductSlip(productSlipNo);
-            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+            //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
             //ds.WriteXml(path + @"\xml\productSlip.xml", XmlWriteMode.WriteSchema);
-            doc.Load(path + @"\productSlip.rpt");
+
+            var reportPath = Application.StartupPath;
+            doc.Load(reportPath + @"\Report\productSlip.rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;

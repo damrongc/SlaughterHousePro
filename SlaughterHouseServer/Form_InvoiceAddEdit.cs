@@ -1,5 +1,6 @@
 ﻿using SlaughterHouseLib;
 using SlaughterHouseLib.Models;
+using SlaughterHouseServer.Report;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -399,7 +400,7 @@ namespace SlaughterHouseServer
                     InvoiceController.Update(invoice);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -457,7 +458,7 @@ namespace SlaughterHouseServer
                     throw new Exception($"ราคาสุทธิต้องมีค่ามากกวว่า 0");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -505,7 +506,7 @@ namespace SlaughterHouseServer
                 frmPrint.ShowDialog();
                 this.DialogResult = DialogResult.OK;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlaughterHouseClient", "Sla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlaughterHouseServer", "SlaughterHouseServer\SlaughterHouseServer.csproj", "{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SlaughterHouseProSetup", "SlaughterHouseProSetup\SlaughterHouseProSetup.vdproj", "{82AE92A0-256E-4213-AA2F-79AAFB2E0701}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SlaughterHouseClientSetup", "SlaughterHouseProSetup\SlaughterHouseProSetup.vdproj", "{82AE92A0-256E-4213-AA2F-79AAFB2E0701}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SlaughterHouseServerSetup", "SlaughterHouseServerSetup\SlaughterHouseServerSetup.vdproj", "{22C208C5-B9C1-4096-AB53-5073ECA1E6EF}"
 EndProject
@@ -25,21 +25,12 @@ Global
 		{2CF06E33-7FA0-4347-BE7D-04396863DAFE}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{44F1713B-E080-4493-8FC4-EE611B1FB3CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{44F1713B-E080-4493-8FC4-EE611B1FB3CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-<<<<<<< HEAD
-		{44F1713B-E080-4493-8FC4-EE611B1FB3CD}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{44F1713B-E080-4493-8FC4-EE611B1FB3CD}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}.Release|Any CPU.Build.0 = Debug|Any CPU
-=======
 		{44F1713B-E080-4493-8FC4-EE611B1FB3CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44F1713B-E080-4493-8FC4-EE611B1FB3CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> ac5e22c86e6dabc02e754260e2c97a08db24e5a6
+		{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{82AE92A0-256E-4213-AA2F-79AAFB2E0701}.Debug|Any CPU.ActiveCfg = Debug
 		{82AE92A0-256E-4213-AA2F-79AAFB2E0701}.Release|Any CPU.ActiveCfg = Release
 		{22C208C5-B9C1-4096-AB53-5073ECA1E6EF}.Debug|Any CPU.ActiveCfg = Debug

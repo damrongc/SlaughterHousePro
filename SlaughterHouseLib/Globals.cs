@@ -71,7 +71,7 @@ namespace SlaughterHouseLib
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

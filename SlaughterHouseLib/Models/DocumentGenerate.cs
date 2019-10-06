@@ -38,7 +38,7 @@ namespace SlaughterHouseLib.Models
                     return documentNo;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -68,18 +68,17 @@ namespace SlaughterHouseLib.Models
                     var julian_date = DateTime.Today.DayOfYear.ToString().PadLeft(3, '0');
                     var day = productionDate.ToString("dd");
                     var month = productionDate.ToString("MM");
-                    var documentNo = string.Format("{0}{1}{2}{3}{4}{5}", plantId, year, julian_date, queueNo, day, month);
-                    return documentNo;
+                    return string.Format("{0}{1}{2}{3}{4}{5}{6}", plantId, year, julian_date, queueNo, day, month, running.PadLeft(2, '0'));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
             }
         }
 
-        public static string GetProductLotNo(int plantId, DateTime productionDate, string estNo)
+        public static string GetProductionLotNo(int plantId, DateTime productionDate, string estNo)
         {
             try
             {
@@ -99,6 +98,7 @@ namespace SlaughterHouseLib.Models
 
                     var cmd = new MySqlCommand(sb.ToString(), conn);
                     var running = cmd.ExecuteScalar().ToString();
+
                     var year = DateTime.Today.ToString("yy");
                     var julian_date = DateTime.Today.DayOfYear.ToString().PadLeft(3, '0');
                     var day = productionDate.ToString("dd");
@@ -107,7 +107,7 @@ namespace SlaughterHouseLib.Models
                     return documentNo;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;

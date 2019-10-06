@@ -64,7 +64,7 @@ namespace SlaughterHouseLib
                     return coll;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -119,12 +119,12 @@ namespace SlaughterHouseLib
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
             }
-        } 
+        }
         public static object GetOrderReadyToSell(DateTime requestDate, string customerCode = "")
         {
             try
@@ -177,7 +177,7 @@ namespace SlaughterHouseLib
                     return coll;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -263,7 +263,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 tr.Rollback();
                 throw;
@@ -271,7 +271,7 @@ namespace SlaughterHouseLib
         }
         public static bool Update(Order order)
         {
-            MySqlTransaction tr = null;
+            MySqlTransaction tr;
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
@@ -365,14 +365,14 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
         }
         public static bool Cancel(Order order)
         {
-            MySqlTransaction tr = null;
+            MySqlTransaction tr;
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
@@ -392,7 +392,7 @@ namespace SlaughterHouseLib
                     if (orderFlag > 0 || unloadWgh > 0)
                     {
                         throw new Exception("ไม่สามารถบันทึกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
-                    } 
+                    }
 
                     sql = @"UPDATE orders
 								SET  active=@active 
@@ -409,7 +409,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -418,7 +418,7 @@ namespace SlaughterHouseLib
         public static bool CheckUseOrder(string orderNo)
         {
             bool res = false;
-            MySqlTransaction tr = null;
+            MySqlTransaction tr;
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
@@ -438,11 +438,11 @@ namespace SlaughterHouseLib
                     if (orderFlag > 0 || unloadWgh > 0)
                     {
                         res = true;
-                    } 
+                    }
                 }
                 return res;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -543,7 +543,7 @@ namespace SlaughterHouseLib
                     return ds.Tables[0];
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -596,7 +596,7 @@ namespace SlaughterHouseLib
                     return ds.Tables[0];
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -641,7 +641,7 @@ namespace SlaughterHouseLib
                     return pickingCompleteFlag;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

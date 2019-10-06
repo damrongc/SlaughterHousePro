@@ -1,11 +1,7 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using SlaughterHouseLib;
-using SlaughterHouseLib.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer.Reports
 {
@@ -25,6 +21,12 @@ namespace SlaughterHouseServer.Reports
             this.Shown += Form_Shown;
 
             this.BtnShowReport.Click += BtnShowReport_Click;
+            rptViewer.ShowCloseButton = false;
+            rptViewer.ShowCopyButton = false;
+            rptViewer.ShowGroupTreeButton = false;
+            rptViewer.ShowParameterPanelButton = false;
+            rptViewer.ShowTextSearchButton = false;
+            rptViewer.ShowLogo = false;
         }
 
         private void BtnShowReport_Click(object sender, EventArgs e)
@@ -45,10 +47,11 @@ namespace SlaughterHouseServer.Reports
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = ReportController.GetDataReportStockBalance(dtpInvoiceDatePeriod.Value);
-            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+            //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
             //ds.WriteXml(path + @"\xml\stockbalance.xml", XmlWriteMode.WriteSchema);
-            doc.Load(path + @"\stockbalance.rpt");
+            var reportPath = Application.StartupPath;
+            doc.Load(reportPath + @"\Report\stockbalance.rpt");
             doc.SetDataSource(ds);
 
             rptViewer.ReportSource = doc;

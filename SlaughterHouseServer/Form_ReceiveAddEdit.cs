@@ -215,13 +215,13 @@ namespace SlaughterHouseServer
                     CoopNo = txtCoopNo.Text.Trim(),
                     FarmQty = txtFarmQty.Text.ToInt16(),
                     FarmWgh = txtFarmWgh.Text.ToDecimal(),
-                    CreateBy = "damrong"
+                    CreateBy = "system"
 
                 };
                 ReceiveController.InsertOrUpdate(receive);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;

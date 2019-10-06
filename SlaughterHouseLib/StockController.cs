@@ -165,7 +165,7 @@ namespace SlaughterHouseLib
                 return true;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 transaction.Rollback();
                 throw;
@@ -288,7 +288,7 @@ namespace SlaughterHouseLib
                 return true;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -351,7 +351,7 @@ namespace SlaughterHouseLib
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -372,7 +372,7 @@ namespace SlaughterHouseLib
                     return cmd.ExecuteNonQuery();  
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

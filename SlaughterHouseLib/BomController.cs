@@ -62,7 +62,7 @@ namespace SlaughterHouseLib
                     return coll;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -102,7 +102,7 @@ namespace SlaughterHouseLib
         //            return boms;
         //        }
         //    }
-        //    catch (Exception ex)
+        //    catch (Exception)
         //    {
         //        throw;
         //    }
@@ -134,7 +134,7 @@ namespace SlaughterHouseLib
                     return ds.Tables[0];
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -181,7 +181,7 @@ namespace SlaughterHouseLib
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -207,7 +207,7 @@ namespace SlaughterHouseLib
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -285,7 +285,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 tr.Rollback();
                 throw;
@@ -364,7 +364,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -395,7 +395,7 @@ namespace SlaughterHouseLib
         //        }
         //        return true;
         //    }
-        //    catch (Exception ex)
+        //    catch (Exception)
         //    {
         //        throw;
         //    }
@@ -425,7 +425,7 @@ namespace SlaughterHouseLib
                     return ds.Tables[0];
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

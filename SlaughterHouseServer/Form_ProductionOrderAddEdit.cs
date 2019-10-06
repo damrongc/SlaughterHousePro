@@ -34,7 +34,7 @@ namespace SlaughterHouseServer
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
-            //KeyDown  
+            //KeyDown
             dtpPoDate.KeyDown += DtpPoDate_KeyDown;
         }
         private void Form_Shown(object sender, System.EventArgs e)
@@ -42,7 +42,7 @@ namespace SlaughterHouseServer
             dtpPoDate.Focus();
         }
         private void Form_Load(object sender, System.EventArgs e)
-        { 
+        {
             LoadData();
         }
         private void DtpPoDate_KeyDown(object sender, KeyEventArgs e)
@@ -52,8 +52,8 @@ namespace SlaughterHouseServer
                 txtComment.Focus();
             }
         }
-       
-        #region Event Focus, KeyDown 
+
+        #region Event Focus, KeyDown
         private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -114,7 +114,7 @@ namespace SlaughterHouseServer
 
                 poNo = "";
                 txtPoNo.Text = "";
-                txtPoNo.Focus(); 
+                txtPoNo.Focus();
                 txtComment.Text = "";
                 chkActive.Checked = true;
                 LoadDetail();
@@ -127,8 +127,8 @@ namespace SlaughterHouseServer
         }
         private void BtnAddPoItem_Click(object sender, System.EventArgs e)
         {
-            
-        var frm = new Form_ProductionOrderDetail();
+
+            var frm = new Form_ProductionOrderDetail();
             frm.qtyWgh = 0;
             if (frm.ShowDialog() == DialogResult.OK)
             {
@@ -137,7 +137,7 @@ namespace SlaughterHouseServer
 
                 dr["seq"] = 0;
                 dr["product_code"] = frm.productCode;
-                dr["product_name"] = frm.productName; 
+                dr["product_name"] = frm.productName;
                 dr["qty_wgh"] = frm.qtyWgh;
                 dr["issue_unit_method"] = frm.issueUnitMethod;
                 dr["unit_code"] = frm.unitCode;
@@ -181,7 +181,7 @@ namespace SlaughterHouseServer
                         case "Del":
                             dtPoItem.Rows[e.RowIndex].Delete();
                             dtPoItem.AcceptChanges();
-                            gv.Refresh(); 
+                            gv.Refresh();
                             break;
                     }
 
@@ -191,9 +191,9 @@ namespace SlaughterHouseServer
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
-#endregion
+        #endregion
 
         private void LoadData()
         {
@@ -202,11 +202,11 @@ namespace SlaughterHouseServer
             if (po != null)
             {
                 txtPoNo.Text = po.PoNo;
-                dtpPoDate.Value = po.PoDate ;
+                dtpPoDate.Value = po.PoDate;
                 txtComment.Text = po.Comments;
                 chkActive.Checked = po.Active;
                 dtpPoDate.Enabled = false;
-                BtnSaveAndNew.Visible = false; 
+                BtnSaveAndNew.Visible = false;
             }
             else
             {
@@ -219,7 +219,7 @@ namespace SlaughterHouseServer
             //var orderItem = PoItemController.GetPoItems(orderNo);
             dtPoItem = new DataTable("PO_ITEM");
             dtPoItem = ProductionOrderItemController.GetProductionOrderItems(this.poNo);
-         
+
             gv.DataSource = dtPoItem;
             gv.Columns["seq"].HeaderText = "ลำดับ";
             gv.Columns["product_code"].HeaderText = "รหัสสินค้า";
@@ -234,7 +234,7 @@ namespace SlaughterHouseServer
             gv.Columns["unit_code"].Visible = false;
             gv.Columns["unload_qty"].Visible = false;
             gv.Columns["unload_wgh"].Visible = false;
-        } 
+        }
         private void SavePo()
         {
             try
@@ -261,26 +261,27 @@ namespace SlaughterHouseServer
                 var po = new ProductionOrder
                 {
                     PoNo = txtPoNo.Text,
-                    PoDate  = dtpPoDate.Value, 
+                    PoDate = dtpPoDate.Value,
                     Comments = txtComment.Text,
-                    PoFlag  = 0,
+                    PoFlag = 0,
                     Active = chkActive.Checked,
                     CreateBy = "system",
                     ModifiedBy = "system",
                     ProductionOrderItem = poItems,
                 };
 
-                if (string.IsNullOrEmpty(txtPoNo.Text)) 
+                if (string.IsNullOrEmpty(txtPoNo.Text))
                 {
                     ProductionOrderController.Insert(po);
                 }
-                else{
-                    ProductionOrderController.Update (po);
+                else
+                {
+                    ProductionOrderController.Update(po);
                 }
                 //ProductionOrderController.InsertOrUpdate(order);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -292,7 +293,7 @@ namespace SlaughterHouseServer
                 var po = new ProductionOrder
                 {
                     PoNo = txtPoNo.Text,
-                    PoDate  = dtpPoDate.Value, 
+                    PoDate = dtpPoDate.Value,
                     Comments = txtComment.Text,
                     PoFlag = 0,
                     Active = false,
@@ -301,12 +302,12 @@ namespace SlaughterHouseServer
                 };
                 ProductionOrderController.Cancel(po);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
         }
 
- 
+
     }
 }

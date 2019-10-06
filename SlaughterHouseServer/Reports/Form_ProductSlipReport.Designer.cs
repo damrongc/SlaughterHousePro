@@ -1,6 +1,6 @@
-﻿namespace SlaughterHouseServer
+﻿namespace SlaughterHouseServer.Report
 {
-    partial class Form_InvoiceReport
+    partial class Form_ProductSlipReport
     {
         /// <summary>
         /// Required designer variable.
@@ -32,9 +32,9 @@
             this.rptViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.groupBoxReportName.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // groupBoxReportName
-            // 
+            //
             this.groupBoxReportName.Controls.Add(this.rptViewer);
             this.groupBoxReportName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxReportName.Location = new System.Drawing.Point(0, 0);
@@ -42,10 +42,10 @@
             this.groupBoxReportName.Size = new System.Drawing.Size(1184, 661);
             this.groupBoxReportName.TabIndex = 0;
             this.groupBoxReportName.TabStop = false;
-            this.groupBoxReportName.Text = "ใบแจ้งหหนี้";
-            // 
+            this.groupBoxReportName.Text = "ใบจัดสินค้า";
+            //
             // rptViewer
-            // 
+            //
             this.rptViewer.ActiveViewIndex = -1;
             this.rptViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rptViewer.Cursor = System.Windows.Forms.Cursors.Default;
@@ -57,16 +57,16 @@
             this.rptViewer.Size = new System.Drawing.Size(1178, 626);
             this.rptViewer.TabIndex = 1;
             this.rptViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
-            // 
-            // Form_InvoiceReport
-            // 
+            //
+            // Form_ProductSlipReport
+            //
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1184, 661);
             this.Controls.Add(this.groupBoxReportName);
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimizeBox = false;
-            this.Name = "Form_InvoiceReport";
+            this.Name = "Form_ProductSlipReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form_InvoiceReport";
             this.groupBoxReportName.ResumeLayout(false);

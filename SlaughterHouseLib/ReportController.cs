@@ -91,7 +91,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -153,7 +153,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -259,7 +259,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -291,7 +291,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -432,7 +432,7 @@ namespace SlaughterHouseLib
                     return ds;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

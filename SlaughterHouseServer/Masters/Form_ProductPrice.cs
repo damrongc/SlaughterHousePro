@@ -6,13 +6,13 @@ using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
     public partial class Form_ProductPrice : Form
-    { 
+    {
         public Form_ProductPrice()
         {
             InitializeComponent();
             UserSettingsComponent();
         }
-        
+
         private void UserSettingsComponent()
         {
             BtnAdd.Click += BtnAdd_Click;
@@ -26,14 +26,14 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
-             
+
             LoadProduct();
             LoadOrder();
         }
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-              
+
         }
 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -55,7 +55,7 @@ namespace SlaughterHouseServer
                             {
                                 productCode = productCode,
                                 startDate = startDate
-                            }; 
+                            };
                             if (frm.ShowDialog() == DialogResult.OK)
                             {
                                 LoadOrder();
@@ -93,8 +93,8 @@ namespace SlaughterHouseServer
             var coll = ProductController.GetAllProducts();
             coll.Insert(0, new Product
             {
-                ProductCode  = "",
-                ProductName  = "--ทั้งหมด--"
+                ProductCode = "",
+                ProductName = "--ทั้งหมด--"
             });
             cboProduct.DisplayMember = "ProductName";
             cboProduct.ValueMember = "ProductCode";
@@ -111,13 +111,13 @@ namespace SlaughterHouseServer
             gv.Columns[2].HeaderText = "ชื่อสินค้า";
             gv.Columns[3].HeaderText = "วันที่เริ่มต้น";
             gv.Columns[4].HeaderText = "วินที่สิ้นสุด";
-            gv.Columns[5].HeaderText = "ราคาต่อหน่วย";  
+            gv.Columns[5].HeaderText = "ราคาต่อหน่วย";
             gv.Columns[6].HeaderText = "จำนวนวัน";
             gv.Columns[7].HeaderText = "วันเวลาสร้าง";
             gv.Columns[8].HeaderText = "ผู้สร้าง";
             gv.Columns[7].Visible = false;
         }
 
-     
+
     }
-}  
+}

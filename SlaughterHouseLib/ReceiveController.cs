@@ -76,7 +76,7 @@ namespace SlaughterHouseLib
                     return coll;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -134,7 +134,7 @@ namespace SlaughterHouseLib
                     return coll;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -219,7 +219,7 @@ namespace SlaughterHouseLib
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -297,7 +297,7 @@ namespace SlaughterHouseLib
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -442,7 +442,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -460,7 +460,7 @@ namespace SlaughterHouseLib
 
                     //Check Flag
                     // 0 = New Create
-                    // 1 = Next State 
+                    // 1 = Next State
                     var sql = @"SELECT receive_flag FROM receives WHERE receive_no=@receive_no";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("receive_no", receiveNo);
@@ -491,7 +491,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //tr.Rollback();
                 throw;
@@ -547,7 +547,7 @@ namespace SlaughterHouseLib
 
                 return receiveItems;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -673,7 +673,7 @@ namespace SlaughterHouseLib
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (transaction != null)
                     transaction.Rollback();
@@ -775,7 +775,7 @@ namespace SlaughterHouseLib
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (transaction != null)
                     transaction.Rollback();
@@ -797,8 +797,8 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"UPDATE receives SET 
-                                receive_flag=1,
+                    var sql = @"UPDATE receives SET
+                                receive_flag=2,
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by
                                 WHERE receive_no=@receive_no";
@@ -809,7 +809,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
