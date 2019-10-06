@@ -38,6 +38,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.TxtFilter = new System.Windows.Forms.TextBox();
             this.BtnSearch = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboxProductGroup = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
@@ -122,6 +124,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.comboxProductGroup);
             this.panel2.Controls.Add(this.TxtFilter);
             this.panel2.Controls.Add(this.BtnSearch);
             this.panel2.Controls.Add(this.label1);
@@ -136,7 +140,7 @@
             // 
             this.TxtFilter.BackColor = System.Drawing.Color.WhiteSmoke;
             this.TxtFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtFilter.Location = new System.Drawing.Point(252, 12);
+            this.TxtFilter.Location = new System.Drawing.Point(636, 12);
             this.TxtFilter.Name = "TxtFilter";
             this.TxtFilter.Size = new System.Drawing.Size(215, 36);
             this.TxtFilter.TabIndex = 3;
@@ -150,13 +154,30 @@
             this.BtnSearch.ForeColor = System.Drawing.Color.White;
             this.BtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("BtnSearch.Image")));
             this.BtnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSearch.Location = new System.Drawing.Point(473, 12);
+            this.BtnSearch.Location = new System.Drawing.Point(857, 12);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(129, 36);
             this.BtnSearch.TabIndex = 4;
             this.BtnSearch.Text = "ค้นข้อมูล";
             this.BtnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnSearch.UseVisualStyleBackColor = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(259, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(90, 29);
+            this.label4.TabIndex = 54;
+            this.label4.Text = "กลุ่มสินค้า";
+            // 
+            // comboxProductGroup
+            // 
+            this.comboxProductGroup.FormattingEnabled = true;
+            this.comboxProductGroup.Location = new System.Drawing.Point(355, 12);
+            this.comboxProductGroup.Name = "comboxProductGroup";
+            this.comboxProductGroup.Size = new System.Drawing.Size(260, 37);
+            this.comboxProductGroup.TabIndex = 53;
             // 
             // Form_Product
             // 
@@ -186,5 +207,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView gv;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboxProductGroup;
     }
 }

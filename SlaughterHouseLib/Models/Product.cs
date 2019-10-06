@@ -32,7 +32,7 @@ namespace SlaughterHouseLib.Models
 
     public static class ProductController
     {
-        public static DataTable GetAllProducts(string keyword)
+        public static DataTable GetAllProducts(string productGroup, string keyword)
         {
             try
             {
@@ -43,8 +43,8 @@ namespace SlaughterHouseLib.Models
                     var sb = new StringBuilder();
                     sb.Append("select a.product_code,a.product_name");
                     sb.Append(" ,b.product_group_name");
-                    sb.Append(" ,unit_of_qty ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_qty) as unit_code_qty");
-                    sb.Append(" ,unit_of_wgh ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_wgh) as unit_code_wgh");
+                    sb.Append(" ,unit_of_qty ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_qty) as unit_name_qty");
+                    sb.Append(" ,unit_of_wgh ,(select unit_name from unit_of_measurement where unit_code=a.unit_of_wgh) as unit_name_wgh");
                     sb.Append(" ,min_weight, max_weight, std_yield ");
                     sb.Append(" ,sale_unit_method, issue_unit_method ");
                     sb.Append(" ,a.packing_size, a.active,  a.create_at, a.create_by, a.modified_at, a.modified_by");
@@ -54,9 +54,14 @@ namespace SlaughterHouseLib.Models
                     if (!string.IsNullOrEmpty(keyword))
                     {
                         sb.Append(" and (product_code like @product_code");
-                        sb.Append(" or product_name like @product_name)"); 
+                        sb.Append(" or product_name like @product_name)");
                     }
-                    sb.Append(" order by product_code asc");
+                    if (String.IsNullOrEmpty(productGroup) == false)
+                    {
+
+                        sb.Append(" and a.product_group_code like @product_group_code ");
+                    }
+                    sb.Append(" order by product_name asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
 
                     if (!string.IsNullOrEmpty(keyword))
@@ -64,7 +69,11 @@ namespace SlaughterHouseLib.Models
                         cmd.Parameters.AddWithValue("product_code", string.Format("%{0}%", keyword));
                         cmd.Parameters.AddWithValue("product_name", string.Format("%{0}%", keyword));
                     }
-
+                    if (String.IsNullOrEmpty(productGroup) == false)
+                    {
+                        productGroup = (productGroup == "0") ? "%" : productGroup;
+                        cmd.Parameters.AddWithValue("product_group_code", productGroup);
+                    }
 
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
@@ -109,7 +118,7 @@ namespace SlaughterHouseLib.Models
                     conn.Open();
                     var sb = new StringBuilder();
                     sb.Append("SELECT * FROM product WHERE active=1 and product_code <> 'NA' ");
-                    sb.Append(" ORDER BY product_code ASC");
+                    sb.Append(" ORDER BY product_name ASC");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
                     var da = new MySqlDataAdapter(cmd);
 
@@ -181,7 +190,7 @@ namespace SlaughterHouseLib.Models
                     {
                         sql += $" and p.product_name like '%{productName}%' ";
                     }
-                    sql += "  order by p.product_code  ";
+                    sql += "  order by p.product_name  ";
                     var cmd = new MySqlCommand(sql, conn);
 
                     //if (String.IsNullOrEmpty(productCode) == false)
@@ -261,7 +270,7 @@ namespace SlaughterHouseLib.Models
                               ";
                     }
                     if (String.IsNullOrEmpty(productGroup) == false)
-                    { 
+                    {
                         productGroup = (productGroup == "0") ? "" : productGroup;
                         sql += $" and p.product_group_code like '%{productGroup}%' ";
                     }
@@ -273,7 +282,7 @@ namespace SlaughterHouseLib.Models
                     {
                         sql += $" and p.product_name like '%{productName}%' ";
                     }
-                    sql += "  order by p.product_code  ";
+                    sql += "  order by p.product_name  ";
                     var cmd = new MySqlCommand(sql, conn);
 
                     //if (String.IsNullOrEmpty(productCode) == false)

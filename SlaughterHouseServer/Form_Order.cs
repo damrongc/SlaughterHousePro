@@ -62,13 +62,13 @@ namespace SlaughterHouseServer
 
             DataGridViewButtonColumn invoiceBtnColumn = new DataGridViewButtonColumn();
             invoiceBtnColumn.Name = ConstColumns.BTN_INVOICE;
-            invoiceBtnColumn.Text = "ออกใบแจ้งหนี้";
+            invoiceBtnColumn.Text = "สร้างใบแจ้งหนี้";
             invoiceBtnColumn.UseColumnTextForButtonValue = true; //dont forget this line
             invoiceBtnColumn.FlatStyle = FlatStyle.Flat;
             if (gv.Columns[ConstColumns.BTN_INVOICE] == null)
             {
                 gv.Columns.Insert(gv.ColumnCount, invoiceBtnColumn);
-                gv.Columns[ConstColumns.BTN_INVOICE].HeaderText = "ใบแจ้งหนี้";
+                gv.Columns[ConstColumns.BTN_INVOICE].HeaderText = "";
             }
             foreach (DataGridViewRow row in gv.Rows)
             {
@@ -85,13 +85,13 @@ namespace SlaughterHouseServer
 
             DataGridViewButtonColumn printProductSlipBtnColumn = new DataGridViewButtonColumn();
             printProductSlipBtnColumn.Name = ConstColumns.BTN_PRODUCT_SLIP;
-            printProductSlipBtnColumn.Text = "ปริ้นใบจัดสินค้า";
+            printProductSlipBtnColumn.Text = "สร้างใบจัดสินค้า";
             printProductSlipBtnColumn.UseColumnTextForButtonValue = true; //dont forget this line
             printProductSlipBtnColumn.FlatStyle = FlatStyle.Flat;
             if (gv.Columns[ConstColumns.BTN_PRODUCT_SLIP] == null)
             {
                 gv.Columns.Insert(gv.ColumnCount, printProductSlipBtnColumn);
-                gv.Columns[ConstColumns.BTN_PRODUCT_SLIP].HeaderText = "ปริ้นใบจัดสินค้า";
+                gv.Columns[ConstColumns.BTN_PRODUCT_SLIP].HeaderText = "";
             }
         }
 
