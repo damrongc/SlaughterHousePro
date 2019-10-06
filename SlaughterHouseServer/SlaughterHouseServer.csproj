@@ -589,7 +589,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Report\productSlip.rpt" />
+    <Content Include="Report\productSlip.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Report\swineyield.rpt" />
   </ItemGroup>
   <ItemGroup>

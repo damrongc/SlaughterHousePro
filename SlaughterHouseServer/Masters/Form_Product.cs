@@ -123,8 +123,6 @@ namespace SlaughterHouseServer
             comboxProductGroup.ValueMember = "ProductGroupCode";
             comboxProductGroup.DisplayMember = "ProductGroupName";
             comboxProductGroup.DataSource = coll;
-
-
         }
     }
 }

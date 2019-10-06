@@ -35,9 +35,8 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" a.start_date,");
                     sb.Append(" a.end_date,");
                     sb.Append(" a.unit_price,");
-                    sb.Append(" CAST(DATEDIFF(a.end_date, a.start_date) AS SIGNED) as day,");
                     sb.Append(" a.create_at,");
-                    sb.Append(" a.create_by");
+                    sb.Append(" a.create_by, a.modified_at, a.modified_by");
                     sb.Append(" FROM customer_price a, product b, customer c");
                     sb.Append(" WHERE a.product_code = b.product_code ");
                     sb.Append(" AND a.customer_code = c.customer_code ");
@@ -45,7 +44,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" AND a.end_date >= '" + startDate.ToString("yyyy-MM-dd") + "'");
                     if (!string.IsNullOrEmpty(productCode))
                         sb.Append(" AND a.product_code =@product_code");
-                    sb.Append(" ORDER BY a.start_date, a.product_code ASC");
+                    sb.Append(" ORDER BY c.customer_name, b.product_name, a.end_date ");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
                     //cmd.Parameters.AddWithValue("start_date", startDate.ToString("yyyy-MM-dd"));
                     if (!string.IsNullOrEmpty(productCode))
@@ -65,9 +64,11 @@ namespace SlaughterHouseLib.Models
                                     StartDate = p.Field<DateTime>("start_date"),
                                     EndDate = p.Field<DateTime>("end_date"),
                                     UnitPrice = p.Field<decimal>("unit_price"),
-                                    Day = p.Field<long>("day"),
+                                    Day = (Convert.ToDateTime(p.Field<DateTime>("end_date")) - Convert.ToDateTime(p.Field<DateTime>("start_date"))).TotalDays,
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
+                                    ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
+                                    ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
                                 }).ToList();
                     return coll;
                 }
@@ -127,7 +128,11 @@ namespace SlaughterHouseLib.Models
                             StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
                             EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
                             UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"],
+<<<<<<< HEAD
                             Day = (Int32)ds.Tables[0].Rows[0]["day"],
+=======
+                            Day = Convert.ToInt32(ds.Tables[0].Rows[0]["day"]),
+>>>>>>> 30edaac5cc81a5f892487364601e697bd579e2cf
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }

@@ -6,13 +6,13 @@ using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
     public partial class Form_PriceList : Form
-    { 
+    {
         public Form_PriceList()
         {
             InitializeComponent();
             UserSettingsComponent();
         }
-        
+
         private void UserSettingsComponent()
         {
             BtnAdd.Click += BtnAdd_Click;
@@ -48,7 +48,7 @@ namespace SlaughterHouseServer
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-              
+
         }
 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -70,7 +70,7 @@ namespace SlaughterHouseServer
                             {
                                 productCode = productCode,
                                 startDate = startDate
-                            }; 
+                            };
                             if (frm.ShowDialog() == DialogResult.OK)
                             {
                                 LoadProductPrice();
@@ -90,7 +90,7 @@ namespace SlaughterHouseServer
         private void GvCv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
 
-        } 
+        }
         private void GvCv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -159,8 +159,8 @@ namespace SlaughterHouseServer
             var coll = ProductController.GetAllProducts();
             coll.Insert(0, new Product
             {
-                ProductCode  = "",
-                ProductName  = "--ทั้งหมด--"
+                ProductCode = "",
+                ProductName = "--ทั้งหมด--"
             });
             cboProduct.DisplayMember = "ProductName";
             cboProduct.ValueMember = "ProductCode";
@@ -182,12 +182,14 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.ProductName].HeaderText = "ชื่อสินค้า";
             gv.Columns[ConstColumns.StartDate].HeaderText = "วันที่เริ่มต้น";
             gv.Columns[ConstColumns.EndDate].HeaderText = "วินที่สิ้นสุด";
-            gv.Columns[ConstColumns.UnitPrice].HeaderText = "ราคาต่อหน่วย";  
+            gv.Columns[ConstColumns.UnitPrice].HeaderText = "ราคาต่อหน่วย";
             gv.Columns[ConstColumns.Day].HeaderText = "จำนวนวัน";
             gv.Columns[ConstColumns.CreateAt].HeaderText = "วันเวลาสร้าง";
             gv.Columns[ConstColumns.CreateBy].HeaderText = "ผู้สร้าง";
+            gv.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
+            gv.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
 
-            gv.Columns[ConstColumns.CreateAt].Visible = false;
+            //gv.Columns[ConstColumns.CreateAt].Visible = false;
         }
         private void LoadCustomerPrice()
         {
@@ -205,8 +207,10 @@ namespace SlaughterHouseServer
             gvCv.Columns[ConstColumns.CreateAt].HeaderText = "วันเวลาสร้าง";
             gvCv.Columns[ConstColumns.CreateBy].HeaderText = "ผู้สร้าง";
 
-            gvCv.Columns[ConstColumns.CreateAt].Visible = false;
+            gvCv.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
+            gvCv.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
+
         }
 
     }
-}  
+}

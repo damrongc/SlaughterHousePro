@@ -315,6 +315,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E61AF33CEC70478A974A35049197B2DB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EDABAB91266B6E15F24947F651DB12C9"
         "OwnerKey" = "8:_D985E96E4A29442C8228046A6DC9C6BA"
         "MsmSig" = "8:_UNDEFINED"
@@ -1450,6 +1456,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E61AF33CEC70478A974A35049197B2DB"
+            {
+            "SourcePath" = "8:..\\SlaughterHouseClient\\Report\\Rpt\\barcode.rpt"
+            "TargetName" = "8:barcode.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_3AEBABF262BA4B8D884602DDDDB01847"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EDABAB91266B6E15F24947F651DB12C9"
             {
             "AssemblyRegister" = "3:1"
@@ -1550,6 +1576,28 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_05177315DFC34EB19B786690A27EE085"
+                    {
+                    "Name" = "8:Report"
+                    "AlwaysCreate" = "11:TRUE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_6914AE90B50F49F68DFE44BAA78BDFFE"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_3AEBABF262BA4B8D884602DDDDB01847"
+                            {
+                            "Name" = "8:Rpt"
+                            "AlwaysCreate" = "11:TRUE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_DC7D09FD5F544EBFA3E5BAB3905C835B"
+                                "Folders"
+                                {
+                                }
+                            }
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_E3D511A27A784D7EA0CDD84E33518243"
@@ -1591,7 +1639,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SlaughterHousePro Client"
         "ProductCode" = "8:{4255C4A5-9844-496B-8404-35C5C7D5906A}"
-        "PackageCode" = "8:{72205EC9-8A02-42B1-8D08-FA1A1AA2C2B7}"
+        "PackageCode" = "8:{F51F9B55-FE9E-4CE8-B0AA-08A41791599E}"
         "UpgradeCode" = "8:{014D9D61-0DFF-48EF-853C-D1345EFD5394}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
