@@ -10,7 +10,7 @@ public static class Constants
     public static string SO = "SO";
     public static string STK = "STK";
 
-    public static string CREATE_BY = "auto";
+    //public static string CREATE_BY = "auto";
 
 
 

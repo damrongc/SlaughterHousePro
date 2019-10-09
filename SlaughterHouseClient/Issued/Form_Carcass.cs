@@ -110,6 +110,7 @@ namespace SlaughterHouseClient.Issued
 
                 if (DataInvoke.Length == 40)
                 {
+                    tx.Text = DataInvoke;
 
                     //int scaleDecimal = DataInvoke.Substring(20, 2).ToInt32();
                     //int scaleDivision = (int)Math.Round(Math.Pow(10.0, unchecked(scaleDecimal)));
@@ -131,6 +132,10 @@ namespace SlaughterHouseClient.Issued
                     //double scaleDivision = Math.Pow(10.0, scaleDecimal);
 
                     //string strFormatWt = scaleDecimal == 0 ? "#0" : "#0." + "0".PadRight(scaleDecimal, '0');
+
+
+
+
                     short stateOfScale = DataInvoke.Substring(6, 1).ToInt16();
                     short stableWt = DataInvoke.Substring(5, 1).ToInt16();
 
@@ -150,6 +155,8 @@ namespace SlaughterHouseClient.Issued
                             num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / 1000;
                         }
                         lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
+
+
                         //if (isStart && isZero)
                         //{
                         //    if (num > 0 && num > product.min_weight.ToString().ToDouble())
@@ -273,7 +280,7 @@ namespace SlaughterHouseClient.Issued
                 b.ForeColor = Color.Black;
             }
             var btn = (Button)sender;
-            btn.BackColor = ColorTranslator.FromHtml("#2D9CDB");
+            btn.BackColor = ColorTranslator.FromHtml("#1C6BBC");
             btn.ForeColor = Color.White;
             lotNo = btn.Tag.ToString();
         }
@@ -287,6 +294,7 @@ namespace SlaughterHouseClient.Issued
 
                 var refDocumentNo = "";
                 var refDocumentType = "";
+                string create_by = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
                     var receiveItem = db.receive_item.Where(p => p.product_code == product.product_code
@@ -323,7 +331,7 @@ namespace SlaughterHouseClient.Issued
                                 orderItem.unload_qty += 1;
                                 orderItem.unload_wgh += unloadWeight;
                                 orderItem.modified_at = DateTime.Now;
-                                orderItem.modified_by = Constants.CREATE_BY;
+                                orderItem.modified_by = create_by;
                                 db.Entry(orderItem).State = EntityState.Modified;
 
 
@@ -384,17 +392,11 @@ namespace SlaughterHouseClient.Issued
                             //}
 
 
-
-
-
-
-
-
                             //update receive item
                             receiveItem.chill_qty = 1;
                             receiveItem.chill_wgh = unloadWeight;
                             receiveItem.modified_at = DateTime.Now;
-                            receiveItem.modified_by = Constants.CREATE_BY;
+                            receiveItem.modified_by = create_by;
                             db.Entry(receiveItem).State = EntityState.Modified;
 
                             //insert stock
@@ -412,7 +414,7 @@ namespace SlaughterHouseClient.Issued
                                 location_code = 2, //ห้องเย็นเก็บหมุซีก
                                 barcode_no = 0,
                                 transaction_type = 2,
-                                create_by = Constants.CREATE_BY
+                                create_by = create_by
                             };
 
                             db.stocks.Add(stock);
@@ -427,7 +429,7 @@ namespace SlaughterHouseClient.Issued
                                     doc_no = refDocumentNo,
                                     stock_no = stock_no,
                                     stock_item = 1,
-                                    create_by = Constants.CREATE_BY
+                                    create_by = create_by
 
                                 };
 
@@ -603,6 +605,7 @@ namespace SlaughterHouseClient.Issued
                 btnOrderNo.Enabled = true;
                 btnStart.Enabled = true;
                 btnStop.Enabled = false;
+                btnAcceptWeight.Enabled = false;
             }
             catch (Exception ex)
             {

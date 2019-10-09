@@ -127,15 +127,7 @@ namespace SlaughterHouseLib.Models
                             StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
                             EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
                             UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"],
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            Day = (Int32)ds.Tables[0].Rows[0]["day"],
-=======
-                            Day = Convert.ToInt32(ds.Tables[0].Rows[0]["day"]),
->>>>>>> 30edaac5cc81a5f892487364601e697bd579e2cf
-=======
                             Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays),
->>>>>>> 8af699cb25522c43b45020778fc957c78bfc35a0
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }

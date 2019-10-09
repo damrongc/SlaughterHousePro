@@ -86,9 +86,9 @@ namespace SlaughterHouseClient
         private void btnReceivePart_Click(object sender, EventArgs e)
         {
             ////location code 7 :ห้องตัดแต่ง
-            //var frm = new Receiving.Form_ByProduct("รับผลได้ชิ้นส่วน", 5, 7);
-            //frm.ShowInTaskbar = false;
-            //frm.ShowDialog();
+            var frm = new Receiving.Form_ReceiveProduct();
+            frm.ShowInTaskbar = false;
+            frm.ShowDialog();
         }
 
 

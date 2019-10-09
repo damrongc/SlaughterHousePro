@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_09F4C11EDF4446528EA112BD2E86CF11"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0F6F31B26FCE434C97929C644D35802B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -112,7 +118,7 @@
         "Entry"
         {
         "MsmKey" = "8:_3CAFD5ECAAD65FDAF56BDFBF19B9DF37"
-        "OwnerKey" = "8:_CF15515E3634CFFEAB5011765A16D514"
+        "OwnerKey" = "8:_EBFF49CAE8D74F0C0399940F8D47146F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -141,7 +147,31 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_51210C05928D427884A86D74BC1C23D5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_554F58A3238D4F67A7D9EB4D31F2D5B5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_64EBA77F4ADA42BDB3EB5A2D0DEF1DE4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_69FCA78CE1874A2EA862FCB0D97B44E5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6A170E7A461E4769A1558728F30B196B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -160,6 +190,18 @@
         "Entry"
         {
         "MsmKey" = "8:_7A28CBDD3C0048F09F8D8BADAB9E10FE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7CFF4E43E50544CD93B4C6D81963A8EE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_883C28F02FCB4C5BB9BE50564B815EC7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -189,6 +231,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A053DF83F5FC49FDA434141294A75C50"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A1FA90EE6B2923E1428FC97EFA6878E8"
         "OwnerKey" = "8:_9AE019544CD26E02E9A30AC95149BB6F"
         "MsmSig" = "8:_UNDEFINED"
@@ -202,6 +250,12 @@
         "Entry"
         {
         "MsmKey" = "8:_A685E63550A142B188ADC879F7FAFE7E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A8649B0B963342A285FED2DA9240E715"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -273,8 +327,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CF15515E3634CFFEAB5011765A16D514"
-        "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
+        "MsmKey" = "8:_D6435BB90B364A5296813265437B42F7"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -329,6 +383,12 @@
         {
         "MsmKey" = "8:_EB02FAE9BA61A10617A043C4A61D5667"
         "OwnerKey" = "8:_3117EFEAFDB0B20BD16EFD83A24E0495"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EBFF49CAE8D74F0C0399940F8D47146F"
+        "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -394,6 +454,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EBFF49CAE8D74F0C0399940F8D47146F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9AE019544CD26E02E9A30AC95149BB6F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -419,12 +485,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C54F17BCC8868D7A2653E385E9DDA739"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CF15515E3634CFFEAB5011765A16D514"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -576,7 +636,7 @@
             {
             "Enabled" = "11:TRUE"
             "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:1"
+            "PrerequisitesLocation" = "2:2"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
                 "Items"
@@ -585,11 +645,6 @@
                     {
                     "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.6.1"
-                    }
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:SAP.CrystalReports14.NET.2.0"
-                    {
-                    "Name" = "8:SAP Crystal Reports Runtime Engine for .NET Framework"
-                    "ProductCode" = "8:SAP.CrystalReports14.NET.2.0"
                     }
                 }
             }
@@ -622,6 +677,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_09F4C11EDF4446528EA112BD2E86CF11"
+            {
+            "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\stockbalance.rpt"
+            "TargetName" = "8:stockbalance.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_AD5BC544660B4049891CDFDA10B2F517"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0F6F31B26FCE434C97929C644D35802B"
             {
             "SourcePath" = "8:F:\\Kanit\\Kanit-Black.ttf"
@@ -968,6 +1043,66 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_51210C05928D427884A86D74BC1C23D5"
+            {
+            "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\stockmovement.rpt"
+            "TargetName" = "8:stockmovement.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_AD5BC544660B4049891CDFDA10B2F517"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_554F58A3238D4F67A7D9EB4D31F2D5B5"
+            {
+            "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\productSlip.rpt"
+            "TargetName" = "8:productSlip.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_AD5BC544660B4049891CDFDA10B2F517"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_64EBA77F4ADA42BDB3EB5A2D0DEF1DE4"
+            {
+            "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\swineyield.rpt"
+            "TargetName" = "8:swineyield.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_AD5BC544660B4049891CDFDA10B2F517"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_69FCA78CE1874A2EA862FCB0D97B44E5"
             {
             "SourcePath" = "8:F:\\Client Setup\\BARCOD39_1.TTF"
@@ -984,6 +1119,26 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6A170E7A461E4769A1558728F30B196B"
+            {
+            "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\dailysales.rpt"
+            "TargetName" = "8:dailysales.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_AD5BC544660B4049891CDFDA10B2F517"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
@@ -1055,6 +1210,46 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7CFF4E43E50544CD93B4C6D81963A8EE"
+            {
+            "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\swinereceive.rpt"
+            "TargetName" = "8:swinereceive.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_AD5BC544660B4049891CDFDA10B2F517"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_883C28F02FCB4C5BB9BE50564B815EC7"
+            {
+            "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\barcode.rpt"
+            "TargetName" = "8:barcode.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_AD5BC544660B4049891CDFDA10B2F517"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
@@ -1161,6 +1356,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A053DF83F5FC49FDA434141294A75C50"
+            {
+            "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\invoice.rpt"
+            "TargetName" = "8:invoice.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_AD5BC544660B4049891CDFDA10B2F517"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A1FA90EE6B2923E1428FC97EFA6878E8"
             {
             "AssemblyRegister" = "3:1"
@@ -1208,6 +1423,26 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A8649B0B963342A285FED2DA9240E715"
+            {
+            "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\receivebarcode.rpt"
+            "TargetName" = "8:receivebarcode.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_AD5BC544660B4049891CDFDA10B2F517"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
@@ -1385,23 +1620,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CF15515E3634CFFEAB5011765A16D514"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6435BB90B364A5296813265437B42F7"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SlaughterHouseLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_CF15515E3634CFFEAB5011765A16D514"
-                    {
-                    "Name" = "8:SlaughterHouseLib.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:SlaughterHouseLib.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\somapinvoice.rpt"
+            "TargetName" = "8:somapinvoice.rpt"
             "Tag" = "8:"
-            "Folder" = "8:_5C3790145DF94ECCAA178CDF8F2656FF"
+            "Folder" = "8:_AD5BC544660B4049891CDFDA10B2F517"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1413,7 +1637,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DD8E9B32305340AE8E78175AB5EFD7CD"
@@ -1543,6 +1767,37 @@
                     }
                 }
             "SourcePath" = "8:EntityFramework.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5C3790145DF94ECCAA178CDF8F2656FF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EBFF49CAE8D74F0C0399940F8D47146F"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SlaughterHouseLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_EBFF49CAE8D74F0C0399940F8D47146F"
+                    {
+                    "Name" = "8:SlaughterHouseLib.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:SlaughterHouseLib.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5C3790145DF94ECCAA178CDF8F2656FF"
@@ -1742,6 +1997,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_AD5BC544660B4049891CDFDA10B2F517"
+                    {
+                    "Name" = "8:Report"
+                    "AlwaysCreate" = "11:TRUE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_A5D80EFDBB74461A8EF2A483FAE94322"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_B465DA9525304D07A716503E36AB6063"
@@ -1772,7 +2038,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SlaughterHouse Server"
         "ProductCode" = "8:{9E8739FF-B260-4350-8C61-1FD33AFC8463}"
-        "PackageCode" = "8:{CE564E69-E67B-451E-AB49-759C5433D8F6}"
+        "PackageCode" = "8:{0D48E0A6-0E89-4AB1-807C-0879665F01E5}"
         "UpgradeCode" = "8:{20C0DE35-33AD-4276-9DCE-1D31D65FF090}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -2321,7 +2587,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FDB1ADB60D414D6C93EF5843C3924468"
             {
-            "SourcePath" = "8:..\\SlaughterHouseServer\\obj\\Debug\\SlaughterHouseServer.exe"
+            "SourcePath" = "8:..\\SlaughterHouseServer\\obj\\Release\\SlaughterHouseServer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5C3790145DF94ECCAA178CDF8F2656FF"

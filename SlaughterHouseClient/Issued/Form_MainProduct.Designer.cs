@@ -254,10 +254,10 @@
             // 
             this.panel1.Controls.Add(this.gv);
             this.panel1.Font = new System.Drawing.Font("Kanit", 16F);
-            this.panel1.Location = new System.Drawing.Point(18, 215);
+            this.panel1.Location = new System.Drawing.Point(18, 226);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(994, 517);
+            this.panel1.Size = new System.Drawing.Size(994, 506);
             this.panel1.TabIndex = 69;
             // 
             // gv
@@ -278,13 +278,13 @@
             this.gv.RowHeadersWidth = 10;
             this.gv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv.Size = new System.Drawing.Size(984, 507);
+            this.gv.Size = new System.Drawing.Size(984, 496);
             this.gv.TabIndex = 11;
             // 
             // Form_MainProduct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1024, 768);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtBarcodeNo);
@@ -306,7 +306,6 @@
             this.MinimizeBox = false;
             this.Name = "Form_MainProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "รับหมูเป็น";
             this.panelHeader.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();

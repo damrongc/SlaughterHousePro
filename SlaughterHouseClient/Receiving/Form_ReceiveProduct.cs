@@ -20,20 +20,18 @@ using nucs.JsonSettings;
 
 namespace SlaughterHouseClient.Receiving
 {
-    public partial class Form_ByProduct : Form
+    public partial class Form_ReceiveProduct : Form
     {
         SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
         product product;
         string productCode;
-
-        bom bom;
         private int Index;
         private int PAGE_SIZE = 15;
         List<Button> buttons;
 
         //CrystalReportViewer reportViewer = new CrystalReportViewer();
 
-        private int _locationCode;
+        private int locationCode = 7;
         private bool isStart = false;
         private bool isTare = false;
         private bool isZero = true;
@@ -51,22 +49,10 @@ namespace SlaughterHouseClient.Receiving
 
 
         delegate void SetTextCallback(string text);
-        public Form_ByProduct(string title, int bomCode, int locationCode)
+        public Form_ReceiveProduct()
         {
             InitializeComponent();
             UserInitialization();
-
-
-            _locationCode = locationCode;
-            lblCaption.Text = title;
-            using (var db = new SlaughterhouseEntities())
-            {
-                bom = db.boms.Where(p => p.bom_code == bomCode).SingleOrDefault();
-            }
-
-
-
-
         }
         private void Form_Load(object sender, EventArgs e)
         {
@@ -131,7 +117,6 @@ namespace SlaughterHouseClient.Receiving
                 plSimulator.Visible = false;
         }
 
-
         void LoadSetting()
         {
             if (MySettings.Data.Count > 0)
@@ -145,7 +130,6 @@ namespace SlaughterHouseClient.Receiving
                 stableCountTarget = MySettings["StableTarget"].ToString().ToInt16();
             }
         }
-
 
         string InputData = String.Empty;
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -325,11 +309,8 @@ namespace SlaughterHouseClient.Receiving
                 //decimal stock_wgh = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_wgh);
 
                 //int remain_qty = receive.farm_qty - stock_qty;
-                lblReceiveNo.Text = receive.receive_no;
-                lblFarm.Text = receive.farm.farm_name;
-                lblBreeder.Text = receive.breeder.breeder_name;
-                lblTruckNo.Text = receive.truck_no;
-                lblQueueNo.Text = receive.queue_no.ToString();
+                lblProduct.Text = receive.receive_no;
+
             }
 
         }
@@ -340,12 +321,12 @@ namespace SlaughterHouseClient.Receiving
             {
                 product = db.products.Where(p => p.product_code == productCode).SingleOrDefault();
 
+                lblProduct.Text = product.product_name;
                 lblMinWeight.Text = product.min_weight.ToString();
                 lblMaxWeight.Text = product.max_weight.ToString();
 
 
-                var receiveItems = db.receive_item.Where(p => p.product_code.Equals(product.product_code)
-                && p.receive_no.Equals(lblReceiveNo.Text)).ToList();
+                var receiveItems = db.receive_item.Where(p => p.product_code.Equals(product.product_code)).ToList();
 
                 int stock_qty = 0;
                 decimal stock_wgh = 0;
@@ -414,7 +395,7 @@ namespace SlaughterHouseClient.Receiving
             var btn = (Button)sender;
             btn.BackColor = ColorTranslator.FromHtml("#2D9CDB");
             btn.ForeColor = Color.White;
-            productCode = btn.Tag.ToString();
+
             LoadProduct();
 
         }
@@ -422,34 +403,6 @@ namespace SlaughterHouseClient.Receiving
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void btnReceiveNo_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var frm = new Form_LookupSwine();
-
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    LoadData(frm.ReceiveNo);
-                    LoadBomItem(bom.bom_code);
-
-                    lblMessage.Text = Constants.PRODUCT_WAITING;
-                    int stock_qty = 0;
-                    decimal stock_wgh = 0;
-
-                    //int remain_qty = lblSwineQty.Text.ToInt16() - stock_qty;
-                    lblStockQty.Text = stock_qty.ToComma();
-                    lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
-                    //lblRemainQty.Text = remain_qty.ToComma();
-                }
-            }
-            catch (Exception ex)
-            {
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
-                toastNotification.Show();
-            }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -476,7 +429,7 @@ namespace SlaughterHouseClient.Receiving
                 lblMessage.Text = Constants.WEIGHT_WAITING;
 
                 lblWeight.Text = "0.00";
-                btnReceiveNo.Enabled = !isStart;
+                btnProduct.Enabled = !isStart;
                 btnStart.Enabled = !isStart;
                 btnStop.Enabled = isStart;
                 btnPrint.Enabled = !isStart;
@@ -491,7 +444,6 @@ namespace SlaughterHouseClient.Receiving
 
 
         }
-
         private void btnStop_Click(object sender, EventArgs e)
         {
             //if (_spManager.CurrentSerialSettings.PortName != "")
@@ -512,7 +464,7 @@ namespace SlaughterHouseClient.Receiving
                 lblStable.Text = stableCount.ToString();
                 lblStable.Refresh();
 
-                btnReceiveNo.Enabled = !isStart;
+                btnProduct.Enabled = !isStart;
                 btnStart.Enabled = !isStart;
                 btnStop.Enabled = isStart;
                 btnPrint.Enabled = !isStart;
@@ -535,7 +487,7 @@ namespace SlaughterHouseClient.Receiving
                 {
 
                     //update receive
-                    var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
+                    var receive = db.receives.Where(p => p.receive_no.Equals(lblProduct.Text)).SingleOrDefault();
                     int seq = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Count();
 
                     barcode_no = db.barcodes.Max(p => p.barcode_no) + 1;
@@ -590,7 +542,7 @@ namespace SlaughterHouseClient.Receiving
                                 ref_document_no = receive.receive_no,
                                 ref_document_type = Constants.REV,
                                 lot_no = barcode.lot_no,
-                                location_code = _locationCode,
+                                location_code = locationCode,
                                 barcode_no = barcode_no,
                                 transaction_type = 1,
                                 create_by = create_by
@@ -685,7 +637,7 @@ namespace SlaughterHouseClient.Receiving
                 lblMessage.Text = Constants.WEIGHT_WAITING;
 
                 lblWeight.Text = "0.00";
-                btnReceiveNo.Enabled = !isStart;
+                btnProduct.Enabled = !isStart;
                 btnStart.Enabled = !isStart;
                 btnStop.Enabled = isStart;
                 btnPrint.Enabled = !isStart;
@@ -837,18 +789,6 @@ namespace SlaughterHouseClient.Receiving
             }
         }
 
-        private void BtnTareWeight_Click(object sender, EventArgs e)
-        {
-            //if (_spManager.CurrentSerialSettings.PortName != "")
-            //    _spManager.StartListening();
-
-
-            isTare = true;
-
-            //lblWeight.Text = 0.0.ToFormat2Double();
-
-        }
-
         private void TimerMinWeight_Tick(object sender, EventArgs e)
         {
 
@@ -878,7 +818,50 @@ namespace SlaughterHouseClient.Receiving
             }
         }
 
+        private void btnZeroWeight_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    serialPort1.Write("Z \r\n");
+                }
+            }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
+        private void btnProduct_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var frm = new Form_LookupProduct();
+
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    productCode = frm.ProductCode;
+                    LoadProduct();
+                    //LoadData(frm.ReceiveNo);
+                    //LoadBomItem(bom.bom_code);
+
+                    //lblMessage.Text = Constants.PRODUCT_WAITING;
+                    //int stock_qty = 0;
+                    //decimal stock_wgh = 0;
+
+                    ////int remain_qty = lblSwineQty.Text.ToInt16() - stock_qty;
+                    //lblStockQty.Text = stock_qty.ToComma();
+                    //lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
+                    ////lblRemainQty.Text = remain_qty.ToComma();
+                }
+            }
+            catch (Exception ex)
+            {
+                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                toastNotification.Show();
+            }
+        }
     }
 }

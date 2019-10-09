@@ -70,6 +70,7 @@
             this.lblStable = new System.Windows.Forms.Label();
             this.lblMaxWeight = new System.Windows.Forms.Label();
             this.lblMinWeight = new System.Windows.Forms.Label();
+            this.tx = new System.Windows.Forms.TextBox();
             this.panelHeader.SuspendLayout();
             this.plSimulator.SuspendLayout();
             this.SuspendLayout();
@@ -397,12 +398,13 @@
             // 
             // plSimulator
             // 
+            this.plSimulator.Controls.Add(this.tx);
             this.plSimulator.Controls.Add(this.btnSetWgh);
             this.plSimulator.Controls.Add(this.txtSimWeight);
             this.plSimulator.Controls.Add(this.btnZero);
-            this.plSimulator.Location = new System.Drawing.Point(199, 158);
+            this.plSimulator.Location = new System.Drawing.Point(89, 157);
             this.plSimulator.Name = "plSimulator";
-            this.plSimulator.Size = new System.Drawing.Size(238, 126);
+            this.plSimulator.Size = new System.Drawing.Size(335, 190);
             this.plSimulator.TabIndex = 58;
             this.plSimulator.TabStop = false;
             this.plSimulator.Text = "Simulator";
@@ -524,14 +526,22 @@
             this.lblMinWeight.Text = "0.00";
             this.lblMinWeight.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // tx
+            // 
+            this.tx.Location = new System.Drawing.Point(6, 111);
+            this.tx.Multiline = true;
+            this.tx.Name = "tx";
+            this.tx.Size = new System.Drawing.Size(275, 70);
+            this.tx.TabIndex = 80;
+            // 
             // Form_Carcass
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1024, 768);
             this.Controls.Add(this.lblMaxWeight);
-            this.Controls.Add(this.lblMinWeight);
             this.Controls.Add(this.plSimulator);
+            this.Controls.Add(this.lblMinWeight);
             this.Controls.Add(this.lblStable);
             this.Controls.Add(this.btnAcceptWeight);
             this.Controls.Add(this.btnStop);
@@ -565,7 +575,6 @@
             this.MinimizeBox = false;
             this.Name = "Form_Carcass";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "รับหมูเป็น";
             this.panelHeader.ResumeLayout(false);
             this.plSimulator.ResumeLayout(false);
             this.plSimulator.PerformLayout();
@@ -616,6 +625,7 @@
         private System.Windows.Forms.Label lblStable;
         private System.Windows.Forms.Label lblMaxWeight;
         private System.Windows.Forms.Label lblMinWeight;
+        private System.Windows.Forms.TextBox tx;
     }
 }
 

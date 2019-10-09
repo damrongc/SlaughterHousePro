@@ -107,10 +107,7 @@ namespace SlaughterHouseClient.Receiving
         {
             if (lockWeight == false)
             {
-
                 double num = 0.0;
-
-
                 if (DataInvoke.Length == 40)
                 {
 
@@ -445,6 +442,7 @@ namespace SlaughterHouseClient.Receiving
             try
             {
                 var receive_wgh = lblWeight.Text.ToDecimal();
+                string create_by = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
                     //update receive
@@ -469,7 +467,7 @@ namespace SlaughterHouseClient.Receiving
                         receive_wgh = receive_wgh,
                         chill_qty = 0,
                         chill_wgh = 0,
-                        create_by = Constants.CREATE_BY
+                        create_by = create_by
 
                     };
 
