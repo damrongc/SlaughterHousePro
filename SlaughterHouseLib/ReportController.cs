@@ -159,7 +159,7 @@ namespace SlaughterHouseLib
             }
         }
 
-        public static DataSet GetDataReportStockBalance(DateTime invoiceDatePeriod)
+        public static DataSet GetDataReportStockBalance(DateTime transactionDate)
         {
             try
             {
@@ -180,7 +180,7 @@ namespace SlaughterHouseLib
                                     uw.unit_name as unit_name_wgh,
                                 pl.plant_name,
                                 pl.address AS plant_address,
-	                                DATE_FORMAT(@date_period, '%m-%Y')  as show_date_period
+	                                DATE_FORMAT(@date_period, '%d-%m-%Y')  as show_date_period
                                 FROM
 	                                stock sk,
                                     product p,
@@ -188,7 +188,7 @@ namespace SlaughterHouseLib
 	                                unit_of_measurement uw,
                                     plant pl
                                 where 1=1
-                                and DATE_FORMAT(sk.stock_date, '%Y-%m-01') = DATE_FORMAT(@date_period, '%Y-%m-01')
+                                and DATE_FORMAT(sk.stock_date, '%Y-%m-%d') = DATE_FORMAT(@date_period, '%Y-%m-%d')
                                 and sk.product_code = p.product_code
                                 and uq.unit_code = p.unit_of_qty
                                 and uw.unit_code = p.unit_of_wgh
@@ -198,8 +198,8 @@ namespace SlaughterHouseLib
 	                                sk.lot_no
                                 ";
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("date_period", invoiceDatePeriod.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("show_date_period", invoiceDatePeriod.ToString("dd/MM/yyyy"));
+                    cmd.Parameters.AddWithValue("date_period", transactionDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("show_date_period", transactionDate.ToString("dd/MM/yyyy"));
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);

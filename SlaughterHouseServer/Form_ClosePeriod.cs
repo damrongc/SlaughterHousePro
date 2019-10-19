@@ -17,29 +17,43 @@ namespace SlaughterHouseServer
         private void UserSettingsComponent()
         {
             btnClosePeriod.Click += BtnClosePeriod_Click;
-            dtpPeriodDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            //dtpPeriodDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dtpPeriodDate.Enabled = false;
+            LoadProductionDate(); 
         }
 
+        private void LoadProductionDate()
+        {
+            try
+            {
+                DateTime res = (DateTime)StockController.GetProductionDate();
+                dtpPeriodDate.Value = res;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error LoadProductionDate", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+         
         private void BtnClosePeriod_Click(object sender, System.EventArgs e)
         {
             try
             {
-                DialogResult result = MessageBox.Show("ต้องการยกยอดสต็อกใช่ไหม ?", "ยืนยัน ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("ต้องการปิดวันใช่ไหม ?", "ยืนยัน ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    int res = StockController.GenStockBf(dtpPeriodDate.Value);
-                    MessageBox.Show($"สร้างสต็อกยกมาเดือน {Convert.ToDateTime(dtpPeriodDate.Value).AddMonths(1).ToString(("MM/yyyy"))} ทั้งหมด {res} รายการ",
+                    int res = StockController.GenStockBfDay(dtpPeriodDate.Value);
+                    LoadProductionDate(); 
+                    MessageBox.Show($"สร้างสต็อกยกมาวัน {Convert.ToDateTime(dtpPeriodDate.Value).ToString(("dd/MM/yyyy"))} ทั้งหมด {res} รายการ",
                         "Complete",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-            }
-
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } 
         }
     }
 }
