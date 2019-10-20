@@ -114,8 +114,7 @@ namespace SlaughterHouseServer
         private void BtnSaveAndNew_Click(object sender, System.EventArgs e)
         {
             try
-            {
-
+            { 
                 var farm = new Farm
                 {
                     FarmCode = txtFarmCode.Text.Trim(),

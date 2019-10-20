@@ -19,7 +19,7 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT b.bom_code, b.product_code, p.product_name, b.active, b.create_at, b.create_by ");
+                    sb.Append("SELECT b.bom_code, b.product_code, p.product_name, b.active, b.create_at, b.create_by, b.modified_at, b.modified_by ");
                     sb.Append("FROM bom b, product p ");
                     sb.Append("WHERE b.product_code = p.product_code and b.bom_code > 0 ");
                     if (!string.IsNullOrEmpty(keyword))
@@ -54,9 +54,9 @@ namespace SlaughterHouseLib
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
-                                }).ToList();
-                    //ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
-                    //ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
+                                    ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
+                                    ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
+                                }).ToList(); 
 
                     //GetData(ds.Tables[0]);
                     return coll;

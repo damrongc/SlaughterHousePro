@@ -222,6 +222,11 @@ namespace SlaughterHouseServer
         {
             try
             {
+                if (dtBomItem.Rows.Count == 0)
+                {
+                    throw new Exception("กรุณาเลือกสินค้าย่อย");
+                }
+
                 var bomItems = new List<BomItem>();
                 int seq = 0;
                 foreach (DataRow row in dtBomItem.Rows)

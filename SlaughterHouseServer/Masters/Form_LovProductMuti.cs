@@ -41,7 +41,10 @@ namespace SlaughterHouseServer
             this.Shown += Form_Shown;
 
             this.comboxProductGroup.SelectedIndexChanged += ComboxProductGroup_SelectedIndexChanged;
-
+            //KeyDown 
+            txtProductCode.KeyDown += TxtProductCode_KeyDown;
+            txtProductName.KeyDown += TxtProductName_KeyDown;
+            comboxProductGroup.KeyDown += ComboxProductGroup_KeyDown;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
@@ -52,14 +55,29 @@ namespace SlaughterHouseServer
             FillProductGroup();
             LoadData();
         }
-        private void BtnSearch_Click(object sender, EventArgs e)
+         
+        #region Event Focus, KeyDown, SelectedIndexChanged
+        private void ComboxProductGroup_KeyDown(object sender, KeyEventArgs e)
         {
-            LoadData();
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtProductCode.Focus();
+            }
         }
-
-
-        #region Event Focus, KeyDown
-
+        private void TxtProductCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoadData();
+            }
+        }
+        private void TxtProductName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoadData();
+            }
+        }
         private void ComboxProductGroup_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             LoadData();
@@ -85,6 +103,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
             gv.Columns[ConstColumns.UNIT_NAME_QTY].ReadOnly = true;
             gv.Columns[ConstColumns.UNIT_NAME_WGH].ReadOnly = true;
+            gv.Columns[ConstColumns.PACKING_SIZE].ReadOnly = true;
 
             gv.Columns[ConstColumns.SELECT_COL].ReadOnly = false;
 
@@ -97,7 +116,10 @@ namespace SlaughterHouseServer
         #endregion
 
         #region Event Click
-
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
