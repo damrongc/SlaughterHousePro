@@ -363,8 +363,7 @@ namespace SlaughterHouseLib
             }
 
         }
-
-        public static object GetProductionDate( )
+        public static object GetProductionDate()
         {
             try
             {
@@ -396,7 +395,53 @@ namespace SlaughterHouseLib
             }
 
         }
+        public static DataTable  GetStockBfOfDay(DateTime pDate)
+        {
+            try
+            { 
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    string sql = @" SELECT s.stock_date,
+                                    s.stock_no,
+                                    s.stock_item,
+                                    loc.location_name,
+                                    s.product_code,
+                                    p.product_name,
+                                    s.lot_no,
+                                    s.stock_qty as qty,
+                                    s.stock_wgh as wgh
+                                FROM stock s,
+                                  location loc,
+                                  product p 
+                                where s.stock_date = @stock_date
+                                and s.location_code = loc.location_code
+                                and s.transaction_type ='1'
+                                and s.ref_document_type = 'BF' 
+                                and s.product_code = p.product_code ";
 
+                    var cmd = new MySqlCommand(sql, conn); 
+                    cmd.Parameters.AddWithValue("stock_date", pDate.ToString("yyyy-MM-dd"));
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        return ds.Tables[0];
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
         public static int GenStockBfDay(DateTime pDate)
         {
             try
@@ -417,6 +462,25 @@ namespace SlaughterHouseLib
             }
 
         }
+        public static int CancelStockBfDay(DateTime pDate)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    MySqlCommand cmd = new MySqlCommand("CancelStockBfDay", conn);
 
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new MySqlParameter("pDate", pDate.ToString("yyyy-MM-dd")));
+                    conn.Open();
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
     }
 }

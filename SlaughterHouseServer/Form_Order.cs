@@ -103,6 +103,8 @@ namespace SlaughterHouseServer
 
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            gvDt.Columns[ConstColumns.ORDER_NO].HeaderText = "เลขที่ใบสั่งขาย";
+
             gvDt.Columns[ConstColumns.SEQ].HeaderText = "ลำดับ";
             gvDt.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gvDt.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "สินค้า";

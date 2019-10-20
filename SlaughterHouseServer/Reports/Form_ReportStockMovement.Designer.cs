@@ -121,7 +121,7 @@
             this.rptViewer.TabIndex = 4;
             this.rptViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
-            // Form_Report_Stock_Movement
+            // Form_ReportStockMovement
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1184, 661);
@@ -130,7 +130,7 @@
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimizeBox = false;
-            this.Name = "Form_Report_Stock_Movement";
+            this.Name = "Form_ReportStockMovement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_Report_Stock_Movement";
             this.groupBoxReportName.ResumeLayout(false);

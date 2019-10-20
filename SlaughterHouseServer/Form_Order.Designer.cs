@@ -110,7 +110,7 @@
             this.gvDt.AllowUserToResizeColumns = false;
             this.gvDt.AllowUserToResizeRows = false;
             this.gvDt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gvDt.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

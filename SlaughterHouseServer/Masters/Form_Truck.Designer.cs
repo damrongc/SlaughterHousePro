@@ -34,11 +34,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.TxtFilter = new System.Windows.Forms.TextBox();
             this.BtnSearch = new System.Windows.Forms.Button();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
@@ -111,9 +111,18 @@
             this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
+            this.gv.ReadOnly = true;
             this.gv.RowHeadersWidth = 10;
             this.gv.Size = new System.Drawing.Size(1368, 656);
             this.gv.TabIndex = 9;
+            // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "แก้ไข";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.Name = "Edit";
+            this.Edit.ReadOnly = true;
+            this.Edit.Width = 58;
             // 
             // panel3
             // 
@@ -161,13 +170,6 @@
             this.BtnSearch.Text = "ค้นข้อมูล";
             this.BtnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnSearch.UseVisualStyleBackColor = false;
-            // 
-            // Edit
-            // 
-            this.Edit.HeaderText = "แก้ไข";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.Name = "Edit";
-            this.Edit.Width = 58;
             // 
             // Form_Truck
             // 

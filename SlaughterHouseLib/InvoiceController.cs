@@ -485,7 +485,7 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"select a.seq,
+                    var sql = @"select a.Invoice_no, a.seq,
 								a.product_code,
 								b.product_name,
 								a.sale_unit_method,
