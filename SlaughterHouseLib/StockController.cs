@@ -285,7 +285,7 @@ namespace SlaughterHouseLib
                     cmd.ExecuteNonQuery();
                 }
 
-                return true; 
+                return true;
             }
             catch (Exception)
             {
@@ -316,7 +316,7 @@ namespace SlaughterHouseLib
                         if (lotNo != "") {
                             sql += " and stk.lot_no = @lot_no ";
                         }
-                                 
+
                         sql += @" and stk.product_code = p.product_code
                                 and stk.location_code = loc.location_code
                                 group by p.product_name, stk.lot_no,  stk.transaction_type, loc.location_code, loc.location_name, p.issue_unit_method, p.sale_unit_method
@@ -332,7 +332,7 @@ namespace SlaughterHouseLib
                     if (lotNo != "")
                     {
                         cmd.Parameters.AddWithValue("lot_no", lotNo);
-                    } 
+                    }
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();
@@ -374,11 +374,11 @@ namespace SlaughterHouseLib
                     string sql = @" SELECT production_date FROM slaughterhouse.plant
                                    where plant_id = 1 ";
 
-                    var cmd = new MySqlCommand(sql, conn); 
+                    var cmd = new MySqlCommand(sql, conn);
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();
-                    da.Fill(ds); 
+                    da.Fill(ds);
                     if (ds.Tables[0].Rows.Count > 0)
                     {
                         return (DateTime)ds.Tables[0].Rows[0]["production_date"];
@@ -398,7 +398,7 @@ namespace SlaughterHouseLib
         public static DataTable  GetStockBfOfDay(DateTime pDate)
         {
             try
-            { 
+            {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -420,7 +420,7 @@ namespace SlaughterHouseLib
                                 and s.ref_document_type = 'BF' 
                                 and s.product_code = p.product_code ";
 
-                    var cmd = new MySqlCommand(sql, conn); 
+                    var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("stock_date", pDate.ToString("yyyy-MM-dd"));
                     var da = new MySqlDataAdapter(cmd);
 
@@ -453,7 +453,7 @@ namespace SlaughterHouseLib
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new MySqlParameter("pDate", pDate.ToString("yyyy-MM-dd")));
                     conn.Open();
-                    return cmd.ExecuteNonQuery();  
+                    return cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception)
@@ -468,8 +468,11 @@ namespace SlaughterHouseLib
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
+                    if (CheckHasTransaction(pDate) == true)
+                    {
+                        throw new Exception("ไม่สามารถย้อนปิดวันได้เพราะมีข้อมูลของวันที่ " + pDate.ToString("yyyy-MM-dd") + " แล้ว");
+                    }
                     MySqlCommand cmd = new MySqlCommand("CancelStockBfDay", conn);
-
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new MySqlParameter("pDate", pDate.ToString("yyyy-MM-dd")));
                     conn.Open();
@@ -481,6 +484,41 @@ namespace SlaughterHouseLib
                 throw;
             }
 
+        }
+        public static bool CheckHasTransaction(DateTime pDate)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = "";
+
+                        sql = @"SELECT count(1) as count_row
+                                FROM stock
+                                where stock_date = @stock_date
+                                and ref_document_type <> 'BF'
+                            ";
+
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("stock_date", pDate.ToString("yyyy-MM-dd"));
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    bool res = false;
+                    if (Convert.ToInt32(ds.Tables[0].Rows[0][0]) > 0)
+                    {
+                        res = true;
+                    }
+
+                    return res;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
