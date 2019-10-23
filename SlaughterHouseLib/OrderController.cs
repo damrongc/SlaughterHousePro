@@ -414,7 +414,6 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-
         public static bool CheckUseOrder(string orderNo)
         {
             bool res = false;
@@ -447,7 +446,6 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-
     }
     public static class OrderItemController
     {
@@ -646,7 +644,5 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-
-
-    }
+    } 
 }

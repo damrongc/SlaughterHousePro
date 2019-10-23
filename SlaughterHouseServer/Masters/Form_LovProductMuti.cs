@@ -41,7 +41,7 @@ namespace SlaughterHouseServer
             this.Shown += Form_Shown;
 
             this.comboxProductGroup.SelectedIndexChanged += ComboxProductGroup_SelectedIndexChanged;
-            //KeyDown 
+            //KeyDown
             txtProductCode.KeyDown += TxtProductCode_KeyDown;
             txtProductName.KeyDown += TxtProductName_KeyDown;
             comboxProductGroup.KeyDown += ComboxProductGroup_KeyDown;
@@ -55,7 +55,7 @@ namespace SlaughterHouseServer
             FillProductGroup();
             LoadData();
         }
-         
+
         #region Event Focus, KeyDown, SelectedIndexChanged
         private void ComboxProductGroup_KeyDown(object sender, KeyEventArgs e)
         {
