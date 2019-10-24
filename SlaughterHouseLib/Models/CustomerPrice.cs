@@ -30,9 +30,6 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-
-
-
                     sb.Append("SELECT a.customer_code, c.customer_name, a.product_code,");
                     sb.Append(" b.product_name,");
                     sb.Append(" a.start_date,");

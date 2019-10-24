@@ -18,6 +18,7 @@ namespace SlaughterHouseClient
         public order()
         {
             this.orders_item = new HashSet<orders_item>();
+            this.product_slip = new HashSet<product_slip>();
         }
     
         public string order_no { get; set; }
@@ -35,5 +36,7 @@ namespace SlaughterHouseClient
         public virtual customer customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<orders_item> orders_item { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<product_slip> product_slip { get; set; }
     }
 }

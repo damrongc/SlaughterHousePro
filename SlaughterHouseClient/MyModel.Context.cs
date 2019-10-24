@@ -30,25 +30,29 @@ namespace SlaughterHouseClient
         public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<document_generate> document_generate { get; set; }
         public virtual DbSet<farm> farms { get; set; }
-        public virtual DbSet<invoice> invoices { get; set; }
         public virtual DbSet<invoice_item> invoice_item { get; set; }
         public virtual DbSet<location> locations { get; set; }
         public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<orders_item> orders_item { get; set; }
         public virtual DbSet<plant> plants { get; set; }
-        public virtual DbSet<product> products { get; set; }
         public virtual DbSet<product_group> product_group { get; set; }
         public virtual DbSet<product_price> product_price { get; set; }
         public virtual DbSet<production_order> production_order { get; set; }
         public virtual DbSet<production_order_item> production_order_item { get; set; }
         public virtual DbSet<receive> receives { get; set; }
         public virtual DbSet<stock_item_running> stock_item_running { get; set; }
-        public virtual DbSet<transport> transports { get; set; }
-        public virtual DbSet<transport_item> transport_item { get; set; }
         public virtual DbSet<unit_of_measurement> unit_of_measurement { get; set; }
         public virtual DbSet<bom> boms { get; set; }
         public virtual DbSet<bom_item> bom_item { get; set; }
-        public virtual DbSet<stock> stocks { get; set; }
         public virtual DbSet<receive_item> receive_item { get; set; }
+        public virtual DbSet<customer_price> customer_price { get; set; }
+        public virtual DbSet<invoice> invoices { get; set; }
+        public virtual DbSet<product_slip> product_slip { get; set; }
+        public virtual DbSet<product_slip_item> product_slip_item { get; set; }
+        public virtual DbSet<stock> stocks { get; set; }
+        public virtual DbSet<truck> trucks { get; set; }
+        public virtual DbSet<product> products { get; set; }
+        public virtual DbSet<transport> transports { get; set; }
+        public virtual DbSet<transport_item> transport_item { get; set; }
     }
 }

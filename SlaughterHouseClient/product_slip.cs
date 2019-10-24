@@ -12,33 +12,26 @@ namespace SlaughterHouseClient
     using System;
     using System.Collections.Generic;
     
-    public partial class invoice
+    public partial class product_slip
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public invoice()
+        public product_slip()
         {
-            this.invoice_item = new HashSet<invoice_item>();
+            this.product_slip_item = new HashSet<product_slip_item>();
         }
     
-        public string invoice_no { get; set; }
-        public System.DateTime invoice_date { get; set; }
+        public string product_slip_no { get; set; }
+        public System.DateTime product_slip_date { get; set; }
         public string ref_document_no { get; set; }
-        public string customer_code { get; set; }
-        public decimal gross_amt { get; set; }
-        public decimal disc_amt { get; set; }
-        public decimal disc_amt_bill { get; set; }
-        public decimal vat_rate { get; set; }
-        public decimal vat_amt { get; set; }
-        public decimal net_amt { get; set; }
-        public int invoice_flag { get; set; }
-        public string comments { get; set; }
+        public int product_slip_flag { get; set; }
         public bool active { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
     
+        public virtual order order { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<invoice_item> invoice_item { get; set; }
+        public virtual ICollection<product_slip_item> product_slip_item { get; set; }
     }
 }

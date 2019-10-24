@@ -33,7 +33,6 @@
             this.lblCurrentDatetime = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dragControl1 = new DragControl();
             this.btnOrderNo = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.lblOrderNo = new System.Windows.Forms.Label();
@@ -46,8 +45,13 @@
             this.label8 = new System.Windows.Forms.Label();
             this.lblLotNo = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnTruckNo = new System.Windows.Forms.Button();
+            this.lblTruckNo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
+            this.dragControl1 = new DragControl();
+            this.btnView = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
@@ -110,10 +114,6 @@
             this.label1.Text = "จ่ายชิ้นส่วน";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // dragControl1
-            // 
-            this.dragControl1.SelectControl = this.panelHeader;
-            // 
             // btnOrderNo
             // 
             this.btnOrderNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
@@ -123,9 +123,9 @@
             this.btnOrderNo.ForeColor = System.Drawing.Color.White;
             this.btnOrderNo.Location = new System.Drawing.Point(263, 90);
             this.btnOrderNo.Name = "btnOrderNo";
-            this.btnOrderNo.Size = new System.Drawing.Size(146, 43);
+            this.btnOrderNo.Size = new System.Drawing.Size(91, 43);
             this.btnOrderNo.TabIndex = 7;
-            this.btnOrderNo.Text = "เลือกข้อมูล";
+            this.btnOrderNo.Text = "เลือก";
             this.btnOrderNo.UseVisualStyleBackColor = false;
             this.btnOrderNo.Click += new System.EventHandler(this.BtnOrderNo_Click);
             // 
@@ -133,7 +133,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label5.Location = new System.Drawing.Point(18, 57);
+            this.label5.Location = new System.Drawing.Point(12, 57);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(128, 33);
             this.label5.TabIndex = 8;
@@ -168,7 +168,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label2.Location = new System.Drawing.Point(415, 57);
+            this.label2.Location = new System.Drawing.Point(354, 57);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 33);
             this.label2.TabIndex = 33;
@@ -181,26 +181,29 @@
             this.lblCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCustomer.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblCustomer.ForeColor = System.Drawing.Color.Black;
-            this.lblCustomer.Location = new System.Drawing.Point(421, 90);
+            this.lblCustomer.Location = new System.Drawing.Point(360, 90);
             this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(591, 43);
+            this.lblCustomer.Size = new System.Drawing.Size(388, 43);
             this.lblCustomer.TabIndex = 34;
             // 
             // txtBarcodeNo
             // 
-            this.txtBarcodeNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
-            this.txtBarcodeNo.Font = new System.Drawing.Font("Kanit", 16F);
+            this.txtBarcodeNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(185)))), ((int)(((byte)(0)))));
+            this.txtBarcodeNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBarcodeNo.Font = new System.Drawing.Font("Kanit", 18F);
             this.txtBarcodeNo.ForeColor = System.Drawing.Color.White;
-            this.txtBarcodeNo.Location = new System.Drawing.Point(710, 169);
+            this.txtBarcodeNo.Location = new System.Drawing.Point(490, 169);
             this.txtBarcodeNo.Name = "txtBarcodeNo";
-            this.txtBarcodeNo.Size = new System.Drawing.Size(302, 39);
+            this.txtBarcodeNo.Size = new System.Drawing.Size(258, 43);
             this.txtBarcodeNo.TabIndex = 68;
+            this.txtBarcodeNo.Text = "0000000000";
+            this.txtBarcodeNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label6.Location = new System.Drawing.Point(710, 136);
+            this.label6.Location = new System.Drawing.Point(484, 134);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 33);
             this.label6.TabIndex = 67;
@@ -211,18 +214,19 @@
             this.lblProduct.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblProduct.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblProduct.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblProduct.Font = new System.Drawing.Font("Kanit", 20.25F);
             this.lblProduct.ForeColor = System.Drawing.Color.Black;
             this.lblProduct.Location = new System.Drawing.Point(18, 169);
             this.lblProduct.Name = "lblProduct";
-            this.lblProduct.Size = new System.Drawing.Size(391, 43);
+            this.lblProduct.Size = new System.Drawing.Size(239, 43);
             this.lblProduct.TabIndex = 66;
+            this.lblProduct.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label8.Location = new System.Drawing.Point(12, 133);
+            this.label8.Location = new System.Drawing.Point(12, 136);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 33);
             this.label8.TabIndex = 65;
@@ -233,32 +237,68 @@
             this.lblLotNo.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblLotNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblLotNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblLotNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblLotNo.Font = new System.Drawing.Font("Kanit", 20.25F);
             this.lblLotNo.ForeColor = System.Drawing.Color.Black;
-            this.lblLotNo.Location = new System.Drawing.Point(421, 169);
+            this.lblLotNo.Location = new System.Drawing.Point(263, 169);
             this.lblLotNo.Name = "lblLotNo";
-            this.lblLotNo.Size = new System.Drawing.Size(283, 43);
+            this.lblLotNo.Size = new System.Drawing.Size(221, 43);
             this.lblLotNo.TabIndex = 64;
+            this.lblLotNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label4.Location = new System.Drawing.Point(415, 136);
+            this.label4.Location = new System.Drawing.Point(257, 136);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 33);
             this.label4.TabIndex = 63;
             this.label4.Text = "Lot No";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label3.Location = new System.Drawing.Point(748, 57);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(106, 33);
+            this.label3.TabIndex = 70;
+            this.label3.Text = "ทะเบียนรถ";
+            // 
+            // btnTruckNo
+            // 
+            this.btnTruckNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
+            this.btnTruckNo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnTruckNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTruckNo.Font = new System.Drawing.Font("Kanit", 16F);
+            this.btnTruckNo.ForeColor = System.Drawing.Color.White;
+            this.btnTruckNo.Image = ((System.Drawing.Image)(resources.GetObject("btnTruckNo.Image")));
+            this.btnTruckNo.Location = new System.Drawing.Point(948, 90);
+            this.btnTruckNo.Name = "btnTruckNo";
+            this.btnTruckNo.Size = new System.Drawing.Size(64, 43);
+            this.btnTruckNo.TabIndex = 71;
+            this.btnTruckNo.UseVisualStyleBackColor = false;
+            this.btnTruckNo.Click += new System.EventHandler(this.btnTruckNo_Click);
+            // 
+            // lblTruckNo
+            // 
+            this.lblTruckNo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblTruckNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblTruckNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTruckNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblTruckNo.ForeColor = System.Drawing.Color.Black;
+            this.lblTruckNo.Location = new System.Drawing.Point(754, 90);
+            this.lblTruckNo.Name = "lblTruckNo";
+            this.lblTruckNo.Size = new System.Drawing.Size(188, 43);
+            this.lblTruckNo.TabIndex = 72;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.gv);
-            this.panel1.Font = new System.Drawing.Font("Kanit", 16F);
-            this.panel1.Location = new System.Drawing.Point(18, 215);
+            this.panel1.Location = new System.Drawing.Point(18, 218);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(994, 517);
-            this.panel1.TabIndex = 69;
+            this.panel1.Size = new System.Drawing.Size(994, 514);
+            this.panel1.TabIndex = 73;
             // 
             // gv
             // 
@@ -266,27 +306,48 @@
             this.gv.AllowUserToDeleteRows = false;
             this.gv.AllowUserToResizeColumns = false;
             this.gv.AllowUserToResizeRows = false;
-            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gv.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.gv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gv.Location = new System.Drawing.Point(5, 5);
+            this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.MultiSelect = false;
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv.Size = new System.Drawing.Size(984, 507);
+            this.gv.Size = new System.Drawing.Size(994, 514);
             this.gv.TabIndex = 11;
+            // 
+            // dragControl1
+            // 
+            this.dragControl1.SelectControl = this.panelHeader;
+            // 
+            // btnView
+            // 
+            this.btnView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
+            this.btnView.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnView.Font = new System.Drawing.Font("Kanit", 16F);
+            this.btnView.ForeColor = System.Drawing.Color.White;
+            this.btnView.Image = ((System.Drawing.Image)(resources.GetObject("btnView.Image")));
+            this.btnView.Location = new System.Drawing.Point(754, 169);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(188, 43);
+            this.btnView.TabIndex = 75;
+            this.btnView.UseVisualStyleBackColor = false;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // Form_MainProduct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.btnView);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.lblTruckNo);
+            this.Controls.Add(this.btnTruckNo);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtBarcodeNo);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lblProduct);
@@ -306,7 +367,6 @@
             this.MinimizeBox = false;
             this.Name = "Form_MainProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "รับหมูเป็น";
             this.panelHeader.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
@@ -334,8 +394,12 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblLotNo;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnTruckNo;
+        private System.Windows.Forms.Label lblTruckNo;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView gv;
+        private System.Windows.Forms.Button btnView;
     }
 }
 

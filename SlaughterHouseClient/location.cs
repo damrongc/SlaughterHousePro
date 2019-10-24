@@ -17,6 +17,7 @@ namespace SlaughterHouseClient
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public location()
         {
+            this.product_slip_item = new HashSet<product_slip_item>();
             this.stocks = new HashSet<stock>();
         }
     
@@ -28,6 +29,8 @@ namespace SlaughterHouseClient
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<product_slip_item> product_slip_item { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock> stocks { get; set; }
     }

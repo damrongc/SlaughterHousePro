@@ -37,9 +37,6 @@ namespace SlaughterHouseClient.Receiving
             InitializeComponent();
             UserInitialization();
         }
-
-
-
         private void Form_Load(object sender, EventArgs e)
         {
             try
@@ -371,6 +368,7 @@ namespace SlaughterHouseClient.Receiving
             try
             {
                 var weight = lblWeight.Text.ToDecimal();
+                string create_by = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
                     //update receive
@@ -396,7 +394,7 @@ namespace SlaughterHouseClient.Receiving
                         receive_wgh = weight,
                         chill_qty = 0,
                         chill_wgh = 0,
-                        create_by = Constants.CREATE_BY
+                        create_by = create_by
 
                     };
 

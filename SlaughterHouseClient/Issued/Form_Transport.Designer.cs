@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseClient.Issued
 {
-    partial class Form_Orders
+    partial class Form_Transport
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Orders));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Transport));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
+            this.colBarcodeNo = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
@@ -58,7 +59,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(327, 44);
             this.label1.TabIndex = 16;
-            this.label1.Text = "เอกสารใบสั่งขาย";
+            this.label1.Text = "รายการขนส่ง";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnClose
@@ -104,6 +105,8 @@
             this.gv.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.gv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colBarcodeNo});
             this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv.Location = new System.Drawing.Point(10, 10);
             this.gv.MultiSelect = false;
@@ -114,7 +117,14 @@
             this.gv.Size = new System.Drawing.Size(1004, 704);
             this.gv.TabIndex = 10;
             // 
-            // Form_Orders
+            // colBarcodeNo
+            // 
+            this.colBarcodeNo.DataPropertyName = "barcode_no";
+            this.colBarcodeNo.HeaderText = "ยกเลิก";
+            this.colBarcodeNo.Name = "colBarcodeNo";
+            this.colBarcodeNo.Width = 80;
+            // 
+            // Form_Transport
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1024, 768);
@@ -122,7 +132,7 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Kanit", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form_Orders";
+            this.Name = "Form_Transport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -138,5 +148,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView gv;
+        private System.Windows.Forms.DataGridViewButtonColumn colBarcodeNo;
     }
 }

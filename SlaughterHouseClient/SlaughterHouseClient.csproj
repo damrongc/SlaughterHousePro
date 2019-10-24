@@ -95,6 +95,9 @@
     <Compile Include="customer.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="customer_price.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CustomMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,12 +132,17 @@
     <Compile Include="invoice_item.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Issued\CustomerOrder.cs" />
     <Compile Include="Issued\Form_ByProduct.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Issued\Form_ByProduct.Designer.cs">
       <DependentUpon>Form_ByProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Issued\Form_LookupTruck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Issued\Form_LookupTruck.Designer.cs">
+      <DependentUpon>Form_LookupTruck.cs</DependentUpon>
     </Compile>
     <Compile Include="Issued\Form_MainProduct.cs">
       <SubType>Form</SubType>
@@ -147,6 +155,12 @@
     </Compile>
     <Compile Include="Issued\Form_Carcass.Designer.cs">
       <DependentUpon>Form_Carcass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Issued\Form_Transport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Issued\Form_Transport.Designer.cs">
+      <DependentUpon>Form_Transport.cs</DependentUpon>
     </Compile>
     <Compile Include="Issued\Form_Orders.cs">
       <SubType>Form</SubType>
@@ -163,6 +177,8 @@
     <Compile Include="location.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerOrder.cs" />
+    <Compile Include="Models\CustomerTransport.cs" />
     <Compile Include="Models\StockLot.cs" />
     <Compile Include="MyModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -203,11 +219,35 @@
     <Compile Include="product_price.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="product_slip.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="product_slip_item.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="receive.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="receive_item.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Receiving\Form_LookupProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_LookupProduct.Designer.cs">
+      <DependentUpon>Form_LookupProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Receiving\Form_Barcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_Barcode.Designer.cs">
+      <DependentUpon>Form_Barcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Receiving\Form_ReceiveProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_ReceiveProduct.Designer.cs">
+      <DependentUpon>Form_ReceiveProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Receiving\Form_ByProductReceive.cs">
       <SubType>Form</SubType>
@@ -263,12 +303,6 @@
     <Compile Include="Receiving\Form_LookupSwine.Designer.cs">
       <DependentUpon>Form_LookupSwine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Receiving\Form_ReceiveLot.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Receiving\Form_ReceiveLot.Designer.cs">
-      <DependentUpon>Form_ReceiveLot.cs</DependentUpon>
-    </Compile>
     <Compile Include="Receiving\Form_Receive.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +347,9 @@
     <Compile Include="transport_item.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="truck.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="unit_of_measurement.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -328,17 +365,32 @@
     <EmbeddedResource Include="Issued\Form_ByProduct.resx">
       <DependentUpon>Form_ByProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_LookupTruck.resx">
+      <DependentUpon>Form_LookupTruck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Issued\Form_MainProduct.resx">
       <DependentUpon>Form_MainProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Issued\Form_Carcass.resx">
       <DependentUpon>Form_Carcass.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_Transport.resx">
+      <DependentUpon>Form_Transport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Issued\Form_Orders.resx">
       <DependentUpon>Form_Orders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Issued\Form_Issued.resx">
       <DependentUpon>Form_Issued.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_LookupProduct.resx">
+      <DependentUpon>Form_LookupProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_Barcode.resx">
+      <DependentUpon>Form_Barcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_ReceiveProduct.resx">
+      <DependentUpon>Form_ReceiveProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_ByProductReceive.resx">
       <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
@@ -366,9 +418,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_LookupSwine.resx">
       <DependentUpon>Form_LookupSwine.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_ReceiveLot.resx">
-      <DependentUpon>Form_ReceiveLot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_Receive.resx">
       <DependentUpon>Form_Receive.cs</DependentUpon>

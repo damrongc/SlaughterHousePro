@@ -197,7 +197,6 @@ namespace SlaughterHouseClient.Receiving
 
                     if (barcode == null)
                     {
-
                         throw new Exception("ไม่พบข้อมูลบาร์โค็ดนี้!");
                     }
                     lblWeight.Text = barcode.wgh.ToFormat2Decimal();
@@ -211,17 +210,19 @@ namespace SlaughterHouseClient.Receiving
                         throw new Exception("ไม่พบข้อมูลบาร์โค็ดนี้!");
                     }
 
-                    var stock = db.stocks.Where(p => p.ref_document_no.Equals(receiveItem.receive_no)
-                                        && p.barcode_no.Equals(barcodeNo)).FirstOrDefault();
+                    var stock = db.stocks.Where(p => p.barcode_no.Equals(barcodeNo)
+                                        && p.transaction_type == 1).FirstOrDefault();
                     string stock_no = "";
-                    int stock_item = 1;
-                    var documentGenerate = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
+                    int stock_item = 0;
+                    //var documentGenerate = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
+                    var documentGenerate = db.document_generate.Find(Constants.STK);
                     //check stock_item_running
                     var stockItemRunning = db.stock_item_running.Where(p => p.doc_no.Equals(stock.stock_no)).SingleOrDefault();
                     if (stockItemRunning == null)
                     {
                         //get new stock doc no
                         stock_no = Constants.STK + documentGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
+                        stock_item = 1;
                     }
                     else
                     {

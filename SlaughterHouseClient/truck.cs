@@ -12,22 +12,14 @@ namespace SlaughterHouseClient
     using System;
     using System.Collections.Generic;
     
-    public partial class transport_item
+    public partial class truck
     {
-        public string transport_no { get; set; }
-        public string product_code { get; set; }
-        public int seq { get; set; }
-        public int transport_qty { get; set; }
-        public decimal transport_wgh { get; set; }
-        public string stock_no { get; set; }
-        public string lot_no { get; set; }
         public string truck_no { get; set; }
-        public long barcode_no { get; set; }
-        public int bom_code { get; set; }
-        public System.DateTime create_at { get; set; }
+        public string driver { get; set; }
+        public Nullable<bool> active { get; set; }
+        public Nullable<System.DateTime> create_at { get; set; }
         public string create_by { get; set; }
-    
-        public virtual product product { get; set; }
-        public virtual transport transport { get; set; }
+        public Nullable<System.DateTime> modified_at { get; set; }
+        public string modified_by { get; set; }
     }
 }
