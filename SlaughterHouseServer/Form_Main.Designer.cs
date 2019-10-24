@@ -145,7 +145,7 @@
             this.BtnClosePeriod.Name = "BtnClosePeriod";
             this.BtnClosePeriod.Size = new System.Drawing.Size(147, 50);
             this.BtnClosePeriod.TabIndex = 34;
-            this.BtnClosePeriod.Text = "ยกสต็อก";
+            this.BtnClosePeriod.Text = "ปิดวัน";
             this.BtnClosePeriod.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnClosePeriod.UseVisualStyleBackColor = false;
             // 

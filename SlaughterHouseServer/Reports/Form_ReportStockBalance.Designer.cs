@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ReportStockBalance));
             this.groupBoxReportName = new System.Windows.Forms.GroupBox();
             this.BtnShowReport = new System.Windows.Forms.Button();
-            this.dtpInvoiceDatePeriod = new System.Windows.Forms.DateTimePicker();
+            this.dtpInvoiceDate = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rptViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.groupBoxReportName.SuspendLayout();
@@ -41,14 +41,14 @@
             // groupBoxReportName
             // 
             this.groupBoxReportName.Controls.Add(this.BtnShowReport);
-            this.groupBoxReportName.Controls.Add(this.dtpInvoiceDatePeriod);
+            this.groupBoxReportName.Controls.Add(this.dtpInvoiceDate);
             this.groupBoxReportName.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxReportName.Location = new System.Drawing.Point(0, 0);
             this.groupBoxReportName.Name = "groupBoxReportName";
             this.groupBoxReportName.Size = new System.Drawing.Size(1184, 91);
             this.groupBoxReportName.TabIndex = 0;
             this.groupBoxReportName.TabStop = false;
-            this.groupBoxReportName.Text = "รายงานสต็อกคงเหลือ";
+            this.groupBoxReportName.Text = "รายงานสต็อกคงเหลือรายวัน";
             // 
             // BtnShowReport
             // 
@@ -66,15 +66,16 @@
             this.BtnShowReport.Text = "แสดงรายงาน";
             this.BtnShowReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnShowReport.UseVisualStyleBackColor = false;
+            this.BtnShowReport.Click += new System.EventHandler(this.BtnShowReport_Click_1);
             // 
-            // dtpInvoiceDatePeriod
+            // dtpInvoiceDate
             // 
-            this.dtpInvoiceDatePeriod.CustomFormat = "dd/MM/yyyy";
-            this.dtpInvoiceDatePeriod.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpInvoiceDatePeriod.Location = new System.Drawing.Point(12, 35);
-            this.dtpInvoiceDatePeriod.Name = "dtpInvoiceDatePeriod";
-            this.dtpInvoiceDatePeriod.Size = new System.Drawing.Size(177, 36);
-            this.dtpInvoiceDatePeriod.TabIndex = 11;
+            this.dtpInvoiceDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpInvoiceDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpInvoiceDate.Location = new System.Drawing.Point(12, 35);
+            this.dtpInvoiceDate.Name = "dtpInvoiceDate";
+            this.dtpInvoiceDate.Size = new System.Drawing.Size(177, 36);
+            this.dtpInvoiceDate.TabIndex = 11;
             // 
             // panel1
             // 
@@ -98,7 +99,7 @@
             this.rptViewer.TabIndex = 3;
             this.rptViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
-            // Form_Report_Stock_Balance
+            // Form_ReportStockBalance
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1184, 661);
@@ -107,7 +108,7 @@
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimizeBox = false;
-            this.Name = "Form_Report_Stock_Balance";
+            this.Name = "Form_ReportStockBalance";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_Report_Stock_Balance";
             this.groupBoxReportName.ResumeLayout(false);
@@ -120,7 +121,7 @@
 
         private System.Windows.Forms.GroupBox groupBoxReportName;
         private System.Windows.Forms.Button BtnShowReport;
-        private System.Windows.Forms.DateTimePicker dtpInvoiceDatePeriod;
+        private System.Windows.Forms.DateTimePicker dtpInvoiceDate;
         private System.Windows.Forms.Panel panel1;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer rptViewer;
     }

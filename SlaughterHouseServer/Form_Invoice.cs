@@ -73,6 +73,7 @@ namespace SlaughterHouseServer
 
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            gvDt.Columns[ConstColumns.INVOICE_NO].HeaderText = "เลขที่ใบแจ้งหนี้";
             gvDt.Columns[ConstColumns.SEQ].HeaderText = "ลำดับ";
             gvDt.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gvDt.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "สินค้า";
@@ -101,11 +102,10 @@ namespace SlaughterHouseServer
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-                string invoiceNo = gv.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string invoiceNo = gv.Rows[e.RowIndex].Cells[ConstColumns.INVOICE_NO].Value.ToString();
+                string orderNo = gv.Rows[e.RowIndex].Cells[ConstColumns.REF_DOCUMENT_NO ].Value.ToString();
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-
-
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
                     {
                         case "Edit":
@@ -121,7 +121,8 @@ namespace SlaughterHouseServer
                         case "Print":
                             var frmPrint = new Form_InvoiceReport
                             {
-                                invoiceNo = invoiceNo
+                                invoiceNo = invoiceNo,
+                                orderNo = orderNo
                             };
                             frmPrint.ShowDialog();
                             //if (frmPrint.ShowDialog() == DialogResult.OK)
@@ -146,15 +147,7 @@ namespace SlaughterHouseServer
         {
             LoadInvoice();
         }
-
-        //private void BtnAdd_Click(object sender, System.EventArgs e)
-        //{
-        //    var frm = new Form_InvoiceAddEdit();
-        //    if (frm.ShowDialog() == DialogResult.OK)
-        //    {
-        //        LoadInvoice();
-        //    }
-        //}
+         
         private void BtnRefSo_Click(object sender, System.EventArgs e)
         {
             var frmNew = new Form_InvoiceNew();

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.plMenu = new System.Windows.Forms.Panel();
-            this.BtnBom = new System.Windows.Forms.Button();
+            this.BtnTruck = new System.Windows.Forms.Button();
             this.BtnPriceList = new System.Windows.Forms.Button();
             this.BtnCustomer = new System.Windows.Forms.Button();
             this.BtnUnit = new System.Windows.Forms.Button();
@@ -37,6 +37,7 @@
             this.BtnProduct = new System.Windows.Forms.Button();
             this.BtnFarm = new System.Windows.Forms.Button();
             this.plContainer = new System.Windows.Forms.Panel();
+            this.BtnBom = new System.Windows.Forms.Button();
             this.plMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,6 +45,7 @@
             // 
             this.plMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
             this.plMenu.Controls.Add(this.BtnBom);
+            this.plMenu.Controls.Add(this.BtnTruck);
             this.plMenu.Controls.Add(this.BtnPriceList);
             this.plMenu.Controls.Add(this.BtnCustomer);
             this.plMenu.Controls.Add(this.BtnUnit);
@@ -56,19 +58,19 @@
             this.plMenu.Size = new System.Drawing.Size(165, 750);
             this.plMenu.TabIndex = 2;
             // 
-            // BtnBom
+            // BtnTruck
             // 
-            this.BtnBom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnBom.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnBom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBom.Font = new System.Drawing.Font("Kanit", 14.25F);
-            this.BtnBom.ForeColor = System.Drawing.Color.White;
-            this.BtnBom.Location = new System.Drawing.Point(0, 300);
-            this.BtnBom.Name = "BtnBom";
-            this.BtnBom.Size = new System.Drawing.Size(165, 50);
-            this.BtnBom.TabIndex = 6;
-            this.BtnBom.Text = "Bom";
-            this.BtnBom.UseVisualStyleBackColor = false;
+            this.BtnTruck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnTruck.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnTruck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnTruck.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnTruck.ForeColor = System.Drawing.Color.White;
+            this.BtnTruck.Location = new System.Drawing.Point(0, 300);
+            this.BtnTruck.Name = "BtnTruck";
+            this.BtnTruck.Size = new System.Drawing.Size(165, 50);
+            this.BtnTruck.TabIndex = 7;
+            this.BtnTruck.Text = "ทะเบียนรถ";
+            this.BtnTruck.UseVisualStyleBackColor = false;
             // 
             // BtnPriceList
             // 
@@ -162,6 +164,20 @@
             this.plContainer.Size = new System.Drawing.Size(1235, 750);
             this.plContainer.TabIndex = 3;
             // 
+            // BtnBom
+            // 
+            this.BtnBom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnBom.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnBom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBom.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnBom.ForeColor = System.Drawing.Color.White;
+            this.BtnBom.Location = new System.Drawing.Point(0, 350);
+            this.BtnBom.Name = "BtnBom";
+            this.BtnBom.Size = new System.Drawing.Size(165, 50);
+            this.BtnBom.TabIndex = 8;
+            this.BtnBom.Text = "Bom";
+            this.BtnBom.UseVisualStyleBackColor = false;
+            // 
             // Form_MasterMenu
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -187,6 +203,7 @@
         private System.Windows.Forms.Button BtnProduct;
         private System.Windows.Forms.Button BtnFarm;
         private System.Windows.Forms.Panel plContainer;
+        private System.Windows.Forms.Button BtnTruck;
         private System.Windows.Forms.Button BtnBom;
     }
 }

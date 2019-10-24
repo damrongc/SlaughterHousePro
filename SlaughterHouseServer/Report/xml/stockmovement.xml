@@ -36,91 +36,936 @@
     </xs:element>
   </xs:schema>
   <Table>
-    <stock_date>2019-11-01T00:00:00+07:00</stock_date>
-    <stock_no>BF20191001</stock_no>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
     <stock_item>1</stock_item>
-    <product_code>P001</product_code>
-    <product_name>หมูเป็น</product_name>
-    <lot_no>11927810510</lot_no>
-    <stock_qty>4</stock_qty>
-    <stock_wgh>82.00</stock_wgh>
-    <ref_document_type>BF</ref_document_type>
-    <ref_document_no>BF001</ref_document_no>
-    <lot_no1>11927810510</lot_no1>
-    <location_code>1</location_code>
-    <barcode_no>0</barcode_no>
-    <transaction_type>1</transaction_type>
-    <location_name>ลานพักหมูเป็น</location_name>
-    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
-    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
-    <date_str>01-11-2019</date_str>
-    <date_end>30-11-2019</date_end>
-    <transaction_type_name>รับ</transaction_type_name>
-  </Table>
-  <Table>
-    <stock_date>2019-11-01T00:00:00+07:00</stock_date>
-    <stock_no>BF20191001</stock_no>
-    <stock_item>2</stock_item>
-    <product_code>P004</product_code>
-    <product_name>เครื่องในขาว-ชุด</product_name>
-    <lot_no>11926612309</lot_no>
-    <stock_qty>3</stock_qty>
-    <stock_wgh>19.33</stock_wgh>
-    <ref_document_type>BF</ref_document_type>
-    <ref_document_no>BF001</ref_document_no>
-    <lot_no1>11926612309</lot_no1>
-    <location_code>4</location_code>
-    <barcode_no>0</barcode_no>
-    <transaction_type>1</transaction_type>
-    <location_name>ห้องเย็นเก็บเครื่องในขาว</location_name>
-    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
-    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
-    <date_str>01-11-2019</date_str>
-    <date_end>30-11-2019</date_end>
-    <transaction_type_name>รับ</transaction_type_name>
-  </Table>
-  <Table>
-    <stock_date>2019-11-01T00:00:00+07:00</stock_date>
-    <stock_no>BF20191001</stock_no>
-    <stock_item>3</stock_item>
     <product_code>P005</product_code>
     <product_name>หัวหมู</product_name>
     <lot_no>11926612309</lot_no>
     <stock_qty>1</stock_qty>
     <stock_wgh>5.25</stock_wgh>
-    <ref_document_type>BF</ref_document_type>
-    <ref_document_no>BF001</ref_document_no>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
     <lot_no1>11926612309</lot_no1>
     <location_code>0</location_code>
-    <barcode_no>0</barcode_no>
+    <barcode_no>1000000000140</barcode_no>
     <transaction_type>1</transaction_type>
     <location_name>NA</location_name>
+    <description>เอกสารรับหมูเป็น</description>
     <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
     <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
-    <date_str>01-11-2019</date_str>
-    <date_end>30-11-2019</date_end>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
     <transaction_type_name>รับ</transaction_type_name>
   </Table>
   <Table>
-    <stock_date>2019-11-01T00:00:00+07:00</stock_date>
-    <stock_no>BF20191001</stock_no>
+    <stock_date>2019-10-10T00:00:00+07:00</stock_date>
+    <stock_no>STK0000010</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P001</product_code>
+    <product_name>หมูเป็น</product_name>
+    <lot_no>1192831101001</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>78.00</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000004</ref_document_no>
+    <lot_no1>1192831101001</lot_no1>
+    <location_code>1</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ลานพักหมูเป็น</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-10T00:00:00+07:00</stock_date>
+    <stock_no>STK0000010</stock_no>
+    <stock_item>2</stock_item>
+    <product_code>P001</product_code>
+    <product_name>หมูเป็น</product_name>
+    <lot_no>1192831101001</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>77.00</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000004</ref_document_no>
+    <lot_no1>1192831101001</lot_no1>
+    <location_code>1</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ลานพักหมูเป็น</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-02T00:00:00+07:00</stock_date>
+    <stock_no>STK0000005</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
+    <lot_no>11924910609</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>75.50</stock_wgh>
+    <ref_document_type>ISS</ref_document_type>
+    <ref_document_no>ISS0000001</ref_document_no>
+    <lot_no1>11924910609</lot_no1>
+    <location_code>2</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>2</transaction_type>
+    <location_name>ห้องเย็นเก็บหมุซีก</location_name>
+    <description>เอกสารเบิก</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>จ่าย</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-02T00:00:00+07:00</stock_date>
+    <stock_no>STK0000005</stock_no>
+    <stock_item>2</stock_item>
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
+    <lot_no>11924910609</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>78.50</stock_wgh>
+    <ref_document_type>ISS</ref_document_type>
+    <ref_document_no>ISS0000001</ref_document_no>
+    <lot_no1>11924910609</lot_no1>
+    <location_code>2</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>2</transaction_type>
+    <location_name>ห้องเย็นเก็บหมุซีก</location_name>
+    <description>เอกสารเบิก</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>จ่าย</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000006</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
+    <lot_no>11924910609</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>75.90</stock_wgh>
+    <ref_document_type>SO</ref_document_type>
+    <ref_document_no>SO00000029</ref_document_no>
+    <lot_no1>11924910609</lot_no1>
+    <location_code>2</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>2</transaction_type>
+    <location_name>ห้องเย็นเก็บหมุซีก</location_name>
+    <description>เอกสาร sales order</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>จ่าย</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-09T00:00:00+07:00</stock_date>
+    <stock_no>STK0000005</stock_no>
+    <stock_item>3</stock_item>
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
+    <lot_no>11924910609</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>66.50</stock_wgh>
+    <ref_document_type>ISS</ref_document_type>
+    <ref_document_no>ISS0000001</ref_document_no>
+    <lot_no1>11924910609</lot_no1>
+    <location_code>2</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>2</transaction_type>
+    <location_name>ห้องเย็นเก็บหมุซีก</location_name>
+    <description>เอกสารเบิก</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>จ่าย</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-09T00:00:00+07:00</stock_date>
+    <stock_no>STK0000007</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
+    <lot_no>11924910609</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>65.50</stock_wgh>
+    <ref_document_type>SO</ref_document_type>
+    <ref_document_no>SO00000030</ref_document_no>
+    <lot_no1>11924910609</lot_no1>
+    <location_code>2</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>2</transaction_type>
+    <location_name>ห้องเย็นเก็บหมุซีก</location_name>
+    <description>เอกสาร sales order</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>จ่าย</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-09T00:00:00+07:00</stock_date>
+    <stock_no>STK0000007</stock_no>
+    <stock_item>2</stock_item>
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>67.12</stock_wgh>
+    <ref_document_type>SO</ref_document_type>
+    <ref_document_no>SO00000030</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>2</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>2</transaction_type>
+    <location_name>ห้องเย็นเก็บหมุซีก</location_name>
+    <description>เอกสาร sales order</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>จ่าย</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-10T00:00:00+07:00</stock_date>
+    <stock_no>STK0000010</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
+    <lot_no>1192831101001</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>65.00</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000004</ref_document_no>
+    <lot_no1>1192831101001</lot_no1>
+    <location_code>2</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเย็นเก็บหมุซีก</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P004</product_code>
+    <product_name>เครื่องในขาว-ชุด</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>6.78</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>4</location_code>
+    <barcode_no>1000000000149</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเย็นเก็บเครื่องในขาว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
+    <stock_item>2</stock_item>
+    <product_code>P004</product_code>
+    <product_name>เครื่องในขาว-ชุด</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>6.66</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>4</location_code>
+    <barcode_no>1000000000150</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเย็นเก็บเครื่องในขาว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
+    <stock_item>3</stock_item>
+    <product_code>P004</product_code>
+    <product_name>เครื่องในขาว-ชุด</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>5.89</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>4</location_code>
+    <barcode_no>1000000000151</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเย็นเก็บเครื่องในขาว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-10T00:00:00+07:00</stock_date>
+    <stock_no>STK0000008</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P0046</product_code>
+    <product_name>ไส้ตัน</product_name>
+    <lot_no>11924910609</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>5.25</stock_wgh>
+    <lot_no1>11924910609</lot_no1>
+    <location_code>7</location_code>
+    <barcode_no>1000000000152</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องตัดแต่ง</location_name>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-10T00:00:00+07:00</stock_date>
+    <stock_no>STK0000008</stock_no>
+    <stock_item>2</stock_item>
+    <product_code>P0046</product_code>
+    <product_name>ไส้ตัน</product_name>
+    <lot_no>11924910609</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.11</stock_wgh>
+    <lot_no1>11924910609</lot_no1>
+    <location_code>7</location_code>
+    <barcode_no>1000000000153</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องตัดแต่ง</location_name>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
+    <stock_item>2</stock_item>
+    <product_code>P005</product_code>
+    <product_name>หัวหมู</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.95</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
+    <stock_item>3</stock_item>
+    <product_code>P005</product_code>
+    <product_name>หัวหมู</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.55</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>1000000000141</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
     <stock_item>4</stock_item>
     <product_code>P005</product_code>
     <product_name>หัวหมู</product_name>
     <lot_no>11926612309</lot_no>
-    <stock_qty>9</stock_qty>
-    <stock_wgh>41.35</stock_wgh>
-    <ref_document_type>BF</ref_document_type>
-    <ref_document_no>BF001</ref_document_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.55</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
     <lot_no1>11926612309</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>1000000000142</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
+    <stock_item>5</stock_item>
+    <product_code>P005</product_code>
+    <product_name>หัวหมู</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.55</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>1000000000143</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
+    <stock_item>6</stock_item>
+    <product_code>P005</product_code>
+    <product_name>หัวหมู</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.55</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>1000000000144</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
+    <stock_item>7</stock_item>
+    <product_code>P005</product_code>
+    <product_name>หัวหมู</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.55</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>1000000000145</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
+    <stock_item>8</stock_item>
+    <product_code>P005</product_code>
+    <product_name>หัวหมู</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.55</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>1000000000146</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
+    <stock_item>9</stock_item>
+    <product_code>P005</product_code>
+    <product_name>หัวหมู</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.55</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>1000000000147</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-03T00:00:00+07:00</stock_date>
+    <stock_no>STK0000004</stock_no>
+    <stock_item>10</stock_item>
+    <product_code>P005</product_code>
+    <product_name>หัวหมู</product_name>
+    <lot_no>11926612309</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.55</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000003</ref_document_no>
+    <lot_no1>11926612309</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>1000000000148</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-10T00:00:00+07:00</stock_date>
+    <stock_no>STK0000010</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P005</product_code>
+    <product_name>หัวหมู</product_name>
+    <lot_no>1192831101001</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.55</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000004</ref_document_no>
+    <lot_no1>1192831101001</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>1000000000154</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-10T00:00:00+07:00</stock_date>
+    <stock_no>STK0000010</stock_no>
+    <stock_item>2</stock_item>
+    <product_code>P005</product_code>
+    <product_name>หัวหมู</product_name>
+    <lot_no>1192831101001</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>4.55</stock_wgh>
+    <ref_document_type>REV</ref_document_type>
+    <ref_document_no>REV0000004</ref_document_no>
+    <lot_no1>1192831101001</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>1000000000155</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>เอกสารรับหมูเป็น</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-19T00:00:00+07:00</stock_date>
+    <stock_no>STK0000500</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A001</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>0.50</stock_wgh>
+    <ref_document_type>TEST</ref_document_type>
+    <ref_document_no>TEST01</ref_document_no>
+    <lot_no1>A001</lot_no1>
     <location_code>8</location_code>
     <barcode_no>0</barcode_no>
     <transaction_type>1</transaction_type>
     <location_name>ห้องเก็บหัว</location_name>
     <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
     <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
-    <date_str>01-11-2019</date_str>
-    <date_end>30-11-2019</date_end>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-19T00:00:00+07:00</stock_date>
+    <stock_no>STK0000501</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A003</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>1.50</stock_wgh>
+    <ref_document_type>TEST</ref_document_type>
+    <ref_document_no>TEST01</ref_document_no>
+    <lot_no1>A003</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-19T00:00:00+07:00</stock_date>
+    <stock_no>STK0000502</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A002</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>0.50</stock_wgh>
+    <ref_document_type>TEST</ref_document_type>
+    <ref_document_no>TEST01</ref_document_no>
+    <lot_no1>A002</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-20T00:00:00+07:00</stock_date>
+    <stock_no>BF20191020</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A001</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>7.00</stock_wgh>
+    <ref_document_type>BF</ref_document_type>
+    <ref_document_no>BF001</ref_document_no>
+    <lot_no1>A001</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>ยกมา</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-20T00:00:00+07:00</stock_date>
+    <stock_no>BF20191020</stock_no>
+    <stock_item>2</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A002</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>0.50</stock_wgh>
+    <ref_document_type>BF</ref_document_type>
+    <ref_document_no>BF001</ref_document_no>
+    <lot_no1>A002</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>ยกมา</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-20T00:00:00+07:00</stock_date>
+    <stock_no>BF20191020</stock_no>
+    <stock_item>3</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A003</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>1.50</stock_wgh>
+    <ref_document_type>BF</ref_document_type>
+    <ref_document_no>BF001</ref_document_no>
+    <lot_no1>A003</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>ยกมา</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-21T00:00:00+07:00</stock_date>
+    <stock_no>BF20191021</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A001</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>0.50</stock_wgh>
+    <ref_document_type>BF</ref_document_type>
+    <ref_document_no>BF001</ref_document_no>
+    <lot_no1>A001</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>ยกมา</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-21T00:00:00+07:00</stock_date>
+    <stock_no>BF20191021</stock_no>
+    <stock_item>2</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A002</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>0.50</stock_wgh>
+    <ref_document_type>BF</ref_document_type>
+    <ref_document_no>BF001</ref_document_no>
+    <lot_no1>A002</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>ยกมา</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-21T00:00:00+07:00</stock_date>
+    <stock_no>BF20191021</stock_no>
+    <stock_item>3</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A003</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>1.50</stock_wgh>
+    <ref_document_type>BF</ref_document_type>
+    <ref_document_no>BF001</ref_document_no>
+    <lot_no1>A003</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>ยกมา</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-22T00:00:00+07:00</stock_date>
+    <stock_no>BF20191022</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A001</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>0.50</stock_wgh>
+    <ref_document_type>BF</ref_document_type>
+    <ref_document_no>BF001</ref_document_no>
+    <lot_no1>A001</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>ยกมา</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-22T00:00:00+07:00</stock_date>
+    <stock_no>BF20191022</stock_no>
+    <stock_item>2</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A002</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>0.50</stock_wgh>
+    <ref_document_type>BF</ref_document_type>
+    <ref_document_no>BF001</ref_document_no>
+    <lot_no1>A002</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>ยกมา</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-22T00:00:00+07:00</stock_date>
+    <stock_no>BF20191022</stock_no>
+    <stock_item>3</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A003</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>1.50</stock_wgh>
+    <ref_document_type>BF</ref_document_type>
+    <ref_document_no>BF001</ref_document_no>
+    <lot_no1>A003</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>ยกมา</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-22T00:00:00+07:00</stock_date>
+    <stock_no>STK0000502</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A002</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>0.50</stock_wgh>
+    <ref_document_type>TEST</ref_document_type>
+    <ref_document_no>TEST01</ref_document_no>
+    <lot_no1>A002</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>2</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>จ่าย</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-23T00:00:00+07:00</stock_date>
+    <stock_no>BF20191023</stock_no>
+    <stock_item>1</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A001</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>0.50</stock_wgh>
+    <ref_document_type>BF</ref_document_type>
+    <ref_document_no>BF001</ref_document_no>
+    <lot_no1>A001</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>ยกมา</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
+    <transaction_type_name>รับ</transaction_type_name>
+  </Table>
+  <Table>
+    <stock_date>2019-10-23T00:00:00+07:00</stock_date>
+    <stock_no>BF20191023</stock_no>
+    <stock_item>2</stock_item>
+    <product_code>P0024</product_code>
+    <product_name>สันนอก- Raw</product_name>
+    <lot_no>A003</lot_no>
+    <stock_qty>1</stock_qty>
+    <stock_wgh>1.50</stock_wgh>
+    <ref_document_type>BF</ref_document_type>
+    <ref_document_no>BF001</ref_document_no>
+    <lot_no1>A003</lot_no1>
+    <location_code>8</location_code>
+    <barcode_no>0</barcode_no>
+    <transaction_type>1</transaction_type>
+    <location_name>ห้องเก็บหัว</location_name>
+    <description>ยกมา</description>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-10-2019</date_str>
+    <date_end>23-10-2019</date_end>
     <transaction_type_name>รับ</transaction_type_name>
   </Table>
 </NewDataSet>

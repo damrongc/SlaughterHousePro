@@ -100,7 +100,7 @@
             this.btnStockBalance.Name = "btnStockBalance";
             this.btnStockBalance.Size = new System.Drawing.Size(666, 59);
             this.btnStockBalance.TabIndex = 1;
-            this.btnStockBalance.Text = "รายงานสต็อกคงเหลือ";
+            this.btnStockBalance.Text = "รายงานสต็อกคงเหลือรายวัน";
             this.btnStockBalance.UseVisualStyleBackColor = false;
             // 
             // Form_Report

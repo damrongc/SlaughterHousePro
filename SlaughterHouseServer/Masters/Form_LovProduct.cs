@@ -41,6 +41,11 @@ namespace SlaughterHouseServer
             this.Shown += Form_Shown;
 
             this.comboxProductGroup.SelectedIndexChanged += ComboxProductGroup_SelectedIndexChanged;
+
+            //KeyDown 
+            txtProductCode.KeyDown += TxtProductCode_KeyDown;
+            txtProductName.KeyDown += TxtProductName_KeyDown;
+            comboxProductGroup.KeyDown += ComboxProductGroup_KeyDown;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
@@ -56,7 +61,28 @@ namespace SlaughterHouseServer
             LoadData();
         }
 
-        #region Event Focus, KeyDown 
+        #region Event Focus, KeyDown, SelectedIndexChanged
+        private void ComboxProductGroup_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtProductCode.Focus();
+            }
+        }
+        private void TxtProductCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoadData();
+            }
+        }
+        private void TxtProductName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoadData();
+            }
+        }
         private void ComboxProductGroup_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             LoadData();
@@ -81,6 +107,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
             gv.Columns[ConstColumns.UNIT_NAME_QTY].ReadOnly = true;
             gv.Columns[ConstColumns.UNIT_NAME_WGH].ReadOnly = true;
+            gv.Columns[ConstColumns.PACKING_SIZE].ReadOnly = true;
 
             gv.Columns[ConstColumns.SELECT_COL].ReadOnly = false;
 
@@ -98,25 +125,7 @@ namespace SlaughterHouseServer
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-                //if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
-                //{
-                //    switch (senderGrid.Columns[e.ColumnIndex].Name)
-                //    {
-                //        case "select_col":
-                //            try
-                //            {
-                //                this.productCode = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_CODE].Value.ToString();
-                //                this.productName = gv.Rows[e.RowIndex].Cells[ConstColumns.PRODUCT_NAME].Value.ToString();
-                //                this.DialogResult = DialogResult.OK;
-                //                this.Close();
-                //            }
-                //            catch (System.Exception ex)
-                //            {
-                //                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //            }
-                //            break;
-                //    }
-                //}
+            
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewLinkColumn)
                 {
                     try
@@ -149,6 +158,7 @@ namespace SlaughterHouseServer
                 gv.DataSource = dtProduct;
             }
         }
+
         private void FillProductGroup()
         {
             //bool showSelectAllflag = true;

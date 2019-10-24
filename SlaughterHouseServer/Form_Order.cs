@@ -60,6 +60,19 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.ACTIVE].Visible = false;
             gv.Columns[ConstColumns.CREATE_BY].Visible = false;
 
+
+            DataGridViewButtonColumn printProductSlipBtnColumn = new DataGridViewButtonColumn();
+            printProductSlipBtnColumn.Name = ConstColumns.BTN_PRODUCT_SLIP;
+            printProductSlipBtnColumn.Text = "สร้างใบจัดสินค้า";
+            printProductSlipBtnColumn.UseColumnTextForButtonValue = true; //dont forget this line
+            printProductSlipBtnColumn.FlatStyle = FlatStyle.Flat; 
+            if (gv.Columns[ConstColumns.BTN_PRODUCT_SLIP] == null)
+            {
+                gv.Columns.Insert(gv.ColumnCount, printProductSlipBtnColumn);
+                gv.Columns[ConstColumns.BTN_PRODUCT_SLIP].HeaderText = "";
+            }
+
+
             DataGridViewButtonColumn invoiceBtnColumn = new DataGridViewButtonColumn();
             invoiceBtnColumn.Name = ConstColumns.BTN_INVOICE;
             invoiceBtnColumn.Text = "สร้างใบแจ้งหนี้";
@@ -70,6 +83,8 @@ namespace SlaughterHouseServer
                 gv.Columns.Insert(gv.ColumnCount, invoiceBtnColumn);
                 gv.Columns[ConstColumns.BTN_INVOICE].HeaderText = "";
             }
+
+
             foreach (DataGridViewRow row in gv.Rows)
             {
                 string invocieFlag = gv.Rows[row.Index].Cells[ConstColumns.INVOICE_FLAG].Value.ToString();
@@ -81,23 +96,15 @@ namespace SlaughterHouseServer
                 {
                     gv.Rows[row.Index].Cells[ConstColumns.BTN_INVOICE].Style.BackColor = Color.MediumSpringGreen;
                 }
-            }
-
-            DataGridViewButtonColumn printProductSlipBtnColumn = new DataGridViewButtonColumn();
-            printProductSlipBtnColumn.Name = ConstColumns.BTN_PRODUCT_SLIP;
-            printProductSlipBtnColumn.Text = "สร้างใบจัดสินค้า";
-            printProductSlipBtnColumn.UseColumnTextForButtonValue = true; //dont forget this line
-            printProductSlipBtnColumn.FlatStyle = FlatStyle.Flat;
-            if (gv.Columns[ConstColumns.BTN_PRODUCT_SLIP] == null)
-            {
-                gv.Columns.Insert(gv.ColumnCount, printProductSlipBtnColumn);
-                gv.Columns[ConstColumns.BTN_PRODUCT_SLIP].HeaderText = "";
-            }
+                gv.Rows[row.Index].Cells[ConstColumns.BTN_PRODUCT_SLIP].Style.BackColor = Color.LightSkyBlue; 
+            } 
         }
 
 
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            gvDt.Columns[ConstColumns.ORDER_NO].HeaderText = "เลขที่ใบสั่งขาย";
+
             gvDt.Columns[ConstColumns.SEQ].HeaderText = "ลำดับ";
             gvDt.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gvDt.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "สินค้า";

@@ -502,7 +502,7 @@ namespace SlaughterHouseServer
             {
                 var frmPrint = new Form_InvoiceReport();
                 frmPrint.invoiceNo = (String.IsNullOrEmpty(txtInvoiceNo.Text)) ? InvoiceController.GetInvoiceNoByOrderNo(txtOrderNo.Text) : txtInvoiceNo.Text;
-
+                frmPrint.orderNo = txtOrderNo.Text; 
                 frmPrint.ShowDialog();
                 this.DialogResult = DialogResult.OK;
             }

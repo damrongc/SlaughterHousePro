@@ -414,7 +414,6 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-
         public static bool CheckUseOrder(string orderNo)
         {
             bool res = false;
@@ -447,7 +446,6 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-
     }
     public static class OrderItemController
     {
@@ -491,7 +489,7 @@ namespace SlaughterHouseLib
                     }
                     else
                     {
-                        sql = @"select 
+                        sql = @"select a.order_no,
 							    0 as seq,
 							    a.product_code,
 							    p.product_name,
@@ -646,7 +644,5 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-
-
-    }
+    } 
 }

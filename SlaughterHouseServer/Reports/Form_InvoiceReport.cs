@@ -7,6 +7,7 @@ namespace SlaughterHouseServer.Report
     public partial class Form_InvoiceReport : Form
     {
         public string invoiceNo { get; set; }
+        public string orderNo { get; set; }
 
         public Form_InvoiceReport()
         {
@@ -24,6 +25,12 @@ namespace SlaughterHouseServer.Report
             rptViewer.ShowTextSearchButton = false;
             rptViewer.ShowLogo = false;
 
+            rptViewerTransport.ShowCloseButton = false;
+            rptViewerTransport.ShowCopyButton = false;
+            rptViewerTransport.ShowGroupTreeButton = false;
+            rptViewerTransport.ShowParameterPanelButton = false;
+            rptViewerTransport.ShowTextSearchButton = false;
+            rptViewerTransport.ShowLogo = false;
         }
 
         private void Form_Load(object sender, System.EventArgs e)
@@ -46,6 +53,18 @@ namespace SlaughterHouseServer.Report
             rptViewer.ReportSource = doc;
             rptViewer.Zoom(100);
             rptViewer.RefreshReport();
+
+
+
+            ReportDocument docTrabsport = new ReportDocument();
+            DataSet dsTrabsport = InvoiceController.GetDataPrintTransport(orderNo);
+
+            //dsTrabsport.WriteXml(reportPath + @"\transport.xml", XmlWriteMode.WriteSchema);
+            docTrabsport.Load(reportPath + @"\Report\transport.rpt");
+            docTrabsport.SetDataSource(dsTrabsport);
+            rptViewerTransport.ReportSource = docTrabsport;
+            rptViewerTransport.Zoom(100);
+            rptViewerTransport.RefreshReport();
         }
     }
 }

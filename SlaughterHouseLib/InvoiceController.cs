@@ -59,7 +59,7 @@ namespace SlaughterHouseLib
                                     //VatRate = p.Field<decimal>("vat_rate"),
                                     VAT_AMT = p.Field<decimal>("vat_amt"),
                                     NET_AMT = p.Field<decimal>("Net_Amt"),
-                                    //InvoiceFlag = p.Field<int>("invoice_flag"), 
+                                    //InvoiceFlag = p.Field<int>("invoice_flag"),
                                     //Comments = p.Field<string>("comments"),
                                     ACTIVE = p.Field<bool>("active"),
                                     CREATE_AT = p.Field<DateTime>("create_at"),
@@ -395,6 +395,39 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+        public static string GetInvoiceNoByOrderNo(string orderNo)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"SELECT max(Invoice_no)  as Invoice_no
+								FROM invoice
+								WHERE ref_document_no =@orderNo 
+                                   and active = 1 ";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("orderNo", orderNo);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        return (string)ds.Tables[0].Rows[0]["Invoice_no"];
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public static DataSet GetDataPrintInvoice(string invoiceNo)
         {
             try
@@ -440,33 +473,75 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-
-        public static string GetInvoiceNoByOrderNo(string orderNo)
+        public static DataSet GetDataPrintTransport(string orderNo)
         {
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"SELECT max(Invoice_no)  as Invoice_no
-								FROM invoice
-								WHERE ref_document_no =@orderNo 
-                                   and active = 1 ";
+                    var sql = @"SELECT 
+                                        t.transport_no,
+                                        t.transport_date,
+                                        t.ref_document_no,
+                                        o.customer_code,
+                                        c.customer_name,
+                                        trk.truck_no,
+                                        trk.driver,
+                                        0 AS disc_amt,
+                                        0 AS gross_amt_hd,
+                                        0 AS discount_hd,
+                                        0 AS before_vat,
+                                        0 AS vat_rate_hd,
+                                        0 AS vat_amt_hd,
+                                        0 AS net_amt_hd,
+                                        t.transport_flag,
+                                        ti.product_code,
+                                        p.product_name,
+                                        ti.lot_no,
+                                        u.unit_name,
+                                        ti.seq,
+                                        CASE
+                                            WHEN p.sale_unit_method = 'Q' THEN ti.transport_qty
+                                            ELSE ti.transport_wgh
+                                        END qty_wgh,
+                                        ti.transport_qty,
+                                        ti.transport_wgh,
+                                        0 AS unit_price,
+                                        0 AS gross_amt, 
+                                        c.address,
+                                        c.ship_to,
+                                        c.tax_id,
+                                        c.contact_no,
+                                        pl.plant_name,
+                                        pl.address AS plant_address 
+                                    FROM
+                                        orders o,
+                                        transport t,
+                                        transport_item ti,
+                                        truck trk,
+                                        product p,
+                                        customer c,
+                                        unit_of_measurement u,
+                                        plant pl
+                                    WHERE
+                                        t.ref_document_no = @order_no
+                                            AND t.transport_no = ti.transport_no
+                                            AND ti.truck_no = trk.truck_no
+                                            AND o.order_no = t.ref_document_no
+                                            AND ti.product_code = p.product_code
+                                            AND c.customer_code = o.customer_code
+                                            AND CASE
+                                            WHEN p.sale_unit_method = 'Q' THEN p.unit_of_qty ELSE p.unit_of_wgh END = u.unit_code
+                                            AND pl.plant_id = 1
+								";
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("orderNo", orderNo);
+                    cmd.Parameters.AddWithValue("order_no", orderNo);
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();
                     da.Fill(ds);
-
-                    if (ds.Tables[0].Rows.Count > 0)
-                    {
-                        return (string)ds.Tables[0].Rows[0]["Invoice_no"];
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    return ds;
                 }
             }
             catch (Exception)
@@ -474,7 +549,6 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-
     }
     public static class InvoiceItemController
     {
@@ -485,7 +559,7 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"select a.seq,
+                    var sql = @"select a.Invoice_no, a.seq,
 								a.product_code,
 								b.product_name,
 								a.sale_unit_method,

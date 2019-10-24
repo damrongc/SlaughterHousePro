@@ -46,7 +46,7 @@ namespace SlaughterHouseServer.Reports
         private void LoadReport()
         {
             ReportDocument doc = new ReportDocument();
-            DataSet ds = ReportController.GetDataReportStockBalance(dtpInvoiceDatePeriod.Value);
+            DataSet ds = ReportController.GetDataReportStockBalance(dtpInvoiceDate.Value);
             //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
             //ds.WriteXml(path + @"\xml\stockbalance.xml", XmlWriteMode.WriteSchema);
@@ -57,6 +57,11 @@ namespace SlaughterHouseServer.Reports
             rptViewer.ReportSource = doc;
             rptViewer.Zoom(100);
             rptViewer.RefreshReport();
+        }
+
+        private void BtnShowReport_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

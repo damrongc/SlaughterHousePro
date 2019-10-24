@@ -34,6 +34,9 @@ namespace SlaughterHouseServer
         public const string CUSTOMER_CODE = "CUSTOMER_CODE";
         public const string CUSTOMER_NAME = "CUSTOMER_NAME";
         public const string DAY = "DAY";
+        public const string DRIVER = "DRIVER";
+
+        
         public const string DESCRIPTION = "DESCRIPTION";
         public const string DISC_AMT = "DISC_AMT";
         public const string DISC_AMT_BILL = "DISC_AMT_BILL";
