@@ -20,7 +20,7 @@ namespace SlaughterHouseLib
                     conn.Open();
                     var sb = new StringBuilder();
                     sb.Append("SELECT a.invoice_No, a.Invoice_date,");
-                    sb.Append(" a.Ref_Document_No, a.customer_code,");
+                    sb.Append(" a.Ref_Document_No, a.customer_code, a.truck_no,");
                     sb.Append(" a.disc_amt, a.Gross_Amt, a.disc_amt_bill,");
                     sb.Append(" a.Vat_Rate, a.Vat_Amt,");
                     sb.Append(" a.Net_Amt, a.Invoice_Flag,");
@@ -53,6 +53,7 @@ namespace SlaughterHouseLib
                                     INVOICE_DATE = p.Field<DateTime>("Invoice_date"),
                                     REF_DOCUMENT_NO = p.Field<string>("Ref_Document_No"),
                                     CUSTOMER_NAME = p.Field<string>("customer_name"),
+                                    TRUCK_NO = p.Field<string>("truck_no"),
                                     GROSS_AMT = p.Field<decimal>("gross_Amt"),
                                     DISC_AMT = p.Field<decimal>("disc_amt"),
                                     DISC_AMT_BILL = p.Field<decimal>("disc_amt_bill"),
@@ -84,6 +85,7 @@ namespace SlaughterHouseLib
 								Invoice_date,
 								ref_document_no,
 								customer_code,
+                                truck_no,
 								gross_amt,
 								disc_amt,
 								disc_amt_bill,
@@ -114,6 +116,10 @@ namespace SlaughterHouseLib
                             Customer = new Customer
                             {
                                 CustomerCode = (string)ds.Tables[0].Rows[0]["customer_code"]
+                            },
+                            Truck = new Truck
+                            {
+                                TruckNo = (string)ds.Tables[0].Rows[0]["truck_no"]
                             },
                             GrossAmt = (decimal)ds.Tables[0].Rows[0]["gross_amt"],
                             DiscAmt  = (decimal)ds.Tables[0].Rows[0]["disc_amt"],
@@ -152,13 +158,13 @@ namespace SlaughterHouseLib
                     var sql = @"INSERT
 								INTO invoice(
 									invoice_no, invoice_date, ref_document_no,
-									customer_code, gross_amt, disc_amt, disc_amt_bill,
+									customer_code, truck_no, gross_amt, disc_amt, disc_amt_bill,
 									vat_rate, vat_amt, net_amt, 
 									invoice_flag, comments, active,
 									create_by
 								)
 								VALUES( @invoice_no, @invoice_date, @ref_document_no,
-									@customer_code, @gross_amt, @disc_amt, @disc_amt_bill,
+									@customer_code, @truck_no, @gross_amt, @disc_amt, @disc_amt_bill,
 									@vat_rate, @vat_amt, @net_amt,
 									@invoice_flag, @comments, @active,
 									@create_by)";
@@ -170,6 +176,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("Invoice_date", Invoice.InvoiceDate);
                     cmd.Parameters.AddWithValue("ref_document_no", Invoice.RefDocumentNo);
                     cmd.Parameters.AddWithValue("customer_code", Invoice.Customer.CustomerCode);
+                    cmd.Parameters.AddWithValue("truck_no", Invoice.Truck.TruckNo);
                     cmd.Parameters.AddWithValue("gross_amt", Invoice.GrossAmt);
                     cmd.Parameters.AddWithValue("disc_amt", Invoice.DiscAmt);
                     cmd.Parameters.AddWithValue("disc_amt_bill", Invoice.DiscAmtBill);
@@ -254,7 +261,7 @@ namespace SlaughterHouseLib
 								SET Invoice_date=@Invoice_date,
 								ref_document_no=@ref_document_no,
 								customer_code=@customer_code,
-								
+								truck_no=@truck_no, 
 								gross_amt=@gross_amt,
 								disc_amt=@disc_amt,
 								disc_amt_bill=@disc_amt_bill,
@@ -276,6 +283,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("Invoice_date", Invoice.InvoiceDate);
                     cmd.Parameters.AddWithValue("ref_document_no", Invoice.RefDocumentNo);
                     cmd.Parameters.AddWithValue("customer_code", Invoice.Customer.CustomerCode);
+                    cmd.Parameters.AddWithValue("truck_no", Invoice.Truck.TruckNo);
                     cmd.Parameters.AddWithValue("gross_amt", Invoice.GrossAmt);
                     cmd.Parameters.AddWithValue("disc_amt", Invoice.DiscAmt );
                     cmd.Parameters.AddWithValue("disc_amt_bill", Invoice.DiscAmtBill );
@@ -436,31 +444,33 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = @"select i.invoice_no,
-									i.invoice_date,	i.ref_document_no, i.customer_code,
-                                    i.disc_amt,
-									i.gross_amt as gross_amt_hd,
-									i.disc_amt_bill as discount_hd,
-									i.gross_amt - i.disc_amt_bill as before_vat,
-									i.vat_rate as vat_rate_hd,
-									i.vat_amt as vat_amt_hd,
-									i.net_amt as net_amt_hd,
-									i.invoice_flag,	i.comments, itm.product_code, 
-									p.product_name, u.unit_name, itm.seq,
-									case when itm.sale_unit_method = 'Q' then itm.qty else itm.wgh end qty_wgh,
-									itm.qty, itm.wgh, itm.unit_price,
-									itm.gross_amt, c.customer_name, c.address, 
-									c.ship_to, c.tax_id, c.contact_no,
-									pl.plant_name, pl.address as plant_address, i.active
-								from invoice i , invoice_item itm, 	product p, customer c, unit_of_measurement u, plant pl
-								where i.invoice_no =@Invoice_no
-									and i.invoice_no = itm.invoice_no                                    
-									and itm.product_code = p.product_code
-									and c.customer_code = i.customer_code
-									and case when itm.sale_unit_method = 'Q' then p.unit_of_qty else unit_of_wgh end = u.unit_code 
-									and pl.plant_id = 1
+	                            i.invoice_date,	i.ref_document_no, i.customer_code,
+	                            i.disc_amt,
+	                            i.gross_amt as gross_amt_hd,
+	                            i.disc_amt_bill as discount_hd,
+	                            i.gross_amt - i.disc_amt_bill as before_vat,
+	                            i.vat_rate as vat_rate_hd,
+	                            i.vat_amt as vat_amt_hd,
+	                            i.net_amt as net_amt_hd,
+	                            i.invoice_flag,	i.comments, itm.product_code, 
+	                            p.product_name, u.unit_name, itm.seq,
+	                            case when itm.sale_unit_method = 'Q' then itm.qty else itm.wgh end qty_wgh,
+	                            itm.qty, itm.wgh, itm.unit_price,
+	                            itm.gross_amt, c.customer_name, c.address, 
+	                            c.ship_to, c.tax_id, c.contact_no,
+                                tk.truck_no, tk.driver,
+	                            pl.plant_name, pl.address as plant_address, i.active
+                            from invoice i , invoice_item itm, 	product p, customer c, unit_of_measurement u, plant pl, truck tk
+                            where i.invoice_no = @invoice_no
+	                            and i.invoice_no = itm.invoice_no
+	                            and itm.product_code = p.product_code
+	                            and c.customer_code = i.customer_code
+	                            and case when itm.sale_unit_method = 'Q' then p.unit_of_qty else unit_of_wgh end = u.unit_code 
+	                            and pl.plant_id = 1
+                                and i.truck_no = tk.truck_no
 								";
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("Invoice_no", invoiceNo);
+                    cmd.Parameters.AddWithValue("invoice_no", invoiceNo);
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();

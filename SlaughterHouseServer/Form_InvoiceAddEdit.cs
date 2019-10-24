@@ -132,6 +132,7 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
+            LoadTruck();
             LoadCustomer();
             LoadData();
         }
@@ -238,12 +239,12 @@ namespace SlaughterHouseServer
                     //customerCode = order.Customer.CustomerCode;
                     txtComment.Text = "";
                     chkActive.Checked = order.Active;
+                    cboTrucko.SelectedValue = TruckController.GetTruckNoFromTransport(this.orderNo);
                 }
                 BtnCancel.Visible = false;
             }
             else
             {
-
                 Invoice invoice = InvoiceController.GetInvoice(this.invoiceNo);
                 if (invoice != null)
                 {
@@ -251,6 +252,7 @@ namespace SlaughterHouseServer
                     dtpInvoiceDate.Value = invoice.InvoiceDate;
                     txtOrderNo.Text = invoice.RefDocumentNo;
                     cboCustomer.SelectedValue = invoice.Customer.CustomerCode;
+                    cboTrucko.SelectedValue = invoice.Truck.TruckNo;
                     txtComment.Text = invoice.Comments;
                     chkActive.Checked = invoice.Active;
                     txtGrossAmt.Text = invoice.GrossAmt.ToString();
@@ -274,6 +276,7 @@ namespace SlaughterHouseServer
                     txtDiscount.Enabled = false;
                     chkVatFlag.Enabled = false;
                     txtVatRate.Enabled = false;
+                    cboTrucko.Enabled = false;
                     if (chkActive.Checked == false)
                     {
                         BtnCancel.Visible = false;
@@ -324,7 +327,15 @@ namespace SlaughterHouseServer
                 dtInvoiceItem = InvoiceItemController.GetInvoiceItems(this.invoiceNo);
             }
             gv.DataSource = dtInvoiceItem;
+        }
 
+        //();
+        private void LoadTruck()
+        {
+            var coll = TruckController.GetAllTrucks();
+            cboTrucko.DisplayMember = "TruckNo";
+            cboTrucko.ValueMember = "TruckNo";
+            cboTrucko.DataSource = coll;
         }
         private void LoadCustomer()
         {
@@ -376,6 +387,10 @@ namespace SlaughterHouseServer
                     Customer = new Customer
                     {
                         CustomerCode = cboCustomer.SelectedValue.ToString()
+                    },
+                    Truck = new Truck
+                    {
+                        TruckNo = cboTrucko.SelectedValue.ToString()
                     },
                     GrossAmt = Convert.ToDecimal(txtGrossAmt.Text),
                     DiscAmt = 0,
@@ -502,7 +517,7 @@ namespace SlaughterHouseServer
             {
                 var frmPrint = new Form_InvoiceReport();
                 frmPrint.invoiceNo = (String.IsNullOrEmpty(txtInvoiceNo.Text)) ? InvoiceController.GetInvoiceNoByOrderNo(txtOrderNo.Text) : txtInvoiceNo.Text;
-                frmPrint.orderNo = txtOrderNo.Text; 
+                frmPrint.orderNo = txtOrderNo.Text;
                 frmPrint.ShowDialog();
                 this.DialogResult = DialogResult.OK;
             }

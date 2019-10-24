@@ -58,6 +58,8 @@
             this.txtVatRate = new System.Windows.Forms.TextBox();
             this.chkVatFlag = new System.Windows.Forms.CheckBox();
             this.BtnCancel = new System.Windows.Forms.Button();
+            this.cboTrucko = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
@@ -90,7 +92,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(796, 626);
+            this.BtnSave.Location = new System.Drawing.Point(796, 669);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -137,7 +139,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.gv);
-            this.panel2.Location = new System.Drawing.Point(12, 144);
+            this.panel2.Location = new System.Drawing.Point(12, 187);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1008, 211);
             this.panel2.TabIndex = 43;
@@ -174,7 +176,7 @@
             this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(12, 108);
+            this.panel1.Location = new System.Drawing.Point(12, 151);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1008, 36);
             this.panel1.TabIndex = 45;
@@ -211,7 +213,7 @@
             // 
             // txtGrossAmt
             // 
-            this.txtGrossAmt.Location = new System.Drawing.Point(858, 369);
+            this.txtGrossAmt.Location = new System.Drawing.Point(858, 412);
             this.txtGrossAmt.MaxLength = 10;
             this.txtGrossAmt.Name = "txtGrossAmt";
             this.txtGrossAmt.Size = new System.Drawing.Size(159, 36);
@@ -221,7 +223,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(744, 372);
+            this.label6.Location = new System.Drawing.Point(744, 415);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(108, 29);
             this.label6.TabIndex = 49;
@@ -229,7 +231,7 @@
             // 
             // txtDiscount
             // 
-            this.txtDiscount.Location = new System.Drawing.Point(858, 411);
+            this.txtDiscount.Location = new System.Drawing.Point(858, 454);
             this.txtDiscount.MaxLength = 10;
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(159, 36);
@@ -239,7 +241,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(781, 414);
+            this.label7.Location = new System.Drawing.Point(781, 457);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(71, 29);
             this.label7.TabIndex = 51;
@@ -247,7 +249,7 @@
             // 
             // txtBeforeVat
             // 
-            this.txtBeforeVat.Location = new System.Drawing.Point(858, 453);
+            this.txtBeforeVat.Location = new System.Drawing.Point(858, 496);
             this.txtBeforeVat.MaxLength = 10;
             this.txtBeforeVat.Name = "txtBeforeVat";
             this.txtBeforeVat.Size = new System.Drawing.Size(159, 36);
@@ -257,7 +259,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(708, 456);
+            this.label8.Location = new System.Drawing.Point(708, 499);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(144, 29);
             this.label8.TabIndex = 53;
@@ -266,7 +268,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtComment);
-            this.groupBox1.Location = new System.Drawing.Point(13, 369);
+            this.groupBox1.Location = new System.Drawing.Point(13, 412);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(411, 163);
             this.groupBox1.TabIndex = 55;
@@ -284,7 +286,7 @@
             // 
             // txtNetAmt
             // 
-            this.txtNetAmt.Location = new System.Drawing.Point(858, 538);
+            this.txtNetAmt.Location = new System.Drawing.Point(858, 581);
             this.txtNetAmt.MaxLength = 10;
             this.txtNetAmt.Name = "txtNetAmt";
             this.txtNetAmt.Size = new System.Drawing.Size(159, 36);
@@ -294,7 +296,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(741, 541);
+            this.label3.Location = new System.Drawing.Point(741, 584);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(111, 29);
             this.label3.TabIndex = 58;
@@ -302,7 +304,7 @@
             // 
             // txtVatAmt
             // 
-            this.txtVatAmt.Location = new System.Drawing.Point(858, 496);
+            this.txtVatAmt.Location = new System.Drawing.Point(858, 539);
             this.txtVatAmt.MaxLength = 10;
             this.txtVatAmt.Name = "txtVatAmt";
             this.txtVatAmt.Size = new System.Drawing.Size(159, 36);
@@ -312,7 +314,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(742, 499);
+            this.label9.Location = new System.Drawing.Point(742, 542);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(110, 29);
             this.label9.TabIndex = 56;
@@ -320,7 +322,7 @@
             // 
             // txtVatRate
             // 
-            this.txtVatRate.Location = new System.Drawing.Point(666, 496);
+            this.txtVatRate.Location = new System.Drawing.Point(666, 539);
             this.txtVatRate.MaxLength = 10;
             this.txtVatRate.Name = "txtVatRate";
             this.txtVatRate.Size = new System.Drawing.Size(65, 36);
@@ -330,7 +332,7 @@
             // chkVatFlag
             // 
             this.chkVatFlag.AutoSize = true;
-            this.chkVatFlag.Location = new System.Drawing.Point(596, 498);
+            this.chkVatFlag.Location = new System.Drawing.Point(596, 541);
             this.chkVatFlag.Name = "chkVatFlag";
             this.chkVatFlag.Size = new System.Drawing.Size(64, 33);
             this.chkVatFlag.TabIndex = 62;
@@ -346,7 +348,7 @@
             this.BtnCancel.ForeColor = System.Drawing.Color.White;
             this.BtnCancel.Image = ((System.Drawing.Image)(resources.GetObject("BtnCancel.Image")));
             this.BtnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCancel.Location = new System.Drawing.Point(588, 626);
+            this.BtnCancel.Location = new System.Drawing.Point(588, 669);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(202, 36);
             this.BtnCancel.TabIndex = 63;
@@ -354,10 +356,29 @@
             this.BtnCancel.UseVisualStyleBackColor = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // cboTrucko
+            // 
+            this.cboTrucko.FormattingEnabled = true;
+            this.cboTrucko.Location = new System.Drawing.Point(190, 106);
+            this.cboTrucko.Name = "cboTrucko";
+            this.cboTrucko.Size = new System.Drawing.Size(215, 37);
+            this.cboTrucko.TabIndex = 65;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(93, 110);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(95, 29);
+            this.label10.TabIndex = 64;
+            this.label10.Text = "ทะเบียนรถ:";
+            // 
             // Form_InvoiceAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1032, 678);
+            this.ClientSize = new System.Drawing.Size(1029, 722);
+            this.Controls.Add(this.cboTrucko);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.chkVatFlag);
             this.Controls.Add(this.txtVatRate);
@@ -433,5 +454,7 @@
         private System.Windows.Forms.TextBox txtVatRate;
         private System.Windows.Forms.CheckBox chkVatFlag;
         private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.ComboBox cboTrucko;
+        private System.Windows.Forms.Label label10;
     }
 }

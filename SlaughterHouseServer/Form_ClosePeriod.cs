@@ -31,7 +31,7 @@ namespace SlaughterHouseServer
             btnClosedDownPeriod.Click += BtnClosedDownPeriod_Click;
             //dtpPeriodDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dtpPeriodDate.Enabled = false;
-            LoadProductionDate(); 
+            LoadProductionDate();
         }
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -49,7 +49,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
 
             gv.Columns[ConstColumns.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[ConstColumns.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight; 
+            gv.Columns[ConstColumns.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gv.Columns[ConstColumns.QTY].DefaultCellStyle.Format = "N0";
             gv.Columns[ConstColumns.WGH].DefaultCellStyle.Format = "N2";
         }
@@ -81,7 +81,7 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error LoadData", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-         
+
         private void BtnClosePeriod_Click(object sender, System.EventArgs e)
         {
             try
@@ -90,17 +90,18 @@ namespace SlaughterHouseServer
                 if (result == DialogResult.Yes)
                 {
                     int res = StockController.GenStockBfDay(dtpPeriodDate.Value);
-                    LoadProductionDate(); 
+                    LoadProductionDate();
                     MessageBox.Show($"สร้างสต็อกยกมาวัน {Convert.ToDateTime(dtpPeriodDate.Value).ToString(("dd/MM/yyyy"))} ทั้งหมด {res} รายการ",
                         "Complete",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
+                    btnClosePeriod.Enabled = false;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } 
+            }
         }
         private void BtnClosedDownPeriod_Click(object sender, System.EventArgs e)
         {
@@ -122,5 +123,6 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    }    
+
+    }
 }

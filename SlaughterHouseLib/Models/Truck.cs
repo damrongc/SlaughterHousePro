@@ -16,7 +16,7 @@ namespace SlaughterHouseLib.Models
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
         public string ModifiedBy { get; set; }
-        public DateTime ModifiedAt { get; set; } 
+        public DateTime ModifiedAt { get; set; }
     }
 
     public static class TruckController
@@ -30,7 +30,7 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT * FROM Truck WHERE active=1");
+                    sb.Append("SELECT * FROM truck WHERE active=1");
                     sb.Append(" ORDER BY truck_no asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
 
@@ -47,7 +47,7 @@ namespace SlaughterHouseLib.Models
                             Driver = item["driver"].ToString(),
                         });
                     }
-                     
+
                     return Trucks;
                 }
             }
@@ -85,8 +85,8 @@ namespace SlaughterHouseLib.Models
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();
-                    da.Fill(ds); 
-                    
+                    da.Fill(ds);
+
                     return ds.Tables[0];
                 }
             }
@@ -96,7 +96,41 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static Truck GetTruck(string truckNo)
+        public static string GetTruckNoFromTransport(string orderNo)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sb = new StringBuilder();
+                    sb.Append(" select truck_no from transport");
+                    sb.Append(" where ref_document_no = @ref_document_no");
+
+                    var cmd = new MySqlCommand(sb.ToString(), conn);
+                    cmd.Parameters.AddWithValue("ref_document_no", orderNo);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    string res = "";
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        res = ds.Tables[0].Rows[0]["truck_no"].ToString() != "" ? ds.Tables[0].Rows[0]["truck_no"].ToString() : "";
+                    }
+
+                    return res;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+            public static Truck GetTruck(string truckNo)
         {
             try
             {
