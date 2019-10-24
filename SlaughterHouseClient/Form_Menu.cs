@@ -15,7 +15,13 @@ namespace SlaughterHouseClient
 
         private void Form_Load(object sender, EventArgs e)
         {
-            lblCurrentDatetime.Text = DateTime.Today.ToString("dd-MM-yyyy");
+            using (var db = new SlaughterhouseEntities())
+            {
+                int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                var plant = db.plants.Find(plantID);
+                lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
+            }
+
         }
 
         private void btnReceiveSwine_Click(object sender, EventArgs e)

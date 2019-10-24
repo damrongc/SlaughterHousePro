@@ -103,8 +103,19 @@ namespace SlaughterHouseClient.Issued
                 using (var db = new SlaughterhouseEntities())
                 {
                     var order = db.orders.Find(lblOrderNo.Text);
-                    lblOrderNo.Text = order.order_no;
+                    //lblOrderNo.Text = order.order_no;
                     lblCustomer.Text = order.customer.customer_name;
+                    var transport = db.transports.Where(p => p.ref_document_no == order.order_no).SingleOrDefault();
+                    if (transport != null)
+                    {
+                        lblTruckNo.Text = transport.truck_no;
+                        lblMessage.Text = Constants.BARCODE_WAITING;
+                    }
+                    else
+                    {
+                        lblMessage.Text = Constants.CHOOSE_TRUCK;
+                    }
+                    txtBarcodeNo.Focus();
 
                     var coll = (from or in order.orders_item
                                 join bom in db.boms on or.bom_code equals bom.bom_code
@@ -198,9 +209,6 @@ namespace SlaughterHouseClient.Issued
 
                 using (var db = new SlaughterhouseEntities())
                 {
-
-
-
                     var barcode = db.barcodes.Find(barcodeNo);
                     if (barcode == null)
                     {
@@ -290,6 +298,7 @@ namespace SlaughterHouseClient.Issued
                                 {
                                     transport_no = transportNo,
                                     transport_date = DateTime.Today,
+                                    truck_no = truckNo,
                                     ref_document_no = orderNo,
                                     transport_flag = 0,
                                     create_at = DateTime.Now,
@@ -328,15 +337,11 @@ namespace SlaughterHouseClient.Issued
                             stockGenerate.running += 1;
                             db.Entry(stockGenerate).State = EntityState.Modified;
 
-
-
-
                             //set barcode
                             barcode.active = false;
                             db.Entry(barcode).State = EntityState.Modified;
 
                             //set unload
-
                             orderItems.unload_qty += barcode.qty;
                             orderItems.unload_wgh += barcode.wgh;
 
@@ -347,7 +352,6 @@ namespace SlaughterHouseClient.Issued
 
                             db.SaveChanges();
                             transaction.Commit();
-
                             return true;
                         }
                         catch (Exception)
@@ -389,21 +393,9 @@ namespace SlaughterHouseClient.Issued
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     lblTruckNo.Text = frm.TruckNo;
-                    //product_code = frm.ProductCode;
-                    //LoadProduct();
-                    //LoadLotNo();
+                    txtBarcodeNo.Focus();
+                    lblMessage.Text = Constants.BARCODE_WAITING;
 
-                    //LoadData(frm.ReceiveNo);
-                    //LoadBomItem(bom.bom_code);
-
-                    //lblMessage.Text = Constants.PRODUCT_WAITING;
-                    //int stock_qty = 0;
-                    //decimal stock_wgh = 0;
-
-                    ////int remain_qty = lblSwineQty.Text.ToInt16() - stock_qty;
-                    //lblStockQty.Text = stock_qty.ToComma();
-                    //lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
-                    ////lblRemainQty.Text = remain_qty.ToComma();
                 }
             }
             catch (Exception ex)

@@ -51,6 +51,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.dtpReceiveDate = new System.Windows.Forms.DateTimePicker();
+            this.BtnDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnSaveAndClose
@@ -266,10 +267,28 @@
             this.dtpReceiveDate.Size = new System.Drawing.Size(215, 36);
             this.dtpReceiveDate.TabIndex = 32;
             // 
+            // BtnDelete
+            // 
+            this.BtnDelete.BackColor = System.Drawing.Color.Tomato;
+            this.BtnDelete.FlatAppearance.BorderSize = 0;
+            this.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDelete.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDelete.ForeColor = System.Drawing.Color.White;
+            this.BtnDelete.Image = ((System.Drawing.Image)(resources.GetObject("BtnDelete.Image")));
+            this.BtnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnDelete.Location = new System.Drawing.Point(218, 434);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(202, 36);
+            this.BtnDelete.TabIndex = 48;
+            this.BtnDelete.Text = "ยกเลิกเอกสาร";
+            this.BtnDelete.UseVisualStyleBackColor = false;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
             // Form_ReceiveAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(807, 482);
+            this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.dtpReceiveDate);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtReciveNo);
@@ -328,5 +347,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DateTimePicker dtpReceiveDate;
+        private System.Windows.Forms.Button BtnDelete;
     }
 }

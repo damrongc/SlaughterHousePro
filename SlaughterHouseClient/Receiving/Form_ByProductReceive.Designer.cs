@@ -59,7 +59,6 @@
             this.lblStable = new System.Windows.Forms.Label();
             this.timerMinWeight = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.dragControl1 = new DragControl();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.lblFactoryWgh = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -77,6 +76,7 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.lblProduct = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.dragControl1 = new DragControl();
             this.panelHeader.SuspendLayout();
             this.plSimulator.SuspendLayout();
             this.SuspendLayout();
@@ -263,11 +263,11 @@
             // 
             // btnZero
             // 
-            this.btnZero.Location = new System.Drawing.Point(112, 74);
+            this.btnZero.Location = new System.Drawing.Point(142, 33);
             this.btnZero.Name = "btnZero";
-            this.btnZero.Size = new System.Drawing.Size(98, 31);
+            this.btnZero.Size = new System.Drawing.Size(60, 31);
             this.btnZero.TabIndex = 41;
-            this.btnZero.Text = "Set Zero";
+            this.btnZero.Text = "Zero";
             this.btnZero.UseVisualStyleBackColor = true;
             this.btnZero.Click += new System.EventHandler(this.btnZero_Click);
             // 
@@ -366,23 +366,25 @@
             // 
             // plSimulator
             // 
+            this.plSimulator.BackColor = System.Drawing.Color.White;
             this.plSimulator.Controls.Add(this.btnSetWgh);
             this.plSimulator.Controls.Add(this.txtSimWeight);
             this.plSimulator.Controls.Add(this.btnZero);
+            this.plSimulator.Font = new System.Drawing.Font("Kanit", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.plSimulator.Location = new System.Drawing.Point(436, 452);
             this.plSimulator.Name = "plSimulator";
-            this.plSimulator.Size = new System.Drawing.Size(238, 126);
+            this.plSimulator.Size = new System.Drawing.Size(214, 72);
             this.plSimulator.TabIndex = 50;
             this.plSimulator.TabStop = false;
             this.plSimulator.Text = "Simulator";
             // 
             // btnSetWgh
             // 
-            this.btnSetWgh.Location = new System.Drawing.Point(112, 37);
+            this.btnSetWgh.Location = new System.Drawing.Point(80, 33);
             this.btnSetWgh.Name = "btnSetWgh";
-            this.btnSetWgh.Size = new System.Drawing.Size(98, 31);
+            this.btnSetWgh.Size = new System.Drawing.Size(56, 31);
             this.btnSetWgh.TabIndex = 43;
-            this.btnSetWgh.Text = "Set Wgh";
+            this.btnSetWgh.Text = "Wgh";
             this.btnSetWgh.UseVisualStyleBackColor = true;
             this.btnSetWgh.Click += new System.EventHandler(this.btnSetWgh_Click);
             // 
@@ -390,7 +392,7 @@
             // 
             this.txtSimWeight.Location = new System.Drawing.Point(6, 37);
             this.txtSimWeight.Name = "txtSimWeight";
-            this.txtSimWeight.Size = new System.Drawing.Size(100, 31);
+            this.txtSimWeight.Size = new System.Drawing.Size(68, 24);
             this.txtSimWeight.TabIndex = 42;
             this.txtSimWeight.Text = "0";
             this.txtSimWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -413,10 +415,6 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
-            // 
-            // dragControl1
-            // 
-            this.dragControl1.SelectControl = this.panelHeader;
             // 
             // lblFactoryWgh
             // 
@@ -526,6 +524,7 @@
             this.btnAcceptWeight.TabIndex = 74;
             this.btnAcceptWeight.Text = "ตกลง";
             this.btnAcceptWeight.UseVisualStyleBackColor = false;
+            this.btnAcceptWeight.Visible = false;
             this.btnAcceptWeight.Click += new System.EventHandler(this.BtnAcceptWeight_Click);
             // 
             // lblLastWgh
@@ -609,6 +608,10 @@
             this.label6.Size = new System.Drawing.Size(65, 33);
             this.label6.TabIndex = 80;
             this.label6.Text = "สินค้า";
+            // 
+            // dragControl1
+            // 
+            this.dragControl1.SelectControl = this.panelHeader;
             // 
             // Form_ByProductReceive
             // 

@@ -198,7 +198,6 @@ namespace SlaughterHouseClient.Issued
             {
                 var order = db.orders.Where(p => p.order_no == orderNo).SingleOrDefault();
                 var orderItems = order.orders_item.Where(p => p.product_code == product.product_code).ToList();
-
                 lblProduct.Text = orderItems[0].product.product_name;
                 lblOrderQty.Text = orderItems[0].order_qty.ToComma();
                 lblOrderWgh.Text = orderItems[0].order_wgh.ToFormat2Decimal();
@@ -207,6 +206,12 @@ namespace SlaughterHouseClient.Issued
 
                 lblOrderNo.Text = order.order_no;
                 lblCustomer.Text = order.customer.customer_name;
+
+                var transport = db.transports.Where(p => p.ref_document_no == order.order_no).SingleOrDefault();
+                if (transport != null)
+                {
+                    lblTruckNo.Text = transport.truck_no;
+                }
 
 
             }
@@ -412,24 +417,27 @@ namespace SlaughterHouseClient.Issued
                                 receiveItem.transfer_qty = 1;
                                 receiveItem.transfer_wgh = unloadWeight;
 
-
-                                var trans = new transport
+                                var transport = db.transports.Find(transportNo);
+                                if (transport == null)
                                 {
-                                    transport_no = transportNo,
-                                    transport_date = DateTime.Today,
-                                    ref_document_no = orderNo,
-                                    transport_flag = 0,
-                                    create_at = DateTime.Now,
-                                    create_by = createBy
-
-
-                                };
-                                db.transports.Add(trans);
-
-
-
+                                    var trans = new transport
+                                    {
+                                        transport_no = transportNo,
+                                        transport_date = DateTime.Today,
+                                        ref_document_no = orderNo,
+                                        truck_no = truckNo,
+                                        transport_flag = 0,
+                                        create_at = DateTime.Now,
+                                        create_by = createBy
+                                    };
+                                    db.transports.Add(trans);
+                                }
+                                else
+                                {
+                                    transport.truck_no = truckNo;
+                                    db.Entry(transport).State = EntityState.Modified;
+                                }
                                 //insert transport item
-
                                 var transItem = new transport_item
                                 {
                                     transport_no = transportNo,
@@ -446,7 +454,6 @@ namespace SlaughterHouseClient.Issued
                                     create_by = createBy
                                 };
                                 db.transport_item.Add(transItem);
-
                             }
 
                             //update receive item
@@ -475,9 +482,7 @@ namespace SlaughterHouseClient.Issued
                             };
 
                             db.stocks.Add(stock);
-
                             //รับหมูซีก เครื่องใน ไม่ต้อง update stock_item_running เพราะเริ่มตาม receive_item.seq
-
                             if (stockItemRunning == null)
                             {
                                 //insert stock_item_running
@@ -501,9 +506,6 @@ namespace SlaughterHouseClient.Issued
                                 stockItemRunning.stock_item += 1;
                                 db.Entry(stockItemRunning).State = EntityState.Modified;
                             }
-
-
-
                             db.SaveChanges();
                             transaction.Commit();
                         }

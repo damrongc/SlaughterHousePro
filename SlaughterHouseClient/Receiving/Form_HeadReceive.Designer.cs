@@ -261,11 +261,11 @@
             // 
             // btnZero
             // 
-            this.btnZero.Location = new System.Drawing.Point(112, 74);
+            this.btnZero.Location = new System.Drawing.Point(156, 23);
             this.btnZero.Name = "btnZero";
-            this.btnZero.Size = new System.Drawing.Size(98, 31);
+            this.btnZero.Size = new System.Drawing.Size(73, 31);
             this.btnZero.TabIndex = 41;
-            this.btnZero.Text = "Set Zero";
+            this.btnZero.Text = "Zero";
             this.btnZero.UseVisualStyleBackColor = true;
             this.btnZero.Click += new System.EventHandler(this.btnZero_Click);
             // 
@@ -364,31 +364,33 @@
             // 
             // plSimulator
             // 
+            this.plSimulator.BackColor = System.Drawing.Color.White;
             this.plSimulator.Controls.Add(this.btnSetWgh);
             this.plSimulator.Controls.Add(this.txtSimWeight);
             this.plSimulator.Controls.Add(this.btnZero);
-            this.plSimulator.Location = new System.Drawing.Point(436, 452);
+            this.plSimulator.Font = new System.Drawing.Font("Kanit", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.plSimulator.Location = new System.Drawing.Point(370, 468);
             this.plSimulator.Name = "plSimulator";
-            this.plSimulator.Size = new System.Drawing.Size(238, 126);
+            this.plSimulator.Size = new System.Drawing.Size(238, 72);
             this.plSimulator.TabIndex = 50;
             this.plSimulator.TabStop = false;
             this.plSimulator.Text = "Simulator";
             // 
             // btnSetWgh
             // 
-            this.btnSetWgh.Location = new System.Drawing.Point(112, 37);
+            this.btnSetWgh.Location = new System.Drawing.Point(87, 23);
             this.btnSetWgh.Name = "btnSetWgh";
-            this.btnSetWgh.Size = new System.Drawing.Size(98, 31);
+            this.btnSetWgh.Size = new System.Drawing.Size(63, 31);
             this.btnSetWgh.TabIndex = 43;
-            this.btnSetWgh.Text = "Set Wgh";
+            this.btnSetWgh.Text = "Wgh";
             this.btnSetWgh.UseVisualStyleBackColor = true;
             this.btnSetWgh.Click += new System.EventHandler(this.btnSetWgh_Click);
             // 
             // txtSimWeight
             // 
-            this.txtSimWeight.Location = new System.Drawing.Point(6, 37);
+            this.txtSimWeight.Location = new System.Drawing.Point(6, 27);
             this.txtSimWeight.Name = "txtSimWeight";
-            this.txtSimWeight.Size = new System.Drawing.Size(100, 31);
+            this.txtSimWeight.Size = new System.Drawing.Size(75, 24);
             this.txtSimWeight.TabIndex = 42;
             this.txtSimWeight.Text = "0";
             this.txtSimWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -524,6 +526,7 @@
             this.btnAcceptWeight.TabIndex = 74;
             this.btnAcceptWeight.Text = "ตกลง";
             this.btnAcceptWeight.UseVisualStyleBackColor = false;
+            this.btnAcceptWeight.Visible = false;
             this.btnAcceptWeight.Click += new System.EventHandler(this.BtnAcceptWeight_Click);
             // 
             // lblLastWgh

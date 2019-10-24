@@ -41,7 +41,13 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
+                using (var db = new SlaughterhouseEntities())
+                {
+                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                    var plant = db.plants.Find(plantID);
+                    lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
+                }
+
                 lblMessage.Text = Constants.CHOOSE_QUEUE;
 
             }
@@ -78,6 +84,7 @@ namespace SlaughterHouseClient.Receiving
                 plSimulator.Visible = true;
             else
                 plSimulator.Visible = false;
+            //plSimulator.Visible = false;
 
         }
 
@@ -251,9 +258,6 @@ namespace SlaughterHouseClient.Receiving
                 lblMaxWeight.Text = product.max_weight.ToString();
 
                 var receive = db.receives.Where(p => p.receive_no == lblReceiveNo.Text).SingleOrDefault();
-
-
-
                 lblReceiveNo.Text = receive.receive_no;
                 lblFarm.Text = receive.farm.farm_name;
                 lblBreeder.Text = receive.breeder.breeder_name;
@@ -262,18 +266,9 @@ namespace SlaughterHouseClient.Receiving
                 lblFarmQty.Text = receive.farm_qty.ToComma();
                 lblFactoryQty.Text = receive.factory_qty.ToComma();
                 lblFactoryWgh.Text = receive.factory_wgh.ToFormat2Decimal();
+                lblRemainQty.Text = (receive.farm_qty - receive.factory_qty).ToComma();
 
-                var remain_qty = receive.farm_qty - receive.factory_qty;
-                lblRemainQty.Text = remain_qty.ToComma();
 
-                //if (remain_qty == 0)
-                //{
-                //    btnStart.Enabled = false;
-                //}
-                //else
-                //{
-                //    btnStart.Enabled = true;
-                //}
             }
 
             lblMessage.Text = Constants.START_WAITING;
@@ -294,7 +289,16 @@ namespace SlaughterHouseClient.Receiving
                 {
                     lblReceiveNo.Text = frm.ReceiveNo;
                     LoadData();
+                    var remain_qty = lblRemainQty.Text.ToInt16();
 
+                    if (remain_qty == 0)
+                    {
+                        btnStart.Enabled = false;
+                    }
+                    else
+                    {
+                        btnStart.Enabled = true;
+                    }
 
                 }
             }
@@ -306,13 +310,10 @@ namespace SlaughterHouseClient.Receiving
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-
             try
             {
-
                 if (!serialPort1.IsOpen)
                     serialPort1.Open();
-
 
                 isStart = true;
                 isZero = true;
@@ -323,10 +324,9 @@ namespace SlaughterHouseClient.Receiving
                 btnStart.Enabled = false;
                 btnStop.Enabled = true;
                 btnAcceptWeight.Enabled = true;
-
                 lblMessage.Text = Constants.WEIGHT_WAITING;
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -368,9 +368,14 @@ namespace SlaughterHouseClient.Receiving
             try
             {
                 var weight = lblWeight.Text.ToDecimal();
-                string create_by = Helper.GetLocalIPAddress();
+                string createBy = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
+
+
+                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                    var productionDate = db.plants.Find(plantID).production_date;
+
                     //update receive
                     var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
 
@@ -394,18 +399,18 @@ namespace SlaughterHouseClient.Receiving
                         receive_wgh = weight,
                         chill_qty = 0,
                         chill_wgh = 0,
-                        create_by = create_by
+                        create_by = createBy
 
                     };
 
                     string stock_no = "";
-                    var documentGenerate = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
+                    var stockDocument = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
                     //check stock_item_running
                     var stockItemRunning = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).SingleOrDefault();
                     if (stockItemRunning == null)
                     {
                         //get new stock doc no
-                        stock_no = Constants.STK + documentGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
+                        stock_no = Constants.STK + stockDocument.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
                     }
                     else
                     {
@@ -426,7 +431,7 @@ namespace SlaughterHouseClient.Receiving
                             //insert stock
                             var stock = new stock
                             {
-                                stock_date = receive.receive_date,
+                                stock_date = productionDate,
                                 stock_no = stock_no,
                                 stock_item = item.seq,
                                 product_code = item.product_code,
@@ -455,8 +460,8 @@ namespace SlaughterHouseClient.Receiving
                                 db.stock_item_running.Add(newStockItem);
 
                                 //update document_generate
-                                documentGenerate.running += 1;
-                                db.Entry(documentGenerate).State = System.Data.Entity.EntityState.Modified;
+                                stockDocument.running += 1;
+                                db.Entry(stockDocument).State = System.Data.Entity.EntityState.Modified;
 
 
                             }
@@ -491,7 +496,18 @@ namespace SlaughterHouseClient.Receiving
         private void btnSetWgh_Click(object sender, EventArgs e)
         {
             lblWeight.Text = txtSimWeight.Text.ToDecimal().ToFormat2Decimal();
-            ProcessData();
+
+            isStart = true;
+            isZero = true;
+            lblMessage.Text = Constants.WEIGHT_WAITING;
+
+            btnReceiveNo.Enabled = false;
+            btnStart.Enabled = false;
+            btnStop.Enabled = true;
+            btnAcceptWeight.Enabled = true;
+            lblMessage.Text = Constants.WEIGHT_WAITING;
+
+            //ProcessData();
         }
 
         private void btnZero_Click(object sender, EventArgs e)
@@ -571,10 +587,8 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-
                 if (isStart && isZero)
                 {
-
                     decimal scaleWeight = lblWeight.Text.ToDecimal();
                     if (scaleWeight < product.min_weight)
                     {
@@ -590,8 +604,6 @@ namespace SlaughterHouseClient.Receiving
                     var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำหมูออก", 3, Color.Green, animationMethod, animationDirection);
                     toastNotification.Show();
                     LoadData();
-
-
                     isZero = false;
                     //clear weight
                     lockWeight = false;

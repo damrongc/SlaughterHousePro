@@ -17,6 +17,7 @@ public static class Constants
 
     public static string CHOOSE_QUEUE = "กรุณาเลือกข้อมูล";
     public static string CHOOSE_WH = "กรุณาเลือกคลังสินค้า";
+    public static string CHOOSE_TRUCK = "กรุณาเลือกทะเบียนรถ";
     public static string START_WAITING = "กรุณาเริ่มชั่ง";
     public static string PRODUCT_WAITING = "กรุณาเลือกสินค้า";
     public static string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";

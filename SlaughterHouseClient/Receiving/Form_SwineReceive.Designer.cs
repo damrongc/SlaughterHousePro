@@ -72,8 +72,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.lblBreeder = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.lblTruckNo = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.lblTruckNo = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
             this.plSimulator.SuspendLayout();
             this.SuspendLayout();
@@ -260,11 +260,11 @@
             // 
             // btnZero
             // 
-            this.btnZero.Location = new System.Drawing.Point(112, 74);
+            this.btnZero.Location = new System.Drawing.Point(167, 23);
             this.btnZero.Name = "btnZero";
-            this.btnZero.Size = new System.Drawing.Size(98, 31);
+            this.btnZero.Size = new System.Drawing.Size(57, 31);
             this.btnZero.TabIndex = 41;
-            this.btnZero.Text = "Set Zero";
+            this.btnZero.Text = "Zero";
             this.btnZero.UseVisualStyleBackColor = true;
             this.btnZero.Click += new System.EventHandler(this.btnZero_Click);
             // 
@@ -297,31 +297,33 @@
             // 
             // plSimulator
             // 
+            this.plSimulator.BackColor = System.Drawing.Color.White;
             this.plSimulator.Controls.Add(this.btnSetWgh);
             this.plSimulator.Controls.Add(this.txtSimWeight);
             this.plSimulator.Controls.Add(this.btnZero);
-            this.plSimulator.Location = new System.Drawing.Point(278, 328);
+            this.plSimulator.Font = new System.Drawing.Font("Kanit", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.plSimulator.Location = new System.Drawing.Point(771, 338);
             this.plSimulator.Name = "plSimulator";
-            this.plSimulator.Size = new System.Drawing.Size(238, 126);
+            this.plSimulator.Size = new System.Drawing.Size(238, 63);
             this.plSimulator.TabIndex = 50;
             this.plSimulator.TabStop = false;
             this.plSimulator.Text = "Simulator";
             // 
             // btnSetWgh
             // 
-            this.btnSetWgh.Location = new System.Drawing.Point(112, 37);
+            this.btnSetWgh.Location = new System.Drawing.Point(96, 23);
             this.btnSetWgh.Name = "btnSetWgh";
-            this.btnSetWgh.Size = new System.Drawing.Size(98, 31);
+            this.btnSetWgh.Size = new System.Drawing.Size(65, 31);
             this.btnSetWgh.TabIndex = 43;
-            this.btnSetWgh.Text = "Set Wgh";
+            this.btnSetWgh.Text = "Wgh";
             this.btnSetWgh.UseVisualStyleBackColor = true;
             this.btnSetWgh.Click += new System.EventHandler(this.btnSetWgh_Click);
             // 
             // txtSimWeight
             // 
-            this.txtSimWeight.Location = new System.Drawing.Point(6, 37);
+            this.txtSimWeight.Location = new System.Drawing.Point(22, 27);
             this.txtSimWeight.Name = "txtSimWeight";
-            this.txtSimWeight.Size = new System.Drawing.Size(100, 31);
+            this.txtSimWeight.Size = new System.Drawing.Size(68, 24);
             this.txtSimWeight.TabIndex = 42;
             this.txtSimWeight.Text = "0";
             this.txtSimWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -555,18 +557,6 @@
             this.label12.TabIndex = 77;
             this.label12.Text = "ประเภท";
             // 
-            // lblTruckNo
-            // 
-            this.lblTruckNo.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTruckNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTruckNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblTruckNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.lblTruckNo.ForeColor = System.Drawing.Color.Black;
-            this.lblTruckNo.Location = new System.Drawing.Point(18, 274);
-            this.lblTruckNo.Name = "lblTruckNo";
-            this.lblTruckNo.Size = new System.Drawing.Size(248, 43);
-            this.lblTruckNo.TabIndex = 76;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -577,16 +567,28 @@
             this.label10.TabIndex = 75;
             this.label10.Text = "ทะเบียนรถ";
             // 
+            // lblTruckNo
+            // 
+            this.lblTruckNo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblTruckNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblTruckNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTruckNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblTruckNo.ForeColor = System.Drawing.Color.Black;
+            this.lblTruckNo.Location = new System.Drawing.Point(18, 274);
+            this.lblTruckNo.Name = "lblTruckNo";
+            this.lblTruckNo.Size = new System.Drawing.Size(248, 43);
+            this.lblTruckNo.TabIndex = 81;
+            // 
             // Form_SwineReceive
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.lblTruckNo);
             this.Controls.Add(this.lblQueueNo);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.lblBreeder);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.lblTruckNo);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.btnAcceptWeight);
             this.Controls.Add(this.lblFactoryWgh);
@@ -676,8 +678,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblBreeder;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label lblTruckNo;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblTruckNo;
     }
 }
 

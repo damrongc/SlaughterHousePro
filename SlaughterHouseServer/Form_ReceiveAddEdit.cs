@@ -32,6 +32,8 @@ namespace SlaughterHouseServer
 
         private void Form_Load(object sender, EventArgs e)
         {
+
+            BtnDelete.Visible = false;
             LoadFarm();
             LoadBreeder();
             LoadData();
@@ -132,6 +134,13 @@ namespace SlaughterHouseServer
 
                 dtpReceiveDate.Enabled = false;
                 BtnSaveAndNew.Visible = false;
+
+                if (receive.ReceiveFlag == 0)
+                {
+                    BtnDelete.Visible = true;
+
+                }
+
             }
         }
 
@@ -219,6 +228,20 @@ namespace SlaughterHouseServer
 
                 };
                 ReceiveController.InsertOrUpdate(receive);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ReceiveController.Delete(txtReciveNo.Text);
 
             }
             catch (Exception)

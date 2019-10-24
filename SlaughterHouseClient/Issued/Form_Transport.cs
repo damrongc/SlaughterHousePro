@@ -157,7 +157,6 @@ namespace SlaughterHouseClient.Issued
                 var qry = db.Database.SqlQuery<CustomerTransport>(sql, new MySqlParameter("order_no", OrderNo)).ToList();
                 var coll = qry.AsEnumerable().Select(p => new
                 {
-
                     p.barcode_no,
                     p.truck_no,
                     p.product_name,

@@ -472,7 +472,7 @@ namespace SlaughterHouseLib
                     {
                         double factory_wgh = ds.Tables[0].Rows[i]["factory_wgh"].ToString().ToDouble();
                         double carcass_wgh = ds.Tables[0].Rows[i]["carcass_wgh"].ToString().ToDouble();
-                        ds.Tables[0].Rows[i]["yeild"] = ((carcass_wgh * 100) / 100).ToFormat2Double();
+                        ds.Tables[0].Rows[i]["yeild"] = ((carcass_wgh * 100) / factory_wgh).ToFormat2Double();
                     }
 
 

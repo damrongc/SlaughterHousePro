@@ -14,7 +14,7 @@ namespace SlaughterHouseServer
 
         private void UserSettingComponent()
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
             BtnMaster.Click += Btn_Click;
             BtnOrder.Click += Btn_Click;
             BtnProductionOrder.Click += Btn_Click;

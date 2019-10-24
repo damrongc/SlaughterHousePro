@@ -52,8 +52,12 @@ namespace SlaughterHouseClient.Receiving
                     lblMaxWeight.Text = product.max_weight.ToString();
                     lblProduct.Text = product.product_name;
 
+                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                    var plant = db.plants.Find(plantID);
+                    lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
                 }
-                lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
+
+
                 lblMessage.Text = Constants.CHOOSE_QUEUE;
             }
             catch (Exception ex)
@@ -397,7 +401,7 @@ namespace SlaughterHouseClient.Receiving
             btnAcceptWeight.Enabled = true;
 
 
-            //ProcessData();
+            ProcessData();
         }
 
         private void btnZero_Click(object sender, EventArgs e)
@@ -493,10 +497,13 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                var receive_wgh = lblWeight.Text.ToDecimal();
-                var create_by = Helper.GetLocalIPAddress();
+                var receiveWgh = lblWeight.Text.ToDecimal();
+                var createBy = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
+                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                    var productionDate = db.plants.Find(plantID).production_date;
+
                     //update receive
                     var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
 
@@ -519,11 +526,11 @@ namespace SlaughterHouseClient.Receiving
                         lot_no = receive.lot_no,
                         sex_flag = "",
                         receive_qty = 1,
-                        receive_wgh = receive_wgh,
+                        receive_wgh = receiveWgh,
                         chill_qty = 0,
                         chill_wgh = 0,
                         barcode_no = barcode_no,
-                        create_by = create_by
+                        create_by = createBy
                     };
 
                     string stock_no = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).Select(p => p.stock_no).SingleOrDefault();
@@ -553,11 +560,11 @@ namespace SlaughterHouseClient.Receiving
                             {
                                 barcode_no = barcode_no,
                                 product_code = item.product_code,
-                                production_date = DateTime.Today,
+                                production_date = productionDate,
                                 lot_no = receive.lot_no,
                                 qty = 1,
-                                wgh = receive_wgh,
-                                create_by = create_by
+                                wgh = receiveWgh,
+                                create_by = createBy
                             };
 
                             db.barcodes.Add(barcode);
@@ -587,7 +594,7 @@ namespace SlaughterHouseClient.Receiving
                             //insert stock
                             var stock = new stock
                             {
-                                stock_date = DateTime.Today,
+                                stock_date = productionDate,
                                 stock_no = stock_no,
                                 stock_item = item.seq,
                                 product_code = item.product_code,
@@ -599,19 +606,23 @@ namespace SlaughterHouseClient.Receiving
                                 location_code = LocationCode,
                                 barcode_no = barcode_no,
                                 transaction_type = 1,
-                                create_by = create_by
+                                create_by = createBy
                             };
 
                             db.stocks.Add(stock);
                             db.SaveChanges();
                             transaction.Commit();
-                            PrintBarcode();
                         }
                         catch (Exception)
                         {
 
                             transaction.Rollback();
                             throw;
+                        }
+                        finally
+                        {
+                            PrintBarcode();
+
                         }
 
                     }
@@ -629,7 +640,6 @@ namespace SlaughterHouseClient.Receiving
             try
             {
                 btnPrint.Enabled = false;
-
                 using (var db = new SlaughterhouseEntities())
                 {
 
@@ -661,8 +671,9 @@ namespace SlaughterHouseClient.Receiving
                     dr["wgh_unit"] = barcode.product.unit_of_measurement1.unit_name;
                     dt.Rows.Add(dr);
 
-                    //string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"\Report\Rpt\"));//Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
-                    //dt.WriteXml(path + @"\xml\barcode.xml", XmlWriteMode.WriteSchema);
+                    //var reportPath = Application.StartupPath;
+                    //dt.WriteXml(reportPath + @"\xml\barcode.xml", XmlWriteMode.WriteSchema);
+
                     doc.SetDataSource(dt);
                     doc.PrintToPrinter(1, true, 0, 0);
                 }

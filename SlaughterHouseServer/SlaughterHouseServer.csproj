@@ -611,7 +611,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Report\swineyield.rpt" />
-    <None Include="Report\transport.rpt" />
+    <Content Include="Report\transport.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

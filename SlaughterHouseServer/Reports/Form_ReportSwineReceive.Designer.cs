@@ -55,16 +55,15 @@
             this.rptViewer.TabIndex = 5;
             this.rptViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
-            // Form_Report_Swine_Receive
+            // Form_ReportSwineReceive
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1184, 661);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_Report_Swine_Receive";
+            this.Name = "Form_ReportSwineReceive";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Swine Receive";
             this.panel1.ResumeLayout(false);

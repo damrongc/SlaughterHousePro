@@ -26,16 +26,16 @@
     </xs:element>
   </xs:schema>
   <Barcode>
-    <barcode_no>*1000000000107*</barcode_no>
-    <barcode_no_text>1000000000107</barcode_no_text>
-    <product_code>P0021</product_code>
-    <product_name>สะโพก- Raw</product_name>
-    <production_date>2019-09-21T00:00:00+07:00</production_date>
-    <expired_date>2019-11-20T00:00:00+07:00</expired_date>
-    <lot_no>11924910609</lot_no>
+    <barcode_no>*1000000000168*</barcode_no>
+    <barcode_no_text>1000000000168</barcode_no_text>
+    <product_code>P004</product_code>
+    <product_name>เครื่องในขาว-ชุด</product_name>
+    <production_date>2019-10-24T00:00:00+07:00</production_date>
+    <expired_date>2019-12-23T00:00:00+07:00</expired_date>
+    <lot_no>1192971241001</lot_no>
     <qty>1</qty>
-    <qty_unit>ซีก</qty_unit>
-    <wgh>11.88</wgh>
+    <qty_unit>ชุด</qty_unit>
+    <wgh>5.22</wgh>
     <wgh_unit>กิโลกรัม</wgh_unit>
   </Barcode>
 </NewDataSet>

@@ -188,13 +188,14 @@
             // 
             // txtBarcodeNo
             // 
-            this.txtBarcodeNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
+            this.txtBarcodeNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(185)))), ((int)(((byte)(0)))));
             this.txtBarcodeNo.Font = new System.Drawing.Font("Kanit", 16F);
             this.txtBarcodeNo.ForeColor = System.Drawing.Color.White;
             this.txtBarcodeNo.Location = new System.Drawing.Point(710, 169);
             this.txtBarcodeNo.Name = "txtBarcodeNo";
             this.txtBarcodeNo.Size = new System.Drawing.Size(302, 39);
             this.txtBarcodeNo.TabIndex = 68;
+            this.txtBarcodeNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
             // 

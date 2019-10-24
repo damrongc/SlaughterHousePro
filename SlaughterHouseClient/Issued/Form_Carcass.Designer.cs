@@ -396,7 +396,7 @@
             // 
             // plSimulator
             // 
-            this.plSimulator.BackColor = System.Drawing.Color.White;
+            this.plSimulator.BackColor = System.Drawing.Color.Gainsboro;
             this.plSimulator.Controls.Add(this.btnSetWgh);
             this.plSimulator.Controls.Add(this.txtSimWeight);
             this.plSimulator.Controls.Add(this.btnZero);

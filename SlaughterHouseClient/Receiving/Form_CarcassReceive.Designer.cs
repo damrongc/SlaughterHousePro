@@ -71,9 +71,9 @@
             this.btnAcceptWeight = new System.Windows.Forms.Button();
             this.lblLastWgh = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dragControl1 = new DragControl();
             this.lblLotNo = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.dragControl1 = new DragControl();
             this.panelHeader.SuspendLayout();
             this.plSimulator.SuspendLayout();
             this.SuspendLayout();
@@ -236,11 +236,11 @@
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(732, 337);
+            this.btnStop.Location = new System.Drawing.Point(732, 364);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(136, 97);
+            this.btnStop.Size = new System.Drawing.Size(136, 70);
             this.btnStop.TabIndex = 38;
-            this.btnStop.Text = "ยกเลิก";
+            this.btnStop.Text = "หยุดชั่ง";
             this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
@@ -250,9 +250,9 @@
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(590, 337);
+            this.btnStart.Location = new System.Drawing.Point(590, 364);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(136, 97);
+            this.btnStart.Size = new System.Drawing.Size(136, 70);
             this.btnStart.TabIndex = 37;
             this.btnStart.Text = "เริ่มชั่ง";
             this.btnStart.UseVisualStyleBackColor = false;
@@ -260,11 +260,11 @@
             // 
             // btnZero
             // 
-            this.btnZero.Location = new System.Drawing.Point(112, 74);
+            this.btnZero.Location = new System.Drawing.Point(159, 19);
             this.btnZero.Name = "btnZero";
-            this.btnZero.Size = new System.Drawing.Size(98, 31);
+            this.btnZero.Size = new System.Drawing.Size(73, 31);
             this.btnZero.TabIndex = 41;
-            this.btnZero.Text = "Set Zero";
+            this.btnZero.Text = "Zero";
             this.btnZero.UseVisualStyleBackColor = true;
             this.btnZero.Click += new System.EventHandler(this.btnZero_Click);
             // 
@@ -363,21 +363,23 @@
             // 
             // plSimulator
             // 
+            this.plSimulator.BackColor = System.Drawing.Color.White;
             this.plSimulator.Controls.Add(this.btnSetWgh);
             this.plSimulator.Controls.Add(this.txtSimWeight);
             this.plSimulator.Controls.Add(this.btnZero);
+            this.plSimulator.Font = new System.Drawing.Font("Kanit", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.plSimulator.Location = new System.Drawing.Point(320, 391);
             this.plSimulator.Name = "plSimulator";
-            this.plSimulator.Size = new System.Drawing.Size(238, 126);
+            this.plSimulator.Size = new System.Drawing.Size(238, 60);
             this.plSimulator.TabIndex = 50;
             this.plSimulator.TabStop = false;
             this.plSimulator.Text = "Simulator";
             // 
             // btnSetWgh
             // 
-            this.btnSetWgh.Location = new System.Drawing.Point(112, 37);
+            this.btnSetWgh.Location = new System.Drawing.Point(85, 19);
             this.btnSetWgh.Name = "btnSetWgh";
-            this.btnSetWgh.Size = new System.Drawing.Size(98, 31);
+            this.btnSetWgh.Size = new System.Drawing.Size(71, 31);
             this.btnSetWgh.TabIndex = 43;
             this.btnSetWgh.Text = "Set Wgh";
             this.btnSetWgh.UseVisualStyleBackColor = true;
@@ -385,9 +387,9 @@
             // 
             // txtSimWeight
             // 
-            this.txtSimWeight.Location = new System.Drawing.Point(6, 37);
+            this.txtSimWeight.Location = new System.Drawing.Point(6, 23);
             this.txtSimWeight.Name = "txtSimWeight";
-            this.txtSimWeight.Size = new System.Drawing.Size(100, 31);
+            this.txtSimWeight.Size = new System.Drawing.Size(73, 24);
             this.txtSimWeight.TabIndex = 42;
             this.txtSimWeight.Text = "0";
             this.txtSimWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -513,9 +515,9 @@
             this.btnAcceptWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAcceptWeight.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnAcceptWeight.ForeColor = System.Drawing.Color.White;
-            this.btnAcceptWeight.Location = new System.Drawing.Point(874, 337);
+            this.btnAcceptWeight.Location = new System.Drawing.Point(874, 364);
             this.btnAcceptWeight.Name = "btnAcceptWeight";
-            this.btnAcceptWeight.Size = new System.Drawing.Size(136, 97);
+            this.btnAcceptWeight.Size = new System.Drawing.Size(136, 70);
             this.btnAcceptWeight.TabIndex = 74;
             this.btnAcceptWeight.Text = "ตกลง";
             this.btnAcceptWeight.UseVisualStyleBackColor = false;
@@ -545,10 +547,6 @@
             this.label2.TabIndex = 75;
             this.label2.Text = "น้ำหนักล่าสุด";
             // 
-            // dragControl1
-            // 
-            this.dragControl1.SelectControl = this.panelHeader;
-            // 
             // lblLotNo
             // 
             this.lblLotNo.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -570,6 +568,10 @@
             this.label3.Size = new System.Drawing.Size(83, 33);
             this.label3.TabIndex = 77;
             this.label3.Text = "Lot No";
+            // 
+            // dragControl1
+            // 
+            this.dragControl1.SelectControl = this.panelHeader;
             // 
             // Form_CarcassReceive
             // 

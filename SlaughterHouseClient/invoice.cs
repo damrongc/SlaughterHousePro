@@ -37,6 +37,7 @@ namespace SlaughterHouseClient
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
+        public string truck_no { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<invoice_item> invoice_item { get; set; }

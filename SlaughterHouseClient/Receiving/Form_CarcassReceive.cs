@@ -39,7 +39,12 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
+                using (var db = new SlaughterhouseEntities())
+                {
+                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                    var plant = db.plants.Find(plantID);
+                    lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
+                }
                 lblMessage.Text = Constants.CHOOSE_QUEUE;
 
             }
@@ -230,16 +235,6 @@ namespace SlaughterHouseClient.Receiving
 
                 if (receive_item != null)
                     lblLastWgh.Text = receive_item.receive_wgh.ToFormat2Decimal();
-
-                //if (remain_qty == 0)
-                //{
-                //    btnStart.Enabled = false;
-                //}
-                //else
-                //{
-                //    btnStart.Enabled = true;
-
-                //}
             }
 
 
@@ -441,10 +436,13 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                var receive_wgh = lblWeight.Text.ToDecimal();
-                string create_by = Helper.GetLocalIPAddress();
+                var receiveWgh = lblWeight.Text.ToDecimal();
+                string createBy = Helper.GetLocalIPAddress();
+
                 using (var db = new SlaughterhouseEntities())
                 {
+                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                    var productionDate = db.plants.Find(plantID).production_date;
                     //update receive
                     var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
 
@@ -464,10 +462,10 @@ namespace SlaughterHouseClient.Receiving
                         lot_no = receive.lot_no,
                         sex_flag = "",
                         receive_qty = 1,
-                        receive_wgh = receive_wgh,
+                        receive_wgh = receiveWgh,
                         chill_qty = 0,
                         chill_wgh = 0,
-                        create_by = create_by
+                        create_by = createBy
 
                     };
 
@@ -517,7 +515,7 @@ namespace SlaughterHouseClient.Receiving
                             //insert stock
                             var stock = new stock
                             {
-                                stock_date = DateTime.Today,
+                                stock_date = productionDate,
                                 stock_no = stock_no,
                                 stock_item = item.seq,
                                 product_code = item.product_code,
@@ -538,13 +536,10 @@ namespace SlaughterHouseClient.Receiving
                         }
                         catch (Exception)
                         {
-
                             transaction.Rollback();
                             throw;
                         }
-
                     }
-
                 }
             }
             catch (Exception)
