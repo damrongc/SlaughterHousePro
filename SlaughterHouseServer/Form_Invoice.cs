@@ -49,6 +49,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.INVOICE_DATE].HeaderText = "วันที่แจ้งหนี้";
             gv.Columns[ConstColumns.REF_DOCUMENT_NO].HeaderText = "เลขที่ใบสั่งขาย";
             gv.Columns[ConstColumns.CUSTOMER_NAME].HeaderText = "ลูกค้า";
+            gv.Columns[ConstColumns.TRUCK_NO].HeaderText = "ทะเบียนรถ";
             gv.Columns[ConstColumns.GROSS_AMT].HeaderText = "ราคา";
             gv.Columns[ConstColumns.DISC_AMT_BILL].HeaderText = "ส่วนลด";
             gv.Columns[ConstColumns.VAT_AMT].HeaderText = "ภาษี";

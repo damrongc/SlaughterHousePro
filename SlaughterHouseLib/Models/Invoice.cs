@@ -8,8 +8,9 @@ namespace SlaughterHouseLib.Models
     {
         public string InvoiceNo { get; set; }
         public DateTime InvoiceDate { get; set; }
-        public string RefDocumentNo { get; set; } 
+        public string RefDocumentNo { get; set; }
         public Customer Customer { get; set; }
+        public Truck Truck { get; set; }
         public decimal GrossAmt { get; set; }
         public decimal DiscAmt { get; set; }
         public decimal DiscAmtBill { get; set; }
@@ -27,4 +28,3 @@ namespace SlaughterHouseLib.Models
 
     }
 }
- 

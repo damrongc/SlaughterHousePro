@@ -31,6 +31,9 @@ namespace SlaughterHouseServer.Report
             rptViewerTransport.ShowParameterPanelButton = false;
             rptViewerTransport.ShowTextSearchButton = false;
             rptViewerTransport.ShowLogo = false;
+
+
+            tabControl1.TabPages.Remove(tabPage2);
         }
 
         private void Form_Load(object sender, System.EventArgs e)
@@ -44,9 +47,10 @@ namespace SlaughterHouseServer.Report
             DataSet ds = InvoiceController.GetDataPrintInvoice(invoiceNo);
             //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
             //string reportName = "invoice";
-            //ds.WriteXml(path + @"\xml\invoice.xml", XmlWriteMode.WriteSchema);
             //doc.Load(path + @"\invoice.rpt");
             var reportPath = Application.StartupPath;
+            ds.WriteXml(reportPath + @"\invoice.xml", XmlWriteMode.WriteSchema);
+
             doc.Load(reportPath + @"\Report\invoice.rpt");
             doc.SetDataSource(ds);
 
@@ -56,15 +60,15 @@ namespace SlaughterHouseServer.Report
 
 
 
-            ReportDocument docTrabsport = new ReportDocument();
-            DataSet dsTrabsport = InvoiceController.GetDataPrintTransport(orderNo);
+            //ReportDocument docTrabsport = new ReportDocument();
+            //DataSet dsTrabsport = InvoiceController.GetDataPrintTransport(orderNo);
 
-            //dsTrabsport.WriteXml(reportPath + @"\transport.xml", XmlWriteMode.WriteSchema);
-            docTrabsport.Load(reportPath + @"\Report\transport.rpt");
-            docTrabsport.SetDataSource(dsTrabsport);
-            rptViewerTransport.ReportSource = docTrabsport;
-            rptViewerTransport.Zoom(100);
-            rptViewerTransport.RefreshReport();
+            ////dsTrabsport.WriteXml(reportPath + @"\transport.xml", XmlWriteMode.WriteSchema);
+            //docTrabsport.Load(reportPath + @"\Report\transport.rpt");
+            //docTrabsport.SetDataSource(dsTrabsport);
+            //rptViewerTransport.ReportSource = docTrabsport;
+            //rptViewerTransport.Zoom(100);
+            //rptViewerTransport.RefreshReport();
         }
     }
 }
