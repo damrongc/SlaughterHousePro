@@ -17,9 +17,9 @@ namespace SlaughterHouseClient
             {
 
 
-                MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection();
-                connection.ConnectionString = "Server=192.168.1.252;Database=slaughterhouse;Uid=root;Pwd=Pa$$w0rd@!9;SslMode=None;";
-                connection.Open();
+                //MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection();
+                //connection.ConnectionString = "Server=192.168.1.252;Database=slaughterhouse;Uid=root;Pwd=Pa$$w0rd@!9;SslMode=None;";
+                //connection.Open();
 
                 //MessageBox.Show("Open success");
                 Application.EnableVisualStyles();

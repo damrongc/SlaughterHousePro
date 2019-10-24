@@ -19,6 +19,8 @@ namespace SlaughterHouseClient
         public bool active { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
+        public Nullable<System.DateTime> modified_at { get; set; }
+        public string modified_by { get; set; }
     
         public virtual product product { get; set; }
     }

@@ -289,7 +289,7 @@
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(109, 78);
             this.btnStop.TabIndex = 38;
-            this.btnStop.Text = "ยกเลิก";
+            this.btnStop.Text = "หยุดชั่ง";
             this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 

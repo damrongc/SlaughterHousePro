@@ -23,13 +23,15 @@ namespace SlaughterHouseClient
         public decimal receive_wgh { get; set; }
         public Nullable<int> chill_qty { get; set; }
         public Nullable<decimal> chill_wgh { get; set; }
+        public int transfer_qty { get; set; }
+        public decimal transfer_wgh { get; set; }
         public long barcode_no { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
     
-        public virtual product product { get; set; }
         public virtual receive receive { get; set; }
+        public virtual product product { get; set; }
     }
 }

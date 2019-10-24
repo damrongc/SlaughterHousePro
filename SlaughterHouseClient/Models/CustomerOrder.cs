@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SlaughterHouseClient.Issued
+namespace SlaughterHouseClient.Models
 {
     public class CustomerOrder
     {

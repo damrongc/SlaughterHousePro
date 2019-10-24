@@ -18,13 +18,15 @@ namespace SlaughterHouseClient
         public product()
         {
             this.barcodes = new HashSet<barcode>();
+            this.boms = new HashSet<bom>();
+            this.bom_item = new HashSet<bom_item>();
             this.invoice_item = new HashSet<invoice_item>();
             this.orders_item = new HashSet<orders_item>();
             this.production_order_item = new HashSet<production_order_item>();
-            this.boms = new HashSet<bom>();
-            this.bom_item = new HashSet<bom_item>();
-            this.stocks = new HashSet<stock>();
             this.receive_item = new HashSet<receive_item>();
+            this.product_slip_item = new HashSet<product_slip_item>();
+            this.stocks = new HashSet<stock>();
+            this.transport_item = new HashSet<transport_item>();
         }
     
         public string product_code { get; set; }
@@ -38,6 +40,7 @@ namespace SlaughterHouseClient
         public string sale_unit_method { get; set; }
         public string issue_unit_method { get; set; }
         public Nullable<int> shelflife { get; set; }
+        public Nullable<decimal> packing_size { get; set; }
         public bool active { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
@@ -47,21 +50,25 @@ namespace SlaughterHouseClient
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<barcode> barcodes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bom> boms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bom_item> bom_item { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<invoice_item> invoice_item { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<orders_item> orders_item { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<production_order_item> production_order_item { get; set; }
         public virtual product_group product_group { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<receive_item> receive_item { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<product_slip_item> product_slip_item { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<stock> stocks { get; set; }
         public virtual unit_of_measurement unit_of_measurement { get; set; }
         public virtual unit_of_measurement unit_of_measurement1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bom> boms { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bom_item> bom_item { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<stock> stocks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<receive_item> receive_item { get; set; }
+        public virtual ICollection<transport_item> transport_item { get; set; }
     }
 }

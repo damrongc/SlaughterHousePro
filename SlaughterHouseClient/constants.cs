@@ -9,6 +9,7 @@ public static class Constants
     public static string PO = "PO";
     public static string SO = "SO";
     public static string STK = "STK";
+    public static string TP = "TP";
 
     //public static string CREATE_BY = "auto";
 

@@ -12,4 +12,6 @@ namespace SlaughterHouseClient.Models
         public int stock_qty { get; set; }
         public double stock_wgh { get; set; }
     }
+
+  
 }

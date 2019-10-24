@@ -26,7 +26,7 @@ namespace SlaughterHouseClient
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
     
-        public virtual product product { get; set; }
         public virtual production_order production_order { get; set; }
+        public virtual product product { get; set; }
     }
 }

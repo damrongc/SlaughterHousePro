@@ -24,7 +24,6 @@ namespace SlaughterHouseClient.Receiving
     {
         SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
         product product;
-        string productCode;
         private int Index;
         private int PAGE_SIZE = 15;
         List<Button> buttons;
@@ -40,7 +39,9 @@ namespace SlaughterHouseClient.Receiving
         int stableCountTarget = 0;
 
         //SerialPortManager _spManager;
-        long barcode_no = 0;
+        long barcodeNo = 0;
+        string lot_no = "";
+        string product_code = "";
         ReportDocument doc = new ReportDocument();
 
 
@@ -229,7 +230,9 @@ namespace SlaughterHouseClient.Receiving
 
                 var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณายกสินค้าออก", 2, Color.Green, animationMethod, animationDirection);
                 toastNotification.Show();
-                LoadProduct();
+
+                LoadStock();
+                //LoadProduct();
 
                 //lblWeight.BackColor = Color.FromArgb(33, 150, 83);
                 //lblWeight.ForeColor = Color.White;
@@ -317,63 +320,98 @@ namespace SlaughterHouseClient.Receiving
 
         private void LoadProduct()
         {
+
             using (var db = new SlaughterhouseEntities())
             {
-                product = db.products.Where(p => p.product_code == productCode).SingleOrDefault();
+                product = db.products.Where(p => p.product_code.Equals(product_code)).SingleOrDefault();
 
                 lblProduct.Text = product.product_name;
                 lblMinWeight.Text = product.min_weight.ToString();
                 lblMaxWeight.Text = product.max_weight.ToString();
-
-
-                var receiveItems = db.receive_item.Where(p => p.product_code.Equals(product.product_code)).ToList();
-
-                int stock_qty = 0;
-                decimal stock_wgh = 0;
-                foreach (var item in receiveItems)
-                {
-                    stock_qty += item.receive_qty;
-                    stock_wgh += item.receive_wgh;
-                }
-
-                //int remain_qty = lblSwineQty.Text.ToInt16() - stock_qty;
-                lblStockQty.Text = stock_qty.ToComma();
-                lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
-                btnStart.Enabled = true;
-                lblMessage.Text = Constants.START_WAITING;
-
             }
 
         }
 
-        private void LoadBomItem(int bomCode)
+        private void LoadStock()
         {
             using (var db = new SlaughterhouseEntities())
             {
-                //var bom = db.boms.Where(p => p.bom_code == bomCode).SingleOrDefault();
-                //lblCaption.Text = bom.product.product_name;
-                var bomItems = db.bom_item.Where(p => p.bom_code == bomCode).ToList();
-                //lblMinWeight.Text = product.min_weight.ToString();
-                //lblMaxWeight.Text = product.max_weight.ToString();
+
+                var stocks = db.stocks.Where(p => p.stock_date == DateTime.Today
+                && p.product_code == product_code
+                && p.lot_no == lot_no
+                && p.transaction_type == 1).Select(p => new
+                {
+                    p.barcode_no,
+                    p.stock_qty,
+                    p.stock_wgh
+                }).ToList();
+
+                //var stock = (from s in db.stocks
+                //             where (s.product_code == product_code && s.lot_no == lot_no && s.transaction_type == 1 && s.stock_date == DateTime.Today)
+                //             group s by 1 into g
+                //             select new
+                //             {
+                //                 stock_qty = g.Sum(x => x.stock_qty),
+                //                 stock_wgh = g.Sum(x => x.stock_wgh),
+                //             });
+
+                //from p in m.Items
+                //group p by 1 into g
+                //select new
+                //{
+                //    SumTotal = g.Sum(x => x.Total),
+                //    SumDone = g.Sum(x => x.Done)
+                //};
+
+                int stock_qty = stocks.Sum(p => p.stock_qty);
+                decimal stock_wgh = stocks.Sum(p => p.stock_wgh);
+
+                lblStockQty.Text = stock_qty.ToComma();
+                lblStockWgh.Text = stock_wgh.ToFormat2Decimal();
+                if (stocks.Count > 0)
+                {
+                    lblLastWeight.Text = stocks[stocks.Count - 1].stock_wgh.ToFormat2Decimal();
+                    barcodeNo = stocks[stocks.Count - 1].barcode_no;
+                }
+            }
+        }
+
+        private void LoadLotNo()
+        {
+            using (var db = new SlaughterhouseEntities())
+            {
+                var lotNoList = db.receive_item.Where(p => p.chill_qty > 0
+                    && p.transfer_qty == 0
+                    && p.product_code == "P002").ToList();
+
                 flowLayoutPanel1.Controls.Clear();
 
                 buttons = new List<Button>();
-                foreach (var item in bomItems)
+                foreach (var item in lotNoList)
                 {
-                    var btn = new Button
+                    var day = (DateTime.Today - DateTime.Parse(item.modified_at.ToString())).TotalDays;
+                    if (day <= 30)
                     {
-                        Text = item.product.product_name,
-                        Width = 200,
-                        Height = 80,
-                        FlatStyle = FlatStyle.Flat,
-                        Font = new Font("Kanit", 14),
-                        BackColor = Color.WhiteSmoke,
-                        Tag = item.product_code
-                    };
+                        var count = buttons.Where(p => p.Text.Equals(item.lot_no)).Count();
+                        if (count == 0)
+                        {
+                            var btn = new Button
+                            {
+                                Text = item.lot_no,
+                                Width = 200,
+                                Height = 80,
+                                FlatStyle = FlatStyle.Flat,
+                                Font = new Font("Kanit", 14),
+                                BackColor = Color.WhiteSmoke,
+                                Tag = item.lot_no
+                            };
 
-                    buttons.Add(btn);
+                            buttons.Add(btn);
+                            btn.Click += Btn_Click;
+                        }
+                    }
 
-                    btn.Click += Btn_Click;
                     //flowLayoutPanel1.Controls.Add(btn);
 
                     DisplayPaging();
@@ -395,8 +433,9 @@ namespace SlaughterHouseClient.Receiving
             var btn = (Button)sender;
             btn.BackColor = ColorTranslator.FromHtml("#2D9CDB");
             btn.ForeColor = Color.White;
-
+            lot_no = btn.Text;
             LoadProduct();
+            LoadStock();
 
         }
 
@@ -481,36 +520,59 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                decimal receive_wgh = lblWeight.Text.ToDecimal();
-                string create_by = Helper.GetLocalIPAddress();
+                decimal receiveWgh = lblWeight.Text.ToDecimal();
+                string createBy = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
 
                     //update receive
-                    var receive = db.receives.Where(p => p.receive_no.Equals(lblProduct.Text)).SingleOrDefault();
-                    int seq = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Count();
+                    //var receive = db.receives.Where(p => p.receive_no.Equals(lblProduct.Text)).SingleOrDefault();
+                    //int seq = db.receive_item.Where(p => p.product_code.Equals(product.product_code)).Count();
 
-                    barcode_no = db.barcodes.Max(p => p.barcode_no) + 1;
+                    barcodeNo = db.barcodes.Max(p => p.barcode_no) + 1;
                     //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
 
-                    seq += 1;
-                    var item = new receive_item
+                    //seq += 1;
+                    //var item = new receive_item
+                    //{
+                    //    receive_no = receive.receive_no,
+                    //    product_code = product.product_code,
+                    //    seq = seq,
+                    //    sex_flag = "",
+                    //    lot_no = lot_no,
+                    //    receive_qty = 1,
+                    //    receive_wgh = receive_wgh,
+                    //    chill_qty = 0,
+                    //    chill_wgh = 0,
+                    //    transfer_qty = 0,
+                    //    transfer_wgh = 0,
+                    //    barcode_no = barcode_no,
+                    //    create_by = create_by
+                    //};
+
+                    //string stock_no = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).Select(p => p.stock_no).SingleOrDefault();
+                    //var documentGenerate = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
+                    //string stock_no = Constants.STK + documentGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
+
+                    string stockNo = "";
+                    int stockItem = 0;
+                    var stk = db.stocks.Where(p => p.product_code == product_code && p.lot_no == lot_no).ToList();
+
+                    var stockGenerate = db.document_generate.Find(Constants.STK);
+                    if (stk.Count == 0)
                     {
-                        receive_no = receive.receive_no,
-                        product_code = product.product_code,
-                        seq = seq,
-                        sex_flag = "",
-                        lot_no = receive.lot_no,
-                        receive_qty = 1,
-                        receive_wgh = receive_wgh,
-                        chill_qty = 0,
-                        chill_wgh = 0,
-                        barcode_no = barcode_no,
-                        create_by = create_by
-                    };
+                        stockNo = Constants.STK + stockGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
+                        stockItem = 1;
+                    }
+                    else
+                    {
+                        stockNo = stk[0].stock_no;
+                        stockItem = stk[0].stock_item + 1;
+                    }
 
 
-                    string stock_no = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).Select(p => p.stock_no).SingleOrDefault();
+
+
                     using (DbContextTransaction transaction = db.Database.BeginTransaction())
                     {
                         try
@@ -518,37 +580,44 @@ namespace SlaughterHouseClient.Receiving
                             //insert barcode
                             var barcode = new barcode
                             {
-                                barcode_no = barcode_no,
-                                product_code = item.product_code,
+                                barcode_no = barcodeNo,
+                                product_code = product_code,
                                 production_date = DateTime.Today,
-                                lot_no = receive.lot_no,
+                                lot_no = lot_no,
                                 qty = 1,
-                                wgh = receive_wgh,
-                                create_by = create_by
+                                wgh = receiveWgh,
+                                active = true,
+                                create_by = createBy
                             };
 
                             db.barcodes.Add(barcode);
                             //insert receive_item
-                            db.receive_item.Add(item);
+                            //db.receive_item.Add(item);
                             //insert stock
                             var stock = new stock
                             {
                                 stock_date = DateTime.Today,
-                                stock_no = stock_no,
-                                stock_item = item.seq,
+                                stock_no = stockNo,
+                                stock_item = stockItem,
                                 product_code = barcode.product_code,
                                 stock_qty = barcode.qty,
                                 stock_wgh = barcode.wgh,
-                                ref_document_no = receive.receive_no,
-                                ref_document_type = Constants.REV,
+                                //ref_document_no = receive.receive_no,
+                                //ref_document_type = Constants.REV,
                                 lot_no = barcode.lot_no,
                                 location_code = locationCode,
-                                barcode_no = barcode_no,
+                                barcode_no = barcodeNo,
                                 transaction_type = 1,
-                                create_by = create_by
+                                create_by = createBy
                             };
 
                             db.stocks.Add(stock);
+
+
+                            //var genDoc = db.document_generate.Find(Constants.STK);
+                            stockGenerate.running += 1;
+                            db.Entry(stockGenerate).State = System.Data.Entity.EntityState.Modified;
+
                             db.SaveChanges();
                             transaction.Commit();
                             PrintBarcode();
@@ -573,52 +642,12 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-
-                using (var db = new SlaughterhouseEntities())
-                {
-
-                    var barcode = db.barcodes.Where(p => p.barcode_no == barcode_no).SingleOrDefault();
-                    DataTable dt = new DataTable("Barcode");
-                    dt.Columns.Add("barcode_no", typeof(string));
-                    dt.Columns.Add("barcode_no_text", typeof(string));
-                    dt.Columns.Add("product_code", typeof(string));
-                    dt.Columns.Add("product_name", typeof(string));
-                    dt.Columns.Add("production_date", typeof(DateTime));
-                    dt.Columns.Add("expired_date", typeof(DateTime));
-                    dt.Columns.Add("lot_no", typeof(string));
-                    dt.Columns.Add("qty", typeof(int));
-                    dt.Columns.Add("qty_unit", typeof(string));
-                    dt.Columns.Add("wgh", typeof(double));
-                    dt.Columns.Add("wgh_unit", typeof(string));
-
-                    DataRow dr = dt.NewRow();
-                    dr["barcode_no"] = string.Format("*{0}*", barcode.barcode_no);
-                    dr["barcode_no_text"] = barcode.barcode_no.ToString();
-                    dr["product_code"] = barcode.product_code;
-                    dr["product_name"] = barcode.product.product_name;
-                    dr["production_date"] = barcode.production_date;
-                    dr["expired_date"] = barcode.production_date.AddDays(barcode.product.shelflife.ToString().ToDouble());
-                    dr["lot_no"] = barcode.lot_no;
-                    dr["qty"] = barcode.qty;
-                    dr["qty_unit"] = barcode.product.unit_of_measurement.unit_name;
-                    dr["wgh"] = barcode.wgh;
-                    dr["wgh_unit"] = barcode.product.unit_of_measurement1.unit_name;
-                    dt.Rows.Add(dr);
-
-                    //string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"\Report\Rpt\"));//Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
-                    //dt.WriteXml(path + @"\xml\barcode.xml", XmlWriteMode.WriteSchema);
-                    doc.SetDataSource(dt);
-                    doc.PrintToPrinter(1, true, 0, 0);
-                    btnPrint.Enabled = false;
-                }
-
-
-
-
+                DataTable dt = Helper.GetBarcode(barcodeNo);
+                doc.SetDataSource(dt);
+                doc.PrintToPrinter(1, true, 0, 0);
             }
             catch (Exception)
             {
-
                 throw;
             }
 
@@ -771,15 +800,17 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                btnPrint.Enabled = false;
-                if (barcode_no > 0)
+                if (!string.IsNullOrEmpty(product_code))
                 {
-                    PrintBarcode();
+                    var frm = new Form_Barcode();
+                    frm.ProductCode = product_code;
+                    frm.ShowDialog();
                 }
                 else
                 {
-                    throw new Exception("ไม่พบข้อมูล BARCODE!");
+                    throw new Exception("กรุณาเลือกสินค้า!");
                 }
+
 
             }
             catch (Exception ex)
@@ -842,8 +873,10 @@ namespace SlaughterHouseClient.Receiving
 
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    productCode = frm.ProductCode;
+                    product_code = frm.ProductCode;
                     LoadProduct();
+                    LoadLotNo();
+
                     //LoadData(frm.ReceiveNo);
                     //LoadBomItem(bom.bom_code);
 
@@ -863,5 +896,6 @@ namespace SlaughterHouseClient.Receiving
                 toastNotification.Show();
             }
         }
+
     }
 }

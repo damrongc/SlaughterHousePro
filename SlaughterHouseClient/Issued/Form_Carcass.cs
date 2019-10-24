@@ -110,7 +110,7 @@ namespace SlaughterHouseClient.Issued
 
                 if (DataInvoke.Length == 40)
                 {
-                    tx.Text = DataInvoke;
+
 
                     //int scaleDecimal = DataInvoke.Substring(20, 2).ToInt32();
                     //int scaleDivision = (int)Math.Round(Math.Pow(10.0, unchecked(scaleDecimal)));
@@ -294,7 +294,10 @@ namespace SlaughterHouseClient.Issued
 
                 var refDocumentNo = "";
                 var refDocumentType = "";
-                string create_by = Helper.GetLocalIPAddress();
+                var transportNo = "";
+                var truckNo = lblTruckNo.Text;
+
+                string createBy = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
                     var receiveItem = db.receive_item.Where(p => p.product_code == product.product_code
@@ -313,7 +316,8 @@ namespace SlaughterHouseClient.Issued
                         try
                         {
                             int seq = 0;
-                            string stock_no = "";
+                            string stockNo = "";
+                            int bomCode = 0;
                             if (!string.IsNullOrEmpty(orderNo))
                             {
                                 refDocumentNo = orderNo;
@@ -327,33 +331,42 @@ namespace SlaughterHouseClient.Issued
                                     throw new Exception("ไม่สามารถจ่ายได้!\r\nจำนวนจ่ายครบแล้ว");
                                 }
 
+
+                                bomCode = orderItem.bom_code;
                                 //update production order
                                 orderItem.unload_qty += 1;
                                 orderItem.unload_wgh += unloadWeight;
                                 orderItem.modified_at = DateTime.Now;
-                                orderItem.modified_by = create_by;
+                                orderItem.modified_by = createBy;
                                 db.Entry(orderItem).State = EntityState.Modified;
 
+                                var transport = db.transports.Where(p => p.ref_document_no == orderNo).SingleOrDefault();
+                                var transportGenrate = db.document_generate.Find(Constants.TP);
+                                if (transport == null)
+                                {
+                                    transportNo = Constants.TP + transportGenrate.running.ToString().PadLeft(10 - Constants.TP.Length, '0');
 
+                                    //update transport running
+                                    transportGenrate.running += 1;
+                                    db.Entry(transportGenrate).State = EntityState.Modified;
 
+                                }
+                                else
+                                {
+                                    transportNo = transport.transport_no;
+                                    //if (transport.transport_item.Count == 0)
+                                    //{
+
+                                    //}
+                                    //else
+                                    //{
+
+                                    //}
+                                }
                             }
                             else
                             {
                                 var issDoc = (from p in db.document_generate where p.document_type == Constants.ISS select p).SingleOrDefault();
-
-                                ////check stock_item_running
-                                //var stockItemRunning = db.stock_item_running.Where(p => p.doc_no.Equals(orderNo)).SingleOrDefault();
-                                //if (stockItemRunning == null)
-                                //{
-                                //    //get new stock doc no
-                                //    stock_no = Constants.ISS + issDoc.running.ToString().PadLeft(10 - Constants.ISS.Length, '0');
-                                //    seq = 1;
-                                //}
-                                //else
-                                //{
-                                //    stock_no = stockItemRunning.stock_no;
-                                //    seq = stockItemRunning.stock_item + 1;
-                                //}
 
 
                                 refDocumentNo = Constants.ISS + issDoc.running.ToString().PadLeft(10 - Constants.ISS.Length, '0');
@@ -362,19 +375,21 @@ namespace SlaughterHouseClient.Issued
 
                             }
 
-                            var documentGenerate = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
+                            var stockGenerate = db.document_generate.Find(Constants.STK);
+
+
 
                             //check stock_item_running
                             var stockItemRunning = db.stock_item_running.Where(p => p.doc_no.Equals(refDocumentNo)).SingleOrDefault();
                             if (stockItemRunning == null)
                             {
                                 //get new stock doc no
-                                stock_no = Constants.STK + documentGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
+                                stockNo = Constants.STK + stockGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
                                 seq = 1;
                             }
                             else
                             {
-                                stock_no = stockItemRunning.stock_no;
+                                stockNo = stockItemRunning.stock_no;
                                 seq = stockItemRunning.stock_item + 1;
                             }
                             //var receiveItems = db.receive_item.Where(p => p.product_code == product.product_code
@@ -391,19 +406,61 @@ namespace SlaughterHouseClient.Issued
                             //    }
                             //}
 
+                            if (!string.IsNullOrEmpty(orderNo))
+                            {
+                                //update receive item
+                                receiveItem.transfer_qty = 1;
+                                receiveItem.transfer_wgh = unloadWeight;
+
+
+                                var trans = new transport
+                                {
+                                    transport_no = transportNo,
+                                    transport_date = DateTime.Today,
+                                    ref_document_no = orderNo,
+                                    transport_flag = 0,
+                                    create_at = DateTime.Now,
+                                    create_by = createBy
+
+
+                                };
+                                db.transports.Add(trans);
+
+
+
+                                //insert transport item
+
+                                var transItem = new transport_item
+                                {
+                                    transport_no = transportNo,
+                                    product_code = product.product_code,
+                                    seq = seq,
+                                    transport_qty = 1,
+                                    transport_wgh = unloadWeight,
+                                    stock_no = stockNo,
+                                    lot_no = lotNo,
+                                    truck_no = truckNo,
+                                    barcode_no = 0,
+                                    bom_code = bomCode,
+                                    create_at = DateTime.Now,
+                                    create_by = createBy
+                                };
+                                db.transport_item.Add(transItem);
+
+                            }
 
                             //update receive item
                             receiveItem.chill_qty = 1;
                             receiveItem.chill_wgh = unloadWeight;
                             receiveItem.modified_at = DateTime.Now;
-                            receiveItem.modified_by = create_by;
+                            receiveItem.modified_by = createBy;
                             db.Entry(receiveItem).State = EntityState.Modified;
 
                             //insert stock
                             var stock = new stock
                             {
                                 stock_date = DateTime.Today,
-                                stock_no = stock_no,
+                                stock_no = stockNo,
                                 stock_item = seq,
                                 product_code = product.product_code,
                                 stock_qty = 1,
@@ -414,7 +471,7 @@ namespace SlaughterHouseClient.Issued
                                 location_code = 2, //ห้องเย็นเก็บหมุซีก
                                 barcode_no = 0,
                                 transaction_type = 2,
-                                create_by = create_by
+                                create_by = createBy
                             };
 
                             db.stocks.Add(stock);
@@ -427,16 +484,16 @@ namespace SlaughterHouseClient.Issued
                                 var newStockItem = new stock_item_running
                                 {
                                     doc_no = refDocumentNo,
-                                    stock_no = stock_no,
+                                    stock_no = stockNo,
                                     stock_item = 1,
-                                    create_by = create_by
+                                    create_by = createBy
 
                                 };
 
                                 db.stock_item_running.Add(newStockItem);
                                 //update document_generate
-                                documentGenerate.running += 1;
-                                db.Entry(documentGenerate).State = EntityState.Modified;
+                                stockGenerate.running += 1;
+                                db.Entry(stockGenerate).State = EntityState.Modified;
                             }
                             else
                             {
@@ -444,6 +501,9 @@ namespace SlaughterHouseClient.Issued
                                 stockItemRunning.stock_item += 1;
                                 db.Entry(stockItemRunning).State = EntityState.Modified;
                             }
+
+
+
                             db.SaveChanges();
                             transaction.Commit();
                         }
@@ -556,6 +616,14 @@ namespace SlaughterHouseClient.Issued
         {
             try
             {
+                if (!string.IsNullOrEmpty(lblOrderNo.Text))
+                {
+                    if (string.IsNullOrEmpty(lblTruckNo.Text))
+                    {
+                        throw new Exception("กรุณาเลือก ทะเบียนรถ!");
+
+                    }
+                }
 
                 if (string.IsNullOrEmpty(lotNo))
                 {
@@ -705,6 +773,24 @@ namespace SlaughterHouseClient.Issued
             {
                 LoadData(frm.OrderNo);
                 LoadLotNo();
+            }
+        }
+
+        private void btnShowTruck_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var frm = new Form_LookupTruck();
+
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    lblTruckNo.Text = frm.TruckNo;
+                }
+            }
+            catch (Exception ex)
+            {
+                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                toastNotification.Show();
             }
         }
     }
