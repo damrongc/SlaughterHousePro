@@ -17,11 +17,14 @@ namespace SlaughterHouseClient.Issued
     public partial class Form_Carcass : Form
     {
         SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
+
+        const string PRODUCT_CODE = "P002";
         product product;
+
         private string lotNo = "";
 
         private bool isStart = false;
-        private bool isTare = false;
+        //private bool isTare = false;
         private bool isZero = true;
         bool lockWeight = false;
         int stableCount = 0;
@@ -58,7 +61,7 @@ namespace SlaughterHouseClient.Issued
             LoadProduct();
             LoadLotNo();
 
-            lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
+            //lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
             lblMessage.Text = Constants.CHOOSE_QUEUE;
 
             if (System.Diagnostics.Debugger.IsAttached)
@@ -87,7 +90,6 @@ namespace SlaughterHouseClient.Issued
             if (serialPort1.IsOpen)
                 serialPort1.Close();
         }
-
 
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -207,10 +209,14 @@ namespace SlaughterHouseClient.Issued
                 lblOrderNo.Text = order.order_no;
                 lblCustomer.Text = order.customer.customer_name;
 
+
+
                 var transport = db.transports.Where(p => p.ref_document_no == order.order_no).SingleOrDefault();
                 if (transport != null)
                 {
-                    lblTruckNo.Text = transport.truck_no;
+                    //lblTruckNo.Text = transport.truck_no;
+                    cboTruckNo.SelectedValue = transport.truck_no;
+                    cboTruckNo.Enabled = false;
                 }
 
 
@@ -222,9 +228,22 @@ namespace SlaughterHouseClient.Issued
         {
             using (var db = new SlaughterhouseEntities())
             {
-                product = db.products.Find("P002");
+                product = db.products.Find(PRODUCT_CODE);
                 lblMinWeight.Text = product.min_weight.ToString();
                 lblMaxWeight.Text = product.max_weight.ToString();
+                int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                var plant = db.plants.Find(plantID);
+                lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
+
+                var trucks = db.trucks.Where(p => p.active == true).Select(p => new
+                {
+                    p.truck_no,
+                }).ToList();
+
+                cboTruckNo.DisplayMember = "truck_no";
+                cboTruckNo.ValueMember = "truck_no";
+                cboTruckNo.DataSource = trucks;
+
             }
         }
 
@@ -235,15 +254,14 @@ namespace SlaughterHouseClient.Issued
                 var sql = @"SELECT lot_no,
                                 sum(receive_qty - chill_qty) as stock_qty,
                                 sum(receive_wgh - chill_wgh) as stock_wgh
-                                FROM slaughterhouse.receive_item where product_code='P002'
-                                AND (receive_qty - chill_qty) >0
-                                GROUP BY lot_no";
+                                FROM slaughterhouse.receive_item where product_code='{0}'
+                                AND (receive_qty - chill_qty) > 0
+                                GROUP BY lot_no
+                                ORDER BY lot_no ASC";
                 using (var db = new SlaughterhouseEntities())
                 {
-                    var stockLots = db.Database.SqlQuery<StockLot>(sql).ToList();
-
+                    var stockLots = db.Database.SqlQuery<StockLot>(string.Format(sql, PRODUCT_CODE)).ToList();
                     flowLayoutPanel1.Controls.Clear();
-
                     buttons = new List<Button>();
                     foreach (var item in stockLots)
                     {
@@ -300,11 +318,15 @@ namespace SlaughterHouseClient.Issued
                 var refDocumentNo = "";
                 var refDocumentType = "";
                 var transportNo = "";
-                var truckNo = lblTruckNo.Text;
+                var truckNo = cboTruckNo.SelectedValue.ToString();
+                //var truckNo = lblTruckNo.Text;
 
                 string createBy = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
+                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                    var productionDate = db.plants.Find(plantID).production_date;
+
                     var receiveItem = db.receive_item.Where(p => p.product_code == product.product_code
                                                                       && p.lot_no == lotNo
                                                                       && p.chill_qty == 0)
@@ -466,7 +488,7 @@ namespace SlaughterHouseClient.Issued
                             //insert stock
                             var stock = new stock
                             {
-                                stock_date = DateTime.Today,
+                                stock_date = productionDate,
                                 stock_no = stockNo,
                                 stock_item = seq,
                                 product_code = product.product_code,
@@ -511,7 +533,7 @@ namespace SlaughterHouseClient.Issued
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex.Message);
+                            //Console.WriteLine(ex.Message);
                             transaction.Rollback();
                             throw;
                         }
@@ -648,8 +670,7 @@ namespace SlaughterHouseClient.Issued
             }
             catch (Exception ex)
             {
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
-                toastNotification.Show();
+                MessageBox.Show(ex.Message, "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
 

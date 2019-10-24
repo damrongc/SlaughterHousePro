@@ -28,6 +28,5 @@ namespace SlaughterHouseClient
         public string create_by { get; set; }
     
         public virtual product product { get; set; }
-        public virtual transport transport { get; set; }
     }
 }

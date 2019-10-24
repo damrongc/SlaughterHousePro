@@ -73,6 +73,7 @@
             this.lblTruckNo = new System.Windows.Forms.Label();
             this.btnShowTruck = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
+            this.cboTruckNo = new System.Windows.Forms.ComboBox();
             this.panelHeader.SuspendLayout();
             this.plSimulator.SuspendLayout();
             this.SuspendLayout();
@@ -396,22 +397,23 @@
             // 
             // plSimulator
             // 
-            this.plSimulator.BackColor = System.Drawing.Color.Gainsboro;
+            this.plSimulator.BackColor = System.Drawing.Color.White;
             this.plSimulator.Controls.Add(this.btnSetWgh);
             this.plSimulator.Controls.Add(this.txtSimWeight);
             this.plSimulator.Controls.Add(this.btnZero);
-            this.plSimulator.Location = new System.Drawing.Point(707, 107);
+            this.plSimulator.Font = new System.Drawing.Font("Kanit", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.plSimulator.Location = new System.Drawing.Point(717, 93);
             this.plSimulator.Name = "plSimulator";
-            this.plSimulator.Size = new System.Drawing.Size(292, 115);
+            this.plSimulator.Size = new System.Drawing.Size(292, 59);
             this.plSimulator.TabIndex = 58;
             this.plSimulator.TabStop = false;
             this.plSimulator.Text = "Simulator";
             // 
             // btnSetWgh
             // 
-            this.btnSetWgh.Location = new System.Drawing.Point(112, 37);
+            this.btnSetWgh.Location = new System.Drawing.Point(96, 22);
             this.btnSetWgh.Name = "btnSetWgh";
-            this.btnSetWgh.Size = new System.Drawing.Size(98, 31);
+            this.btnSetWgh.Size = new System.Drawing.Size(70, 31);
             this.btnSetWgh.TabIndex = 43;
             this.btnSetWgh.Text = "Set Wgh";
             this.btnSetWgh.UseVisualStyleBackColor = true;
@@ -419,18 +421,18 @@
             // 
             // txtSimWeight
             // 
-            this.txtSimWeight.Location = new System.Drawing.Point(6, 37);
+            this.txtSimWeight.Location = new System.Drawing.Point(10, 26);
             this.txtSimWeight.Name = "txtSimWeight";
-            this.txtSimWeight.Size = new System.Drawing.Size(100, 31);
+            this.txtSimWeight.Size = new System.Drawing.Size(78, 24);
             this.txtSimWeight.TabIndex = 42;
             this.txtSimWeight.Text = "0";
             this.txtSimWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnZero
             // 
-            this.btnZero.Location = new System.Drawing.Point(110, 74);
+            this.btnZero.Location = new System.Drawing.Point(172, 22);
             this.btnZero.Name = "btnZero";
-            this.btnZero.Size = new System.Drawing.Size(98, 31);
+            this.btnZero.Size = new System.Drawing.Size(80, 31);
             this.btnZero.TabIndex = 41;
             this.btnZero.Text = "Set Zero";
             this.btnZero.UseVisualStyleBackColor = true;
@@ -539,12 +541,13 @@
             this.lblTruckNo.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblTruckNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblTruckNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblTruckNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblTruckNo.Font = new System.Drawing.Font("Kanit", 18F);
             this.lblTruckNo.ForeColor = System.Drawing.Color.Black;
-            this.lblTruckNo.Location = new System.Drawing.Point(303, 242);
+            this.lblTruckNo.Location = new System.Drawing.Point(872, 479);
             this.lblTruckNo.Name = "lblTruckNo";
-            this.lblTruckNo.Size = new System.Drawing.Size(131, 43);
+            this.lblTruckNo.Size = new System.Drawing.Size(70, 43);
             this.lblTruckNo.TabIndex = 82;
+            this.lblTruckNo.Visible = false;
             // 
             // btnShowTruck
             // 
@@ -554,22 +557,33 @@
             this.btnShowTruck.Font = new System.Drawing.Font("Kanit", 16F);
             this.btnShowTruck.ForeColor = System.Drawing.Color.White;
             this.btnShowTruck.Image = ((System.Drawing.Image)(resources.GetObject("btnShowTruck.Image")));
-            this.btnShowTruck.Location = new System.Drawing.Point(440, 242);
+            this.btnShowTruck.Location = new System.Drawing.Point(948, 479);
             this.btnShowTruck.Name = "btnShowTruck";
             this.btnShowTruck.Size = new System.Drawing.Size(61, 43);
             this.btnShowTruck.TabIndex = 83;
             this.btnShowTruck.UseVisualStyleBackColor = false;
+            this.btnShowTruck.Visible = false;
             this.btnShowTruck.Click += new System.EventHandler(this.btnShowTruck_Click);
             // 
             // dragControl1
             // 
             this.dragControl1.SelectControl = this.panelHeader;
             // 
+            // cboTruckNo
+            // 
+            this.cboTruckNo.Font = new System.Drawing.Font("Kanit", 18F);
+            this.cboTruckNo.FormattingEnabled = true;
+            this.cboTruckNo.Location = new System.Drawing.Point(303, 242);
+            this.cboTruckNo.Name = "cboTruckNo";
+            this.cboTruckNo.Size = new System.Drawing.Size(198, 43);
+            this.cboTruckNo.TabIndex = 84;
+            // 
             // Form_Carcass
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.cboTruckNo);
             this.Controls.Add(this.btnShowTruck);
             this.Controls.Add(this.lblTruckNo);
             this.Controls.Add(this.label2);
@@ -662,6 +676,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTruckNo;
         private System.Windows.Forms.Button btnShowTruck;
+        private System.Windows.Forms.ComboBox cboTruckNo;
     }
 }
 

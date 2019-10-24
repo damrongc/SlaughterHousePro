@@ -48,6 +48,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cboTruckNo = new System.Windows.Forms.ComboBox();
             this.panelHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
@@ -183,7 +185,7 @@
             this.lblCustomer.ForeColor = System.Drawing.Color.Black;
             this.lblCustomer.Location = new System.Drawing.Point(421, 90);
             this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(591, 43);
+            this.lblCustomer.Size = new System.Drawing.Size(374, 43);
             this.lblCustomer.TabIndex = 34;
             // 
             // txtBarcodeNo
@@ -282,11 +284,32 @@
             this.gv.Size = new System.Drawing.Size(984, 507);
             this.gv.TabIndex = 11;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Kanit", 16F);
+            this.label3.Location = new System.Drawing.Point(795, 57);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(106, 33);
+            this.label3.TabIndex = 70;
+            this.label3.Text = "ทะเบียนรถ";
+            // 
+            // cboTruckNo
+            // 
+            this.cboTruckNo.Font = new System.Drawing.Font("Kanit", 18F);
+            this.cboTruckNo.FormattingEnabled = true;
+            this.cboTruckNo.Location = new System.Drawing.Point(801, 90);
+            this.cboTruckNo.Name = "cboTruckNo";
+            this.cboTruckNo.Size = new System.Drawing.Size(209, 43);
+            this.cboTruckNo.TabIndex = 71;
+            // 
             // Form_ByProduct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.cboTruckNo);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtBarcodeNo);
             this.Controls.Add(this.label6);
@@ -337,6 +360,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView gv;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cboTruckNo;
     }
 }
 

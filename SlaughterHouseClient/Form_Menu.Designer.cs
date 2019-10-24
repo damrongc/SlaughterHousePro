@@ -249,6 +249,7 @@
             this.btnConfirmStock.TabIndex = 19;
             this.btnConfirmStock.Text = "รับเข้าคลังสินค้า";
             this.btnConfirmStock.UseVisualStyleBackColor = false;
+            this.btnConfirmStock.Visible = false;
             this.btnConfirmStock.Click += new System.EventHandler(this.BtnConfirmStock_Click);
             // 
             // btnIssueCarcass

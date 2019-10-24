@@ -70,7 +70,7 @@ namespace SlaughterHouseClient.Issued
                                 and ord.customer_code =cus.customer_code
                                 and ord.order_flag =0
                                 and ord_item.product_code ={0}
-                                and (ord_item.order_qty -ord_item.unload_qty)>0";
+                                and (ord_item.order_qty - ord_item.unload_qty)>0";
 
                 if (string.IsNullOrEmpty(_productCode))
                 {
@@ -79,7 +79,7 @@ namespace SlaughterHouseClient.Issued
                                 where ord.order_no = ord_item.order_no
                                 and ord.customer_code =cus.customer_code
                                 and ord.order_flag =0
-                                and (ord_item.order_qty -ord_item.unload_qty)>0";
+                                and (ord_item.order_qty - ord_item.unload_qty)>0";
 
                 }
 

@@ -145,14 +145,14 @@ namespace SlaughterHouseClient.Issued
         {
             using (var db = new SlaughterhouseEntities())
             {
-
                 var sql = @"select item.transport_no,stock_no,item.product_code,product_name,seq,transport_qty,transport_wgh,
-                                    barcode_no,bom_code,lot_no,truck_no,item.create_at,item.create_by
+                                    barcode_no,bom_code,lot_no,hd.truck_no,item.create_at,item.create_by
                                 from transport hd ,transport_item item,product p
                                 where ref_document_no =@order_no
                                 and hd.transport_no=item.transport_no
                                 and item.product_code =p.product_code
-                                order by truck_no,seq desc";
+                                and barcode_no > 0
+                                order by hd.truck_no,seq desc";
 
                 var qry = db.Database.SqlQuery<CustomerTransport>(sql, new MySqlParameter("order_no", OrderNo)).ToList();
                 var coll = qry.AsEnumerable().Select(p => new

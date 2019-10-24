@@ -10,11 +10,14 @@ namespace SlaughterHouseClient.Issued
 {
     public partial class Form_ByProduct : Form
     {
+        const string PRODUCT_CODE = "P002";
+        int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+
 
         public Form_ByProduct()
         {
             InitializeComponent();
-            Shown += Form_Shown;
+            Load += Form_Load;
 
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             //gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
@@ -28,17 +31,34 @@ namespace SlaughterHouseClient.Issued
 
         }
 
+        private void Form_Load(object sender, EventArgs e)
+        {
+            using (var db = new SlaughterhouseEntities())
+            {
+
+                var plant = db.plants.Find(plantID);
+                lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
+
+                var trucks = db.trucks.Where(p => p.active == true).Select(p => new
+                {
+                    p.truck_no,
+                }).ToList();
+
+                cboTruckNo.DisplayMember = "truck_no";
+                cboTruckNo.ValueMember = "truck_no";
+                cboTruckNo.DataSource = trucks;
+
+                lblMessage.Text = Constants.CHOOSE_QUEUE;
+            }
+        }
+
         private void TxtBarcodeNo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 ProcessData();
         }
 
-        private void Form_Shown(object sender, EventArgs e)
-        {
-            lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
-            lblMessage.Text = Constants.CHOOSE_QUEUE;
-        }
+
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -55,6 +75,10 @@ namespace SlaughterHouseClient.Issued
                 {
                     lblOrderNo.Text = frm.OrderNo;
                     LoadOrder();
+
+                    lblProduct.Text = "";
+                    lblLotNo.Text = "";
+
                     txtBarcodeNo.Text = "";
                     txtBarcodeNo.Focus();
                 }
@@ -77,7 +101,7 @@ namespace SlaughterHouseClient.Issued
                     lblOrderNo.Text = order.order_no;
                     lblCustomer.Text = order.customer.customer_name;
 
-                    var coll = order.orders_item.Where(p => p.product_code != "P002").AsEnumerable().Select(p => new
+                    var coll = order.orders_item.Where(p => p.product_code != PRODUCT_CODE).AsEnumerable().Select(p => new
                     {
                         p.product.product_name,
                         p.order_qty,
@@ -99,6 +123,15 @@ namespace SlaughterHouseClient.Issued
                     gv.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     gv.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+                    var transport = db.transports.Where(p => p.ref_document_no == order.order_no).SingleOrDefault();
+                    if (transport != null)
+                    {
+                        cboTruckNo.SelectedValue = transport.truck_no;
+                        cboTruckNo.Enabled = false;
+                    }
+
+
+
                     txtBarcodeNo.Focus();
                 }
             }
@@ -117,7 +150,7 @@ namespace SlaughterHouseClient.Issued
                 if (string.IsNullOrEmpty(lblOrderNo.Text))
                 {
 
-                    throw new Exception("กรุณาเลือกเอกสาร SO!");
+                    throw new Exception("กรุณาเลือกใบสั่งขาย!");
                 }
                 lblMessage.Text = Constants.PROCESSING;
 
@@ -141,170 +174,178 @@ namespace SlaughterHouseClient.Issued
                 //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+
         }
 
         private bool SaveData()
         {
             try
             {
-
+                var createBy = Helper.GetLocalIPAddress();
                 var orderNo = lblOrderNo.Text;
-                //using (var db = new SlaughterhouseEntities())
-                //{
-                //    long barcodeNo = txtBarcodeNo.Text.ToLong();
-                //    var barcode = db.barcodes.Find(barcodeNo);
+                var barcodeNo = txtBarcodeNo.Text.ToLong();
+                var truckNo = cboTruckNo.SelectedValue.ToString();
 
-                //    if (barcode == null)
-                //    {
+                string stockNo = "";
+                int stockItem = 0;
+                string transportNo = "";
 
-                //        throw new Exception("ไม่พบข้อมูลบาร์โค็ดนี้!");
-                //    }
-                //    lblProduct.Text = barcode.product.product_name;
-                //    lblLotNo.Text = barcode.lot_no;
+                using (var db = new SlaughterhouseEntities())
+                {
+                    var barcode = db.barcodes.Find(barcodeNo);
+                    if (barcode == null)
+                    {
+                        throw new Exception("ไม่พบข้อมูลบาร์โค็ดนี้!");
+                    }
+                    if (!barcode.active)
+                    {
+                        throw new Exception("ข้อมูลบาร์โค็ด ใช้งานแล้ว!");
+                    }
 
-                //    //check stock
-                //    int count = db.stocks.Where(p => p.ref_document_no.Equals(receiveItem.receive_no) && p.barcode_no.Equals(barcodeNo)).Count();
-                //    if (count > 0)
-                //    {
+                    lblProduct.Text = barcode.product.product_name;
+                    lblLotNo.Text = barcode.lot_no;
 
-                //        throw new Exception("ไม่สามารถรับเข้าคลังได้ \rเนื่องจากบาร์โค็ดรับเข้าคลังแล้ว!");
-                //    }
+                    var orderItems = db.orders_item.Where(p => p.order_no == orderNo
+                                && p.product_code == barcode.product_code).OrderBy(p => p.seq).SingleOrDefault();
 
+                    if (orderItems == null)
+                    {
+                        throw new Exception("ไม่พบสินค้า ในรายการจ่าย!");
+                    }
+                    if (orderItems.unload_qty >= orderItems.order_qty)
+                    {
+                        throw new Exception("จ่ายสินค้านี้ ครบแล้ว!");
+                    }
 
-                //    //update production order
-                //    var productionItem = db.production_order_item.Where(p => p.po_no == poNo
-                //                                           && p.product_code == productCode).SingleOrDefault();
+                    var productionDate = db.plants.Find(plantID).production_date;
+                    var transport = db.transports.Where(p => p.ref_document_no == orderNo).SingleOrDefault();
 
+                    var stockGenerate = db.document_generate.Find(Constants.STK);
+                    var transportGenrate = db.document_generate.Find(Constants.TP);
+                    if (transport == null)
+                    {
+                        stockNo = Constants.STK + stockGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
+                        stockItem = 1;
+                        transportNo = Constants.TP + transportGenrate.running.ToString().PadLeft(10 - Constants.TP.Length, '0');
+                    }
+                    else
+                    {
+                        transportNo = transport.transport_no;
+                        var transportItem = db.transport_item.Where(p => p.transport_no == transport.transport_no).ToList();
+                        if (transportItem.Count == 0)
+                        {
+                            stockNo = Constants.STK + stockGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
 
-                //    if (productionItem.po_qty - productionItem.unload_qty == 0)
-                //    {
-                //        throw new Exception("จำนวนเบิกครบแล้ว ไม่สามารถเบิกเพิ่มได้!");
-                //    }
+                        }
+                        else
+                        {
+                            stockNo = transportItem[0].stock_no;
 
-                //    var receiveItem = db.receive_item.Where(p => p.product_code == productCode
-                //                                               && p.lot_no == lotNo
-                //                                               && p.chill_qty == 0)
-                //                                               .OrderBy(p => p.seq).Take(1).SingleOrDefault();
-
-                //    if (receiveItem == null)
-                //    {
-                //        lblLotNo.Text = "";
-                //        throw new Exception("ไม่พบ Lot No นี้ในคลัง กรุณาเลือก Lot ใหม่!");
-                //    }
-
-
-
-                //    int seq = 0;
-                //    string stock_no = "";
-
-                //    var documentGenerate = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
-
-                //    //check stock_item_running
-                //    var stockItemRunning = db.stock_item_running.Where(p => p.doc_no.Equals(poNo)).SingleOrDefault();
-                //    if (stockItemRunning == null)
-                //    {
-                //        //get new stock doc no
-
-                //        stock_no = Constants.STK + documentGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
-                //        seq = 1;
-                //    }
-                //    else
-                //    {
-
-                //        stock_no = stockItemRunning.stock_no;
-                //        seq = stockItemRunning.stock_item + 1;
-
-                //    }
+                        }
+                        stockItem = transportItem.Count + 1;
+                    }
 
 
+                    using (DbContextTransaction transaction = db.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            //insert stock
+                            var stock = new stock
+                            {
+                                stock_date = productionDate,
+                                stock_no = stockNo,
+                                stock_item = stockItem,
+                                product_code = barcode.product_code,
+                                stock_qty = barcode.qty,
+                                stock_wgh = barcode.wgh,
+                                ref_document_no = orderNo,
+                                ref_document_type = Constants.SO,
+                                lot_no = barcode.lot_no,
+                                location_code = 0,
+                                barcode_no = barcode.barcode_no,
+                                transaction_type = 2,
+                                create_by = createBy
+                            };
+
+                            db.stocks.Add(stock);
+
+                            //insert transport
+                            if (transport == null)
+                            {
+
+                                var trans = new transport
+                                {
+                                    transport_no = transportNo,
+                                    transport_date = DateTime.Today,
+                                    truck_no = truckNo,
+                                    ref_document_no = orderNo,
+                                    transport_flag = 0,
+                                    create_at = DateTime.Now,
+                                    create_by = createBy
 
 
-                //    using (DbContextTransaction transaction = db.Database.BeginTransaction())
-                //    {
-                //        try
-                //        {
+                                };
+                                db.transports.Add(trans);
 
-                //            //update production order
-                //            productionItem.unload_qty += 1;
-                //            productionItem.unload_wgh += unloadWeight;
-                //            productionItem.modified_at = DateTime.Now;
-                //            productionItem.modified_by = Constants.CREATE_BY;
-                //            db.Entry(productionItem).State = EntityState.Modified;
+                                //update transport running
 
+                                transportGenrate.running += 1;
+                                db.Entry(transportGenrate).State = EntityState.Modified;
+                            }
 
-                //            //update receive item
-                //            receiveItem.chill_qty = 1;
-                //            receiveItem.chill_wgh = unloadWeight;
-                //            receiveItem.modified_at = DateTime.Now;
-                //            receiveItem.modified_by = Constants.CREATE_BY;
-                //            db.Entry(receiveItem).State = EntityState.Modified;
+                            //insert transport item
+                            var transItem = new transport_item
+                            {
+                                transport_no = transportNo,
+                                product_code = barcode.product_code,
+                                seq = stockItem,
+                                transport_qty = barcode.qty,
+                                transport_wgh = barcode.wgh,
+                                stock_no = stockNo,
+                                lot_no = barcode.lot_no,
+                                truck_no = truckNo,
+                                barcode_no = barcode.barcode_no,
+                                bom_code = orderItems.bom_code,
+                                create_at = DateTime.Now,
+                                create_by = createBy
+                            };
+                            db.transport_item.Add(transItem);
 
-                //            //insert stock
-                //            var stock = new stock
-                //            {
-                //                stock_date = DateTime.Today,
-                //                stock_no = stock_no,
-                //                stock_item = seq,
-                //                product_code = productionItem.product_code,
-                //                stock_qty = productionItem.unload_qty,
-                //                stock_wgh = productionItem.unload_wgh,
-                //                ref_document_no = poNo,
-                //                ref_document_type = Constants.PO,
-                //                lot_no = lotNo,
-                //                location_code = 2, //ห้องเย็นเก็บหมุซีก
-                //                barcode_no = 0,
-                //                transaction_type = 2,
-                //                create_by = Constants.CREATE_BY
-                //            };
+                            //var genDoc = db.document_generate.Find(Constants.STK);
 
-                //            db.stocks.Add(stock);
+                            if (stockItem == 1)
+                            {
+                                stockGenerate.running += 1;
+                                db.Entry(stockGenerate).State = EntityState.Modified;
+                            }
+                            //set barcode
+                            barcode.active = false;
+                            db.Entry(barcode).State = EntityState.Modified;
 
-                //            //รับหมูซีก เครื่องใน ไม่ต้อง update stock_item_running เพราะเริ่มตาม receive_item.seq
+                            //set unload
+                            orderItems.unload_qty += barcode.qty;
+                            orderItems.unload_wgh += barcode.wgh;
 
-                //            if (stockItemRunning == null)
-                //            {
-                //                //insert stock_item_running
-                //                var newStockItem = new stock_item_running
-                //                {
-                //                    doc_no = poNo,
-                //                    stock_no = stock_no,
-                //                    stock_item = 1,
-                //                    create_by = Constants.CREATE_BY
+                            orderItems.modified_by = createBy;
+                            orderItems.modified_at = DateTime.Now;
+                            db.Entry(orderItems).State = EntityState.Modified;
 
-                //                };
-
-                //                db.stock_item_running.Add(newStockItem);
-                //                //update document_generate
-                //                documentGenerate.running += 1;
-                //                db.Entry(documentGenerate).State = EntityState.Modified;
-
-
-                //            }
-                //            else
-                //            {
-                //                //update stock_item_running
-                //                stockItemRunning.stock_item += 1;
-                //                db.Entry(stockItemRunning).State = EntityState.Modified;
-                //            }
-                //            db.SaveChanges();
-                //            transaction.Commit();
-                //        }
-                //        catch (Exception ex)
-                //        {
-                //            Console.WriteLine(ex.Message);
-                //            transaction.Rollback();
-                //            throw;
-                //        }
-
-                //    }
-
-                //}
-
-                return true;
+                            db.SaveChanges();
+                            transaction.Commit();
+                            return true;
+                        }
+                        catch (Exception)
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
                 throw;
             }
 
@@ -312,8 +353,8 @@ namespace SlaughterHouseClient.Issued
 
         private void ClearDisplay()
         {
-            lblProduct.Text = "";
-            lblLotNo.Text = "";
+            //lblProduct.Text = "";
+            //lblLotNo.Text = "";
             txtBarcodeNo.Text = "";
             txtBarcodeNo.Focus();
         }

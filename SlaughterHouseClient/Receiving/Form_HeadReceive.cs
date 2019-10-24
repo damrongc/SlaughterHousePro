@@ -510,6 +510,7 @@ namespace SlaughterHouseClient.Receiving
                                 lot_no = receive.lot_no,
                                 qty = 1,
                                 wgh = receiveWgh,
+                                active = true,
                                 create_by = createBy
                             };
 

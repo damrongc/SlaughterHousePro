@@ -110,7 +110,7 @@ namespace SlaughterHouseLib
                                     sk.stock_item,
                                     sk.product_code,
                                     p.product_name,
-                                    sk.lot_no, 
+                                    sk.lot_no,
                                     sk.stock_qty,
                                     sk.stock_wgh,
                                     sk.ref_document_type,
@@ -134,10 +134,10 @@ namespace SlaughterHouseLib
                                     location lo ON sk.location_code = lo.location_code
                                         LEFT JOIN
                                     document_generate dc ON sk.ref_document_type = dc.document_type
-                                        INNER JOIN 
+                                        INNER JOIN
                                     plant pl ON pl.plant_id = 1
-                                WHERE sk.stock_date >= @date_str 
-                                    AND sk.stock_date <= @date_end  
+                                WHERE sk.stock_date >= @date_str
+                                    AND sk.stock_date <= @date_end
                                 ";
                     // WHERE sk.stock_date BETWEEN @date_str AND @date_end
                     // AND sk.stock_date <= @date_end

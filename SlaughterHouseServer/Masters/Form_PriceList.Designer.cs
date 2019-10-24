@@ -103,7 +103,7 @@
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(6);
-            this.panel1.Size = new System.Drawing.Size(1384, 716);
+            this.panel1.Size = new System.Drawing.Size(1384, 698);
             this.panel1.TabIndex = 3;
             // 
             // gv
@@ -123,7 +123,7 @@
             this.gv.Location = new System.Drawing.Point(6, 68);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(1372, 642);
+            this.gv.Size = new System.Drawing.Size(1372, 624);
             this.gv.TabIndex = 8;
             // 
             // Edit
@@ -202,8 +202,8 @@
             // 
             // dtpStartDateCustomer
             // 
-            this.dtpStartDateCustomer.Controls.Add(this.tabPageCustomer);
             this.dtpStartDateCustomer.Controls.Add(this.tabPageProduct);
+            this.dtpStartDateCustomer.Controls.Add(this.tabPageCustomer);
             this.dtpStartDateCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtpStartDateCustomer.Location = new System.Drawing.Point(0, 0);
             this.dtpStartDateCustomer.Name = "dtpStartDateCustomer";
@@ -363,10 +363,10 @@
             this.tabPageProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPageProduct.Controls.Add(this.panel1);
             this.tabPageProduct.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.tabPageProduct.Location = new System.Drawing.Point(4, 22);
+            this.tabPageProduct.Location = new System.Drawing.Point(4, 40);
             this.tabPageProduct.Name = "tabPageProduct";
             this.tabPageProduct.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProduct.Size = new System.Drawing.Size(1392, 724);
+            this.tabPageProduct.Size = new System.Drawing.Size(1392, 706);
             this.tabPageProduct.TabIndex = 1;
             this.tabPageProduct.Text = " ราคาระดับสินค้า ";
             this.tabPageProduct.UseVisualStyleBackColor = true;

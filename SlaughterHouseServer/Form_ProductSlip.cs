@@ -251,6 +251,7 @@ namespace SlaughterHouseServer
             DataTable dtOrdersIteemItem = new DataTable("ORDERS_ITEM");
             dtOrdersIteemItem = OrderItemController.GetOrderItems(orderNo, "N");
             gvSo.DataSource = dtOrdersIteemItem;
+            gvSo.Columns[0].Visible = false;
 
             if (String.IsNullOrEmpty(txtProductSlipNo.Text))
             {

@@ -9,19 +9,19 @@ using System.Text;
 namespace SlaughterHouseLib
 {
 
-	public static class ProductSlipController
-	{
-		public static string Insert(ProductSlip productSlip)
-		{
-			MySqlTransaction tr = null;
-			try
-			{
-				using (var conn = new MySqlConnection(Globals.CONN_STR))
-				{
-					productSlip.ProductSlipNo = DocumentGenerate.GetDocumentRunning("PDS");
-					conn.Open();
-					tr = conn.BeginTransaction();
-					var sql = @"INSERT INTO product_slip
+    public static class ProductSlipController
+    {
+        public static string Insert(ProductSlip productSlip)
+        {
+            MySqlTransaction tr = null;
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    productSlip.ProductSlipNo = DocumentGenerate.GetDocumentRunning("PDS");
+                    conn.Open();
+                    tr = conn.BeginTransaction();
+                    var sql = @"INSERT INTO product_slip
 									(product_slip_no,
 									product_slip_date,
 									ref_document_no,
@@ -36,19 +36,19 @@ namespace SlaughterHouseLib
 									 @active,
 									 @create_by ) 
 							   ";
-					var cmd = new MySqlCommand(sql, conn)
-					{
-						Transaction = tr
-					};
-					cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
-					cmd.Parameters.AddWithValue("product_slip_date", productSlip.ProductSlipDate);
-					cmd.Parameters.AddWithValue("ref_document_no", productSlip.RefDocumentNo);
-					cmd.Parameters.AddWithValue("product_slip_flag", productSlip.ProductSlipFlag);
-					cmd.Parameters.AddWithValue("active", productSlip.Active);
-					cmd.Parameters.AddWithValue("create_by", productSlip.CreateBy);
-					cmd.ExecuteNonQuery();
+                    var cmd = new MySqlCommand(sql, conn)
+                    {
+                        Transaction = tr
+                    };
+                    cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
+                    cmd.Parameters.AddWithValue("product_slip_date", productSlip.ProductSlipDate);
+                    cmd.Parameters.AddWithValue("ref_document_no", productSlip.RefDocumentNo);
+                    cmd.Parameters.AddWithValue("product_slip_flag", productSlip.ProductSlipFlag);
+                    cmd.Parameters.AddWithValue("active", productSlip.Active);
+                    cmd.Parameters.AddWithValue("create_by", productSlip.CreateBy);
+                    cmd.ExecuteNonQuery();
 
-					sql = @"INSERT INTO slaughterhouse.product_slip_item
+                    sql = @"INSERT INTO slaughterhouse.product_slip_item
 							   (product_slip_no,
 								product_code,
 								location_code,
@@ -64,51 +64,51 @@ namespace SlaughterHouseLib
 								@create_by )
 							";
 
-					foreach (var item in productSlip.ProductSlipItem)
-					{
-						cmd = new MySqlCommand(sql, conn)
-						{
-							Transaction = tr
-						};
-						cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
-						cmd.Parameters.AddWithValue("product_code", item.Product.ProductCode);
-						cmd.Parameters.AddWithValue("location_code", item.Location.LocationCode);
-						cmd.Parameters.AddWithValue("lot_no", item.LotNo);
-						cmd.Parameters.AddWithValue("seq", item.Seq);
-						cmd.Parameters.AddWithValue("qty", item.Qty);
-						cmd.Parameters.AddWithValue("wgh", item.Wgh);
-						cmd.Parameters.AddWithValue("create_by", productSlip.CreateBy);
-						cmd.ExecuteNonQuery();
-					}
-					tr.Commit();
-				}
-				return productSlip.ProductSlipNo;
-			}
-			catch (Exception)
-			{
-				tr.Rollback();
-				throw;
-			}
-		}
-		public static bool Update(ProductSlip productSlip)
-		{
-			MySqlTransaction tr = null;
-			try
-			{
-				using (var conn = new MySqlConnection(Globals.CONN_STR))
-				{
-					conn.Open();
-					tr = conn.BeginTransaction();
-					var sql = @"SELECT product_slip_flag FROM product_slip WHERE product_slip_no=@product_slip_no";
-					var cmd = new MySqlCommand(sql, conn);
-					cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
-					var productSlipFlag = (int)cmd.ExecuteScalar();
+                    foreach (var item in productSlip.ProductSlipItem)
+                    {
+                        cmd = new MySqlCommand(sql, conn)
+                        {
+                            Transaction = tr
+                        };
+                        cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
+                        cmd.Parameters.AddWithValue("product_code", item.Product.ProductCode);
+                        cmd.Parameters.AddWithValue("location_code", item.Location.LocationCode);
+                        cmd.Parameters.AddWithValue("lot_no", item.LotNo);
+                        cmd.Parameters.AddWithValue("seq", item.Seq);
+                        cmd.Parameters.AddWithValue("qty", item.Qty);
+                        cmd.Parameters.AddWithValue("wgh", item.Wgh);
+                        cmd.Parameters.AddWithValue("create_by", productSlip.CreateBy);
+                        cmd.ExecuteNonQuery();
+                    }
+                    tr.Commit();
+                }
+                return productSlip.ProductSlipNo;
+            }
+            catch (Exception)
+            {
+                tr.Rollback();
+                throw;
+            }
+        }
+        public static bool Update(ProductSlip productSlip)
+        {
+            MySqlTransaction tr = null;
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    tr = conn.BeginTransaction();
+                    var sql = @"SELECT product_slip_flag FROM product_slip WHERE product_slip_no=@product_slip_no";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
+                    var productSlipFlag = (int)cmd.ExecuteScalar();
 
-					if (productSlipFlag > 0)
-					{
-						throw new Exception("ไม่สามารถบันทึกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
-					}
-					sql = @"UPDATE slaughterhouse.product_slip
+                    if (productSlipFlag > 0)
+                    {
+                        throw new Exception("ไม่สามารถบันทึกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
+                    }
+                    sql = @"UPDATE slaughterhouse.product_slip
 							SET 
 								product_slip_date = @product_slip_date,
 								ref_document_no = @ref_document_no,
@@ -118,28 +118,28 @@ namespace SlaughterHouseLib
 								modified_by=@modified_by
 							WHERE product_slip_no = @product_slip_no
 						  ";
-					cmd = new MySqlCommand(sql, conn)
-					{
-						Transaction = tr
-					};
-					cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
-					cmd.Parameters.AddWithValue("product_slip_date", productSlip.ProductSlipDate);
-					cmd.Parameters.AddWithValue("ref_document_no", productSlip.RefDocumentNo);
-					cmd.Parameters.AddWithValue("product_slip_flag", productSlip.ProductSlipFlag);
-					cmd.Parameters.AddWithValue("active", productSlip.Active);
-					cmd.Parameters.AddWithValue("modified_by", productSlip.ModifiedBy);
-					var affRow = cmd.ExecuteNonQuery();
+                    cmd = new MySqlCommand(sql, conn)
+                    {
+                        Transaction = tr
+                    };
+                    cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
+                    cmd.Parameters.AddWithValue("product_slip_date", productSlip.ProductSlipDate);
+                    cmd.Parameters.AddWithValue("ref_document_no", productSlip.RefDocumentNo);
+                    cmd.Parameters.AddWithValue("product_slip_flag", productSlip.ProductSlipFlag);
+                    cmd.Parameters.AddWithValue("active", productSlip.Active);
+                    cmd.Parameters.AddWithValue("modified_by", productSlip.ModifiedBy);
+                    var affRow = cmd.ExecuteNonQuery();
 
-					sql = @"Delete From product_slip_item 
+                    sql = @"Delete From product_slip_item 
 								WHERE product_slip_no=@product_slip_no";
-					cmd = new MySqlCommand(sql, conn)
-					{
-						Transaction = tr
-					};
-					cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
-					cmd.ExecuteNonQuery();
+                    cmd = new MySqlCommand(sql, conn)
+                    {
+                        Transaction = tr
+                    };
+                    cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
+                    cmd.ExecuteNonQuery();
 
-					sql = @"INSERT INTO slaughterhouse.product_slip_item
+                    sql = @"INSERT INTO slaughterhouse.product_slip_item
 							(product_slip_no,
 								product_code,
 								location_code,
@@ -153,115 +153,115 @@ namespace SlaughterHouseLib
 								@create_by ) 
 							";
 
-					foreach (var item in productSlip.ProductSlipItem)
-					{
-						cmd = new MySqlCommand(sql, conn)
-						{
-							Transaction = tr
-						};
-						cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
-						cmd.Parameters.AddWithValue("product_code", item.Product.ProductCode);
-						cmd.Parameters.AddWithValue("location_code", item.Location);
-						cmd.Parameters.AddWithValue("seq", item.Seq);
-						cmd.Parameters.AddWithValue("create_by", productSlip.CreateBy);
-						cmd.ExecuteNonQuery();
-					}
-					tr.Commit();
-				}
-				return true;
-			}
-			catch (Exception)
-			{
-				throw;
-			}
-		}
-		public static bool Cancel(ProductSlip productSlip)
-		{
-			MySqlTransaction tr = null;
-			try
-			{
-				using (var conn = new MySqlConnection(Globals.CONN_STR))
-				{
-					conn.Open();
-					tr = conn.BeginTransaction();
-					var sql = "";
+                    foreach (var item in productSlip.ProductSlipItem)
+                    {
+                        cmd = new MySqlCommand(sql, conn)
+                        {
+                            Transaction = tr
+                        };
+                        cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
+                        cmd.Parameters.AddWithValue("product_code", item.Product.ProductCode);
+                        cmd.Parameters.AddWithValue("location_code", item.Location);
+                        cmd.Parameters.AddWithValue("seq", item.Seq);
+                        cmd.Parameters.AddWithValue("create_by", productSlip.CreateBy);
+                        cmd.ExecuteNonQuery();
+                    }
+                    tr.Commit();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static bool Cancel(ProductSlip productSlip)
+        {
+            MySqlTransaction tr = null;
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    tr = conn.BeginTransaction();
+                    var sql = "";
 
-					sql = @"UPDATE product_slip
+                    sql = @"UPDATE product_slip
 								SET  active=@active 
 								WHERE product_slip_no=@product_slip_no";
-					var cmd = new MySqlCommand(sql, conn)
-					{
-						Transaction = tr
-					};
-					cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
-					cmd.Parameters.AddWithValue("active", productSlip.Active);
-					var affRow = cmd.ExecuteNonQuery();
+                    var cmd = new MySqlCommand(sql, conn)
+                    {
+                        Transaction = tr
+                    };
+                    cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
+                    cmd.Parameters.AddWithValue("active", productSlip.Active);
+                    var affRow = cmd.ExecuteNonQuery();
 
-					tr.Commit();
-				}
-				return true;
-			}
-			catch (Exception)
-			{
-				throw;
-			}
-		}
-		public static ProductSlip GetProductSlipByOrderNo(string orderNo)
-		{
-			try
-			{
+                    tr.Commit();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static ProductSlip GetProductSlipByOrderNo(string orderNo)
+        {
+            try
+            {
 
-				using (var conn = new MySqlConnection(Globals.CONN_STR))
-				{
-					conn.Open();
-					var sql = @"SELECT  product_slip_no ,
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"SELECT  product_slip_no ,
 								 product_slip_date ,
 								 ref_document_no ,
 								 product_slip_flag ,
-								 active  
-						FROM product_slip 
-						Where ref_document_no = @ref_document_no 
+								 active
+						FROM product_slip
+						Where ref_document_no = @ref_document_no
 							and active  = 1
 							";
 
 
-					var cmd = new MySqlCommand(sql, conn);
-					cmd.Parameters.AddWithValue("ref_document_no", orderNo);
-					var da = new MySqlDataAdapter(cmd);
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("ref_document_no", orderNo);
+                    var da = new MySqlDataAdapter(cmd);
 
-					var ds = new DataSet();
-					da.Fill(ds);
+                    var ds = new DataSet();
+                    da.Fill(ds);
 
-					if (ds.Tables[0].Rows.Count > 0)
-					{
-						return new ProductSlip
-						{
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        return new ProductSlip
+                        {
 
-							ProductSlipNo = (string)ds.Tables[0].Rows[0]["product_slip_no"],
-							ProductSlipDate = (DateTime)ds.Tables[0].Rows[0]["product_slip_date"],
-							RefDocumentNo = (string)ds.Tables[0].Rows[0]["ref_document_no"],
-						};
-					}
-					else
-					{
-						return null;
-					}
-				}
-			}
-			catch (Exception)
-			{
-				throw;
-			}
-		}
+                            ProductSlipNo = (string)ds.Tables[0].Rows[0]["product_slip_no"],
+                            ProductSlipDate = (DateTime)ds.Tables[0].Rows[0]["product_slip_date"],
+                            RefDocumentNo = (string)ds.Tables[0].Rows[0]["ref_document_no"],
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-		public static DataSet GetDataPrintProductSlip(string productSlip)
-		{
-			try
-			{
-				using (var conn = new MySqlConnection(Globals.CONN_STR))
-				{
-					conn.Open();
-					var sql = @" 
+        public static DataSet GetDataPrintProductSlip(string productSlip)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @" 
 							Select distinct ps.product_slip_no, ps.product_slip_date, o.order_no,
 								c.customer_code, c.customer_name, p.product_code, p.product_name,
 								psi.lot_no, psi.qty, psi.wgh,
@@ -282,32 +282,32 @@ namespace SlaughterHouseLib
 								and p.unit_of_wgh = uw.unit_code    
 								and ps.product_slip_no =  @product_slip_no
 								";
-					var cmd = new MySqlCommand(sql, conn);
-					cmd.Parameters.AddWithValue("product_slip_no", productSlip);
-					var da = new MySqlDataAdapter(cmd);
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_slip_no", productSlip);
+                    var da = new MySqlDataAdapter(cmd);
 
-					var ds = new DataSet();
-					da.Fill(ds);
-					return ds;
-				}
-			}
-			catch (Exception)
-			{
-				throw;
-			}
-		}
-	}
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    return ds;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
 
-	public static class ProductSlipItemController
-	{
-		public static DataTable GetProductSlipItemByOrderNo(string orderNo)
-		{
-			try
-			{
-				using (var conn = new MySqlConnection(Globals.CONN_STR))
-				{
-					conn.Open();
-					var sql = @"select  
+    public static class ProductSlipItemController
+    {
+        public static DataTable GetProductSlipItemByOrderNo(string orderNo)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"select
 								a.product_code,
 								b.product_name,
 								sum(Case when b.issue_unit_method = 'Q' then order_qty else order_wgh end) qty_wgh,
@@ -316,90 +316,89 @@ namespace SlaughterHouseLib
 								null as location_name,
 								0.00 as qty_wgh_location,
 								u.unit_name,
-								b.issue_unit_method 
+								b.issue_unit_method
 								from orders_item a,product b, unit_of_measurement u
 								where a.product_code =b.product_code
 								and Case when b.issue_unit_method = 'Q' then unit_of_qty else unit_of_wgh end = u.unit_code
 								and a.order_no = @order_no
-								group by a.order_no, a.product_code,  
-									b.product_name, 
+								group by a.order_no, a.product_code,
+									b.product_name,
 									b.issue_unit_method,
-									u.unit_name 
-								order by a.product_code asc
-											";
-					var cmd = new MySqlCommand(sql, conn);
-					cmd.Parameters.AddWithValue("order_no", orderNo);  
-					var da = new MySqlDataAdapter(cmd);
+									u.unit_name
+								order by a.product_code asc";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("order_no", orderNo);
+                    var da = new MySqlDataAdapter(cmd);
 
-					var ds = new DataSet();
-					da.Fill(ds);
-					DataTable dt = new DataTable();
-					dt = ds.Tables[0].Copy();
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    DataTable dt = new DataTable();
+                    dt = ds.Tables[0].Copy();
 
-					DataTable dtLocation = new DataTable();
-					DataTable sortDT = new DataTable();
-					if (dt.Rows.Count > 0)
-					{
-						for (int i = 0; i < dt.Rows.Count; i++)
-						{
-							if (Convert.ToDecimal(dt.Rows[i]["QTY_WGH_LOCATION"]) == 0)
-							{
-								int row = i;
-								dtLocation = StockController.GetCfLocation(dt.Rows[row]["PRODUCT_CODE"].ToString());
-								if (dtLocation != null && dtLocation.Rows.Count > 0)
-								{
-									decimal qtyWghSo = Convert.ToDecimal(dt.Rows[row]["QTY_WGH"]);
-									for (int j = 0; j < dtLocation.Rows.Count; j++)
-									{
-										if (Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]) >= qtyWghSo)
-										{
-											dt.Rows[row]["LOT_NO"] = dtLocation.Rows[j]["LOT_NO"].ToString();
-											dt.Rows[row]["LOCATION_CODE"] = (int)dtLocation.Rows[j]["LOCATION_CODE"];
-											dt.Rows[row]["LOCATION_NAME"] = dtLocation.Rows[j]["LOCATION_NAME"].ToString();
-											dt.Rows[row]["QTY_WGH_LOCATION"] = qtyWghSo;
-											break;
-										}
-										else if (Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]) > 0)
-										{
-											dt.Rows[row]["LOT_NO"] = dtLocation.Rows[j]["LOT_NO"].ToString();
-											dt.Rows[row]["LOCATION_CODE"] = (int)dtLocation.Rows[j]["LOCATION_CODE"];
-											dt.Rows[row]["LOCATION_NAME"] = dtLocation.Rows[j]["LOCATION_NAME"].ToString();
-											dt.Rows[row]["QTY_WGH_LOCATION"] = Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]);
+                    DataTable dtLocation = new DataTable();
+                    DataTable sortDT = new DataTable();
+                    if (dt.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            if (Convert.ToDecimal(dt.Rows[i]["QTY_WGH_LOCATION"]) == 0)
+                            {
+                                int row = i;
+                                dtLocation = StockController.GetCfLocation(dt.Rows[row]["PRODUCT_CODE"].ToString());
+                                if (dtLocation != null && dtLocation.Rows.Count > 0)
+                                {
+                                    decimal qtyWghSo = Convert.ToDecimal(dt.Rows[row]["QTY_WGH"]);
+                                    for (int j = 0; j < dtLocation.Rows.Count; j++)
+                                    {
+                                        if (Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]) >= qtyWghSo)
+                                        {
+                                            dt.Rows[row]["LOT_NO"] = dtLocation.Rows[j]["LOT_NO"].ToString();
+                                            dt.Rows[row]["LOCATION_CODE"] = (int)dtLocation.Rows[j]["LOCATION_CODE"];
+                                            dt.Rows[row]["LOCATION_NAME"] = dtLocation.Rows[j]["LOCATION_NAME"].ToString();
+                                            dt.Rows[row]["QTY_WGH_LOCATION"] = qtyWghSo;
+                                            break;
+                                        }
+                                        else if (Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]) > 0)
+                                        {
+                                            dt.Rows[row]["LOT_NO"] = dtLocation.Rows[j]["LOT_NO"].ToString();
+                                            dt.Rows[row]["LOCATION_CODE"] = (int)dtLocation.Rows[j]["LOCATION_CODE"];
+                                            dt.Rows[row]["LOCATION_NAME"] = dtLocation.Rows[j]["LOCATION_NAME"].ToString();
+                                            dt.Rows[row]["QTY_WGH_LOCATION"] = Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]);
 
-											qtyWghSo = qtyWghSo - Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]);
-											row = Create_Row(ref dt, i, qtyWghSo);
-										}
-									}
-								}
-								else
-								{
-									dt.Rows[row]["LOT_NO"] = "NA";
-									dt.Rows[row]["LOCATION_CODE"] = 0;
-									dt.Rows[row]["LOCATION_NAME"] = "NA";
-								}
-							}
-						}
-						DataView dv = dt.DefaultView;
-						dv.Sort = "PRODUCT_CODE ASC, LOT_NO ASC";
-						sortDT = dv.ToTable();
-					}
-					return sortDT;
-				}
-			}
-			catch (Exception)
-			{
+                                            qtyWghSo = qtyWghSo - Convert.ToDecimal(dtLocation.Rows[j]["QTY_WGH"]);
+                                            row = Create_Row(ref dt, i, qtyWghSo);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    dt.Rows[row]["LOT_NO"] = "NA";
+                                    dt.Rows[row]["LOCATION_CODE"] = 0;
+                                    dt.Rows[row]["LOCATION_NAME"] = "NA";
+                                }
+                            }
+                        }
+                        DataView dv = dt.DefaultView;
+                        dv.Sort = "PRODUCT_CODE ASC, LOT_NO ASC";
+                        sortDT = dv.ToTable();
+                    }
+                    return sortDT;
+                }
+            }
+            catch (Exception)
+            {
 
-				throw;
-			}
-		}
-		public static DataTable GetProductSlipItem(string productSlipNo)
-		{
-			try
-			{
-				using (var conn = new MySqlConnection(Globals.CONN_STR))
-				{
-					conn.Open();
-					var sql = @"select  a.seq,
+                throw;
+            }
+        }
+        public static DataTable GetProductSlipItem(string productSlipNo)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"select  a.seq,
 								a.product_code,
 								b.product_name,
 								0 as qty_wgh,
@@ -423,39 +422,39 @@ namespace SlaughterHouseLib
 	
 							";
 
-					var cmd = new MySqlCommand(sql, conn);
-					cmd.Parameters.AddWithValue("product_slip_no", productSlipNo);
-					var da = new MySqlDataAdapter(cmd);
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_slip_no", productSlipNo);
+                    var da = new MySqlDataAdapter(cmd);
 
-					var ds = new DataSet();
-					da.Fill(ds);
+                    var ds = new DataSet();
+                    da.Fill(ds);
 
 
 
-					return ds.Tables[0];
-				}
-			}
-			catch (Exception)
-			{
+                    return ds.Tables[0];
+                }
+            }
+            catch (Exception)
+            {
 
-				throw;
-			}
-		}
+                throw;
+            }
+        }
 
-		private static int Create_Row(ref DataTable dt, int idxRow, decimal cfQtyWgh)
-		{ 
-			DataRow drNew = dt.NewRow();
-			drNew["PRODUCT_CODE"] = dt.Rows[idxRow]["PRODUCT_CODE"];
-			drNew["PRODUCT_NAME"] = dt.Rows[idxRow]["PRODUCT_NAME"];
-			drNew["LOT_NO"] = "NA";
-			drNew["LOCATION_CODE"] = 0;
-			drNew["LOCATION_NAME"] = "NA";
-			drNew["QTY_WGH"] = Convert.ToDecimal(dt.Rows[idxRow]["QTY_WGH"]);
-			drNew["UNIT_NAME"] = dt.Rows[idxRow]["UNIT_NAME"];
-			drNew["ISSUE_UNIT_METHOD"] = dt.Rows[idxRow]["ISSUE_UNIT_METHOD"];
-			drNew["QTY_WGH_LOCATION"] = cfQtyWgh;
-			dt.Rows.Add(drNew);
-			return dt.Rows.Count - 1;
-		}
-	}
+        private static int Create_Row(ref DataTable dt, int idxRow, decimal cfQtyWgh)
+        {
+            DataRow drNew = dt.NewRow();
+            drNew["PRODUCT_CODE"] = dt.Rows[idxRow]["PRODUCT_CODE"];
+            drNew["PRODUCT_NAME"] = dt.Rows[idxRow]["PRODUCT_NAME"];
+            drNew["LOT_NO"] = "NA";
+            drNew["LOCATION_CODE"] = 0;
+            drNew["LOCATION_NAME"] = "NA";
+            drNew["QTY_WGH"] = Convert.ToDecimal(dt.Rows[idxRow]["QTY_WGH"]);
+            drNew["UNIT_NAME"] = dt.Rows[idxRow]["UNIT_NAME"];
+            drNew["ISSUE_UNIT_METHOD"] = dt.Rows[idxRow]["ISSUE_UNIT_METHOD"];
+            drNew["QTY_WGH_LOCATION"] = cfQtyWgh;
+            dt.Rows.Add(drNew);
+            return dt.Rows.Count - 1;
+        }
+    }
 }

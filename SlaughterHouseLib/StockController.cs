@@ -74,7 +74,7 @@ namespace SlaughterHouseLib
                         stock_item,
                         product_code,
                         stock_qty,
-                        stock_wgh,  
+                        stock_wgh,
                         ref_document_type,
                         ref_document_no,
                         lot_no,
@@ -207,7 +207,7 @@ namespace SlaughterHouseLib
                         stock_item,
                         product_code,
                         stock_qty,
-                        stock_wgh,  
+                        stock_wgh,
                         ref_document_type,
                         ref_document_no,
                         lot_no,
@@ -269,11 +269,11 @@ namespace SlaughterHouseLib
                 {
 
                     //update stock_item_running
-                    sql = @"UPDATE stock_item_running 
+                    sql = @"UPDATE stock_item_running
                             SET stock_item=@stock_item,
                                 modified_at=@modified_at,
                                 modified_by=@modified_by
-                            WHERE doc_no=@doc_no 
+                            WHERE doc_no=@doc_no
                             AND stock_no=@stock_no";
                     cmd.CommandText = sql;
                     cmd.Parameters.Clear();
@@ -304,27 +304,28 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     string sql = @"
-                                Select  p.product_name, stk.lot_no, loc.location_code, loc.location_name, 
-                                case when p.issue_unit_method = 'W' 
+                                Select  p.product_name, stk.lot_no, loc.location_code, loc.location_name,
+                                case when p.issue_unit_method = 'W'
                                     then sum(case when stk.transaction_type = '1' then stk.stock_wgh else stk.stock_wgh*-1 end)
                                     else sum(case when stk.transaction_type = '1' then stk.stock_qty else stk.stock_qty*-1 end)
                                     end as qty_wgh, p.issue_unit_method
                                 From stock stk, product p, location loc
-                                where 1 = 1 
-                                 and stk.stock_date = DATE_FORMAT(SYSDATE(), '%Y-%m-%d')
+                                where 1 = 1
+                                 and stk.stock_date = (SELECT production_date FROM slaughterhouse.plant WHERE plant_id = 1)
                                  and stk.product_code = @product_code ";
-                        if (lotNo != "") {
-                            sql += " and stk.lot_no = @lot_no ";
-                        }
+                    if (lotNo != "")
+                    {
+                        sql += " and stk.lot_no = @lot_no ";
+                    }
 
-                        sql += @" and stk.product_code = p.product_code
+                    sql += @" and stk.product_code = p.product_code
                                 and stk.location_code = loc.location_code
                                 group by p.product_name, stk.lot_no,  stk.transaction_type, loc.location_code, loc.location_name, p.issue_unit_method, p.sale_unit_method
-                                having case when p.sale_unit_method = 'W' 
-                                then sum(case when stk.transaction_type = '1' then stk.stock_wgh else stk.stock_wgh*-1 end) 
-                                else sum(case when stk.transaction_type = '1' then stk.stock_qty else stk.stock_qty*-1 end) 
+                                having case when p.sale_unit_method = 'W'
+                                then sum(case when stk.transaction_type = '1' then stk.stock_wgh else stk.stock_wgh*-1 end)
+                                else sum(case when stk.transaction_type = '1' then stk.stock_qty else stk.stock_qty*-1 end)
                                 end > 0
-                                order by stk.lot_no 
+                                order by stk.lot_no
                                         ";
 
                     var cmd = new MySqlCommand(sql, conn);
@@ -371,8 +372,8 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    string sql = @" SELECT production_date FROM slaughterhouse.plant
-                                   where plant_id = 1 ";
+                    string sql = @"SELECT production_date FROM slaughterhouse.plant
+                                   WHERE plant_id = 1";
 
                     var cmd = new MySqlCommand(sql, conn);
                     var da = new MySqlDataAdapter(cmd);
@@ -395,7 +396,7 @@ namespace SlaughterHouseLib
             }
 
         }
-        public static DataTable  GetStockBfOfDay(DateTime pDate)
+        public static DataTable GetStockBfOfDay(DateTime pDate)
         {
             try
             {
@@ -413,11 +414,11 @@ namespace SlaughterHouseLib
                                     s.stock_wgh as wgh
                                 FROM stock s,
                                   location loc,
-                                  product p 
+                                  product p
                                 where s.stock_date = @stock_date
                                 and s.location_code = loc.location_code
                                 and s.transaction_type ='1'
-                                and s.ref_document_type = 'BF' 
+                                and s.ref_document_type = 'BF'
                                 and s.product_code = p.product_code ";
 
                     var cmd = new MySqlCommand(sql, conn);
@@ -492,13 +493,11 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = "";
 
-                        sql = @"SELECT count(1) as count_row
+                    var sql = @"SELECT count(1) as count_row
                                 FROM stock
                                 where stock_date = @stock_date
-                                and ref_document_type <> 'BF'
-                            ";
+                                and ref_document_type <> 'BF'";
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("stock_date", pDate.ToString("yyyy-MM-dd"));

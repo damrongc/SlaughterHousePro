@@ -23,6 +23,8 @@ namespace SlaughterHouseClient.Receiving
     public partial class Form_ReceiveProduct : Form
     {
         SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
+        int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+
         product product;
         private int Index;
         private int PAGE_SIZE = 15;
@@ -109,6 +111,12 @@ namespace SlaughterHouseClient.Receiving
             serialPort1.StopBits = StopBits.One;
             LoadSetting();
 
+            using (var db = new SlaughterhouseEntities())
+            {
+
+                var plant = db.plants.Find(plantID);
+                lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
+            }
 
             var reportPath = Application.StartupPath;
             doc.Load(reportPath + "\\Report\\Rpt\\barcode.rpt");
@@ -336,8 +344,8 @@ namespace SlaughterHouseClient.Receiving
         {
             using (var db = new SlaughterhouseEntities())
             {
-
-                var stocks = db.stocks.Where(p => p.stock_date == DateTime.Today
+                var productionDate = db.plants.Find(plantID).production_date;
+                var stocks = db.stocks.Where(p => p.stock_date == productionDate
                 && p.product_code == product_code
                 && p.lot_no == lot_no
                 && p.transaction_type == 1).Select(p => new
@@ -471,7 +479,7 @@ namespace SlaughterHouseClient.Receiving
                 btnProduct.Enabled = !isStart;
                 btnStart.Enabled = !isStart;
                 btnStop.Enabled = isStart;
-                btnPrint.Enabled = !isStart;
+                //btnPrint.Enabled = !isStart;
 
                 lblMessage.Text = Constants.WEIGHT_WAITING;
             }
@@ -506,7 +514,7 @@ namespace SlaughterHouseClient.Receiving
                 btnProduct.Enabled = !isStart;
                 btnStart.Enabled = !isStart;
                 btnStop.Enabled = isStart;
-                btnPrint.Enabled = !isStart;
+                //btnPrint.Enabled = !isStart;
             }
             catch (Exception ex)
             {
@@ -516,73 +524,50 @@ namespace SlaughterHouseClient.Receiving
 
         }
 
-        private bool SaveData()
+        private void SaveData()
         {
             try
             {
                 decimal receiveWgh = lblWeight.Text.ToDecimal();
                 string createBy = Helper.GetLocalIPAddress();
+                string stockNo = "";
+                int stockItem = 0;
                 using (var db = new SlaughterhouseEntities())
                 {
+                    var productionDate = db.plants.Find(plantID).production_date;
+                    var stocks = db.stocks.Where(p => p.stock_date == productionDate
+                        && p.product_code == product_code
+                        && p.lot_no == lot_no
+                        && p.transaction_type == 1).ToList();
 
-                    //update receive
-                    //var receive = db.receives.Where(p => p.receive_no.Equals(lblProduct.Text)).SingleOrDefault();
-                    //int seq = db.receive_item.Where(p => p.product_code.Equals(product.product_code)).Count();
-
-                    barcodeNo = db.barcodes.Max(p => p.barcode_no) + 1;
-                    //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
-
-                    //seq += 1;
-                    //var item = new receive_item
-                    //{
-                    //    receive_no = receive.receive_no,
-                    //    product_code = product.product_code,
-                    //    seq = seq,
-                    //    sex_flag = "",
-                    //    lot_no = lot_no,
-                    //    receive_qty = 1,
-                    //    receive_wgh = receive_wgh,
-                    //    chill_qty = 0,
-                    //    chill_wgh = 0,
-                    //    transfer_qty = 0,
-                    //    transfer_wgh = 0,
-                    //    barcode_no = barcode_no,
-                    //    create_by = create_by
-                    //};
-
-                    //string stock_no = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).Select(p => p.stock_no).SingleOrDefault();
-                    //var documentGenerate = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
-                    //string stock_no = Constants.STK + documentGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
-
-                    string stockNo = "";
-                    int stockItem = 0;
-                    var stk = db.stocks.Where(p => p.product_code == product_code && p.lot_no == lot_no).ToList();
-
-                    var stockGenerate = db.document_generate.Find(Constants.STK);
-                    if (stk.Count == 0)
+                    if (stocks.Count == 0)
                     {
+                        var stockGenerate = db.document_generate.Find(Constants.STK);
+
                         stockNo = Constants.STK + stockGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
                         stockItem = 1;
+
+                        stockGenerate.running += 1;
+                        db.Entry(stockGenerate).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
                     }
                     else
                     {
-                        stockNo = stk[0].stock_no;
-                        stockItem = stk[0].stock_item + 1;
+                        stockNo = stocks[0].stock_no;
+                        stockItem = stocks[0].stock_item + 1;
                     }
-
-
-
 
                     using (DbContextTransaction transaction = db.Database.BeginTransaction())
                     {
                         try
                         {
+                            barcodeNo = db.barcodes.Max(p => p.barcode_no) + 1;
                             //insert barcode
                             var barcode = new barcode
                             {
                                 barcode_no = barcodeNo,
                                 product_code = product_code,
-                                production_date = DateTime.Today,
+                                production_date = productionDate,
                                 lot_no = lot_no,
                                 qty = 1,
                                 wgh = receiveWgh,
@@ -596,7 +581,7 @@ namespace SlaughterHouseClient.Receiving
                             //insert stock
                             var stock = new stock
                             {
-                                stock_date = DateTime.Today,
+                                stock_date = productionDate,
                                 stock_no = stockNo,
                                 stock_item = stockItem,
                                 product_code = barcode.product_code,
@@ -612,21 +597,17 @@ namespace SlaughterHouseClient.Receiving
                             };
 
                             db.stocks.Add(stock);
-
-
-                            //var genDoc = db.document_generate.Find(Constants.STK);
-                            stockGenerate.running += 1;
-                            db.Entry(stockGenerate).State = System.Data.Entity.EntityState.Modified;
-
                             db.SaveChanges();
                             transaction.Commit();
-                            PrintBarcode();
-                            return true;
                         }
                         catch (Exception)
                         {
                             transaction.Rollback();
                             throw;
+                        }
+                        finally
+                        {
+                            PrintBarcode();
                         }
                     }
                 }
@@ -669,7 +650,7 @@ namespace SlaughterHouseClient.Receiving
                 btnProduct.Enabled = !isStart;
                 btnStart.Enabled = !isStart;
                 btnStop.Enabled = isStart;
-                btnPrint.Enabled = !isStart;
+                //btnPrint.Enabled = !isStart;
 
                 lblMessage.Text = Constants.WEIGHT_WAITING;
                 lblWeight.Text = txtSimWeight.Text.ToDecimal().ToFormat2Decimal();

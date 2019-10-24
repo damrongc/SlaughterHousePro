@@ -65,7 +65,7 @@ namespace SlaughterHouseServer
             printProductSlipBtnColumn.Name = ConstColumns.BTN_PRODUCT_SLIP;
             printProductSlipBtnColumn.Text = "สร้างใบจัดสินค้า";
             printProductSlipBtnColumn.UseColumnTextForButtonValue = true; //dont forget this line
-            printProductSlipBtnColumn.FlatStyle = FlatStyle.Flat; 
+            printProductSlipBtnColumn.FlatStyle = FlatStyle.Flat;
             if (gv.Columns[ConstColumns.BTN_PRODUCT_SLIP] == null)
             {
                 gv.Columns.Insert(gv.ColumnCount, printProductSlipBtnColumn);
@@ -96,8 +96,8 @@ namespace SlaughterHouseServer
                 {
                     gv.Rows[row.Index].Cells[ConstColumns.BTN_INVOICE].Style.BackColor = Color.MediumSpringGreen;
                 }
-                gv.Rows[row.Index].Cells[ConstColumns.BTN_PRODUCT_SLIP].Style.BackColor = Color.LightSkyBlue; 
-            } 
+                gv.Rows[row.Index].Cells[ConstColumns.BTN_PRODUCT_SLIP].Style.BackColor = Color.LightSkyBlue;
+            }
         }
 
 
@@ -170,7 +170,7 @@ namespace SlaughterHouseServer
                             if (pickingCompleteFlag == false)
                             {
                                 LoadItem(orderNo);
-                                DialogResult result = MessageBox.Show("จำนวนสินยังไม่ครบตามใบสั่งขาย\rท่านยังต้องขายใช่ไหม? Yes/No", "Warning ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                DialogResult result = MessageBox.Show("จำนวนสินค้ายังไม่ครบตามใบสั่งขาย\rต้องการ ออกใบแจ้งหนี้ใช่หรือไม่? Yes/No", "คำเตือน ", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                                 if (result == DialogResult.Yes)
                                 {
                                     var frmInv = new Form_InvoiceAddEdit
@@ -257,6 +257,7 @@ namespace SlaughterHouseServer
             gv.DataSource = coll;
             LoadItem("");
         }
+
         private void LoadItem(string orderNo)
         {
             DataTable dtOrderItem = new DataTable("ORDERS_ITEM");

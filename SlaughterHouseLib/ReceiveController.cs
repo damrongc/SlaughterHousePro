@@ -316,7 +316,7 @@ namespace SlaughterHouseLib
                     {
                         //ADD NEW
                         var sql = @"SELECT MAX(queue_no)
-                                    FROM receives 
+                                    FROM receives
                                     WHERE receive_date=@receive_date
                                     GROUP BY receive_no";
 

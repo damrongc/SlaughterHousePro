@@ -14,13 +14,13 @@ namespace SlaughterHouseClient.Issued
 
         FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
         FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
-
+        int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
 
 
         public Form_MainProduct()
         {
             InitializeComponent();
-            Shown += Form_Shown;
+            Load += Form_Load;
 
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             //gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
@@ -34,18 +34,35 @@ namespace SlaughterHouseClient.Issued
 
         }
 
+        private void Form_Load(object sender, EventArgs e)
+        {
+            using (var db = new SlaughterhouseEntities())
+            {
+
+                var plant = db.plants.Find(plantID);
+                lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
+
+                //var trucks = db.trucks.Where(p => p.active == true).Select(p => new
+                //{
+                //    p.truck_no,
+                //}).ToList();
+
+                //cboTruckNo.DisplayMember = "truck_no";
+                //cboTruckNo.ValueMember = "truck_no";
+                //cboTruckNo.DataSource = trucks;
+
+                lblMessage.Text = Constants.CHOOSE_QUEUE;
+                btnView.Enabled = false;
+            }
+        }
+
         private void TxtBarcodeNo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 ProcessData();
         }
 
-        private void Form_Shown(object sender, EventArgs e)
-        {
-            lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
-            lblMessage.Text = Constants.CHOOSE_QUEUE;
-            btnView.Enabled = false;
-        }
+
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -232,35 +249,52 @@ namespace SlaughterHouseClient.Issued
                         throw new Exception("จ่ายสินค้านี้ ครบแล้ว!");
                     }
 
-
-
-                    var productionDate = db.plants.Find(1).production_date;
-
+                    var productionDate = db.plants.Find(plantID).production_date;
                     var transport = db.transports.Where(p => p.ref_document_no == orderNo).SingleOrDefault();
 
-                    var stockGenerate = db.document_generate.Find(Constants.STK);
+
                     var transportGenrate = db.document_generate.Find(Constants.TP);
                     if (transport == null)
                     {
+                        var stockGenerate = db.document_generate.Find(Constants.STK);
                         stockNo = Constants.STK + stockGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
+                        stockGenerate.running += 1;
+                        db.Entry(stockGenerate).State = EntityState.Modified;
+                        db.SaveChanges();
                         stockItem = 1;
-
                         transportNo = Constants.TP + transportGenrate.running.ToString().PadLeft(10 - Constants.TP.Length, '0');
 
                     }
                     else
                     {
-                        if (transport.transport_item.Count == 0)
+                        transportNo = transport.transport_no;
+                        var transportItem = db.transport_item.Where(p => p.transport_no == transport.transport_no).ToList();
+                        if (transportItem.Count == 0)
                         {
+                            var stockGenerate = db.document_generate.Find(Constants.STK);
                             stockNo = Constants.STK + stockGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
+                            stockGenerate.running += 1;
+                            db.Entry(stockGenerate).State = EntityState.Modified;
+                            db.SaveChanges();
                             transportNo = transport.transport_no;
                         }
                         else
                         {
-                            stockNo = transport.transport_item.Select(p => p.stock_no).First();
+                            stockNo = transportItem[0].stock_no;
 
                         }
-                        stockItem = transport.transport_item.Count() + 1;
+                        stockItem = transportItem.Count + 1;
+                        //if (transport.transport_item.Count == 0)
+                        //{
+                        //    stockNo = Constants.STK + stockGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
+                        //    transportNo = transport.transport_no;
+                        //}
+                        //else
+                        //{
+                        //    stockNo = transport.transport_item.Select(p => p.stock_no).First();
+
+                        //}
+                        //stockItem = transport.transport_item.Count() + 1;
                     }
 
 
@@ -334,8 +368,7 @@ namespace SlaughterHouseClient.Issued
                             db.transport_item.Add(transItem);
 
                             //var genDoc = db.document_generate.Find(Constants.STK);
-                            stockGenerate.running += 1;
-                            db.Entry(stockGenerate).State = EntityState.Modified;
+
 
                             //set barcode
                             barcode.active = false;
