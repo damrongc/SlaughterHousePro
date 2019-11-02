@@ -38,7 +38,7 @@ namespace SlaughterHouseServer
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
                     string customerCode = gv.Rows[e.RowIndex].Cells[1].Value.ToString();
-                    var frm = new Form_CustomerAddEdit 
+                    var frm = new Form_CustomerAddEdit
                     {
                         customerCode = customerCode
                     };
@@ -62,7 +62,7 @@ namespace SlaughterHouseServer
 
         private void BtnAdd_Click(object sender, System.EventArgs e)
         {
-            var frm = new Form_CustomerAddEdit 
+            var frm = new Form_CustomerAddEdit
             {
                 customerCode = ""
             };
@@ -77,17 +77,21 @@ namespace SlaughterHouseServer
             var coll = CustomerController.GetAllCustomers(TxtFilter.Text.Trim());
             gv.DataSource = coll;
 
-            gv.Columns[1].HeaderText = "รหัสลูกค้า";
-            gv.Columns[2].HeaderText = "ชื่อลูกค้า";
-            gv.Columns[3].HeaderText = "ที่อยู่";
-            gv.Columns[4].HeaderText = "สถานที่ส่งสินค้า";
-            gv.Columns[5].HeaderText = "เลขที่ผู้เสียภาษี";
-            gv.Columns[6].HeaderText = "เบอร์ติดต่อ"; 
-            gv.Columns[7].HeaderText = "ใช้งาน";
-            gv.Columns[8].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[9].HeaderText = "ผู้สร้าง";
-            gv.Columns[10].HeaderText = "วันเวลาแก้ไข";
-            gv.Columns[11].HeaderText = "ผู้แก้ไข";
+            gv.Columns[ConstColumns.CustomerCode].HeaderText = "รหัสลูกค้า";
+            gv.Columns[ConstColumns.CustomerName].HeaderText = "ชื่อลูกค้า";
+            gv.Columns[ConstColumns.ClassName].HeaderText = "กลุ่มลูกค้า";
+            gv.Columns[ConstColumns.Address].HeaderText = "ที่อยู่";
+            gv.Columns[ConstColumns.ShipTo].HeaderText = "สถานที่ส่งสินค้า";
+            gv.Columns[ConstColumns.TaxId].HeaderText = "เลขที่ผู้เสียภาษี";
+            gv.Columns[ConstColumns.ContactNo].HeaderText = "เบอร์ติดต่อ";
+            gv.Columns[ConstColumns.Active].HeaderText = "ใช้งาน";
+            gv.Columns[ConstColumns.CreateAt].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[ConstColumns.CreateBy].HeaderText = "ผู้สร้าง";
+            gv.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
+            gv.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
+
+            gv.Columns[ConstColumns.ClassId].Visible = false;
+
         }
     }
 }

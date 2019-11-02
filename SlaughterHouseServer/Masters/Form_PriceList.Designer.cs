@@ -40,7 +40,8 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.dtpStartDateCustomer = new System.Windows.Forms.TabControl();
+            this.tabControlPrice = new System.Windows.Forms.TabControl();
+            this.tabPageProduct = new System.Windows.Forms.TabPage();
             this.tabPageCustomer = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.gvCv = new System.Windows.Forms.DataGridView();
@@ -53,16 +54,31 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.BtnAddCv = new System.Windows.Forms.Button();
-            this.tabPageProduct = new System.Windows.Forms.TabPage();
+            this.tabPageCustomerClassDis = new System.Windows.Forms.TabPage();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.gvClassDis = new System.Windows.Forms.DataGridView();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.cboClassId = new System.Windows.Forms.ComboBox();
+            this.dtpStartDateClassDis = new System.Windows.Forms.DateTimePicker();
+            this.BtnSearchClassDis = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.BtnAddClassDis = new System.Windows.Forms.Button();
+            this.EditClassDis = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
-            this.dtpStartDateCustomer.SuspendLayout();
+            this.tabControlPrice.SuspendLayout();
+            this.tabPageProduct.SuspendLayout();
             this.tabPageCustomer.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCv)).BeginInit();
             this.panel6.SuspendLayout();
-            this.tabPageProduct.SuspendLayout();
+            this.tabPageCustomerClassDis.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvClassDis)).BeginInit();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -71,9 +87,9 @@
             this.label1.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(11, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(178, 29);
+            this.label1.Size = new System.Drawing.Size(189, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ข้อมูลราคาระดับสินค้า";
+            this.label1.Text = "ข้อมูลส่วนลดกลุ่มลูกค้า";
             // 
             // BtnAdd
             // 
@@ -84,7 +100,7 @@
             this.BtnAdd.ForeColor = System.Drawing.Color.White;
             this.BtnAdd.Image = ((System.Drawing.Image)(resources.GetObject("BtnAdd.Image")));
             this.BtnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnAdd.Location = new System.Drawing.Point(192, 14);
+            this.BtnAdd.Location = new System.Drawing.Point(205, 14);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(129, 36);
             this.BtnAdd.TabIndex = 2;
@@ -159,7 +175,7 @@
             // cboProduct
             // 
             this.cboProduct.FormattingEnabled = true;
-            this.cboProduct.Location = new System.Drawing.Point(558, 14);
+            this.cboProduct.Location = new System.Drawing.Point(571, 14);
             this.cboProduct.Name = "cboProduct";
             this.cboProduct.Size = new System.Drawing.Size(214, 37);
             this.cboProduct.TabIndex = 7;
@@ -168,7 +184,7 @@
             // 
             this.dtpStartDate.CustomFormat = "dd/MM/yyyy";
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpStartDate.Location = new System.Drawing.Point(327, 14);
+            this.dtpStartDate.Location = new System.Drawing.Point(340, 14);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(160, 36);
             this.dtpStartDate.TabIndex = 6;
@@ -182,7 +198,7 @@
             this.BtnSearch.ForeColor = System.Drawing.Color.White;
             this.BtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("BtnSearch.Image")));
             this.BtnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSearch.Location = new System.Drawing.Point(778, 14);
+            this.BtnSearch.Location = new System.Drawing.Point(791, 14);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(142, 36);
             this.BtnSearch.TabIndex = 4;
@@ -194,22 +210,36 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(493, 18);
+            this.label2.Location = new System.Drawing.Point(506, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 29);
             this.label2.TabIndex = 5;
             this.label2.Text = "สินค้า:";
             // 
-            // dtpStartDateCustomer
+            // tabControlPrice
             // 
-            this.dtpStartDateCustomer.Controls.Add(this.tabPageProduct);
-            this.dtpStartDateCustomer.Controls.Add(this.tabPageCustomer);
-            this.dtpStartDateCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtpStartDateCustomer.Location = new System.Drawing.Point(0, 0);
-            this.dtpStartDateCustomer.Name = "dtpStartDateCustomer";
-            this.dtpStartDateCustomer.SelectedIndex = 0;
-            this.dtpStartDateCustomer.Size = new System.Drawing.Size(1400, 750);
-            this.dtpStartDateCustomer.TabIndex = 4;
+            this.tabControlPrice.Controls.Add(this.tabPageProduct);
+            this.tabControlPrice.Controls.Add(this.tabPageCustomer);
+            this.tabControlPrice.Controls.Add(this.tabPageCustomerClassDis);
+            this.tabControlPrice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPrice.Location = new System.Drawing.Point(0, 0);
+            this.tabControlPrice.Name = "tabControlPrice";
+            this.tabControlPrice.SelectedIndex = 0;
+            this.tabControlPrice.Size = new System.Drawing.Size(1400, 750);
+            this.tabControlPrice.TabIndex = 4;
+            // 
+            // tabPageProduct
+            // 
+            this.tabPageProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPageProduct.Controls.Add(this.panel1);
+            this.tabPageProduct.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tabPageProduct.Location = new System.Drawing.Point(4, 40);
+            this.tabPageProduct.Name = "tabPageProduct";
+            this.tabPageProduct.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageProduct.Size = new System.Drawing.Size(1392, 706);
+            this.tabPageProduct.TabIndex = 1;
+            this.tabPageProduct.Text = " ราคาระดับสินค้า ";
+            this.tabPageProduct.UseVisualStyleBackColor = true;
             // 
             // tabPageCustomer
             // 
@@ -358,24 +388,159 @@
             this.BtnAddCv.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnAddCv.UseVisualStyleBackColor = false;
             // 
-            // tabPageProduct
+            // tabPageCustomerClassDis
             // 
-            this.tabPageProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPageProduct.Controls.Add(this.panel1);
-            this.tabPageProduct.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.tabPageProduct.Location = new System.Drawing.Point(4, 40);
-            this.tabPageProduct.Name = "tabPageProduct";
-            this.tabPageProduct.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProduct.Size = new System.Drawing.Size(1392, 706);
-            this.tabPageProduct.TabIndex = 1;
-            this.tabPageProduct.Text = " ราคาระดับสินค้า ";
-            this.tabPageProduct.UseVisualStyleBackColor = true;
+            this.tabPageCustomerClassDis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPageCustomerClassDis.Controls.Add(this.panel7);
+            this.tabPageCustomerClassDis.Location = new System.Drawing.Point(4, 40);
+            this.tabPageCustomerClassDis.Name = "tabPageCustomerClassDis";
+            this.tabPageCustomerClassDis.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCustomerClassDis.Size = new System.Drawing.Size(1392, 706);
+            this.tabPageCustomerClassDis.TabIndex = 2;
+            this.tabPageCustomerClassDis.Text = "ส่วนลดกลุ่มลูกค้า";
+            this.tabPageCustomerClassDis.UseVisualStyleBackColor = true;
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.White;
+            this.panel7.Controls.Add(this.gvClassDis);
+            this.panel7.Controls.Add(this.panel8);
+            this.panel7.Controls.Add(this.panel9);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel7.Location = new System.Drawing.Point(3, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Padding = new System.Windows.Forms.Padding(6);
+            this.panel7.Size = new System.Drawing.Size(1384, 698);
+            this.panel7.TabIndex = 5;
+            // 
+            // gvClassDis
+            // 
+            this.gvClassDis.AllowUserToAddRows = false;
+            this.gvClassDis.AllowUserToDeleteRows = false;
+            this.gvClassDis.AllowUserToResizeColumns = false;
+            this.gvClassDis.AllowUserToResizeRows = false;
+            this.gvClassDis.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gvClassDis.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gvClassDis.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.gvClassDis.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gvClassDis.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvClassDis.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.EditClassDis});
+            this.gvClassDis.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvClassDis.Location = new System.Drawing.Point(6, 68);
+            this.gvClassDis.Name = "gvClassDis";
+            this.gvClassDis.RowHeadersWidth = 10;
+            this.gvClassDis.Size = new System.Drawing.Size(1372, 624);
+            this.gvClassDis.TabIndex = 8;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.LightGray;
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel8.Location = new System.Drawing.Point(6, 67);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(1372, 1);
+            this.panel8.TabIndex = 6;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.cboClassId);
+            this.panel9.Controls.Add(this.dtpStartDateClassDis);
+            this.panel9.Controls.Add(this.BtnSearchClassDis);
+            this.panel9.Controls.Add(this.label5);
+            this.panel9.Controls.Add(this.label6);
+            this.panel9.Controls.Add(this.BtnAddClassDis);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel9.Location = new System.Drawing.Point(6, 6);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(1372, 61);
+            this.panel9.TabIndex = 5;
+            // 
+            // cboClassId
+            // 
+            this.cboClassId.FormattingEnabled = true;
+            this.cboClassId.Location = new System.Drawing.Point(601, 14);
+            this.cboClassId.Name = "cboClassId";
+            this.cboClassId.Size = new System.Drawing.Size(214, 37);
+            this.cboClassId.TabIndex = 7;
+            // 
+            // dtpStartDateClassDis
+            // 
+            this.dtpStartDateClassDis.CustomFormat = "dd/MM/yyyy";
+            this.dtpStartDateClassDis.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpStartDateClassDis.Location = new System.Drawing.Point(327, 14);
+            this.dtpStartDateClassDis.Name = "dtpStartDateClassDis";
+            this.dtpStartDateClassDis.Size = new System.Drawing.Size(160, 36);
+            this.dtpStartDateClassDis.TabIndex = 6;
+            // 
+            // BtnSearchClassDis
+            // 
+            this.BtnSearchClassDis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnSearchClassDis.FlatAppearance.BorderSize = 0;
+            this.BtnSearchClassDis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSearchClassDis.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSearchClassDis.ForeColor = System.Drawing.Color.White;
+            this.BtnSearchClassDis.Image = ((System.Drawing.Image)(resources.GetObject("BtnSearchClassDis.Image")));
+            this.BtnSearchClassDis.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnSearchClassDis.Location = new System.Drawing.Point(821, 14);
+            this.BtnSearchClassDis.Name = "BtnSearchClassDis";
+            this.BtnSearchClassDis.Size = new System.Drawing.Size(142, 36);
+            this.BtnSearchClassDis.TabIndex = 4;
+            this.BtnSearchClassDis.Text = "แสดงข้อมูล";
+            this.BtnSearchClassDis.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnSearchClassDis.UseVisualStyleBackColor = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label5.Location = new System.Drawing.Point(499, 18);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(99, 29);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "ระดับลูกค้้า:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(11, 18);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(178, 29);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "ข้อมูลราคาระดับลูกค้า";
+            // 
+            // BtnAddClassDis
+            // 
+            this.BtnAddClassDis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnAddClassDis.FlatAppearance.BorderSize = 0;
+            this.BtnAddClassDis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddClassDis.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAddClassDis.ForeColor = System.Drawing.Color.White;
+            this.BtnAddClassDis.Image = ((System.Drawing.Image)(resources.GetObject("BtnAddClassDis.Image")));
+            this.BtnAddClassDis.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnAddClassDis.Location = new System.Drawing.Point(192, 14);
+            this.BtnAddClassDis.Name = "BtnAddClassDis";
+            this.BtnAddClassDis.Size = new System.Drawing.Size(129, 36);
+            this.BtnAddClassDis.TabIndex = 2;
+            this.BtnAddClassDis.Text = "เพิ่มข้อมูล";
+            this.BtnAddClassDis.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnAddClassDis.UseVisualStyleBackColor = false;
+            // 
+            // EditClassDis
+            // 
+            this.EditClassDis.HeaderText = "แก้ไข";
+            this.EditClassDis.Image = ((System.Drawing.Image)(resources.GetObject("EditClassDis.Image")));
+            this.EditClassDis.Name = "EditClassDis";
+            this.EditClassDis.Width = 58;
             // 
             // Form_PriceList
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1400, 750);
-            this.Controls.Add(this.dtpStartDateCustomer);
+            this.Controls.Add(this.tabControlPrice);
             this.Font = new System.Drawing.Font("Kanit", 15.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form_PriceList";
@@ -384,13 +549,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.dtpStartDateCustomer.ResumeLayout(false);
+            this.tabControlPrice.ResumeLayout(false);
+            this.tabPageProduct.ResumeLayout(false);
             this.tabPageCustomer.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvCv)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            this.tabPageProduct.ResumeLayout(false);
+            this.tabPageCustomerClassDis.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvClassDis)).EndInit();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -406,7 +576,7 @@
         private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TabControl dtpStartDateCustomer;
+        private System.Windows.Forms.TabControl tabControlPrice;
         private System.Windows.Forms.TabPage tabPageCustomer;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.DataGridView gvCv;
@@ -422,5 +592,17 @@
         private System.Windows.Forms.ComboBox cboProduct;
         private System.Windows.Forms.Button BtnSearch;
         private System.Windows.Forms.DataGridViewImageColumn EditCv;
+        private System.Windows.Forms.TabPage tabPageCustomerClassDis;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.DataGridView gvClassDis;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.ComboBox cboClassId;
+        private System.Windows.Forms.DateTimePicker dtpStartDateClassDis;
+        private System.Windows.Forms.Button BtnSearchClassDis;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button BtnAddClassDis;
+        private System.Windows.Forms.DataGridViewImageColumn EditClassDis;
     }
 }

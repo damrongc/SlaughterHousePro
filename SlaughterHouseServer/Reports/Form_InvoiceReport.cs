@@ -32,6 +32,12 @@ namespace SlaughterHouseServer.Report
             rptViewerTransport.ShowTextSearchButton = false;
             rptViewerTransport.ShowLogo = false;
 
+            crystalReportViewer1.ShowCloseButton = false;
+            crystalReportViewer1.ShowCopyButton = false;
+            crystalReportViewer1.ShowGroupTreeButton = false;
+            crystalReportViewer1.ShowParameterPanelButton = false;
+            crystalReportViewer1.ShowTextSearchButton = false;
+            crystalReportViewer1.ShowLogo = false;
 
             tabControl1.TabPages.Remove(tabPage2);
         }
@@ -49,14 +55,22 @@ namespace SlaughterHouseServer.Report
             //string reportName = "invoice";
             //doc.Load(path + @"\invoice.rpt");
             var reportPath = Application.StartupPath;
-            ds.WriteXml(reportPath + @"\invoice.xml", XmlWriteMode.WriteSchema);
+            //ds.WriteXml(reportPath + @"\invoice.xml", XmlWriteMode.WriteSchema);
 
             doc.Load(reportPath + @"\Report\invoice.rpt");
             doc.SetDataSource(ds);
-
             rptViewer.ReportSource = doc;
             rptViewer.Zoom(100);
             rptViewer.RefreshReport();
+
+
+
+            ReportDocument docReceipt = new ReportDocument();
+            docReceipt.Load(reportPath + @"\Report\receipt.rpt");
+            docReceipt.SetDataSource(ds);
+            crystalReportViewer1.ReportSource = docReceipt;
+            crystalReportViewer1.Zoom(100);
+            crystalReportViewer1.RefreshReport();
 
 
 

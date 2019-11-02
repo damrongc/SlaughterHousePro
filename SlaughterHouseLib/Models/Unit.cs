@@ -43,14 +43,14 @@ namespace SlaughterHouseLib.Models
                     if (!string.IsNullOrEmpty(keyword))
                     {
                         cmd.Parameters.AddWithValue("Unit_code", string.Format("%{0}%", keyword));
-                        cmd.Parameters.AddWithValue("Unit_name", string.Format("%{0}%", keyword)); 
+                        cmd.Parameters.AddWithValue("Unit_name", string.Format("%{0}%", keyword));
                     }
 
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();
                     da.Fill(ds);
- 
+
                     var coll = (from p in ds.Tables[0].AsEnumerable()
                                 select new
                                 {
@@ -62,7 +62,7 @@ namespace SlaughterHouseLib.Models
                                     ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
                                     ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
                                 }).ToList();
-                     
+
                     return coll;
                 }
             }
@@ -165,7 +165,7 @@ namespace SlaughterHouseLib.Models
                                 @create_by)";
                     var cmd = new MySqlCommand(sql, conn);
                     //cmd.Parameters.AddWithValue("Unit_code", Unit.UnitCode);
-                    cmd.Parameters.AddWithValue("Unit_name", Unit.UnitName); 
+                    cmd.Parameters.AddWithValue("Unit_name", Unit.UnitName);
                     cmd.Parameters.AddWithValue("active", Unit.Active);
                     cmd.Parameters.AddWithValue("create_by", Unit.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
@@ -192,7 +192,7 @@ namespace SlaughterHouseLib.Models
                                 WHERE Unit_code=@Unit_code";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("Unit_code", Unit.UnitCode);
-                    cmd.Parameters.AddWithValue("Unit_name", Unit.UnitName); 
+                    cmd.Parameters.AddWithValue("Unit_name", Unit.UnitName);
                     cmd.Parameters.AddWithValue("active", Unit.Active);
                     cmd.Parameters.AddWithValue("modified_by", Unit.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();

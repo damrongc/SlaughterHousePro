@@ -10,16 +10,16 @@ namespace SlaughterHouseServer
         public Form_ProductAddEdit()
         {
             InitializeComponent();
-            //KeyDown  
+            //KeyDown
             txtProductCode.KeyDown += TxtProductCode_KeyDown;
             txtProductName.KeyDown += TxtProductName_KeyDown;
             comboxProductGroup.KeyDown += ComboxProductGroup_KeyDown;
             comboxUnitQty.KeyDown += ComboxUnitQty_KeyDown;
-            comboxUnitWgh.KeyDown += ComboxUnitWgh_KeyDown; 
+            comboxUnitWgh.KeyDown += ComboxUnitWgh_KeyDown;
             txtMinWgh.KeyDown += TxtMinWgh_KeyDown;
             txtMaxWgh.KeyDown += TxtMaxWgh_KeyDown;
             txtStdYield.KeyDown += TxtStdYield_KeyDown;
-         
+
             //KeyPress
             txtMinWgh.KeyPress += TxtMinWgh_KeyPress;
             txtMaxWgh.KeyPress += TxtMaxWgh_KeyPress;
@@ -74,14 +74,14 @@ namespace SlaughterHouseServer
                 BtnSaveAndNew.Visible = false;
             }
         }
-       
+
 
         private void Form_ProductAddEdit_Load(object sender, System.EventArgs e)
         {
             FillProductGroup();
             FillUnitQtyWgh();
             if (!string.IsNullOrEmpty(this.productCode))
-            { 
+            {
                 var product = ProductController.GetProduct(this.productCode);
                 if (product != null)
                 {
@@ -90,7 +90,7 @@ namespace SlaughterHouseServer
                     txtProductName.Text = product.ProductName;
                     comboxProductGroup.SelectedValue = product.ProductGroup.ProductGroupCode;
                     comboxUnitQty.SelectedValue = product.UnitOfQty.UnitCode ;
-                    comboxUnitWgh.SelectedValue = product.UnitOfWgh.UnitCode ; 
+                    comboxUnitWgh.SelectedValue = product.UnitOfWgh.UnitCode ;
                     txtMinWgh.Text = product.MinWeight.ToString();
                     txtMaxWgh.Text = product.MaxWeight.ToString();
                     txtStdYield.Text = product.StdYield.ToString();
@@ -120,7 +120,7 @@ namespace SlaughterHouseServer
                 txtMaxWgh.Text = "0";
                 txtStdYield.Text = "0";
             }
-        } 
+        }
 
         private void TxtProductName_KeyDown(object sender, KeyEventArgs e)
         {
@@ -250,7 +250,7 @@ namespace SlaughterHouseServer
                         MinWeight = Convert.ToDecimal(txtMinWgh.Text),
                         MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
                         StdYield = Convert.ToDecimal(txtStdYield.Text),
-                        PackingSize = Convert.ToDecimal(txtPackingSize.Text), 
+                        PackingSize = Convert.ToDecimal(txtPackingSize.Text),
                         SaleUnitMethod = (rdbQtySale.Checked == true) ? "Q" : "W",
                         IssueUnitMethod = (rdbQtyIssue.Checked == true) ? "Q" : "W",
                         Active = chkActive.Checked,
@@ -272,7 +272,7 @@ namespace SlaughterHouseServer
         private void BtnSaveAndNew_Click(object sender, System.EventArgs e)
         {
             try
-            { 
+            {
                 var product = new Product
                 {
                     ProductCode = txtProductCode.Text.Trim(),
@@ -295,13 +295,13 @@ namespace SlaughterHouseServer
                     MinWeight = Convert.ToDecimal(txtMinWgh.Text),
                     MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
                     StdYield = Convert.ToDecimal(txtStdYield.Text),
-                    PackingSize = Convert.ToDecimal(txtPackingSize.Text), 
+                    PackingSize = Convert.ToDecimal(txtPackingSize.Text),
                     SaleUnitMethod = (rdbQtySale.Checked == true) ? "Q" : "W",
                     IssueUnitMethod = (rdbQtyIssue.Checked == true) ? "Q" : "W",
                     Active = chkActive.Checked,
                     CreateBy = "system",
                 };
-                ProductController.Insert(product); 
+                ProductController.Insert(product);
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 txtProductCode.Text = "";
@@ -322,7 +322,7 @@ namespace SlaughterHouseServer
             }
         }
         private void  FillProductGroup()
-        { 
+        {
             comboxProductGroup.DataSource = ProductGroupController.GetAllProudctGroups();
             comboxProductGroup.ValueMember = "ProductGroupCode";
             comboxProductGroup.DisplayMember = "ProductGroupName";

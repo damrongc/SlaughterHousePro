@@ -36,12 +36,15 @@ namespace SlaughterHouseServer
         public const string DAY = "DAY";
         public const string DRIVER = "DRIVER";
 
-        
+
         public const string DESCRIPTION = "DESCRIPTION";
         public const string DISC_AMT = "DISC_AMT";
         public const string DISC_AMT_BILL = "DISC_AMT_BILL";
+        public const string DISCOUNT_PER = "DISCOUNT_PER";
         public const string DOCUMENT_TYPE = "DOCUMENT_TYPE";
         public const string DOC_NO = "DOC_NO";
+        public const string CLASS_ID = "CLASS_ID";
+        public const string CLASS_NAME = "CLASS_NAME";
         public const string END_DATE = "END_DATE";
         public const string EST_NO = "EST_NO";
         public const string FACTORY_QTY = "FACTORY_QTY";
@@ -115,6 +118,7 @@ namespace SlaughterHouseServer
         public const string TRANSPORT_NO = "TRANSPORT_NO";
         public const string TRANSPORT_QTY = "TRANSPORT_QTY";
         public const string TRANSPORT_WGH = "TRANSPORT_WGH";
+        public const string TRUCK_ID = "TRUCK_ID";
         public const string TRUCK_NO = "TRUCK_NO";
         public const string UNIT_CODE = "UNIT_CODE";
         public const string UNIT_NAME = "UNIT_NAME";
@@ -132,22 +136,34 @@ namespace SlaughterHouseServer
         public const string VAT_AMT = "VAT_AMT";
         public const string VAT_RATE = "VAT_RATE";
         public const string WGH = "WGH";
+         
 
-        public const string BomCode = "BomCode";
-        public const string CustomerCode = "CustomerCode";
-        public const string CustomerName = "CustomerName";
-        public const string ProductCode = "ProductCode";
-        public const string ProductName = "ProductName";
-        public const string StartDate = "StartDate";
-        public const string EndDate = "EndDate";
-        public const string UnitPrice = "UnitPrice";
-        public const string Day = "Day";
         public const string Active = "Active";
+        public const string Address = "Address";
+        public const string BomCode = "BomCode";
+        public const string ClassId = "ClassId";
+        public const string ClassName = "ClassName";
+        public const string ContactNo = "ContactNo";
         public const string CreateAt = "CreateAt";
         public const string CreateBy = "CreateBy";
-
+        public const string CustomerCode = "CustomerCode";
+        public const string CustomerName = "CustomerName";
+        public const string Day = "Day";
+        public const string DiscountPer = "DiscountPer";
+        public const string EndDate = "EndDate";
         public const string ModifiedAt = "ModifiedAt";
         public const string ModifiedBy = "ModifiedBy";
+        public const string ProductCode = "ProductCode";
+        public const string ProductName = "ProductName";
+        public const string ShipTo = "ShipTo";
+        public const string StartDate = "StartDate";
+        public const string TaxId = "TaxId";
+        public const string UnitPrice = "UnitPrice";
+
+
+
+
+
 
 
     }

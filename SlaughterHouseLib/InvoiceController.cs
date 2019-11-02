@@ -20,7 +20,7 @@ namespace SlaughterHouseLib
                     conn.Open();
                     var sb = new StringBuilder();
                     sb.Append("SELECT a.invoice_No, a.Invoice_date,");
-                    sb.Append(" a.Ref_Document_No, a.customer_code, a.truck_no,");
+                    sb.Append(" a.Ref_Document_No, a.customer_code, t.truck_no,");
                     sb.Append(" a.disc_amt, a.Gross_Amt, a.disc_amt_bill,");
                     sb.Append(" a.Vat_Rate, a.Vat_Amt,");
                     sb.Append(" a.Net_Amt, a.Invoice_Flag,");
@@ -29,9 +29,10 @@ namespace SlaughterHouseLib
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by,");
                     sb.Append(" b.customer_name");
-                    sb.Append(" FROM invoice a,customer b");
+                    sb.Append(" FROM invoice a,customer b, truck t");
                     sb.Append(" WHERE a.customer_code =b.customer_code");
                     sb.Append(" AND a.invoice_date =@invoice_date");
+                    sb.Append(" AND t.truck_id = a.truck_id");
                     //sb.Append(" AND a.active = 1");
 
                     if (!string.IsNullOrEmpty(customerCode))
@@ -467,7 +468,7 @@ namespace SlaughterHouseLib
 	                            and c.customer_code = i.customer_code
 	                            and case when itm.sale_unit_method = 'Q' then p.unit_of_qty else unit_of_wgh end = u.unit_code 
 	                            and pl.plant_id = 1
-                                and i.truck_no = tk.truck_no
+                                and i.truck_id = tk.truck_id
 								";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("invoice_no", invoiceNo);
@@ -537,7 +538,7 @@ namespace SlaughterHouseLib
                                     WHERE
                                         t.ref_document_no = @order_no
                                             AND t.transport_no = ti.transport_no
-                                            AND ti.truck_no = trk.truck_no
+                                            AND ti.truck_id = trk.truck_id
                                             AND o.order_no = t.ref_document_no
                                             AND ti.product_code = p.product_code
                                             AND c.customer_code = o.customer_code

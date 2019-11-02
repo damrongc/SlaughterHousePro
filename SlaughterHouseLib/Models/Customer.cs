@@ -11,6 +11,7 @@ namespace SlaughterHouseLib.Models
     {
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
+        public CustomerClass CustomerClass { get; set; }
         public string Address { get; set; }
         public string ShipTo { get; set; }
         public string TaxId { get; set; }
@@ -32,14 +33,22 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT * FROM customer");
+                    sb.Append(" SELECT cv.customer_code, cv.customer_name, ");
+                    sb.Append(" cv.class_id, cls.class_name, ");
+                    sb.Append(" cv.address, cv.ship_to, ");
+                    sb.Append(" cv.tax_id, cv.contact_no, ");
+                    sb.Append(" cv.active, cv.create_at, ");
+                    sb.Append(" cv.create_by, cv.modified_at, cv.modified_by ");
+                    sb.Append(" FROM customer cv , customer_class cls");
+                    sb.Append(" WHERE 1=1 ");
+
                     if (!string.IsNullOrEmpty(keyword))
                     {
-                        sb.Append(" WHERE customer_code LIKE @customer_code");
+                        sb.Append(" and (customer_code LIKE @customer_code");
                         sb.Append(" OR customer_name LIKE @customer_name");
-                        sb.Append(" OR address LIKE @address");
+                        sb.Append(" OR address LIKE @address) ");
                     }
-
+                    sb.Append(" and cv.class_id = cls.class_id ");
                     sb.Append(" ORDER BY customer_code asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
 
@@ -55,12 +64,14 @@ namespace SlaughterHouseLib.Models
 
                     var ds = new DataSet();
                     da.Fill(ds);
- 
+
                     var coll = (from p in ds.Tables[0].AsEnumerable()
                                 select new
                                 {
                                     CustomerCode = p.Field<string>("customer_code"),
                                     CustomerName = p.Field<string>("customer_name"),
+                                    ClassId = p.Field<Int32>("class_id"),
+                                    ClassName = p.Field<string>("class_name"),
                                     Address = p.Field<string>("address"),
                                     ShipTo = p.Field<string>("ship_to"),
                                     TaxId = p.Field<string>("tax_id"),
@@ -144,7 +155,7 @@ namespace SlaughterHouseLib.Models
                             Address = ds.Tables[0].Rows[0]["address"].ToString(),
                             ShipTo = ds.Tables[0].Rows[0]["ship_to"].ToString(),
                             TaxId = ds.Tables[0].Rows[0]["tax_id"].ToString(),
-                            ContactNo = ds.Tables[0].Rows[0]["contact_no"].ToString(), 
+                            ContactNo = ds.Tables[0].Rows[0]["contact_no"].ToString(),
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
@@ -170,16 +181,17 @@ namespace SlaughterHouseLib.Models
                     conn.Open();
                     var sql = @"INSERT
                                 INTO customer (
-                                    customer_code, customer_name, address, 
+                                    customer_code, customer_name, class_id, address, 
                                     ship_to, tax_id, contact_no, 
                                     active, create_by 
                                 )
-                                VALUES (@customer_code, @customer_name, @address, 
+                                VALUES (@customer_code, @customer_name, @class_id, @address, 
                                     @ship_to, @tax_id, @contact_no, 
                                     @active, @create_by )";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customer.CustomerCode);
                     cmd.Parameters.AddWithValue("customer_name", customer.CustomerName);
+                    cmd.Parameters.AddWithValue("class_id", customer.CustomerClass.ClassId);
                     cmd.Parameters.AddWithValue("address", customer.Address);
                     cmd.Parameters.AddWithValue("ship_to", customer.ShipTo);
                     cmd.Parameters.AddWithValue("tax_id", customer.TaxId );
@@ -206,6 +218,7 @@ namespace SlaughterHouseLib.Models
                     var sql = @"UPDATE customer 
                                 set customer_code =@customer_code,
                                 customer_name=@customer_name,
+                                class_id=@class_id,
                                 address=@address,
                                 ship_to=@ship_to,
                                 tax_id=@tax_id,
@@ -217,6 +230,7 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customer.CustomerCode);
                     cmd.Parameters.AddWithValue("customer_name", customer.CustomerName);
+                    cmd.Parameters.AddWithValue("class_id", customer.CustomerClass.ClassId);
                     cmd.Parameters.AddWithValue("address", customer.Address);
                     cmd.Parameters.AddWithValue("ship_to", customer.ShipTo);
                     cmd.Parameters.AddWithValue("tax_id", customer.TaxId);
