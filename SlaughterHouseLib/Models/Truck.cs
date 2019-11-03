@@ -10,8 +10,10 @@ namespace SlaughterHouseLib.Models
 {
     public class Truck
     {
+        public Int32 TruckId { get; set; }
         public string TruckNo { get; set; }
         public string Driver { get; set; }
+        public TruckType TruckType { get; set; }
         public bool Active { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
@@ -30,7 +32,14 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT * FROM truck WHERE active=1");
+                    sb.Append("SELECT t.truck_id, t.truck_no, t.driver,   ");
+                    sb.Append("  t.truck_type_id, tt.truck_type_desc,  ");
+                    sb.Append("  t.active, t.create_at, t.create_by,   ");
+                    sb.Append("  t.modified_at, t.modified_by   ");
+                    sb.Append(" FROM truck t, truck_type tt ");
+                    sb.Append(" WHERE active=1 ");
+                    sb.Append(" and t.truck_type_id = tt.truck_type_id ");
+
                     sb.Append(" ORDER BY truck_no asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
 
@@ -43,8 +52,14 @@ namespace SlaughterHouseLib.Models
                     {
                         Trucks.Add(new Truck
                         {
+                            TruckId = Convert.ToInt32(item["truck_id"]),
                             TruckNo =  item["truck_no"].ToString(),
                             Driver = item["driver"].ToString(),
+                            TruckType = new TruckType
+                            {
+                                TruckTypeId = Convert.ToInt32(ds.Tables[0].Rows[0]["truck_type_id"]),
+                                TruckTypeDesc = ds.Tables[0].Rows[0]["truck_type_desc"].ToString(),
+                            }
                         });
                     }
 
@@ -66,18 +81,27 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("select * from truck");
+                    sb.Append("SELECT t.truck_id, t.truck_no, t.driver,   ");
+                    sb.Append("  t.truck_type_id, tt.truck_type_desc,  ");
+                    sb.Append("  t.active, t.create_at, t.create_by,   ");
+                    sb.Append("  t.modified_at, t.modified_by   ");
+                    sb.Append(" FROM truck t, truck_type tt ");
+                    sb.Append(" WHERE 1=1 ");
+                    sb.Append(" and t.truck_type_id = tt.truck_type_id ");
+
                     if (!string.IsNullOrEmpty(keyword))
                     {
-                        sb.Append(" where driver like @driver");
+                        sb.Append(" and ( t.truck_no like @truck_no ");
+                        sb.Append("  or t.driver like @driver )");
 
                     }
 
-                    sb.Append(" order by driver asc");
+                    sb.Append(" order by t.driver asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
 
                     if (!string.IsNullOrEmpty(keyword))
                     {
+                        cmd.Parameters.AddWithValue("truck_no", string.Format("%{0}%", keyword));
                         cmd.Parameters.AddWithValue("driver", string.Format("%{0}%", keyword));
                     }
 
@@ -104,8 +128,9 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append(" select truck_no from transport");
-                    sb.Append(" where ref_document_no = @ref_document_no");
+                    sb.Append(" select t.truck_no from transport tp, truck t ");
+                    sb.Append(" where tp.ref_document_no = @ref_document_no");
+                    sb.Append(" and tp.truck_id = t.truck_id");
 
                     var cmd = new MySqlCommand(sb.ToString(), conn);
                     cmd.Parameters.AddWithValue("ref_document_no", orderNo);
@@ -122,28 +147,31 @@ namespace SlaughterHouseLib.Models
 
                     return res;
                 }
-
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
-            public static Truck GetTruck(string truckNo)
+        public static Truck GetTruck(Int32 truckId)
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("select * from truck");
-                    sb.Append(" where truck_no = @truck_no");
+
+                    sb.Append("SELECT t.truck_id, t.truck_no, t.driver, ");
+                    sb.Append("  t.truck_type_id, tt.truck_type_desc, ");
+                    sb.Append("  t.active, t.create_at, t.create_by, ");
+                    sb.Append("  t.modified_at, t.modified_by ");
+                    sb.Append(" FROM truck t, truck_type tt ");
+                    sb.Append(" WHERE t.truck_type_id = tt.truck_type_id ");
+                    sb.Append(" and truck_id = @truck_id");
 
                     var cmd = new MySqlCommand(sb.ToString(), conn);
-                    cmd.Parameters.AddWithValue("truck_no", truckNo);
+                    cmd.Parameters.AddWithValue("truck_id", truckId);
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();
@@ -154,9 +182,14 @@ namespace SlaughterHouseLib.Models
                     {
                         return new Truck
                         {
-
+                            TruckId = Convert.ToInt32(ds.Tables[0].Rows[0]["truck_id"]),
                             TruckNo = ds.Tables[0].Rows[0]["truck_no"].ToString(),
                             Driver = ds.Tables[0].Rows[0]["driver"].ToString(),
+                            TruckType = new TruckType
+                            {
+                                TruckTypeId = Convert.ToInt32(ds.Tables[0].Rows[0]["truck_type_id"]),
+                                TruckTypeDesc = ds.Tables[0].Rows[0]["truck_type_desc"].ToString(),
+                            },
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
@@ -177,22 +210,24 @@ namespace SlaughterHouseLib.Models
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
                     var sql = @"INSERT INTO slaughterhouse.truck
                                 (truck_no,
                                 driver,
+                                truck_type_id,
                                 active, 
                                 create_by )
                                 VALUES (@truck_no,
                                 @driver,
+                                @truck_type_id,
                                 @active,
                                 @create_by)";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("truck_no", Truck.TruckNo);
                     cmd.Parameters.AddWithValue("driver", Truck.Driver);
+                    cmd.Parameters.AddWithValue("truck_type_id", Truck.TruckType.TruckTypeId);
                     cmd.Parameters.AddWithValue("active", Truck.Active);
                     cmd.Parameters.AddWithValue("create_by", Truck.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
@@ -213,14 +248,18 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sql = @"UPDATE truck
-                                SET driver=@driver,
+                                SET truck_no=@truck_no,
+                                driver=@driver,
+                                truck_type_id=@truck_type_id,
                                 active=@active,
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by
-                                WHERE truck_no=@truck_no";
+                                WHERE truck_id=@truck_id";
                     var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("truck_id", Truck.TruckId);
                     cmd.Parameters.AddWithValue("truck_no", Truck.TruckNo);
                     cmd.Parameters.AddWithValue("driver", Truck.Driver);
+                    cmd.Parameters.AddWithValue("truck_type_id", Truck.TruckType.TruckTypeId);
                     cmd.Parameters.AddWithValue("active", Truck.Active);
                     cmd.Parameters.AddWithValue("modified_by", Truck.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();

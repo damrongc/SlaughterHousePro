@@ -130,6 +130,7 @@ namespace SlaughterHouseServer
         public const string UNIT_OF_WGH = "UNIT_OF_WGH";
         public const string UNIT_PRICE = "UNIT_PRICE";
         public const string UNIT_DISC = "UNIT_DISC";
+        public const string DISC_PER = "DISC_PER";
         public const string UNIT_NET = "UNIT_NET";
         public const string UNLOAD_QTY = "UNLOAD_QTY";
         public const string UNLOAD_WGH = "UNLOAD_WGH";

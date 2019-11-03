@@ -152,6 +152,10 @@ namespace SlaughterHouseLib.Models
                         {
                             CustomerCode = ds.Tables[0].Rows[0]["customer_code"].ToString(),
                             CustomerName = ds.Tables[0].Rows[0]["customer_name"].ToString(),
+                            CustomerClass = new CustomerClass
+                            {
+                                ClassId  = Convert.ToInt32(ds.Tables[0].Rows[0]["class_id"]),
+                            },
                             Address = ds.Tables[0].Rows[0]["address"].ToString(),
                             ShipTo = ds.Tables[0].Rows[0]["ship_to"].ToString(),
                             TaxId = ds.Tables[0].Rows[0]["tax_id"].ToString(),

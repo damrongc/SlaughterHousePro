@@ -28,18 +28,18 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
- 
+
 
             LoadTruck();
         }
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-     
 
+            gv.Columns[ConstColumns.TRUCK_ID].Visible = false;
             gv.Columns[ConstColumns.TRUCK_NO].HeaderText = "ทะเบียนรถ";
             gv.Columns[ConstColumns.DRIVER].HeaderText = "ชื่อคนขับรถ";
-             
+
             gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
             gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
             gv.Columns[ConstColumns.CREATE_BY].HeaderText = "ผู้สร้าง";
@@ -48,14 +48,14 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข";
 
         }
-         
+
 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-                string truckNo = gv.Rows[e.RowIndex].Cells[ConstColumns.TRUCK_NO].Value.ToString();
+                Int32 truckId = Convert.ToInt32(gv.Rows[e.RowIndex].Cells[ConstColumns.TRUCK_ID].Value );
 
 
                 if ((senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn || senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn) && e.RowIndex >= 0)
@@ -65,7 +65,7 @@ namespace SlaughterHouseServer
                         case "Edit":
                             var frm = new Form_TruckAddEdit
                             {
-                                truckNo = truckNo
+                                truckId = truckId
                             };
                             if (frm.ShowDialog() == DialogResult.OK)
                             {
@@ -75,7 +75,7 @@ namespace SlaughterHouseServer
                         case "Print":
                             break;
                     }
-                } 
+                }
             }
             catch (Exception ex)
             {
@@ -107,7 +107,7 @@ namespace SlaughterHouseServer
             gv.DataSource = coll;
             //LoadItem("");
         }
-        
+
 
 
     }

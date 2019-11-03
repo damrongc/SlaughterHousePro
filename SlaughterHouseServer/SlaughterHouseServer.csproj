@@ -68,6 +68,18 @@
     <Compile Include="Form_ClosePeriod.Designer.cs">
       <DependentUpon>Form_ClosePeriod.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\Form_Breeder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Breeder.Designer.cs">
+      <DependentUpon>Form_Breeder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_BreederAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_BreederAddEdit.Designer.cs">
+      <DependentUpon>Form_BreederAddEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Masters\Form_CustomerClassDiscountAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -412,6 +424,12 @@
     </Compile>
     <EmbeddedResource Include="Form_ClosePeriod.resx">
       <DependentUpon>Form_ClosePeriod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Breeder.resx">
+      <DependentUpon>Form_Breeder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_BreederAddEdit.resx">
+      <DependentUpon>Form_BreederAddEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_CustomerClassDiscountAddEdit.resx">
       <DependentUpon>Form_CustomerClassDiscountAddEdit.cs</DependentUpon>

@@ -52,6 +52,7 @@ namespace SlaughterHouseServer
                 {
                     txtCustomerCode.Text = customer.CustomerCode;
                     txtCustomerCode.Enabled = false;
+                    comboxCustomerClass.SelectedValue = customer.CustomerClass.ClassId;
                     txtCustomerName.Text = customer.CustomerName;
                     txtAddress.Text = customer.Address;
                     txtShipTo.Text = customer.ShipTo;
@@ -210,7 +211,7 @@ namespace SlaughterHouseServer
                 txtTaxId.Text = "";
                 txtContactNo.Text = "";
                 chkActive.Checked = true;
-                LoadCustomerClass(); 
+                LoadCustomerClass();
             }
             catch (System.Exception ex)
             {

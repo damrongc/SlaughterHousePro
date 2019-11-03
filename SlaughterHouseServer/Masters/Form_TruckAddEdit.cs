@@ -9,7 +9,7 @@ namespace SlaughterHouseServer
 {
     public partial class Form_TruckAddEdit : Form
     {
-        public string truckNo { get; set; }
+        public Int32 truckId { get; set; }
         string productCode { get; set; }
         DataTable dtTruckItem;
 
@@ -20,6 +20,7 @@ namespace SlaughterHouseServer
         }
         private void UserSettingsComponent()
         {
+            LoadCustomerClass();
             this.Load += Form_Load;
             this.Shown += Form_Shown;
             txtDriver.KeyDown += TxtDriver_KeyDown;
@@ -33,8 +34,7 @@ namespace SlaughterHouseServer
         {
             LoadData();
         }
-
-
+         
         #region Event Focus, KeyDown
         private void TxtTruckNo_KeyDown(object sender, KeyEventArgs e)
         {
@@ -52,7 +52,7 @@ namespace SlaughterHouseServer
         }
         #endregion
 
-         
+
         #region Event Click
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
@@ -77,11 +77,11 @@ namespace SlaughterHouseServer
                 SaveTruck();
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                
+
                 txtDriver.Text = "";
                 txtTruckNo.Text = "";
                 txtTruckNo.Focus();
-                chkActive.Checked = true; 
+                chkActive.Checked = true;
             }
             catch (System.Exception ex)
             {
@@ -89,46 +89,62 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-         
-      
+
+
         #endregion
 
         private void LoadData()
-        {  
-            if (this.truckNo != null)
+        {
+            try
             {
-                Truck Truck = TruckController.GetTruck(this.truckNo);
-                txtTruckNo.Text = Truck.TruckNo.ToString();
-                txtDriver.Text = Truck.Driver.ToString();
-                BtnSaveAndNew.Visible = false;
-                txtTruckNo.Enabled = false;
+                if (this.truckId > 0)
+                {
+                    Truck Truck = TruckController.GetTruck(this.truckId);
+                    txtTruckId.Text = this.truckId.ToString(); ;
+                    txtTruckNo.Text = Truck.TruckNo.ToString();
+                    txtDriver.Text = Truck.Driver.ToString();
+                    comboxTruckType.SelectedValue = Truck.TruckType.TruckTypeId;
+                    BtnSaveAndNew.Visible = false;
+                    //txtTruckNo.Enabled = false;
+                }
             }
-            else
+            catch (Exception)
             {
 
             }
-             
         }
-       
+
+        private void LoadCustomerClass()
+        {
+            comboxTruckType.DataSource = TruckTypeController.GetAllTruckType();
+            comboxTruckType.ValueMember = "TruckTypeId";
+            comboxTruckType.DisplayMember = "TruckTypeDesc";
+        }
 
         private void SaveTruck()
         {
             try
-            { 
+            {
                 var truck = new Truck
                 {
                     TruckNo = txtTruckNo.Text.Trim(),
-                    Driver = txtDriver.Text.Trim(), 
+                    Driver = txtDriver.Text.Trim(),
+                    TruckType = new TruckType
+                    {
+                        TruckTypeId = (int)comboxTruckType.SelectedValue,
+                        TruckTypeDesc = comboxTruckType.Text,
+                    },
                     Active = chkActive.Checked,
                     CreateBy = "system",
                 };
-                
-                if (string.IsNullOrEmpty(this.truckNo))
+
+                if (this.truckId == null || this.truckId == 0)
                 {
                     TruckController.Insert(truck);
                 }
                 else
                 {
+                    truck.TruckId = Convert.ToInt32(txtTruckId.Text);
                     TruckController.Update(truck);
                 }
             }

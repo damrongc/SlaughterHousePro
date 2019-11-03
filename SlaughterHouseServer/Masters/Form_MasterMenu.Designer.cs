@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.plMenu = new System.Windows.Forms.Panel();
+            this.BtnBreeder = new System.Windows.Forms.Button();
             this.BtnTruck = new System.Windows.Forms.Button();
             this.BtnPriceList = new System.Windows.Forms.Button();
             this.BtnCustomer = new System.Windows.Forms.Button();
@@ -45,6 +46,7 @@
             // 
             this.plMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
             this.plMenu.Controls.Add(this.BtnBom);
+            this.plMenu.Controls.Add(this.BtnBreeder);
             this.plMenu.Controls.Add(this.BtnTruck);
             this.plMenu.Controls.Add(this.BtnPriceList);
             this.plMenu.Controls.Add(this.BtnCustomer);
@@ -57,6 +59,20 @@
             this.plMenu.Name = "plMenu";
             this.plMenu.Size = new System.Drawing.Size(165, 750);
             this.plMenu.TabIndex = 2;
+            // 
+            // BtnBreeder
+            // 
+            this.BtnBreeder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnBreeder.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnBreeder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBreeder.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnBreeder.ForeColor = System.Drawing.Color.White;
+            this.BtnBreeder.Location = new System.Drawing.Point(0, 350);
+            this.BtnBreeder.Name = "BtnBreeder";
+            this.BtnBreeder.Size = new System.Drawing.Size(165, 50);
+            this.BtnBreeder.TabIndex = 8;
+            this.BtnBreeder.Text = "สายพันธุ์";
+            this.BtnBreeder.UseVisualStyleBackColor = false;
             // 
             // BtnTruck
             // 
@@ -171,10 +187,10 @@
             this.BtnBom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnBom.Font = new System.Drawing.Font("Kanit", 14.25F);
             this.BtnBom.ForeColor = System.Drawing.Color.White;
-            this.BtnBom.Location = new System.Drawing.Point(0, 350);
+            this.BtnBom.Location = new System.Drawing.Point(0, 400);
             this.BtnBom.Name = "BtnBom";
             this.BtnBom.Size = new System.Drawing.Size(165, 50);
-            this.BtnBom.TabIndex = 8;
+            this.BtnBom.TabIndex = 9;
             this.BtnBom.Text = "Bom";
             this.BtnBom.UseVisualStyleBackColor = false;
             // 
@@ -204,6 +220,7 @@
         private System.Windows.Forms.Button BtnFarm;
         private System.Windows.Forms.Panel plContainer;
         private System.Windows.Forms.Button BtnTruck;
+        private System.Windows.Forms.Button BtnBreeder;
         private System.Windows.Forms.Button BtnBom;
     }
 }

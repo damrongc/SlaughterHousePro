@@ -176,6 +176,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.SEQ].Visible = false;
             gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
 
+            gv.Columns[ConstColumns.DISC_PER].Visible = false;
             gv.Columns[ConstColumns.UNIT_DISC].Visible = false;
             gv.Columns[ConstColumns.UNIT_NET].Visible = false;
             gv.Columns[ConstColumns.DISC_AMT].Visible = false;
@@ -297,6 +298,7 @@ namespace SlaughterHouseServer
                 if (dtInvoiceItem.Rows.Count > 0)
                 {
                     decimal unitPrice;
+                    //decimal discountPer;
                     Product product;
                     for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
                     {
@@ -333,9 +335,15 @@ namespace SlaughterHouseServer
         private void LoadTruck()
         {
             var coll = TruckController.GetAllTrucks();
+            //coll.Insert(0, new Truck
+            //{
+            //    TruckId = 0,
+            //    TruckNo = "--เลือก--"
+            //});
             cboTrucko.DisplayMember = "TruckNo";
-            cboTrucko.ValueMember = "TruckNo";
+            cboTrucko.ValueMember = "TruckId";
             cboTrucko.DataSource = coll;
+
         }
         private void LoadCustomer()
         {
@@ -509,7 +517,6 @@ namespace SlaughterHouseServer
             txtBeforeVat.Text = string.Format("{0:#,##0.00}", double.Parse(txtBeforeVat.Text));
             txtVatAmt.Text = string.Format("{0:#,##0.00}", double.Parse(txtVatAmt.Text));
             txtNetAmt.Text = string.Format("{0:#,##0.00}", double.Parse(txtNetAmt.Text));
-
         }
         private void PrintReport()
         {
