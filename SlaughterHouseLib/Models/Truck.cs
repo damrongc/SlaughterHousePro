@@ -37,7 +37,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append("  t.active, t.create_at, t.create_by,   ");
                     sb.Append("  t.modified_at, t.modified_by   ");
                     sb.Append(" FROM truck t, truck_type tt ");
-                    sb.Append(" WHERE active=1 ");
+                    sb.Append(" WHERE t.active=1 ");
                     sb.Append(" and t.truck_type_id = tt.truck_type_id ");
 
                     sb.Append(" ORDER BY truck_no asc");
