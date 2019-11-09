@@ -45,6 +45,37 @@ namespace SlaughterHouseLib.Models
             }
         }
 
+        public static string GetDocumentRunningFormat(string documentType, DateTime docDate)
+        {
+            try
+            { 
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sb = new StringBuilder();
+                    sb.Append("select running from document_generate");
+                    sb.Append(" where document_type = @document_type");
+
+                    var cmd = new MySqlCommand(sb.ToString(), conn);
+                    cmd.Parameters.AddWithValue("document_type", documentType);
+                    var running = cmd.ExecuteScalar().ToString();
+
+                    string yy = String.Format("{0:yy}", docDate);
+                    string mm = String.Format("{0:MM}", docDate);
+                    string dd = String.Format("{0:dd}", docDate);
+
+                    var documentNo = documentType + yy + mm + dd + running.PadLeft(4, '0');
+
+                    return documentNo;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public static string GetSwineLotNo(int plantId, DateTime productionDate, int queueNo)
         {
             try

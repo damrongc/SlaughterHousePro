@@ -23,6 +23,50 @@ namespace SlaughterHouseLib.Models
 
     public static class TruckController
     {
+        public static List<Truck> GetAllTrucks(int typeId)
+        {
+            try
+            {
+                List<Truck> Trucks = new List<Truck>();
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"SELECT  a.truck_id, a.truck_no,a.driver, b.truck_type_id, b.truck_type_desc
+                                    FROM truck a,truck_type b
+                                    WHERE a.truck_type_id =b.truck_type_id
+                                    AND a.truck_type_id=@truck_type_id
+                                    AND a.active=1
+                                    ORDER BY a.truck_no ASC";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("truck_type_id", typeId);
+                    var da = new MySqlDataAdapter(cmd);
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    foreach (DataRow item in ds.Tables[0].Rows)
+                    {
+                        Trucks.Add(new Truck
+                        {
+                            TruckId = Convert.ToInt32(item["truck_id"]),
+                            TruckNo = item["truck_no"].ToString(),
+                            TruckType = new TruckType
+                            {
+                                TruckTypeId = Convert.ToInt32(item["truck_type_id"]),
+                                TruckTypeDesc = item["truck_type_desc"].ToString(),
+                            },
+                            Driver = item["driver"].ToString(),
+                        });
+                    }
+                    return Trucks;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public static List<Truck> GetAllTrucks()
         {
             try
@@ -53,12 +97,12 @@ namespace SlaughterHouseLib.Models
                         Trucks.Add(new Truck
                         {
                             TruckId = Convert.ToInt32(item["truck_id"]),
-                            TruckNo =  item["truck_no"].ToString(),
+                            TruckNo = item["truck_no"].ToString(),
                             Driver = item["driver"].ToString(),
                             TruckType = new TruckType
                             {
-                                TruckTypeId = Convert.ToInt32(ds.Tables[0].Rows[0]["truck_type_id"]),
-                                TruckTypeDesc = ds.Tables[0].Rows[0]["truck_type_desc"].ToString(),
+                                TruckTypeId = Convert.ToInt32(item["truck_type_id"]),
+                                TruckTypeDesc = item["truck_type_desc"].ToString(),
                             }
                         });
                     }
@@ -72,7 +116,7 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static DataTable  GetAllTrucks(string keyword)
+        public static DataTable GetAllTrucks(string keyword)
         {
             try
             {

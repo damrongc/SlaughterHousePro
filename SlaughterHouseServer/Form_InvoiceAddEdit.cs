@@ -253,7 +253,7 @@ namespace SlaughterHouseServer
                     dtpInvoiceDate.Value = invoice.InvoiceDate;
                     txtOrderNo.Text = invoice.RefDocumentNo;
                     cboCustomer.SelectedValue = invoice.Customer.CustomerCode;
-                    cboTrucko.SelectedValue = invoice.Truck.TruckNo;
+                    cboTrucko.SelectedValue = invoice.Truck.TruckId;
                     txtComment.Text = invoice.Comments;
                     chkActive.Checked = invoice.Active;
                     txtGrossAmt.Text = invoice.GrossAmt.ToString();
@@ -334,7 +334,7 @@ namespace SlaughterHouseServer
         //();
         private void LoadTruck()
         {
-            var coll = TruckController.GetAllTrucks();
+            var coll = TruckController.GetAllTrucks(2);
             //coll.Insert(0, new Truck
             //{
             //    TruckId = 0,
@@ -398,7 +398,7 @@ namespace SlaughterHouseServer
                     },
                     Truck = new Truck
                     {
-                        TruckNo = cboTrucko.SelectedValue.ToString()
+                        TruckId = Convert.ToInt32(cboTrucko.SelectedValue)
                     },
                     GrossAmt = Convert.ToDecimal(txtGrossAmt.Text),
                     DiscAmt = 0,
@@ -479,6 +479,12 @@ namespace SlaughterHouseServer
                 if (Convert.ToDecimal(txtNetAmt.Text) <= 0)
                 {
                     throw new Exception($"ราคาสุทธิต้องมีค่ามากกวว่า 0");
+                }
+
+                //Check Truck No
+                if ( cboTrucko.SelectedValue  == null)
+                {
+                    throw new Exception($"โปรดดระบุทะเบียนรถ");
                 }
             }
             catch (Exception)

@@ -189,7 +189,7 @@ namespace SlaughterHouseLib
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
-                    order.OrderNo = DocumentGenerate.GetDocumentRunning("SO");
+                    order.OrderNo = DocumentGenerate.GetDocumentRunningFormat("SO", order.RequestDate);
                     conn.Open();
                     tr = conn.BeginTransaction();
                     var sql = @"INSERT INTO orders

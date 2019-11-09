@@ -120,6 +120,8 @@ namespace SlaughterHouseServer
         public const string TRANSPORT_WGH = "TRANSPORT_WGH";
         public const string TRUCK_ID = "TRUCK_ID";
         public const string TRUCK_NO = "TRUCK_NO";
+        public const string TRUCK_TYPE_ID = "TRUCK_TYPE_ID";
+        public const string TRUCK_TYPE_DESC = "TRUCK_TYPE_DESC";
         public const string UNIT_CODE = "UNIT_CODE";
         public const string UNIT_NAME = "UNIT_NAME";
         public const string UNIT_CODE_QTY = "UNIT_CODE_QTY";
@@ -137,7 +139,7 @@ namespace SlaughterHouseServer
         public const string VAT_AMT = "VAT_AMT";
         public const string VAT_RATE = "VAT_RATE";
         public const string WGH = "WGH";
-         
+
 
         public const string Active = "Active";
         public const string Address = "Address";
@@ -160,13 +162,15 @@ namespace SlaughterHouseServer
         public const string StartDate = "StartDate";
         public const string TaxId = "TaxId";
         public const string UnitPrice = "UnitPrice";
+        public const string TruckTypeId = "TruckTypeId";
+        public const string TruckTypeDesc = "TruckTypeDesc";
 
 
-
-
-
-
-
+        public const string PlantId = "PlantId";
+        public const string ProductionDate = "ProductionDate";
+        public const string PlantName = "PlantName"; 
+        public const string EstNo = "EstNo";
+        public const string LogoImage = "LogoImage"; 
     }
 
 
