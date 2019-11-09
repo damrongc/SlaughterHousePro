@@ -1,5 +1,7 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using SlaughterHouseLib;
+using SlaughterHouseLib.Models;
+using System;
 using System.Data;
 using System.Windows.Forms;
 namespace SlaughterHouseServer.Report
@@ -49,40 +51,46 @@ namespace SlaughterHouseServer.Report
 
         private void LoadReport()
         {
-            ReportDocument doc = new ReportDocument();
-            DataSet ds = InvoiceController.GetDataPrintInvoice(invoiceNo);
-            //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
-            //string reportName = "invoice";
-            //doc.Load(path + @"\invoice.rpt");
-            var reportPath = Application.StartupPath;
-            //ds.WriteXml(reportPath + @"\invoice.xml", XmlWriteMode.WriteSchema);
+            try
+            {
+                ReportDocument doc = new ReportDocument();
+                DataSet ds = InvoiceController.GetDataPrintInvoice(invoiceNo);
+                //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
+                //string reportName = "invoice";
+                //doc.Load(path + @"\invoice.rpt");
+                var reportPath = Application.StartupPath;
+                ds.WriteXml(reportPath + @"\invoice.xml", XmlWriteMode.WriteSchema);
 
-            doc.Load(reportPath + @"\Report\invoice.rpt");
-            doc.SetDataSource(ds);
-            rptViewer.ReportSource = doc;
-            rptViewer.Zoom(100);
-            rptViewer.RefreshReport();
+                doc.Load(reportPath + @"\Report\invoice.rpt");
+                doc.SetDataSource(ds);
+                rptViewer.ReportSource = doc;
+                rptViewer.Zoom(100);
+                rptViewer.RefreshReport();
 
+                ReportDocument docReceipt = new ReportDocument();
+                docReceipt.Load(reportPath + @"\Report\receipt.rpt");
+                docReceipt.SetDataSource(ds);
+                crystalReportViewer1.ReportSource = docReceipt;
+                crystalReportViewer1.Zoom(100);
+                crystalReportViewer1.RefreshReport();
 
+                int affRow = InvoiceController.UpdatePrintNo(invoiceNo);
+                //ReportDocument docTrabsport = new ReportDocument();
+                //DataSet dsTrabsport = InvoiceController.GetDataPrintTransport(orderNo);
 
-            ReportDocument docReceipt = new ReportDocument();
-            docReceipt.Load(reportPath + @"\Report\receipt.rpt");
-            docReceipt.SetDataSource(ds);
-            crystalReportViewer1.ReportSource = docReceipt;
-            crystalReportViewer1.Zoom(100);
-            crystalReportViewer1.RefreshReport();
+                ////dsTrabsport.WriteXml(reportPath + @"\transport.xml", XmlWriteMode.WriteSchema);
+                //docTrabsport.Load(reportPath + @"\Report\transport.rpt");
+                //docTrabsport.SetDataSource(dsTrabsport);
+                //rptViewerTransport.ReportSource = docTrabsport;
+                //rptViewerTransport.Zoom(100);
+                //rptViewerTransport.RefreshReport();
 
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-
-            //ReportDocument docTrabsport = new ReportDocument();
-            //DataSet dsTrabsport = InvoiceController.GetDataPrintTransport(orderNo);
-
-            ////dsTrabsport.WriteXml(reportPath + @"\transport.xml", XmlWriteMode.WriteSchema);
-            //docTrabsport.Load(reportPath + @"\Report\transport.rpt");
-            //docTrabsport.SetDataSource(dsTrabsport);
-            //rptViewerTransport.ReportSource = docTrabsport;
-            //rptViewerTransport.Zoom(100);
-            //rptViewerTransport.RefreshReport();
         }
     }
 }

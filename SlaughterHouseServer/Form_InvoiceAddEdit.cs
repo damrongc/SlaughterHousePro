@@ -54,6 +54,7 @@ namespace SlaughterHouseServer
             cboCustomer.Enabled = false;
             dtpInvoiceDate.Enabled = false;
             txtOrderNo.Enabled = false;
+            txtReceiptNo.Enabled = false;
             txtInvoiceNo.Enabled = false;
             txtGrossAmt.Enabled = false;
             txtBeforeVat.Enabled = false;
@@ -252,6 +253,8 @@ namespace SlaughterHouseServer
                     txtInvoiceNo.Text = invoice.InvoiceNo;
                     dtpInvoiceDate.Value = invoice.InvoiceDate;
                     txtOrderNo.Text = invoice.RefDocumentNo;
+                    txtReceiptNo.Text = invoice.ReceiptNo;
+                    lbPrintNo.Text = invoice.PrintNo.ToString();
                     cboCustomer.SelectedValue = invoice.Customer.CustomerCode;
                     cboTrucko.SelectedValue = invoice.Truck.TruckId;
                     txtComment.Text = invoice.Comments;
@@ -392,6 +395,7 @@ namespace SlaughterHouseServer
                     InvoiceNo = txtInvoiceNo.Text,
                     InvoiceDate = dtpInvoiceDate.Value,
                     RefDocumentNo = txtOrderNo.Text,
+                    ReceiptNo = txtReceiptNo.Text,
                     Customer = new Customer
                     {
                         CustomerCode = cboCustomer.SelectedValue.ToString()
@@ -407,6 +411,7 @@ namespace SlaughterHouseServer
                     VatAmt = Convert.ToDecimal(txtVatAmt.Text),
                     NetAmt = Convert.ToDecimal(txtNetAmt.Text),
                     Comments = txtComment.Text,
+                    PrintNo = Convert.ToInt32(lbPrintNo.Text),
                     InvoiceFlag = 0,
                     Active = chkActive.Checked,
                     CreateBy = "system",

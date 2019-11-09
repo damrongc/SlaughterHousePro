@@ -88,8 +88,10 @@ namespace SlaughterHouseServer
         public const string PRODUCT_GROUP_CODE = "PRODUCT_GROUP_CODE";
         public const string PRODUCT_GROUP_NAME = "PRODUCT_GROUP_NAME";
         public const string PRODUCT_NAME = "PRODUCT_NAME";
+        public const string PRINT_NO = "PRINT_NO";
         public const string QTY = "QTY";
         public const string QUEUE_NO = "QUEUE_NO";
+        public const string RECEIPT_NO = "RECEIPT_NO";
         public const string RECEIVE_DATE = "RECEIVE_DATE";
         public const string RECEIVE_FLAG = "RECEIVE_FLAG";
         public const string RECEIVE_NO = "RECEIVE_NO";
@@ -168,9 +170,9 @@ namespace SlaughterHouseServer
 
         public const string PlantId = "PlantId";
         public const string ProductionDate = "ProductionDate";
-        public const string PlantName = "PlantName"; 
+        public const string PlantName = "PlantName";
         public const string EstNo = "EstNo";
-        public const string LogoImage = "LogoImage"; 
+        public const string LogoImage = "LogoImage";
     }
 
 

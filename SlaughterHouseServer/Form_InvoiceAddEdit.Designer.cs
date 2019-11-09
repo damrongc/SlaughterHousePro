@@ -60,10 +60,15 @@
             this.BtnCancel = new System.Windows.Forms.Button();
             this.cboTrucko = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.txtReceiptNo = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lbPrintNo = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -122,7 +127,7 @@
             // cboCustomer
             // 
             this.cboCustomer.FormattingEnabled = true;
-            this.cboCustomer.Location = new System.Drawing.Point(662, 64);
+            this.cboCustomer.Location = new System.Drawing.Point(662, 106);
             this.cboCustomer.Name = "cboCustomer";
             this.cboCustomer.Size = new System.Drawing.Size(310, 37);
             this.cboCustomer.TabIndex = 36;
@@ -130,7 +135,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(601, 68);
+            this.label4.Location = new System.Drawing.Point(601, 110);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 29);
             this.label4.TabIndex = 35;
@@ -373,10 +378,50 @@
             this.label10.TabIndex = 64;
             this.label10.Text = "ทะเบียนรถ:";
             // 
+            // txtReceiptNo
+            // 
+            this.txtReceiptNo.Location = new System.Drawing.Point(662, 64);
+            this.txtReceiptNo.MaxLength = 10;
+            this.txtReceiptNo.Name = "txtReceiptNo";
+            this.txtReceiptNo.Size = new System.Drawing.Size(215, 36);
+            this.txtReceiptNo.TabIndex = 67;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(548, 68);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(112, 29);
+            this.label12.TabIndex = 66;
+            this.label12.Text = "เลขที่ใบเสร็จ:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(902, 59);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(49, 38);
+            this.pictureBox1.TabIndex = 68;
+            this.pictureBox1.TabStop = false;
+            // 
+            // lbPrintNo
+            // 
+            this.lbPrintNo.AutoSize = true;
+            this.lbPrintNo.Location = new System.Drawing.Point(936, 64);
+            this.lbPrintNo.Name = "lbPrintNo";
+            this.lbPrintNo.Size = new System.Drawing.Size(25, 29);
+            this.lbPrintNo.TabIndex = 69;
+            this.lbPrintNo.Text = "0";
+            // 
             // Form_InvoiceAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1029, 722);
+            this.Controls.Add(this.lbPrintNo);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.txtReceiptNo);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.cboTrucko);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.BtnCancel);
@@ -418,6 +463,7 @@
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,5 +502,9 @@
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.ComboBox cboTrucko;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtReceiptNo;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lbPrintNo;
     }
 }

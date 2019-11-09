@@ -9,6 +9,7 @@ namespace SlaughterHouseLib.Models
         public string InvoiceNo { get; set; }
         public DateTime InvoiceDate { get; set; }
         public string RefDocumentNo { get; set; }
+        public string ReceiptNo { get; set; }
         public Customer Customer { get; set; }
         public Truck Truck { get; set; }
         public decimal GrossAmt { get; set; }
@@ -17,6 +18,7 @@ namespace SlaughterHouseLib.Models
         public decimal VatRate { get; set; }
         public decimal VatAmt { get; set; }
         public decimal NetAmt { get; set; }
+        public int PrintNo { get; set; }
         public int InvoiceFlag { get; set; }
         public string Comments { get; set; }
         public bool Active { get; set; }

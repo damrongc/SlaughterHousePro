@@ -28,7 +28,8 @@ namespace SlaughterHouseLib
                     sb.Append(" a.active,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by,");
-                    sb.Append(" b.customer_name");
+                    sb.Append(" b.customer_name,");
+                    sb.Append(" a.print_no, a.receipt_no ");
                     sb.Append(" FROM invoice a,customer b, truck t");
                     sb.Append(" WHERE a.customer_code =b.customer_code");
                     sb.Append(" AND a.invoice_date =@invoice_date");
@@ -53,6 +54,7 @@ namespace SlaughterHouseLib
                                     INVOICE_NO = p.Field<string>("invoice_no"),
                                     INVOICE_DATE = p.Field<DateTime>("invoice_date"),
                                     REF_DOCUMENT_NO = p.Field<string>("Ref_Document_No"),
+                                    RECEIPT_NO = p.Field<string>("receipt_no"),
                                     CUSTOMER_NAME = p.Field<string>("customer_name"),
                                     TRUCK_NO = p.Field<string>("truck_no"),
                                     GROSS_AMT = p.Field<decimal>("gross_Amt"),
@@ -63,6 +65,7 @@ namespace SlaughterHouseLib
                                     NET_AMT = p.Field<decimal>("Net_Amt"),
                                     //InvoiceFlag = p.Field<int>("invoice_flag"),
                                     //Comments = p.Field<string>("comments"),
+                                    PRINT_NO = p.Field<int>("print_no"),
                                     ACTIVE = p.Field<bool>("active"),
                                     CREATE_AT = p.Field<DateTime>("create_at"),
                                 }).ToList();
@@ -85,6 +88,7 @@ namespace SlaughterHouseLib
                     var sql = @"SELECT invoice_no,
 								invoice_date,
 								ref_document_no,
+                                receipt_no,
 								customer_code,
                                 truck_id,
 								gross_amt,
@@ -95,6 +99,7 @@ namespace SlaughterHouseLib
 								net_amt,
 								invoice_flag,
 								comments,
+                                print_no,
 								active,
 								create_at
 								FROM invoice
@@ -114,6 +119,7 @@ namespace SlaughterHouseLib
                             InvoiceNo = (string)ds.Tables[0].Rows[0]["invoice_no"],
                             InvoiceDate = (DateTime)ds.Tables[0].Rows[0]["invoice_date"],
                             RefDocumentNo = (string)ds.Tables[0].Rows[0]["ref_document_no"],
+                            ReceiptNo = ds.Tables[0].Rows[0]["receipt_no"] == DBNull.Value ? "" : (string)ds.Tables[0].Rows[0]["receipt_no"],
                             Customer = new Customer
                             {
                                 CustomerCode = (string)ds.Tables[0].Rows[0]["customer_code"]
@@ -129,6 +135,7 @@ namespace SlaughterHouseLib
                             VatAmt = (decimal)ds.Tables[0].Rows[0]["vat_amt"],
                             NetAmt = (decimal)ds.Tables[0].Rows[0]["net_amt"],
                             Comments = (string)ds.Tables[0].Rows[0]["comments"],
+                            PrintNo = (int)ds.Tables[0].Rows[0]["print_no"],
                             InvoiceFlag = (int)ds.Tables[0].Rows[0]["invoice_flag"],
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
@@ -153,20 +160,22 @@ namespace SlaughterHouseLib
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
+
                     Invoice.InvoiceNo = DocumentGenerate.GetDocumentRunningFormat("IV", Invoice.InvoiceDate);
+                    Invoice.ReceiptNo = DocumentGenerate.GetDocumentRunningFormat("RC", Invoice.InvoiceDate);
                     conn.Open();
                     tr = conn.BeginTransaction();
                     var sql = @"INSERT
 								INTO invoice(
-									invoice_no, invoice_date, ref_document_no,
+									invoice_no, invoice_date, ref_document_no, receipt_no,
 									customer_code, truck_id, gross_amt, disc_amt, disc_amt_bill,
-									vat_rate, vat_amt, net_amt, 
+									vat_rate, vat_amt, net_amt,  
 									invoice_flag, comments, active,
 									create_by
 								)
-								VALUES( @invoice_no, @invoice_date, @ref_document_no,
+								VALUES( @invoice_no, @invoice_date, @ref_document_no, @receipt_no,
 									@customer_code, @truck_id, @gross_amt, @disc_amt, @disc_amt_bill,
-									@vat_rate, @vat_amt, @net_amt,
+									@vat_rate, @vat_amt, @net_amt,  
 									@invoice_flag, @comments, @active,
 									@create_by)";
                     var cmd = new MySqlCommand(sql, conn)
@@ -176,6 +185,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("invoice_no", Invoice.InvoiceNo);
                     cmd.Parameters.AddWithValue("invoice_date", Invoice.InvoiceDate);
                     cmd.Parameters.AddWithValue("ref_document_no", Invoice.RefDocumentNo);
+                    cmd.Parameters.AddWithValue("receipt_no", Invoice.ReceiptNo);
                     cmd.Parameters.AddWithValue("customer_code", Invoice.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("truck_id", Invoice.Truck.TruckId);
                     cmd.Parameters.AddWithValue("gross_amt", Invoice.GrossAmt);
@@ -186,6 +196,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("net_amt", Invoice.NetAmt);
                     cmd.Parameters.AddWithValue("invoice_flag", Invoice.InvoiceFlag);
                     cmd.Parameters.AddWithValue("comments", Invoice.Comments);
+                    //cmd.Parameters.AddWithValue("print_no", Invoice.PrintNo);
                     cmd.Parameters.AddWithValue("active", Invoice.Active);
                     cmd.Parameters.AddWithValue("create_by", Invoice.CreateBy);
                     cmd.ExecuteNonQuery();
@@ -234,7 +245,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 tr.Rollback();
                 throw;
@@ -261,6 +272,7 @@ namespace SlaughterHouseLib
                     sql = @"UPDATE invoice
 								SET invoice_date=@invoice_date,
 								ref_document_no=@ref_document_no,
+								receipt_no=@receipt_no,
 								customer_code=@customer_code,
 								truck_no=@truck_no, 
 								gross_amt=@gross_amt,
@@ -268,8 +280,7 @@ namespace SlaughterHouseLib
 								disc_amt_bill=@disc_amt_bill,
 								vat_rate=@vat_rate,
 								vat_amt=@vat_amt,
-								net_amt=@net_amt, 
-
+								net_amt=@net_amt,  
 								invoice_flag=@invoice_flag,
 								comments=@comments,
 								active=@active,
@@ -283,6 +294,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("invoice_no", Invoice.InvoiceNo);
                     cmd.Parameters.AddWithValue("invoice_date", Invoice.InvoiceDate);
                     cmd.Parameters.AddWithValue("ref_document_no", Invoice.RefDocumentNo);
+                    cmd.Parameters.AddWithValue("receipt_no", Invoice.ReceiptNo);
                     cmd.Parameters.AddWithValue("customer_code", Invoice.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("truck_no", Invoice.Truck.TruckNo);
                     cmd.Parameters.AddWithValue("gross_amt", Invoice.GrossAmt);
@@ -291,6 +303,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("vat_rate", Invoice.VatRate);
                     cmd.Parameters.AddWithValue("vat_amt", Invoice.VatAmt);
                     cmd.Parameters.AddWithValue("net_amt", Invoice.NetAmt);
+                    //cmd.Parameters.AddWithValue("print_no", Invoice.PrintNo);
                     cmd.Parameters.AddWithValue("invoice_flag", Invoice.InvoiceFlag);
                     cmd.Parameters.AddWithValue("comments", Invoice.Comments);
                     cmd.Parameters.AddWithValue("active", Invoice.Active);
@@ -404,6 +417,36 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+        public static int UpdatePrintNo(string invoiceNo)
+        {
+            MySqlTransaction tr = null;
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    tr = conn.BeginTransaction();
+                    var sql = "";
+
+                    sql = @"UPDATE invoice
+								SET  print_no=print_no+1
+								WHERE invoice_no=@invoice_no";
+                    var cmd = new MySqlCommand(sql, conn)
+                    {
+                        Transaction = tr
+                    };
+                    cmd.Parameters.AddWithValue("invoice_no", invoiceNo);
+                    var affRow = cmd.ExecuteNonQuery();
+
+                    tr.Commit();
+                    return affRow;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public static string GetInvoiceNoByOrderNo(string orderNo)
         {
             try
@@ -446,7 +489,7 @@ namespace SlaughterHouseLib
                     conn.Open();
                     var sql = @"select i.invoice_no,
 	                            i.invoice_date,	i.ref_document_no, i.customer_code,
-	                            i.disc_amt,
+	                            i.disc_amt, i.receipt_no,
 	                            i.gross_amt as gross_amt_hd,
 	                            i.disc_amt_bill as discount_hd,
 	                            i.gross_amt - i.disc_amt_bill as before_vat,
@@ -460,7 +503,8 @@ namespace SlaughterHouseLib
 	                            itm.gross_amt, c.customer_name, c.address, 
 	                            c.ship_to, c.tax_id, c.contact_no,
                                 tk.truck_no, tk.driver,
-	                            pl.plant_name, pl.address as plant_address, i.active
+	                            pl.plant_name, pl.address as plant_address, i.active,
+                                pl.logo_image
                             from invoice i , invoice_item itm, 	product p, customer c, unit_of_measurement u, plant pl, truck tk
                             where i.invoice_no = @invoice_no
 	                            and i.invoice_no = itm.invoice_no
@@ -536,15 +580,15 @@ namespace SlaughterHouseLib
                                         unit_of_measurement u,
                                         plant pl
                                     WHERE
-                                        t.ref_document_no = @order_no
-                                            AND t.transport_no = ti.transport_no
-                                            AND ti.truck_id = trk.truck_id
-                                            AND o.order_no = t.ref_document_no
-                                            AND ti.product_code = p.product_code
-                                            AND c.customer_code = o.customer_code
-                                            AND CASE
-                                            WHEN p.sale_unit_method = 'Q' THEN p.unit_of_qty ELSE p.unit_of_wgh END = u.unit_code
-                                            AND pl.plant_id = 1
+                                          t.ref_document_no = @order_no
+                                        AND t.transport_no = ti.transport_no
+                                        AND ti.truck_id = trk.truck_id
+                                        AND o.order_no = t.ref_document_no
+                                        AND ti.product_code = p.product_code
+                                        AND c.customer_code = o.customer_code
+                                        AND CASE
+                                        WHEN p.sale_unit_method = 'Q' THEN p.unit_of_qty ELSE p.unit_of_wgh END = u.unit_code
+                                        AND pl.plant_id = 1
 								";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("order_no", orderNo);
