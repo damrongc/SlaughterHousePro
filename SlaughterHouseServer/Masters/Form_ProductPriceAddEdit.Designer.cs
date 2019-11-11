@@ -54,7 +54,7 @@
             // txtDay
             // 
             this.txtDay.Location = new System.Drawing.Point(182, 106);
-            this.txtDay.MaxLength = 10;
+            this.txtDay.MaxLength = 4;
             this.txtDay.Name = "txtDay";
             this.txtDay.Size = new System.Drawing.Size(215, 36);
             this.txtDay.TabIndex = 1;

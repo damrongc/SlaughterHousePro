@@ -445,20 +445,21 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"SELECT receive_date,transport_doc_no,truck_no
-                                ,queue_no,lot_no,farm_qty,farm_wgh
-                                ,factory_qty
-                                ,factory_wgh
-                                ,(select sum(receive_qty) from receive_item where receive_item.receive_no =a.receive_no and product_code ='P002') as carcass_qty
-                                ,(select sum(receive_wgh) from receive_item where receive_item.receive_no =a.receive_no and product_code ='P002') as carcass_wgh
-                                ,b.farm_name
-                                ,c.breeder_name
-                                ,(SELECT std_yield from product WHERE product_code ='P002') as std_yield
-                                ,0.0 as yeild
-                                FROM receives a,farm b,breeder c
+                    var sql = @"SELECT receive_date,transport_doc_no, t.truck_no
+                                    ,queue_no,lot_no,farm_qty,farm_wgh
+                                    ,factory_qty
+                                    ,factory_wgh
+                                    ,(select sum(receive_qty) from receive_item where receive_item.receive_no =a.receive_no and product_code ='P002') as carcass_qty
+                                    ,(select sum(receive_wgh) from receive_item where receive_item.receive_no =a.receive_no and product_code ='P002') as carcass_wgh
+                                    ,b.farm_name
+                                    ,c.breeder_name
+                                    ,(SELECT std_yield from product WHERE product_code ='P002') as std_yield
+                                    ,0.0 as yeild
+                                FROM receives a,farm b,breeder c, truck t
                                 WHERE receive_date =@receive_date
-                                AND a.farm_code =b.farm_code
-                                AND a.breeder_code =c.breeder_code";
+                                    AND a.farm_code =b.farm_code
+                                    AND a.truck_id =t.truck_id
+                                    AND a.breeder_code =c.breeder_code";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("receive_date", receiveDate.ToString("yyyy-MM-dd"));
 

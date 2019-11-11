@@ -19,9 +19,13 @@ namespace SlaughterHouseServer
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
-            //KeyDown  
+            //KeyDown
             dtpStartDate.KeyDown += DtpStartDate_KeyDown;
             txtDay.KeyDown += TxtDay_KeyDown;
+
+            txtDay.KeyPress += TxtDay_KeyPress;
+            txtUnitPrice.KeyPress += TxtUnitPrice_KeyPress;
+
 
             //Click
             btnLovProduct.Click += BtnLovProduct_Click;
@@ -31,7 +35,7 @@ namespace SlaughterHouseServer
             dtpStartDate.Focus();
         }
         private void Form_Load(object sender, System.EventArgs e)
-        { 
+        {
             LoadData();
         }
         private void DtpStartDate_KeyDown(object sender, KeyEventArgs e)
@@ -48,8 +52,28 @@ namespace SlaughterHouseServer
                 txtUnitPrice.Focus();
             }
         }
+        private void TxtDay_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
 
-        #region Event Focus, KeyDown 
+        private void TxtUnitPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                if (e.KeyChar != 46)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+        }
+
+        #region Event Focus, KeyDown
         private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -121,14 +145,14 @@ namespace SlaughterHouseServer
 
 
         #endregion
- 
+
 
         private void LoadData()
         {
             if (String.IsNullOrEmpty(this.productCode) == false)
             {
                 btnLovProduct.Enabled = false;
-                txtProductName.Enabled = false; 
+                txtProductName.Enabled = false;
             }
             ProductPrice productPrice = ProductPriceController.GetProductPrice(this.productCode, this.startDate);
             if (productPrice != null)
@@ -138,7 +162,7 @@ namespace SlaughterHouseServer
                 txtProductName.Text = productPrice.Product.ProductName;
                 txtUnitPrice.Text = productPrice.UnitPrice.ToString();
                 txtDay.Text = productPrice.Day.ToString();
-                
+
                 dtpStartDate.Value = productPrice.StartDate;
                 dtpStartDate.Enabled = false;
                 BtnSaveAndNew.Visible = false;
@@ -149,7 +173,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-                
+
                 var productPrice = new ProductPrice
                 {
                     Product = new Product
@@ -163,7 +187,7 @@ namespace SlaughterHouseServer
                     UnitPrice = Convert.ToDecimal(txtUnitPrice.Text),
                     CreateBy = "system",
                     ModifiedBy = "system"
-                }; 
+                };
                 if (btnLovProduct.Enabled == true && txtProductName.Enabled == true)
                 {
                     ProductPriceController.Insert(productPrice);

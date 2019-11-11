@@ -15,7 +15,6 @@ namespace SlaughterHouseServer
         }
         private void UserSettingsComponent()
         {
-
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
@@ -23,7 +22,8 @@ namespace SlaughterHouseServer
             dtpStartDate.KeyDown += DtpStartDate_KeyDown;
             txtDay.KeyDown += TxtDay_KeyDown;
 
-
+            txtDay.KeyPress += TxtDay_KeyPress;
+            txtDiscountPer.KeyPress += TxtDiscountPer_KeyPress;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
@@ -49,6 +49,27 @@ namespace SlaughterHouseServer
             }
         }
 
+        private void TxtDay_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void TxtDiscountPer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                if (e.KeyChar != 46)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+        }
+
         #region Event Focus, KeyDown
         private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
@@ -70,6 +91,12 @@ namespace SlaughterHouseServer
         {
             try
             {
+                if (Convert.ToDecimal(txtDiscountPer.Text)> 100)
+                {
+                    MessageBox.Show("ส่วนลดต้องไม่เกิน 100%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 SaveProductPrice();
                 MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
