@@ -36,7 +36,7 @@ namespace SlaughterHouseServer
         public const string DAY = "DAY";
         public const string DRIVER = "DRIVER";
 
-        
+
         public const string DESCRIPTION = "DESCRIPTION";
         public const string DISC_AMT = "DISC_AMT";
         public const string DISC_AMT_BILL = "DISC_AMT_BILL";
@@ -116,6 +116,7 @@ namespace SlaughterHouseServer
         public const string TRANSPORT_QTY = "TRANSPORT_QTY";
         public const string TRANSPORT_WGH = "TRANSPORT_WGH";
         public const string TRUCK_NO = "TRUCK_NO";
+        public const string TRUCK_TYPE = "TRUCK_TYPE";
         public const string UNIT_CODE = "UNIT_CODE";
         public const string UNIT_NAME = "UNIT_NAME";
         public const string UNIT_CODE_QTY = "UNIT_CODE_QTY";

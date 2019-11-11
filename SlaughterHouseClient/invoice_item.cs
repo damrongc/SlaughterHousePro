@@ -30,8 +30,9 @@ namespace SlaughterHouseClient
         public decimal unit_disc { get; set; }
         public decimal unit_net { get; set; }
         public Nullable<decimal> disc_amt { get; set; }
+        public Nullable<decimal> disc_per { get; set; }
     
-        public virtual invoice invoice { get; set; }
         public virtual product product { get; set; }
+        public virtual invoice invoice { get; set; }
     }
 }

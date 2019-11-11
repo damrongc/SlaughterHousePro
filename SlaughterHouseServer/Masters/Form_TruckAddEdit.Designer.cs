@@ -36,12 +36,14 @@
             this.BtnSaveAndNew = new System.Windows.Forms.Button();
             this.txtDriver = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cboTruckType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(83, 25);
+            this.label1.Location = new System.Drawing.Point(84, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 29);
             this.label1.TabIndex = 0;
@@ -64,7 +66,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(314, 161);
+            this.BtnSave.Location = new System.Drawing.Point(364, 211);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -77,7 +79,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(182, 106);
+            this.chkActive.Location = new System.Drawing.Point(182, 155);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 46;
@@ -93,7 +95,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(105, 161);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(155, 211);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -113,16 +115,35 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(72, 67);
+            this.label3.Location = new System.Drawing.Point(73, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(103, 29);
             this.label3.TabIndex = 48;
             this.label3.Text = "ชื่อคนขับรถ";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(83, 112);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 29);
+            this.label2.TabIndex = 50;
+            this.label2.Text = "ประเภทรถ";
+            // 
+            // cboTruckType
+            // 
+            this.cboTruckType.FormattingEnabled = true;
+            this.cboTruckType.Location = new System.Drawing.Point(182, 112);
+            this.cboTruckType.Name = "cboTruckType";
+            this.cboTruckType.Size = new System.Drawing.Size(347, 37);
+            this.cboTruckType.TabIndex = 52;
+            // 
             // Form_TruckAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(591, 231);
+            this.ClientSize = new System.Drawing.Size(591, 261);
+            this.Controls.Add(this.cboTruckType);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtDriver);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.chkActive);
@@ -151,5 +172,7 @@
         private System.Windows.Forms.Button BtnSaveAndNew;
         private System.Windows.Forms.TextBox txtDriver;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cboTruckType;
     }
 }

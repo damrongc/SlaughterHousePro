@@ -45,14 +45,17 @@ namespace SlaughterHouseClient
         public virtual DbSet<bom_item> bom_item { get; set; }
         public virtual DbSet<receive_item> receive_item { get; set; }
         public virtual DbSet<customer_price> customer_price { get; set; }
-        public virtual DbSet<invoice> invoices { get; set; }
         public virtual DbSet<product_slip> product_slip { get; set; }
         public virtual DbSet<product_slip_item> product_slip_item { get; set; }
         public virtual DbSet<stock> stocks { get; set; }
-        public virtual DbSet<truck> trucks { get; set; }
         public virtual DbSet<product> products { get; set; }
-        public virtual DbSet<transport> transports { get; set; }
         public virtual DbSet<receive> receives { get; set; }
+        public virtual DbSet<truck> trucks { get; set; }
+        public virtual DbSet<truck_type> truck_type { get; set; }
+        public virtual DbSet<customer_class> customer_class { get; set; }
+        public virtual DbSet<customer_class_discount> customer_class_discount { get; set; }
+        public virtual DbSet<invoice> invoices { get; set; }
+        public virtual DbSet<transport> transports { get; set; }
         public virtual DbSet<transport_item> transport_item { get; set; }
     }
 }

@@ -19,5 +19,6 @@ namespace SlaughterHouseClient
         public System.DateTime create_at { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }
         public string description { get; set; }
+        public string current_year { get; set; }
     }
 }

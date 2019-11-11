@@ -41,11 +41,12 @@ namespace SlaughterHouseClient.Issued
 
                 var trucks = db.trucks.Where(p => p.active == true).Select(p => new
                 {
+                    p.truck_id,
                     p.truck_no,
                 }).ToList();
 
                 cboTruckNo.DisplayMember = "truck_no";
-                cboTruckNo.ValueMember = "truck_no";
+                cboTruckNo.ValueMember = "truck_id";
                 cboTruckNo.DataSource = trucks;
 
                 lblMessage.Text = Constants.CHOOSE_QUEUE;
@@ -126,7 +127,7 @@ namespace SlaughterHouseClient.Issued
                     var transport = db.transports.Where(p => p.ref_document_no == order.order_no).SingleOrDefault();
                     if (transport != null)
                     {
-                        cboTruckNo.SelectedValue = transport.truck_no;
+                        cboTruckNo.SelectedValue = transport.truck_id;
                         cboTruckNo.Enabled = false;
                     }
 
@@ -184,7 +185,7 @@ namespace SlaughterHouseClient.Issued
                 var createBy = Helper.GetLocalIPAddress();
                 var orderNo = lblOrderNo.Text;
                 var barcodeNo = txtBarcodeNo.Text.ToLong();
-                var truckNo = cboTruckNo.SelectedValue.ToString();
+                var truckId = cboTruckNo.SelectedValue.ToString().ToInt16();
 
                 string stockNo = "";
                 int stockItem = 0;
@@ -278,7 +279,7 @@ namespace SlaughterHouseClient.Issued
                                 {
                                     transport_no = transportNo,
                                     transport_date = DateTime.Today,
-                                    truck_no = truckNo,
+                                    truck_id = truckId,
                                     ref_document_no = orderNo,
                                     transport_flag = 0,
                                     create_at = DateTime.Now,
@@ -304,7 +305,7 @@ namespace SlaughterHouseClient.Issued
                                 transport_wgh = barcode.wgh,
                                 stock_no = stockNo,
                                 lot_no = barcode.lot_no,
-                                truck_no = truckNo,
+                                truck_id = truckId,
                                 barcode_no = barcode.barcode_no,
                                 bom_code = orderItems.bom_code,
                                 create_at = DateTime.Now,

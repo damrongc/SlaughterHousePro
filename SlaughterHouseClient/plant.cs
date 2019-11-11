@@ -19,5 +19,6 @@ namespace SlaughterHouseClient
         public string plant_name { get; set; }
         public string address { get; set; }
         public string est_no { get; set; }
+        public byte[] logo_image { get; set; }
     }
 }

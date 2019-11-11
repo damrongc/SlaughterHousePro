@@ -24,6 +24,7 @@ namespace SlaughterHouseClient
         public System.DateTime invoice_date { get; set; }
         public string ref_document_no { get; set; }
         public string customer_code { get; set; }
+        public int truck_id { get; set; }
         public decimal gross_amt { get; set; }
         public decimal disc_amt { get; set; }
         public decimal disc_amt_bill { get; set; }
@@ -37,9 +38,9 @@ namespace SlaughterHouseClient
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
-        public string truck_no { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<invoice_item> invoice_item { get; set; }
+        public virtual truck truck { get; set; }
     }
 }

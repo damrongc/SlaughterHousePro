@@ -42,14 +42,15 @@ namespace SlaughterHouseClient.Issued
                 var plant = db.plants.Find(plantID);
                 lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
 
-                //var trucks = db.trucks.Where(p => p.active == true).Select(p => new
-                //{
-                //    p.truck_no,
-                //}).ToList();
+                var trucks = db.trucks.Where(p => p.truck_type_id == 2 && p.active == true).Select(p => new
+                {
+                    p.truck_id,
+                    p.truck_no,
+                }).ToList();
 
-                //cboTruckNo.DisplayMember = "truck_no";
-                //cboTruckNo.ValueMember = "truck_no";
-                //cboTruckNo.DataSource = trucks;
+                cboTruckNo.DisplayMember = "truck_no";
+                cboTruckNo.ValueMember = "truck_id";
+                cboTruckNo.DataSource = trucks;
 
                 lblMessage.Text = Constants.CHOOSE_QUEUE;
                 btnView.Enabled = false;
@@ -61,8 +62,6 @@ namespace SlaughterHouseClient.Issued
             if (e.KeyCode == Keys.Enter)
                 ProcessData();
         }
-
-
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -125,7 +124,7 @@ namespace SlaughterHouseClient.Issued
                     var transport = db.transports.Where(p => p.ref_document_no == order.order_no).SingleOrDefault();
                     if (transport != null)
                     {
-                        lblTruckNo.Text = transport.truck_no;
+                        cboTruckNo.SelectedValue = transport.truck_id;
                         lblMessage.Text = Constants.BARCODE_WAITING;
                     }
                     else
@@ -182,11 +181,11 @@ namespace SlaughterHouseClient.Issued
 
                     throw new Exception("กรุณาเลือกเอกสาร SO!");
                 }
-                if (string.IsNullOrEmpty(lblTruckNo.Text))
-                {
+                //if (string.IsNullOrEmpty(lblTruckNo.Text))
+                //{
 
-                    throw new Exception("กรุณาเลือกทะเบียนรถ!");
-                }
+                //    throw new Exception("กรุณาเลือกทะเบียนรถ!");
+                //}
                 lblMessage.Text = Constants.PROCESSING;
 
                 SaveData();
@@ -218,7 +217,7 @@ namespace SlaughterHouseClient.Issued
                 var createBy = Helper.GetLocalIPAddress();
                 var orderNo = lblOrderNo.Text;
                 var barcodeNo = txtBarcodeNo.Text.ToLong();
-                var truckNo = lblTruckNo.Text;
+                var truckId = cboTruckNo.SelectedValue.ToString().ToInt16();
 
                 string stockNo = "";
                 int stockItem = 0;
@@ -332,7 +331,7 @@ namespace SlaughterHouseClient.Issued
                                 {
                                     transport_no = transportNo,
                                     transport_date = DateTime.Today,
-                                    truck_no = truckNo,
+                                    truck_id = truckId,
                                     ref_document_no = orderNo,
                                     transport_flag = 0,
                                     create_at = DateTime.Now,
@@ -359,7 +358,7 @@ namespace SlaughterHouseClient.Issued
                                 transport_wgh = barcode.wgh,
                                 stock_no = stockNo,
                                 lot_no = barcode.lot_no,
-                                truck_no = truckNo,
+                                truck_id = truckId,
                                 barcode_no = barcode.barcode_no,
                                 bom_code = orderItems.bom_code,
                                 create_at = DateTime.Now,
@@ -393,17 +392,10 @@ namespace SlaughterHouseClient.Issued
                             throw;
                         }
                     }
-
-
-
                 }
-
-
-
             }
             catch (Exception)
             {
-
                 throw;
             }
 
@@ -417,27 +409,6 @@ namespace SlaughterHouseClient.Issued
             txtBarcodeNo.Focus();
         }
 
-        private void btnTruckNo_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var frm = new Form_LookupTruck();
-
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    lblTruckNo.Text = frm.TruckNo;
-                    txtBarcodeNo.Focus();
-                    lblMessage.Text = Constants.BARCODE_WAITING;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
-                toastNotification.Show();
-            }
-        }
-
         private void btnView_Click(object sender, EventArgs e)
         {
             var frm = new Form_Transport
@@ -447,8 +418,6 @@ namespace SlaughterHouseClient.Issued
             frm.ShowDialog();
             LoadOrder();
         }
-
-
         //private bool CloseJob()
         //{
         //    try

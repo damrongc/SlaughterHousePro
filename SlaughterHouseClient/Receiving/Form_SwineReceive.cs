@@ -20,7 +20,7 @@ namespace SlaughterHouseClient.Receiving
         product product;
         private string sexFlag = "F";
         private bool isStart = false;
-        private bool isTare = false;
+        //private bool isTare = false;
         private bool isZero = true;
         bool lockWeight = false;
         string color = "#1C6BBC";
@@ -84,8 +84,6 @@ namespace SlaughterHouseClient.Receiving
                 plSimulator.Visible = true;
             else
                 plSimulator.Visible = false;
-            //plSimulator.Visible = false;
-
         }
 
         void LoadSetting()
@@ -110,9 +108,10 @@ namespace SlaughterHouseClient.Receiving
                 InputData = serialPort1.ReadExisting();
             if (InputData != String.Empty)
             {
-                this.BeginInvoke(new SetTextCallback(DisplayWeightJadever), new object[] { InputData });
+                this.BeginInvoke(new SetTextCallback(DisplayWeightIWX), new object[] { InputData });
             }
         }
+
         private void DisplayWeightJadever(string DataInvoke)
         {
             if (lockWeight == false)
@@ -147,13 +146,9 @@ namespace SlaughterHouseClient.Receiving
         {
             if (lockWeight == false)
             {
-
                 double num = 0.0;
-
-
                 if (DataInvoke.Length == 40)
                 {
-
                     //int scaleDecimal = DataInvoke.Substring(20, 2).ToInt32();
                     //int scaleDivision = (int)Math.Round(Math.Pow(10.0, unchecked(scaleDecimal)));
 
@@ -186,11 +181,11 @@ namespace SlaughterHouseClient.Receiving
 
                         if (stateOfScale == 0)
                         {
-                            num = DataInvoke.Substring(16, 6).ToDouble() / 1000;
+                            num = DataInvoke.Substring(16, 6).ToDouble() / 100;
                         }
                         else if (stateOfScale == 1)
                         {
-                            num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / 1000;
+                            num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / 100;
                         }
 
                         lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
@@ -261,7 +256,7 @@ namespace SlaughterHouseClient.Receiving
                 lblReceiveNo.Text = receive.receive_no;
                 lblFarm.Text = receive.farm.farm_name;
                 lblBreeder.Text = receive.breeder.breeder_name;
-                lblTruckNo.Text = receive.truck_no;
+                lblTruckNo.Text = receive.truck.truck_no;
                 lblQueueNo.Text = receive.queue_no.ToString();
                 lblFarmQty.Text = receive.farm_qty.ToComma();
                 lblFactoryQty.Text = receive.factory_qty.ToComma();
@@ -517,7 +512,7 @@ namespace SlaughterHouseClient.Receiving
 
         private void BtnTareWeight_Click(object sender, EventArgs e)
         {
-            isTare = true;
+            //isTare = true;
         }
 
         private void TimerMinWeight_Tick(object sender, EventArgs e)
@@ -535,7 +530,8 @@ namespace SlaughterHouseClient.Receiving
         private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             double scaleWeight = lblWeight.Text.ToDouble();
-            if (scaleWeight <= 0)
+            double minWeight = lblMinWeight.Text.ToDouble();
+            if (scaleWeight <= minWeight)
             {
                 lblMessage.Text = Constants.WEIGHT_WAITING;
                 isZero = true;

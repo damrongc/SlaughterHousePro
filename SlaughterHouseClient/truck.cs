@@ -14,12 +14,33 @@ namespace SlaughterHouseClient
     
     public partial class truck
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public truck()
+        {
+            this.receives = new HashSet<receive>();
+            this.invoices = new HashSet<invoice>();
+            this.transports = new HashSet<transport>();
+            this.transport_item = new HashSet<transport_item>();
+        }
+    
+        public int truck_id { get; set; }
         public string truck_no { get; set; }
         public string driver { get; set; }
+        public int truck_type_id { get; set; }
         public Nullable<bool> active { get; set; }
         public Nullable<System.DateTime> create_at { get; set; }
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<receive> receives { get; set; }
+        public virtual truck_type truck_type { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<invoice> invoices { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<transport> transports { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<transport_item> transport_item { get; set; }
     }
 }

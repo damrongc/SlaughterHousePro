@@ -171,7 +171,7 @@
             this.btnOrderNo.TabIndex = 7;
             this.btnOrderNo.Text = "เลือกข้อมูล";
             this.btnOrderNo.UseVisualStyleBackColor = false;
-            this.btnOrderNo.Click += new System.EventHandler(this.btnOrderNo_Click);
+            this.btnOrderNo.Click += new System.EventHandler(this.BtnOrderNo_Click);
             // 
             // label5
             // 
@@ -450,7 +450,7 @@
             this.btnAcceptWeight.TabIndex = 77;
             this.btnAcceptWeight.Text = "ตกลง";
             this.btnAcceptWeight.UseVisualStyleBackColor = false;
-            this.btnAcceptWeight.Click += new System.EventHandler(this.btnAcceptWeight_Click);
+            this.btnAcceptWeight.Click += new System.EventHandler(this.BtnAcceptWeight_Click);
             // 
             // btnStop
             // 
@@ -482,13 +482,13 @@
             // 
             // backgroundWorker1
             // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
             // 
             // timerMinWeight
             // 
             this.timerMinWeight.Interval = 1000;
-            this.timerMinWeight.Tick += new System.EventHandler(this.timerMinWeight_Tick);
+            this.timerMinWeight.Tick += new System.EventHandler(this.TimerMinWeight_Tick);
             // 
             // lblStable
             // 
@@ -563,7 +563,7 @@
             this.btnShowTruck.TabIndex = 83;
             this.btnShowTruck.UseVisualStyleBackColor = false;
             this.btnShowTruck.Visible = false;
-            this.btnShowTruck.Click += new System.EventHandler(this.btnShowTruck_Click);
+            this.btnShowTruck.Click += new System.EventHandler(this.BtnShowTruck_Click);
             // 
             // dragControl1
             // 

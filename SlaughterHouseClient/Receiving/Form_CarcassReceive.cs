@@ -224,7 +224,7 @@ namespace SlaughterHouseClient.Receiving
                 lblReceiveNo.Text = receive.receive_no;
                 lblFarm.Text = receive.farm.farm_name;
                 lblBreeder.Text = receive.breeder.breeder_name;
-                lblTruckNo.Text = receive.truck_no;
+                lblTruckNo.Text = receive.truck.truck_no;
                 lblQueueNo.Text = receive.queue_no.ToString();
                 lblLotNo.Text = receive.lot_no;
 
@@ -366,7 +366,8 @@ namespace SlaughterHouseClient.Receiving
         private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             double scaleWeight = lblWeight.Text.ToDouble();
-            if (scaleWeight <= 0)
+            double minWeight = lblMinWeight.Text.ToDouble();
+            if (scaleWeight <= minWeight)
             {
                 lblMessage.Text = Constants.WEIGHT_WAITING;
                 isZero = true;

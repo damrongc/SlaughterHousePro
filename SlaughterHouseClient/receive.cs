@@ -23,7 +23,7 @@ namespace SlaughterHouseClient
         public string receive_no { get; set; }
         public System.DateTime receive_date { get; set; }
         public string transport_doc_no { get; set; }
-        public string truck_no { get; set; }
+        public int truck_id { get; set; }
         public string farm_code { get; set; }
         public string coop_no { get; set; }
         public int breeder_code { get; set; }
@@ -43,5 +43,6 @@ namespace SlaughterHouseClient
         public virtual farm farm { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<receive_item> receive_item { get; set; }
+        public virtual truck truck { get; set; }
     }
 }

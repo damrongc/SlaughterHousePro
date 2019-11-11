@@ -28,18 +28,17 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
- 
-
             LoadTruck();
         }
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-     
+
 
             gv.Columns[ConstColumns.TRUCK_NO].HeaderText = "ทะเบียนรถ";
             gv.Columns[ConstColumns.DRIVER].HeaderText = "ชื่อคนขับรถ";
-             
+            gv.Columns[ConstColumns.TRUCK_TYPE].HeaderText = "ประเภทรถ";
+
             gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
             gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
             gv.Columns[ConstColumns.CREATE_BY].HeaderText = "ผู้สร้าง";
@@ -48,7 +47,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข";
 
         }
-         
+
 
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -75,7 +74,7 @@ namespace SlaughterHouseServer
                         case "Print":
                             break;
                     }
-                } 
+                }
             }
             catch (Exception ex)
             {
@@ -107,7 +106,7 @@ namespace SlaughterHouseServer
             gv.DataSource = coll;
             //LoadItem("");
         }
-        
+
 
 
     }

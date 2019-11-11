@@ -31,6 +31,7 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
+            LoadType();
             LoadData();
         }
 
@@ -52,7 +53,6 @@ namespace SlaughterHouseServer
         }
         #endregion
 
-         
         #region Event Click
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
@@ -77,11 +77,11 @@ namespace SlaughterHouseServer
                 SaveTruck();
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                
+
                 txtDriver.Text = "";
                 txtTruckNo.Text = "";
                 txtTruckNo.Focus();
-                chkActive.Checked = true; 
+                chkActive.Checked = true;
             }
             catch (System.Exception ex)
             {
@@ -89,40 +89,44 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-         
-      
+
+
         #endregion
 
         private void LoadData()
-        {  
+        {
             if (this.truckNo != null)
             {
                 Truck Truck = TruckController.GetTruck(this.truckNo);
                 txtTruckNo.Text = Truck.TruckNo.ToString();
+                cboTruckType.SelectedValue = Truck.TruckTypeId;
                 txtDriver.Text = Truck.Driver.ToString();
                 BtnSaveAndNew.Visible = false;
                 txtTruckNo.Enabled = false;
             }
-            else
-            {
 
-            }
-             
+
         }
-       
-
+        private void LoadType()
+        {
+            var coll = TruckTypeController.GetAllTruckTypes();
+            cboTruckType.DisplayMember = "TruckTypeDesc";
+            cboTruckType.ValueMember = "TruckTypeId";
+            cboTruckType.DataSource = coll;
+        }
         private void SaveTruck()
         {
             try
-            { 
+            {
                 var truck = new Truck
                 {
                     TruckNo = txtTruckNo.Text.Trim(),
-                    Driver = txtDriver.Text.Trim(), 
+                    TruckTypeId = cboTruckType.SelectedValue.ToString().ToInt16(),
+                    Driver = txtDriver.Text.Trim(),
                     Active = chkActive.Checked,
                     CreateBy = "system",
                 };
-                
+
                 if (string.IsNullOrEmpty(this.truckNo))
                 {
                     TruckController.Insert(truck);
