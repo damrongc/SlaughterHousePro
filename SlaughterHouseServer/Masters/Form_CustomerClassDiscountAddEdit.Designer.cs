@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseServer
 {
-    partial class Form_ProductPriceAddEdit
+    partial class Form_CustomerClassDiscountAddEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ProductPriceAddEdit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_CustomerClassDiscountAddEdit));
             this.label1 = new System.Windows.Forms.Label();
             this.txtDay = new System.Windows.Forms.TextBox();
             this.BtnSave = new System.Windows.Forms.Button();
@@ -36,10 +36,10 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtUnitPrice = new System.Windows.Forms.TextBox();
+            this.txtDiscountPer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnLovProduct = new System.Windows.Forms.Button();
-            this.txtProductName = new System.Windows.Forms.TextBox();
+            this.comboxCustomerClass = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -116,61 +116,53 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(117, 24);
+            this.label4.Location = new System.Drawing.Point(75, 24);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 29);
+            this.label4.Size = new System.Drawing.Size(101, 29);
             this.label4.TabIndex = 35;
-            this.label4.Text = "สินค้า:";
+            this.label4.Text = "กลุ่มมลูกค้า";
             // 
-            // txtUnitPrice
+            // txtDiscountPer
             // 
-            this.txtUnitPrice.Location = new System.Drawing.Point(182, 148);
-            this.txtUnitPrice.MaxLength = 10;
-            this.txtUnitPrice.Name = "txtUnitPrice";
-            this.txtUnitPrice.Size = new System.Drawing.Size(215, 36);
-            this.txtUnitPrice.TabIndex = 39;
+            this.txtDiscountPer.Location = new System.Drawing.Point(182, 148);
+            this.txtDiscountPer.MaxLength = 5;
+            this.txtDiscountPer.Name = "txtDiscountPer";
+            this.txtDiscountPer.Size = new System.Drawing.Size(215, 36);
+            this.txtDiscountPer.TabIndex = 39;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(122, 151);
+            this.label2.Location = new System.Drawing.Point(105, 152);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 29);
+            this.label2.Size = new System.Drawing.Size(71, 29);
             this.label2.TabIndex = 38;
-            this.label2.Text = "ราคา:";
+            this.label2.Text = "ส่วนลด:";
             // 
-            // btnLovProduct
+            // comboxCustomerClass
             // 
-            this.btnLovProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
-            this.btnLovProduct.FlatAppearance.BorderSize = 0;
-            this.btnLovProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLovProduct.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLovProduct.ForeColor = System.Drawing.Color.White;
-            this.btnLovProduct.Image = ((System.Drawing.Image)(resources.GetObject("btnLovProduct.Image")));
-            this.btnLovProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLovProduct.Location = new System.Drawing.Point(629, 21);
-            this.btnLovProduct.Name = "btnLovProduct";
-            this.btnLovProduct.Size = new System.Drawing.Size(39, 36);
-            this.btnLovProduct.TabIndex = 52;
-            this.btnLovProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLovProduct.UseVisualStyleBackColor = false;
+            this.comboxCustomerClass.FormattingEnabled = true;
+            this.comboxCustomerClass.Location = new System.Drawing.Point(182, 21);
+            this.comboxCustomerClass.Name = "comboxCustomerClass";
+            this.comboxCustomerClass.Size = new System.Drawing.Size(215, 37);
+            this.comboxCustomerClass.TabIndex = 52;
             // 
-            // txtProductName
+            // label3
             // 
-            this.txtProductName.Location = new System.Drawing.Point(182, 21);
-            this.txtProductName.MaxLength = 10;
-            this.txtProductName.Name = "txtProductName";
-            this.txtProductName.ReadOnly = true;
-            this.txtProductName.Size = new System.Drawing.Size(447, 36);
-            this.txtProductName.TabIndex = 51;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(403, 152);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(27, 29);
+            this.label3.TabIndex = 53;
+            this.label3.Text = "%";
             // 
-            // Form_ProductPriceAddEdit
+            // Form_CustomerClassDiscountAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(730, 267);
-            this.Controls.Add(this.btnLovProduct);
-            this.Controls.Add(this.txtProductName);
-            this.Controls.Add(this.txtUnitPrice);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.comboxCustomerClass);
+            this.Controls.Add(this.txtDiscountPer);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dtpStartDate);
@@ -183,9 +175,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_ProductPriceAddEdit";
+            this.Name = "Form_CustomerClassDiscountAddEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form_ProductPriceAddEdit";
+            this.Text = "Form_ClassDiscountAddEdit";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,9 +192,9 @@
         private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtUnitPrice;
+        private System.Windows.Forms.TextBox txtDiscountPer;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnLovProduct;
-        private System.Windows.Forms.TextBox txtProductName;
+        private System.Windows.Forms.ComboBox comboxCustomerClass;
+        private System.Windows.Forms.Label label3;
     }
 }

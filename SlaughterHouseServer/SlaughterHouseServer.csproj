@@ -68,11 +68,41 @@
     <Compile Include="Form_ClosePeriod.Designer.cs">
       <DependentUpon>Form_ClosePeriod.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\Form_Breeder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Breeder.Designer.cs">
+      <DependentUpon>Form_Breeder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_BreederAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_BreederAddEdit.Designer.cs">
+      <DependentUpon>Form_BreederAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerClassDiscountAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerClassDiscountAddEdit.Designer.cs">
+      <DependentUpon>Form_CustomerClassDiscountAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_Plant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Plant.Designer.cs">
+      <DependentUpon>Form_Plant.cs</DependentUpon>
+    </Compile>
     <Compile Include="Masters\Form_Truck.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Masters\Form_Truck.Designer.cs">
       <DependentUpon>Form_Truck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_PlantAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_PlantAddEdit.Designer.cs">
+      <DependentUpon>Form_PlantAddEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Masters\Form_TruckAddEdit.cs">
       <SubType>Form</SubType>
@@ -407,8 +437,23 @@
     <EmbeddedResource Include="Form_ClosePeriod.resx">
       <DependentUpon>Form_ClosePeriod.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Breeder.resx">
+      <DependentUpon>Form_Breeder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_BreederAddEdit.resx">
+      <DependentUpon>Form_BreederAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_CustomerClassDiscountAddEdit.resx">
+      <DependentUpon>Form_CustomerClassDiscountAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Plant.resx">
+      <DependentUpon>Form_Plant.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_Truck.resx">
       <DependentUpon>Form_Truck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_PlantAddEdit.resx">
+      <DependentUpon>Form_PlantAddEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_TruckAddEdit.resx">
       <DependentUpon>Form_TruckAddEdit.cs</DependentUpon>
@@ -608,6 +653,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="Report\productSlip.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\receipt.rpt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Report\swineyield.rpt" />

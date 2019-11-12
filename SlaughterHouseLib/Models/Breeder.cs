@@ -17,8 +17,6 @@ namespace SlaughterHouseLib.Models
         public DateTime CreateAt { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
-
-
     }
 
     public static class BreederController
@@ -68,11 +66,10 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static object GetAllBreeders(string keyword)
+        public static DataTable GetAllBreeders(string keyword)
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -98,16 +95,16 @@ namespace SlaughterHouseLib.Models
                     var ds = new DataSet();
                     da.Fill(ds);
 
-                    var coll = (from p in ds.Tables[0].AsEnumerable()
-                                select new
-                                {
-                                    BreederCode = p.Field<int>("breeder_code"),
-                                    BreederName = p.Field<string>("breeder_name"),
-                                    Active = p.Field<bool>("active"),
-                                    CreateAt = p.Field<DateTime>("create_at"),
-                                }).ToList();
+                    //var coll = (from p in ds.Tables[0].AsEnumerable()
+                    //            select new
+                    //            {
+                    //                BreederCode = p.Field<int>("breeder_code"),
+                    //                BreederName = p.Field<string>("breeder_name"),
+                    //                Active = p.Field<bool>("active"),
+                    //                CreateAt = p.Field<DateTime>("create_at"),
+                    //            }).ToList();
 
-                    return coll;
+                    return ds.Tables[0];
                 }
             }
             catch (Exception)

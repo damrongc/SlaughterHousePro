@@ -189,7 +189,7 @@ namespace SlaughterHouseLib
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
-                    order.OrderNo = DocumentGenerate.GetDocumentRunning("SO");
+                    order.OrderNo = DocumentGenerate.GetDocumentRunningFormat("SO", order.RequestDate);
                     conn.Open();
                     tr = conn.BeginTransaction();
                     var sql = @"INSERT INTO orders
@@ -563,11 +563,12 @@ namespace SlaughterHouseLib
 							p.sale_unit_method, 
 							case when a.bom_code = 0 then sum(a.unload_qty) else CEILING(sum(a.unload_qty) / sum(bmt.mutiply_qty)) end as qty,
 							sum(a.unload_wgh) as wgh,
-								0 as unit_price, 
-                                0 as unit_disc,
-                                0 as unit_net,
-                                0 as disc_amt,
-								0 as gross_amt
+								0.00 as unit_price, 
+                                0.00 as disc_per,
+                                0.00 as unit_disc,
+                                0.00 as unit_net,
+                                0.00 as disc_amt,
+								0.00 as gross_amt
 						FROM
 							orders_item a,
 							product p, 
@@ -644,5 +645,5 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
-    } 
+    }
 }

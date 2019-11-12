@@ -9,7 +9,7 @@ namespace SlaughterHouseServer
 {
     public partial class Form_TruckAddEdit : Form
     {
-        public string truckNo { get; set; }
+        public Int32 truckId { get; set; }
         string productCode { get; set; }
         DataTable dtTruckItem;
 
@@ -20,6 +20,7 @@ namespace SlaughterHouseServer
         }
         private void UserSettingsComponent()
         {
+            LoadCustomerClass();
             this.Load += Form_Load;
             this.Shown += Form_Shown;
             txtDriver.KeyDown += TxtDriver_KeyDown;
@@ -34,8 +35,7 @@ namespace SlaughterHouseServer
             LoadType();
             LoadData();
         }
-
-
+         
         #region Event Focus, KeyDown
         private void TxtTruckNo_KeyDown(object sender, KeyEventArgs e)
         {
@@ -53,6 +53,10 @@ namespace SlaughterHouseServer
         }
         #endregion
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
         #region Event Click
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
@@ -95,6 +99,7 @@ namespace SlaughterHouseServer
 
         private void LoadData()
         {
+<<<<<<< HEAD
             if (this.truckNo != null)
             {
                 Truck Truck = TruckController.GetTruck(this.truckNo);
@@ -105,6 +110,33 @@ namespace SlaughterHouseServer
                 txtTruckNo.Enabled = false;
             }
 
+=======
+            try
+            {
+                if (this.truckId > 0)
+                {
+                    Truck Truck = TruckController.GetTruck(this.truckId);
+                    txtTruckId.Text = this.truckId.ToString(); ;
+                    txtTruckNo.Text = Truck.TruckNo.ToString();
+                    txtDriver.Text = Truck.Driver.ToString();
+                    comboxTruckType.SelectedValue = Truck.TruckType.TruckTypeId;
+                    BtnSaveAndNew.Visible = false;
+                    //txtTruckNo.Enabled = false;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void LoadCustomerClass()
+        {
+            comboxTruckType.DataSource = TruckTypeController.GetAllTruckType();
+            comboxTruckType.ValueMember = "TruckTypeId";
+            comboxTruckType.DisplayMember = "TruckTypeDesc";
+        }
+>>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
 
         }
         private void LoadType()
@@ -121,18 +153,32 @@ namespace SlaughterHouseServer
                 var truck = new Truck
                 {
                     TruckNo = txtTruckNo.Text.Trim(),
+<<<<<<< HEAD
                     TruckTypeId = cboTruckType.SelectedValue.ToString().ToInt16(),
                     Driver = txtDriver.Text.Trim(),
+=======
+                    Driver = txtDriver.Text.Trim(),
+                    TruckType = new TruckType
+                    {
+                        TruckTypeId = (int)comboxTruckType.SelectedValue,
+                        TruckTypeDesc = comboxTruckType.Text,
+                    },
+>>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
                     Active = chkActive.Checked,
                     CreateBy = "system",
                 };
 
+<<<<<<< HEAD
                 if (string.IsNullOrEmpty(this.truckNo))
+=======
+                if (this.truckId == null || this.truckId == 0)
+>>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
                 {
                     TruckController.Insert(truck);
                 }
                 else
                 {
+                    truck.TruckId = Convert.ToInt32(txtTruckId.Text);
                     TruckController.Update(truck);
                 }
             }

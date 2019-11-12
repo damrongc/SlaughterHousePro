@@ -44,12 +44,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtContactNo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.comboxCustomerClass = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(107, 25);
+            this.label1.Location = new System.Drawing.Point(105, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 29);
             this.label1.TabIndex = 0;
@@ -84,13 +86,13 @@
             this.txtAddress.Location = new System.Drawing.Point(200, 106);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(529, 133);
+            this.txtAddress.Size = new System.Drawing.Size(529, 116);
             this.txtAddress.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(143, 106);
+            this.label3.Location = new System.Drawing.Point(148, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 29);
             this.label3.TabIndex = 4;
@@ -101,7 +103,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(200, 382);
+            this.chkActive.Location = new System.Drawing.Point(200, 484);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 6;
@@ -117,7 +119,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(514, 432);
+            this.BtnSave.Location = new System.Drawing.Point(514, 534);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -134,7 +136,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(200, 432);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(200, 534);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -145,16 +147,17 @@
             // 
             // txtShipTo
             // 
-            this.txtShipTo.Location = new System.Drawing.Point(200, 247);
+            this.txtShipTo.Location = new System.Drawing.Point(200, 228);
             this.txtShipTo.MaxLength = 80;
+            this.txtShipTo.Multiline = true;
             this.txtShipTo.Name = "txtShipTo";
-            this.txtShipTo.Size = new System.Drawing.Size(529, 36);
+            this.txtShipTo.Size = new System.Drawing.Size(529, 116);
             this.txtShipTo.TabIndex = 27;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(65, 250);
+            this.label4.Location = new System.Drawing.Point(61, 230);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(133, 29);
             this.label4.TabIndex = 26;
@@ -162,7 +165,7 @@
             // 
             // txtTaxId
             // 
-            this.txtTaxId.Location = new System.Drawing.Point(200, 290);
+            this.txtTaxId.Location = new System.Drawing.Point(200, 351);
             this.txtTaxId.MaxLength = 13;
             this.txtTaxId.Name = "txtTaxId";
             this.txtTaxId.Size = new System.Drawing.Size(215, 36);
@@ -171,7 +174,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 293);
+            this.label5.Location = new System.Drawing.Point(12, 354);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(182, 29);
             this.label5.TabIndex = 28;
@@ -179,7 +182,7 @@
             // 
             // txtContactNo
             // 
-            this.txtContactNo.Location = new System.Drawing.Point(200, 334);
+            this.txtContactNo.Location = new System.Drawing.Point(200, 395);
             this.txtContactNo.MaxLength = 10;
             this.txtContactNo.Name = "txtContactNo";
             this.txtContactNo.Size = new System.Drawing.Size(215, 36);
@@ -188,16 +191,35 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(99, 337);
+            this.label6.Location = new System.Drawing.Point(95, 398);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(99, 29);
             this.label6.TabIndex = 30;
             this.label6.Text = "เบอร์ติดต่อ";
             // 
+            // comboxCustomerClass
+            // 
+            this.comboxCustomerClass.FormattingEnabled = true;
+            this.comboxCustomerClass.Location = new System.Drawing.Point(200, 439);
+            this.comboxCustomerClass.Name = "comboxCustomerClass";
+            this.comboxCustomerClass.Size = new System.Drawing.Size(215, 37);
+            this.comboxCustomerClass.TabIndex = 54;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(93, 442);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(101, 29);
+            this.label7.TabIndex = 53;
+            this.label7.Text = "กลุ่มมลูกค้า";
+            // 
             // Form_CustomerAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(761, 488);
+            this.ClientSize = new System.Drawing.Size(755, 607);
+            this.Controls.Add(this.comboxCustomerClass);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.txtContactNo);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtTaxId);
@@ -242,5 +264,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtContactNo;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox comboxCustomerClass;
+        private System.Windows.Forms.Label label7;
     }
 }

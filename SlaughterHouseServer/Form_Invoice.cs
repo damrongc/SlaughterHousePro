@@ -14,7 +14,6 @@ namespace SlaughterHouseServer
             InitializeComponent();
             UserSettingsComponent();
         }
-
         private void UserSettingsComponent()
         {
             //BtnAdd.Click += BtnAdd_Click;
@@ -42,18 +41,19 @@ namespace SlaughterHouseServer
             LoadCustomer();
             LoadInvoice();
         }
-
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             gv.Columns[ConstColumns.INVOICE_NO].HeaderText = "เลขที่ใบแจ้งหนี้";
             gv.Columns[ConstColumns.INVOICE_DATE].HeaderText = "วันที่แจ้งหนี้";
             gv.Columns[ConstColumns.REF_DOCUMENT_NO].HeaderText = "เลขที่ใบสั่งขาย";
+            gv.Columns[ConstColumns.RECEIPT_NO].HeaderText = "เลขที่ใบเสร็จ";
             gv.Columns[ConstColumns.CUSTOMER_NAME].HeaderText = "ลูกค้า";
             gv.Columns[ConstColumns.TRUCK_NO].HeaderText = "ทะเบียนรถ";
             gv.Columns[ConstColumns.GROSS_AMT].HeaderText = "ราคา";
             gv.Columns[ConstColumns.DISC_AMT_BILL].HeaderText = "ส่วนลด";
             gv.Columns[ConstColumns.VAT_AMT].HeaderText = "ภาษี";
             gv.Columns[ConstColumns.NET_AMT].HeaderText = "ราคาสุทธิ";
+            gv.Columns[ConstColumns.PRINT_NO].HeaderText = "จำนวนพิมพ์";
             gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
             gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
 
@@ -62,7 +62,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.VAT_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gv.Columns[ConstColumns.NET_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            gv.Columns[ConstColumns.DISC_AMT].Visible = false; 
+            gv.Columns[ConstColumns.DISC_AMT].Visible = false;
 
 
 
@@ -71,7 +71,6 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.VAT_AMT].DefaultCellStyle.Format = "N2";
             gv.Columns[ConstColumns.NET_AMT].DefaultCellStyle.Format = "N2";
         }
-
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             gvDt.Columns[ConstColumns.INVOICE_NO].HeaderText = "เลขที่ใบแจ้งหนี้";
@@ -96,7 +95,6 @@ namespace SlaughterHouseServer
             gvDt.Columns[ConstColumns.UNIT_PRICE].DefaultCellStyle.Format = "N2";
             gvDt.Columns[ConstColumns.GROSS_AMT].DefaultCellStyle.Format = "N2";
         }
-
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -104,7 +102,7 @@ namespace SlaughterHouseServer
             {
                 DataGridView senderGrid = (DataGridView)sender;
                 string invoiceNo = gv.Rows[e.RowIndex].Cells[ConstColumns.INVOICE_NO].Value.ToString();
-                string orderNo = gv.Rows[e.RowIndex].Cells[ConstColumns.REF_DOCUMENT_NO ].Value.ToString();
+                string orderNo = gv.Rows[e.RowIndex].Cells[ConstColumns.REF_DOCUMENT_NO].Value.ToString();
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
@@ -143,12 +141,10 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void BtnSearch_Click(object sender, System.EventArgs e)
         {
             LoadInvoice();
         }
-         
         private void BtnRefSo_Click(object sender, System.EventArgs e)
         {
             var frmNew = new Form_InvoiceNew();
@@ -165,7 +161,6 @@ namespace SlaughterHouseServer
                 }
             }
         }
-
         private void LoadCustomer()
         {
             var coll = CustomerController.GetAllCustomers();
@@ -178,7 +173,6 @@ namespace SlaughterHouseServer
             cboCustomer.ValueMember = "CustomerCode";
             cboCustomer.DataSource = coll;
         }
-
         private void LoadInvoice()
         {
             //var farmCtrl = new FarmController();
@@ -196,6 +190,5 @@ namespace SlaughterHouseServer
             gvDt.Visible = true;
 
         }
-
     }
 }

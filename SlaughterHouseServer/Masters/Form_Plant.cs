@@ -6,15 +6,14 @@ using System.Drawing;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_Truck : Form
+    public partial class Form_Plant : Form
     {
 
-        public Form_Truck()
+        public Form_Plant()
         {
             InitializeComponent();
             UserSettingsComponent();
         }
-
         private void UserSettingsComponent()
         {
             BtnAdd.Click += BtnAdd_Click;
@@ -28,38 +27,16 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
-            LoadTruck();
+            LoadPlant();
         }
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-<<<<<<< HEAD
-
-=======
->>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
-
-            gv.Columns[ConstColumns.TRUCK_ID].Visible = false;
-            gv.Columns[ConstColumns.TRUCK_NO].HeaderText = "ทะเบียนรถ";
-            gv.Columns[ConstColumns.DRIVER].HeaderText = "ชื่อคนขับรถ";
-<<<<<<< HEAD
-            gv.Columns[ConstColumns.TRUCK_TYPE].HeaderText = "ประเภทรถ";
-=======
->>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
-
-            gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
-            gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[ConstColumns.CREATE_BY].HeaderText = "ผู้สร้าง";
-
-            gv.Columns[ConstColumns.MODIFIED_AT].HeaderText = "วันเวลาแก้ไข";
-            gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข";
-            gv.Columns[ConstColumns.TRUCK_TYPE_ID].Visible = false;
-            gv.Columns[ConstColumns.TRUCK_TYPE_DESC].Visible = false;
-
+            gv.Columns[ConstColumns.PlantId].Visible = false;
+            gv.Columns[ConstColumns.LogoImage].Visible = false;
+            gv.Columns[ConstColumns.ProductionDate].Visible = false;
+            gv.Columns[ConstColumns.PlantName].HeaderText = "ชื่อโรงงาน";
+            gv.Columns[ConstColumns.Address].HeaderText = "ที่อยู่";
         }
 
 
@@ -68,21 +45,20 @@ namespace SlaughterHouseServer
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-                Int32 truckId = Convert.ToInt32(gv.Rows[e.RowIndex].Cells[ConstColumns.TRUCK_ID].Value );
-
+                Int32 plantId = Convert.ToInt32(gv.Rows[e.RowIndex].Cells[ConstColumns.PlantId].Value);
 
                 if ((senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn || senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn) && e.RowIndex >= 0)
                 {
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
                     {
                         case "Edit":
-                            var frm = new Form_TruckAddEdit
+                            var frm = new Form_PlantAddEdit
                             {
-                                truckId = truckId
+                                plantId = plantId
                             };
                             if (frm.ShowDialog() == DialogResult.OK)
                             {
-                                LoadTruck();
+                                LoadPlant();
                             }
                             break;
                         case "Print":
@@ -98,7 +74,7 @@ namespace SlaughterHouseServer
 
         private void BtnSearch_Click(object sender, System.EventArgs e)
         {
-            LoadTruck();
+            LoadPlant();
         }
 
         private void BtnAdd_Click(object sender, System.EventArgs e)
@@ -108,20 +84,15 @@ namespace SlaughterHouseServer
             {
 
             }
-            LoadTruck();
+            LoadPlant();
         }
 
-
-
-        private void LoadTruck()
+        private void LoadPlant()
         {
             //var farmCtrl = new FarmController();
-            var coll = TruckController.GetAllTrucks(TxtFilter.Text);
+            var coll = PlantController.GetAllPlants();
             gv.DataSource = coll;
             //LoadItem("");
         }
-
-
-
     }
 }

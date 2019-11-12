@@ -3,19 +3,18 @@ using System;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_ProductPriceAddEdit : Form
+    public partial class Form_CustomerClassDiscountAddEdit : Form
     {
-        public string productCode { get; set; }
+        public Int32 classId { get; set; }
         public DateTime startDate { get; set; }
 
-        public Form_ProductPriceAddEdit()
+        public Form_CustomerClassDiscountAddEdit()
         {
             InitializeComponent();
             UserSettingsComponent();
         }
         private void UserSettingsComponent()
         {
-
             this.Load += Form_Load;
             this.Shown += Form_Shown;
 
@@ -24,11 +23,7 @@ namespace SlaughterHouseServer
             txtDay.KeyDown += TxtDay_KeyDown;
 
             txtDay.KeyPress += TxtDay_KeyPress;
-            txtUnitPrice.KeyPress += TxtUnitPrice_KeyPress;
-
-
-            //Click
-            btnLovProduct.Click += BtnLovProduct_Click;
+            txtDiscountPer.KeyPress += TxtDiscountPer_KeyPress;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
@@ -36,6 +31,7 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
+            LoadCustomerClass();
             LoadData();
         }
         private void DtpStartDate_KeyDown(object sender, KeyEventArgs e)
@@ -49,9 +45,10 @@ namespace SlaughterHouseServer
         {
             if (e.KeyCode == Keys.Enter)
             {
-                txtUnitPrice.Focus();
+                txtDiscountPer.Focus();
             }
         }
+
         private void TxtDay_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
@@ -61,7 +58,7 @@ namespace SlaughterHouseServer
             }
         }
 
-        private void TxtUnitPrice_KeyPress(object sender, KeyPressEventArgs e)
+        private void TxtDiscountPer_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
             {
@@ -89,26 +86,17 @@ namespace SlaughterHouseServer
         #endregion
 
         #region Event Click
-        private void BtnLovProduct_Click(object sender, System.EventArgs e)
-        {
-            try
-            {
-                var frm = new Form_LovProduct();
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    txtProductName.Text = frm.productName;
-                    this.productCode = frm.productCode;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
             {
+                if (Convert.ToDecimal(txtDiscountPer.Text)> 100)
+                {
+                    MessageBox.Show("ส่วนลดต้องไม่เกิน 100%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 SaveProductPrice();
                 MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
@@ -128,17 +116,15 @@ namespace SlaughterHouseServer
                 SaveProductPrice();
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.productCode = "";
-                txtProductName.Text = "";
-                txtUnitPrice.Text = "0";
+                this.classId = 0;
+                txtDiscountPer.Text = "0";
                 txtDay.Text = "0";
                 dtpStartDate.Value = DateTime.Now;
+                LoadCustomerClass();
                 LoadData();
-
             }
             catch (System.Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -149,52 +135,57 @@ namespace SlaughterHouseServer
 
         private void LoadData()
         {
-            if (String.IsNullOrEmpty(this.productCode) == false)
+            if (this.classId > 0)
             {
-                btnLovProduct.Enabled = false;
-                txtProductName.Enabled = false;
+                comboxCustomerClass.Enabled = false;
+                dtpStartDate.Enabled = false;
             }
-            ProductPrice productPrice = ProductPriceController.GetProductPrice(this.productCode, this.startDate);
-            if (productPrice != null)
+            CustomerClassDiscount customerClassDiscount = CustomerClassDiscountController.GetCustomerClassDiscount(this.classId, this.startDate);
+            if (customerClassDiscount != null)
             {
+                this.classId = customerClassDiscount.CustomerClass.ClassId;
+                comboxCustomerClass.SelectedValue = customerClassDiscount.CustomerClass.ClassId;
+                txtDiscountPer.Text = customerClassDiscount.DiscountPer.ToString();
+                txtDay.Text = customerClassDiscount.Day.ToString();
 
-                this.productCode = productPrice.Product.ProductCode;
-                txtProductName.Text = productPrice.Product.ProductName;
-                txtUnitPrice.Text = productPrice.UnitPrice.ToString();
-                txtDay.Text = productPrice.Day.ToString();
-
-                dtpStartDate.Value = productPrice.StartDate;
+                dtpStartDate.Value = customerClassDiscount.StartDate;
                 dtpStartDate.Enabled = false;
                 BtnSaveAndNew.Visible = false;
             }
+        }
+
+        private void LoadCustomerClass()
+        {
+            comboxCustomerClass.DataSource = CustomerClassController.GetAllCustomerClass();
+            comboxCustomerClass.ValueMember = "ClassId";
+            comboxCustomerClass.DisplayMember = "ClassName";
         }
 
         private void SaveProductPrice()
         {
             try
             {
-
-                var productPrice = new ProductPrice
+                var customerClassDiscount = new CustomerClassDiscount
                 {
-                    Product = new Product
+                    CustomerClass = new CustomerClass
                     {
-                        ProductCode = this.productCode
+                        ClassId = Convert.ToInt32(comboxCustomerClass.SelectedValue)
                     },
                     StartDate = dtpStartDate.Value,
                     EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
                     Day = Convert.ToInt16(txtDay.Text),
 
-                    UnitPrice = Convert.ToDecimal(txtUnitPrice.Text),
+                    DiscountPer  = Convert.ToDecimal(txtDiscountPer.Text),
                     CreateBy = "system",
                     ModifiedBy = "system"
                 };
-                if (btnLovProduct.Enabled == true && txtProductName.Enabled == true)
+                if (comboxCustomerClass.Enabled == true && dtpStartDate.Enabled == true)
                 {
-                    ProductPriceController.Insert(productPrice);
+                    CustomerClassDiscountController.Insert(customerClassDiscount);
                 }
                 else
                 {
-                    ProductPriceController.Update(productPrice);
+                    CustomerClassDiscountController.Update(customerClassDiscount);
                 }
             }
             catch (Exception)

@@ -54,6 +54,7 @@ namespace SlaughterHouseServer
             cboCustomer.Enabled = false;
             dtpInvoiceDate.Enabled = false;
             txtOrderNo.Enabled = false;
+            txtReceiptNo.Enabled = false;
             txtInvoiceNo.Enabled = false;
             txtGrossAmt.Enabled = false;
             txtBeforeVat.Enabled = false;
@@ -176,6 +177,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.SEQ].Visible = false;
             gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
 
+            gv.Columns[ConstColumns.DISC_PER].Visible = false;
             gv.Columns[ConstColumns.UNIT_DISC].Visible = false;
             gv.Columns[ConstColumns.UNIT_NET].Visible = false;
             gv.Columns[ConstColumns.DISC_AMT].Visible = false;
@@ -251,8 +253,10 @@ namespace SlaughterHouseServer
                     txtInvoiceNo.Text = invoice.InvoiceNo;
                     dtpInvoiceDate.Value = invoice.InvoiceDate;
                     txtOrderNo.Text = invoice.RefDocumentNo;
+                    txtReceiptNo.Text = invoice.ReceiptNo;
+                    lbPrintNo.Text = invoice.PrintNo.ToString();
                     cboCustomer.SelectedValue = invoice.Customer.CustomerCode;
-                    cboTrucko.SelectedValue = invoice.Truck.TruckNo;
+                    cboTrucko.SelectedValue = invoice.Truck.TruckId;
                     txtComment.Text = invoice.Comments;
                     chkActive.Checked = invoice.Active;
                     txtGrossAmt.Text = invoice.GrossAmt.ToString();
@@ -297,6 +301,7 @@ namespace SlaughterHouseServer
                 if (dtInvoiceItem.Rows.Count > 0)
                 {
                     decimal unitPrice;
+                    //decimal discountPer;
                     Product product;
                     for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
                     {
@@ -332,10 +337,16 @@ namespace SlaughterHouseServer
         //();
         private void LoadTruck()
         {
-            var coll = TruckController.GetAllTrucks();
+            var coll = TruckController.GetAllTrucks(2);
+            //coll.Insert(0, new Truck
+            //{
+            //    TruckId = 0,
+            //    TruckNo = "--เลือก--"
+            //});
             cboTrucko.DisplayMember = "TruckNo";
-            cboTrucko.ValueMember = "TruckNo";
+            cboTrucko.ValueMember = "TruckId";
             cboTrucko.DataSource = coll;
+
         }
         private void LoadCustomer()
         {
@@ -384,13 +395,14 @@ namespace SlaughterHouseServer
                     InvoiceNo = txtInvoiceNo.Text,
                     InvoiceDate = dtpInvoiceDate.Value,
                     RefDocumentNo = txtOrderNo.Text,
+                    ReceiptNo = txtReceiptNo.Text,
                     Customer = new Customer
                     {
                         CustomerCode = cboCustomer.SelectedValue.ToString()
                     },
                     Truck = new Truck
                     {
-                        TruckNo = cboTrucko.SelectedValue.ToString()
+                        TruckId = Convert.ToInt32(cboTrucko.SelectedValue)
                     },
                     GrossAmt = Convert.ToDecimal(txtGrossAmt.Text),
                     DiscAmt = 0,
@@ -399,6 +411,7 @@ namespace SlaughterHouseServer
                     VatAmt = Convert.ToDecimal(txtVatAmt.Text),
                     NetAmt = Convert.ToDecimal(txtNetAmt.Text),
                     Comments = txtComment.Text,
+                    PrintNo = Convert.ToInt32(lbPrintNo.Text),
                     InvoiceFlag = 0,
                     Active = chkActive.Checked,
                     CreateBy = "system",
@@ -472,6 +485,12 @@ namespace SlaughterHouseServer
                 {
                     throw new Exception($"ราคาสุทธิต้องมีค่ามากกวว่า 0");
                 }
+
+                //Check Truck No
+                if ( cboTrucko.SelectedValue  == null)
+                {
+                    throw new Exception($"โปรดดระบุทะเบียนรถ");
+                }
             }
             catch (Exception)
             {
@@ -509,7 +528,6 @@ namespace SlaughterHouseServer
             txtBeforeVat.Text = string.Format("{0:#,##0.00}", double.Parse(txtBeforeVat.Text));
             txtVatAmt.Text = string.Format("{0:#,##0.00}", double.Parse(txtVatAmt.Text));
             txtNetAmt.Text = string.Format("{0:#,##0.00}", double.Parse(txtNetAmt.Text));
-
         }
         private void PrintReport()
         {

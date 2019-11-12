@@ -42,7 +42,7 @@ namespace SlaughterHouseServer
 
             this.comboxProductGroup.SelectedIndexChanged += ComboxProductGroup_SelectedIndexChanged;
 
-            //KeyDown 
+            //KeyDown
             txtProductCode.KeyDown += TxtProductCode_KeyDown;
             txtProductName.KeyDown += TxtProductName_KeyDown;
             comboxProductGroup.KeyDown += ComboxProductGroup_KeyDown;
@@ -119,13 +119,13 @@ namespace SlaughterHouseServer
 
         #endregion
 
-        #region Event Click 
+        #region Event Click
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-            
+
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewLinkColumn)
                 {
                     try
@@ -164,7 +164,7 @@ namespace SlaughterHouseServer
             //bool showSelectAllflag = true;
             //var coll = ProductGroupController.GetAllProudctGroups(showSelectAllflag);
             //comboxProductGroup.ValueMember = "ProductGroupCode";
-            //comboxProductGroup.DisplayMember = "ProductGroupName"; 
+            //comboxProductGroup.DisplayMember = "ProductGroupName";
 
             var coll = ProductGroupController.GetAllProudctGroups();
             coll.Insert(0, new ProductGroup

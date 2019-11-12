@@ -1,13 +1,14 @@
 ﻿using SlaughterHouseLib;
 using SlaughterHouseLib.Models;
 using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_Customer : Form
+    public partial class Form_Breeder : Form
     {
-        public Form_Customer()
+        public Form_Breeder()
         {
             InitializeComponent();
             UserSettingsComponent();
@@ -15,6 +16,7 @@ namespace SlaughterHouseServer
 
         private void UserSettingsComponent()
         {
+
             BtnAdd.Click += BtnAdd_Click;
             BtnSearch.Click += BtnSearch_Click;
             gv.CellContentClick += Gv_CellContentClick;
@@ -26,6 +28,9 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
+
+
+
             Populate();
         }
 
@@ -37,10 +42,10 @@ namespace SlaughterHouseServer
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-                    string customerCode = gv.Rows[e.RowIndex].Cells[1].Value.ToString();
-                    var frm = new Form_CustomerAddEdit
+                    string breederCode = gv.Rows[e.RowIndex].Cells[ConstColumns.BREEDER_CODE].Value.ToString();
+                    var frm = new Form_BreederAddEdit
                     {
-                        customerCode = customerCode
+                        breederCode = breederCode
                     };
                     if (frm.ShowDialog() == DialogResult.OK)
                     {
@@ -62,9 +67,9 @@ namespace SlaughterHouseServer
 
         private void BtnAdd_Click(object sender, System.EventArgs e)
         {
-            var frm = new Form_CustomerAddEdit
+            var frm = new Form_BreederAddEdit
             {
-                customerCode = ""
+                breederCode = ""
             };
             if (frm.ShowDialog() == DialogResult.OK)
             {
@@ -74,24 +79,19 @@ namespace SlaughterHouseServer
 
         private void Populate()
         {
-            var coll = CustomerController.GetAllCustomers(TxtFilter.Text.Trim());
+
+            DataTable coll = BreederController.GetAllBreeders(TxtFilter.Text.Trim());
             gv.DataSource = coll;
 
-            gv.Columns[ConstColumns.CustomerCode].HeaderText = "รหัสลูกค้า";
-            gv.Columns[ConstColumns.CustomerName].HeaderText = "ชื่อลูกค้า";
-            gv.Columns[ConstColumns.ClassName].HeaderText = "กลุ่มลูกค้า";
-            gv.Columns[ConstColumns.Address].HeaderText = "ที่อยู่";
-            gv.Columns[ConstColumns.ShipTo].HeaderText = "สถานที่ส่งสินค้า";
-            gv.Columns[ConstColumns.TaxId].HeaderText = "เลขที่ผู้เสียภาษี";
-            gv.Columns[ConstColumns.ContactNo].HeaderText = "เบอร์ติดต่อ";
-            gv.Columns[ConstColumns.Active].HeaderText = "ใช้งาน";
-            gv.Columns[ConstColumns.CreateAt].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[ConstColumns.CreateBy].HeaderText = "ผู้สร้าง";
-            gv.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
-            gv.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
+            gv.Columns[ConstColumns.BREEDER_CODE].HeaderText = "รหัสสายพันธุ์";
+            gv.Columns[ConstColumns.BREEDER_NAME].HeaderText = "ชื่อสายพันธุ์";
+            gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
+            gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[ConstColumns.CREATE_BY].HeaderText = "ผู้สร้าง";
+            gv.Columns[ConstColumns.MODIFIED_AT].HeaderText = "วันเวลาแก้ไข";
+            gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข";
 
-            gv.Columns[ConstColumns.ClassId].Visible = false;
-
+            gv.Columns[ConstColumns.BREEDER_CODE].Visible = false;
         }
     }
 }

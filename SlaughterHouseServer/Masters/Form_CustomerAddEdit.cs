@@ -1,4 +1,5 @@
 ﻿using SlaughterHouseLib.Models;
+using System;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
@@ -11,7 +12,7 @@ namespace SlaughterHouseServer
             InitializeComponent();
 
             txtCustomerCode.KeyDown += TxtCustomerCode_KeyDown;
-            txtCustomerName.KeyDown += TxtCustomerName_KeyDown; 
+            txtCustomerName.KeyDown += TxtCustomerName_KeyDown;
             txtShipTo.KeyDown += TxtShipTo_KeyDown;
             txtTaxId.KeyDown += TxtTaxId_KeyDown;
             txtContactNo.KeyDown += TxtContactNo_KeyDown;
@@ -19,8 +20,16 @@ namespace SlaughterHouseServer
             txtTaxId.KeyPress += TxtTaxId_KeyPress;
             txtContactNo.KeyPress += TxtContactNo;
 
+            LoadCustomerClass();
             this.Load += Form_CustomerAddEdit_Load;
             this.Shown += Form_CustomerAddEdit_Shown;
+        }
+
+        private void LoadCustomerClass()
+        {
+            comboxCustomerClass.DataSource = CustomerClassController.GetAllCustomerClass();
+            comboxCustomerClass.ValueMember = "ClassId";
+            comboxCustomerClass.DisplayMember = "ClassName";
         }
 
         private void Form_CustomerAddEdit_Shown(object sender, System.EventArgs e)
@@ -43,6 +52,7 @@ namespace SlaughterHouseServer
                 {
                     txtCustomerCode.Text = customer.CustomerCode;
                     txtCustomerCode.Enabled = false;
+                    comboxCustomerClass.SelectedValue = customer.CustomerClass.ClassId;
                     txtCustomerName.Text = customer.CustomerName;
                     txtAddress.Text = customer.Address;
                     txtShipTo.Text = customer.ShipTo;
@@ -89,7 +99,7 @@ namespace SlaughterHouseServer
                 txtTaxId.Focus();
             }
         }
-                private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
+        private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -123,6 +133,10 @@ namespace SlaughterHouseServer
                     {
                         CustomerCode = txtCustomerCode.Text.Trim(),
                         CustomerName = txtCustomerName.Text.Trim(),
+                        CustomerClass = new CustomerClass
+                        {
+                            ClassId = Convert.ToInt32(comboxCustomerClass.SelectedValue)
+                        },
                         Address = txtAddress.Text.Trim(),
                         ShipTo = txtShipTo.Text.Trim(),
                         TaxId = txtTaxId.Text.Trim(),
@@ -136,10 +150,14 @@ namespace SlaughterHouseServer
                 }
                 else
                 {
-                    var customer = new Customer 
+                    var customer = new Customer
                     {
                         CustomerCode = txtCustomerCode.Text.Trim(),
                         CustomerName = txtCustomerName.Text.Trim(),
+                        CustomerClass = new CustomerClass
+                        {
+                            ClassId = Convert.ToInt32(comboxCustomerClass.SelectedValue)
+                        },
                         Address = txtAddress.Text.Trim(),
                         ShipTo = txtShipTo.Text.Trim(),
                         TaxId = txtTaxId.Text.Trim(),
@@ -171,6 +189,10 @@ namespace SlaughterHouseServer
                 {
                     CustomerCode = txtCustomerCode.Text.Trim(),
                     CustomerName = txtCustomerName.Text.Trim(),
+                    CustomerClass = new CustomerClass
+                    {
+                        ClassId = Convert.ToInt32(comboxCustomerClass.SelectedValue)
+                    },
                     Address = txtAddress.Text.Trim(),
                     ShipTo = txtShipTo.Text.Trim(),
                     TaxId = txtTaxId.Text.Trim(),
@@ -189,7 +211,7 @@ namespace SlaughterHouseServer
                 txtTaxId.Text = "";
                 txtContactNo.Text = "";
                 chkActive.Checked = true;
-
+                LoadCustomerClass();
             }
             catch (System.Exception ex)
             {
@@ -197,6 +219,6 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-         
+
     }
 }
