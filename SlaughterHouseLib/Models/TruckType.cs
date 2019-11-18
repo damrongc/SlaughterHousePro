@@ -19,14 +19,13 @@ namespace SlaughterHouseLib.Models
         public DateTime ModifiedAt { get; set; }
     }
 
-
     public static class TruckTypeController
     {
         public static List<TruckType> GetAllTruckType()
         {
             try
             {
-                List<TruckType> truckTypes = new List<TruckType>();
+                List<TruckType> Trucks = new List<TruckType>();
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -42,14 +41,14 @@ namespace SlaughterHouseLib.Models
 
                     foreach (DataRow item in ds.Tables[0].Rows)
                     {
-                        truckTypes.Add(new TruckType
+                        Trucks.Add(new TruckType
                         {
-                            TruckTypeId = item["truck_type_id"].ToString().ToInt16(),
-                            TruckTypeDesc = item["truck_type_desc"].ToString(),
+                            TruckTypeId = Convert.ToInt32(item["truck_type_id"]),
+                            TruckTypeDesc =  item["truck_type_desc"].ToString(),
                         });
                     }
-                    return truckTypes;
 
+                    return Trucks;
                 }
             }
             catch (Exception)
@@ -123,7 +122,7 @@ namespace SlaughterHouseLib.Models
                         return new TruckType
                         {
 
-                            TruckTypeId = Convert.ToInt32(ds.Tables[0].Rows[0]["truck_type_id"]),
+                            TruckTypeId= Convert.ToInt32(ds.Tables[0].Rows[0]["truck_type_id"]) ,
                             TruckTypeDesc = ds.Tables[0].Rows[0]["truck_type_desc"].ToString(),
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
