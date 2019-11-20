@@ -11,7 +11,7 @@ namespace SlaughterHouseServer
     {
         public Int32 truckId { get; set; }
         string productCode { get; set; }
-        //DataTable dtTruckItem;
+        DataTable dtTruckItem;
 
         public Form_TruckAddEdit()
         {
@@ -20,7 +20,7 @@ namespace SlaughterHouseServer
         }
         private void UserSettingsComponent()
         {
-            LoadTruckType();
+            LoadCustomerClass();
             this.Load += Form_Load;
             this.Shown += Form_Shown;
             txtDriver.KeyDown += TxtDriver_KeyDown;
@@ -32,7 +32,6 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
-            LoadType();
             LoadData();
         }
 
@@ -53,10 +52,7 @@ namespace SlaughterHouseServer
         }
         #endregion
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
         #region Event Click
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
@@ -99,27 +95,16 @@ namespace SlaughterHouseServer
 
         private void LoadData()
         {
-<<<<<<< HEAD
-            if (this.truckNo != null)
-            {
-                Truck Truck = TruckController.GetTruck(this.truckNo);
-                txtTruckNo.Text = Truck.TruckNo.ToString();
-                cboTruckType.SelectedValue = Truck.TruckTypeId;
-                txtDriver.Text = Truck.Driver.ToString();
-                BtnSaveAndNew.Visible = false;
-                txtTruckNo.Enabled = false;
-            }
-
-=======
             try
             {
                 if (this.truckId > 0)
                 {
-                    Truck Truck = TruckController.GetTruck(this.truckId);
+                    Truck truck = TruckController.GetTruck(this.truckId);
                     txtTruckId.Text = this.truckId.ToString(); ;
-                    txtTruckNo.Text = Truck.TruckNo.ToString();
-                    txtDriver.Text = Truck.Driver.ToString();
-                    comboxTruckType.SelectedValue = Truck.TruckType.TruckTypeId;
+                    txtTruckNo.Text = truck.TruckNo.ToString();
+                    txtDriver.Text = truck.Driver.ToString();
+                    chkActive.Checked = truck.Active;
+                    comboxTruckType.SelectedValue = truck.TruckType.TruckTypeId;
                     BtnSaveAndNew.Visible = false;
                     //txtTruckNo.Enabled = false;
                 }
@@ -130,22 +115,13 @@ namespace SlaughterHouseServer
             }
         }
 
-        private void LoadTruckType()
+        private void LoadCustomerClass()
         {
             comboxTruckType.DataSource = TruckTypeController.GetAllTruckType();
             comboxTruckType.ValueMember = "TruckTypeId";
             comboxTruckType.DisplayMember = "TruckTypeDesc";
         }
->>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
 
-        }
-        private void LoadType()
-        {
-            var coll = TruckTypeController.GetAllTruckTypes();
-            cboTruckType.DisplayMember = "TruckTypeDesc";
-            cboTruckType.ValueMember = "TruckTypeId";
-            cboTruckType.DataSource = coll;
-        }
         private void SaveTruck()
         {
             try
@@ -153,26 +129,17 @@ namespace SlaughterHouseServer
                 var truck = new Truck
                 {
                     TruckNo = txtTruckNo.Text.Trim(),
-<<<<<<< HEAD
-                    TruckTypeId = cboTruckType.SelectedValue.ToString().ToInt16(),
-                    Driver = txtDriver.Text.Trim(),
-=======
                     Driver = txtDriver.Text.Trim(),
                     TruckType = new TruckType
                     {
                         TruckTypeId = (int)comboxTruckType.SelectedValue,
                         TruckTypeDesc = comboxTruckType.Text,
                     },
->>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
                     Active = chkActive.Checked,
                     CreateBy = "system",
                 };
 
-<<<<<<< HEAD
-                if (string.IsNullOrEmpty(this.truckNo))
-=======
                 if (this.truckId == null || this.truckId == 0)
->>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
                 {
                     TruckController.Insert(truck);
                 }

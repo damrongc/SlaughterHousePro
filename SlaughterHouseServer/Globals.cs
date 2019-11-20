@@ -122,12 +122,11 @@ namespace SlaughterHouseServer
         public const string TRANSPORT_WGH = "TRANSPORT_WGH";
         public const string TRUCK_ID = "TRUCK_ID";
         public const string TRUCK_NO = "TRUCK_NO";
-<<<<<<< HEAD
-        public const string TRUCK_TYPE = "TRUCK_TYPE";
-=======
+
+
         public const string TRUCK_TYPE_ID = "TRUCK_TYPE_ID";
         public const string TRUCK_TYPE_DESC = "TRUCK_TYPE_DESC";
->>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
+
         public const string UNIT_CODE = "UNIT_CODE";
         public const string UNIT_NAME = "UNIT_NAME";
         public const string UNIT_CODE_QTY = "UNIT_CODE_QTY";

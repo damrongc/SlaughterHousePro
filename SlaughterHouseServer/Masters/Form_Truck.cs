@@ -28,28 +28,17 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
             LoadTruck();
         }
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-<<<<<<< HEAD
-
-=======
->>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
 
             gv.Columns[ConstColumns.TRUCK_ID].Visible = false;
             gv.Columns[ConstColumns.TRUCK_NO].HeaderText = "ทะเบียนรถ";
             gv.Columns[ConstColumns.DRIVER].HeaderText = "ชื่อคนขับรถ";
-<<<<<<< HEAD
-            gv.Columns[ConstColumns.TRUCK_TYPE].HeaderText = "ประเภทรถ";
-=======
->>>>>>> 8e7570345231c099c0226de5161f05ab481aac21
 
             gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
             gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
@@ -59,9 +48,6 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข";
             gv.Columns[ConstColumns.TRUCK_TYPE_ID].Visible = false;
             gv.Columns[ConstColumns.TRUCK_TYPE_DESC].Visible = false;
-
-            gv.Columns[ConstColumns.CREATE_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            gv.Columns[ConstColumns.MODIFIED_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
 
         }
 
