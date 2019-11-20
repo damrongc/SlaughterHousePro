@@ -135,12 +135,13 @@ namespace SlaughterHouseServer
         public const string UNIT_PRICE = "UNIT_PRICE";
         public const string UNIT_DISC = "UNIT_DISC";
         public const string DISC_PER = "DISC_PER";
-        public const string UNIT_NET = "UNIT_NET";
         public const string UNLOAD_QTY = "UNLOAD_QTY";
         public const string UNLOAD_WGH = "UNLOAD_WGH";
         public const string VAT_AMT = "VAT_AMT";
         public const string VAT_RATE = "VAT_RATE";
         public const string WGH = "WGH";
+
+        public const string UNIT_PRICE_CURRENT = "UNIT_PRICE_CURRENT";
 
 
         public const string Active = "Active";

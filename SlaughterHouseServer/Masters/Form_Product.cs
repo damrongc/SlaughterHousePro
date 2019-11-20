@@ -109,7 +109,8 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.UNIT_OF_QTY].Visible = false;
             gv.Columns[ConstColumns.UNIT_OF_WGH].Visible = false;
 
-
+            gv.Columns[ConstColumns.CREATE_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            gv.Columns[ConstColumns.MODIFIED_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
         }
 
         private void FillProductGroup()

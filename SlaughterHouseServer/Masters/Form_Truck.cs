@@ -49,6 +49,9 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.TRUCK_TYPE_ID].Visible = false;
             gv.Columns[ConstColumns.TRUCK_TYPE_DESC].Visible = false;
 
+            gv.Columns[ConstColumns.CREATE_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            gv.Columns[ConstColumns.MODIFIED_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+
         }
 
 

@@ -6,14 +6,15 @@ using System.Drawing;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_Plant : Form
+    public partial class Form_TruckType : Form
     {
 
-        public Form_Plant()
+        public Form_TruckType()
         {
             InitializeComponent();
             UserSettingsComponent();
         }
+
         private void UserSettingsComponent()
         {
             BtnAdd.Click += BtnAdd_Click;
@@ -27,19 +28,29 @@ namespace SlaughterHouseServer
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
-            LoadPlant();
+
+
+            LoadTruckType();
         }
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            gv.Columns[ConstColumns.PlantId].Visible = false;
-            gv.Columns[ConstColumns.LogoImage].Visible = false;
-            gv.Columns[ConstColumns.ProductionDate].Visible = false;
-            gv.Columns[ConstColumns.PlantName].HeaderText = "ชื่อโรงงาน";
-            gv.Columns[ConstColumns.Address].HeaderText = "ที่อยู่";
 
-            gv.Columns[ConstColumns.CreateAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            gv.Columns[ConstColumns.ModifiedAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            gv.Columns[ConstColumns.TRUCK_TYPE_ID].Visible = false;
+            gv.Columns[ConstColumns.TRUCK_TYPE_DESC].HeaderText = "ประเภทรถ";
+
+            gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
+            gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[ConstColumns.CREATE_BY].HeaderText = "ผู้สร้าง";
+
+            gv.Columns[ConstColumns.MODIFIED_AT].HeaderText = "วันเวลาแก้ไข";
+            gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข";
+            //gv.Columns[ConstColumns.TRUCK_TYPE_ID].Visible = false;
+            //gv.Columns[ConstColumns.TRUCK_TYPE_DESC].Visible = false;
+
+            gv.Columns[ConstColumns.CREATE_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            gv.Columns[ConstColumns.MODIFIED_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+
         }
 
 
@@ -48,20 +59,21 @@ namespace SlaughterHouseServer
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-                Int32 plantId = Convert.ToInt32(gv.Rows[e.RowIndex].Cells[ConstColumns.PlantId].Value);
+                Int32 truckTypeId = Convert.ToInt32(gv.Rows[e.RowIndex].Cells[ConstColumns.TRUCK_TYPE_ID].Value );
+
 
                 if ((senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn || senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn) && e.RowIndex >= 0)
                 {
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
                     {
                         case "Edit":
-                            var frm = new Form_PlantAddEdit
+                            var frm = new Form_TruckTypeAddEdit
                             {
-                                plantId = plantId
+                                truckTypeId = truckTypeId
                             };
                             if (frm.ShowDialog() == DialogResult.OK)
                             {
-                                LoadPlant();
+                                LoadTruckType();
                             }
                             break;
                         case "Print":
@@ -77,25 +89,30 @@ namespace SlaughterHouseServer
 
         private void BtnSearch_Click(object sender, System.EventArgs e)
         {
-            LoadPlant();
+            LoadTruckType();
         }
 
         private void BtnAdd_Click(object sender, System.EventArgs e)
         {
-            var frm = new Form_TruckAddEdit();
+            var frm = new Form_TruckTypeAddEdit();
             if (frm.ShowDialog() == DialogResult.OK)
             {
 
             }
-            LoadPlant();
+            LoadTruckType();
         }
 
-        private void LoadPlant()
+
+
+        private void LoadTruckType()
         {
             //var farmCtrl = new FarmController();
-            var coll = PlantController.GetAllPlants();
+            var coll = TruckTypeController.GetAllTruckType(TxtFilter.Text);
             gv.DataSource = coll;
             //LoadItem("");
         }
+
+
+
     }
 }

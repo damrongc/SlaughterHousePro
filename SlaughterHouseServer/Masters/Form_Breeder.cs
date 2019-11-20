@@ -92,6 +92,9 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข";
 
             gv.Columns[ConstColumns.BREEDER_CODE].Visible = false;
+
+            gv.Columns[ConstColumns.CREATE_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            gv.Columns[ConstColumns.MODIFIED_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
         }
     }
 }

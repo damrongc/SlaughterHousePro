@@ -92,6 +92,9 @@ namespace SlaughterHouseServer
 
             gv.Columns[ConstColumns.ClassId].Visible = false;
 
+            gv.Columns[ConstColumns.CreateAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            gv.Columns[ConstColumns.ModifiedAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+
         }
     }
 }

@@ -116,6 +116,9 @@ namespace SlaughterHouseServer
             gv.Columns[7].HeaderText = "วันเวลาสร้าง";
             gv.Columns[8].HeaderText = "ผู้สร้าง";
             gv.Columns[7].Visible = false;
+
+            gv.Columns[ConstColumns.CreateAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            gv.Columns[ConstColumns.ModifiedAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
         }
 
 

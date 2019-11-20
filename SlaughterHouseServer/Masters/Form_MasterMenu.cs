@@ -31,6 +31,7 @@ namespace SlaughterHouseServer.Masters
             BtnTruck.Click += Btn_Click;
             BtnBom.Click += Btn_Click;
             BtnPlant.Click += Btn_Click;
+            BtnTruckType.Click += Btn_Click;
         }
 
         private void Btn_Click(object sender, EventArgs e)
@@ -72,6 +73,9 @@ namespace SlaughterHouseServer.Masters
                     break;
                 case "BtnPlant":
                     AddFormToContainer(new Form_Plant());
+                    break;
+                case "BtnTruckType":
+                    AddFormToContainer(new Form_TruckType());
                     break;
             }
         }

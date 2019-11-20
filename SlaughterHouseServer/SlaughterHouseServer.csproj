@@ -92,6 +92,12 @@
     <Compile Include="Masters\Form_Plant.Designer.cs">
       <DependentUpon>Form_Plant.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\Form_TruckType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_TruckType.Designer.cs">
+      <DependentUpon>Form_TruckType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Masters\Form_Truck.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,12 @@
     </Compile>
     <Compile Include="Masters\Form_PlantAddEdit.Designer.cs">
       <DependentUpon>Form_PlantAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_TruckTypeAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_TruckTypeAddEdit.Designer.cs">
+      <DependentUpon>Form_TruckTypeAddEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Masters\Form_TruckAddEdit.cs">
       <SubType>Form</SubType>
@@ -449,11 +461,17 @@
     <EmbeddedResource Include="Masters\Form_Plant.resx">
       <DependentUpon>Form_Plant.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_TruckType.resx">
+      <DependentUpon>Form_TruckType.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_Truck.resx">
       <DependentUpon>Form_Truck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_PlantAddEdit.resx">
       <DependentUpon>Form_PlantAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_TruckTypeAddEdit.resx">
+      <DependentUpon>Form_TruckTypeAddEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_TruckAddEdit.resx">
       <DependentUpon>Form_TruckAddEdit.cs</DependentUpon>

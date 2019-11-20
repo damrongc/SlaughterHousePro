@@ -57,6 +57,10 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.ACTIVE].HeaderText = "ใช้งาน";
             gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
 
+
+            gv.Columns[ConstColumns.INVOICE_DATE].DefaultCellStyle.Format = "dd/MM/yyyy";
+            gv.Columns[ConstColumns.CREATE_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+
             gv.Columns[ConstColumns.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gv.Columns[ConstColumns.DISC_AMT_BILL].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gv.Columns[ConstColumns.VAT_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -89,6 +93,11 @@ namespace SlaughterHouseServer
             gvDt.Columns[ConstColumns.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvDt.Columns[ConstColumns.UNIT_PRICE].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvDt.Columns[ConstColumns.GROSS_AMT].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            gvDt.Columns[ConstColumns.DISC_AMT].Visible = false;
+            gvDt.Columns[ConstColumns.UNIT_PRICE_CURRENT].Visible = false;
+            gvDt.Columns[ConstColumns.DISC_PER].Visible = false;
+            gvDt.Columns[ConstColumns.UNIT_DISC].Visible = false;
 
             gvDt.Columns[ConstColumns.QTY].DefaultCellStyle.Format = "N0";
             gvDt.Columns[ConstColumns.WGH].DefaultCellStyle.Format = "N2";

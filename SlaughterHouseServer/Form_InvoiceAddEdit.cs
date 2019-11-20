@@ -177,9 +177,9 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.SEQ].Visible = false;
             gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
 
+            gv.Columns[ConstColumns.UNIT_PRICE_CURRENT].Visible = false;
             gv.Columns[ConstColumns.DISC_PER].Visible = false;
-            gv.Columns[ConstColumns.UNIT_DISC].Visible = false;
-            gv.Columns[ConstColumns.UNIT_NET].Visible = false;
+            gv.Columns[ConstColumns.UNIT_DISC].Visible = false; 
             gv.Columns[ConstColumns.DISC_AMT].Visible = false;
 
 
@@ -301,14 +301,20 @@ namespace SlaughterHouseServer
                 if (dtInvoiceItem.Rows.Count > 0)
                 {
                     decimal unitPrice;
+                    decimal unitPriceCurrent;
+                    decimal discPer;
                     //decimal discountPer;
                     Product product;
                     for (int i = 0; i < dtInvoiceItem.Rows.Count; i++)
                     {
                         string productCode = dtInvoiceItem.Rows[i][ConstColumns.PRODUCT_CODE].ToString();
                         unitPrice = Globals.GetPriceList(cboCustomer.SelectedValue.ToString(), productCode, dtpInvoiceDate.Value);
+                        unitPriceCurrent = Globals.GetPriceListCurrent(cboCustomer.SelectedValue.ToString(), productCode, dtpInvoiceDate.Value);
+                        discPer = Globals.GetDiscountPer(cboCustomer.SelectedValue.ToString(), dtpInvoiceDate.Value);
                         product = ProductController.GetProduct(productCode);
 
+                        dtInvoiceItem.Rows[i][ConstColumns.UNIT_PRICE_CURRENT] = unitPriceCurrent;
+                        dtInvoiceItem.Rows[i][ConstColumns.DISC_PER] = discPer;
                         dtInvoiceItem.Rows[i][ConstColumns.UNIT_PRICE] = unitPrice;
                         dtInvoiceItem.Rows[i][ConstColumns.SALE_UNIT_METHOD] = product.SaleUnitMethod;
                         if (dtInvoiceItem.Rows[i][ConstColumns.SALE_UNIT_METHOD].ToString() == "Q")
@@ -377,9 +383,10 @@ namespace SlaughterHouseServer
                         },
                         Qty = Convert.ToInt16(row[ConstColumns.QTY]),
                         Wgh = Convert.ToDecimal(row[ConstColumns.WGH]),
+                        UnitPriceCurrent = Convert.ToDecimal(row[ConstColumns.UNIT_PRICE_CURRENT]),
+                        DiscPer = Convert.ToDecimal(row[ConstColumns.DISC_PER]),
                         UnitPrice = Convert.ToDecimal(row[ConstColumns.UNIT_PRICE]),
-                        UnitDisc = Convert.ToDecimal(row[ConstColumns.UNIT_DISC]),
-                        UnitNet = Convert.ToDecimal(row[ConstColumns.UNIT_NET]),
+                        UnitDisc = Convert.ToDecimal(row[ConstColumns.UNIT_DISC]), 
                         GrossAmt = Convert.ToDecimal(row[ConstColumns.GROSS_AMT]),
                         SaleUnitMethod = row[ConstColumns.SALE_UNIT_METHOD].ToString(),
                     });

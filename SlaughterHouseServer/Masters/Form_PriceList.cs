@@ -94,6 +94,9 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.CreateBy].HeaderText = "ผู้สร้าง";
             gv.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
             gv.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
+
+            gv.Columns[ConstColumns.CreateAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            gv.Columns[ConstColumns.ModifiedAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
         }
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -44,7 +44,7 @@ namespace SlaughterHouseLib.Models
                         Trucks.Add(new TruckType
                         {
                             TruckTypeId = Convert.ToInt32(item["truck_type_id"]),
-                            TruckTypeDesc =  item["truck_type_desc"].ToString(),
+                            TruckTypeDesc = item["truck_type_desc"].ToString(),
                         });
                     }
 
@@ -97,11 +97,10 @@ namespace SlaughterHouseLib.Models
             }
         }
 
-        public static TruckType GetTruckType(string truckTypeId)
+        public static TruckType GetTruckType(int truckTypeId)
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
@@ -122,7 +121,7 @@ namespace SlaughterHouseLib.Models
                         return new TruckType
                         {
 
-                            TruckTypeId= Convert.ToInt32(ds.Tables[0].Rows[0]["truck_type_id"]) ,
+                            TruckTypeId = Convert.ToInt32(ds.Tables[0].Rows[0]["truck_type_id"]),
                             TruckTypeDesc = ds.Tables[0].Rows[0]["truck_type_desc"].ToString(),
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],

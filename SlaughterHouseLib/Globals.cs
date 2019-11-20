@@ -89,7 +89,74 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+        public static decimal GetPriceListCurrent(string customerCode, string productCode, DateTime priceDate)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(CONN_STR))
+                {
+                    conn.Open();
+                    var sql = ""; 
+                    sql = @"select COALESCE(unit_price, 0) as unit_price
+                         from customer_price p
+                            where start_date <=@start_date
+                             and end_date >=@end_date
+                             and product_code =@product_code
+                             and customer_code =@customer_code
+                            order by end_date asc LIMIT 1 ";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("customer_code", customerCode);
+                    cmd.Parameters.AddWithValue("product_code", productCode);
+                    cmd.Parameters.AddWithValue("start_date", priceDate);
+                    cmd.Parameters.AddWithValue("end_date", priceDate);
+                    var da = new MySqlDataAdapter(cmd);
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (Convert.ToDecimal(ds.Tables[0].Rows[0]["unit_price"]) > 0)
+                        {
+                            decimal unitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"]; 
+                            return unitPrice;
+                        }
+                    }
 
+                    sql = @"select COALESCE(unit_price, 0) as unit_price
+                         from product_price p
+                            where start_date <=@start_date
+                             and end_date >=@end_date
+                             and product_code =@product_code
+                            order by end_date asc LIMIT 1 ";
+                    cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_code", productCode);
+                    cmd.Parameters.AddWithValue("start_date", priceDate);
+                    cmd.Parameters.AddWithValue("end_date", priceDate);
+                    da = new MySqlDataAdapter(cmd);
+                    ds = new DataSet();
+                    da.Fill(ds);
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (Convert.ToDecimal(ds.Tables[0].Rows[0]["unit_price"]) > 0)
+                        {
+                            decimal unitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"]; 
+                            return unitPrice;
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public static decimal GetDiscountPer(string customerCode, DateTime priceDate)
         {
             try
