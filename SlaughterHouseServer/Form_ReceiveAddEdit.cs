@@ -22,7 +22,6 @@ namespace SlaughterHouseServer
             //KeyDown
             txtTransportNo.KeyDown += TxtTransportNo_KeyDown;
 
-            txtTruckNo.KeyDown += TxtTruckNo_KeyDown;
             txtCoopNo.KeyDown += TxtCoopNo_KeyDown;
             txtFarmQty.KeyDown += TxtFarmQty_KeyDown;
             txtFarmWgh.KeyDown += TxtFarmWgh_KeyDown;
@@ -35,6 +34,7 @@ namespace SlaughterHouseServer
 
             BtnDelete.Visible = false;
             LoadFarm();
+            LoadTruck();
             LoadBreeder();
             LoadData();
         }
@@ -50,8 +50,8 @@ namespace SlaughterHouseServer
         {
             if (e.KeyCode == Keys.Enter)
             {
-                txtTruckNo.SelectAll();
-                txtTruckNo.Focus();
+
+                cboTruckNo.Focus();
             }
         }
 
@@ -127,7 +127,7 @@ namespace SlaughterHouseServer
                 txtTransportNo.Text = receive.TransportDocNo;
                 cboBreeder.SelectedValue = receive.Breeder.BreederCode;
                 cboFarm.SelectedValue = receive.Farm.FarmCode;
-                txtTruckNo.Text = receive.TruckNo;
+                cboTruckNo.SelectedValue = receive.TruckNo;
                 txtCoopNo.Text = receive.CoopNo;
                 txtFarmQty.Text = receive.FarmQty.ToString();
                 txtFarmWgh.Text = receive.FarmWgh.ToString();
@@ -142,6 +142,13 @@ namespace SlaughterHouseServer
                 }
 
             }
+        }
+        private void LoadTruck()
+        {
+            var coll = TruckController.GetAllTrucks(1);
+            cboTruckNo.DisplayMember = "TruckNo";
+            cboTruckNo.ValueMember = "TruckNo";
+            cboTruckNo.DataSource = coll;
         }
 
         private void LoadFarm()
@@ -190,7 +197,7 @@ namespace SlaughterHouseServer
                 txtTransportNo.Text = "";
                 cboBreeder.SelectedIndex = 0;
                 cboFarm.SelectedIndex = 0;
-                txtTruckNo.Text = "";
+                cboTruckNo.SelectedIndex = 0;
                 txtCoopNo.Text = "";
                 txtFarmQty.Text = 0.ToString();
                 txtFarmWgh.Text = 0.ToString();
@@ -212,7 +219,7 @@ namespace SlaughterHouseServer
                     ReceiveNo = txtReciveNo.Text,
                     ReceiveDate = dtpReceiveDate.Value,
                     TransportDocNo = txtTransportNo.Text.Trim(),
-                    TruckNo = txtTruckNo.Text.Trim(),
+                    TruckNo = cboTruckNo.SelectedValue.ToString(),
                     Breeder = new Breeder
                     {
                         BreederCode = (int)cboBreeder.SelectedValue

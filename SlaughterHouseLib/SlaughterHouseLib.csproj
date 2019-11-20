@@ -43,8 +43,6 @@
   <ItemGroup>
     <Compile Include="Models\CustomerClass.cs" />
     <Compile Include="Models\CustomerClassDiscount.cs" />
-    <Compile Include="Models\TruckType.cs" />
-    <Compile Include="Models\Truck.cs" />
     <Compile Include="Models\Bom.cs" />
     <Compile Include="Models\CustomerPrice.cs" />
     <Compile Include="Models\ProductSlipItem.cs" />
@@ -64,6 +62,8 @@
     <Compile Include="Models\Receive.cs" />
     <Compile Include="Models\Stock.cs" />
     <Compile Include="Models\StockItemRunning.cs" />
+    <Compile Include="Models\Truck.cs" />
+    <Compile Include="Models\TruckType.cs" />
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Models\ProductGroup.cs" />
     <Compile Include="Models\Location.cs" />

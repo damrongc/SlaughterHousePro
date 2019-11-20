@@ -21,12 +21,13 @@ namespace SlaughterHouseClient
         public decimal transport_wgh { get; set; }
         public string stock_no { get; set; }
         public string lot_no { get; set; }
-        public string truck_no { get; set; }
+        public int truck_id { get; set; }
         public long barcode_no { get; set; }
         public int bom_code { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
     
         public virtual product product { get; set; }
+        public virtual truck truck { get; set; }
     }
 }

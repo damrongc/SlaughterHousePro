@@ -16,30 +16,19 @@ namespace SlaughterHouseClient.Issued
 {
     public partial class Form_Carcass : Form
     {
-        SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
-
+        private readonly SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
         const string PRODUCT_CODE = "P002";
         product product;
-
         private string lotNo = "";
-
         private bool isStart = false;
-        //private bool isTare = false;
         private bool isZero = true;
         bool lockWeight = false;
         int stableCount = 0;
-
-
-        //private const string CHOOSE_DATA = "กรุณาเลือกข้อมูล";
-        //private const string START_WAITING = "กรุณาเริ่มชั่ง";
-        //private const string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
-
         List<Button> buttons;
         private int Index;
-        private int PAGE_SIZE = 15;
-
-        FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
-        FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
+        private readonly int PAGE_SIZE = 15;
+        readonly FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
+        readonly FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
         delegate void SetTextCallback(string text);
         string InputData = String.Empty;
         public Form_Carcass()
@@ -208,14 +197,11 @@ namespace SlaughterHouseClient.Issued
 
                 lblOrderNo.Text = order.order_no;
                 lblCustomer.Text = order.customer.customer_name;
-
-
-
                 var transport = db.transports.Where(p => p.ref_document_no == order.order_no).SingleOrDefault();
                 if (transport != null)
                 {
                     //lblTruckNo.Text = transport.truck_no;
-                    cboTruckNo.SelectedValue = transport.truck_no;
+                    cboTruckNo.SelectedValue = transport.truck_id;
                     cboTruckNo.Enabled = false;
                 }
 
@@ -235,13 +221,14 @@ namespace SlaughterHouseClient.Issued
                 var plant = db.plants.Find(plantID);
                 lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
 
-                var trucks = db.trucks.Where(p => p.active == true).Select(p => new
+                var trucks = db.trucks.Where(p => p.truck_type_id == 2 && p.active == true).Select(p => new
                 {
+                    p.truck_id,
                     p.truck_no,
                 }).ToList();
 
                 cboTruckNo.DisplayMember = "truck_no";
-                cboTruckNo.ValueMember = "truck_no";
+                cboTruckNo.ValueMember = "truck_id";
                 cboTruckNo.DataSource = trucks;
 
             }
@@ -318,8 +305,7 @@ namespace SlaughterHouseClient.Issued
                 var refDocumentNo = "";
                 var refDocumentType = "";
                 var transportNo = "";
-                var truckNo = cboTruckNo.SelectedValue.ToString();
-                //var truckNo = lblTruckNo.Text;
+                var truckId = cboTruckNo.SelectedValue.ToString().ToInt16();
 
                 string createBy = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
@@ -447,7 +433,7 @@ namespace SlaughterHouseClient.Issued
                                         transport_no = transportNo,
                                         transport_date = DateTime.Today,
                                         ref_document_no = orderNo,
-                                        truck_no = truckNo,
+                                        truck_id = truckId,
                                         transport_flag = 0,
                                         create_at = DateTime.Now,
                                         create_by = createBy
@@ -456,7 +442,7 @@ namespace SlaughterHouseClient.Issued
                                 }
                                 else
                                 {
-                                    transport.truck_no = truckNo;
+                                    transport.truck_id = truckId;
                                     db.Entry(transport).State = EntityState.Modified;
                                 }
                                 //insert transport item
@@ -469,7 +455,7 @@ namespace SlaughterHouseClient.Issued
                                     transport_wgh = unloadWeight,
                                     stock_no = stockNo,
                                     lot_no = lotNo,
-                                    truck_no = truckNo,
+                                    truck_id = truckId,
                                     barcode_no = 0,
                                     bom_code = bomCode,
                                     create_at = DateTime.Now,
@@ -565,7 +551,7 @@ namespace SlaughterHouseClient.Issued
         {
             if (Index > 0)
             {
-                Index = Index - PAGE_SIZE;
+                Index -= PAGE_SIZE;
                 if (Index < 0)
                 {
                     Index = 0;
@@ -578,7 +564,7 @@ namespace SlaughterHouseClient.Issued
         {
             if (Index < buttons.Count - 1)
             {
-                Index = Index + PAGE_SIZE;
+                Index += PAGE_SIZE;
                 if (Index > buttons.Count - 1)
                 {
                     Index = buttons.Count - 1;
@@ -704,7 +690,7 @@ namespace SlaughterHouseClient.Issued
             }
         }
 
-        private void btnAcceptWeight_Click(object sender, EventArgs e)
+        private void BtnAcceptWeight_Click(object sender, EventArgs e)
         {
             try
             {
@@ -750,15 +736,16 @@ namespace SlaughterHouseClient.Issued
             }
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void BackgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
 
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             double scaleWeight = lblWeight.Text.ToDouble();
-            if (scaleWeight <= 0)
+            double minWeight = lblMinWeight.Text.ToDouble();
+            if (scaleWeight <= minWeight)
             {
                 lblMessage.Text = Constants.WEIGHT_WAITING;
                 isZero = true;
@@ -782,13 +769,13 @@ namespace SlaughterHouseClient.Issued
             }
         }
 
-        private void timerMinWeight_Tick(object sender, EventArgs e)
+        private void TimerMinWeight_Tick(object sender, EventArgs e)
         {
             if (!backgroundWorker1.IsBusy)
                 backgroundWorker1.RunWorkerAsync();
         }
 
-        private void btnOrderNo_Click(object sender, EventArgs e)
+        private void BtnOrderNo_Click(object sender, EventArgs e)
         {
             var frm = new Form_Orders(product.product_code);
 
@@ -799,7 +786,7 @@ namespace SlaughterHouseClient.Issued
             }
         }
 
-        private void btnShowTruck_Click(object sender, EventArgs e)
+        private void BtnShowTruck_Click(object sender, EventArgs e)
         {
             try
             {

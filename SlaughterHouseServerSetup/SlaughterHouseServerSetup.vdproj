@@ -21,14 +21,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0F6F31B26FCE434C97929C644D35802B"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_1724FE0A0096E756B9AE206A303389D0"
+        "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1724FE0A0096E756B9AE206A303389D0"
-        "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
+        "MsmKey" = "8:_18CF2AD3960F4B18A23C35A67716AC50"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -45,13 +45,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1DD875F07773407094E55184FC78D643"
+        "MsmKey" = "8:_1D628E6AD65948939658CE101D2E84F2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1F289466CDC94D0F8127CEADF560B014"
+        "MsmKey" = "8:_1FA4891915534336B2083C0DEF51372E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -87,25 +87,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2BD9F3BEB989488ABD33F572CCFD8905"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3117EFEAFDB0B20BD16EFD83A24E0495"
         "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3169759A330B4161974C8FF8C232037E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_332D0D21C2FA4892843190EF50FEAE21"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_397C9A5A09414F0D9CFE092FFF9D9BBB"
+        "MsmKey" = "8:_3C24360B9A1D403CAD2BCBF9974E8337"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -135,13 +129,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3F9FFE91C71548409D92769EDA6B673A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3FB9E8615E42448E8C04D0FB848C48DA"
+        "MsmKey" = "8:_4980AA7D90504B7794EB5E58049FF379"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -165,7 +153,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_69FCA78CE1874A2EA862FCB0D97B44E5"
+        "MsmKey" = "8:_655AF3959E874ED79B41F94856F7A541"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -189,7 +177,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7A28CBDD3C0048F09F8D8BADAB9E10FE"
+        "MsmKey" = "8:_738ADCF6BB264FC6B642C42D55979D3E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7A5628D92EAA409A81021B40BA02EFA5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7B97CAA156B14E46A084868A986163D0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -201,19 +201,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7FE2F18CCBC048CA9759D09789CFCB90"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8499A25DCC8941268E3413B9A915336A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_883C28F02FCB4C5BB9BE50564B815EC7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8A737FFBB2E14591A7E12D5C77112DD6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8BFA8C06510E48BBB9039BA5C3EB46C7"
+        "MsmKey" = "8:_8F8890C530A44B1AAA49EE144B657CF2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -249,7 +255,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A685E63550A142B188ADC879F7FAFE7E"
+        "MsmKey" = "8:_A39F0BBA133C4887849AC2E0A01AD777"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A7ECEE1ECF414FA7BD9BAC242DCCD9F8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A85A441A27184BFB973576063F581B20"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -261,20 +279,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B66F4032FA134513A9A6FD60589AD3EF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_C30707127758F01661966928E551DA0B"
         "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C38EB823703E4594B990F338348E35FD"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -315,25 +321,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C9EE7FB85CC141BEAFF324617B45938B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CD94E690F8654FE687E5F8763C49B7C7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D6435BB90B364A5296813265437B42F7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DD8E9B32305340AE8E78175AB5EFD7CD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -345,8 +333,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E2142880A6E941F5A94059DB3ED10B69"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E2F476C31B63D9CEA623DF74BBDA53C8"
         "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E46FACBA5E6E412DA423753FF7057307"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -359,6 +359,12 @@
         {
         "MsmKey" = "8:_E8F3ED2140C0DB7DB7C740C1FFE8D81F"
         "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E979963E61CD410AA93B15CCD9A81771"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -393,7 +399,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EE03736B59F34D3A9ED1880AC8EC9512"
+        "MsmKey" = "8:_EC9C694CD36B4A7CBBF3CC80866E6B93"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -460,6 +466,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_99A952C30BEBCB5C84617078C70743B1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9AE019544CD26E02E9A30AC95149BB6F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -485,12 +497,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C54F17BCC8868D7A2653E385E9DDA739"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_99A952C30BEBCB5C84617078C70743B1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -636,7 +642,7 @@
             {
             "Enabled" = "11:TRUE"
             "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:2"
+            "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
                 "Items"
@@ -697,26 +703,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0F6F31B26FCE434C97929C644D35802B"
-            {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-Black.ttf"
-            "TargetName" = "8:Kanit-Black.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:5"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1724FE0A0096E756B9AE206A303389D0"
             {
             "AssemblyRegister" = "3:1"
@@ -746,6 +732,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_18CF2AD3960F4B18A23C35A67716AC50"
+            {
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-ExtraLightItalic.ttf"
+            "TargetName" = "8:Kanit-ExtraLightItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1B8DE055AB8D3FA39DE6DBBB2747AAEC"
@@ -779,10 +785,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1DD875F07773407094E55184FC78D643"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1D628E6AD65948939658CE101D2E84F2"
             {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-SemiBold.ttf"
-            "TargetName" = "8:Kanit-SemiBold.ttf"
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-BoldItalic.ttf"
+            "TargetName" = "8:Kanit-BoldItalic.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
             "Condition" = "8:"
@@ -799,10 +805,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F289466CDC94D0F8127CEADF560B014"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1FA4891915534336B2083C0DEF51372E"
             {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-Light.ttf"
-            "TargetName" = "8:Kanit-Light.ttf"
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-ExtraLight.ttf"
+            "TargetName" = "8:Kanit-ExtraLight.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
             "Condition" = "8:"
@@ -881,6 +887,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2BD9F3BEB989488ABD33F572CCFD8905"
+            {
+            "SourcePath" = "8:..\\..\\Fonts\\BARCOD39_1.TTF"
+            "TargetName" = "8:BARCOD39_1.TTF"
+            "Tag" = "8:"
+            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3117EFEAFDB0B20BD16EFD83A24E0495"
             {
             "AssemblyRegister" = "3:1"
@@ -912,50 +938,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3169759A330B4161974C8FF8C232037E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3C24360B9A1D403CAD2BCBF9974E8337"
             {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-ExtraBoldItalic.ttf"
-            "TargetName" = "8:Kanit-ExtraBoldItalic.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:5"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_332D0D21C2FA4892843190EF50FEAE21"
-            {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-ExtraBold.ttf"
-            "TargetName" = "8:Kanit-ExtraBold.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:5"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_397C9A5A09414F0D9CFE092FFF9D9BBB"
-            {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-Medium.ttf"
-            "TargetName" = "8:Kanit-Medium.ttf"
+            "SourcePath" = "8:..\\..\\Fonts\\BARCD39.TTF"
+            "TargetName" = "8:BARCD39.TTF"
             "Tag" = "8:"
             "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
             "Condition" = "8:"
@@ -1003,30 +989,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3F9FFE91C71548409D92769EDA6B673A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4980AA7D90504B7794EB5E58049FF379"
             {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-Thin.ttf"
-            "TargetName" = "8:Kanit-Thin.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:5"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3FB9E8615E42448E8C04D0FB848C48DA"
-            {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-Italic.ttf"
-            "TargetName" = "8:Kanit-Italic.ttf"
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-Regular.ttf"
+            "TargetName" = "8:Kanit-Regular.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
             "Condition" = "8:"
@@ -1103,10 +1069,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_69FCA78CE1874A2EA862FCB0D97B44E5"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_655AF3959E874ED79B41F94856F7A541"
             {
-            "SourcePath" = "8:F:\\Client Setup\\BARCOD39_1.TTF"
-            "TargetName" = "8:BARCOD39_1.TTF"
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-Black.ttf"
+            "TargetName" = "8:Kanit-Black.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
             "Condition" = "8:"
@@ -1194,10 +1160,50 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A28CBDD3C0048F09F8D8BADAB9E10FE"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_738ADCF6BB264FC6B642C42D55979D3E"
             {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-SemiBoldItalic.ttf"
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-SemiBoldItalic.ttf"
             "TargetName" = "8:Kanit-SemiBoldItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A5628D92EAA409A81021B40BA02EFA5"
+            {
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-Bold.ttf"
+            "TargetName" = "8:Kanit-Bold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7B97CAA156B14E46A084868A986163D0"
+            {
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-Light.ttf"
+            "TargetName" = "8:Kanit-Light.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
             "Condition" = "8:"
@@ -1234,6 +1240,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7FE2F18CCBC048CA9759D09789CFCB90"
+            {
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-Medium.ttf"
+            "TargetName" = "8:Kanit-Medium.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8499A25DCC8941268E3413B9A915336A"
+            {
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-Thin.ttf"
+            "TargetName" = "8:Kanit-Thin.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_883C28F02FCB4C5BB9BE50564B815EC7"
             {
             "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\barcode.rpt"
@@ -1254,30 +1300,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8A737FFBB2E14591A7E12D5C77112DD6"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F8890C530A44B1AAA49EE144B657CF2"
             {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-ExtraLightItalic.ttf"
-            "TargetName" = "8:Kanit-ExtraLightItalic.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:5"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8BFA8C06510E48BBB9039BA5C3EB46C7"
-            {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-Regular.ttf"
-            "TargetName" = "8:Kanit-Regular.ttf"
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-ExtraBoldItalic.ttf"
+            "TargetName" = "8:Kanit-ExtraBoldItalic.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
             "Condition" = "8:"
@@ -1407,10 +1433,50 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A685E63550A142B188ADC879F7FAFE7E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A39F0BBA133C4887849AC2E0A01AD777"
             {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-MediumItalic.ttf"
-            "TargetName" = "8:Kanit-MediumItalic.ttf"
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-LightItalic.ttf"
+            "TargetName" = "8:Kanit-LightItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A7ECEE1ECF414FA7BD9BAC242DCCD9F8"
+            {
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-Italic.ttf"
+            "TargetName" = "8:Kanit-Italic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A85A441A27184BFB973576063F581B20"
+            {
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-ExtraBold.ttf"
+            "TargetName" = "8:Kanit-ExtraBold.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
             "Condition" = "8:"
@@ -1447,26 +1513,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B66F4032FA134513A9A6FD60589AD3EF"
-            {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-BoldItalic.ttf"
-            "TargetName" = "8:Kanit-BoldItalic.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:5"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C30707127758F01661966928E551DA0B"
             {
             "AssemblyRegister" = "3:1"
@@ -1496,26 +1542,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C38EB823703E4594B990F338348E35FD"
-            {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-LightItalic.ttf"
-            "TargetName" = "8:Kanit-LightItalic.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:5"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C3ABD67043FC743B1A24553BE69E6078"
@@ -1580,46 +1606,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C9EE7FB85CC141BEAFF324617B45938B"
-            {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-ExtraLight.ttf"
-            "TargetName" = "8:Kanit-ExtraLight.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:5"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CD94E690F8654FE687E5F8763C49B7C7"
-            {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-Bold.ttf"
-            "TargetName" = "8:Kanit-Bold.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:5"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6435BB90B364A5296813265437B42F7"
             {
             "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\somapinvoice.rpt"
@@ -1636,26 +1622,6 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DD8E9B32305340AE8E78175AB5EFD7CD"
-            {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-ThinItalic.ttf"
-            "TargetName" = "8:Kanit-ThinItalic.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:5"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
@@ -1691,6 +1657,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E2142880A6E941F5A94059DB3ED10B69"
+            {
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-BlackItalic.ttf"
+            "TargetName" = "8:Kanit-BlackItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E2F476C31B63D9CEA623DF74BBDA53C8"
             {
             "AssemblyRegister" = "3:1"
@@ -1722,6 +1708,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E46FACBA5E6E412DA423753FF7057307"
+            {
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-ThinItalic.ttf"
+            "TargetName" = "8:Kanit-ThinItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E8F3ED2140C0DB7DB7C740C1FFE8D81F"
             {
             "AssemblyRegister" = "3:1"
@@ -1751,6 +1757,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E979963E61CD410AA93B15CCD9A81771"
+            {
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-SemiBold.ttf"
+            "TargetName" = "8:Kanit-SemiBold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EB02FAE9BA61A10617A043C4A61D5667"
@@ -1815,10 +1841,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE03736B59F34D3A9ED1880AC8EC9512"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EC9C694CD36B4A7CBBF3CC80866E6B93"
             {
-            "SourcePath" = "8:F:\\Kanit\\Kanit-BlackItalic.ttf"
-            "TargetName" = "8:Kanit-BlackItalic.ttf"
+            "SourcePath" = "8:..\\..\\Fonts\\Kanit\\Kanit-MediumItalic.ttf"
+            "TargetName" = "8:Kanit-MediumItalic.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1B03A33CF8B9483DBC05824986486242"
             "Condition" = "8:"

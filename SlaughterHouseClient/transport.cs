@@ -17,11 +17,13 @@ namespace SlaughterHouseClient
         public string transport_no { get; set; }
         public System.DateTime transport_date { get; set; }
         public string ref_document_no { get; set; }
-        public string truck_no { get; set; }
+        public int truck_id { get; set; }
         public int transport_flag { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
+    
+        public virtual truck truck { get; set; }
     }
 }

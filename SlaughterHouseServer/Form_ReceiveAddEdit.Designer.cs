@@ -37,7 +37,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtTruckNo = new System.Windows.Forms.TextBox();
             this.txtFarmWgh = new System.Windows.Forms.TextBox();
             this.txtCoopNo = new System.Windows.Forms.TextBox();
             this.txtFarmQty = new System.Windows.Forms.TextBox();
@@ -52,6 +51,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.dtpReceiveDate = new System.Windows.Forms.DateTimePicker();
             this.BtnDelete = new System.Windows.Forms.Button();
+            this.cboTruckNo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // BtnSaveAndClose
@@ -133,14 +133,6 @@
             this.label6.Size = new System.Drawing.Size(112, 29);
             this.label6.TabIndex = 18;
             this.label6.Text = "น้ำหนักฟาร์ม:";
-            // 
-            // txtTruckNo
-            // 
-            this.txtTruckNo.Location = new System.Drawing.Point(187, 223);
-            this.txtTruckNo.MaxLength = 10;
-            this.txtTruckNo.Name = "txtTruckNo";
-            this.txtTruckNo.Size = new System.Drawing.Size(215, 36);
-            this.txtTruckNo.TabIndex = 19;
             // 
             // txtFarmWgh
             // 
@@ -284,10 +276,19 @@
             this.BtnDelete.UseVisualStyleBackColor = false;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
+            // cboTruckNo
+            // 
+            this.cboTruckNo.FormattingEnabled = true;
+            this.cboTruckNo.Location = new System.Drawing.Point(187, 223);
+            this.cboTruckNo.Name = "cboTruckNo";
+            this.cboTruckNo.Size = new System.Drawing.Size(215, 37);
+            this.cboTruckNo.TabIndex = 49;
+            // 
             // Form_ReceiveAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(807, 482);
+            this.Controls.Add(this.cboTruckNo);
             this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.dtpReceiveDate);
             this.Controls.Add(this.label11);
@@ -302,7 +303,6 @@
             this.Controls.Add(this.txtFarmQty);
             this.Controls.Add(this.txtCoopNo);
             this.Controls.Add(this.txtFarmWgh);
-            this.Controls.Add(this.txtTruckNo);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -333,7 +333,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtTruckNo;
         private System.Windows.Forms.TextBox txtFarmWgh;
         private System.Windows.Forms.TextBox txtCoopNo;
         private System.Windows.Forms.TextBox txtFarmQty;
@@ -348,5 +347,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DateTimePicker dtpReceiveDate;
         private System.Windows.Forms.Button BtnDelete;
+        private System.Windows.Forms.ComboBox cboTruckNo;
     }
 }

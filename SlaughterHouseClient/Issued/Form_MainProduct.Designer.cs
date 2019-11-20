@@ -46,12 +46,11 @@
             this.lblLotNo = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnTruckNo = new System.Windows.Forms.Button();
-            this.lblTruckNo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
             this.dragControl1 = new DragControl();
             this.btnView = new System.Windows.Forms.Button();
+            this.cboTruckNo = new System.Windows.Forms.ComboBox();
             this.panelHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
@@ -265,33 +264,6 @@
             this.label3.TabIndex = 70;
             this.label3.Text = "ทะเบียนรถ";
             // 
-            // btnTruckNo
-            // 
-            this.btnTruckNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
-            this.btnTruckNo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnTruckNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTruckNo.Font = new System.Drawing.Font("Kanit", 16F);
-            this.btnTruckNo.ForeColor = System.Drawing.Color.White;
-            this.btnTruckNo.Image = ((System.Drawing.Image)(resources.GetObject("btnTruckNo.Image")));
-            this.btnTruckNo.Location = new System.Drawing.Point(948, 90);
-            this.btnTruckNo.Name = "btnTruckNo";
-            this.btnTruckNo.Size = new System.Drawing.Size(64, 43);
-            this.btnTruckNo.TabIndex = 71;
-            this.btnTruckNo.UseVisualStyleBackColor = false;
-            this.btnTruckNo.Click += new System.EventHandler(this.btnTruckNo_Click);
-            // 
-            // lblTruckNo
-            // 
-            this.lblTruckNo.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTruckNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTruckNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblTruckNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.lblTruckNo.ForeColor = System.Drawing.Color.Black;
-            this.lblTruckNo.Location = new System.Drawing.Point(754, 90);
-            this.lblTruckNo.Name = "lblTruckNo";
-            this.lblTruckNo.Size = new System.Drawing.Size(188, 43);
-            this.lblTruckNo.TabIndex = 72;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.gv);
@@ -338,15 +310,23 @@
             this.btnView.UseVisualStyleBackColor = false;
             this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
+            // cboTruckNo
+            // 
+            this.cboTruckNo.Font = new System.Drawing.Font("Kanit", 18F);
+            this.cboTruckNo.FormattingEnabled = true;
+            this.cboTruckNo.Location = new System.Drawing.Point(754, 90);
+            this.cboTruckNo.Name = "cboTruckNo";
+            this.cboTruckNo.Size = new System.Drawing.Size(198, 43);
+            this.cboTruckNo.TabIndex = 85;
+            // 
             // Form_MainProduct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.cboTruckNo);
             this.Controls.Add(this.btnView);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.lblTruckNo);
-            this.Controls.Add(this.btnTruckNo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtBarcodeNo);
             this.Controls.Add(this.label6);
@@ -395,11 +375,10 @@
         private System.Windows.Forms.Label lblLotNo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnTruckNo;
-        private System.Windows.Forms.Label lblTruckNo;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView gv;
         private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.ComboBox cboTruckNo;
     }
 }
 

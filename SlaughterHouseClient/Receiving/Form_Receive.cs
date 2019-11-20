@@ -72,7 +72,7 @@ namespace SlaughterHouseClient.Receiving
                     p.receive_no,
                     receive_date = p.receive_date.ToString("dd-MM-yyyy"),
                     p.transport_doc_no,
-                    p.truck_no,
+                    p.truck.truck_no,
                     p.farm.farm_name,
                     p.coop_no,
                     p.queue_no,

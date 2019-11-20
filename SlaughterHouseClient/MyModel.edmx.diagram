@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="217538d12a614ee0bc02a52f55759ae3" Name="Diagram1" ZoomLevel="78">
+      <Diagram DiagramId="217538d12a614ee0bc02a52f55759ae3" Name="Diagram1" ZoomLevel="102">
         <EntityTypeShape EntityType="SlaughterhouseModel.barcode" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.breeder" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.customer" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.document_generate" Width="1.5" PointX="7.75" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.farm" Width="1.5" PointX="3.75" PointY="23.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.invoice_item" Width="1.5" PointX="8.25" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.location" Width="1.5" PointX="6" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.location" Width="1.5" PointX="13.375" PointY="29.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.order" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.orders_item" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.plant" Width="1.5" PointX="8.75" PointY="2.875" IsExpanded="true" />
@@ -28,16 +28,13 @@
         <EntityTypeShape EntityType="SlaughterhouseModel.bom_item" Width="1.5" PointX="5.25" PointY="34" />
         <EntityTypeShape EntityType="SlaughterhouseModel.receive_item" Width="1.5" PointX="13.25" PointY="8.5" />
         <EntityTypeShape EntityType="SlaughterhouseModel.customer_price" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.invoice" Width="1.5" PointX="6.375" PointY="24.375" />
         <EntityTypeShape EntityType="SlaughterhouseModel.product_slip" Width="1.5" PointX="9.375" PointY="27" />
         <EntityTypeShape EntityType="SlaughterhouseModel.product_slip_item" Width="1.5" PointX="11.625" PointY="21.75" />
-        <AssociationConnector Association="SlaughterhouseModel.fk_invitem_inv" />
         <AssociationConnector Association="SlaughterhouseModel.fk_slipitem_location" />
         <AssociationConnector Association="SlaughterhouseModel.fk_product_slip_order" />
         <AssociationConnector Association="SlaughterhouseModel.fk_slipitem_slip" />
         <EntityTypeShape EntityType="SlaughterhouseModel.stock" Width="1.5" PointX="9.25" PointY="21.5" />
         <AssociationConnector Association="SlaughterhouseModel.fk_stock_location" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.truck" Width="1.5" PointX="7.375" PointY="9.75" />
         <EntityTypeShape EntityType="SlaughterhouseModel.product" Width="1.5" PointX="3" PointY="12.875" />
         <AssociationConnector Association="SlaughterhouseModel.fk_barcode_product" />
         <AssociationConnector Association="SlaughterhouseModel.fk_bom_product" />
@@ -51,13 +48,24 @@
         <AssociationConnector Association="SlaughterhouseModel.fk_stock_product" />
         <AssociationConnector Association="SlaughterhouseModel.fk_unit_qty" />
         <AssociationConnector Association="SlaughterhouseModel.fk_unit_wgh" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.transport" Width="1.5" PointX="11.375" PointY="1" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.receive" Width="1.5" PointX="11" PointY="13.625" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.receive" Width="1.5" PointX="13.75" PointY="13.5" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.truck" Width="1.5" PointX="0.75" PointY="10.25" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.truck_type" Width="1.5" PointX="3.75" PointY="20.75" />
         <AssociationConnector Association="SlaughterhouseModel.fk_breeder_01" />
         <AssociationConnector Association="SlaughterhouseModel.fk_farm_01" />
         <AssociationConnector Association="SlaughterhouseModel.fk_receives_01" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.transport_item" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_truck_01" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_truck_type" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.customer_class" Width="1.5" PointX="7.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.customer_class_discount" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.invoice" Width="1.5" PointX="7" PointY="25.125" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.transport" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.transport_item" Width="1.5" PointX="11.25" PointY="15.25" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_invitem_inv" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_invoice_truck" />
         <AssociationConnector Association="SlaughterhouseModel.fk_transport_product" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_transport_truck" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_transport_item_truck" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
