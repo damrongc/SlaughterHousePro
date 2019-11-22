@@ -20,5 +20,10 @@ namespace SlaughterHouseClient
         public string address { get; set; }
         public string est_no { get; set; }
         public byte[] logo_image { get; set; }
+        public Nullable<bool> active { get; set; }
+        public Nullable<System.DateTime> create_at { get; set; }
+        public string create_by { get; set; }
+        public Nullable<System.DateTime> modified_at { get; set; }
+        public string modified_by { get; set; }
     }
 }

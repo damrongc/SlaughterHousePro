@@ -44,8 +44,6 @@ namespace SlaughterHouseServer
             txtTransportNo.CharacterCasing = CharacterCasing.Upper;
         }
 
-
-
         private void TxtTransportNo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -119,7 +117,7 @@ namespace SlaughterHouseServer
         private void LoadData()
         {
             txtReciveNo.Enabled = false;
-            Receive receive = ReceiveController.GetReceive(this.receiveNo);
+            Receive receive = ReceiveController.GetReceive(receiveNo);
             if (receive != null)
             {
                 txtReciveNo.Text = receive.ReceiveNo;
@@ -127,7 +125,7 @@ namespace SlaughterHouseServer
                 txtTransportNo.Text = receive.TransportDocNo;
                 cboBreeder.SelectedValue = receive.Breeder.BreederCode;
                 cboFarm.SelectedValue = receive.Farm.FarmCode;
-                cboTruckNo.SelectedValue = receive.TruckNo;
+                cboTruckNo.SelectedValue = receive.Truck.TruckId;
                 txtCoopNo.Text = receive.CoopNo;
                 txtFarmQty.Text = receive.FarmQty.ToString();
                 txtFarmWgh.Text = receive.FarmWgh.ToString();
@@ -143,11 +141,12 @@ namespace SlaughterHouseServer
 
             }
         }
+
         private void LoadTruck()
         {
             var coll = TruckController.GetAllTrucks(1);
             cboTruckNo.DisplayMember = "TruckNo";
-            cboTruckNo.ValueMember = "TruckNo";
+            cboTruckNo.ValueMember = "TruckId";
             cboTruckNo.DataSource = coll;
         }
 
@@ -209,7 +208,6 @@ namespace SlaughterHouseServer
             }
         }
 
-
         private void SaveReceive()
         {
             try
@@ -219,7 +217,11 @@ namespace SlaughterHouseServer
                     ReceiveNo = txtReciveNo.Text,
                     ReceiveDate = dtpReceiveDate.Value,
                     TransportDocNo = txtTransportNo.Text.Trim(),
-                    TruckNo = cboTruckNo.SelectedValue.ToString(),
+
+                    Truck = new Truck
+                    {
+                        TruckId = cboTruckNo.SelectedValue.ToString().ToInt16(),
+                    },
                     Breeder = new Breeder
                     {
                         BreederCode = (int)cboBreeder.SelectedValue

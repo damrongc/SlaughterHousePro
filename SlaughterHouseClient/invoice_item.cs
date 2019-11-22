@@ -19,7 +19,11 @@ namespace SlaughterHouseClient
         public int seq { get; set; }
         public int qty { get; set; }
         public decimal wgh { get; set; }
+        public Nullable<decimal> unit_price_current { get; set; }
+        public Nullable<decimal> disc_per { get; set; }
         public decimal unit_price { get; set; }
+        public decimal unit_disc { get; set; }
+        public Nullable<decimal> disc_amt { get; set; }
         public decimal gross_amt { get; set; }
         public decimal net_amt { get; set; }
         public string sale_unit_method { get; set; }
@@ -27,11 +31,8 @@ namespace SlaughterHouseClient
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
-        public decimal unit_disc { get; set; } 
-        public Nullable<decimal> disc_amt { get; set; }
-        public Nullable<decimal> disc_per { get; set; }
     
-        public virtual product product { get; set; }
         public virtual invoice invoice { get; set; }
+        public virtual product product { get; set; }
     }
 }

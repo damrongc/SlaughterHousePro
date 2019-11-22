@@ -16,22 +16,30 @@ namespace SlaughterHouseServer
 
         private void UserSettingsComponent()
         {
+            try
+            {
+                BtnAdd.Click += BtnAdd_Click;
+                BtnSearch.Click += BtnSearch_Click;
+                gv.CellContentClick += Gv_CellContentClick;
+                gv.DataBindingComplete += Gv_DataBindingComplete;
+                gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+                gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
+                gv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
+                gv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
+                gv.EnableHeadersVisualStyles = false;
 
-            BtnAdd.Click += BtnAdd_Click;
-            BtnSearch.Click += BtnSearch_Click;
-            gv.CellContentClick += Gv_CellContentClick;
-            gv.DataBindingComplete += Gv_DataBindingComplete;
-            gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
-            gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
-            gv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
-            gv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
-            gv.EnableHeadersVisualStyles = false;
 
+                LoadFarm();
+                LoadReceive();
+            }
+            catch (Exception ex)
+            {
 
-            LoadFarm();
-            LoadReceive();
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

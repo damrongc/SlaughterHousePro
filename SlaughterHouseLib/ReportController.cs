@@ -307,15 +307,16 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"select receive_no,receive_date,transport_doc_no,
-                                    truck_no,rev.farm_code,coop_no,queue_no,lot_no,
-                                    farm_qty,farm_wgh,factory_qty,factory_wgh,
-                                    farm.farm_name,farm.address,
-                                    breeder.breeder_name
-                                    from receives rev,farm,breeder
-                                    where receive_no =@receive_no
-                                    and rev.farm_code =farm.farm_code
-                                    and rev.breeder_code =breeder.breeder_code";
+                    var sql = @"SELECT receive_no,receive_date,transport_doc_no,
+                                        truck_no,rev.farm_code,coop_no,queue_no,lot_no,
+                                        farm_qty,farm_wgh,factory_qty,factory_wgh,
+                                        farm.farm_name,farm.address,
+                                        breeder.breeder_name
+                                    FROM receives rev,farm,breeder,truck d
+                                    WHERE receive_no =@receive_no
+                                    AND rev.farm_code =farm.farm_code
+                                    AND rev.breeder_code =breeder.breeder_code
+                                    AND rev.truck_id =d.truck_id";
 
                     using (var cmd = new MySqlCommand(sql, conn))
                     {
@@ -325,11 +326,11 @@ namespace SlaughterHouseLib
                         da.Fill(ds);
 
                     }
-                    sql = @"select receive_no,product_code,seq,sex_flag,receive_qty,receive_wgh,create_at
-                                    from receive_item
-                                    where receive_no =@receive_no
-                                    and product_code ='P001'
-                                    order by seq asc";
+                    sql = @"SELECT receive_no,product_code,seq,sex_flag,receive_qty,receive_wgh,create_at
+                                    FROM receive_item
+                                    WHERE receive_no =@receive_no
+                                    AND product_code ='P001'
+                                    ORDER BY seq ASC";
                     using (var cmd = new MySqlCommand(sql, conn))
                     {
                         cmd.Parameters.AddWithValue("receive_no", receiveNo);
@@ -337,16 +338,16 @@ namespace SlaughterHouseLib
                         var ds1 = new DataSet();
                         da.Fill(ds1);
 
-
                         decimal multiplyRound = 1;
                         int totalRecord = 200;
                         int rowPerCol = 30;
                         int totalCol = 6;
 
-
                         DataTable dt = new DataTable("TableItem");
-
-
+                        if (dt.Rows.Count == 0)
+                        {
+                            throw new Exception("ไม่สามารถออกรายงานได้\r\nเนื่องจากไม่มีการชั่ง");
+                        }
                         for (int i = 0; i < totalCol; i++)
                         {
                             dt.Columns.Add("SeqNo" + (i + 1), typeof(int));

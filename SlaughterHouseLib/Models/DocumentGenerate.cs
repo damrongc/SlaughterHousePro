@@ -48,7 +48,7 @@ namespace SlaughterHouseLib.Models
         public static string GetDocumentRunningFormat(string documentType, DateTime docDate)
         {
             try
-            { 
+            {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();

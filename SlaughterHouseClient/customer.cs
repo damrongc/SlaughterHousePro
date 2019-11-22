@@ -22,6 +22,7 @@ namespace SlaughterHouseClient
     
         public string customer_code { get; set; }
         public string customer_name { get; set; }
+        public int class_id { get; set; }
         public string address { get; set; }
         public string ship_to { get; set; }
         public string tax_id { get; set; }
@@ -31,7 +32,6 @@ namespace SlaughterHouseClient
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
-        public int class_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }

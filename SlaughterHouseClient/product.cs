@@ -66,9 +66,9 @@ namespace SlaughterHouseClient
         public virtual ICollection<product_slip_item> product_slip_item { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock> stocks { get; set; }
-        public virtual unit_of_measurement unit_of_measurement { get; set; }
-        public virtual unit_of_measurement unit_of_measurement1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<transport_item> transport_item { get; set; }
+        public virtual unit_of_measurement unit_of_measurement { get; set; }
+        public virtual unit_of_measurement unit_of_measurement1 { get; set; }
     }
 }

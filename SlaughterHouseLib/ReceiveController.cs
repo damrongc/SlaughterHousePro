@@ -20,17 +20,17 @@ namespace SlaughterHouseLib
                     conn.Open();
                     var sb = new StringBuilder();
                     sb.Append("SELECT a.receive_no,a.receive_date,a.transport_doc_no,");
-                    sb.Append(" a.truck_no,a.farm_code,a.coop_no,");
+                    sb.Append(" a.truck_id,a.farm_code,a.coop_no,");
                     sb.Append(" a.farm_qty,a.farm_wgh,");
                     sb.Append(" a.factory_qty,a.factory_wgh,");
                     sb.Append(" a.receive_flag,");
                     sb.Append(" a.queue_no,");
                     sb.Append(" b.farm_name,");
-                    sb.Append(" c.breeder_name,a.create_at");
-                    sb.Append(" FROM receives a,farm b,breeder c");
+                    sb.Append(" c.breeder_name,a.create_at,d.truck_no");
+                    sb.Append(" FROM receives a,farm b,breeder c,truck d");
                     sb.Append(" WHERE a.farm_code =b.farm_code");
                     sb.Append(" AND a.breeder_code =c.breeder_code");
-
+                    sb.Append(" AND a.truck_id =d.truck_id");
                     sb.Append(" AND a.receive_date=@receive_date");
                     if (!string.IsNullOrEmpty(farmCode))
                         sb.Append(" AND a.farm_code =@farm_code");
@@ -60,6 +60,7 @@ namespace SlaughterHouseLib
                                     ReceiveNo = p.Field<string>("receive_no"),
                                     ReceiveDate = p.Field<DateTime>("receive_date"),
                                     TransportDocNo = p.Field<string>("transport_doc_no"),
+                                    //TruckId = p.Field<Int32>("truck_id"),
                                     TruckNo = p.Field<string>("truck_no"),
                                     FarmName = p.Field<string>("farm_name"),
                                     CoopNo = p.Field<string>("coop_no"),
@@ -91,18 +92,19 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = @"SELECT a.receive_no,a.receive_date,a.transport_doc_no,
-                     a.truck_no,a.farm_code,a.coop_no,
-                     a.farm_qty,a.farm_wgh,
-                     a.factory_qty,a.factory_wgh,
-                     a.receive_flag,
-                     a.queue_no,
-                     b.farm_name,
-                     c.breeder_name,a.create_at
-                     FROM receives a,farm b,breeder c
-                     WHERE a.farm_code =b.farm_code
-                     AND a.breeder_code =c.breeder_code
-                     AND a.receive_flag = @receive_flag
-                     ORDER BY receive_no asc";
+                                a.truck_id,a.farm_code,a.coop_no,
+                                a.farm_qty,a.farm_wgh,
+                                a.factory_qty,a.factory_wgh,
+                                a.receive_flag,
+                                a.queue_no,
+                                b.farm_name,
+                                c.breeder_name,a.create_at,d.truck_no
+                                FROM receives a,farm b,breeder c,truck d
+                                WHERE a.farm_code =b.farm_code
+                                AND a.breeder_code =c.breeder_code
+                                AND a.truck_id =d.truck_id
+                                AND a.receive_flag = @receive_flag
+                                ORDER BY receive_no asc";
 
                     var cmd = new MySqlCommand(sql, conn);
 
@@ -118,6 +120,7 @@ namespace SlaughterHouseLib
                                     ReceiveNo = p.Field<string>("receive_no"),
                                     ReceiveDate = p.Field<DateTime>("receive_date"),
                                     TransportDocNo = p.Field<string>("transport_doc_no"),
+                                    TruckId = p.Field<Int32>("truck_id"),
                                     TruckNo = p.Field<string>("truck_no"),
                                     FarmName = p.Field<string>("farm_name"),
                                     CoopNo = p.Field<string>("coop_no"),
@@ -148,11 +151,11 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"SELECT 
+                    var sql = @"SELECT
                                 a.receive_no,
                                 a.receive_date,
                                 a.transport_doc_no,
-                                a.truck_no,
+                                a.truck_id,
                                 a.farm_code,
                                 a.coop_no,
                                 a.breeder_code,
@@ -163,10 +166,12 @@ namespace SlaughterHouseLib
                                 a.factory_wgh,
                                 a.receive_flag,
                                 b.farm_name,
-                                c.breeder_name
-                                FROM receives a,farm b,breeder c
+                                c.breeder_name,
+                                d.truck_no
+                                FROM receives a,farm b,breeder c,truck d
                                 WHERE a.farm_code =b.farm_code
                                 AND a.breeder_code =c.breeder_code
+                                AND a.truck_id =d.truck_id
                                 AND receive_no =@receive_no";
 
 
@@ -185,9 +190,11 @@ namespace SlaughterHouseLib
                             ReceiveNo = (string)ds.Tables[0].Rows[0]["receive_no"],
                             ReceiveDate = (DateTime)ds.Tables[0].Rows[0]["receive_date"],
                             TransportDocNo = (string)ds.Tables[0].Rows[0]["transport_doc_no"],
-
-                            TruckNo = (string)ds.Tables[0].Rows[0]["truck_no"],
-
+                            Truck = new Truck
+                            {
+                                TruckId = (Int32)ds.Tables[0].Rows[0]["truck_id"],
+                                //TruckNo = (string)ds.Tables[0].Rows[0]["truck_no"],
+                            },
                             Farm = new Farm
                             {
                                 FarmCode = (string)ds.Tables[0].Rows[0]["farm_code"],
@@ -226,83 +233,83 @@ namespace SlaughterHouseLib
             }
         }
 
-        public static Receive GetReceive(string receiveNo, string productCode)
-        {
-            try
-            {
+        //public static Receive GetReceive(string receiveNo, string productCode)
+        //{
+        //    try
+        //    {
 
-                using (var conn = new MySqlConnection(Globals.CONN_STR))
-                {
-                    conn.Open();
-                    var sql = @"SELECT x.*,y.farm_name,z.breeder_name
-                                FROM 
-                                    (SELECT a.receive_no,
-                                    a.receive_date,
-                                    a.transport_doc_no,
-                                    a.truck_no,
-                                    a.farm_code,
-                                    a.coop_no,
-                                    a.breeder_code,
-                                    a.queue_no,
-                                    a.farm_qty,
-                                    a.farm_wgh,
-                                    IFNULL(SUM(receive_qty),0) as factory_qty,
-                                    IFNULL(SUM(receive_wgh),0) as factory_wgh
-                                    FROM receives a 
-                                    LEFT JOIN receive_item b 
-                                    ON a.receive_no=b.receive_no
-                                    WHERE  a.receive_no =@receive_no
-                                    AND b.product_code =@product_code
-                                ) x,farm y,breeder z
-                                WHERE x.farm_code =y.farm_code
-                                AND x.breeder_code =z.breeder_code";
-
-
-                    var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("receive_no", receiveNo);
-                    cmd.Parameters.AddWithValue("product_code", productCode);
-                    var da = new MySqlDataAdapter(cmd);
-
-                    var ds = new DataSet();
-                    da.Fill(ds);
-
-                    Receive receive = new Receive();
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                    {
+        //        using (var conn = new MySqlConnection(Globals.CONN_STR))
+        //        {
+        //            conn.Open();
+        //            var sql = @"SELECT x.*,y.farm_name,z.breeder_name
+        //                        FROM
+        //                            (SELECT a.receive_no,
+        //                            a.receive_date,
+        //                            a.transport_doc_no,
+        //                            a.truck_no,
+        //                            a.farm_code,
+        //                            a.coop_no,
+        //                            a.breeder_code,
+        //                            a.queue_no,
+        //                            a.farm_qty,
+        //                            a.farm_wgh,
+        //                            IFNULL(SUM(receive_qty),0) as factory_qty,
+        //                            IFNULL(SUM(receive_wgh),0) as factory_wgh
+        //                            FROM receives a
+        //                            LEFT JOIN receive_item b
+        //                            ON a.receive_no=b.receive_no
+        //                            WHERE  a.receive_no =@receive_no
+        //                            AND b.product_code =@product_code
+        //                        ) x,farm y,breeder z
+        //                        WHERE x.farm_code =y.farm_code
+        //                        AND x.breeder_code =z.breeder_code";
 
 
-                        receive.ReceiveNo = (string)ds.Tables[0].Rows[i]["receive_no"];
-                        receive.ReceiveDate = (DateTime)ds.Tables[0].Rows[i]["receive_date"];
-                        receive.TransportDocNo = (string)ds.Tables[0].Rows[i]["transport_doc_no"];
-                        receive.TruckNo = (string)ds.Tables[0].Rows[i]["truck_no"];
-                        receive.Farm = new Farm
-                        {
-                            FarmCode = (string)ds.Tables[0].Rows[i]["farm_code"],
-                            FarmName = (string)ds.Tables[0].Rows[i]["farm_name"]
+        //            var cmd = new MySqlCommand(sql, conn);
+        //            cmd.Parameters.AddWithValue("receive_no", receiveNo);
+        //            cmd.Parameters.AddWithValue("product_code", productCode);
+        //            var da = new MySqlDataAdapter(cmd);
 
-                        };
-                        receive.CoopNo = ds.Tables[0].Rows[i]["coop_no"].ToString();
-                        receive.Breeder = new Breeder
-                        {
-                            BreederCode = ds.Tables[0].Rows[i]["breeder_code"].ToString().ToInt16(),
-                            BreederName = (string)ds.Tables[0].Rows[i]["breeder_name"]
-                        };
-                        receive.QueueNo = ds.Tables[0].Rows[i]["queue_no"].ToString().ToInt16();
-                        receive.FarmQty = ds.Tables[0].Rows[i]["farm_qty"].ToString().ToInt16();
-                        receive.FarmWgh = ds.Tables[0].Rows[i]["farm_wgh"].ToString().ToDecimal();
-                        receive.FactoryQty = ds.Tables[0].Rows[i]["factory_qty"].ToString().ToInt16();
-                        receive.FactoryWgh = ds.Tables[0].Rows[i]["factory_wgh"].ToString().ToDecimal();
-                    }
-                    return receive;
+        //            var ds = new DataSet();
+        //            da.Fill(ds);
 
-                }
-            }
-            catch (Exception)
-            {
+        //            Receive receive = new Receive();
+        //            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+        //            {
 
-                throw;
-            }
-        }
+
+        //                receive.ReceiveNo = (string)ds.Tables[0].Rows[i]["receive_no"];
+        //                receive.ReceiveDate = (DateTime)ds.Tables[0].Rows[i]["receive_date"];
+        //                receive.TransportDocNo = (string)ds.Tables[0].Rows[i]["transport_doc_no"];
+        //                receive.TruckNo = (string)ds.Tables[0].Rows[i]["truck_no"];
+        //                receive.Farm = new Farm
+        //                {
+        //                    FarmCode = (string)ds.Tables[0].Rows[i]["farm_code"],
+        //                    FarmName = (string)ds.Tables[0].Rows[i]["farm_name"]
+
+        //                };
+        //                receive.CoopNo = ds.Tables[0].Rows[i]["coop_no"].ToString();
+        //                receive.Breeder = new Breeder
+        //                {
+        //                    BreederCode = ds.Tables[0].Rows[i]["breeder_code"].ToString().ToInt16(),
+        //                    BreederName = (string)ds.Tables[0].Rows[i]["breeder_name"]
+        //                };
+        //                receive.QueueNo = ds.Tables[0].Rows[i]["queue_no"].ToString().ToInt16();
+        //                receive.FarmQty = ds.Tables[0].Rows[i]["farm_qty"].ToString().ToInt16();
+        //                receive.FarmWgh = ds.Tables[0].Rows[i]["farm_wgh"].ToString().ToDecimal();
+        //                receive.FactoryQty = ds.Tables[0].Rows[i]["factory_qty"].ToString().ToInt16();
+        //                receive.FactoryWgh = ds.Tables[0].Rows[i]["factory_wgh"].ToString().ToDecimal();
+        //            }
+        //            return receive;
+
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
 
         public static bool InsertOrUpdate(Receive receive)
         {
@@ -328,7 +335,7 @@ namespace SlaughterHouseLib
                         else
                             receive.QueueNo = queue_no.ToString().ToInt16() + 1;
 
-                        receive.ReceiveNo = DocumentGenerate.GetDocumentRunning("REV");
+                        receive.ReceiveNo = DocumentGenerate.GetDocumentRunningFormat("REV", receive.ReceiveDate);
                         receive.LotNo = DocumentGenerate.GetSwineLotNo(plant.PlantId, receive.ReceiveDate, receive.QueueNo);
 
 
@@ -336,7 +343,7 @@ namespace SlaughterHouseLib
                                 receive_no,
                                 receive_date,
                                 transport_doc_no,
-                                truck_no,
+                                truck_id,
                                 farm_code,
                                 coop_no,
                                 breeder_code,
@@ -350,7 +357,7 @@ namespace SlaughterHouseLib
                                 @receive_no,
                                 @receive_date,
                                 @transport_doc_no,
-                                @truck_no,
+                                @truck_id,
                                 @farm_code,
                                 @coop_no,
                                 @breeder_code,
@@ -364,7 +371,7 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
                         cmd.Parameters.AddWithValue("receive_date", receive.ReceiveDate);
                         cmd.Parameters.AddWithValue("transport_doc_no", receive.TransportDocNo);
-                        cmd.Parameters.AddWithValue("truck_no", receive.TruckNo);
+                        cmd.Parameters.AddWithValue("truck_id", receive.Truck.TruckId);
                         cmd.Parameters.AddWithValue("farm_code", receive.Farm.FarmCode);
                         cmd.Parameters.AddWithValue("coop_no", receive.CoopNo);
                         cmd.Parameters.AddWithValue("breeder_code", receive.Breeder.BreederCode);
@@ -381,9 +388,9 @@ namespace SlaughterHouseLib
                     else
                     {
                         //UPDATE
-                        var sql = @"UPDATE receives SET 
+                        var sql = @"UPDATE receives SET
                                 transport_doc_no=@transport_doc_no,
-                                truck_no=@truck_no,
+                                truck_id=@truck_id,
                                 farm_code=@farm_code,
                                 coop_no=@coop_no,
                                 breeder_code=@breeder_code,
@@ -395,7 +402,7 @@ namespace SlaughterHouseLib
                         var cmd = new MySqlCommand(sql, conn);
                         cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
                         cmd.Parameters.AddWithValue("transport_doc_no", receive.TransportDocNo);
-                        cmd.Parameters.AddWithValue("truck_no", receive.TruckNo);
+                        cmd.Parameters.AddWithValue("truck_id", receive.Truck.TruckId);
                         cmd.Parameters.AddWithValue("farm_code", receive.Farm.FarmCode);
                         cmd.Parameters.AddWithValue("coop_no", receive.CoopNo);
                         cmd.Parameters.AddWithValue("breeder_code", receive.Breeder.BreederCode);
@@ -405,40 +412,6 @@ namespace SlaughterHouseLib
                         cmd.ExecuteNonQuery();
                     }
 
-
-
-                    //sql = @"NSERT INTO receive_item(
-                    //            receive_no,
-                    //            seq,
-                    //            sex_flag,
-                    //            receive_qty,
-                    //            receive_wgh,
-                    //            create_by)
-                    //            VALUES(
-                    //            @receive_no,
-                    //            @queue_no,
-                    //            @seq,
-                    //            @product_code,
-                    //            @sex_flag,
-                    //            @receive_qty,
-                    //            @receive_wgh,
-                    //            @create_by)";
-
-                    //foreach (var item in receive.ReceiveItems)
-                    //{
-                    //    cmd = new MySqlCommand(sql, conn)
-                    //    {
-                    //        Transaction = tr
-                    //    };
-                    //    cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
-                    //    cmd.Parameters.AddWithValue("seq", item.Seq);
-                    //    cmd.Parameters.AddWithValue("sex_flag", item.SexFlag);
-                    //    cmd.Parameters.AddWithValue("receive_qty", item.ReceiveQty);
-                    //    cmd.Parameters.AddWithValue("receive_wgh", item.ReceiveWgh);
-                    //    cmd.Parameters.AddWithValue("create_by", receive.CreateBy);
-                    //    cmd.ExecuteNonQuery();
-                    //}
-                    //tr.Commit();
                 }
                 return true;
             }

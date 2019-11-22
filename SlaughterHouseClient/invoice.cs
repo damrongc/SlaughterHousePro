@@ -23,6 +23,7 @@ namespace SlaughterHouseClient
         public string invoice_no { get; set; }
         public System.DateTime invoice_date { get; set; }
         public string ref_document_no { get; set; }
+        public string receipt_no { get; set; }
         public string customer_code { get; set; }
         public int truck_id { get; set; }
         public decimal gross_amt { get; set; }
@@ -33,6 +34,7 @@ namespace SlaughterHouseClient
         public decimal net_amt { get; set; }
         public int invoice_flag { get; set; }
         public string comments { get; set; }
+        public Nullable<int> print_no { get; set; }
         public bool active { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }

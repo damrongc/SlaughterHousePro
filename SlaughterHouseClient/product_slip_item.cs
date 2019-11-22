@@ -27,7 +27,7 @@ namespace SlaughterHouseClient
         public string modified_by { get; set; }
     
         public virtual location location { get; set; }
-        public virtual product_slip product_slip { get; set; }
         public virtual product product { get; set; }
+        public virtual product_slip product_slip { get; set; }
     }
 }

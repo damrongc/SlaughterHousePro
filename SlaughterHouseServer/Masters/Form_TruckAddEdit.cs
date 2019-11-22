@@ -11,7 +11,7 @@ namespace SlaughterHouseServer
     {
         public Int32 truckId { get; set; }
         string productCode { get; set; }
-        DataTable dtTruckItem;
+        //DataTable dtTruckItem;
 
         public Form_TruckAddEdit()
         {

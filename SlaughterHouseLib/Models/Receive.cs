@@ -8,7 +8,7 @@ namespace SlaughterHouseLib.Models
         public string ReceiveNo { get; set; }
         public DateTime ReceiveDate { get; set; }
         public string TransportDocNo { get; set; }
-        public string TruckNo { get; set; }
+        public Truck Truck { get; set; }
         public Farm Farm { get; set; }
         public string CoopNo { get; set; }
 

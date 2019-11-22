@@ -34,7 +34,7 @@ namespace SlaughterHouseClient.Receiving
 
         private int locationCode = 7;
         private bool isStart = false;
-        private bool isTare = false;
+        //private bool isTare = false;
         private bool isZero = true;
         bool lockWeight = false;
         int stableCount = 0;

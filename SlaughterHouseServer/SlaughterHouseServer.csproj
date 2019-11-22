@@ -689,12 +689,6 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SlaughterHouseLib\SlaughterHouseLib.csproj">
-      <Project>{2cf06e33-7fa0-4347-be7d-04396863dafe}</Project>
-      <Name>SlaughterHouseLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
@@ -724,6 +718,12 @@
     <Content Include="Report\xml\stockbalance.xml" />
     <Content Include="Report\xml\stockmovement.xml" />
     <Content Include="Report\xml\swinereceive.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SlaughterHouseLib\SlaughterHouseLib.csproj">
+      <Project>{2cf06e33-7fa0-4347-be7d-04396863dafe}</Project>
+      <Name>SlaughterHouseLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
