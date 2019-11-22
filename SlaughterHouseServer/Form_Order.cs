@@ -55,6 +55,10 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
             gv.Columns[ConstColumns.CREATE_BY].HeaderText = "ผู้สร้าง";
 
+            gv.Columns[ConstColumns.REQUEST_DATE].DefaultCellStyle.Format = "dd/MM/yyyy";
+            gv.Columns[ConstColumns.CREATE_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+
+
             gv.Columns[ConstColumns.ORDER_FLAG].Visible = false;
             gv.Columns[ConstColumns.INVOICE_FLAG].Visible = false;
             gv.Columns[ConstColumns.ACTIVE].Visible = false;

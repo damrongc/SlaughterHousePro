@@ -203,12 +203,12 @@ namespace SlaughterHouseLib
 
                     sql = @"INSERT INTO invoice_item(
 										invoice_no, product_code, seq,
-										qty, wgh, unit_price,
-										gross_amt, net_amt, sale_unit_method, create_by 
+										qty, wgh, unit_price_current, disc_per, unit_price,
+										gross_amt, net_amt, sale_unit_method, create_by
 									)
-								VALUES ( 
+								VALUES (
 										@invoice_no, @product_code, @seq,
-										@qty, @wgh, @unit_price,
+										@qty, @wgh, @unit_price_current, @disc_per, @unit_price,
 										@gross_amt, @net_amt, @sale_unit_method, @create_by )";
 
                     foreach (var item in Invoice.InvoiceItems)
@@ -222,6 +222,8 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("seq", item.Seq);
                         cmd.Parameters.AddWithValue("qty", item.Qty);
                         cmd.Parameters.AddWithValue("wgh", item.Wgh);
+                        cmd.Parameters.AddWithValue("unit_price_current", item.UnitPriceCurrent);
+                        cmd.Parameters.AddWithValue("disc_per", item.DiscPer);
                         cmd.Parameters.AddWithValue("unit_price", item.UnitPrice);
                         cmd.Parameters.AddWithValue("gross_amt", item.GrossAmt);
                         cmd.Parameters.AddWithValue("net_amt", item.NetAmt);
@@ -321,12 +323,12 @@ namespace SlaughterHouseLib
 
                     sql = @"INSERT INTO invoice_item(
 										invoice_no, product_code, seq,
-										qty, wgh, unit_price,
+										qty, wgh, unit_price_current, disc_per, unit_price,
 										gross_amt, net_amt, sale_unit_method, create_by 
 									)
 								VALUES ( 
 										@invoice_no, @product_code, @seq,
-										@qty, @wgh, @unit_price,
+										@qty, @wgh, @unit_price_current, @disc_per, @unit_price,
 										@gross_amt, @net_amt, @sale_unit_method, @create_by )";
 
                     foreach (var item in Invoice.InvoiceItems)
@@ -340,6 +342,8 @@ namespace SlaughterHouseLib
                         cmd.Parameters.AddWithValue("seq", item.Seq);
                         cmd.Parameters.AddWithValue("qty", item.Qty);
                         cmd.Parameters.AddWithValue("wgh", item.Wgh);
+                        cmd.Parameters.AddWithValue("unit_price_current", item.UnitPriceCurrent);
+                        cmd.Parameters.AddWithValue("disc_per", item.DiscPer);
                         cmd.Parameters.AddWithValue("unit_price", item.UnitPrice);
                         cmd.Parameters.AddWithValue("gross_amt", item.GrossAmt);
                         cmd.Parameters.AddWithValue("net_amt", item.NetAmt);
@@ -618,16 +622,15 @@ namespace SlaughterHouseLib
 								a.product_code,
 								b.product_name,
 								a.sale_unit_method,
-								qty, wgh,  
-								unit_price, 
-                                disc_per,
+								qty, wgh,
+                                unit_price_current, disc_per,
+								unit_price,
                                 unit_disc,
-                                unit_net,
                                 disc_amt,
                                 gross_amt
 								from invoice_item a, product b
 								where a.product_code =b.product_code
-								and a.invoice_no =@invoice_no 
+								and a.invoice_no =@invoice_no
 								Order by seq asc";
 
                     var cmd = new MySqlCommand(sql, conn);

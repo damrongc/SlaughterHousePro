@@ -563,10 +563,10 @@ namespace SlaughterHouseLib
 							p.sale_unit_method, 
 							case when a.bom_code = 0 then sum(a.unload_qty) else CEILING(sum(a.unload_qty) / sum(bmt.mutiply_qty)) end as qty,
 							sum(a.unload_wgh) as wgh,
-								0.00 as unit_price, 
-                                0.00 as disc_per,
-                                0.00 as unit_disc,
-                                0.00 as unit_net,
+								0.00 as unit_price_current, 
+								0.00 as disc_per, 
+								0.00 as unit_price,  
+                                0.00 as unit_disc, 
                                 0.00 as disc_amt,
 								0.00 as gross_amt
 						FROM

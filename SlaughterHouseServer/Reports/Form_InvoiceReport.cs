@@ -59,7 +59,7 @@ namespace SlaughterHouseServer.Report
                 //string reportName = "invoice";
                 //doc.Load(path + @"\invoice.rpt");
                 var reportPath = Application.StartupPath;
-                ds.WriteXml(reportPath + @"\invoice.xml", XmlWriteMode.WriteSchema);
+                //ds.WriteXml(reportPath + @"\invoice.xml", XmlWriteMode.WriteSchema);
 
                 doc.Load(reportPath + @"\Report\invoice.rpt");
                 doc.SetDataSource(ds);

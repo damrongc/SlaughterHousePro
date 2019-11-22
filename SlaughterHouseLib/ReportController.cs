@@ -27,6 +27,8 @@ namespace SlaughterHouseLib
                                 i.net_amt AS net_amt_hd,
                                 i.invoice_flag,
                                 i.comments,
+                                i.active,
+                                i.print_no,
                                 itm.product_code,
                                 p.product_name,
                                 u.unit_name,

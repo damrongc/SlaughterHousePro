@@ -1,0 +1,346 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="invoice_no" type="xs:string" minOccurs="0" />
+                <xs:element name="invoice_date" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="ref_document_no" type="xs:string" minOccurs="0" />
+                <xs:element name="customer_code" type="xs:string" minOccurs="0" />
+                <xs:element name="gross_amt_hd" type="xs:decimal" minOccurs="0" />
+                <xs:element name="discount_hd" type="xs:decimal" minOccurs="0" />
+                <xs:element name="before_vat_hd" type="xs:decimal" minOccurs="0" />
+                <xs:element name="vat_rate_hd" type="xs:decimal" minOccurs="0" />
+                <xs:element name="vat_amt_hd" type="xs:decimal" minOccurs="0" />
+                <xs:element name="net_amt_hd" type="xs:decimal" minOccurs="0" />
+                <xs:element name="invoice_flag" type="xs:int" minOccurs="0" />
+                <xs:element name="comments" type="xs:string" minOccurs="0" />
+                <xs:element name="product_code" type="xs:string" minOccurs="0" />
+                <xs:element name="product_name" type="xs:string" minOccurs="0" />
+                <xs:element name="unit_name" type="xs:string" minOccurs="0" />
+                <xs:element name="seq" type="xs:int" minOccurs="0" />
+                <xs:element name="qty_wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="qty" type="xs:int" minOccurs="0" />
+                <xs:element name="wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="unit_price" type="xs:decimal" minOccurs="0" />
+                <xs:element name="gross_amt" type="xs:decimal" minOccurs="0" />
+                <xs:element name="discount" type="xs:long" minOccurs="0" />
+                <xs:element name="before_vat" type="xs:decimal" minOccurs="0" />
+                <xs:element name="vat_amt" type="xs:long" minOccurs="0" />
+                <xs:element name="net_amt" type="xs:long" minOccurs="0" />
+                <xs:element name="customer_name" type="xs:string" minOccurs="0" />
+                <xs:element name="address" type="xs:string" minOccurs="0" />
+                <xs:element name="ship_to" type="xs:string" minOccurs="0" />
+                <xs:element name="tax_id" type="xs:string" minOccurs="0" />
+                <xs:element name="contact_no" type="xs:string" minOccurs="0" />
+                <xs:element name="plant_name" type="xs:string" minOccurs="0" />
+                <xs:element name="plant_address" type="xs:string" minOccurs="0" />
+                <xs:element name="date_str" type="xs:string" minOccurs="0" />
+                <xs:element name="date_end" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <invoice_no>INV0000003</invoice_no>
+    <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000012</ref_document_no>
+    <customer_code>002</customer_code>
+    <gross_amt_hd>22500.00</gross_amt_hd>
+    <discount_hd>350.00</discount_hd>
+    <before_vat_hd>22150.00</before_vat_hd>
+    <vat_rate_hd>7.00</vat_rate_hd>
+    <vat_amt_hd>1550.50</vat_amt_hd>
+    <net_amt_hd>23700.50</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P002</product_code>
+    <product_name>หมูซีก</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>1</seq>
+    <qty_wgh>150.00</qty_wgh>
+    <qty>0</qty>
+    <wgh>150.00</wgh>
+    <unit_price>150.00</unit_price>
+    <gross_amt>22500.00</gross_amt>
+    <discount>0</discount>
+    <before_vat>22500.00</before_vat>
+    <vat_amt>0</vat_amt>
+    <net_amt>0</net_amt>
+    <customer_name>จอนวิค</customer_name>
+    <address>1880 สารทร กรุงเทพ 120520</address>
+    <ship_to>บางรัก</ship_to>
+    <tax_id>1759000021</tax_id>
+    <contact_no>0981562200</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-07-2019</date_str>
+    <date_end>03-08-2019</date_end>
+  </Table>
+  <Table>
+    <invoice_no>INV0000004</invoice_no>
+    <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000011</ref_document_no>
+    <customer_code>001</customer_code>
+    <gross_amt_hd>0</gross_amt_hd>
+    <discount_hd>0</discount_hd>
+    <before_vat_hd>0</before_vat_hd>
+    <vat_rate_hd>7.00</vat_rate_hd>
+    <vat_amt_hd>0</vat_amt_hd>
+    <net_amt_hd>0</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P001</product_code>
+    <product_name>หมูเป็น</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>2</seq>
+    <qty_wgh>10.00</qty_wgh>
+    <qty>0</qty>
+    <wgh>10.00</wgh>
+    <unit_price>98.00</unit_price>
+    <gross_amt>980.00</gross_amt>
+    <discount>0</discount>
+    <before_vat>980.00</before_vat>
+    <vat_amt>0</vat_amt>
+    <net_amt>0</net_amt>
+    <customer_name>Iron Man</customer_name>
+    <address>10880 Malibu Point, Florida United Sta
+320032</address>
+    <ship_to>Malibu</ship_to>
+    <tax_id>1234455587</tax_id>
+    <contact_no>0981562333</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-07-2019</date_str>
+    <date_end>03-08-2019</date_end>
+  </Table>
+  <Table>
+    <invoice_no>INV0000004</invoice_no>
+    <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000011</ref_document_no>
+    <customer_code>001</customer_code>
+    <gross_amt_hd>17135.00</gross_amt_hd>
+    <discount_hd>1713.00</discount_hd>
+    <before_vat_hd>15422.00</before_vat_hd>
+    <vat_rate_hd>7.00</vat_rate_hd>
+    <vat_amt_hd>1079.54</vat_amt_hd>
+    <net_amt_hd>16501.54</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P004</product_code>
+    <product_name>เครื่องใน</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>1</seq>
+    <qty_wgh>200.00</qty_wgh>
+    <qty>0</qty>
+    <wgh>200.00</wgh>
+    <unit_price>75.00</unit_price>
+    <gross_amt>15000.00</gross_amt>
+    <discount>0</discount>
+    <before_vat>15000.00</before_vat>
+    <vat_amt>0</vat_amt>
+    <net_amt>0</net_amt>
+    <customer_name>Iron Man</customer_name>
+    <address>10880 Malibu Point, Florida United Sta
+320032</address>
+    <ship_to>Malibu</ship_to>
+    <tax_id>1234455587</tax_id>
+    <contact_no>0981562333</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-07-2019</date_str>
+    <date_end>03-08-2019</date_end>
+  </Table>
+  <Table>
+    <invoice_no>INV0000005</invoice_no>
+    <invoice_date>2019-07-21T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000013</ref_document_no>
+    <customer_code>003</customer_code>
+    <gross_amt_hd>0</gross_amt_hd>
+    <discount_hd>0</discount_hd>
+    <before_vat_hd>0</before_vat_hd>
+    <vat_rate_hd>0.00</vat_rate_hd>
+    <vat_amt_hd>0</vat_amt_hd>
+    <net_amt_hd>0</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P001</product_code>
+    <product_name>หมูเป็น</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>2</seq>
+    <qty_wgh>190.00</qty_wgh>
+    <qty>0</qty>
+    <wgh>190.00</wgh>
+    <unit_price>98.00</unit_price>
+    <gross_amt>18620.00</gross_amt>
+    <discount>0</discount>
+    <before_vat>18620.00</before_vat>
+    <vat_amt>0</vat_amt>
+    <net_amt>0</net_amt>
+    <customer_name>สมชาย ใจดี</customer_name>
+    <address>12/7 ต.นาขวาง อ.เมือง
+จ.สมุทรสาคร 75000</address>
+    <ship_to>โกดัง 15 ท่าเรือมมหาชัย</ship_to>
+    <tax_id>1254785695</tax_id>
+    <contact_no>0997847589</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-07-2019</date_str>
+    <date_end>03-08-2019</date_end>
+  </Table>
+  <Table>
+    <invoice_no>INV0000005</invoice_no>
+    <invoice_date>2019-07-21T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000013</ref_document_no>
+    <customer_code>003</customer_code>
+    <gross_amt_hd>34595.00</gross_amt_hd>
+    <discount_hd>100.00</discount_hd>
+    <before_vat_hd>34495.00</before_vat_hd>
+    <vat_rate_hd>0.00</vat_rate_hd>
+    <vat_amt_hd>0.00</vat_amt_hd>
+    <net_amt_hd>34495.00</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P004</product_code>
+    <product_name>เครื่องใน</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>1</seq>
+    <qty_wgh>213.00</qty_wgh>
+    <qty>0</qty>
+    <wgh>213.00</wgh>
+    <unit_price>75.00</unit_price>
+    <gross_amt>15975.00</gross_amt>
+    <discount>0</discount>
+    <before_vat>15975.00</before_vat>
+    <vat_amt>0</vat_amt>
+    <net_amt>0</net_amt>
+    <customer_name>สมชาย ใจดี</customer_name>
+    <address>12/7 ต.นาขวาง อ.เมือง
+จ.สมุทรสาคร 75000</address>
+    <ship_to>โกดัง 15 ท่าเรือมมหาชัย</ship_to>
+    <tax_id>1254785695</tax_id>
+    <contact_no>0997847589</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-07-2019</date_str>
+    <date_end>03-08-2019</date_end>
+  </Table>
+  <Table>
+    <invoice_no>INV0000006</invoice_no>
+    <invoice_date>2019-07-29T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000014</ref_document_no>
+    <customer_code>001</customer_code>
+    <gross_amt_hd>3810.00</gross_amt_hd>
+    <discount_hd>300.00</discount_hd>
+    <before_vat_hd>3510.00</before_vat_hd>
+    <vat_rate_hd>7.00</vat_rate_hd>
+    <vat_amt_hd>245.70</vat_amt_hd>
+    <net_amt_hd>3755.70</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P001</product_code>
+    <product_name>หมูเป็น</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>1</seq>
+    <qty_wgh>120.00</qty_wgh>
+    <qty>22</qty>
+    <wgh>120.00</wgh>
+    <unit_price>13.00</unit_price>
+    <gross_amt>1560.00</gross_amt>
+    <discount>0</discount>
+    <before_vat>1560.00</before_vat>
+    <vat_amt>0</vat_amt>
+    <net_amt>0</net_amt>
+    <customer_name>Iron Man</customer_name>
+    <address>10880 Malibu Point, Florida United Sta
+320032</address>
+    <ship_to>Malibu</ship_to>
+    <tax_id>1234455587</tax_id>
+    <contact_no>0981562333</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-07-2019</date_str>
+    <date_end>03-08-2019</date_end>
+  </Table>
+  <Table>
+    <invoice_no>INV0000006</invoice_no>
+    <invoice_date>2019-07-29T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000014</ref_document_no>
+    <customer_code>001</customer_code>
+    <gross_amt_hd>0</gross_amt_hd>
+    <discount_hd>0</discount_hd>
+    <before_vat_hd>0</before_vat_hd>
+    <vat_rate_hd>7.00</vat_rate_hd>
+    <vat_amt_hd>0</vat_amt_hd>
+    <net_amt_hd>0</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P004</product_code>
+    <product_name>เครื่องใน</product_name>
+    <unit_name>กิโลกรัม</unit_name>
+    <seq>2</seq>
+    <qty_wgh>30.00</qty_wgh>
+    <qty>1</qty>
+    <wgh>30.00</wgh>
+    <unit_price>75.00</unit_price>
+    <gross_amt>2250.00</gross_amt>
+    <discount>0</discount>
+    <before_vat>2250.00</before_vat>
+    <vat_amt>0</vat_amt>
+    <net_amt>0</net_amt>
+    <customer_name>Iron Man</customer_name>
+    <address>10880 Malibu Point, Florida United Sta
+320032</address>
+    <ship_to>Malibu</ship_to>
+    <tax_id>1234455587</tax_id>
+    <contact_no>0981562333</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-07-2019</date_str>
+    <date_end>03-08-2019</date_end>
+  </Table>
+  <Table>
+    <invoice_no>INV0000004</invoice_no>
+    <invoice_date>2019-07-20T00:00:00+07:00</invoice_date>
+    <ref_document_no>SO00000011</ref_document_no>
+    <customer_code>001</customer_code>
+    <gross_amt_hd>0</gross_amt_hd>
+    <discount_hd>0</discount_hd>
+    <before_vat_hd>0</before_vat_hd>
+    <vat_rate_hd>7.00</vat_rate_hd>
+    <vat_amt_hd>0</vat_amt_hd>
+    <net_amt_hd>0</net_amt_hd>
+    <invoice_flag>0</invoice_flag>
+    <comments />
+    <product_code>P005</product_code>
+    <product_name>หางหมู</product_name>
+    <unit_name>ชิ้น</unit_name>
+    <seq>3</seq>
+    <qty_wgh>15.00</qty_wgh>
+    <qty>15</qty>
+    <wgh>0.00</wgh>
+    <unit_price>77.00</unit_price>
+    <gross_amt>1155.00</gross_amt>
+    <discount>0</discount>
+    <before_vat>1155.00</before_vat>
+    <vat_amt>0</vat_amt>
+    <net_amt>0</net_amt>
+    <customer_name>Iron Man</customer_name>
+    <address>10880 Malibu Point, Florida United Sta
+320032</address>
+    <ship_to>Malibu</ship_to>
+    <tax_id>1234455587</tax_id>
+    <contact_no>0981562333</contact_no>
+    <plant_name>บริษัท พี.เค.พี 6 จำกัด</plant_name>
+    <plant_address>85/1 หมู่ 1 ตำบลไม้เค็ด อำเภอเมืองปราจีนบุรี จ.ปราจีนบุรี 25230</plant_address>
+    <date_str>01-07-2019</date_str>
+    <date_end>03-08-2019</date_end>
+  </Table>
+</NewDataSet>

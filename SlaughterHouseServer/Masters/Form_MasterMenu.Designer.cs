@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.plMenu = new System.Windows.Forms.Panel();
+            this.BtnPlant = new System.Windows.Forms.Button();
             this.BtnBom = new System.Windows.Forms.Button();
             this.BtnBreeder = new System.Windows.Forms.Button();
             this.BtnTruck = new System.Windows.Forms.Button();
@@ -39,13 +40,14 @@
             this.BtnProduct = new System.Windows.Forms.Button();
             this.BtnFarm = new System.Windows.Forms.Button();
             this.plContainer = new System.Windows.Forms.Panel();
-            this.BtnPlant = new System.Windows.Forms.Button();
+            this.BtnTruckType = new System.Windows.Forms.Button();
             this.plMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // plMenu
             // 
             this.plMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.plMenu.Controls.Add(this.BtnTruckType);
             this.plMenu.Controls.Add(this.BtnPlant);
             this.plMenu.Controls.Add(this.BtnBom);
             this.plMenu.Controls.Add(this.BtnBreeder);
@@ -61,6 +63,20 @@
             this.plMenu.Name = "plMenu";
             this.plMenu.Size = new System.Drawing.Size(165, 750);
             this.plMenu.TabIndex = 2;
+            // 
+            // BtnPlant
+            // 
+            this.BtnPlant.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnPlant.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnPlant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnPlant.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnPlant.ForeColor = System.Drawing.Color.White;
+            this.BtnPlant.Location = new System.Drawing.Point(0, 450);
+            this.BtnPlant.Name = "BtnPlant";
+            this.BtnPlant.Size = new System.Drawing.Size(165, 50);
+            this.BtnPlant.TabIndex = 10;
+            this.BtnPlant.Text = "โรงงาน";
+            this.BtnPlant.UseVisualStyleBackColor = false;
             // 
             // BtnBom
             // 
@@ -196,19 +212,19 @@
             this.plContainer.Size = new System.Drawing.Size(1235, 750);
             this.plContainer.TabIndex = 3;
             // 
-            // BtnPlant
+            // BtnTruckType
             // 
-            this.BtnPlant.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.BtnPlant.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnPlant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnPlant.Font = new System.Drawing.Font("Kanit", 14.25F);
-            this.BtnPlant.ForeColor = System.Drawing.Color.White;
-            this.BtnPlant.Location = new System.Drawing.Point(0, 450);
-            this.BtnPlant.Name = "BtnPlant";
-            this.BtnPlant.Size = new System.Drawing.Size(165, 50);
-            this.BtnPlant.TabIndex = 10;
-            this.BtnPlant.Text = "โรงงาน";
-            this.BtnPlant.UseVisualStyleBackColor = false;
+            this.BtnTruckType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.BtnTruckType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnTruckType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnTruckType.Font = new System.Drawing.Font("Kanit", 14.25F);
+            this.BtnTruckType.ForeColor = System.Drawing.Color.White;
+            this.BtnTruckType.Location = new System.Drawing.Point(0, 500);
+            this.BtnTruckType.Name = "BtnTruckType";
+            this.BtnTruckType.Size = new System.Drawing.Size(165, 50);
+            this.BtnTruckType.TabIndex = 11;
+            this.BtnTruckType.Text = "ประเภทรถ";
+            this.BtnTruckType.UseVisualStyleBackColor = false;
             // 
             // Form_MasterMenu
             // 
@@ -239,5 +255,6 @@
         private System.Windows.Forms.Button BtnBreeder;
         private System.Windows.Forms.Button BtnBom;
         private System.Windows.Forms.Button BtnPlant;
+        private System.Windows.Forms.Button BtnTruckType;
     }
 }
