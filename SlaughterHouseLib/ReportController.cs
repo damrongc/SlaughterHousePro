@@ -246,6 +246,8 @@ namespace SlaughterHouseLib
                                     left join unit_of_measurement as uiw on uiw.unit_code = pi.unit_of_wgh
                                  WHERE o.order_date >= @date_str
                                     AND o.order_date <= @date_end
+                                    AND o.active = 1
+                                    AND i.active = 1
                                  order by o.order_date, o.order_no, i.invoice_date, i.invoice_no
                                 ";
                     var cmd = new MySqlCommand(sql, conn);

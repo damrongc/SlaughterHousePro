@@ -95,6 +95,8 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
             gv.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
 
+            gv.Columns[ConstColumns.StartDate].DefaultCellStyle.Format = "dd/MM/yyyy";
+            gv.Columns[ConstColumns.EndDate].DefaultCellStyle.Format = "dd/MM/yyyy";
             gv.Columns[ConstColumns.CreateAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             gv.Columns[ConstColumns.ModifiedAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
         }
@@ -178,6 +180,11 @@ namespace SlaughterHouseServer
             gvClassDis.Columns[ConstColumns.CreateBy].HeaderText = "ผู้สร้าง";
             gvClassDis.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
             gvClassDis.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
+
+            gvClassDis.Columns[ConstColumns.StartDate].DefaultCellStyle.Format = "dd/MM/yyyy";
+            gvClassDis.Columns[ConstColumns.EndDate].DefaultCellStyle.Format = "dd/MM/yyyy";
+            gvClassDis.Columns[ConstColumns.CreateAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            gvClassDis.Columns[ConstColumns.ModifiedAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
 
             gvClassDis.Columns[ConstColumns.ClassId].Visible = false;
         }
@@ -308,6 +315,11 @@ namespace SlaughterHouseServer
 
         //    gvCv.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
         //    gvCv.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
+
+            //gvCv.Columns[ConstColumns.StartDate].DefaultCellStyle.Format = "dd/MM/yyyy";
+            //gvCv.Columns[ConstColumns.EndDate].DefaultCellStyle.Format = "dd/MM/yyyy";
+            //gvCv.Columns[ConstColumns.CreateAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            //gvCv.Columns[ConstColumns.ModifiedAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
         //}
 
     }
