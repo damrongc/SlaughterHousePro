@@ -428,7 +428,7 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                var frm = new Form_LookupSwine();
+                var frm = new Form_LookupSwine(Pro);
 
                 if (frm.ShowDialog() == DialogResult.OK)
                 {

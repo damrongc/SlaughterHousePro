@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SlaughterhouseModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SlaughterhouseModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="barcode">
           <Key>
             <PropertyRef Name="barcode_no" />
@@ -130,6 +130,18 @@
           <Property Name="farm_code" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="farm_name" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="group">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="group_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="group_name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="active" Type="bool" Nullable="false" />
           <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
@@ -401,6 +413,14 @@
           <Property Name="farm_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="factory_qty" Type="int" Nullable="false" />
           <Property Name="factory_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="carcass_qty" Type="int" />
+          <Property Name="carcass_wgh" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="head_qty" Type="int" />
+          <Property Name="head_wgh" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="byproduct_red_qty" Type="int" />
+          <Property Name="byproduct_red_wgh" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="byproduct_white_qty" Type="int" />
+          <Property Name="byproduct_white_wgh" Type="decimal" Precision="10" Scale="2" />
           <Property Name="receive_flag" Type="int" Nullable="false" />
           <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
@@ -507,6 +527,20 @@
           </Key>
           <Property Name="unit_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="unit_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="group_id" Type="int" Nullable="false" />
           <Property Name="active" Type="bool" Nullable="false" />
           <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
@@ -861,6 +895,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_user_group">
+          <End Role="group" Type="Self.group" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="group">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SlaughterhouseModelStoreContainer">
           <EntitySet Name="barcode" EntityType="Self.barcode" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="bom" EntityType="Self.bom" Schema="slaughterhouse" store:Type="Tables" />
@@ -872,6 +918,7 @@
           <EntitySet Name="customer_price" EntityType="Self.customer_price" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="document_generate" EntityType="Self.document_generate" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="farm" EntityType="Self.farm" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="group" EntityType="Self.group" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="invoice" EntityType="Self.invoice" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="invoice_item" EntityType="Self.invoice_item" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="location" EntityType="Self.location" Schema="slaughterhouse" store:Type="Tables" />
@@ -894,6 +941,7 @@
           <EntitySet Name="truck" EntityType="Self.truck" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="truck_type" EntityType="Self.truck_type" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="unit_of_measurement" EntityType="Self.unit_of_measurement" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="slaughterhouse" store:Type="Tables" />
           <AssociationSet Name="fk_barcode_product" Association="Self.fk_barcode_product">
             <End Role="product" EntitySet="product" />
             <End Role="barcode" EntitySet="barcode" />
@@ -1010,9 +1058,12 @@
             <End Role="unit_of_measurement" EntitySet="unit_of_measurement" />
             <End Role="product" EntitySet="product" />
           </AssociationSet>
+          <AssociationSet Name="fk_user_group" Association="Self.fk_user_group">
+            <End Role="group" EntitySet="group" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SlaughterhouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1066,7 +1117,7 @@
           <Property Name="create_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="modified_at" Type="DateTime" />
           <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="receives" Relationship="Self.fk_breeder_01" FromRole="breeder" ToRole="receives" />
+          <NavigationProperty Name="receives" Relationship="SlaughterhouseModel.fk_breeder_01" FromRole="breeder" ToRole="receive" />
         </EntityType>
         <EntityType Name="customer">
           <Key>
@@ -1151,7 +1202,7 @@
           <Property Name="create_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="modified_at" Type="DateTime" />
           <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="receives" Relationship="Self.fk_farm_01" FromRole="farm" ToRole="receives" />
+          <NavigationProperty Name="receives" Relationship="SlaughterhouseModel.fk_farm_01" FromRole="farm" ToRole="receive" />
         </EntityType>
         <EntityType Name="invoice">
           <Key>
@@ -1434,34 +1485,7 @@
           <Property Name="modified_at" Type="DateTime" />
           <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="product" Relationship="Self.fk_receives_02" FromRole="receive_item" ToRole="product" />
-          <NavigationProperty Name="receive" Relationship="Self.fk_receives_01" FromRole="receive_item" ToRole="receives" />
-        </EntityType>
-        <EntityType Name="receive">
-          <Key>
-            <PropertyRef Name="receive_no" />
-          </Key>
-          <Property Name="receive_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="receive_date" Type="DateTime" Nullable="false" />
-          <Property Name="transport_doc_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="truck_id" Type="Int32" Nullable="false" />
-          <Property Name="farm_code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="coop_no" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="breeder_code" Type="Int32" Nullable="false" />
-          <Property Name="queue_no" Type="Int32" Nullable="false" />
-          <Property Name="lot_no" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="farm_qty" Type="Int32" Nullable="false" />
-          <Property Name="farm_wgh" Type="Decimal" Nullable="false" />
-          <Property Name="factory_qty" Type="Int32" Nullable="false" />
-          <Property Name="factory_wgh" Type="Decimal" Nullable="false" />
-          <Property Name="receive_flag" Type="Int32" Nullable="false" />
-          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="create_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="modified_at" Type="DateTime" />
-          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="breeder" Relationship="Self.fk_breeder_01" FromRole="receives" ToRole="breeder" />
-          <NavigationProperty Name="farm" Relationship="Self.fk_farm_01" FromRole="receives" ToRole="farm" />
-          <NavigationProperty Name="receive_item" Relationship="Self.fk_receives_01" FromRole="receives" ToRole="receive_item" />
-          <NavigationProperty Name="truck" Relationship="Self.fk_truck_01" FromRole="receives" ToRole="truck" />
+          <NavigationProperty Name="receive" Relationship="SlaughterhouseModel.fk_receives_01" FromRole="receive_item" ToRole="receive" />
         </EntityType>
         <EntityType Name="stock">
           <Key>
@@ -1550,10 +1574,10 @@
           <Property Name="modified_at" Type="DateTime" />
           <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="invoices" Relationship="Self.fk_invoice_truck" FromRole="truck" ToRole="invoice" />
-          <NavigationProperty Name="receives" Relationship="Self.fk_truck_01" FromRole="truck" ToRole="receives" />
           <NavigationProperty Name="transports" Relationship="Self.fk_transport_truck" FromRole="truck" ToRole="transport" />
           <NavigationProperty Name="transport_item" Relationship="Self.fk_transport_item_truck" FromRole="truck" ToRole="transport_item" />
           <NavigationProperty Name="truck_type" Relationship="Self.fk_truck_type" FromRole="truck" ToRole="truck_type" />
+          <NavigationProperty Name="receives" Relationship="SlaughterhouseModel.fk_truck_01" FromRole="truck" ToRole="receive" />
         </EntityType>
         <EntityType Name="truck_type">
           <Key>
@@ -1618,18 +1642,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_breeder_01">
-          <End Role="breeder" Type="Self.breeder" Multiplicity="1" />
-          <End Role="receives" Type="Self.receive" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="breeder">
-              <PropertyRef Name="breeder_code" />
-            </Principal>
-            <Dependent Role="receives">
-              <PropertyRef Name="breeder_code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_order_customer">
           <End Role="customer" Type="Self.customer" Multiplicity="1" />
           <End Role="orders" Type="Self.order" Multiplicity="*" />
@@ -1639,18 +1651,6 @@
             </Principal>
             <Dependent Role="orders">
               <PropertyRef Name="customer_code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_farm_01">
-          <End Role="farm" Type="Self.farm" Multiplicity="1" />
-          <End Role="receives" Type="Self.receive" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="farm">
-              <PropertyRef Name="farm_code" />
-            </Principal>
-            <Dependent Role="receives">
-              <PropertyRef Name="farm_code" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1870,30 +1870,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_receives_01">
-          <End Role="receives" Type="Self.receive" Multiplicity="1" />
-          <End Role="receive_item" Type="Self.receive_item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="receives">
-              <PropertyRef Name="receive_no" />
-            </Principal>
-            <Dependent Role="receive_item">
-              <PropertyRef Name="receive_no" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_truck_01">
-          <End Role="truck" Type="Self.truck" Multiplicity="1" />
-          <End Role="receives" Type="Self.receive" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="truck">
-              <PropertyRef Name="truck_id" />
-            </Principal>
-            <Dependent Role="receives">
-              <PropertyRef Name="truck_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_transport_truck">
           <End Role="truck" Type="Self.truck" Multiplicity="1" />
           <End Role="transport" Type="Self.transport" Multiplicity="*" />
@@ -1955,7 +1931,6 @@
           <EntitySet Name="production_order" EntityType="Self.production_order" />
           <EntitySet Name="production_order_item" EntityType="Self.production_order_item" />
           <EntitySet Name="receive_item" EntityType="Self.receive_item" />
-          <EntitySet Name="receives" EntityType="Self.receive" />
           <EntitySet Name="stocks" EntityType="Self.stock" />
           <EntitySet Name="stock_item_running" EntityType="Self.stock_item_running" />
           <EntitySet Name="transports" EntityType="Self.transport" />
@@ -1975,17 +1950,9 @@
             <End Role="product" EntitySet="products" />
             <End Role="bom_item" EntitySet="bom_item" />
           </AssociationSet>
-          <AssociationSet Name="fk_breeder_01" Association="Self.fk_breeder_01">
-            <End Role="breeder" EntitySet="breeders" />
-            <End Role="receives" EntitySet="receives" />
-          </AssociationSet>
           <AssociationSet Name="fk_order_customer" Association="Self.fk_order_customer">
             <End Role="customer" EntitySet="customers" />
             <End Role="orders" EntitySet="orders" />
-          </AssociationSet>
-          <AssociationSet Name="fk_farm_01" Association="Self.fk_farm_01">
-            <End Role="farm" EntitySet="farms" />
-            <End Role="receives" EntitySet="receives" />
           </AssociationSet>
           <AssociationSet Name="fk_invitem_inv" Association="Self.fk_invitem_inv">
             <End Role="invoice" EntitySet="invoices" />
@@ -2059,14 +2026,6 @@
             <End Role="production_order" EntitySet="production_order" />
             <End Role="production_order_item" EntitySet="production_order_item" />
           </AssociationSet>
-          <AssociationSet Name="fk_receives_01" Association="Self.fk_receives_01">
-            <End Role="receives" EntitySet="receives" />
-            <End Role="receive_item" EntitySet="receive_item" />
-          </AssociationSet>
-          <AssociationSet Name="fk_truck_01" Association="Self.fk_truck_01">
-            <End Role="truck" EntitySet="trucks" />
-            <End Role="receives" EntitySet="receives" />
-          </AssociationSet>
           <AssociationSet Name="fk_transport_truck" Association="Self.fk_transport_truck">
             <End Role="truck" EntitySet="trucks" />
             <End Role="transport" EntitySet="transports" />
@@ -2079,7 +2038,153 @@
             <End Role="truck_type" EntitySet="truck_type" />
             <End Role="truck" EntitySet="trucks" />
           </AssociationSet>
+          <EntitySet Name="groups" EntityType="SlaughterhouseModel.group" />
+          <EntitySet Name="receives" EntityType="SlaughterhouseModel.receive" />
+          <EntitySet Name="users" EntityType="SlaughterhouseModel.user" />
+          <AssociationSet Name="fk_breeder_01" Association="SlaughterhouseModel.fk_breeder_01">
+            <End Role="breeder" EntitySet="breeders" />
+            <End Role="receive" EntitySet="receives" />
+          </AssociationSet>
+          <AssociationSet Name="fk_farm_01" Association="SlaughterhouseModel.fk_farm_01">
+            <End Role="farm" EntitySet="farms" />
+            <End Role="receive" EntitySet="receives" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_group" Association="SlaughterhouseModel.fk_user_group">
+            <End Role="group" EntitySet="groups" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_receives_01" Association="SlaughterhouseModel.fk_receives_01">
+            <End Role="receive" EntitySet="receives" />
+            <End Role="receive_item" EntitySet="receive_item" />
+          </AssociationSet>
+          <AssociationSet Name="fk_truck_01" Association="SlaughterhouseModel.fk_truck_01">
+            <End Role="truck" EntitySet="trucks" />
+            <End Role="receive" EntitySet="receives" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="group">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="group_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="group_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="users" Relationship="SlaughterhouseModel.fk_user_group" FromRole="group" ToRole="user" />
+        </EntityType>
+        <EntityType Name="receive">
+          <Key>
+            <PropertyRef Name="receive_no" />
+          </Key>
+          <Property Name="receive_no" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="receive_date" Type="DateTime" Nullable="false" />
+          <Property Name="transport_doc_no" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="truck_id" Type="Int32" Nullable="false" />
+          <Property Name="farm_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="coop_no" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="breeder_code" Type="Int32" Nullable="false" />
+          <Property Name="queue_no" Type="Int32" Nullable="false" />
+          <Property Name="lot_no" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="farm_qty" Type="Int32" Nullable="false" />
+          <Property Name="farm_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="factory_qty" Type="Int32" Nullable="false" />
+          <Property Name="factory_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="carcass_qty" Type="Int32" />
+          <Property Name="carcass_wgh" Type="Decimal" />
+          <Property Name="head_qty" Type="Int32" />
+          <Property Name="head_wgh" Type="Decimal" />
+          <Property Name="byproduct_red_qty" Type="Int32" />
+          <Property Name="byproduct_red_wgh" Type="Decimal" />
+          <Property Name="byproduct_white_qty" Type="Int32" />
+          <Property Name="byproduct_white_wgh" Type="Decimal" />
+          <Property Name="receive_flag" Type="Int32" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="breeder" Relationship="SlaughterhouseModel.fk_breeder_01" FromRole="receive" ToRole="breeder" />
+          <NavigationProperty Name="farm" Relationship="SlaughterhouseModel.fk_farm_01" FromRole="receive" ToRole="farm" />
+          <NavigationProperty Name="receive_item" Relationship="SlaughterhouseModel.fk_receives_01" FromRole="receive" ToRole="receive_item" />
+          <NavigationProperty Name="truck" Relationship="SlaughterhouseModel.fk_truck_01" FromRole="receive" ToRole="truck" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="group_id" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="group" Relationship="SlaughterhouseModel.fk_user_group" FromRole="user" ToRole="group" />
+        </EntityType>
+        <Association Name="fk_breeder_01">
+          <End Type="SlaughterhouseModel.breeder" Role="breeder" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.receive" Role="receive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="breeder">
+              <PropertyRef Name="breeder_code" />
+            </Principal>
+            <Dependent Role="receive">
+              <PropertyRef Name="breeder_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_farm_01">
+          <End Type="SlaughterhouseModel.farm" Role="farm" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.receive" Role="receive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="farm">
+              <PropertyRef Name="farm_code" />
+            </Principal>
+            <Dependent Role="receive">
+              <PropertyRef Name="farm_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_group">
+          <End Type="SlaughterhouseModel.group" Role="group" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="group">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_receives_01">
+          <End Type="SlaughterhouseModel.receive" Role="receive" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.receive_item" Role="receive_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="receive">
+              <PropertyRef Name="receive_no" />
+            </Principal>
+            <Dependent Role="receive_item">
+              <PropertyRef Name="receive_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_truck_01">
+          <End Type="SlaughterhouseModel.truck" Role="truck" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.receive" Role="receive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="truck">
+              <PropertyRef Name="truck_id" />
+            </Principal>
+            <Dependent Role="receive">
+              <PropertyRef Name="truck_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2475,30 +2580,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="receives">
-            <EntityTypeMapping TypeName="SlaughterhouseModel.receive">
-              <MappingFragment StoreEntitySet="receives">
-                <ScalarProperty Name="receive_no" ColumnName="receive_no" />
-                <ScalarProperty Name="receive_date" ColumnName="receive_date" />
-                <ScalarProperty Name="transport_doc_no" ColumnName="transport_doc_no" />
-                <ScalarProperty Name="truck_id" ColumnName="truck_id" />
-                <ScalarProperty Name="farm_code" ColumnName="farm_code" />
-                <ScalarProperty Name="coop_no" ColumnName="coop_no" />
-                <ScalarProperty Name="breeder_code" ColumnName="breeder_code" />
-                <ScalarProperty Name="queue_no" ColumnName="queue_no" />
-                <ScalarProperty Name="lot_no" ColumnName="lot_no" />
-                <ScalarProperty Name="farm_qty" ColumnName="farm_qty" />
-                <ScalarProperty Name="farm_wgh" ColumnName="farm_wgh" />
-                <ScalarProperty Name="factory_qty" ColumnName="factory_qty" />
-                <ScalarProperty Name="factory_wgh" ColumnName="factory_wgh" />
-                <ScalarProperty Name="receive_flag" ColumnName="receive_flag" />
-                <ScalarProperty Name="create_at" ColumnName="create_at" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
-                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="stocks">
             <EntityTypeMapping TypeName="SlaughterhouseModel.stock">
               <MappingFragment StoreEntitySet="stock">
@@ -2603,6 +2684,66 @@
                 <ScalarProperty Name="create_by" ColumnName="create_by" />
                 <ScalarProperty Name="modified_at" ColumnName="modified_at" />
                 <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="groups">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.group">
+              <MappingFragment StoreEntitySet="group">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="group_name" ColumnName="group_name" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="receives">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.receive">
+              <MappingFragment StoreEntitySet="receives">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="receive_flag" ColumnName="receive_flag" />
+                <ScalarProperty Name="byproduct_white_wgh" ColumnName="byproduct_white_wgh" />
+                <ScalarProperty Name="byproduct_white_qty" ColumnName="byproduct_white_qty" />
+                <ScalarProperty Name="byproduct_red_wgh" ColumnName="byproduct_red_wgh" />
+                <ScalarProperty Name="byproduct_red_qty" ColumnName="byproduct_red_qty" />
+                <ScalarProperty Name="head_wgh" ColumnName="head_wgh" />
+                <ScalarProperty Name="head_qty" ColumnName="head_qty" />
+                <ScalarProperty Name="carcass_wgh" ColumnName="carcass_wgh" />
+                <ScalarProperty Name="carcass_qty" ColumnName="carcass_qty" />
+                <ScalarProperty Name="factory_wgh" ColumnName="factory_wgh" />
+                <ScalarProperty Name="factory_qty" ColumnName="factory_qty" />
+                <ScalarProperty Name="farm_wgh" ColumnName="farm_wgh" />
+                <ScalarProperty Name="farm_qty" ColumnName="farm_qty" />
+                <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+                <ScalarProperty Name="queue_no" ColumnName="queue_no" />
+                <ScalarProperty Name="breeder_code" ColumnName="breeder_code" />
+                <ScalarProperty Name="coop_no" ColumnName="coop_no" />
+                <ScalarProperty Name="farm_code" ColumnName="farm_code" />
+                <ScalarProperty Name="truck_id" ColumnName="truck_id" />
+                <ScalarProperty Name="transport_doc_no" ColumnName="transport_doc_no" />
+                <ScalarProperty Name="receive_date" ColumnName="receive_date" />
+                <ScalarProperty Name="receive_no" ColumnName="receive_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

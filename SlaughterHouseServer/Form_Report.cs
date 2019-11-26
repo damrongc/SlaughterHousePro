@@ -16,6 +16,7 @@ namespace SlaughterHouseServer
 
         private void UserSettingsComponent()
         {
+            btnSwineReceive.Click += BtnSwineReceive_Click; ;
             btnSwineYield.Click += BtnSwineYield_Click;
             btnReportDailySales.Click += BtnReportDailySales_Click;
             btnReportStockMovement.Click += BtnReportStockMovement_Click;
@@ -25,9 +26,22 @@ namespace SlaughterHouseServer
 
         private void BtnSwineYield_Click(object sender, EventArgs e)
         {
+
             var frm = new Form_ReportSwineYeild();
             frm.ShowDialog();
         }
+
+        private void BtnSwineReceive_Click(object sender, EventArgs e)
+        {
+            var frm = new Form_ReportSwineReceiveByDate();
+            frm.ShowDialog();
+        }
+
+        //private void BtnSwineYield_Click(object sender, EventArgs e)
+        //{
+        //    var frm = new Form_ReportSwineYeild();
+        //    frm.ShowDialog();
+        //}
 
         private void BtnStockBalance_Click(object sender, EventArgs e)
         {

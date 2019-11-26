@@ -313,7 +313,7 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                var frm = new Form_LookupSwine();
+                var frm = new Form_LookupSwine(ProductCode);
 
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
@@ -392,15 +392,10 @@ namespace SlaughterHouseClient.Receiving
 
             isStart = true;
             isZero = true;
-
-
-
             btnReceiveNo.Enabled = false;
             btnStart.Enabled = false;
             btnStop.Enabled = true;
             btnAcceptWeight.Enabled = true;
-
-
             ProcessData();
         }
 
@@ -429,7 +424,8 @@ namespace SlaughterHouseClient.Receiving
         private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             double scaleWeight = lblWeight.Text.ToDouble();
-            if (scaleWeight <= 0)
+            double minWeight = lblMinWeight.Text.ToDouble();
+            if (scaleWeight <= minWeight)
             {
                 lblMessage.Text = Constants.WEIGHT_WAITING;
                 isZero = true;
@@ -508,7 +504,7 @@ namespace SlaughterHouseClient.Receiving
                     var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
 
                     int receive_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
-                    if (receive.factory_qty - receive_qty == 0)
+                    if (receive.farm_qty - receive_qty == 0)
                     {
                         throw new Exception("จำนวนรับครบแล้ว ไม่สามารถรับเพิ่มได้!");
                     }
@@ -611,6 +607,19 @@ namespace SlaughterHouseClient.Receiving
                             };
 
                             db.stocks.Add(stock);
+
+                            switch (product.product_code)
+                            {
+
+                                case "P003":
+                                    receive.byproduct_red_qty += item.receive_qty;
+                                    receive.byproduct_red_wgh += item.receive_wgh;
+                                    break;
+                                case "P004":
+                                    receive.byproduct_white_qty += item.receive_qty;
+                                    receive.byproduct_white_wgh += item.receive_wgh;
+                                    break;
+                            }
                             db.SaveChanges();
                             transaction.Commit();
                         }

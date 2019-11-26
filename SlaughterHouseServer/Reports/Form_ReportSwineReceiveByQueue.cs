@@ -5,11 +5,11 @@ using System.Data;
 using System.Windows.Forms;
 namespace SlaughterHouseServer.Reports
 {
-    public partial class Form_ReportSwineReceive : Form
+    public partial class Form_ReportSwineReceiveByQueue : Form
     {
         public string ReceiveNo { get; set; }
 
-        public Form_ReportSwineReceive()
+        public Form_ReportSwineReceiveByQueue()
         {
             InitializeComponent();
             UserSettingsComponent();

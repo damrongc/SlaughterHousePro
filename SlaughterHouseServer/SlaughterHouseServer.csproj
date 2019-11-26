@@ -200,6 +200,12 @@
     <Compile Include="Reports\Form_ReportSoMapInv.Designer.cs">
       <DependentUpon>Form_ReportSoMapInv.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Form_ReportSwineReceiveByDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Form_ReportSwineReceiveByDate.Designer.cs">
+      <DependentUpon>Form_ReportSwineReceiveByDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Form_ReportSwineYeild.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,11 +218,11 @@
     <Compile Include="Reports\Form_ReportStockBalance.Designer.cs">
       <DependentUpon>Form_ReportStockBalance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Form_ReportSwineReceive.cs">
+    <Compile Include="Reports\Form_ReportSwineReceiveByQueue.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\Form_ReportSwineReceive.Designer.cs">
-      <DependentUpon>Form_ReportSwineReceive.cs</DependentUpon>
+    <Compile Include="Reports\Form_ReportSwineReceiveByQueue.Designer.cs">
+      <DependentUpon>Form_ReportSwineReceiveByQueue.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Form_ReportStockMovement.cs">
       <SubType>Form</SubType>
@@ -512,6 +518,9 @@
     <EmbeddedResource Include="Reports\Form_ReportSoMapInv.resx">
       <DependentUpon>Form_ReportSoMapInv.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Form_ReportSwineReceiveByDate.resx">
+      <DependentUpon>Form_ReportSwineReceiveByDate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Form_ReportSwineYeild.resx">
       <DependentUpon>Form_ReportSwineYeild.cs</DependentUpon>
     </EmbeddedResource>
@@ -521,8 +530,8 @@
     <EmbeddedResource Include="Form_ProductSlip.resx">
       <DependentUpon>Form_ProductSlip.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Form_ReportSwineReceive.resx">
-      <DependentUpon>Form_ReportSwineReceive.cs</DependentUpon>
+    <EmbeddedResource Include="Reports\Form_ReportSwineReceiveByQueue.resx">
+      <DependentUpon>Form_ReportSwineReceiveByQueue.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Form_ReportStockMovement.resx">
       <DependentUpon>Form_ReportStockMovement.cs</DependentUpon>

@@ -31,17 +31,19 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnReportDailySales = new System.Windows.Forms.Button();
             this.btnReportSoWithInv = new System.Windows.Forms.Button();
-            this.btnSwineYield = new System.Windows.Forms.Button();
+            this.btnSwineReceive = new System.Windows.Forms.Button();
             this.btnReportStockMovement = new System.Windows.Forms.Button();
             this.btnStockBalance = new System.Windows.Forms.Button();
+            this.btnSwineYield = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSwineYield);
             this.groupBox1.Controls.Add(this.btnReportDailySales);
             this.groupBox1.Controls.Add(this.btnReportSoWithInv);
-            this.groupBox1.Controls.Add(this.btnSwineYield);
+            this.groupBox1.Controls.Add(this.btnSwineReceive);
             this.groupBox1.Controls.Add(this.btnReportStockMovement);
             this.groupBox1.Controls.Add(this.btnStockBalance);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -56,7 +58,7 @@
             // btnReportDailySales
             // 
             this.btnReportDailySales.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnReportDailySales.Location = new System.Drawing.Point(318, 154);
+            this.btnReportDailySales.Location = new System.Drawing.Point(318, 234);
             this.btnReportDailySales.Name = "btnReportDailySales";
             this.btnReportDailySales.Size = new System.Drawing.Size(666, 59);
             this.btnReportDailySales.TabIndex = 0;
@@ -66,27 +68,27 @@
             // btnReportSoWithInv
             // 
             this.btnReportSoWithInv.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnReportSoWithInv.Location = new System.Drawing.Point(318, 246);
+            this.btnReportSoWithInv.Location = new System.Drawing.Point(318, 319);
             this.btnReportSoWithInv.Name = "btnReportSoWithInv";
             this.btnReportSoWithInv.Size = new System.Drawing.Size(666, 59);
             this.btnReportSoWithInv.TabIndex = 2;
             this.btnReportSoWithInv.Text = "รายงานเปรียบเทียบใบสั่งขายกับใบแจ้งหนี้";
             this.btnReportSoWithInv.UseVisualStyleBackColor = false;
             // 
-            // btnSwineYield
+            // btnSwineReceive
             // 
-            this.btnSwineYield.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSwineYield.Location = new System.Drawing.Point(318, 64);
-            this.btnSwineYield.Name = "btnSwineYield";
-            this.btnSwineYield.Size = new System.Drawing.Size(666, 59);
-            this.btnSwineYield.TabIndex = 3;
-            this.btnSwineYield.Text = "รายงานหมูเป็นเทียบหมูซีก";
-            this.btnSwineYield.UseVisualStyleBackColor = false;
+            this.btnSwineReceive.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSwineReceive.Location = new System.Drawing.Point(318, 64);
+            this.btnSwineReceive.Name = "btnSwineReceive";
+            this.btnSwineReceive.Size = new System.Drawing.Size(666, 59);
+            this.btnSwineReceive.TabIndex = 3;
+            this.btnSwineReceive.Text = "รายงานหมูเป็นเทียบหมูซีก หัว เครื่องใน";
+            this.btnSwineReceive.UseVisualStyleBackColor = false;
             // 
             // btnReportStockMovement
             // 
             this.btnReportStockMovement.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnReportStockMovement.Location = new System.Drawing.Point(318, 333);
+            this.btnReportStockMovement.Location = new System.Drawing.Point(318, 404);
             this.btnReportStockMovement.Name = "btnReportStockMovement";
             this.btnReportStockMovement.Size = new System.Drawing.Size(666, 59);
             this.btnReportStockMovement.TabIndex = 4;
@@ -96,12 +98,22 @@
             // btnStockBalance
             // 
             this.btnStockBalance.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnStockBalance.Location = new System.Drawing.Point(318, 422);
+            this.btnStockBalance.Location = new System.Drawing.Point(318, 489);
             this.btnStockBalance.Name = "btnStockBalance";
             this.btnStockBalance.Size = new System.Drawing.Size(666, 59);
             this.btnStockBalance.TabIndex = 1;
             this.btnStockBalance.Text = "รายงานสต็อกคงเหลือรายวัน";
             this.btnStockBalance.UseVisualStyleBackColor = false;
+            // 
+            // btnSwineYield
+            // 
+            this.btnSwineYield.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSwineYield.Location = new System.Drawing.Point(318, 149);
+            this.btnSwineYield.Name = "btnSwineYield";
+            this.btnSwineYield.Size = new System.Drawing.Size(666, 59);
+            this.btnSwineYield.TabIndex = 5;
+            this.btnSwineYield.Text = "รายงาน Yield";
+            this.btnSwineYield.UseVisualStyleBackColor = false;
             // 
             // Form_Report
             // 
@@ -123,8 +135,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnReportDailySales;
         private System.Windows.Forms.Button btnReportSoWithInv;
-        private System.Windows.Forms.Button btnSwineYield;
+        private System.Windows.Forms.Button btnSwineReceive;
         private System.Windows.Forms.Button btnReportStockMovement;
         private System.Windows.Forms.Button btnStockBalance;
+        private System.Windows.Forms.Button btnSwineYield;
     }
 }

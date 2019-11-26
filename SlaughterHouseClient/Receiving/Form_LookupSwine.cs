@@ -8,13 +8,14 @@ namespace SlaughterHouseClient.Receiving
     {
         //int ReceiveFlag { get; set; }
         public string ReceiveNo { get; set; }
-        public Form_LookupSwine()
+
+        readonly string ProductCode = "";
+        public Form_LookupSwine(string productCode)
         {
+            ProductCode = productCode;
             InitializeComponent();
             Load += Form_Receive_Load;
-
             //ReceiveFlag = _receiveFlag;
-
             UserSettingsComponent();
 
         }
@@ -88,6 +89,23 @@ namespace SlaughterHouseClient.Receiving
 
 
                 var qry = db.receives.Where(p => p.receive_flag == 1).ToList();
+                switch (ProductCode)
+                {
+                    case "P002":
+                        qry = qry.Where(p => p.farm_qty > p.carcass_qty).ToList();
+                        break;
+                    case "P003":
+                        qry = qry.Where(p => p.farm_qty > p.byproduct_red_qty).ToList();
+
+                        break;
+                    case "P004":
+                        qry = qry.Where(p => p.farm_qty > p.byproduct_white_qty).ToList();
+
+                        break;
+                    case "P005":
+                        qry = qry.Where(p => p.farm_qty > p.head_qty).ToList();
+                        break;
+                }
                 var coll = qry.AsEnumerable().Select(p => new
                 {
                     p.receive_no,

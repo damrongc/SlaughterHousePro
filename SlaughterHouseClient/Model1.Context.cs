@@ -49,7 +49,6 @@ namespace SlaughterHouseClient
         public virtual DbSet<production_order> production_order { get; set; }
         public virtual DbSet<production_order_item> production_order_item { get; set; }
         public virtual DbSet<receive_item> receive_item { get; set; }
-        public virtual DbSet<receive> receives { get; set; }
         public virtual DbSet<stock> stocks { get; set; }
         public virtual DbSet<stock_item_running> stock_item_running { get; set; }
         public virtual DbSet<transport> transports { get; set; }
@@ -57,5 +56,8 @@ namespace SlaughterHouseClient
         public virtual DbSet<truck> trucks { get; set; }
         public virtual DbSet<truck_type> truck_type { get; set; }
         public virtual DbSet<unit_of_measurement> unit_of_measurement { get; set; }
+        public virtual DbSet<group> groups { get; set; }
+        public virtual DbSet<receive> receives { get; set; }
+        public virtual DbSet<user> users { get; set; }
     }
 }

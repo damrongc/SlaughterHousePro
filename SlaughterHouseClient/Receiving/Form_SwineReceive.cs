@@ -77,7 +77,7 @@ namespace SlaughterHouseClient.Receiving
             FormClosing += new FormClosingEventHandler(Form_FormClosing);
             btnStart.Enabled = false;
             btnStop.Enabled = false;
-            btnAcceptWeight.Enabled = false;
+            //btnAcceptWeight.Enabled = false;
             LoadSetting();
 
 
@@ -100,7 +100,12 @@ namespace SlaughterHouseClient.Receiving
                 stableTarget = MySettings["StableTarget"].ToString().ToInt16();
                 if (stableTarget == 0)
                 {
+                    btnAcceptWeight.Visible = true;
+                }
+                else
+                {
                     btnAcceptWeight.Visible = false;
+
                 }
 
             }

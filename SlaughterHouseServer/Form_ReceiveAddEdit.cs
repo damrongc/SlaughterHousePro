@@ -26,9 +26,6 @@ namespace SlaughterHouseServer
             txtFarmQty.KeyDown += TxtFarmQty_KeyDown;
             txtFarmWgh.KeyDown += TxtFarmWgh_KeyDown;
         }
-
-
-
         private void Form_Load(object sender, EventArgs e)
         {
 
@@ -217,7 +214,6 @@ namespace SlaughterHouseServer
                     ReceiveNo = txtReciveNo.Text,
                     ReceiveDate = dtpReceiveDate.Value,
                     TransportDocNo = txtTransportNo.Text.Trim(),
-
                     Truck = new Truck
                     {
                         TruckId = cboTruckNo.SelectedValue.ToString().ToInt16(),
@@ -259,5 +255,6 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
+
     }
 }

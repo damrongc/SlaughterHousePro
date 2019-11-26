@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseServer.Reports
 {
-    partial class Form_ReportSwineReceive
+    partial class Form_ReportSwineReceiveByQueue
     {
         /// <summary>
         /// Required designer variable.

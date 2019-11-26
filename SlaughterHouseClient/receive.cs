@@ -33,6 +33,14 @@ namespace SlaughterHouseClient
         public decimal farm_wgh { get; set; }
         public int factory_qty { get; set; }
         public decimal factory_wgh { get; set; }
+        public Nullable<int> carcass_qty { get; set; }
+        public Nullable<decimal> carcass_wgh { get; set; }
+        public Nullable<int> head_qty { get; set; }
+        public Nullable<decimal> head_wgh { get; set; }
+        public Nullable<int> byproduct_red_qty { get; set; }
+        public Nullable<decimal> byproduct_red_wgh { get; set; }
+        public Nullable<int> byproduct_white_qty { get; set; }
+        public Nullable<decimal> byproduct_white_wgh { get; set; }
         public int receive_flag { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }

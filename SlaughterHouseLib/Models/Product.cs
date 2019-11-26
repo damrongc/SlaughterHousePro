@@ -61,7 +61,7 @@ namespace SlaughterHouseLib.Models
 
                         sb.Append(" and a.product_group_code like @product_group_code ");
                     }
-                    sb.Append(" order by product_name asc");
+                    sb.Append(" order by a.product_code asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
 
                     if (!string.IsNullOrEmpty(keyword))

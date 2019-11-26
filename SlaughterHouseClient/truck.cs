@@ -18,9 +18,9 @@ namespace SlaughterHouseClient
         public truck()
         {
             this.invoices = new HashSet<invoice>();
-            this.receives = new HashSet<receive>();
             this.transports = new HashSet<transport>();
             this.transport_item = new HashSet<transport_item>();
+            this.receives = new HashSet<receive>();
         }
     
         public int truck_id { get; set; }
@@ -36,11 +36,11 @@ namespace SlaughterHouseClient
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<invoice> invoices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<receive> receives { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<transport> transports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<transport_item> transport_item { get; set; }
         public virtual truck_type truck_type { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<receive> receives { get; set; }
     }
 }

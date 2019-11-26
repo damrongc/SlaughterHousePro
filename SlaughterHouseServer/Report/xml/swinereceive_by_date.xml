@@ -12,6 +12,8 @@
                 <xs:element name="truck_no" type="xs:string" minOccurs="0" />
                 <xs:element name="queue_no" type="xs:int" minOccurs="0" />
                 <xs:element name="lot_no" type="xs:string" minOccurs="0" />
+                <xs:element name="farm_qty" type="xs:int" minOccurs="0" />
+                <xs:element name="farm_wgh" type="xs:decimal" minOccurs="0" />
                 <xs:element name="factory_qty" type="xs:int" minOccurs="0" />
                 <xs:element name="factory_wgh" type="xs:decimal" minOccurs="0" />
                 <xs:element name="carcass_qty" type="xs:int" minOccurs="0" />
@@ -22,11 +24,10 @@
                 <xs:element name="byproduct_red_wgh" type="xs:decimal" minOccurs="0" />
                 <xs:element name="byproduct_white_qty" type="xs:int" minOccurs="0" />
                 <xs:element name="byproduct_white_wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="sum_wgh" type="xs:decimal" minOccurs="0" />
+                <xs:element name="diff_wgh" type="xs:decimal" minOccurs="0" />
                 <xs:element name="farm_name" type="xs:string" minOccurs="0" />
                 <xs:element name="breeder_name" type="xs:string" minOccurs="0" />
-                <xs:element name="std_yield" type="xs:decimal" minOccurs="0" />
-                <xs:element name="sum_wgh" type="xs:decimal" minOccurs="0" />
-                <xs:element name="yield" type="xs:decimal" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -40,6 +41,8 @@
     <truck_no>รน 5602</truck_no>
     <queue_no>1</queue_no>
     <lot_no>1193281241101</lot_no>
+    <farm_qty>4</farm_qty>
+    <farm_wgh>400.00</farm_wgh>
     <factory_qty>1</factory_qty>
     <factory_wgh>75.00</factory_wgh>
     <carcass_qty>4</carcass_qty>
@@ -50,10 +53,9 @@
     <byproduct_red_wgh>24.68</byproduct_red_wgh>
     <byproduct_white_qty>4</byproduct_white_qty>
     <byproduct_white_wgh>19.80</byproduct_white_wgh>
+    <sum_wgh>341.78</sum_wgh>
+    <diff_wgh>58.22</diff_wgh>
     <farm_name>ฟาร์มปราจีน</farm_name>
     <breeder_name>หมูขาว</breeder_name>
-    <std_yield>78.50</std_yield>
-    <sum_wgh>341.78</sum_wgh>
-    <yield>455.706667</yield>
   </Table>
 </NewDataSet>

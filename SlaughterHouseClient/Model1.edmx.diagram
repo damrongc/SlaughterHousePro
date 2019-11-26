@@ -29,7 +29,6 @@
         <EntityTypeShape EntityType="SlaughterhouseModel.production_order" Width="1.5" PointX="6" PointY="41.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.production_order_item" Width="1.5" PointX="8.25" PointY="28.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.receive_item" Width="1.5" PointX="11.25" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.receive" Width="1.5" PointX="9" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.stock" Width="1.5" PointX="11.25" PointY="28.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.stock_item_running" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.transport" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
@@ -40,9 +39,7 @@
         <AssociationConnector Association="SlaughterhouseModel.fk_barcode_product" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_bom_product" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_bomitem_product" ManuallyRouted="false" />
-        <AssociationConnector Association="SlaughterhouseModel.fk_breeder_01" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_order_customer" ManuallyRouted="false" />
-        <AssociationConnector Association="SlaughterhouseModel.fk_farm_01" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_invitem_inv" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_invoice_truck" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_invitem_product" ManuallyRouted="false" />
@@ -61,11 +58,17 @@
         <AssociationConnector Association="SlaughterhouseModel.fk_unit_wgh" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_slipitem_slip" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_porderitem_order" ManuallyRouted="false" />
-        <AssociationConnector Association="SlaughterhouseModel.fk_receives_01" ManuallyRouted="false" />
-        <AssociationConnector Association="SlaughterhouseModel.fk_truck_01" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_transport_truck" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_transport_item_truck" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_truck_type" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.group" Width="1.5" PointX="9.375" PointY="6.125" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.receive" Width="1.5" PointX="9" PointY="10.25" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.user" Width="1.5" PointX="11.625" PointY="6" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_breeder_01" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_farm_01" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_user_group" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_receives_01" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_truck_01" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -335,19 +335,22 @@ namespace SlaughterHouseLib
                     {
                         cmd.Parameters.AddWithValue("receive_no", receiveNo);
                         var da = new MySqlDataAdapter(cmd);
-                        var ds1 = new DataSet();
-                        da.Fill(ds1);
+                        var dsItem = new DataSet();
+                        da.Fill(dsItem);
+                        if (dsItem.Tables[0].Rows.Count == 0)
+                        {
+                            throw new Exception("ไม่สามารถออกรายงานได้\r\nเนื่องจากไม่มีการชั่ง");
+                        }
+
 
                         decimal multiplyRound = 1;
                         int totalRecord = 200;
                         int rowPerCol = 30;
                         int totalCol = 6;
 
+
                         DataTable dt = new DataTable("TableItem");
-                        if (dt.Rows.Count == 0)
-                        {
-                            throw new Exception("ไม่สามารถออกรายงานได้\r\nเนื่องจากไม่มีการชั่ง");
-                        }
+
                         for (int i = 0; i < totalCol; i++)
                         {
                             dt.Columns.Add("SeqNo" + (i + 1), typeof(int));
@@ -355,7 +358,7 @@ namespace SlaughterHouseLib
                             dt.Columns.Add("NetWeight" + (i + 1), typeof(decimal));
                         }
 
-                        int rowCount = ds1.Tables[0].Rows.Count;
+                        int rowCount = dsItem.Tables[0].Rows.Count;
 
                         if (rowCount > 0)
                         {
@@ -376,8 +379,8 @@ namespace SlaughterHouseLib
                                     if (rowIdx < (rowCount - 1))
                                     {
                                         dr["SeqNo" + seq.ToString()] = rowIdx + 1;
-                                        dr["SexFlag" + seq.ToString()] = ds1.Tables[0].Rows[rowIdx]["sex_flag"].ToString();
-                                        dr["NetWeight" + seq.ToString()] = ds1.Tables[0].Rows[rowIdx]["receive_wgh"].ToString().ToDecimal();
+                                        dr["SexFlag" + seq.ToString()] = dsItem.Tables[0].Rows[rowIdx]["sex_flag"].ToString();
+                                        dr["NetWeight" + seq.ToString()] = dsItem.Tables[0].Rows[rowIdx]["receive_wgh"].ToString().ToDecimal();
                                     }
                                     else
                                     {
@@ -385,8 +388,8 @@ namespace SlaughterHouseLib
                                         if (rowIdx == (rowCount - 1))
                                         {
                                             dr["SeqNo" + seq.ToString()] = rowIdx + 1;
-                                            dr["SexFlag" + seq.ToString()] = ds1.Tables[0].Rows[rowIdx]["sex_flag"].ToString();
-                                            dr["NetWeight" + seq.ToString()] = ds1.Tables[0].Rows[rowIdx]["receive_wgh"].ToString().ToDecimal();
+                                            dr["SexFlag" + seq.ToString()] = dsItem.Tables[0].Rows[rowIdx]["sex_flag"].ToString();
+                                            dr["NetWeight" + seq.ToString()] = dsItem.Tables[0].Rows[rowIdx]["receive_wgh"].ToString().ToDecimal();
                                         }
                                     }
                                 }
@@ -404,14 +407,14 @@ namespace SlaughterHouseLib
                         {
                             if (i == 0)
                             {
-                                startDatetime = Convert.ToDateTime(ds1.Tables[0].Rows[i]["create_at"]).ToString("HH:mm");
+                                startDatetime = Convert.ToDateTime(dsItem.Tables[0].Rows[i]["create_at"]).ToString("HH:mm");
                             }
-                            if (i == ds1.Tables[0].Rows.Count - 1)
+                            if (i == dsItem.Tables[0].Rows.Count - 1)
                             {
-                                endDatetime = Convert.ToDateTime(ds1.Tables[0].Rows[i]["create_at"]).ToString("HH:mm");
+                                endDatetime = Convert.ToDateTime(dsItem.Tables[0].Rows[i]["create_at"]).ToString("HH:mm");
                             }
 
-                            sumWeight += ds1.Tables[0].Rows[i]["receive_wgh"].ToString().ToDecimal();
+                            sumWeight += dsItem.Tables[0].Rows[i]["receive_wgh"].ToString().ToDecimal();
                         }
 
 
@@ -441,28 +444,45 @@ namespace SlaughterHouseLib
             }
         }
 
-        public static DataSet GetDataReportSwineYield(DateTime receiveDate)
+        public static DataSet GetDataReportSwineReceive(DateTime receiveDate)
         {
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"SELECT receive_date,transport_doc_no, t.truck_no
-                                    ,queue_no,lot_no,farm_qty,farm_wgh
-                                    ,factory_qty
-                                    ,factory_wgh
-                                    ,(select sum(receive_qty) from receive_item where receive_item.receive_no =a.receive_no and product_code ='P002') as carcass_qty
-                                    ,(select sum(receive_wgh) from receive_item where receive_item.receive_no =a.receive_no and product_code ='P002') as carcass_wgh
-                                    ,b.farm_name
-                                    ,c.breeder_name
-                                    ,(SELECT std_yield from product WHERE product_code ='P002') as std_yield
-                                    ,0.0 as yeild
-                                FROM receives a,farm b,breeder c, truck t
-                                WHERE receive_date =@receive_date
-                                    AND a.farm_code =b.farm_code
-                                    AND a.truck_id =t.truck_id
-                                    AND a.breeder_code =c.breeder_code";
+                    var sql = @"SELECT
+                                    receive_date,
+                                    transport_doc_no,
+                                    t.truck_no,
+                                    queue_no,
+                                    lot_no,
+                                    farm_qty,
+                                    farm_wgh,
+                                    factory_qty,
+                                    factory_wgh,
+                                    carcass_qty,
+                                    carcass_wgh,
+                                    head_qty,
+                                    head_wgh,
+                                    byproduct_red_qty,
+                                    byproduct_red_wgh,
+                                    byproduct_white_qty,
+                                    byproduct_white_wgh,
+                                    (carcass_wgh + head_wgh+byproduct_red_wgh+byproduct_white_wgh) as sum_wgh,
+                                    farm_wgh - (carcass_wgh + head_wgh+byproduct_red_wgh+byproduct_white_wgh) as diff_wgh,
+                                    b.farm_name,
+                                    c.breeder_name
+                                FROM
+                                    receives a,
+                                    farm b,
+                                    breeder c,
+                                    truck t
+                                WHERE
+                                    receive_date = @receive_date
+                                        AND a.farm_code = b.farm_code
+                                        AND a.truck_id = t.truck_id
+                                        AND a.breeder_code = c.breeder_code";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("receive_date", receiveDate.ToString("yyyy-MM-dd"));
 
@@ -472,12 +492,76 @@ namespace SlaughterHouseLib
 
 
 
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                    {
-                        double factory_wgh = ds.Tables[0].Rows[i]["factory_wgh"].ToString().ToDouble();
-                        double carcass_wgh = ds.Tables[0].Rows[i]["carcass_wgh"].ToString().ToDouble();
-                        ds.Tables[0].Rows[i]["yeild"] = ((carcass_wgh * 100) / factory_wgh).ToFormat2Double();
-                    }
+                    //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    //{
+                    //    double factory_wgh = ds.Tables[0].Rows[i]["factory_wgh"].ToString().ToDouble();
+                    //    double carcass_wgh = ds.Tables[0].Rows[i]["carcass_wgh"].ToString().ToDouble();
+                    //    ds.Tables[0].Rows[i]["yeild"] = ((carcass_wgh * 100) / factory_wgh).ToFormat2Double();
+                    //}
+
+
+                    return ds;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static DataSet GetDataReportSwineYield(DateTime receiveDate)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"SELECT 
+                                    receive_date,
+                                    transport_doc_no,
+                                    t.truck_no,
+                                    queue_no,
+                                    lot_no,
+                                    factory_qty,
+                                    factory_wgh,
+                                    carcass_qty,
+                                    carcass_wgh,
+                                    head_qty,
+                                    head_wgh,
+                                    byproduct_red_qty,
+                                    byproduct_red_wgh,
+                                    byproduct_white_qty,
+                                    byproduct_white_wgh,
+                                    b.farm_name,
+                                    c.breeder_name,
+                                    (SELECT std_yield from product WHERE product_code ='P002') as std_yield,
+                                    (carcass_wgh + head_wgh+byproduct_red_wgh+byproduct_white_wgh) as sum_wgh,
+	                                ((carcass_wgh + head_wgh+byproduct_red_wgh+byproduct_white_wgh) *100)/factory_wgh as yield
+                                FROM
+                                    receives a,
+                                    farm b,
+                                    breeder c,
+                                    truck t
+                                WHERE
+                                    receive_date = @receive_date
+                                        AND a.farm_code = b.farm_code
+                                        AND a.truck_id = t.truck_id
+                                        AND a.breeder_code = c.breeder_code";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("receive_date", receiveDate.ToString("yyyy-MM-dd"));
+
+                    var da = new MySqlDataAdapter(cmd);
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+
+
+                    //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    //{
+                    //    double factory_wgh = ds.Tables[0].Rows[i]["factory_wgh"].ToString().ToDouble();
+                    //    double carcass_wgh = ds.Tables[0].Rows[i]["carcass_wgh"].ToString().ToDouble();
+                    //    ds.Tables[0].Rows[i]["yeild"] = ((carcass_wgh * 100) / factory_wgh).ToFormat2Double();
+                    //}
 
 
                     return ds;

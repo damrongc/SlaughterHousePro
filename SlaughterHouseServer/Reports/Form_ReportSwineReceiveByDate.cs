@@ -9,9 +9,9 @@ using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer.Reports
 {
-    public partial class Form_ReportSwineYeild : Form
+    public partial class Form_ReportSwineReceiveByDate : Form
     {
-        public Form_ReportSwineYeild()
+        public Form_ReportSwineReceiveByDate()
         {
             InitializeComponent();
             UserSettingsComponent();
@@ -35,13 +35,13 @@ namespace SlaughterHouseServer.Reports
         private void LoadReport()
         {
             ReportDocument doc = new ReportDocument();
-            DataSet ds = ReportController.GetDataReportSwineYield(dtpReceiveDate.Value);
+            DataSet ds = ReportController.GetDataReportSwineReceive(dtpReceiveDate.Value);
             string xmlPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\xml"));
 
 
-            ds.WriteXml(xmlPath + @"\swineyield.xml", XmlWriteMode.WriteSchema);
+            ds.WriteXml(xmlPath + @"\swinereceive_by_date.xml", XmlWriteMode.WriteSchema);
 
-            //var reportPath = Application.StartupPath;
+            var reportPath = Application.StartupPath;
             //doc.Load(reportPath + @"\Report\swineyield.rpt");
             //doc.SetDataSource(ds);
 

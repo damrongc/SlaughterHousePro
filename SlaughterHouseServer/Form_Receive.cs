@@ -98,7 +98,7 @@ namespace SlaughterHouseServer
                             }
                             break;
                         case "Print":
-                            var frmReport = new Form_ReportSwineReceive
+                            var frmReport = new Form_ReportSwineReceiveByQueue
                             {
                                 ReceiveNo = receiveNo
                             };

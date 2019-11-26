@@ -132,6 +132,9 @@
     <Compile Include="Form_Settings.Designer.cs">
       <DependentUpon>Form_Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="group.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="invoice.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -285,12 +288,6 @@
     <Compile Include="Receiving\Form_ConfirmStock.Designer.cs">
       <DependentUpon>Form_ConfirmStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Receiving\Form_ByProduct.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Receiving\Form_ByProduct.Designer.cs">
-      <DependentUpon>Form_ByProduct.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form_Lot.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,6 +359,9 @@
     <Compile Include="unit_of_measurement.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="user.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -415,9 +415,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_ConfirmStock.resx">
       <DependentUpon>Form_ConfirmStock.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_ByProduct.resx">
-      <DependentUpon>Form_ByProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Lot.resx">
       <DependentUpon>Form_Lot.cs</DependentUpon>
