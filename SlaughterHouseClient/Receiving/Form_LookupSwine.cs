@@ -91,18 +91,18 @@ namespace SlaughterHouseClient.Receiving
                 var qry = db.receives.Where(p => p.receive_flag == 1).ToList();
                 switch (ProductCode)
                 {
-                    case "P002":
+                    case "00000":
                         qry = qry.Where(p => p.farm_qty > p.carcass_qty).ToList();
                         break;
-                    case "P003":
+                    case "00101":
                         qry = qry.Where(p => p.farm_qty > p.byproduct_red_qty).ToList();
 
                         break;
-                    case "P004":
+                    case "00201":
                         qry = qry.Where(p => p.farm_qty > p.byproduct_white_qty).ToList();
 
                         break;
-                    case "P005":
+                    case "04001":
                         qry = qry.Where(p => p.farm_qty > p.head_qty).ToList();
                         break;
                 }

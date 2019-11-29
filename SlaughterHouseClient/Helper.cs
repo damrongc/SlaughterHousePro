@@ -61,6 +61,7 @@ namespace SlaughterHouseClient
                     DataTable dt = new DataTable("Barcode");
                     dt.Columns.Add("barcode_no", typeof(string));
                     dt.Columns.Add("barcode_no_text", typeof(string));
+                    dt.Columns.Add("barcode_info", typeof(string));
                     dt.Columns.Add("product_code", typeof(string));
                     dt.Columns.Add("product_name", typeof(string));
                     dt.Columns.Add("production_date", typeof(DateTime));
@@ -74,6 +75,7 @@ namespace SlaughterHouseClient
                     DataRow dr = dt.NewRow();
                     dr["barcode_no"] = string.Format("*{0}*", barcode.barcode_no);
                     dr["barcode_no_text"] = barcode.barcode_no.ToString();
+                    dr["barcode_info"] = string.Format("*00{0}{1}*", barcode.product_code, Convert.ToInt64(barcode.wgh * 10000).ToString().PadLeft(6, '0'));
                     dr["product_code"] = barcode.product_code;
                     dr["product_name"] = barcode.product.product_name;
                     dr["production_date"] = barcode.production_date;

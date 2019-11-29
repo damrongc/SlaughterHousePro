@@ -510,7 +510,16 @@ namespace SlaughterHouseClient.Receiving
                     }
                     int seq = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Count();
 
-                    barcode_no = db.barcodes.Max(p => p.barcode_no) + 1;
+                    int count = db.barcodes.Count();
+                    if (count == 0)
+                    {
+                        barcode_no = 1;
+                    }
+                    else
+                    {
+                        barcode_no = db.barcodes.Max(p => p.barcode_no) + 1;
+
+                    }
 
                     //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
                     seq += 1;
@@ -650,47 +659,12 @@ namespace SlaughterHouseClient.Receiving
             try
             {
                 btnPrint.Enabled = false;
-                using (var db = new SlaughterhouseEntities())
-                {
-
-                    var barcode = db.barcodes.Where(p => p.barcode_no == barcode_no).SingleOrDefault();
-                    DataTable dt = new DataTable("Barcode");
-                    dt.Columns.Add("barcode_no", typeof(string));
-                    dt.Columns.Add("barcode_no_text", typeof(string));
-                    dt.Columns.Add("product_code", typeof(string));
-                    dt.Columns.Add("product_name", typeof(string));
-                    dt.Columns.Add("production_date", typeof(DateTime));
-                    dt.Columns.Add("expired_date", typeof(DateTime));
-                    dt.Columns.Add("lot_no", typeof(string));
-                    dt.Columns.Add("qty", typeof(int));
-                    dt.Columns.Add("qty_unit", typeof(string));
-                    dt.Columns.Add("wgh", typeof(double));
-                    dt.Columns.Add("wgh_unit", typeof(string));
-
-                    DataRow dr = dt.NewRow();
-                    dr["barcode_no"] = string.Format("*{0}*", barcode.barcode_no);
-                    dr["barcode_no_text"] = barcode.barcode_no.ToString();
-                    dr["product_code"] = barcode.product_code;
-                    dr["product_name"] = barcode.product.product_name;
-                    dr["production_date"] = barcode.production_date;
-                    dr["expired_date"] = barcode.production_date.AddDays(barcode.product.shelflife.ToString().ToDouble());
-                    dr["lot_no"] = barcode.lot_no;
-                    dr["qty"] = barcode.qty;
-                    dr["qty_unit"] = barcode.product.unit_of_measurement.unit_name;
-                    dr["wgh"] = barcode.wgh;
-                    dr["wgh_unit"] = barcode.product.unit_of_measurement1.unit_name;
-                    dt.Rows.Add(dr);
-
-                    //var reportPath = Application.StartupPath;
-                    //dt.WriteXml(reportPath + @"\xml\barcode.xml", XmlWriteMode.WriteSchema);
-
-                    doc.SetDataSource(dt);
-                    doc.PrintToPrinter(1, true, 0, 0);
-                }
+                DataTable dt = Helper.GetBarcode(barcode_no);
+                doc.SetDataSource(dt);
+                doc.PrintToPrinter(1, true, 0, 0);
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -704,8 +678,15 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
+                if (barcode_no > 0)
+                {
+                    PrintBarcode();
 
-                PrintBarcode();
+                }
+                else
+                {
+                    throw new Exception("ไม่พบรหัสบาร์โค็ด");
+                }
             }
             catch (Exception ex)
             {

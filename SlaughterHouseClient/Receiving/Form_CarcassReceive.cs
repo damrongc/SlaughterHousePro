@@ -16,7 +16,7 @@ namespace SlaughterHouseClient.Receiving
 {
     public partial class Form_CarcassReceive : Form
     {
-        const string PRODUCT_CODE = "P002";
+        const string PRODUCT_CODE = "00000";
         SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
         product product;
         private bool isStart = false;

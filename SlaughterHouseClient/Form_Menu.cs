@@ -62,7 +62,7 @@ namespace SlaughterHouseClient
             var frm = new Receiving.Form_ByProductReceive
             {
                 LocationCode = 4,
-                ProductCode = "P004",
+                ProductCode = "00201",
                 //var frm = new Receiving.Form_ByProduct("รับเครื่องในขาว", 3, 4);
                 ShowInTaskbar = false
             };
@@ -74,7 +74,7 @@ namespace SlaughterHouseClient
             var frm = new Receiving.Form_ByProductReceive
             {
                 LocationCode = 3,
-                ProductCode = "P003",
+                ProductCode = "00101",
                 //var frm = new Receiving.Form_ByProduct("รับเครื่องในแดง", 2, 3);
                 ShowInTaskbar = false
             };
