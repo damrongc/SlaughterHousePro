@@ -83,7 +83,7 @@ namespace SlaughterHouseServer
         }
         #endregion
 
-        #region Event Focus, KeyDown
+        #region Event DataBindingComplete
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             gv.Columns["seq"].HeaderText = "ลำดับ";
@@ -127,7 +127,7 @@ namespace SlaughterHouseServer
             {
                 row.Cells[ConstColumns.QTY].Style.BackColor = Color.Bisque;
                 row.Cells[ConstColumns.WGH].Style.BackColor = Color.Bisque;
-            } 
+            }
         }
 
         #endregion
@@ -242,7 +242,6 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -288,7 +287,6 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void Gv_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             //do your checks to see RowIndex is not -1 and other good stuffs
@@ -309,7 +307,7 @@ namespace SlaughterHouseServer
                     {
                         break;
                     }
-                    dtOrderItem.Rows[rowIdx][ConstColumns.QTY] = Math.Ceiling(MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.WGH].ToString()) / packingSize);
+                    dtOrderItem.Rows[rowIdx][ConstColumns.QTY] = RoundQty(MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.WGH].ToString()) / packingSize);
                     break;
             }
             dtOrderItem.AcceptChanges();
@@ -523,6 +521,25 @@ namespace SlaughterHouseServer
             {
                 throw;
             }
+        }
+
+        private int RoundQty(decimal num)
+        {
+
+            var result = (num - Math.Truncate(num)).ToString().Substring(2, 1);
+
+            int firstDecimal = Convert.ToInt32(result);
+            if (firstDecimal >= 8)
+            {
+                int res = Convert.ToInt32(Math.Ceiling(num));
+                return res;
+            }
+            else
+            {
+                int res = Convert.ToInt32(Math.Floor(num));
+                return res;
+            }
+
         }
 
     }
