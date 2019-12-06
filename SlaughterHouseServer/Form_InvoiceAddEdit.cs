@@ -176,10 +176,11 @@ namespace SlaughterHouseServer
 
             gv.Columns[ConstColumns.SEQ].Visible = false;
             gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
+            gv.Columns[ConstColumns.SALE_UNIT_METHOD].Visible = false;
 
             gv.Columns[ConstColumns.UNIT_PRICE_CURRENT].Visible = false;
             gv.Columns[ConstColumns.DISC_PER].Visible = false;
-            gv.Columns[ConstColumns.UNIT_DISC].Visible = false; 
+            gv.Columns[ConstColumns.UNIT_DISC].Visible = false;
             gv.Columns[ConstColumns.DISC_AMT].Visible = false;
 
 
@@ -386,7 +387,7 @@ namespace SlaughterHouseServer
                         UnitPriceCurrent = Convert.ToDecimal(row[ConstColumns.UNIT_PRICE_CURRENT]),
                         DiscPer = Convert.ToDecimal(row[ConstColumns.DISC_PER]),
                         UnitPrice = Convert.ToDecimal(row[ConstColumns.UNIT_PRICE]),
-                        UnitDisc = Convert.ToDecimal(row[ConstColumns.UNIT_DISC]), 
+                        UnitDisc = Convert.ToDecimal(row[ConstColumns.UNIT_DISC]),
                         GrossAmt = Convert.ToDecimal(row[ConstColumns.GROSS_AMT]),
                         SaleUnitMethod = row[ConstColumns.SALE_UNIT_METHOD].ToString(),
                     });
@@ -494,7 +495,7 @@ namespace SlaughterHouseServer
                 }
 
                 //Check Truck No
-                if ( cboTrucko.SelectedValue  == null)
+                if (cboTrucko.SelectedValue == null)
                 {
                     throw new Exception($"โปรดดระบุทะเบียนรถ");
                 }

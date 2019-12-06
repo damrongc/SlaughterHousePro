@@ -697,7 +697,6 @@
     <Content Include="Report\receipt.rpt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Report\swineyield.rpt" />
     <Content Include="Report\transport.rpt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
