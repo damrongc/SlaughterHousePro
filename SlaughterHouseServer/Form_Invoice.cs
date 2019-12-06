@@ -88,6 +88,7 @@ namespace SlaughterHouseServer
             gvDt.Columns[ConstColumns.GROSS_AMT].HeaderText = "จำนวนเงิน";
 
             gvDt.Columns[ConstColumns.SEQ].Visible = false;
+            gvDt.Columns[ConstColumns.SALE_UNIT_METHOD].Visible = false;
 
             gvDt.Columns[ConstColumns.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvDt.Columns[ConstColumns.WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;

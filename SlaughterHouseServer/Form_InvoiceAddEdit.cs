@@ -243,6 +243,8 @@ namespace SlaughterHouseServer
                     txtComment.Text = "";
                     chkActive.Checked = order.Active;
                     cboTrucko.SelectedValue = TruckController.GetTruckNoFromTransport(this.orderNo);
+
+                    //dtpInvoiceDate.Enabled = true;
                 }
                 BtnCancel.Visible = false;
             }
