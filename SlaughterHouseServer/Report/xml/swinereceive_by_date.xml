@@ -36,26 +36,26 @@
     </xs:element>
   </xs:schema>
   <Table>
-    <receive_date>2019-11-24T00:00:00+07:00</receive_date>
-    <transport_doc_no>FF1234</transport_doc_no>
-    <truck_no>รน 5602</truck_no>
+    <receive_date>2019-11-26T00:00:00+07:00</receive_date>
+    <transport_doc_no>SS20190121</transport_doc_no>
+    <truck_no>82-4383</truck_no>
     <queue_no>1</queue_no>
-    <lot_no>1193281241101</lot_no>
-    <farm_qty>4</farm_qty>
-    <farm_wgh>9400.00</farm_wgh>
-    <factory_qty>1</factory_qty>
-    <factory_wgh>75.00</factory_wgh>
-    <carcass_qty>4</carcass_qty>
-    <carcass_wgh>278.34</carcass_wgh>
-    <head_qty>4</head_qty>
-    <head_wgh>18.96</head_wgh>
-    <byproduct_red_qty>4</byproduct_red_qty>
-    <byproduct_red_wgh>24.68</byproduct_red_wgh>
-    <byproduct_white_qty>4</byproduct_white_qty>
-    <byproduct_white_wgh>19.80</byproduct_white_wgh>
-    <sum_wgh>341.78</sum_wgh>
-    <diff_wgh>58.22</diff_wgh>
-    <farm_name>ฟาร์มปราจีน</farm_name>
+    <lot_no>1193301261101</lot_no>
+    <farm_qty>5</farm_qty>
+    <farm_wgh>500.00</farm_wgh>
+    <factory_qty>5</factory_qty>
+    <factory_wgh>350.00</factory_wgh>
+    <carcass_qty>1</carcass_qty>
+    <carcass_wgh>75.45</carcass_wgh>
+    <head_qty>5</head_qty>
+    <head_wgh>22.19</head_wgh>
+    <byproduct_red_qty>3</byproduct_red_qty>
+    <byproduct_red_wgh>25.77</byproduct_red_wgh>
+    <byproduct_white_qty>5</byproduct_white_qty>
+    <byproduct_white_wgh>42.60</byproduct_white_wgh>
+    <sum_wgh>166.01</sum_wgh>
+    <diff_wgh>333.99</diff_wgh>
+    <farm_name>PLF ฟาร์มดงยาง</farm_name>
     <breeder_name>หมูขาว</breeder_name>
   </Table>
 </NewDataSet>

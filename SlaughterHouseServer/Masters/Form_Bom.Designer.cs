@@ -117,6 +117,7 @@
             this.gvDt.Name = "gvDt";
             this.gvDt.ReadOnly = true;
             this.gvDt.RowHeadersWidth = 10;
+            this.gvDt.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gvDt.Size = new System.Drawing.Size(1368, 358);
             this.gvDt.TabIndex = 10;
             // 
@@ -147,6 +148,7 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
+            this.gv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv.Size = new System.Drawing.Size(1368, 298);
             this.gv.TabIndex = 9;
             // 

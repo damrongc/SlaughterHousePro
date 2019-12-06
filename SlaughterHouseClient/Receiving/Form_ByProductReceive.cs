@@ -23,8 +23,13 @@ namespace SlaughterHouseClient.Receiving
         private bool isZero = true;
         bool lockWeight = false;
         int stableCount = 0;
+        private int stableTarget = 0;
+        private int displayTime = 3;
+        private int scaleDivision = 100;
 
         public int LocationCode { get; set; }
+
+        public int ProductGroup { get; set; }
         public string ProductCode { get; set; }
         long barcode_no = 0;
         ReportDocument doc = new ReportDocument();
@@ -51,6 +56,7 @@ namespace SlaughterHouseClient.Receiving
                     lblMinWeight.Text = product.min_weight.ToString();
                     lblMaxWeight.Text = product.max_weight.ToString();
                     lblProduct.Text = product.product_name;
+                    lblCaption.Text = product.product_name;
 
                     int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
                     var plant = db.plants.Find(plantID);
@@ -106,6 +112,19 @@ namespace SlaughterHouseClient.Receiving
                 serialPort1.DataBits = 8;
                 serialPort1.Parity = Parity.None;
                 serialPort1.StopBits = StopBits.One;
+
+                stableTarget = MySettings["StableTarget"].ToString().ToInt16();
+                displayTime = MySettings["DisplayTime"].ToString().ToInt16();
+                scaleDivision = MySettings["Division"].ToString().ToInt16();
+                if (stableTarget == 0)
+                {
+                    btnAcceptWeight.Visible = true;
+                }
+                else
+                {
+                    btnAcceptWeight.Visible = false;
+
+                }
 
             }
         }
@@ -165,34 +184,31 @@ namespace SlaughterHouseClient.Receiving
 
                         if (stateOfScale == 0)
                         {
-                            num = DataInvoke.Substring(16, 6).ToDouble() / 1000;
+                            num = DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
                         else if (stateOfScale == 1)
                         {
-                            num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / 1000;
+                            num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
                         lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
-                        //if (isStart && isZero)
-                        //{
-                        //    if (num > 0 && num > product.min_weight.ToString().ToDouble())
-                        //    {
-                        //        if (stableWt == 0)
-                        //            stableCount += 1;
-                        //        else
-                        //            stableCount = 0;
-                        //        lblStable.Text = stableCount.ToString();
-                        //        lblStable.Refresh();
+                        if (num > 0 && num > product.min_weight.ToString().ToDouble())
+                        {
+                            if (stableWt == 0)
+                                stableCount += 1;
+                            else
+                                stableCount = 0;
+                            lblStable.Text = stableCount.ToString();
+                            lblStable.Refresh();
 
 
-                        //    }
-                        //    if (stableCount >= Constants.STABLE_TARGET.ToInt16())
-                        //    {
-                        //        lockWeight = true;
-                        //        isZero = false;
+                        }
+                        if (stableCount >= Constants.STABLE_TARGET.ToInt16())
+                        {
+                            lockWeight = true;
+                            isZero = false;
 
-                        //        ProcessData();
-                        //    }
-                        //}
+                            ProcessData();
+                        }
                     }
 
 
@@ -205,16 +221,6 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                //lblMessage.Text = Constants.PROCESSING;
-                //SaveData();
-
-                //var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", 2, Color.Green, animationMethod, animationDirection);
-                //toastNotification.Show();
-                //LoadData();
-
-                ////clear weight
-                //lockWeight = false;
-                //timerMinWeight.Enabled = true;
                 if (isStart && isZero)
                 {
                     btnAcceptWeight.Enabled = false;
@@ -236,7 +242,7 @@ namespace SlaughterHouseClient.Receiving
 
                     lblMessage.Text = Constants.PROCESSING;
                     SaveData();
-                    var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", 3, Color.Green, animationMethod, animationDirection);
+                    var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", displayTime, Color.Green, animationMethod, animationDirection);
                     toastNotification.Show();
                     LoadData();
 
@@ -252,7 +258,7 @@ namespace SlaughterHouseClient.Receiving
             catch (Exception ex)
             {
 
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
             finally
@@ -389,9 +395,7 @@ namespace SlaughterHouseClient.Receiving
         private void btnSetWgh_Click(object sender, EventArgs e)
         {
             lblWeight.Text = txtSimWeight.Text.ToDecimal().ToFormat2Decimal();
-
             isStart = true;
-            isZero = true;
             btnReceiveNo.Enabled = false;
             btnStart.Enabled = false;
             btnStop.Enabled = true;
@@ -402,6 +406,7 @@ namespace SlaughterHouseClient.Receiving
         private void btnZero_Click(object sender, EventArgs e)
         {
             lblWeight.Text = 0m.ToFormat2Decimal();
+            isZero = true;
         }
 
         private void BtnTareWeight_Click(object sender, EventArgs e)
@@ -513,7 +518,7 @@ namespace SlaughterHouseClient.Receiving
                     int count = db.barcodes.Count();
                     if (count == 0)
                     {
-                        barcode_no = 1;
+                        barcode_no = 1000000000001;
                     }
                     else
                     {
@@ -619,12 +624,15 @@ namespace SlaughterHouseClient.Receiving
 
                             switch (product.product_code)
                             {
-
-                                case "P003":
+                                case "04001":
+                                    receive.head_qty += item.receive_qty;
+                                    receive.head_wgh += item.receive_wgh;
+                                    break;
+                                case "00101":
                                     receive.byproduct_red_qty += item.receive_qty;
                                     receive.byproduct_red_wgh += item.receive_wgh;
                                     break;
-                                case "P004":
+                                case "00201":
                                     receive.byproduct_white_qty += item.receive_qty;
                                     receive.byproduct_white_wgh += item.receive_wgh;
                                     break;
@@ -641,7 +649,6 @@ namespace SlaughterHouseClient.Receiving
                         finally
                         {
                             PrintBarcode();
-
                         }
 
                     }
@@ -661,7 +668,18 @@ namespace SlaughterHouseClient.Receiving
                 btnPrint.Enabled = false;
                 DataTable dt = Helper.GetBarcode(barcode_no);
                 doc.SetDataSource(dt);
-                doc.PrintToPrinter(1, true, 0, 0);
+                if (System.Diagnostics.Debugger.IsAttached)
+                {
+                    Console.WriteLine("Mode=Debug");
+                }
+                else
+                {
+                    doc.PrintToPrinter(1, true, 0, 0);
+                }
+
+
+
+
             }
             catch (Exception)
             {
@@ -679,14 +697,9 @@ namespace SlaughterHouseClient.Receiving
             try
             {
                 if (barcode_no > 0)
-                {
                     PrintBarcode();
-
-                }
                 else
-                {
                     throw new Exception("ไม่พบรหัสบาร์โค็ด");
-                }
             }
             catch (Exception ex)
             {

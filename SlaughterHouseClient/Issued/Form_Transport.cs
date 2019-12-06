@@ -145,14 +145,32 @@ namespace SlaughterHouseClient.Issued
         {
             using (var db = new SlaughterhouseEntities())
             {
-                var sql = @"select item.transport_no,stock_no,item.product_code,product_name,seq,transport_qty,transport_wgh,
-                                    barcode_no,bom_code,lot_no,hd.truck_no,item.create_at,item.create_by
-                                from transport hd ,transport_item item,product p
-                                where ref_document_no =@order_no
-                                and hd.transport_no=item.transport_no
-                                and item.product_code =p.product_code
-                                and barcode_no > 0
-                                order by hd.truck_no,seq desc";
+                var sql = @"SELECT
+                                item.transport_no,
+                                stock_no,
+                                item.product_code,
+                                product_name,
+                                seq,
+                                transport_qty,
+                                transport_wgh,
+                                barcode_no,
+                                bom_code,
+                                lot_no,
+                                truck_no,
+                                item.create_at,
+                                item.create_by
+                            FROM
+                                transport hd,
+                                transport_item item,
+                                product p,
+                                truck t
+                            WHERE
+                                ref_document_no = @order_no
+                                    AND hd.transport_no = item.transport_no
+                                    AND hd.truck_id = t.truck_id
+                                    AND item.product_code = p.product_code
+                                    AND barcode_no > 0
+                            ORDER BY seq DESC";
 
                 var qry = db.Database.SqlQuery<CustomerTransport>(sql, new MySqlParameter("order_no", OrderNo)).ToList();
                 var coll = qry.AsEnumerable().Select(p => new

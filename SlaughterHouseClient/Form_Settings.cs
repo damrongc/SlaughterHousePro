@@ -39,6 +39,10 @@ namespace SlaughterHouseClient
                 cboBaudrate.Text = MySettings["Baudrate"].ToString();
                 if (MySettings["StableTarget"] != null)
                     cboStableTarget.Text = MySettings["StableTarget"].ToString();
+                if (MySettings["DisplayTime"] != null)
+                    cboMsgDisplayTime.Text = MySettings["DisplayTime"].ToString();
+                if (MySettings["Division"] != null)
+                    cboDivision.Text = MySettings["Division"].ToString();
             }
         }
 
@@ -47,6 +51,8 @@ namespace SlaughterHouseClient
             MySettings["Comport"] = cboComport.Text;
             MySettings["Baudrate"] = cboBaudrate.Text;
             MySettings["StableTarget"] = cboStableTarget.Text;
+            MySettings["DisplayTime"] = cboMsgDisplayTime.Text;
+            MySettings["Division"] = cboDivision.Text;
             MySettings.Save();
 
         }
@@ -62,6 +68,7 @@ namespace SlaughterHouseClient
             {
                 SaveSetting();
                 MessageBox.Show("Success", "บันทึกข้อมูล เรียบร้อยแล้ว", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
             }
             catch (Exception ex)
             {

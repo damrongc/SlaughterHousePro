@@ -7,11 +7,10 @@ namespace SlaughterHouseClient.Receiving
 {
     public partial class Form_LookupProduct : Form
     {
-        //int ReceiveFlag { get; set; }
         public string ProductCode { get; set; }
 
         private int Index;
-        private int PAGE_SIZE = 20;
+        private readonly int PAGE_SIZE = 20;
         List<Button> buttons;
 
         public Form_LookupProduct()
@@ -19,48 +18,16 @@ namespace SlaughterHouseClient.Receiving
             InitializeComponent();
             Load += Form_Load;
 
-            //ReceiveFlag = _receiveFlag;
-
             UserSettingsComponent();
 
         }
 
         private void UserSettingsComponent()
         {
-            //gv.CellContentClick += Gv_CellContentClick;
-            //gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
-            ////gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
-            //gv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
-            //gv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            //gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            ////gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
-            //gv.EnableHeadersVisualStyles = false;
-
-
 
         }
 
-        //private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    try
-        //    {
-        //        DataGridView senderGrid = (DataGridView)sender;
 
-        //        if (e.RowIndex >= 0)
-        //        {
-        //            ProductCode = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
-        //            DialogResult = DialogResult.OK;
-        //            Close();
-
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
 
         private void Form_Load(object sender, System.EventArgs e)
         {
@@ -72,7 +39,7 @@ namespace SlaughterHouseClient.Receiving
 
             using (var db = new SlaughterhouseEntities())
             {
-                var coll = db.product_group.Select(p => new
+                var coll = db.product_group.Where(p => p.product_group_code >= 4).Select(p => new
                 {
                     p.product_group_code,
                     p.product_group_name
@@ -93,7 +60,13 @@ namespace SlaughterHouseClient.Receiving
             using (var db = new SlaughterhouseEntities())
             {
 
-                var products = db.products.Where(p => p.product_group_code == productGroupCode && p.active == true).ToList();
+                var products = db.products.Where(p => p.product_group_code == productGroupCode && p.active == true)
+                    .Select(p => new
+                    {
+                        p.product_code,
+                        p.product_name
+
+                    }).ToList();
                 foreach (var item in products)
                 {
                     var btn = new Button

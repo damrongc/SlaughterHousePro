@@ -38,7 +38,9 @@ namespace SlaughterHouseClient.Receiving
         private bool isZero = true;
         bool lockWeight = false;
         int stableCount = 0;
-        int stableCountTarget = 0;
+        private int stableTarget = 0;
+        private int displayTime = 3;
+        private int scaleDivision = 100;
 
         //SerialPortManager _spManager;
         long barcodeNo = 0;
@@ -136,7 +138,9 @@ namespace SlaughterHouseClient.Receiving
                 serialPort1.Parity = Parity.None;
                 serialPort1.StopBits = StopBits.One;
 
-                stableCountTarget = MySettings["StableTarget"].ToString().ToInt16();
+                stableTarget = MySettings["StableTarget"].ToString().ToInt16();
+                displayTime = MySettings["DisplayTime"].ToString().ToInt16();
+                scaleDivision = MySettings["Division"].ToString().ToInt16();
             }
         }
 
@@ -194,11 +198,11 @@ namespace SlaughterHouseClient.Receiving
 
                         if (stateOfScale == 0)
                         {
-                            num = DataInvoke.Substring(16, 6).ToDouble() / 1000;
+                            num = DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
                         else if (stateOfScale == 1)
                         {
-                            num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / 1000;
+                            num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
                         lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
                         if (isStart && isZero)
@@ -212,7 +216,7 @@ namespace SlaughterHouseClient.Receiving
                                 lblStable.Text = stableCount.ToString();
                                 lblStable.Refresh();
                             }
-                            if (stableCount >= stableCountTarget)
+                            if (stableCount >= stableTarget)
                             {
                                 lockWeight = true;
                                 isZero = false;
@@ -231,12 +235,10 @@ namespace SlaughterHouseClient.Receiving
             {
 
                 lblMessage.Text = Constants.PROCESSING;
-
-
                 SaveData();
                 //PlayNotificationSound("normal");
 
-                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณายกสินค้าออก", 2, Color.Green, animationMethod, animationDirection);
+                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณายกสินค้าออก", displayTime, Color.Green, animationMethod, animationDirection);
                 toastNotification.Show();
 
                 LoadStock();
@@ -259,7 +261,7 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
 
@@ -485,7 +487,7 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
 
@@ -518,7 +520,7 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
 
@@ -658,7 +660,7 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
 
@@ -796,7 +798,7 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
         }
@@ -873,7 +875,7 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
         }

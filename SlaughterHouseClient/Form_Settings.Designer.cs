@@ -39,6 +39,10 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.cboStableTarget = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.cboMsgDisplayTime = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cboDivision = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +95,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Kanit", 18F);
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(93, 91);
+            this.label2.Location = new System.Drawing.Point(125, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(124, 35);
             this.label2.TabIndex = 16;
@@ -103,7 +107,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Kanit", 18F);
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(83, 156);
+            this.label3.Location = new System.Drawing.Point(115, 156);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 35);
             this.label3.TabIndex = 17;
@@ -121,7 +125,7 @@
             "COM4",
             "COM5",
             "COM6"});
-            this.cboComport.Location = new System.Drawing.Point(223, 88);
+            this.cboComport.Location = new System.Drawing.Point(255, 88);
             this.cboComport.Name = "cboComport";
             this.cboComport.Size = new System.Drawing.Size(258, 43);
             this.cboComport.TabIndex = 18;
@@ -133,7 +137,7 @@
             this.cboBaudrate.Items.AddRange(new object[] {
             "9600",
             "11500"});
-            this.cboBaudrate.Location = new System.Drawing.Point(223, 153);
+            this.cboBaudrate.Location = new System.Drawing.Point(255, 153);
             this.cboBaudrate.Name = "cboBaudrate";
             this.cboBaudrate.Size = new System.Drawing.Size(258, 43);
             this.cboBaudrate.TabIndex = 19;
@@ -144,7 +148,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(223, 304);
+            this.btnSave.Location = new System.Drawing.Point(255, 400);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(258, 51);
             this.btnSave.TabIndex = 75;
@@ -163,7 +167,7 @@
             "30",
             "40",
             "50"});
-            this.cboStableTarget.Location = new System.Drawing.Point(223, 220);
+            this.cboStableTarget.Location = new System.Drawing.Point(255, 220);
             this.cboStableTarget.Name = "cboStableTarget";
             this.cboStableTarget.Size = new System.Drawing.Size(258, 43);
             this.cboStableTarget.TabIndex = 77;
@@ -173,18 +177,71 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Kanit", 18F);
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(23, 223);
+            this.label4.Location = new System.Drawing.Point(55, 223);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(194, 35);
             this.label4.TabIndex = 76;
             this.label4.Text = "STABLE TARGET:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // cboMsgDisplayTime
+            // 
+            this.cboMsgDisplayTime.Font = new System.Drawing.Font("Kanit", 18F);
+            this.cboMsgDisplayTime.FormattingEnabled = true;
+            this.cboMsgDisplayTime.Items.AddRange(new object[] {
+            "3",
+            "4",
+            "5"});
+            this.cboMsgDisplayTime.Location = new System.Drawing.Point(255, 351);
+            this.cboMsgDisplayTime.Name = "cboMsgDisplayTime";
+            this.cboMsgDisplayTime.Size = new System.Drawing.Size(258, 43);
+            this.cboMsgDisplayTime.TabIndex = 79;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Kanit", 18F);
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(23, 354);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(226, 35);
+            this.label5.TabIndex = 78;
+            this.label5.Text = "MSG DISPLAY TIME:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cboDivision
+            // 
+            this.cboDivision.Font = new System.Drawing.Font("Kanit", 18F);
+            this.cboDivision.FormattingEnabled = true;
+            this.cboDivision.Items.AddRange(new object[] {
+            "100",
+            "1000"});
+            this.cboDivision.Location = new System.Drawing.Point(255, 286);
+            this.cboDivision.Name = "cboDivision";
+            this.cboDivision.Size = new System.Drawing.Size(258, 43);
+            this.cboDivision.TabIndex = 81;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Kanit", 18F);
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(125, 289);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(116, 35);
+            this.label6.TabIndex = 80;
+            this.label6.Text = "DIVISION:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Form_Settings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(633, 386);
+            this.ClientSize = new System.Drawing.Size(633, 463);
+            this.Controls.Add(this.cboDivision);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cboMsgDisplayTime);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.cboStableTarget);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnSave);
@@ -216,5 +273,9 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox cboStableTarget;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cboMsgDisplayTime;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cboDivision;
+        private System.Windows.Forms.Label label6;
     }
 }

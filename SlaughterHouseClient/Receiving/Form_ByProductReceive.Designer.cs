@@ -300,7 +300,7 @@
             this.lblBreeder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblBreeder.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblBreeder.ForeColor = System.Drawing.Color.Black;
-            this.lblBreeder.Location = new System.Drawing.Point(18, 381);
+            this.lblBreeder.Location = new System.Drawing.Point(18, 391);
             this.lblBreeder.Name = "lblBreeder";
             this.lblBreeder.Size = new System.Drawing.Size(141, 43);
             this.lblBreeder.TabIndex = 45;
@@ -309,7 +309,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label12.Location = new System.Drawing.Point(12, 348);
+            this.label12.Location = new System.Drawing.Point(12, 358);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(81, 33);
             this.label12.TabIndex = 44;
@@ -371,7 +371,7 @@
             this.plSimulator.Controls.Add(this.txtSimWeight);
             this.plSimulator.Controls.Add(this.btnZero);
             this.plSimulator.Font = new System.Drawing.Font("Kanit", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.plSimulator.Location = new System.Drawing.Point(436, 452);
+            this.plSimulator.Location = new System.Drawing.Point(795, 90);
             this.plSimulator.Name = "plSimulator";
             this.plSimulator.Size = new System.Drawing.Size(214, 72);
             this.plSimulator.TabIndex = 50;
@@ -534,7 +534,7 @@
             this.lblLastWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblLastWgh.Font = new System.Drawing.Font("Kanit", 48F);
             this.lblLastWgh.ForeColor = System.Drawing.Color.Black;
-            this.lblLastWgh.Location = new System.Drawing.Point(680, 481);
+            this.lblLastWgh.Location = new System.Drawing.Point(678, 470);
             this.lblLastWgh.Name = "lblLastWgh";
             this.lblLastWgh.Size = new System.Drawing.Size(332, 97);
             this.lblLastWgh.TabIndex = 76;
@@ -545,7 +545,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label2.Location = new System.Drawing.Point(887, 448);
+            this.label2.Location = new System.Drawing.Point(885, 437);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(127, 33);
             this.label2.TabIndex = 75;
@@ -558,16 +558,16 @@
             this.lblLotNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblLotNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblLotNo.ForeColor = System.Drawing.Color.Black;
-            this.lblLotNo.Location = new System.Drawing.Point(19, 481);
+            this.lblLotNo.Location = new System.Drawing.Point(165, 391);
             this.lblLotNo.Name = "lblLotNo";
-            this.lblLotNo.Size = new System.Drawing.Size(248, 43);
+            this.lblLotNo.Size = new System.Drawing.Size(288, 43);
             this.lblLotNo.TabIndex = 78;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label3.Location = new System.Drawing.Point(13, 448);
+            this.label3.Location = new System.Drawing.Point(159, 358);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 33);
             this.label3.TabIndex = 77;
@@ -594,7 +594,7 @@
             this.lblProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblProduct.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblProduct.ForeColor = System.Drawing.Color.Black;
-            this.lblProduct.Location = new System.Drawing.Point(165, 381);
+            this.lblProduct.Location = new System.Drawing.Point(19, 492);
             this.lblProduct.Name = "lblProduct";
             this.lblProduct.Size = new System.Drawing.Size(288, 43);
             this.lblProduct.TabIndex = 81;
@@ -603,7 +603,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label6.Location = new System.Drawing.Point(159, 348);
+            this.label6.Location = new System.Drawing.Point(13, 459);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 33);
             this.label6.TabIndex = 80;

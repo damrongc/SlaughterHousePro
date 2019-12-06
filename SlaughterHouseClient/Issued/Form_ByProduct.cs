@@ -1,4 +1,5 @@
 ﻿
+using nucs.JsonSettings;
 using System;
 using System.Data.Entity;
 using System.Drawing;
@@ -10,8 +11,11 @@ namespace SlaughterHouseClient.Issued
 {
     public partial class Form_ByProduct : Form
     {
-        const string PRODUCT_CODE = "P002";
+        private readonly SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
+        const string PRODUCT_CODE = "00000";
         int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+
+        private int displayTime = 3;
 
 
         public Form_ByProduct()
@@ -33,6 +37,7 @@ namespace SlaughterHouseClient.Issued
 
         private void Form_Load(object sender, EventArgs e)
         {
+            LoadSetting();
             using (var db = new SlaughterhouseEntities())
             {
 
@@ -50,6 +55,14 @@ namespace SlaughterHouseClient.Issued
                 cboTruckNo.DataSource = trucks;
 
                 lblMessage.Text = Constants.CHOOSE_QUEUE;
+            }
+        }
+
+        void LoadSetting()
+        {
+            if (MySettings.Data.Count > 0)
+            {
+                displayTime = MySettings["DisplayTime"].ToString().ToInt16();
             }
         }
 
@@ -159,7 +172,7 @@ namespace SlaughterHouseClient.Issued
 
                 var animationDirection = FormAnimator.AnimationDirection.Up;
                 var animationMethod = FormAnimator.AnimationMethod.Slide;
-                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย.", 2, Color.Green, animationMethod, animationDirection);
+                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย.", displayTime, Color.Green, animationMethod, animationDirection);
                 toastNotification.Show();
 
                 LoadOrder();
@@ -170,7 +183,7 @@ namespace SlaughterHouseClient.Issued
                 ClearDisplay();
                 var animationDirection = FormAnimator.AnimationDirection.Up;
                 var animationMethod = FormAnimator.AnimationMethod.Slide;
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
                 //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

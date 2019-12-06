@@ -36,18 +36,16 @@ namespace SlaughterHouseServer.Reports
         {
             ReportDocument doc = new ReportDocument();
             DataSet ds = ReportController.GetDataReportSwineReceive(dtpReceiveDate.Value);
-            string xmlPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\xml"));
-
-
-            ds.WriteXml(xmlPath + @"\swinereceive_by_date.xml", XmlWriteMode.WriteSchema);
+            //string xmlPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\xml"));
+            //ds.WriteXml(xmlPath + @"\swinereceive_by_date.xml", XmlWriteMode.WriteSchema);
 
             var reportPath = Application.StartupPath;
-            //doc.Load(reportPath + @"\Report\swineyield.rpt");
-            //doc.SetDataSource(ds);
+            doc.Load(reportPath + @"\Report\swinereceive_by_date.rpt");
+            doc.SetDataSource(ds);
 
-            //rptViewer.ReportSource = doc;
-            //rptViewer.Zoom(100);
-            //rptViewer.RefreshReport();
+            rptViewer.ReportSource = doc;
+            rptViewer.Zoom(100);
+            rptViewer.RefreshReport();
         }
     }
 }

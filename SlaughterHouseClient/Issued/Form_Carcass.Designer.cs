@@ -224,9 +224,9 @@
             this.lblOrderQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblOrderQty.Font = new System.Drawing.Font("Kanit", 40F);
             this.lblOrderQty.ForeColor = System.Drawing.Color.Black;
-            this.lblOrderQty.Location = new System.Drawing.Point(17, 634);
+            this.lblOrderQty.Location = new System.Drawing.Point(17, 643);
             this.lblOrderQty.Name = "lblOrderQty";
-            this.lblOrderQty.Size = new System.Drawing.Size(175, 97);
+            this.lblOrderQty.Size = new System.Drawing.Size(175, 87);
             this.lblOrderQty.TabIndex = 20;
             this.lblOrderQty.Text = "0";
             this.lblOrderQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -235,7 +235,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label16.Location = new System.Drawing.Point(11, 601);
+            this.label16.Location = new System.Drawing.Point(11, 614);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(75, 33);
             this.label16.TabIndex = 19;
@@ -248,9 +248,9 @@
             this.lblOrderWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblOrderWgh.Font = new System.Drawing.Font("Kanit", 40F);
             this.lblOrderWgh.ForeColor = System.Drawing.Color.Black;
-            this.lblOrderWgh.Location = new System.Drawing.Point(198, 634);
+            this.lblOrderWgh.Location = new System.Drawing.Point(198, 643);
             this.lblOrderWgh.Name = "lblOrderWgh";
-            this.lblOrderWgh.Size = new System.Drawing.Size(294, 97);
+            this.lblOrderWgh.Size = new System.Drawing.Size(294, 87);
             this.lblOrderWgh.TabIndex = 22;
             this.lblOrderWgh.Text = "0.00";
             this.lblOrderWgh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -259,7 +259,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label18.Location = new System.Drawing.Point(192, 601);
+            this.label18.Location = new System.Drawing.Point(192, 614);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(77, 33);
             this.label18.TabIndex = 21;
@@ -272,9 +272,9 @@
             this.lblUnloadedQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblUnloadedQty.Font = new System.Drawing.Font("Kanit", 40F);
             this.lblUnloadedQty.ForeColor = System.Drawing.Color.Black;
-            this.lblUnloadedQty.Location = new System.Drawing.Point(536, 634);
+            this.lblUnloadedQty.Location = new System.Drawing.Point(536, 643);
             this.lblUnloadedQty.Name = "lblUnloadedQty";
-            this.lblUnloadedQty.Size = new System.Drawing.Size(175, 97);
+            this.lblUnloadedQty.Size = new System.Drawing.Size(175, 87);
             this.lblUnloadedQty.TabIndex = 24;
             this.lblUnloadedQty.Text = "0";
             this.lblUnloadedQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -283,7 +283,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label20.Location = new System.Drawing.Point(530, 601);
+            this.label20.Location = new System.Drawing.Point(530, 614);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(111, 33);
             this.label20.TabIndex = 23;
@@ -296,9 +296,9 @@
             this.lblUnloadedWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblUnloadedWgh.Font = new System.Drawing.Font("Kanit", 40F);
             this.lblUnloadedWgh.ForeColor = System.Drawing.Color.Black;
-            this.lblUnloadedWgh.Location = new System.Drawing.Point(717, 634);
+            this.lblUnloadedWgh.Location = new System.Drawing.Point(717, 643);
             this.lblUnloadedWgh.Name = "lblUnloadedWgh";
-            this.lblUnloadedWgh.Size = new System.Drawing.Size(294, 97);
+            this.lblUnloadedWgh.Size = new System.Drawing.Size(294, 87);
             this.lblUnloadedWgh.TabIndex = 26;
             this.lblUnloadedWgh.Text = "0.00";
             this.lblUnloadedWgh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -307,7 +307,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label22.Location = new System.Drawing.Point(711, 601);
+            this.label22.Location = new System.Drawing.Point(711, 614);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(113, 33);
             this.label22.TabIndex = 25;
@@ -362,9 +362,9 @@
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 312);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 321);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(800, 286);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(800, 277);
             this.flowLayoutPanel1.TabIndex = 52;
             // 
             // btnUp
@@ -374,7 +374,7 @@
             this.btnUp.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnUp.ForeColor = System.Drawing.Color.White;
             this.btnUp.Image = ((System.Drawing.Image)(resources.GetObject("btnUp.Image")));
-            this.btnUp.Location = new System.Drawing.Point(824, 312);
+            this.btnUp.Location = new System.Drawing.Point(824, 321);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(73, 70);
             this.btnUp.TabIndex = 57;
@@ -458,7 +458,7 @@
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(903, 388);
+            this.btnStop.Location = new System.Drawing.Point(903, 397);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(109, 70);
             this.btnStop.TabIndex = 76;
@@ -472,7 +472,7 @@
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(903, 312);
+            this.btnStart.Location = new System.Drawing.Point(903, 321);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(109, 70);
             this.btnStart.TabIndex = 75;

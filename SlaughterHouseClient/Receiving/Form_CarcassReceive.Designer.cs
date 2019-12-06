@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_CarcassReceive));
             this.panelHeader = new System.Windows.Forms.Panel();
-            this.lblCurrentDatetime = new System.Windows.Forms.Label();
+            this.lblProductionDate = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.lblCaption = new System.Windows.Forms.Label();
             this.lblWeight = new System.Windows.Forms.Label();
@@ -81,7 +81,7 @@
             // panelHeader
             // 
             this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
-            this.panelHeader.Controls.Add(this.lblCurrentDatetime);
+            this.panelHeader.Controls.Add(this.lblProductionDate);
             this.panelHeader.Controls.Add(this.btnExit);
             this.panelHeader.Controls.Add(this.lblCaption);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -90,17 +90,17 @@
             this.panelHeader.Size = new System.Drawing.Size(1024, 54);
             this.panelHeader.TabIndex = 0;
             // 
-            // lblCurrentDatetime
+            // lblProductionDate
             // 
-            this.lblCurrentDatetime.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblCurrentDatetime.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.lblCurrentDatetime.ForeColor = System.Drawing.Color.White;
-            this.lblCurrentDatetime.Location = new System.Drawing.Point(798, 0);
-            this.lblCurrentDatetime.Name = "lblCurrentDatetime";
-            this.lblCurrentDatetime.Size = new System.Drawing.Size(150, 54);
-            this.lblCurrentDatetime.TabIndex = 14;
-            this.lblCurrentDatetime.Text = "-";
-            this.lblCurrentDatetime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblProductionDate.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblProductionDate.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblProductionDate.ForeColor = System.Drawing.Color.White;
+            this.lblProductionDate.Location = new System.Drawing.Point(798, 0);
+            this.lblProductionDate.Name = "lblProductionDate";
+            this.lblProductionDate.Size = new System.Drawing.Size(150, 54);
+            this.lblProductionDate.TabIndex = 14;
+            this.lblProductionDate.Text = "-";
+            this.lblProductionDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnExit
             // 
@@ -521,6 +521,7 @@
             this.btnAcceptWeight.TabIndex = 74;
             this.btnAcceptWeight.Text = "ตกลง";
             this.btnAcceptWeight.UseVisualStyleBackColor = false;
+            this.btnAcceptWeight.Visible = false;
             this.btnAcceptWeight.Click += new System.EventHandler(this.BtnAcceptWeight_Click);
             // 
             // lblLastWgh
@@ -641,7 +642,7 @@
         private System.Windows.Forms.Label lblReceiveNo;
         private System.Windows.Forms.Label lblFarm;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label lblCurrentDatetime;
+        private System.Windows.Forms.Label lblProductionDate;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;

@@ -19,7 +19,8 @@ namespace SlaughterHouseServer
         {
             BtnAdd.Click += BtnAdd_Click;
             BtnSearch.Click += BtnSearch_Click;
-            gv.CellContentClick += Gv_CellContentClick;
+            //gv.CellContentClick += Gv_CellContentClick;
+            gv.CellClick += Gv_CellClick;
             gv.DataBindingComplete += Gv_DataBindingComplete;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
@@ -41,47 +42,7 @@ namespace SlaughterHouseServer
             LoadBom();
         }
 
-        private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            //gv.Columns[ConstColumns.ORDER_NO].HeaderText = "เลขที่ใบสั่งขาย";
-            //gv.Columns[ConstColumns.REQUEST_DATE].HeaderText = "วันที่ต้องการสินค้า";
-            //gv.Columns[ConstColumns.CUSTOMER_NAME].HeaderText = "ลูกค้า";
-            //gv.Columns[ConstColumns.COMMENTS].HeaderText = "หมายเหตุ";
-            //gv.Columns[ConstColumns.ORDER_FLAG].HeaderText = "สถานะ";
-            //gv.Columns[ConstColumns.INVOICE_FLAG].HeaderText = "สถานะออกใบแจ้งหนี้";
-            //gv.Columns[ConstColumns.COMMENTS].HeaderText = "หมายเหตุ";
-
-            gv.Columns[ConstColumns.BomCode].HeaderText = "รหัส Bom";
-
-            gv.Columns[ConstColumns.ProductCode].HeaderText = "รหัสสินค้า";
-            gv.Columns[ConstColumns.ProductName].HeaderText = "ชื่อสินค้า";
-            gv.Columns[ConstColumns.Active].HeaderText = "ใช้งาน";
-            gv.Columns[ConstColumns.CreateAt].HeaderText = "วันเวลาสร้าง";
-            gv.Columns[ConstColumns.CreateBy].HeaderText = "ผู้สร้าง";
-            gv.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
-            gv.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
-            gv.Columns[ConstColumns.ProductCode].Visible = false;
-
-            gv.Columns[ConstColumns.CreateAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            gv.Columns[ConstColumns.ModifiedAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-        }
-
-
-        private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            gvDt.Columns[ConstColumns.BOM_CODE].HeaderText = "รหัส Bom";
-            gvDt.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
-            gvDt.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-
-            gvDt.Columns[ConstColumns.MUTIPLY_QTY].Visible = false;
-            gvDt.Columns[ConstColumns.MUTIPLY_WGH].Visible = false;
-            gvDt.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
-            //gvDt.Columns[ConstColumns.UNIT_CODE].Visible = false;
-            //gvDt.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
-
-        }
-
-        private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Gv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -117,6 +78,48 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            //gv.Columns[ConstColumns.ORDER_NO].HeaderText = "เลขที่ใบสั่งขาย";
+            //gv.Columns[ConstColumns.REQUEST_DATE].HeaderText = "วันที่ต้องการสินค้า";
+            //gv.Columns[ConstColumns.CUSTOMER_NAME].HeaderText = "ลูกค้า";
+            //gv.Columns[ConstColumns.COMMENTS].HeaderText = "หมายเหตุ";
+            //gv.Columns[ConstColumns.ORDER_FLAG].HeaderText = "สถานะ";
+            //gv.Columns[ConstColumns.INVOICE_FLAG].HeaderText = "สถานะออกใบแจ้งหนี้";
+            //gv.Columns[ConstColumns.COMMENTS].HeaderText = "หมายเหตุ";
+
+            gv.Columns[ConstColumns.BomCode].HeaderText = "รหัส Bom";
+
+            gv.Columns[ConstColumns.ProductCode].HeaderText = "รหัสสินค้า";
+            gv.Columns[ConstColumns.ProductName].HeaderText = "ชื่อสินค้า";
+            gv.Columns[ConstColumns.Active].HeaderText = "ใช้งาน";
+            gv.Columns[ConstColumns.CreateAt].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[ConstColumns.CreateBy].HeaderText = "ผู้สร้าง";
+            gv.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
+            gv.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
+            gv.Columns[ConstColumns.ProductCode].Visible = false;
+
+            gv.Columns[ConstColumns.CreateAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            gv.Columns[ConstColumns.ModifiedAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+        }
+
+
+        private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+
+            gvDt.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
+            gvDt.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
+            gvDt.Columns[ConstColumns.BOM_CODE].Visible = false;
+            gvDt.Columns[ConstColumns.MUTIPLY_QTY].Visible = false;
+            gvDt.Columns[ConstColumns.MUTIPLY_WGH].Visible = false;
+            //gvDt.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
+            //gvDt.Columns[ConstColumns.UNIT_CODE].Visible = false;
+            //gvDt.Columns[ConstColumns.ISSUE_UNIT_METHOD].Visible = false;
+
+        }
+
+
 
         private void BtnSearch_Click(object sender, System.EventArgs e)
         {

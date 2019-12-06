@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -73,8 +74,9 @@ namespace SlaughterHouseClient
                     dt.Columns.Add("wgh_unit", typeof(string));
 
                     DataRow dr = dt.NewRow();
+                    //string barcode_no_text = string.Format("1{0}", barcode.barcode_no.ToString().PadLeft(12, '0'));
                     dr["barcode_no"] = string.Format("*{0}*", barcode.barcode_no);
-                    dr["barcode_no_text"] = barcode.barcode_no.ToString();
+                    dr["barcode_no_text"] = barcode.barcode_no;
                     dr["barcode_info"] = string.Format("*00{0}{1}*", barcode.product_code, Convert.ToInt64(barcode.wgh * 10000).ToString().PadLeft(6, '0'));
                     dr["product_code"] = barcode.product_code;
                     dr["product_name"] = barcode.product.product_name;
@@ -87,16 +89,12 @@ namespace SlaughterHouseClient
                     dr["wgh_unit"] = barcode.product.unit_of_measurement1.unit_name;
                     dt.Rows.Add(dr);
 
+                    //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\xml\"));
+                    //dt.WriteXml(path + @"barcode.xml", XmlWriteMode.WriteSchema);
+
+
                     return dt;
-
-                    //string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"\Report\Rpt\"));//Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
-                    //dt.WriteXml(path + @"\xml\barcode.xml", XmlWriteMode.WriteSchema);
-
                 }
-
-
-
-
             }
             catch (Exception)
             {

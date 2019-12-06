@@ -20,13 +20,14 @@ namespace SlaughterHouseClient.Receiving
         product product;
         private string sexFlag = "F";
         private bool isStart = false;
-        private int stableTarget = 0;
         //private bool isTare = false;
         private bool isZero = true;
         bool lockWeight = false;
-        string color = "#1C6BBC";
-
+        readonly string color = "#1C6BBC";
         int stableCount = 0;
+        private int stableTarget = 0;
+        private int displayTime = 3;
+        private int scaleDivision = 100;
 
 
         FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
@@ -98,6 +99,8 @@ namespace SlaughterHouseClient.Receiving
                 serialPort1.StopBits = StopBits.One;
 
                 stableTarget = MySettings["StableTarget"].ToString().ToInt16();
+                displayTime = MySettings["DisplayTime"].ToString().ToInt16();
+                scaleDivision = MySettings["Division"].ToString().ToInt16();
                 if (stableTarget == 0)
                 {
                     btnAcceptWeight.Visible = true;
@@ -193,11 +196,11 @@ namespace SlaughterHouseClient.Receiving
 
                         if (stateOfScale == 0)
                         {
-                            num = DataInvoke.Substring(16, 6).ToDouble() / 100;
+                            num = DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
                         else if (stateOfScale == 1)
                         {
-                            num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / 100;
+                            num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
 
                         lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
@@ -248,7 +251,7 @@ namespace SlaughterHouseClient.Receiving
             catch (Exception ex)
             {
 
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
 
@@ -394,90 +397,89 @@ namespace SlaughterHouseClient.Receiving
                     int seq = receive.receive_item.Count();
                     //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
                     seq += 1;
-                    var item = new receive_item
-                    {
-                        receive_no = receive.receive_no,
-                        product_code = product.product_code,
-                        seq = seq,
-                        lot_no = receive.lot_no,
-                        sex_flag = sexFlag,
-                        receive_qty = 1,
-                        receive_wgh = weight,
-                        chill_qty = 0,
-                        chill_wgh = 0,
-                        create_by = createBy
 
-                    };
 
-                    string stock_no = "";
-                    var stockDocument = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
-                    //check stock_item_running
-                    var stockItemRunning = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).SingleOrDefault();
-                    if (stockItemRunning == null)
-                    {
-                        //get new stock doc no
-                        stock_no = Constants.STK + stockDocument.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
-                    }
-                    else
-                    {
-                        stock_no = stockItemRunning.stock_no;
+                    //string stock_no = "";
+                    //var stockDocument = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
+                    ////check stock_item_running
+                    //var stockItemRunning = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).SingleOrDefault();
+                    //if (stockItemRunning == null)
+                    //{
+                    //    //get new stock doc no
+                    //    stock_no = Constants.STK + stockDocument.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
+                    //}
+                    //else
+                    //{
+                    //    stock_no = stockItemRunning.stock_no;
 
-                    }
+                    //}
                     using (DbContextTransaction transaction = db.Database.BeginTransaction())
                     {
                         try
                         {
-                            receive.factory_qty += item.receive_qty;
-                            receive.factory_wgh += item.receive_wgh;
+                            var item = new receive_item
+                            {
+                                receive_no = receive.receive_no,
+                                product_code = product.product_code,
+                                seq = seq,
+                                lot_no = receive.lot_no,
+                                sex_flag = sexFlag,
+                                receive_qty = 1,
+                                receive_wgh = weight,
+                                chill_qty = 0,
+                                chill_wgh = 0,
+                                create_by = createBy
+
+                            };
+                            db.receive_item.Add(item);
+
+                            receive.factory_qty += 1;
+                            receive.factory_wgh += weight;
                             receive.receive_flag = 1;
                             db.Entry(receive).State = System.Data.Entity.EntityState.Modified;
 
-                            db.receive_item.Add(item);
+                            ////insert stock
+                            //var stock = new stock
+                            //{
+                            //    stock_date = productionDate,
+                            //    stock_no = stock_no,
+                            //    stock_item = item.seq,
+                            //    product_code = item.product_code,
+                            //    stock_qty = item.receive_qty,
+                            //    stock_wgh = item.receive_wgh,
+                            //    ref_document_no = receive.receive_no,
+                            //    ref_document_type = Constants.REV,
+                            //    lot_no = receive.lot_no,
+                            //    location_code = 1,
+                            //    barcode_no = 0,
+                            //    transaction_type = 1,
+                            //    create_by = item.create_by
+                            //};
 
-                            //insert stock
-                            var stock = new stock
-                            {
-                                stock_date = productionDate,
-                                stock_no = stock_no,
-                                stock_item = item.seq,
-                                product_code = item.product_code,
-                                stock_qty = item.receive_qty,
-                                stock_wgh = item.receive_wgh,
-                                ref_document_no = receive.receive_no,
-                                ref_document_type = Constants.REV,
-                                lot_no = receive.lot_no,
-                                location_code = 1,
-                                barcode_no = 0,
-                                transaction_type = 1,
-                                create_by = item.create_by
-                            };
+                            //if (stockItemRunning == null)
+                            //{
+                            //    //insert stock_item_running
+                            //    var newStockItem = new stock_item_running
+                            //    {
+                            //        doc_no = receive.receive_no,
+                            //        stock_no = stock_no,
+                            //        stock_item = 1,
+                            //        create_by = item.create_by
+                            //    };
 
-                            if (stockItemRunning == null)
-                            {
-                                //insert stock_item_running
-                                var newStockItem = new stock_item_running
-                                {
-                                    doc_no = receive.receive_no,
-                                    stock_no = stock_no,
-                                    stock_item = 1,
-                                    create_by = item.create_by
-                                };
+                            //    db.stock_item_running.Add(newStockItem);
 
-                                db.stock_item_running.Add(newStockItem);
-
-                                //update document_generate
-                                stockDocument.running += 1;
-                                db.Entry(stockDocument).State = System.Data.Entity.EntityState.Modified;
-
-
-                            }
-                            else
-                            {
-                                //update stock_item_running
-                                stockItemRunning.stock_item += 1;
-                                db.Entry(stockItemRunning).State = System.Data.Entity.EntityState.Modified;
-                            }
-                            db.stocks.Add(stock);
+                            //    //update document_generate
+                            //    stockDocument.running += 1;
+                            //    db.Entry(stockDocument).State = System.Data.Entity.EntityState.Modified;
+                            //}
+                            //else
+                            //{
+                            //    //update stock_item_running
+                            //    stockItemRunning.stock_item += 1;
+                            //    db.Entry(stockItemRunning).State = System.Data.Entity.EntityState.Modified;
+                            //}
+                            //db.stocks.Add(stock);
                             db.SaveChanges();
                             transaction.Commit();
                             lblMessage.Text = Constants.SAVE_SUCCESS;
@@ -609,7 +611,7 @@ namespace SlaughterHouseClient.Receiving
 
                     lblMessage.Text = Constants.PROCESSING;
                     SaveData();
-                    var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำหมูออก", 3, Color.Green, animationMethod, animationDirection);
+                    var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำหมูออก", displayTime, Color.Green, animationMethod, animationDirection);
                     toastNotification.Show();
                     LoadData();
                     isZero = false;
@@ -623,7 +625,7 @@ namespace SlaughterHouseClient.Receiving
             catch (Exception ex)
             {
 
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
             finally

@@ -9,6 +9,7 @@
               <xs:sequence>
                 <xs:element name="barcode_no" type="xs:string" minOccurs="0" />
                 <xs:element name="barcode_no_text" type="xs:string" minOccurs="0" />
+                <xs:element name="barcode_info" type="xs:string" minOccurs="0" />
                 <xs:element name="product_code" type="xs:string" minOccurs="0" />
                 <xs:element name="product_name" type="xs:string" minOccurs="0" />
                 <xs:element name="production_date" type="xs:dateTime" minOccurs="0" />
@@ -26,16 +27,17 @@
     </xs:element>
   </xs:schema>
   <Barcode>
-    <barcode_no>*1000000000168*</barcode_no>
-    <barcode_no_text>1000000000168</barcode_no_text>
-    <product_code>P004</product_code>
-    <product_name>เครื่องในขาว-ชุด</product_name>
-    <production_date>2019-10-24T00:00:00+07:00</production_date>
-    <expired_date>2019-12-23T00:00:00+07:00</expired_date>
-    <lot_no>1192971241001</lot_no>
+    <barcode_no>*1000000000014*</barcode_no>
+    <barcode_no_text>1000000000014</barcode_no_text>
+    <barcode_info>*0000101088900*</barcode_info>
+    <product_code>00101</product_code>
+    <product_name>เครื่องในแดง</product_name>
+    <production_date>2019-11-27T00:00:00+07:00</production_date>
+    <expired_date>2019-12-07T00:00:00+07:00</expired_date>
+    <lot_no>1193301261101</lot_no>
     <qty>1</qty>
     <qty_unit>ชุด</qty_unit>
-    <wgh>5.22</wgh>
+    <wgh>8.89</wgh>
     <wgh_unit>กิโลกรัม</wgh_unit>
   </Barcode>
 </NewDataSet>

@@ -47,12 +47,19 @@ namespace SlaughterHouseClient
         }
         private void btnReceiveHead_Click(object sender, EventArgs e)
         {
-            //var frm = new Receiving.Form_ByProduct("รับหัว", 4, 0);
+
+
+            //var frm = new Receiving.Form_HeadReceive();
             //frm.ShowInTaskbar = false;
             //frm.ShowDialog();
 
-            var frm = new Receiving.Form_HeadReceive();
-            frm.ShowInTaskbar = false;
+            var frm = new Receiving.Form_ByProductReceive
+            {
+                LocationCode = 8,
+                ProductCode = "04001",
+                //var frm = new Receiving.Form_ByProduct("รับเครื่องในขาว", 3, 4);
+                ShowInTaskbar = false
+            };
             frm.ShowDialog();
 
         }

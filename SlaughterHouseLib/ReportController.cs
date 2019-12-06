@@ -513,12 +513,13 @@ namespace SlaughterHouseLib
 
         public static DataSet GetDataReportSwineYield(DateTime receiveDate)
         {
+            const string PRODUCT_CODE = "00000";
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"SELECT 
+                    var sql = @"SELECT
                                     receive_date,
                                     transport_doc_no,
                                     t.truck_no,
@@ -536,7 +537,7 @@ namespace SlaughterHouseLib
                                     byproduct_white_wgh,
                                     b.farm_name,
                                     c.breeder_name,
-                                    (SELECT std_yield from product WHERE product_code ='P002') as std_yield,
+                                    (SELECT std_yield from product WHERE product_code =:product_code) as std_yield,
                                     (carcass_wgh + head_wgh+byproduct_red_wgh+byproduct_white_wgh) as sum_wgh,
 	                                ((carcass_wgh + head_wgh+byproduct_red_wgh+byproduct_white_wgh) *100)/factory_wgh as yield
                                 FROM
@@ -551,12 +552,11 @@ namespace SlaughterHouseLib
                                         AND a.breeder_code = c.breeder_code";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("receive_date", receiveDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("product_code", PRODUCT_CODE);
 
-                    var da = new MySqlDataAdapter(cmd);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);
-
-
 
                     //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     //{

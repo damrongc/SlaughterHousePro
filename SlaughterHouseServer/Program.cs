@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SlaughterHouseServer
@@ -11,7 +13,8 @@ namespace SlaughterHouseServer
         [STAThread]
         static void Main()
         {
-
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

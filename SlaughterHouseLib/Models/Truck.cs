@@ -164,7 +164,7 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static string GetTruckNoFromTransport(string orderNo)
+        public static int GetTruckNoFromTransport(string orderNo)
         {
             try
             {
@@ -172,7 +172,7 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append(" select t.truck_no from transport tp, truck t ");
+                    sb.Append(" select t.truck_id from transport tp, truck t ");
                     sb.Append(" where tp.ref_document_no = @ref_document_no");
                     sb.Append(" and tp.truck_id = t.truck_id");
 
@@ -183,10 +183,19 @@ namespace SlaughterHouseLib.Models
                     var ds = new DataSet();
                     da.Fill(ds);
 
-                    string res = "";
+                    int res = 0;
                     if (ds.Tables[0].Rows.Count > 0)
                     {
-                        res = ds.Tables[0].Rows[0]["truck_no"].ToString() != "" ? ds.Tables[0].Rows[0]["truck_no"].ToString() : "";
+                        double num;
+                        string candidate = ds.Tables[0].Rows[0]["truck_id"].ToString();
+                        if (double.TryParse(candidate, out num))
+                        {
+                            res = Convert.ToInt32(ds.Tables[0].Rows[0]["truck_id"]);
+                        }
+                        else
+                        {
+                            res = 0;
+                        }
                     }
 
                     return res;

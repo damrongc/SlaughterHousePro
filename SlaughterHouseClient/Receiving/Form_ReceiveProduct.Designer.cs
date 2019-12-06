@@ -123,7 +123,7 @@
             this.lblCaption.Name = "lblCaption";
             this.lblCaption.Size = new System.Drawing.Size(266, 54);
             this.lblCaption.TabIndex = 0;
-            this.lblCaption.Text = "รับผลได้ชิ้นส่วน";
+            this.lblCaption.Text = "รับผลได้ชิ้นส่วน-Basic";
             this.lblCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblWeight
@@ -156,11 +156,11 @@
             this.btnProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProduct.Font = new System.Drawing.Font("Kanit", 16F);
             this.btnProduct.ForeColor = System.Drawing.Color.White;
-            this.btnProduct.Location = new System.Drawing.Point(307, 90);
+            this.btnProduct.Location = new System.Drawing.Point(352, 90);
             this.btnProduct.Name = "btnProduct";
-            this.btnProduct.Size = new System.Drawing.Size(146, 43);
+            this.btnProduct.Size = new System.Drawing.Size(101, 43);
             this.btnProduct.TabIndex = 7;
-            this.btnProduct.Text = "เลือกข้อมูล";
+            this.btnProduct.Text = "เลือก";
             this.btnProduct.UseVisualStyleBackColor = false;
             this.btnProduct.Click += new System.EventHandler(this.btnProduct_Click);
             // 
@@ -183,7 +183,7 @@
             this.lblProduct.ForeColor = System.Drawing.Color.Black;
             this.lblProduct.Location = new System.Drawing.Point(18, 90);
             this.lblProduct.Name = "lblProduct";
-            this.lblProduct.Size = new System.Drawing.Size(283, 43);
+            this.lblProduct.Size = new System.Drawing.Size(328, 130);
             this.lblProduct.TabIndex = 9;
             // 
             // lblStockQty
@@ -321,7 +321,7 @@
             this.plSimulator.Controls.Add(this.txtSimWeight);
             this.plSimulator.Controls.Add(this.btnZero);
             this.plSimulator.Font = new System.Drawing.Font("Kanit", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.plSimulator.Location = new System.Drawing.Point(164, 191);
+            this.plSimulator.Location = new System.Drawing.Point(578, 90);
             this.plSimulator.Name = "plSimulator";
             this.plSimulator.Size = new System.Drawing.Size(238, 66);
             this.plSimulator.TabIndex = 50;
