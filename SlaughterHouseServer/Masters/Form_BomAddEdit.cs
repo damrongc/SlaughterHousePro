@@ -62,13 +62,12 @@ namespace SlaughterHouseServer
         #region Event Focus, KeyDown
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            gv.Columns[ConstColumns.BOM_CODE ].HeaderText = "รหัส Bom";
+            gv.Columns[ConstColumns.BOM_CODE].HeaderText = "รหัส Bom";
             gv.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
             gv.Columns[ConstColumns.MUTIPLY_QTY].Visible = false;
             gv.Columns[ConstColumns.MUTIPLY_WGH].Visible = false;
             gv.Columns[ConstColumns.BOM_CODE].Visible = false;
-            gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
             gv.Columns[ConstColumns.PRODUCT_NAME].ReadOnly = true;
 
             foreach (DataGridViewColumn column in gv.Columns)
@@ -250,7 +249,7 @@ namespace SlaughterHouseServer
 
                 var bom = new Bom
                 {
-                    BomCode = String.IsNullOrEmpty(txtBomCode.Text) == true ? 0 : Convert.ToInt32(txtBomCode.Text),
+                    BomCode = string.IsNullOrEmpty(txtBomCode.Text) == true ? 0 : Convert.ToInt32(txtBomCode.Text),
                     Product = new Product
                     {
                         ProductCode = this.productCode,

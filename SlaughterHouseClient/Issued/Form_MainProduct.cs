@@ -121,6 +121,7 @@ namespace SlaughterHouseClient.Issued
                     var order = db.orders.Find(lblOrderNo.Text);
                     //lblOrderNo.Text = order.order_no;
                     lblCustomer.Text = order.customer.customer_name;
+                    lblOrderDate.Text = order.order_date.ToString("dd/MM/yyyy");
                     var transport = db.transports.Where(p => p.ref_document_no == order.order_no).SingleOrDefault();
                     if (transport != null)
                     {
