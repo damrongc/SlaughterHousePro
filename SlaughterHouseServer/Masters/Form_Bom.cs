@@ -108,9 +108,9 @@ namespace SlaughterHouseServer
         private void GvDt_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
 
+            gvDt.Columns[ConstColumns.BOM_CODE].HeaderText = "รหัส Bom";
             gvDt.Columns[ConstColumns.PRODUCT_CODE].HeaderText = "รหัสสินค้า";
             gvDt.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "ชื่อสินค้า";
-            gvDt.Columns[ConstColumns.BOM_CODE].Visible = false;
             gvDt.Columns[ConstColumns.MUTIPLY_QTY].Visible = false;
             gvDt.Columns[ConstColumns.MUTIPLY_WGH].Visible = false;
             //gvDt.Columns[ConstColumns.PRODUCT_CODE].Visible = false;

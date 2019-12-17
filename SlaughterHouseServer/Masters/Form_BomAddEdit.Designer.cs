@@ -124,6 +124,7 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
+            this.gv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv.Size = new System.Drawing.Size(933, 383);
             this.gv.TabIndex = 43;
             // 
