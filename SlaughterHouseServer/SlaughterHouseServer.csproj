@@ -86,11 +86,29 @@
     <Compile Include="Masters\Form_CustomerClassDiscountAddEdit.Designer.cs">
       <DependentUpon>Form_CustomerClassDiscountAddEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\Form_CustomerClassPriceAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerClassPriceAddEdit.Designer.cs">
+      <DependentUpon>Form_CustomerClassPriceAddEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Masters\Form_Plant.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Masters\Form_Plant.Designer.cs">
       <DependentUpon>Form_Plant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerClass.Designer.cs">
+      <DependentUpon>Form_CustomerClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerClassAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerClassAddEdit.Designer.cs">
+      <DependentUpon>Form_CustomerClassAddEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Masters\Form_TruckType.cs">
       <SubType>Form</SubType>
@@ -471,8 +489,17 @@
     <EmbeddedResource Include="Masters\Form_CustomerClassDiscountAddEdit.resx">
       <DependentUpon>Form_CustomerClassDiscountAddEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_CustomerClassPriceAddEdit.resx">
+      <DependentUpon>Form_CustomerClassPriceAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_Plant.resx">
       <DependentUpon>Form_Plant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_CustomerClass.resx">
+      <DependentUpon>Form_CustomerClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_CustomerClassAddEdit.resx">
+      <DependentUpon>Form_CustomerClassAddEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_TruckType.resx">
       <DependentUpon>Form_TruckType.cs</DependentUpon>

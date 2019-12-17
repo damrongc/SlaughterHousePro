@@ -46,6 +46,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.comboxCustomerClass = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtDay = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -103,7 +109,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(200, 484);
+            this.chkActive.Location = new System.Drawing.Point(200, 569);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 6;
@@ -119,7 +125,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(514, 534);
+            this.BtnSave.Location = new System.Drawing.Point(514, 622);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -136,7 +142,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(200, 534);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(200, 622);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -200,7 +206,7 @@
             // comboxCustomerClass
             // 
             this.comboxCustomerClass.FormattingEnabled = true;
-            this.comboxCustomerClass.Location = new System.Drawing.Point(200, 439);
+            this.comboxCustomerClass.Location = new System.Drawing.Point(115, 29);
             this.comboxCustomerClass.Name = "comboxCustomerClass";
             this.comboxCustomerClass.Size = new System.Drawing.Size(215, 37);
             this.comboxCustomerClass.TabIndex = 54;
@@ -208,18 +214,68 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(93, 442);
+            this.label7.Location = new System.Drawing.Point(8, 32);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(101, 29);
             this.label7.TabIndex = 53;
             this.label7.Text = "กลุ่มมลูกค้า";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtDay);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.dtpStartDate);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.comboxCustomerClass);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Location = new System.Drawing.Point(200, 437);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(529, 129);
+            this.groupBox1.TabIndex = 55;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "กลุ่มลูกค้า";
+            // 
+            // dtpStartDate
+            // 
+            this.dtpStartDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpStartDate.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpStartDate.Location = new System.Drawing.Point(115, 73);
+            this.dtpStartDate.Name = "dtpStartDate";
+            this.dtpStartDate.Size = new System.Drawing.Size(161, 36);
+            this.dtpStartDate.TabIndex = 56;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(12, 77);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(97, 29);
+            this.label11.TabIndex = 55;
+            this.label11.Text = "วันที่เริ่มต้น:";
+            // 
+            // txtDay
+            // 
+            this.txtDay.Location = new System.Drawing.Point(398, 73);
+            this.txtDay.MaxLength = 10;
+            this.txtDay.Name = "txtDay";
+            this.txtDay.Size = new System.Drawing.Size(110, 36);
+            this.txtDay.TabIndex = 58;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(306, 76);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(86, 29);
+            this.label8.TabIndex = 57;
+            this.label8.Text = "จำนวนวัน:";
+            // 
             // Form_CustomerAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(755, 607);
-            this.Controls.Add(this.comboxCustomerClass);
-            this.Controls.Add(this.label7);
+            this.ClientSize = new System.Drawing.Size(762, 688);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtContactNo);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtTaxId);
@@ -242,6 +298,8 @@
             this.Name = "Form_CustomerAddEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form_CustomerAddEdit";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,5 +324,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboxCustomerClass;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DateTimePicker dtpStartDate;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtDay;
+        private System.Windows.Forms.Label label8;
     }
 }

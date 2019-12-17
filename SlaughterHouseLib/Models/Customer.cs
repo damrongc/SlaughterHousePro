@@ -16,11 +16,16 @@ namespace SlaughterHouseLib.Models
         public string ShipTo { get; set; }
         public string TaxId { get; set; }
         public string ContactNo { get; set; }
+        public DateTime StartDateClass { get; set; }
+        public DateTime EndDateClass { get; set; }
+        public int Day { get; set; }
         public bool Active { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
+
+        //start_date_class
     }
 
     public static class CustomerController
@@ -37,6 +42,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" cv.class_id, cls.class_name, ");
                     sb.Append(" cv.address, cv.ship_to, ");
                     sb.Append(" cv.tax_id, cv.contact_no, ");
+                    sb.Append(" cv.start_date_class, cv.end_date_class, ");
                     sb.Append(" cv.active, cv.create_at, ");
                     sb.Append(" cv.create_by, cv.modified_at, cv.modified_by ");
                     sb.Append(" FROM customer cv , customer_class cls");
@@ -76,6 +82,9 @@ namespace SlaughterHouseLib.Models
                                     ShipTo = p.Field<string>("ship_to"),
                                     TaxId = p.Field<string>("tax_id"),
                                     ContactNo = p.Field<string>("contact_no"),
+                                    StartDateClass = p.Field<DateTime>("start_date_class"),
+                                    EndDateClass = p.Field<DateTime>("end_date_class"),
+                                    Day = (Convert.ToDateTime(p.Field<DateTime>("end_date_class")) - Convert.ToDateTime(p.Field<DateTime>("start_date_class"))).TotalDays,
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
@@ -154,12 +163,15 @@ namespace SlaughterHouseLib.Models
                             CustomerName = ds.Tables[0].Rows[0]["customer_name"].ToString(),
                             CustomerClass = new CustomerClass
                             {
-                                ClassId  = Convert.ToInt32(ds.Tables[0].Rows[0]["class_id"]),
+                                ClassId = Convert.ToInt32(ds.Tables[0].Rows[0]["class_id"]),
                             },
                             Address = ds.Tables[0].Rows[0]["address"].ToString(),
                             ShipTo = ds.Tables[0].Rows[0]["ship_to"].ToString(),
                             TaxId = ds.Tables[0].Rows[0]["tax_id"].ToString(),
                             ContactNo = ds.Tables[0].Rows[0]["contact_no"].ToString(),
+                            StartDateClass = (DateTime)ds.Tables[0].Rows[0]["start_date_class"],
+                            EndDateClass = (DateTime)ds.Tables[0].Rows[0]["end_date_class"],
+                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date_class"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date_class"])).TotalDays),
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
@@ -186,11 +198,11 @@ namespace SlaughterHouseLib.Models
                     var sql = @"INSERT
                                 INTO customer (
                                     customer_code, customer_name, class_id, address, 
-                                    ship_to, tax_id, contact_no, 
+                                    ship_to, tax_id, contact_no,  start_date_class, end_date_class,
                                     active, create_by 
                                 )
                                 VALUES (@customer_code, @customer_name, @class_id, @address, 
-                                    @ship_to, @tax_id, @contact_no, 
+                                    @ship_to, @tax_id, @contact_no,  @start_date_class, @end_date_class,
                                     @active, @create_by )";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customer.CustomerCode);
@@ -198,8 +210,10 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("class_id", customer.CustomerClass.ClassId);
                     cmd.Parameters.AddWithValue("address", customer.Address);
                     cmd.Parameters.AddWithValue("ship_to", customer.ShipTo);
-                    cmd.Parameters.AddWithValue("tax_id", customer.TaxId );
+                    cmd.Parameters.AddWithValue("tax_id", customer.TaxId);
                     cmd.Parameters.AddWithValue("contact_no", customer.ContactNo);
+                    cmd.Parameters.AddWithValue("start_date_class", customer.StartDateClass);
+                    cmd.Parameters.AddWithValue("end_date_class", customer.EndDateClass);
                     cmd.Parameters.AddWithValue("active", customer.Active);
                     cmd.Parameters.AddWithValue("create_by", customer.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
@@ -227,6 +241,8 @@ namespace SlaughterHouseLib.Models
                                 ship_to=@ship_to,
                                 tax_id=@tax_id,
                                 contact_no=@contact_no,
+                                start_date_class=@start_date_class,
+                                end_date_class=@end_date_class,
                                 active=@active, 
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by 
@@ -239,6 +255,8 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("ship_to", customer.ShipTo);
                     cmd.Parameters.AddWithValue("tax_id", customer.TaxId);
                     cmd.Parameters.AddWithValue("contact_no", customer.ContactNo);
+                    cmd.Parameters.AddWithValue("start_date_class", customer.StartDateClass);
+                    cmd.Parameters.AddWithValue("end_date_class", customer.EndDateClass);
                     cmd.Parameters.AddWithValue("active", customer.Active);
                     cmd.Parameters.AddWithValue("modified_by", customer.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
@@ -248,6 +266,43 @@ namespace SlaughterHouseLib.Models
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public static int GetCustomerClassId(string customerCode, DateTime requestDate)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sb = new StringBuilder();
+                    sb.Append("SELECT c.class_id FROM customer c WHERE c.active=1");
+                    sb.Append(" and c.customer_code = @customer_code");
+                    sb.Append(" and c.start_date_class <= @start_date_class");
+                    sb.Append(" and c.end_date_class >= @end_date_class");
+                    //ต้อง where เรื่อง วันนี้ start end date;
+                    var cmd = new MySqlCommand(sb.ToString(), conn);
+                    cmd.Parameters.AddWithValue("customer_code", customerCode);
+                    cmd.Parameters.AddWithValue("start_date_class", requestDate);
+                    cmd.Parameters.AddWithValue("end_date_class", requestDate);
+
+
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    int res = CustomerClassController.GetCustomerClassDefaultFlag();
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        res = Convert.ToInt32(ds.Tables[0].Rows[0]["class_id"]);
+                    }
+                    return res;
+                }
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

@@ -210,6 +210,9 @@ namespace SlaughterHouseServer
             {
                 var frm = new Form_LovProductMuti();
                 frm.forSaleFlag = true;
+                frm.customerCode = cboCustomer.SelectedValue.ToString();
+                frm.requestDate = dtpRequestDate.Value;
+                frm.classId = CustomerController.GetCustomerClassId(frm.customerCode, frm.requestDate);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     DataRow dr;
@@ -522,6 +525,7 @@ namespace SlaughterHouseServer
                 throw;
             }
         }
+
 
         private int RoundQty(decimal num)
         {

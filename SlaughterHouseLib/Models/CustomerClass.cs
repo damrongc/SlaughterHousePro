@@ -12,6 +12,7 @@ namespace SlaughterHouseLib.Models
     {
         public int ClassId { get; set; }
         public string ClassName { get; set; }
+        public bool DefaultFlag { get; set; }
         public bool Active { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
@@ -47,6 +48,7 @@ namespace SlaughterHouseLib.Models
                         {
                             ClassId = (int)item["class_id"],
                             ClassName = item["class_name"].ToString(),
+                            DefaultFlag = (bool)item["default_flag"],
                         });
                     }
 
@@ -95,8 +97,12 @@ namespace SlaughterHouseLib.Models
                                 {
                                     ClassId = p.Field<int>("class_id"),
                                     ClassName = p.Field<string>("class_name"),
+                                    DefaultFlag = p.Field<bool>("default_flag"),
                                     Active = p.Field<bool>("active"),
                                     CreateAt = p.Field<DateTime>("create_at"),
+                                    CreateBy = p.Field<string>("create_by"),
+                                    ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
+                                    ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
                                 }).ToList();
 
                     return coll;
@@ -108,7 +114,7 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static CustomerClass GetCustomerClass(string class_id)
+        public static CustomerClass GetCustomerClass(int class_id)
         {
             try
             {
@@ -135,6 +141,7 @@ namespace SlaughterHouseLib.Models
 
                             ClassId = (int)ds.Tables[0].Rows[0]["class_id"],
                             ClassName = ds.Tables[0].Rows[0]["class_name"].ToString(),
+                            DefaultFlag = (bool)ds.Tables[0].Rows[0]["default_flag"],
                             Active = (bool)ds.Tables[0].Rows[0]["active"],
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
@@ -151,8 +158,103 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
+        public static bool Insert(CustomerClass customerClass)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"INSERT INTO customer_class
+                                (class_id,
+                                class_name,
+                                default_flag,
+                                active,
+                                create_by)
+                                VALUES(@class_id,
+                                @class_name,
+                                @default_flag,
+                                @active,
+                                @create_by)";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("class_id", customerClass.ClassId);
+                    cmd.Parameters.AddWithValue("class_name", customerClass.ClassName);
+                    cmd.Parameters.AddWithValue("default_flag", customerClass.DefaultFlag);
+                    cmd.Parameters.AddWithValue("active", customerClass.Active);
+                    cmd.Parameters.AddWithValue("create_by", customerClass.CreateBy);
+                    var affRow = cmd.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static bool Update(CustomerClass customerClass)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"UPDATE customer_class
+                                SET class_name=@class_name,
+                                active=@active,
+                                modified_at=CURRENT_TIMESTAMP,
+                                modified_by=@modified_by
+                                WHERE class_id=@class_id";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("class_id", customerClass.ClassId);
+                    cmd.Parameters.AddWithValue("class_name", customerClass.ClassName);
+                    cmd.Parameters.AddWithValue("active", customerClass.Active);
+                    cmd.Parameters.AddWithValue("modified_by", customerClass.ModifiedBy);
+                    var affRow = cmd.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
 
+        public static int GetCustomerClassDefaultFlag()
+        {
+            try
+            {
+
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sb = new StringBuilder();
+                    sb.Append("select class_id from customer_class");
+                    sb.Append(" where default_flag = 1 order by class_id limit 1 ");
+
+                    var cmd = new MySqlCommand(sb.ToString(), conn);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    var customerClass = new CustomerClass();
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        return Convert.ToInt32(ds.Tables[0].Rows[0]["class_id"]);
+                    }
+                    else
+                    {
+                        return 1;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 
 }

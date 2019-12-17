@@ -312,8 +312,8 @@ namespace SlaughterHouseServer
                     {
                         string productCode = dtInvoiceItem.Rows[i][ConstColumns.PRODUCT_CODE].ToString();
                         unitPrice = Globals.GetPriceList(cboCustomer.SelectedValue.ToString(), productCode, dtpInvoiceDate.Value);
-                        unitPriceCurrent = Globals.GetPriceListCurrent(cboCustomer.SelectedValue.ToString(), productCode, dtpInvoiceDate.Value);
-                        discPer = Globals.GetDiscountPer(cboCustomer.SelectedValue.ToString(), dtpInvoiceDate.Value);
+                        unitPriceCurrent = unitPrice; // Globals.GetPriceListCurrent(cboCustomer.SelectedValue.ToString(), productCode, dtpInvoiceDate.Value);
+                        discPer = 0;//Globals.GetDiscountPer(cboCustomer.SelectedValue.ToString(), dtpInvoiceDate.Value);
                         product = ProductController.GetProduct(productCode);
 
                         dtInvoiceItem.Rows[i][ConstColumns.UNIT_PRICE_CURRENT] = unitPriceCurrent;

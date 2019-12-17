@@ -155,6 +155,7 @@ namespace SlaughterHouseServer
         public const string CustomerCode = "CustomerCode";
         public const string CustomerName = "CustomerName";
         public const string Day = "Day";
+        public const string DefaultFlag = "DefaultFlag";
         public const string DiscountPer = "DiscountPer";
         public const string EndDate = "EndDate";
         public const string ModifiedAt = "ModifiedAt";

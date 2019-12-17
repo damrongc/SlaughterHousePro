@@ -19,7 +19,7 @@ namespace SlaughterHouseLib
                     conn.Open();
                     var sql = "";
 
-                     decimal discountPer = GetDiscountPer(customerCode, priceDate);
+                    //decimal discountPer = GetDiscountPer(customerCode, priceDate);
 
                     sql = @"select COALESCE(unit_price, 0) as unit_price
                          from customer_price p
@@ -27,7 +27,7 @@ namespace SlaughterHouseLib
                              and end_date >=@end_date
                              and product_code =@product_code
                              and customer_code =@customer_code
-                            order by end_date asc LIMIT 1 ";
+                            order by start_date desc LIMIT 1 ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customerCode);
                     cmd.Parameters.AddWithValue("product_code", productCode);
@@ -41,20 +41,22 @@ namespace SlaughterHouseLib
                         if (Convert.ToDecimal(ds.Tables[0].Rows[0]["unit_price"]) > 0)
                         {
                             decimal unitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"];
-                            if (discountPer > 0)
-                            {
-                                unitPrice = unitPrice - (Math.Round((unitPrice * discountPer) / 100, 2));
-                            }
+                            //if (discountPer > 0)
+                            //{
+                            //    unitPrice = unitPrice - (Math.Round((unitPrice * discountPer) / 100, 2));
+                            //}
                             return unitPrice;
                         }
                     }
+
+                    GetDiscountPer CustomerClass
 
                     sql = @"select COALESCE(unit_price, 0) as unit_price
                          from product_price p
                             where start_date <=@start_date
                              and end_date >=@end_date
                              and product_code =@product_code
-                            order by end_date asc LIMIT 1 ";
+                            order by start_date desc LIMIT 1 ";
                     cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("product_code", productCode);
                     cmd.Parameters.AddWithValue("start_date", priceDate);
@@ -67,10 +69,10 @@ namespace SlaughterHouseLib
                         if (Convert.ToDecimal(ds.Tables[0].Rows[0]["unit_price"]) > 0)
                         {
                             decimal unitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"];
-                            if (discountPer > 0)
-                            {
-                                unitPrice = unitPrice - (Math.Round((unitPrice * discountPer) / 100, 2));
-                            }
+                            //if (discountPer > 0)
+                            //{
+                            //    unitPrice = unitPrice - (Math.Round((unitPrice * discountPer) / 100, 2));
+                            //}
                             return unitPrice;
                         }
                         else
@@ -96,7 +98,7 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(CONN_STR))
                 {
                     conn.Open();
-                    var sql = ""; 
+                    var sql = "";
                     sql = @"select COALESCE(unit_price, 0) as unit_price
                          from customer_price p
                             where start_date <=@start_date
@@ -116,7 +118,7 @@ namespace SlaughterHouseLib
                     {
                         if (Convert.ToDecimal(ds.Tables[0].Rows[0]["unit_price"]) > 0)
                         {
-                            decimal unitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"]; 
+                            decimal unitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"];
                             return unitPrice;
                         }
                     }
@@ -138,7 +140,7 @@ namespace SlaughterHouseLib
                     {
                         if (Convert.ToDecimal(ds.Tables[0].Rows[0]["unit_price"]) > 0)
                         {
-                            decimal unitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"]; 
+                            decimal unitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"];
                             return unitPrice;
                         }
                         else

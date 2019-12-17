@@ -43,24 +43,34 @@ namespace SlaughterHouseServer
 
         private void Form_CustomerAddEdit_Load(object sender, System.EventArgs e)
         {
-
-            if (!string.IsNullOrEmpty(this.customerCode))
+            try
             {
-
-                var customer = CustomerController.GetCustomer(this.customerCode);
-                if (customer != null)
+                if (!string.IsNullOrEmpty(this.customerCode))
                 {
-                    txtCustomerCode.Text = customer.CustomerCode;
-                    txtCustomerCode.Enabled = false;
-                    comboxCustomerClass.SelectedValue = customer.CustomerClass.ClassId;
-                    txtCustomerName.Text = customer.CustomerName;
-                    txtAddress.Text = customer.Address;
-                    txtShipTo.Text = customer.ShipTo;
-                    txtTaxId.Text = customer.TaxId;
-                    txtContactNo.Text = customer.ContactNo;
-                    chkActive.Checked = customer.Active;
+
+                    var customer = CustomerController.GetCustomer(this.customerCode);
+                    if (customer != null)
+                    {
+                        txtCustomerCode.Text = customer.CustomerCode;
+                        txtCustomerCode.Enabled = false;
+                        comboxCustomerClass.SelectedValue = customer.CustomerClass.ClassId;
+                        txtCustomerName.Text = customer.CustomerName;
+                        txtAddress.Text = customer.Address;
+                        txtShipTo.Text = customer.ShipTo;
+                        txtTaxId.Text = customer.TaxId;
+                        txtContactNo.Text = customer.ContactNo;
+                        chkActive.Checked = customer.Active;
+                        txtDay.Text = customer.Day.ToString();
+
+                        dtpStartDate.Value = customer.StartDateClass;
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Form Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         private void TxtTaxId_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -141,6 +151,9 @@ namespace SlaughterHouseServer
                         ShipTo = txtShipTo.Text.Trim(),
                         TaxId = txtTaxId.Text.Trim(),
                         ContactNo = txtContactNo.Text.Trim(),
+                        StartDateClass = dtpStartDate.Value,
+                        EndDateClass = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
+                        Day = Convert.ToInt16(txtDay.Text),
                         Active = chkActive.Checked,
                         CreateBy = "system",
                     };
@@ -162,6 +175,9 @@ namespace SlaughterHouseServer
                         ShipTo = txtShipTo.Text.Trim(),
                         TaxId = txtTaxId.Text.Trim(),
                         ContactNo = txtContactNo.Text.Trim(),
+                        StartDateClass = dtpStartDate.Value,
+                        EndDateClass = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
+                        Day = Convert.ToInt16(txtDay.Text),
                         Active = chkActive.Checked,
                         ModifiedBy = "system",
                     };
@@ -197,6 +213,9 @@ namespace SlaughterHouseServer
                     ShipTo = txtShipTo.Text.Trim(),
                     TaxId = txtTaxId.Text.Trim(),
                     ContactNo = txtContactNo.Text.Trim(),
+                    StartDateClass = dtpStartDate.Value,
+                    EndDateClass = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
+                    Day = Convert.ToInt16(txtDay.Text),
                     Active = chkActive.Checked,
                     CreateBy = "system",
                 };
@@ -210,6 +229,8 @@ namespace SlaughterHouseServer
                 txtShipTo.Text = "";
                 txtTaxId.Text = "";
                 txtContactNo.Text = "";
+                txtDay.Text = "0";
+                dtpStartDate.Value = DateTime.Now;
                 chkActive.Checked = true;
                 LoadCustomerClass();
             }
