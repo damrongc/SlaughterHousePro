@@ -5,9 +5,9 @@ using System.Drawing;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_CustomerClass : Form
+    public partial class Form_MasterClass : Form
     {
-        public Form_CustomerClass()
+        public Form_MasterClass()
         {
             InitializeComponent();
             UserSettingsComponent();
@@ -42,7 +42,7 @@ namespace SlaughterHouseServer
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
                     int customerClass = Convert.ToInt32(gv.Rows[e.RowIndex].Cells[1].Value);
-                    var frm = new Form_CustomerClassAddEdit
+                    var frm = new Form_MasterClassAddEdit
                     {
                         customerClassId = customerClass
                     };
@@ -53,7 +53,7 @@ namespace SlaughterHouseServer
                 }
             }
             catch (Exception ex)
-            { 
+            {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -65,7 +65,7 @@ namespace SlaughterHouseServer
 
         private void BtnAdd_Click(object sender, System.EventArgs e)
         {
-            var frm = new Form_CustomerClassAddEdit
+            var frm = new Form_MasterClassAddEdit
             {
                 customerClassId = 0
             };
@@ -78,7 +78,7 @@ namespace SlaughterHouseServer
         private void Populate()
         {
 
-            var coll = CustomerClassController.GetAllCustomerClass(TxtFilter.Text.Trim());
+            var coll = MasterClassController.GetAllMasterClass(TxtFilter.Text.Trim());
             gv.DataSource = coll;
 
             gv.Columns[ConstColumns.ClassId].HeaderText = "รหัสระดับลุกค้า";

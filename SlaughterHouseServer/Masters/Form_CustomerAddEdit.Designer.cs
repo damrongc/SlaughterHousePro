@@ -44,13 +44,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtContactNo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboxCustomerClass = new System.Windows.Forms.ComboBox();
+            this.comboxMasterClass = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
-            this.label11 = new System.Windows.Forms.Label();
             this.txtDay = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -203,13 +203,13 @@
             this.label6.TabIndex = 30;
             this.label6.Text = "เบอร์ติดต่อ";
             // 
-            // comboxCustomerClass
+            // comboxMasterClass
             // 
-            this.comboxCustomerClass.FormattingEnabled = true;
-            this.comboxCustomerClass.Location = new System.Drawing.Point(115, 29);
-            this.comboxCustomerClass.Name = "comboxCustomerClass";
-            this.comboxCustomerClass.Size = new System.Drawing.Size(215, 37);
-            this.comboxCustomerClass.TabIndex = 54;
+            this.comboxMasterClass.FormattingEnabled = true;
+            this.comboxMasterClass.Location = new System.Drawing.Point(115, 29);
+            this.comboxMasterClass.Name = "comboxMasterClass";
+            this.comboxMasterClass.Size = new System.Drawing.Size(215, 37);
+            this.comboxMasterClass.TabIndex = 54;
             // 
             // label7
             // 
@@ -226,7 +226,7 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.dtpStartDate);
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.comboxCustomerClass);
+            this.groupBox1.Controls.Add(this.comboxMasterClass);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Location = new System.Drawing.Point(200, 437);
             this.groupBox1.Name = "groupBox1";
@@ -234,6 +234,23 @@
             this.groupBox1.TabIndex = 55;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "กลุ่มลูกค้า";
+            // 
+            // txtDay
+            // 
+            this.txtDay.Location = new System.Drawing.Point(398, 73);
+            this.txtDay.MaxLength = 10;
+            this.txtDay.Name = "txtDay";
+            this.txtDay.Size = new System.Drawing.Size(110, 36);
+            this.txtDay.TabIndex = 58;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(306, 76);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(86, 29);
+            this.label8.TabIndex = 57;
+            this.label8.Text = "จำนวนวัน:";
             // 
             // dtpStartDate
             // 
@@ -253,23 +270,6 @@
             this.label11.Size = new System.Drawing.Size(97, 29);
             this.label11.TabIndex = 55;
             this.label11.Text = "วันที่เริ่มต้น:";
-            // 
-            // txtDay
-            // 
-            this.txtDay.Location = new System.Drawing.Point(398, 73);
-            this.txtDay.MaxLength = 10;
-            this.txtDay.Name = "txtDay";
-            this.txtDay.Size = new System.Drawing.Size(110, 36);
-            this.txtDay.TabIndex = 58;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(306, 76);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 29);
-            this.label8.TabIndex = 57;
-            this.label8.Text = "จำนวนวัน:";
             // 
             // Form_CustomerAddEdit
             // 
@@ -322,7 +322,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtContactNo;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboxCustomerClass;
+        private System.Windows.Forms.ComboBox comboxMasterClass;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DateTimePicker dtpStartDate;

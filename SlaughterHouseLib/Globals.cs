@@ -49,7 +49,7 @@ namespace SlaughterHouseLib
                         }
                     }
 
-                    //GetDiscountPer CustomerClass
+                    //GetDiscountPer MasterClass
 
                     sql = @"select COALESCE(unit_price, 0) as unit_price
                          from product_price p

@@ -98,17 +98,17 @@
     <Compile Include="Masters\Form_Plant.Designer.cs">
       <DependentUpon>Form_Plant.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\Form_CustomerClass.cs">
+    <Compile Include="Masters\Form_MasterClass.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Masters\Form_CustomerClass.Designer.cs">
-      <DependentUpon>Form_CustomerClass.cs</DependentUpon>
+    <Compile Include="Masters\Form_MasterClass.Designer.cs">
+      <DependentUpon>Form_MasterClass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\Form_CustomerClassAddEdit.cs">
+    <Compile Include="Masters\Form_MasterClassAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Masters\Form_CustomerClassAddEdit.Designer.cs">
-      <DependentUpon>Form_CustomerClassAddEdit.cs</DependentUpon>
+    <Compile Include="Masters\Form_MasterClassAddEdit.Designer.cs">
+      <DependentUpon>Form_MasterClassAddEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Masters\Form_TruckType.cs">
       <SubType>Form</SubType>
@@ -495,11 +495,11 @@
     <EmbeddedResource Include="Masters\Form_Plant.resx">
       <DependentUpon>Form_Plant.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\Form_CustomerClass.resx">
-      <DependentUpon>Form_CustomerClass.cs</DependentUpon>
+    <EmbeddedResource Include="Masters\Form_MasterClass.resx">
+      <DependentUpon>Form_MasterClass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\Form_CustomerClassAddEdit.resx">
-      <DependentUpon>Form_CustomerClassAddEdit.cs</DependentUpon>
+    <EmbeddedResource Include="Masters\Form_MasterClassAddEdit.resx">
+      <DependentUpon>Form_MasterClassAddEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_TruckType.resx">
       <DependentUpon>Form_TruckType.cs</DependentUpon>

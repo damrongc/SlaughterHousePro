@@ -8,7 +8,7 @@ namespace SlaughterHouseLib.Models
 {
     public class CustomerClassPrice
     {
-        public CustomerClass CustomerClass { get; set; }
+        public MasterClass MasterClass { get; set; }
         public Product Product { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -37,7 +37,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" a.unit_price,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by, a.modified_at, a.modified_by");
-                    sb.Append(" FROM customer_class_price a, product b, customer_class c");
+                    sb.Append(" FROM customer_class_price a, product b, master_class c");
                     sb.Append(" WHERE a.product_code = b.product_code ");
                     sb.Append(" AND a.class_id = c.class_id ");
                     sb.Append(" AND a.start_date <= '" + startDate.ToString("yyyy-MM-dd") + "'");
@@ -95,7 +95,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" a.unit_price,");
                     sb.Append(" a.create_at,");
                     sb.Append(" a.create_by");
-                    sb.Append(" FROM customer_class_price a, product b, customer_class c");
+                    sb.Append(" FROM customer_class_price a, product b, master_class c");
                     sb.Append(" WHERE a.product_code =b.product_code");
                     sb.Append(" AND a.class_id =c.class_id");
                     sb.Append(" AND a.class_id =@class_id");
@@ -114,7 +114,7 @@ namespace SlaughterHouseLib.Models
                     {
                         return new CustomerClassPrice
                         {
-                            CustomerClass = new CustomerClass
+                            MasterClass = new MasterClass
                             {
                                 ClassId = (int)ds.Tables[0].Rows[0]["class_id"],
                                 ClassName = (string)ds.Tables[0].Rows[0]["class_name"],
@@ -157,7 +157,7 @@ namespace SlaughterHouseLib.Models
                                     @unit_price, @create_by) ";
 
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("class_id", customerClassPrice.CustomerClass.ClassId);
+                    cmd.Parameters.AddWithValue("class_id", customerClassPrice.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("product_code", customerClassPrice.Product.ProductCode);
                     cmd.Parameters.AddWithValue("start_date", customerClassPrice.StartDate);
                     cmd.Parameters.AddWithValue("end_date", customerClassPrice.EndDate);
@@ -189,7 +189,7 @@ namespace SlaughterHouseLib.Models
                                 And class_id = @class_id
                                 And start_date = @start_date";
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("class_id", customerClassPrice.CustomerClass.ClassId);
+                    cmd.Parameters.AddWithValue("class_id", customerClassPrice.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("product_code", customerClassPrice.Product.ProductCode);
                     cmd.Parameters.AddWithValue("start_date", customerClassPrice.StartDate);
                     cmd.Parameters.AddWithValue("end_date", customerClassPrice.EndDate);

@@ -20,16 +20,16 @@ namespace SlaughterHouseServer
             txtTaxId.KeyPress += TxtTaxId_KeyPress;
             txtContactNo.KeyPress += TxtContactNo;
 
-            LoadCustomerClass();
+            LoadMasterClass();
             this.Load += Form_CustomerAddEdit_Load;
             this.Shown += Form_CustomerAddEdit_Shown;
         }
 
-        private void LoadCustomerClass()
+        private void LoadMasterClass()
         {
-            comboxCustomerClass.DataSource = CustomerClassController.GetAllCustomerClass();
-            comboxCustomerClass.ValueMember = "ClassId";
-            comboxCustomerClass.DisplayMember = "ClassName";
+            comboxMasterClass.DataSource = MasterClassController.GetAllMasterClass();
+            comboxMasterClass.ValueMember = "ClassId";
+            comboxMasterClass.DisplayMember = "ClassName";
         }
 
         private void Form_CustomerAddEdit_Shown(object sender, System.EventArgs e)
@@ -53,7 +53,7 @@ namespace SlaughterHouseServer
                     {
                         txtCustomerCode.Text = customer.CustomerCode;
                         txtCustomerCode.Enabled = false;
-                        comboxCustomerClass.SelectedValue = customer.CustomerClass.ClassId;
+                        comboxMasterClass.SelectedValue = customer.MasterClass.ClassId;
                         txtCustomerName.Text = customer.CustomerName;
                         txtAddress.Text = customer.Address;
                         txtShipTo.Text = customer.ShipTo;
@@ -143,9 +143,9 @@ namespace SlaughterHouseServer
                     {
                         CustomerCode = txtCustomerCode.Text.Trim(),
                         CustomerName = txtCustomerName.Text.Trim(),
-                        CustomerClass = new CustomerClass
+                        MasterClass = new MasterClass
                         {
-                            ClassId = Convert.ToInt32(comboxCustomerClass.SelectedValue)
+                            ClassId = Convert.ToInt32(comboxMasterClass.SelectedValue)
                         },
                         Address = txtAddress.Text.Trim(),
                         ShipTo = txtShipTo.Text.Trim(),
@@ -167,9 +167,9 @@ namespace SlaughterHouseServer
                     {
                         CustomerCode = txtCustomerCode.Text.Trim(),
                         CustomerName = txtCustomerName.Text.Trim(),
-                        CustomerClass = new CustomerClass
+                        MasterClass = new MasterClass
                         {
-                            ClassId = Convert.ToInt32(comboxCustomerClass.SelectedValue)
+                            ClassId = Convert.ToInt32(comboxMasterClass.SelectedValue)
                         },
                         Address = txtAddress.Text.Trim(),
                         ShipTo = txtShipTo.Text.Trim(),
@@ -205,9 +205,9 @@ namespace SlaughterHouseServer
                 {
                     CustomerCode = txtCustomerCode.Text.Trim(),
                     CustomerName = txtCustomerName.Text.Trim(),
-                    CustomerClass = new CustomerClass
+                    MasterClass = new MasterClass
                     {
-                        ClassId = Convert.ToInt32(comboxCustomerClass.SelectedValue)
+                        ClassId = Convert.ToInt32(comboxMasterClass.SelectedValue)
                     },
                     Address = txtAddress.Text.Trim(),
                     ShipTo = txtShipTo.Text.Trim(),
@@ -232,7 +232,7 @@ namespace SlaughterHouseServer
                 txtDay.Text = "0";
                 dtpStartDate.Value = DateTime.Now;
                 chkActive.Checked = true;
-                LoadCustomerClass();
+                LoadMasterClass();
             }
             catch (System.Exception ex)
             {

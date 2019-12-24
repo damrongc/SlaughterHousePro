@@ -79,7 +79,7 @@ namespace SlaughterHouseServer.Masters
                     AddFormToContainer(new Form_TruckType());
                     break;
                 case "BtnCustomerClass":
-                    AddFormToContainer(new Form_CustomerClass());
+                    AddFormToContainer(new Form_MasterClass());
                     break;
             }
         }

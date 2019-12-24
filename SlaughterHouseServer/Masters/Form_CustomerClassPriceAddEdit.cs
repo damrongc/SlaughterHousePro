@@ -138,7 +138,7 @@ namespace SlaughterHouseServer
             CustomerClassPrice customerPrice = CustomerClassPriceController.GetCustomerClassPrice(this.classId, this.productCode, this.startDate);
             if (customerPrice != null)
             {
-                cboCustomerClass.SelectedValue = customerPrice.CustomerClass.ClassId;
+                cboCustomerClass.SelectedValue = customerPrice.MasterClass.ClassId;
 
                 this.productCode = customerPrice.Product.ProductCode;
                 txtProductName.Text = customerPrice.Product.ProductName;
@@ -153,7 +153,7 @@ namespace SlaughterHouseServer
 
         private void LoadCustomerClass()
         {
-            cboCustomerClass.DataSource = CustomerClassController.GetAllCustomerClass();
+            cboCustomerClass.DataSource = MasterClassController.GetAllMasterClass();
             cboCustomerClass.ValueMember = "ClassId";
             cboCustomerClass.DisplayMember = "ClassName";
         }
@@ -164,7 +164,7 @@ namespace SlaughterHouseServer
             {
                 var customerClassPrice = new CustomerClassPrice
                 {
-                    CustomerClass = new CustomerClass
+                    MasterClass = new MasterClass
                     {
                         ClassId = Convert.ToInt32(cboCustomerClass.SelectedValue)
                     },

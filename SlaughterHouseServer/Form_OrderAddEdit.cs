@@ -38,10 +38,11 @@ namespace SlaughterHouseServer
 
             btnAddOrderItem.Click += BtnAddOrderItem_Click;
 
-
             //KeyDown
             dtpRequestDate.KeyDown += DtpRequestDate_KeyDown;
             cboCustomer.KeyDown += CboCustomer_KeyDown;
+             
+            cboCustomer.SelectedIndexChanged += CboCustomer_SelectedIndexChanged;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
@@ -66,8 +67,14 @@ namespace SlaughterHouseServer
                 txtComment.Focus();
             }
         }
+
+        private void CboCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadDetail();
+        }
+
         #region Event Focus, KeyDown
-        private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
+            private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -212,7 +219,7 @@ namespace SlaughterHouseServer
                 frm.forSaleFlag = true;
                 frm.customerCode = cboCustomer.SelectedValue.ToString();
                 frm.requestDate = dtpRequestDate.Value;
-                frm.classId = CustomerController.GetCustomerClassId(frm.customerCode, frm.requestDate);
+                frm.classId = CustomerController.GetMasterClassId(frm.customerCode, frm.requestDate);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     DataRow dr;

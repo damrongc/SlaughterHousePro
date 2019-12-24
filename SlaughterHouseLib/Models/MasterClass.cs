@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SlaughterHouseLib.Models
 {
-    public class CustomerClass
+    public class MasterClass
     {
         public int ClassId { get; set; }
         public string ClassName { get; set; }
@@ -22,18 +22,18 @@ namespace SlaughterHouseLib.Models
 
     }
 
-    public static class CustomerClassController
+    public static class MasterClassController
     {
-        public static List<CustomerClass> GetAllCustomerClass()
+        public static List<MasterClass> GetAllMasterClass()
         {
             try
             {
-                List<CustomerClass> customerClass = new List<CustomerClass>();
+                List<MasterClass> masterClass = new List<MasterClass>();
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT * FROM customer_class WHERE active=1");
+                    sb.Append("SELECT * FROM master_class WHERE active=1");
                     sb.Append(" ORDER BY class_id asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
 
@@ -44,7 +44,7 @@ namespace SlaughterHouseLib.Models
 
                     foreach (DataRow item in ds.Tables[0].Rows)
                     {
-                        customerClass.Add(new CustomerClass
+                        masterClass.Add(new MasterClass
                         {
                             ClassId = (int)item["class_id"],
                             ClassName = item["class_name"].ToString(),
@@ -53,7 +53,7 @@ namespace SlaughterHouseLib.Models
                     }
 
 
-                    return customerClass;
+                    return masterClass;
                 }
             }
             catch (Exception)
@@ -62,7 +62,7 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static object GetAllCustomerClass(string keyword)
+        public static object GetAllMasterClass(string keyword)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("select * from customer_class");
+                    sb.Append("select * from master_class");
                     if (!string.IsNullOrEmpty(keyword))
                     {
                         sb.Append(" where class_name like @class_name");
@@ -114,7 +114,7 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static CustomerClass GetCustomerClass(int class_id)
+        public static MasterClass GetMasterClass(int class_id)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("select * from customer_class");
+                    sb.Append("select * from master_class");
                     sb.Append(" where class_id = @class_id");
 
                     var cmd = new MySqlCommand(sb.ToString(), conn);
@@ -133,10 +133,10 @@ namespace SlaughterHouseLib.Models
                     var ds = new DataSet();
                     da.Fill(ds);
 
-                    var customerClass = new CustomerClass();
+                    var masterClass = new MasterClass();
                     if (ds.Tables[0].Rows.Count > 0)
                     {
-                        return new CustomerClass
+                        return new MasterClass
                         {
 
                             ClassId = (int)ds.Tables[0].Rows[0]["class_id"],
@@ -158,14 +158,14 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static bool Insert(CustomerClass customerClass)
+        public static bool Insert(MasterClass masterClass)
         {
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"INSERT INTO customer_class
+                    var sql = @"INSERT INTO master_class
                                 (class_id,
                                 class_name,
                                 default_flag,
@@ -177,11 +177,11 @@ namespace SlaughterHouseLib.Models
                                 @active,
                                 @create_by)";
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("class_id", customerClass.ClassId);
-                    cmd.Parameters.AddWithValue("class_name", customerClass.ClassName);
-                    cmd.Parameters.AddWithValue("default_flag", customerClass.DefaultFlag);
-                    cmd.Parameters.AddWithValue("active", customerClass.Active);
-                    cmd.Parameters.AddWithValue("create_by", customerClass.CreateBy);
+                    cmd.Parameters.AddWithValue("class_id", masterClass.ClassId);
+                    cmd.Parameters.AddWithValue("class_name", masterClass.ClassName);
+                    cmd.Parameters.AddWithValue("default_flag", masterClass.DefaultFlag);
+                    cmd.Parameters.AddWithValue("active", masterClass.Active);
+                    cmd.Parameters.AddWithValue("create_by", masterClass.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
                 }
                 return true;
@@ -191,24 +191,24 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static bool Update(CustomerClass customerClass)
+        public static bool Update(MasterClass masterClass)
         {
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"UPDATE customer_class
+                    var sql = @"UPDATE master_class
                                 SET class_name=@class_name,
                                 active=@active,
                                 modified_at=CURRENT_TIMESTAMP,
                                 modified_by=@modified_by
                                 WHERE class_id=@class_id";
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("class_id", customerClass.ClassId);
-                    cmd.Parameters.AddWithValue("class_name", customerClass.ClassName);
-                    cmd.Parameters.AddWithValue("active", customerClass.Active);
-                    cmd.Parameters.AddWithValue("modified_by", customerClass.ModifiedBy);
+                    cmd.Parameters.AddWithValue("class_id", masterClass.ClassId);
+                    cmd.Parameters.AddWithValue("class_name", masterClass.ClassName);
+                    cmd.Parameters.AddWithValue("active", masterClass.Active);
+                    cmd.Parameters.AddWithValue("modified_by", masterClass.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
                 }
                 return true;
@@ -220,7 +220,7 @@ namespace SlaughterHouseLib.Models
             }
         }
 
-        public static int GetCustomerClassDefaultFlag()
+        public static int GetMasterClassDefaultFlag()
         {
             try
             {
@@ -229,7 +229,7 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("select class_id from customer_class");
+                    sb.Append("select class_id from master_class");
                     sb.Append(" where default_flag = 1 order by class_id limit 1 ");
 
                     var cmd = new MySqlCommand(sb.ToString(), conn);
@@ -238,7 +238,7 @@ namespace SlaughterHouseLib.Models
                     var ds = new DataSet();
                     da.Fill(ds);
 
-                    var customerClass = new CustomerClass();
+                    var masterClass = new MasterClass();
                     if (ds.Tables[0].Rows.Count > 0)
                     {
                         return Convert.ToInt32(ds.Tables[0].Rows[0]["class_id"]);

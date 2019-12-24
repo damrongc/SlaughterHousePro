@@ -11,7 +11,7 @@ namespace SlaughterHouseLib.Models
     {
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
-        public CustomerClass CustomerClass { get; set; }
+        public MasterClass MasterClass { get; set; }
         public string Address { get; set; }
         public string ShipTo { get; set; }
         public string TaxId { get; set; }
@@ -45,7 +45,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" cv.start_date_class, cv.end_date_class, ");
                     sb.Append(" cv.active, cv.create_at, ");
                     sb.Append(" cv.create_by, cv.modified_at, cv.modified_by ");
-                    sb.Append(" FROM customer cv , customer_class cls");
+                    sb.Append(" FROM customer cv , master_class cls");
                     sb.Append(" WHERE 1=1 ");
 
                     if (!string.IsNullOrEmpty(keyword))
@@ -161,7 +161,7 @@ namespace SlaughterHouseLib.Models
                         {
                             CustomerCode = ds.Tables[0].Rows[0]["customer_code"].ToString(),
                             CustomerName = ds.Tables[0].Rows[0]["customer_name"].ToString(),
-                            CustomerClass = new CustomerClass
+                            MasterClass = new MasterClass
                             {
                                 ClassId = Convert.ToInt32(ds.Tables[0].Rows[0]["class_id"]),
                             },
@@ -207,7 +207,7 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customer.CustomerCode);
                     cmd.Parameters.AddWithValue("customer_name", customer.CustomerName);
-                    cmd.Parameters.AddWithValue("class_id", customer.CustomerClass.ClassId);
+                    cmd.Parameters.AddWithValue("class_id", customer.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("address", customer.Address);
                     cmd.Parameters.AddWithValue("ship_to", customer.ShipTo);
                     cmd.Parameters.AddWithValue("tax_id", customer.TaxId);
@@ -250,7 +250,7 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customer.CustomerCode);
                     cmd.Parameters.AddWithValue("customer_name", customer.CustomerName);
-                    cmd.Parameters.AddWithValue("class_id", customer.CustomerClass.ClassId);
+                    cmd.Parameters.AddWithValue("class_id", customer.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("address", customer.Address);
                     cmd.Parameters.AddWithValue("ship_to", customer.ShipTo);
                     cmd.Parameters.AddWithValue("tax_id", customer.TaxId);
@@ -270,7 +270,7 @@ namespace SlaughterHouseLib.Models
             }
         }
 
-        public static int GetCustomerClassId(string customerCode, DateTime requestDate)
+        public static int GetMasterClassId(string customerCode, DateTime requestDate)
         {
             try
             {
@@ -293,7 +293,7 @@ namespace SlaughterHouseLib.Models
 
                     var ds = new DataSet();
                     da.Fill(ds);
-                    int res = CustomerClassController.GetCustomerClassDefaultFlag();
+                    int res = MasterClassController.GetMasterClassDefaultFlag();
                     if (ds.Tables[0].Rows.Count > 0)
                     {
                         res = Convert.ToInt32(ds.Tables[0].Rows[0]["class_id"]);

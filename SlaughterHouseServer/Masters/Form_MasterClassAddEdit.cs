@@ -3,11 +3,11 @@ using System;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_CustomerClassAddEdit : Form
+    public partial class Form_MasterClassAddEdit : Form
     {
         public int customerClassId;
 
-        public Form_CustomerClassAddEdit()
+        public Form_MasterClassAddEdit()
         {
             InitializeComponent();
 
@@ -32,7 +32,7 @@ namespace SlaughterHouseServer
             if (this.customerClassId > 0)
             {
 
-                var customerClass = CustomerClassController.GetCustomerClass(this.customerClassId);
+                var customerClass = MasterClassController.GetMasterClass(this.customerClassId);
                 if (customerClass != null)
                 {
                     txtCustomerClassCode.Text = customerClass.ClassId.ToString();
@@ -62,29 +62,29 @@ namespace SlaughterHouseServer
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
-            { 
+            {
                     if (this.customerClassId == null || this.customerClassId == 0)
                     {
-                    var customerClass = new CustomerClass
+                    var customerClass = new MasterClass
                     {
                         //UnitCode = Convert.ToInt32(txtUnitCode.Text),
                         ClassName  = txtCustomerClassName.Text.Trim(),
                         Active = chkActive.Checked,
                         CreateBy = "system",
                     };
-                    CustomerClassController.Insert(customerClass);
+                    MasterClassController.Insert(customerClass);
                     MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    var customerClass = new CustomerClass
+                    var customerClass = new MasterClass
                     {
                         ClassId = Convert.ToInt32(txtCustomerClassCode.Text),
                         ClassName = txtCustomerClassName.Text.Trim(),
                         Active = chkActive.Checked,
                         ModifiedBy = "system",
                     };
-                    CustomerClassController.Update(customerClass);
+                    MasterClassController.Update(customerClass);
                     MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -103,14 +103,14 @@ namespace SlaughterHouseServer
         {
             try
             {
-                var customerClass = new CustomerClass
+                var customerClass = new MasterClass
                 {
                     //UnitCode = Convert.ToInt32(txtUnitCode.Text),
                     ClassName = txtCustomerClassName.Text.Trim(),
                     Active = chkActive.Checked,
                     CreateBy = "system",
                 };
-                CustomerClassController.Insert(customerClass);
+                MasterClassController.Insert(customerClass);
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 txtCustomerClassCode.Text = "";

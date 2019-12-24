@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseServer
 {
-    partial class Form_CustomerClass
+    partial class Form_MasterClass
     {
         /// <summary>
         /// Required designer variable.
@@ -42,9 +42,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(11, 16);
@@ -52,9 +52,9 @@
             this.label1.Size = new System.Drawing.Size(134, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "ข้อมูลกลุ่มสินค้า";
-            // 
+            //
             // BtnAdd
-            // 
+            //
             this.BtnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
             this.BtnAdd.FlatAppearance.BorderSize = 0;
             this.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -69,9 +69,9 @@
             this.BtnAdd.Text = "เพิ่มข้อมูล";
             this.BtnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnAdd.UseVisualStyleBackColor = false;
-            // 
+            //
             // panel1
-            // 
+            //
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.gv);
             this.panel1.Controls.Add(this.panel3);
@@ -83,9 +83,9 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(6);
             this.panel1.Size = new System.Drawing.Size(1400, 750);
             this.panel1.TabIndex = 3;
-            // 
+            //
             // gv
-            // 
+            //
             this.gv.AllowUserToAddRows = false;
             this.gv.AllowUserToDeleteRows = false;
             this.gv.AllowUserToResizeColumns = false;
@@ -103,25 +103,25 @@
             this.gv.RowHeadersWidth = 10;
             this.gv.Size = new System.Drawing.Size(1388, 679);
             this.gv.TabIndex = 8;
-            // 
+            //
             // Edit
-            // 
+            //
             this.Edit.HeaderText = "แก้ไข";
             this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
             this.Edit.Name = "Edit";
             this.Edit.Width = 58;
-            // 
+            //
             // panel3
-            // 
+            //
             this.panel3.BackColor = System.Drawing.Color.LightGray;
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(6, 64);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1388, 1);
             this.panel3.TabIndex = 6;
-            // 
+            //
             // panel2
-            // 
+            //
             this.panel2.Controls.Add(this.TxtFilter);
             this.panel2.Controls.Add(this.BtnSearch);
             this.panel2.Controls.Add(this.label1);
@@ -131,18 +131,18 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1388, 58);
             this.panel2.TabIndex = 5;
-            // 
+            //
             // TxtFilter
-            // 
+            //
             this.TxtFilter.BackColor = System.Drawing.Color.WhiteSmoke;
             this.TxtFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TxtFilter.Location = new System.Drawing.Point(286, 12);
             this.TxtFilter.Name = "TxtFilter";
             this.TxtFilter.Size = new System.Drawing.Size(215, 36);
             this.TxtFilter.TabIndex = 3;
-            // 
+            //
             // BtnSearch
-            // 
+            //
             this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
             this.BtnSearch.FlatAppearance.BorderSize = 0;
             this.BtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -157,9 +157,9 @@
             this.BtnSearch.Text = "ค้นข้อมูล";
             this.BtnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnSearch.UseVisualStyleBackColor = false;
-            // 
+            //
             // Form_ProductGroup
-            // 
+            //
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1400, 750);
             this.Controls.Add(this.panel1);
