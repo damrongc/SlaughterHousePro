@@ -41,7 +41,7 @@ namespace SlaughterHouseServer
             //KeyDown
             dtpRequestDate.KeyDown += DtpRequestDate_KeyDown;
             cboCustomer.KeyDown += CboCustomer_KeyDown;
-             
+
             cboCustomer.SelectedIndexChanged += CboCustomer_SelectedIndexChanged;
         }
         private void Form_Shown(object sender, System.EventArgs e)
@@ -73,8 +73,8 @@ namespace SlaughterHouseServer
             LoadDetail();
         }
 
-        #region Event Focus, KeyDown
-            private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
+        #region Event Focus, KeyDown, KeyPress
+        private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -88,9 +88,16 @@ namespace SlaughterHouseServer
                 txtComment.Focus();
             }
         }
+        private void ColumnNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
         #endregion
 
-        #region Event DataBindingComplete
+        #region Event GridView
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             gv.Columns["seq"].HeaderText = "ลำดับ";
@@ -136,7 +143,90 @@ namespace SlaughterHouseServer
                 row.Cells[ConstColumns.WGH].Style.BackColor = Color.Bisque;
             }
         }
+        private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                DataGridView senderGrid = (DataGridView)sender;
 
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
+                {
+                    switch (senderGrid.Columns[e.ColumnIndex].Name)
+                    {
+                        //case "Edit":
+                        //    var frm = new Form_OrderDetail();
+                        //    frm.orderNo = txtOrderNo.Text;
+                        //    frm.orderDate = dtpRequestDate.Value;
+
+                        //    frm.productCode = dtOrderItem.Rows[e.RowIndex][ConstColumns.PRODUCT_CODE].ToString();
+                        //    frm.qtyWgh = Convert.ToDecimal(dtOrderItem.Rows[e.RowIndex][ConstColumns.QTY_WGH]);
+                        //    frm.issueUnitMethod = dtOrderItem.Rows[e.RowIndex][ConstColumns.ISSUE_UNIT_METHOD].ToString();
+                        //    frm.unitCode = Convert.ToInt16(dtOrderItem.Rows[e.RowIndex][ConstColumns.UNIT_CODE]);
+                        //    frm.unitName = dtOrderItem.Rows[e.RowIndex][ConstColumns.UNIT_NAME].ToString();
+                        //    if (frm.ShowDialog() == DialogResult.OK)
+                        //    {
+                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.PRODUCT_CODE] = frm.productCode;
+                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.PRODUCT_NAME] = frm.productName;
+                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.QTY_WGH] = frm.qtyWgh;
+                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.ISSUE_UNIT_METHOD] = frm.issueUnitMethod;
+                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.UNIT_CODE] = frm.unitCode;
+                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.UNIT_NAME] = frm.unitName;
+                        //        dtOrderItem.AcceptChanges();
+                        //        gv.Refresh();
+                        //    }
+                        //    break;
+                        case "Del":
+                            dtOrderItem.Rows[e.RowIndex].Delete();
+                            dtOrderItem.AcceptChanges();
+                            gv.Refresh();
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void Gv_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            //do your checks to see RowIndex is not -1 and other good stuffs
+            //var row = gv.Rows[e.RowIndex];
+            int rowIdx = e.RowIndex;
+            int colIdx = e.ColumnIndex - 1;
+            DataGridView senderGrid = (DataGridView)sender;
+            decimal packingSize = 0;
+            decimal.TryParse(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString(), out packingSize);
+
+            switch (senderGrid.Columns[e.ColumnIndex].Name)
+            {
+                case "qty":
+                    dtOrderItem.Rows[rowIdx][ConstColumns.WGH] = MyExtension.ToInt32(dtOrderItem.Rows[rowIdx][ConstColumns.QTY].ToString()) * packingSize;
+                    break;
+                case "wgh":
+                    if (packingSize == 0)
+                    {
+                        break;
+                    }
+                    dtOrderItem.Rows[rowIdx][ConstColumns.QTY] = RoundQty(MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.WGH].ToString()) / packingSize);
+                    break;
+            }
+            dtOrderItem.AcceptChanges();
+            gv.Refresh();
+            //row.Cells[e.ColumnIndex].OwningColumn.Name  ##getName
+        }
+        private void Gv_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(ColumnNumber_KeyPress);
+            if (gv.CurrentCell.ColumnIndex == 4 || gv.CurrentCell.ColumnIndex == 6) //Desired Column
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(ColumnNumber_KeyPress);
+                }
+            }
+        }
         #endregion
 
         #region Event Click
@@ -219,7 +309,7 @@ namespace SlaughterHouseServer
                 frm.forSaleFlag = true;
                 frm.customerCode = cboCustomer.SelectedValue.ToString();
                 frm.requestDate = dtpRequestDate.Value;
-                frm.classId = CustomerController.GetMasterClassId(frm.customerCode, frm.requestDate);
+                frm.classId = CustomerController.GetCustomerClassId(frm.customerCode, frm.requestDate);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     DataRow dr;
@@ -250,99 +340,6 @@ namespace SlaughterHouseServer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-        private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                DataGridView senderGrid = (DataGridView)sender;
-
-                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
-                {
-                    switch (senderGrid.Columns[e.ColumnIndex].Name)
-                    {
-                        //case "Edit":
-                        //    var frm = new Form_OrderDetail();
-                        //    frm.orderNo = txtOrderNo.Text;
-                        //    frm.orderDate = dtpRequestDate.Value;
-
-                        //    frm.productCode = dtOrderItem.Rows[e.RowIndex][ConstColumns.PRODUCT_CODE].ToString();
-                        //    frm.qtyWgh = Convert.ToDecimal(dtOrderItem.Rows[e.RowIndex][ConstColumns.QTY_WGH]);
-                        //    frm.issueUnitMethod = dtOrderItem.Rows[e.RowIndex][ConstColumns.ISSUE_UNIT_METHOD].ToString();
-                        //    frm.unitCode = Convert.ToInt16(dtOrderItem.Rows[e.RowIndex][ConstColumns.UNIT_CODE]);
-                        //    frm.unitName = dtOrderItem.Rows[e.RowIndex][ConstColumns.UNIT_NAME].ToString();
-                        //    if (frm.ShowDialog() == DialogResult.OK)
-                        //    {
-                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.PRODUCT_CODE] = frm.productCode;
-                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.PRODUCT_NAME] = frm.productName;
-                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.QTY_WGH] = frm.qtyWgh;
-                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.ISSUE_UNIT_METHOD] = frm.issueUnitMethod;
-                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.UNIT_CODE] = frm.unitCode;
-                        //        dtOrderItem.Rows[e.RowIndex][ConstColumns.UNIT_NAME] = frm.unitName;
-                        //        dtOrderItem.AcceptChanges();
-                        //        gv.Refresh();
-                        //    }
-                        //    break;
-                        case "Del":
-                            dtOrderItem.Rows[e.RowIndex].Delete();
-                            dtOrderItem.AcceptChanges();
-                            gv.Refresh();
-                            break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void Gv_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            //do your checks to see RowIndex is not -1 and other good stuffs
-            //var row = gv.Rows[e.RowIndex];
-            int rowIdx = e.RowIndex;
-            int colIdx = e.ColumnIndex - 1;
-            DataGridView senderGrid = (DataGridView)sender;
-            decimal packingSize = 0;
-            decimal.TryParse(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString(), out packingSize);
-
-            switch (senderGrid.Columns[e.ColumnIndex].Name)
-            {
-                case "qty":
-                    dtOrderItem.Rows[rowIdx][ConstColumns.WGH] = MyExtension.ToInt32(dtOrderItem.Rows[rowIdx][ConstColumns.QTY].ToString()) * packingSize;
-                    break;
-                case "wgh":
-                    if (packingSize == 0)
-                    {
-                        break;
-                    }
-                    dtOrderItem.Rows[rowIdx][ConstColumns.QTY] = RoundQty(MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.WGH].ToString()) / packingSize);
-                    break;
-            }
-            dtOrderItem.AcceptChanges();
-            gv.Refresh();
-            //row.Cells[e.ColumnIndex].OwningColumn.Name  ##getName
-        }
-
-        private void Gv_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            e.Control.KeyPress -= new KeyPressEventHandler(ColumnNumber_KeyPress);
-            if (gv.CurrentCell.ColumnIndex == 4 || gv.CurrentCell.ColumnIndex == 6) //Desired Column
-            {
-                TextBox tb = e.Control as TextBox;
-                if (tb != null)
-                {
-                    tb.KeyPress += new KeyPressEventHandler(ColumnNumber_KeyPress);
-                }
-            }
-        }
-
-        private void ColumnNumber_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
             }
         }
 
@@ -552,6 +549,7 @@ namespace SlaughterHouseServer
             }
 
         }
+
 
     }
 

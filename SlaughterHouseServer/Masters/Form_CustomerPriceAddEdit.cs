@@ -23,7 +23,8 @@ namespace SlaughterHouseServer
             //KeyDown
             dtpStartDate.KeyDown += DtpStartDate_KeyDown;
             txtDay.KeyDown += TxtDay_KeyDown;
-
+            txtDay.KeyPress += TxtDay_KeyPress;
+            txtUnitPrice.KeyPress += TxtDay_KeyPress;
             //Click
             btnLovProduct.Click += BtnLovProduct_Click;
         }
@@ -43,6 +44,9 @@ namespace SlaughterHouseServer
                 txtDay.Focus();
             }
         }
+
+
+        #region Event Focus, KeyDown
         private void TxtDay_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -51,8 +55,22 @@ namespace SlaughterHouseServer
             }
         }
 
-
-        #region Event Focus, KeyDown
+        private void TxtDay_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 49 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+        private void TxtUnitPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 49 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
         private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -172,7 +190,7 @@ namespace SlaughterHouseServer
                         ProductCode = this.productCode
                     },
                     StartDate = dtpStartDate.Value,
-                    EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
+                    EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text) - 1),
                     Day = Convert.ToInt16(txtDay.Text),
 
                     UnitPrice = Convert.ToDecimal(txtUnitPrice.Text),

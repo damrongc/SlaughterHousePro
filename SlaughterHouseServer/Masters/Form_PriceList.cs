@@ -97,7 +97,7 @@ namespace SlaughterHouseServer
             cboProductCv.ValueMember = "ProductCode";
             cboProductCv.DataSource = coll;
         }
-        #region ### Product 
+        #region ### Product
         //private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         //{
         //    gv.Columns[ConstColumns.ProductCode].HeaderText = "รหัสสินค้า";
@@ -174,8 +174,7 @@ namespace SlaughterHouseServer
         //    var coll = ProductPriceController.GetAllProductPrices(dtpStartDate.Value, cboProduct.SelectedValue.ToString());
         //    gv.DataSource = coll;
         //}
-        #endregion !!!NotUse
-
+        #endregion !!!NotUse 
 
         #region ### CustomerClass
         private void BtnAddCustomerClass_Click(object sender, System.EventArgs e)
@@ -263,8 +262,7 @@ namespace SlaughterHouseServer
 
 
         }
-        #endregion
-
+        #endregion 
 
         #region ### Customer
         private void BtnAddCv_Click(object sender, System.EventArgs e)
@@ -448,6 +446,7 @@ namespace SlaughterHouseServer
         //    gvClassDis.DataSource = coll;
         //}
         #endregion
+
 
     }
 }

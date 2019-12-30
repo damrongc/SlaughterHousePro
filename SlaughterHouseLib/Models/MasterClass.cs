@@ -33,7 +33,7 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT * FROM master_class WHERE active=1");
+                    sb.Append("SELECT * FROM master_class WHERE active=1 and class_id > 1 ");
                     sb.Append(" ORDER BY class_id asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
 

@@ -79,7 +79,7 @@ namespace SlaughterHouseServer
 
             gv.Columns[ConstColumns.CustomerCode].HeaderText = "รหัสลูกค้า";
             gv.Columns[ConstColumns.CustomerName].HeaderText = "ชื่อลูกค้า";
-            gv.Columns[ConstColumns.ClassName].HeaderText = "กลุ่มลูกค้า";
+            //gv.Columns[ConstColumns.ClassName].HeaderText = "กลุ่มลูกค้า";
             gv.Columns[ConstColumns.Address].HeaderText = "ที่อยู่";
             gv.Columns[ConstColumns.ShipTo].HeaderText = "สถานที่ส่งสินค้า";
             gv.Columns[ConstColumns.TaxId].HeaderText = "เลขที่ผู้เสียภาษี";
@@ -90,7 +90,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
             gv.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
 
-            gv.Columns[ConstColumns.ClassId].Visible = false;
+            //gv.Columns[ConstColumns.ClassId].Visible = false;
 
             gv.Columns[ConstColumns.CreateAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             gv.Columns[ConstColumns.ModifiedAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";

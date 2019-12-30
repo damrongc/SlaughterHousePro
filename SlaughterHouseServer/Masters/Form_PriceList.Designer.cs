@@ -45,6 +45,7 @@
             this.tabPageCustomerClass = new System.Windows.Forms.TabPage();
             this.panel10 = new System.Windows.Forms.Panel();
             this.gvCustomerClass = new System.Windows.Forms.DataGridView();
+            this.EditCustomerClass = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel12 = new System.Windows.Forms.Panel();
             this.cboProductCustomerClass = new System.Windows.Forms.ComboBox();
             this.dtpStartDateCustomerClass = new System.Windows.Forms.DateTimePicker();
@@ -77,7 +78,6 @@
             this.BtnAddClassDis = new System.Windows.Forms.Button();
             this.gvClassDis = new System.Windows.Forms.DataGridView();
             this.EditClassDis = new System.Windows.Forms.DataGridViewImageColumn();
-            this.EditCustomerClass = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
@@ -262,10 +262,10 @@
             // 
             this.tabPageCustomerClass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPageCustomerClass.Controls.Add(this.panel10);
-            this.tabPageCustomerClass.Location = new System.Drawing.Point(4, 40);
+            this.tabPageCustomerClass.Location = new System.Drawing.Point(4, 22);
             this.tabPageCustomerClass.Name = "tabPageCustomerClass";
             this.tabPageCustomerClass.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCustomerClass.Size = new System.Drawing.Size(1392, 706);
+            this.tabPageCustomerClass.Size = new System.Drawing.Size(1392, 724);
             this.tabPageCustomerClass.TabIndex = 3;
             this.tabPageCustomerClass.Text = " ราคาระดับกลุ่มลูกค้า";
             this.tabPageCustomerClass.UseVisualStyleBackColor = true;
@@ -281,7 +281,7 @@
             this.panel10.Location = new System.Drawing.Point(3, 3);
             this.panel10.Name = "panel10";
             this.panel10.Padding = new System.Windows.Forms.Padding(6);
-            this.panel10.Size = new System.Drawing.Size(1384, 698);
+            this.panel10.Size = new System.Drawing.Size(1384, 716);
             this.panel10.TabIndex = 6;
             // 
             // gvCustomerClass
@@ -301,8 +301,15 @@
             this.gvCustomerClass.Location = new System.Drawing.Point(6, 68);
             this.gvCustomerClass.Name = "gvCustomerClass";
             this.gvCustomerClass.RowHeadersWidth = 10;
-            this.gvCustomerClass.Size = new System.Drawing.Size(1372, 624);
+            this.gvCustomerClass.Size = new System.Drawing.Size(1372, 642);
             this.gvCustomerClass.TabIndex = 9;
+            // 
+            // EditCustomerClass
+            // 
+            this.EditCustomerClass.HeaderText = "แก้ไข";
+            this.EditCustomerClass.Image = ((System.Drawing.Image)(resources.GetObject("EditCustomerClass.Image")));
+            this.EditCustomerClass.Name = "EditCustomerClass";
+            this.EditCustomerClass.Width = 58;
             // 
             // panel12
             // 
@@ -402,10 +409,10 @@
             // 
             this.tabPageCustomer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPageCustomer.Controls.Add(this.panel4);
-            this.tabPageCustomer.Location = new System.Drawing.Point(4, 40);
+            this.tabPageCustomer.Location = new System.Drawing.Point(4, 22);
             this.tabPageCustomer.Name = "tabPageCustomer";
             this.tabPageCustomer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCustomer.Size = new System.Drawing.Size(1392, 706);
+            this.tabPageCustomer.Size = new System.Drawing.Size(1392, 724);
             this.tabPageCustomer.TabIndex = 0;
             this.tabPageCustomer.Text = " ราคาระดับลูกค้า ";
             this.tabPageCustomer.UseVisualStyleBackColor = true;
@@ -421,7 +428,7 @@
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(6);
-            this.panel4.Size = new System.Drawing.Size(1384, 698);
+            this.panel4.Size = new System.Drawing.Size(1384, 716);
             this.panel4.TabIndex = 4;
             // 
             // gvCv
@@ -441,7 +448,7 @@
             this.gvCv.Location = new System.Drawing.Point(6, 68);
             this.gvCv.Name = "gvCv";
             this.gvCv.RowHeadersWidth = 10;
-            this.gvCv.Size = new System.Drawing.Size(1372, 624);
+            this.gvCv.Size = new System.Drawing.Size(1372, 642);
             this.gvCv.TabIndex = 8;
             // 
             // EditCv
@@ -692,13 +699,6 @@
             this.EditClassDis.Image = ((System.Drawing.Image)(resources.GetObject("EditClassDis.Image")));
             this.EditClassDis.Name = "EditClassDis";
             this.EditClassDis.Width = 58;
-            // 
-            // EditCustomerClass
-            // 
-            this.EditCustomerClass.HeaderText = "แก้ไข";
-            this.EditCustomerClass.Image = ((System.Drawing.Image)(resources.GetObject("EditCustomerClass.Image")));
-            this.EditCustomerClass.Name = "EditCustomerClass";
-            this.EditCustomerClass.Width = 58;
             // 
             // Form_PriceList
             // 

@@ -92,6 +92,12 @@
     <Compile Include="Masters\Form_CustomerClassPriceAddEdit.Designer.cs">
       <DependentUpon>Form_CustomerClassPriceAddEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\Form_CustomerDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerDetail.Designer.cs">
+      <DependentUpon>Form_CustomerDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Masters\Form_Plant.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -491,6 +497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_CustomerClassPriceAddEdit.resx">
       <DependentUpon>Form_CustomerClassPriceAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_CustomerDetail.resx">
+      <DependentUpon>Form_CustomerDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_Plant.resx">
       <DependentUpon>Form_Plant.cs</DependentUpon>
