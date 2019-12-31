@@ -12,7 +12,7 @@ namespace SlaughterHouseLib.Models
         public MasterClass MasterClass { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int Day { get; set; } 
+        public int Day { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
         public string ModifiedBy { get; set; }
@@ -30,11 +30,13 @@ namespace SlaughterHouseLib.Models
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @" SELECT cls.customer_code, c.customer_name , cls.class_id, mc.class_name, cls.start_date, cls.end_date
+                    var sql = @" SELECT cls.customer_code, c.customer_name , cls.class_id, mc.class_name, cls.start_date, cls.end_date,
+                                 cls.create_at,   cls.create_by,  cls.modified_at,   cls.modified_by 
                                  FROM  customer_class cls, master_class mc, customer c
                                  WHERE  cls.customer_code = @customer_code ";
                     if (allFlag == "N")
                     {
+                        //sql += " and cls.start_date <= DATE(SYSDATE()) ";
                         sql += " and cls.end_date >= DATE(SYSDATE()) ";
                     }
                     sql += @" and cls.class_id = mc.class_id
@@ -107,7 +109,7 @@ namespace SlaughterHouseLib.Models
                             },
                             StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
                             EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
-                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays),
+                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays+1),
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }
@@ -139,7 +141,7 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("class_id", CustomerClass.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("customer_code", CustomerClass.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate);
-                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate); 
+                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate);
                     cmd.Parameters.AddWithValue("create_by", CustomerClass.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
                 }

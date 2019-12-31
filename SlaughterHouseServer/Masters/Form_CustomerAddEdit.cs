@@ -73,6 +73,10 @@ namespace SlaughterHouseServer
                         Load_CustomerClass();
                     }
                 }
+                else
+                {
+                    groupBoxCustomerClass.Visible = false;
+                }
             }
             catch (Exception ex)
             {
@@ -270,7 +274,7 @@ namespace SlaughterHouseServer
         private void BtnAddOrderItem_Click(object sender, System.EventArgs e)
         {
             var frm = new Form_CustomerDetail();
-             
+
             frm.customerCode = txtCustomerCode.Text;
             frm.customerName = txtCustomerName.Text;
             if (frm.ShowDialog() == DialogResult.OK)
@@ -287,10 +291,19 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.CLASS_NAME].HeaderText = "ชื่อระดับคลาส";
             gv.Columns[ConstColumns.START_DATE].HeaderText = "วันที่เริ่มต้น";
             gv.Columns[ConstColumns.END_DATE].HeaderText = "วันที่สิ้นสุด";
+            gv.Columns[ConstColumns.CREATE_AT].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[ConstColumns.CREATE_BY].HeaderText = "ผู้สร้าง";
+            gv.Columns[ConstColumns.MODIFIED_AT].HeaderText = "วันเวลาแก้ไข";
+            gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข";
             gv.Columns[ConstColumns.CLASS_ID].Visible = false;
 
             gv.Columns[ConstColumns.CUSTOMER_CODE].Visible = false;
             gv.Columns[ConstColumns.CUSTOMER_NAME].Visible = false;
+
+            gv.Columns[ConstColumns.START_DATE].DefaultCellStyle.Format = "dd/MM/yyyy";
+            gv.Columns[ConstColumns.END_DATE].DefaultCellStyle.Format = "dd/MM/yyyy";
+            gv.Columns[ConstColumns.CREATE_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            gv.Columns[ConstColumns.MODIFIED_AT].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
         }
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

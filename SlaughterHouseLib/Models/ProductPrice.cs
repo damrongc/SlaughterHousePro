@@ -63,7 +63,7 @@ namespace SlaughterHouseLib.Models
                                     StartDate = p.Field<DateTime>("start_date"),
                                     EndDate = p.Field<DateTime>("end_date"),
                                     UnitPrice = p.Field<decimal>("unit_price"),
-                                    Day = (Convert.ToDateTime(p.Field<DateTime>("end_date"))- Convert.ToDateTime( p.Field<DateTime>("start_date"))).TotalDays,
+                                    Day = (Convert.ToDateTime(p.Field<DateTime>("end_date"))- Convert.ToDateTime( p.Field<DateTime>("start_date"))).TotalDays + 1,
                                     CreateAt = p.Field<DateTime?>("create_at") != null ? p.Field<DateTime?>("create_at") : null,
                                     CreateBy = p.Field<string>("create_by") != "" ? p.Field<string>("create_by") : "",
                                     ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
@@ -118,7 +118,7 @@ namespace SlaughterHouseLib.Models
                             StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
                             EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
                             UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"],
-                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays),
+                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays+1),
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }

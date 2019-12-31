@@ -178,13 +178,13 @@ namespace SlaughterHouseLib.Models
                                         from customer_price cp
 	                                    Where  @request_date  >= cp.start_date
 		                                    and @request_date  <= cp.end_date
-		                                    and cp.customer_code like @customer_code
+		                                    and cp.customer_code = @customer_code
                                         union
 	                                    select distinct cp.start_date, cp.end_date, cp.product_code
                                         from customer_class_price cp
 	                                    Where  @request_date  >= cp.start_date
 		                                    and @request_date  <= cp.end_date 
-                                            and cp.class_id = @class_id
+                                            and (cp.class_id = @class_id or cp.class_id = 1)
                                         ) as price,
 	                                    unit_of_measurement uq,
 	                                    unit_of_measurement uw

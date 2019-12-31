@@ -57,7 +57,7 @@ namespace SlaughterHouseServer
 
         private void TxtDay_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (((e.KeyChar < 49 || e.KeyChar > 57) && e.KeyChar != 8))
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
             {
                 e.Handled = true;
                 return;
@@ -65,7 +65,7 @@ namespace SlaughterHouseServer
         }
         private void TxtUnitPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (((e.KeyChar < 49 || e.KeyChar > 57) && e.KeyChar != 8))
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
             {
                 e.Handled = true;
                 return;

@@ -24,7 +24,7 @@ namespace SlaughterHouseLib.Models
 
     public static class MasterClassController
     {
-        public static List<MasterClass> GetAllMasterClass()
+        public static List<MasterClass> GetAllMasterClassCombobox(string allFlag = "Y")
         {
             try
             {
@@ -33,7 +33,12 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sb = new StringBuilder();
-                    sb.Append("SELECT * FROM master_class WHERE active=1 and class_id > 1 ");
+                    sb.Append("SELECT * FROM master_class WHERE active=1   ");
+                    if (allFlag == "N")
+                    {
+                        sb.Append("  and class_id > 1 ");
+                    }
+
                     sb.Append(" ORDER BY class_id asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
 

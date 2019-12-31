@@ -156,7 +156,7 @@ namespace SlaughterHouseServer
 
         private void LoadMasterClass()
         {
-            comboxMasterClass.DataSource = MasterClassController.GetAllMasterClass();
+            comboxMasterClass.DataSource = MasterClassController.GetAllMasterClassCombobox();
             comboxMasterClass.ValueMember = "ClassId";
             comboxMasterClass.DisplayMember = "ClassName";
         }

@@ -25,19 +25,16 @@ namespace SlaughterHouseServer
             dtpStartDate.ValueChanged += DtpStartDate_ValueChanged;
             BtnSave.Click += BtnSave_Click;
         }
-
         private void LoadMasterClass()
         {
-            comboxMasterClass.DataSource = MasterClassController.GetAllMasterClass();
+            comboxMasterClass.DataSource = MasterClassController.GetAllMasterClassCombobox("N");
             comboxMasterClass.ValueMember = "ClassId";
             comboxMasterClass.DisplayMember = "ClassName";
         }
-
         private void Form_CustomerDetail_Shown(object sender, System.EventArgs e)
         {
 
         }
-
         private void Form_CustomerDetail_Load(object sender, System.EventArgs e)
         {
             try
@@ -65,7 +62,6 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void TxtDay_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
@@ -78,7 +74,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-                txtDay.Text = (Convert.ToInt32(txtDay.Text) == 0) ? "1" : txtDay.Text;
+                //txtDay.Text = (Convert.ToInt32(txtDay.Text) == 0) ? "1" : txtDay.Text;
 
                 if (int.TryParse(txtDay.Text, out int n))
                 {
@@ -114,8 +110,6 @@ namespace SlaughterHouseServer
 
             }
         }
-
-
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
@@ -133,7 +127,7 @@ namespace SlaughterHouseServer
                             ClassId = Convert.ToInt32(comboxMasterClass.SelectedValue)
                         },
                         StartDate = dtpStartDate.Value,
-                        EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
+                        EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text) - 1),
                         Day = Convert.ToInt16(txtDay.Text),
                         CreateBy = "system",
                     };
@@ -153,7 +147,7 @@ namespace SlaughterHouseServer
                             ClassId = Convert.ToInt32(comboxMasterClass.SelectedValue)
                         },
                         StartDate = dtpStartDate.Value,
-                        EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
+                        EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text) - 1),
                         Day = Convert.ToInt16(txtDay.Text),
                         ModifiedBy = "system",
                     };

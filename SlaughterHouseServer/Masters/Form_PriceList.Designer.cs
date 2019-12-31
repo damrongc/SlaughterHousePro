@@ -409,10 +409,10 @@
             // 
             this.tabPageCustomer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPageCustomer.Controls.Add(this.panel4);
-            this.tabPageCustomer.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCustomer.Location = new System.Drawing.Point(4, 40);
             this.tabPageCustomer.Name = "tabPageCustomer";
             this.tabPageCustomer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCustomer.Size = new System.Drawing.Size(1392, 724);
+            this.tabPageCustomer.Size = new System.Drawing.Size(1392, 706);
             this.tabPageCustomer.TabIndex = 0;
             this.tabPageCustomer.Text = " ราคาระดับลูกค้า ";
             this.tabPageCustomer.UseVisualStyleBackColor = true;
@@ -428,7 +428,7 @@
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(6);
-            this.panel4.Size = new System.Drawing.Size(1384, 716);
+            this.panel4.Size = new System.Drawing.Size(1384, 698);
             this.panel4.TabIndex = 4;
             // 
             // gvCv
@@ -448,7 +448,7 @@
             this.gvCv.Location = new System.Drawing.Point(6, 68);
             this.gvCv.Name = "gvCv";
             this.gvCv.RowHeadersWidth = 10;
-            this.gvCv.Size = new System.Drawing.Size(1372, 642);
+            this.gvCv.Size = new System.Drawing.Size(1372, 624);
             this.gvCv.TabIndex = 8;
             // 
             // EditCv
