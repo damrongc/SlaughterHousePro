@@ -21,8 +21,13 @@ namespace SlaughterHouseServer
             this.Shown += Form_Shown;
 
             //KeyDown
+            cboCustomer.KeyDown += CboCustomer_KeyDown;
             dtpStartDate.KeyDown += DtpStartDate_KeyDown;
             txtDay.KeyDown += TxtDay_KeyDown;
+            txtUnitPrice.KeyDown += TxtUnitPrice_KeyDown;
+
+
+
             txtDay.KeyPress += TxtDay_KeyPress;
             txtUnitPrice.KeyPress += TxtDay_KeyPress;
             //Click
@@ -30,7 +35,7 @@ namespace SlaughterHouseServer
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
-            dtpStartDate.Focus();
+            cboCustomer.Focus();
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
@@ -47,11 +52,26 @@ namespace SlaughterHouseServer
 
 
         #region Event Focus, KeyDown
+        private void CboCustomer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLovProduct.Focus();
+            }
+        }
         private void TxtDay_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 txtUnitPrice.Focus();
+            }
+        }
+
+        private void TxtUnitPrice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnSaveAndNew.Focus();
             }
         }
 
@@ -95,6 +115,7 @@ namespace SlaughterHouseServer
                 {
                     txtProductName.Text = frm.productName;
                     this.productCode = frm.productCode;
+                    dtpStartDate.Focus();
                 }
             }
             catch (Exception ex)
@@ -106,7 +127,8 @@ namespace SlaughterHouseServer
         {
             try
             {
-                SaveProductPrice();
+                CheckBeforeSave();
+                Save();
                 MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -122,7 +144,8 @@ namespace SlaughterHouseServer
         {
             try
             {
-                SaveProductPrice();
+                CheckBeforeSave();
+                Save();
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 cboCustomer.SelectedIndex = 0;
@@ -175,7 +198,32 @@ namespace SlaughterHouseServer
             }
         }
 
-        private void SaveProductPrice()
+        private void CheckBeforeSave()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtProductName.Text))
+                {
+                    throw new Exception(ConstErrorMsg.ProductNull);
+                }
+                txtDay.Text = (int.TryParse(txtDay.Text, out int tmpDay)) ? tmpDay.ToString() : "0";
+                txtUnitPrice.Text = (int.TryParse(txtUnitPrice.Text, out int tmpUnit)) ? tmpUnit.ToString() : "0";
+                if (Convert.ToInt16(txtDay.Text) == 0)
+                {
+                    throw new Exception(ConstErrorMsg.DayIsZero);
+                }
+                if (Convert.ToInt16(txtUnitPrice.Text) == 0)
+                {
+                    throw new Exception(ConstErrorMsg.UnitPriceIsZero);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        private void Save()
         {
             try
             {

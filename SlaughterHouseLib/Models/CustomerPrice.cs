@@ -40,7 +40,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" FROM customer_price a, product b, customer c");
                     sb.Append(" WHERE a.product_code = b.product_code ");
                     sb.Append(" AND a.customer_code = c.customer_code ");
-                    sb.Append(" AND a.start_date <= '" + startDate.ToString("yyyy-MM-dd") + "'");
+                    //sb.Append(" AND a.start_date <= '" + startDate.ToString("yyyy-MM-dd") + "'");
                     sb.Append(" AND a.end_date >= '" + startDate.ToString("yyyy-MM-dd") + "'");
                     if (!string.IsNullOrEmpty(productCode))
                         sb.Append(" AND a.product_code =@product_code");

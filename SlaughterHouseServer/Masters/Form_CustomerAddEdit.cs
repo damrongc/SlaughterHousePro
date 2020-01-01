@@ -295,8 +295,8 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.CREATE_BY].HeaderText = "ผู้สร้าง";
             gv.Columns[ConstColumns.MODIFIED_AT].HeaderText = "วันเวลาแก้ไข";
             gv.Columns[ConstColumns.MODIFIED_BY].HeaderText = "ผู้แก้ไข";
-            gv.Columns[ConstColumns.CLASS_ID].Visible = false;
 
+            gv.Columns[ConstColumns.CLASS_ID].Visible = false;
             gv.Columns[ConstColumns.CUSTOMER_CODE].Visible = false;
             gv.Columns[ConstColumns.CUSTOMER_NAME].Visible = false;
 

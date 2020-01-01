@@ -146,9 +146,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(105, 17);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 29);
+            this.label3.Size = new System.Drawing.Size(59, 29);
             this.label3.TabIndex = 40;
-            this.label3.Text = "ลูกกค้า:";
+            this.label3.Text = "ลูกค้า:";
             // 
             // cboCustomer
             // 

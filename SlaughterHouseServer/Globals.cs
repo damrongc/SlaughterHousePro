@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace SlaughterHouseServer
 {
+    public static class ConstErrorMsg
+    {
+        public const string ProductNull = "กรุณาระบุสินค้า";
+        public const string DayIsZero = "จำนวนวันต้องมากกกว่า 0";
+        public const string UnitPriceIsZero = "ราคาต้องมากกกว่า 0";
+
+    }
     public static class ConstColumns
     {
 

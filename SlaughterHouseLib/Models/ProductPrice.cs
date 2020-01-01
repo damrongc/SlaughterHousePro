@@ -41,7 +41,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" a.create_by, a.modified_at, a.modified_by");
                     sb.Append(" FROM product_price a, product b");
                     sb.Append(" WHERE a.product_code = b.product_code");
-                    sb.Append(" AND a.start_date <= '" + startDate.ToString("yyyy-MM-dd") + "'");
+                    //sb.Append(" AND a.start_date <= '" + startDate.ToString("yyyy-MM-dd") + "'");
                     sb.Append(" AND a.end_date >= '" + startDate.ToString("yyyy-MM-dd") + "'");
                     if (!string.IsNullOrEmpty(productCode))
                         sb.Append(" AND a.product_code =@product_code");

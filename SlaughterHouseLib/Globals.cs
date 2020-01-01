@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using SlaughterHouseLib.Models;
 using System;
 using System.Data;
 
@@ -20,6 +21,8 @@ namespace SlaughterHouseLib
                     var sql = "";
 
                     //decimal discountPer = GetDiscountPer(customerCode, priceDate);
+
+                    int classId = CustomerController.GetCustomerClassId(customerCode, priceDate);
 
                     sql = @"select COALESCE(unit_price, 0) as unit_price
                          from customer_price p
@@ -49,15 +52,15 @@ namespace SlaughterHouseLib
                         }
                     }
 
-                    //GetDiscountPer MasterClass
-
                     sql = @"select COALESCE(unit_price, 0) as unit_price
-                         from product_price p
+                         from customer_class_price p
                             where start_date <=@start_date
                              and end_date >=@end_date
                              and product_code =@product_code
+                             and class_id =@class_id
                             order by start_date desc LIMIT 1 ";
                     cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("class_id", classId);
                     cmd.Parameters.AddWithValue("product_code", productCode);
                     cmd.Parameters.AddWithValue("start_date", priceDate);
                     cmd.Parameters.AddWithValue("end_date", priceDate);
@@ -75,15 +78,72 @@ namespace SlaughterHouseLib
                             //}
                             return unitPrice;
                         }
-                        else
+                    }
+
+                    sql = @"select COALESCE(unit_price, 0) as unit_price
+                         from customer_class_price p
+                            where start_date <=@start_date
+                             and end_date >=@end_date
+                             and product_code =@product_code
+                             and class_id =@class_id
+                            order by start_date desc LIMIT 1 ";
+                    cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("class_id", 1);
+                    cmd.Parameters.AddWithValue("product_code", productCode);
+                    cmd.Parameters.AddWithValue("start_date", priceDate);
+                    cmd.Parameters.AddWithValue("end_date", priceDate);
+                    da = new MySqlDataAdapter(cmd);
+                    ds = new DataSet();
+                    da.Fill(ds);
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (Convert.ToDecimal(ds.Tables[0].Rows[0]["unit_price"]) > 0)
                         {
-                            return 0;
+                            decimal unitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"];
+                            //if (discountPer > 0)
+                            //{
+                            //    unitPrice = unitPrice - (Math.Round((unitPrice * discountPer) / 100, 2));
+                            //}
+                            return unitPrice;
                         }
                     }
-                    else
-                    {
-                        return 0;
-                    }
+
+                    return 0;
+
+                    //####### Product price, now not use
+                    //sql = @"select COALESCE(unit_price, 0) as unit_price
+                    //     from product_price p
+                    //        where start_date <=@start_date
+                    //         and end_date >=@end_date
+                    //         and product_code =@product_code
+                    //        order by start_date desc LIMIT 1 ";
+                    //cmd = new MySqlCommand(sql, conn);
+                    //cmd.Parameters.AddWithValue("product_code", productCode);
+                    //cmd.Parameters.AddWithValue("start_date", priceDate);
+                    //cmd.Parameters.AddWithValue("end_date", priceDate);
+                    //da = new MySqlDataAdapter(cmd);
+                    //ds = new DataSet();
+                    //da.Fill(ds);
+                    //if (ds.Tables[0].Rows.Count > 0)
+                    //{
+                    //    if (Convert.ToDecimal(ds.Tables[0].Rows[0]["unit_price"]) > 0)
+                    //    {
+                    //        decimal unitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"];
+                    //        //if (discountPer > 0)
+                    //        //{
+                    //        //    unitPrice = unitPrice - (Math.Round((unitPrice * discountPer) / 100, 2));
+                    //        //}
+                    //        return unitPrice;
+                    //    }
+                    //    else
+                    //    {
+                    //        return 0;
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    return 0;
+                    //}
                 }
             }
             catch (Exception)

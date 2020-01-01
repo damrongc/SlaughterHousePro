@@ -249,6 +249,8 @@ namespace SlaughterHouseServer
             gvCustomerClass.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
 
 
+            gvCustomerClass.Columns[ConstColumns.ClassId].Visible = false;
+
             gvCustomerClass.Columns[ConstColumns.UnitPrice].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             gvCustomerClass.Columns[ConstColumns.UnitPrice].DefaultCellStyle.Format = "N2";

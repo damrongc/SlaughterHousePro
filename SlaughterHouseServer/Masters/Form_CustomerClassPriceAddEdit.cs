@@ -21,16 +21,19 @@ namespace SlaughterHouseServer
             this.Shown += Form_Shown;
 
             //KeyDown
+            cboCustomerClass.KeyDown += CboCustomerClass_KeyDown;
             dtpStartDate.KeyDown += DtpStartDate_KeyDown;
             txtDay.KeyDown += TxtDay_KeyDown;
+            txtUnitPrice.KeyDown += TxtUnitPrice_KeyDown;
+
             txtDay.KeyPress += TxtDay_KeyPress;
-            txtUnitPrice.KeyPress += TxtDay_KeyPress;
+            txtUnitPrice.KeyPress += TxtUnitPrice_KeyPress;
             //Click
             btnLovProduct.Click += BtnLovProduct_Click;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
-            dtpStartDate.Focus();
+            cboCustomerClass.Focus();
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
@@ -46,6 +49,15 @@ namespace SlaughterHouseServer
         }
 
         #region Event Focus, KeyDown
+
+        private void CboCustomerClass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLovProduct.Focus();
+            }
+        }
+
         private void TxtDay_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -53,7 +65,13 @@ namespace SlaughterHouseServer
                 txtUnitPrice.Focus();
             }
         }
-
+        private void TxtUnitPrice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnSaveAndNew.Focus();
+            }
+        }
         private void TxtDay_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
@@ -70,14 +88,6 @@ namespace SlaughterHouseServer
                 return;
             }
         }
-        private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                BtnSaveAndNew.Focus();
-            }
-        }
-
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
 
@@ -94,6 +104,7 @@ namespace SlaughterHouseServer
                 {
                     txtProductName.Text = frm.productName;
                     this.productCode = frm.productCode;
+                    dtpStartDate.Focus();
                 }
             }
             catch (Exception ex)
@@ -105,7 +116,8 @@ namespace SlaughterHouseServer
         {
             try
             {
-                SaveProductPrice();
+                CheckBeforeSave();
+                Save();
                 MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -121,7 +133,8 @@ namespace SlaughterHouseServer
         {
             try
             {
-                SaveProductPrice();
+                CheckBeforeSave();
+                Save();
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 cboCustomerClass.SelectedIndex = 0;
@@ -175,7 +188,32 @@ namespace SlaughterHouseServer
             cboCustomerClass.DisplayMember = "ClassName";
         }
 
-        private void SaveProductPrice()
+        private void CheckBeforeSave()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtProductName.Text))
+                {
+                    throw new Exception(ConstErrorMsg.ProductNull);
+                }
+                txtDay.Text = (int.TryParse(txtDay.Text, out int tmpDay)) ? tmpDay.ToString() : "0";
+                txtUnitPrice.Text = (int.TryParse(txtUnitPrice.Text, out int tmpUnit)) ? tmpUnit.ToString() : "0";
+                if (Convert.ToInt16(txtDay.Text) == 0)
+                {
+                    throw new Exception(ConstErrorMsg.DayIsZero);
+                }
+                if (Convert.ToInt16(txtUnitPrice.Text) == 0)
+                {
+                    throw new Exception(ConstErrorMsg.UnitPriceIsZero);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        private void Save()
         {
             try
             {

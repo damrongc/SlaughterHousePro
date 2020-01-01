@@ -41,7 +41,7 @@ namespace SlaughterHouseLib.Models
                     }
                     sql += @" and cls.class_id = mc.class_id
                               and cls.customer_code = c.customer_code
-                             order by cls.start_date, cls.end_date, cls.class_id ";
+                             order by cls.start_date desc, cls.end_date, cls.class_id ";
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customerCode);
@@ -109,7 +109,7 @@ namespace SlaughterHouseLib.Models
                             },
                             StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
                             EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
-                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays+1),
+                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays + 1),
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }
@@ -161,11 +161,11 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sql = @"UPDATE customer_class
-                                set end_date =@end_date,
+                                set class_id = @class_id,
+                                  end_date =@end_date,
                                   modified_at=CURRENT_TIMESTAMP,
                                   modified_by=@modified_by
-                                WHERE customer_code = @customer_code
-                                  And class_id = @class_id
+                                WHERE customer_code = @customer_code 
                                   And start_date = @start_date";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", CustomerClass.MasterClass.ClassId);

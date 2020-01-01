@@ -13,55 +13,48 @@ namespace SlaughterHouseServer
         public Form_CustomerDetail()
         {
             InitializeComponent();
+            UserSettingsComponent();
+        }
+        private void UserSettingsComponent()
+        {
             LoadMasterClass();
-            //txtCustomerClassCode.KeyDown += TxtCustomerClassCode_KeyDown;
-            //txtCustomerClassName.KeyDown += TxtCustomerClassName_KeyDown;
-            this.Load += Form_CustomerDetail_Load;
-            this.Shown += Form_CustomerDetail_Shown;
-            txtDay.TextChanged += TxtDay_TextChanged;
-            txtDay.KeyPress += TxtDay_KeyPress;
 
+            txtDay.KeyDown += TxtDay_KeyDown;
+            dtpStartDate.KeyDown += DtpStartDate_KeyDown;
+            cboMasterClass.KeyDown += CboMasterClass_KeyDown;
+
+            txtDay.TextChanged += TxtDay_TextChanged;
+
+            txtDay.KeyPress += TxtDay_KeyPress;
 
             dtpStartDate.ValueChanged += DtpStartDate_ValueChanged;
             BtnSave.Click += BtnSave_Click;
-        }
-        private void LoadMasterClass()
-        {
-            comboxMasterClass.DataSource = MasterClassController.GetAllMasterClassCombobox("N");
-            comboxMasterClass.ValueMember = "ClassId";
-            comboxMasterClass.DisplayMember = "ClassName";
-        }
-        private void Form_CustomerDetail_Shown(object sender, System.EventArgs e)
-        {
 
+            this.Load += Form_CustomerDetail_Load;
+            this.Shown += Form_CustomerDetail_Shown;
         }
-        private void Form_CustomerDetail_Load(object sender, System.EventArgs e)
+        private void TxtDay_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.Enter)
             {
-                txtCustomerCode.Text = this.customerCode;
-                txtCustomerName.Text = this.customerName;
-                if (this.classId != 0)
-                {
-                    var customerClass = CustomerClassController.GetClassByCustomer(this.classId, this.customerCode, this.startDate);
-                    if (customerClass != null)
-                    {
-                        //### Form Load
-                        comboxMasterClass.SelectedValue = customerClass.MasterClass.ClassId;
-                        txtDay.Text = customerClass.Day.ToString();
-                        dtpStartDate.Value = customerClass.StartDate;
-                        dtpEndDate.Value = customerClass.EndDate;
-
-                        comboxMasterClass.Enabled = false;
-                        dtpStartDate.Enabled = false;
-                    }
-                }
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboMasterClass.Focus();
             }
         }
+        private void DtpStartDate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtDay.Focus();
+            }
+        }
+        private void CboMasterClass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnSave.Focus();
+            }
+        }
+
         private void TxtDay_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
@@ -110,10 +103,64 @@ namespace SlaughterHouseServer
 
             }
         }
+
+        private void LoadMasterClass()
+        {
+            cboMasterClass.DataSource = MasterClassController.GetAllMasterClassCombobox("N");
+            cboMasterClass.ValueMember = "ClassId";
+            cboMasterClass.DisplayMember = "ClassName";
+        }
+        private void Form_CustomerDetail_Shown(object sender, System.EventArgs e)
+        {
+            dtpStartDate.Focus();
+        }
+        private void Form_CustomerDetail_Load(object sender, System.EventArgs e)
+        {
+            try
+            {
+                txtCustomerCode.Text = this.customerCode;
+                txtCustomerName.Text = this.customerName;
+                if (this.classId != 0)
+                {
+                    var customerClass = CustomerClassController.GetClassByCustomer(this.classId, this.customerCode, this.startDate);
+                    if (customerClass != null)
+                    {
+                        //### Form Load
+                        cboMasterClass.SelectedValue = customerClass.MasterClass.ClassId;
+                        txtDay.Text = customerClass.Day.ToString();
+                        dtpStartDate.Value = customerClass.StartDate;
+                        dtpEndDate.Value = customerClass.EndDate;
+
+                        dtpStartDate.Enabled = false;
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void CheckBeforeSave()
+        {
+            try
+            {
+                txtDay.Text = (int.TryParse(txtDay.Text, out int tmpDay)) ? tmpDay.ToString() : "0";
+                if (Convert.ToInt16(txtDay.Text) == 0)
+                {
+                    throw new Exception(ConstErrorMsg.DayIsZero);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
             {
+                CheckBeforeSave();
                 if (this.classId == 0)
                 {
                     var customerClass = new CustomerClass
@@ -124,7 +171,7 @@ namespace SlaughterHouseServer
                         },
                         MasterClass = new MasterClass
                         {
-                            ClassId = Convert.ToInt32(comboxMasterClass.SelectedValue)
+                            ClassId = Convert.ToInt32(cboMasterClass.SelectedValue)
                         },
                         StartDate = dtpStartDate.Value,
                         EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text) - 1),
@@ -144,7 +191,7 @@ namespace SlaughterHouseServer
                         },
                         MasterClass = new MasterClass
                         {
-                            ClassId = Convert.ToInt32(comboxMasterClass.SelectedValue)
+                            ClassId = Convert.ToInt32(cboMasterClass.SelectedValue)
                         },
                         StartDate = dtpStartDate.Value,
                         EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text) - 1),
