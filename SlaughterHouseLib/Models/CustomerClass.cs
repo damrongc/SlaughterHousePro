@@ -70,7 +70,6 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-
         public static CustomerClass GetClassByCustomer(int classId, string customerCode, DateTime startDate)
         {
             try
@@ -124,7 +123,6 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-
         public static bool Insert(CustomerClass CustomerClass)
         {
             try
@@ -132,6 +130,10 @@ namespace SlaughterHouseLib.Models
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
+                    if (IsDuplicateData(CustomerClass))
+                    {
+                        throw new Exception($"รหัสลูกค้า {CustomerClass.Customer.CustomerCode} \n วันที่เริ่มมต้น {CustomerClass.StartDate.ToString("dd/MM/yyyy")} \n มีในระบบแล้ว");
+                    }
                     var sql = @"INSERT INTO customer_class
                                   (class_id, customer_code, start_date, end_date, create_by)
                                 VALUES
@@ -140,8 +142,8 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", CustomerClass.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("customer_code", CustomerClass.Customer.CustomerCode);
-                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate);
-                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate);
+                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate );
+                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate );
                     cmd.Parameters.AddWithValue("create_by", CustomerClass.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
                 }
@@ -170,8 +172,8 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", CustomerClass.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("customer_code", CustomerClass.Customer.CustomerCode);
-                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate);
-                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate);
+                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate );
+                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate );
                     cmd.Parameters.AddWithValue("modified_by", CustomerClass.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
                 }
@@ -183,6 +185,36 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
+        public static bool IsDuplicateData(CustomerClass CustomerClass)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @" SELECT customer_code, class_id, start_date
+                                FROM customer_class c
+                                WHERE customer_code = @customer_code 
+                                    and start_date = @start_date ";
+                    var cmd = new MySqlCommand(sql, conn);
 
+                    cmd.Parameters.AddWithValue("customer_code", CustomerClass.Customer.CustomerCode);
+                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate.ToString("yyyy-MM-dd"));
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

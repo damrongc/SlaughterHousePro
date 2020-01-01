@@ -137,7 +137,7 @@ namespace SlaughterHouseLib
                         Transaction = tr
                     };
                     cmd.Parameters.AddWithValue("po_no", po.PoNo);
-                    cmd.Parameters.AddWithValue("po_date", po.PoDate);
+                    cmd.Parameters.AddWithValue("po_date", po.PoDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("po_flag", po.PoFlag);
                     cmd.Parameters.AddWithValue("active", po.Active);
                     cmd.Parameters.AddWithValue("comments", po.Comments);
@@ -215,7 +215,7 @@ namespace SlaughterHouseLib
                         Transaction = tr
                     };
                     cmd.Parameters.AddWithValue("po_no", po.PoNo);
-                    cmd.Parameters.AddWithValue("po_date", po.PoDate);
+                    cmd.Parameters.AddWithValue("po_date", po.PoDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("comments", po.Comments);
                     cmd.Parameters.AddWithValue("po_flag", po.PoFlag);
                     cmd.Parameters.AddWithValue("active", po.Active);

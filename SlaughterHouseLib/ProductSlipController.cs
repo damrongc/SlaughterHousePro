@@ -41,7 +41,7 @@ namespace SlaughterHouseLib
                         Transaction = tr
                     };
                     cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
-                    cmd.Parameters.AddWithValue("product_slip_date", productSlip.ProductSlipDate);
+                    cmd.Parameters.AddWithValue("product_slip_date", productSlip.ProductSlipDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("ref_document_no", productSlip.RefDocumentNo);
                     cmd.Parameters.AddWithValue("product_slip_flag", productSlip.ProductSlipFlag);
                     cmd.Parameters.AddWithValue("active", productSlip.Active);
@@ -123,7 +123,7 @@ namespace SlaughterHouseLib
                         Transaction = tr
                     };
                     cmd.Parameters.AddWithValue("product_slip_no", productSlip.ProductSlipNo);
-                    cmd.Parameters.AddWithValue("product_slip_date", productSlip.ProductSlipDate);
+                    cmd.Parameters.AddWithValue("product_slip_date", productSlip.ProductSlipDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("ref_document_no", productSlip.RefDocumentNo);
                     cmd.Parameters.AddWithValue("product_slip_flag", productSlip.ProductSlipFlag);
                     cmd.Parameters.AddWithValue("active", productSlip.Active);

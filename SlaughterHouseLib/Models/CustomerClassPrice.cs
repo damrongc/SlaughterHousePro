@@ -159,8 +159,8 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", customerClassPrice.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("product_code", customerClassPrice.Product.ProductCode);
-                    cmd.Parameters.AddWithValue("start_date", customerClassPrice.StartDate);
-                    cmd.Parameters.AddWithValue("end_date", customerClassPrice.EndDate);
+                    cmd.Parameters.AddWithValue("start_date", customerClassPrice.StartDate );
+                    cmd.Parameters.AddWithValue("end_date", customerClassPrice.EndDate );
                     cmd.Parameters.AddWithValue("unit_price", customerClassPrice.UnitPrice);
                     cmd.Parameters.AddWithValue("create_by", customerClassPrice.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
@@ -191,8 +191,8 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", customerClassPrice.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("product_code", customerClassPrice.Product.ProductCode);
-                    cmd.Parameters.AddWithValue("start_date", customerClassPrice.StartDate);
-                    cmd.Parameters.AddWithValue("end_date", customerClassPrice.EndDate);
+                    cmd.Parameters.AddWithValue("start_date", customerClassPrice.StartDate );
+                    cmd.Parameters.AddWithValue("end_date", customerClassPrice.EndDate );
                     cmd.Parameters.AddWithValue("unit_price", customerClassPrice.UnitPrice);
                     cmd.Parameters.AddWithValue("modified_by", customerClassPrice.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();

@@ -159,7 +159,7 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customerPrice.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("product_code", customerPrice.Product.ProductCode);
-                    cmd.Parameters.AddWithValue("start_date", customerPrice.StartDate);
+                    cmd.Parameters.AddWithValue("start_date", customerPrice.StartDate );
                     cmd.Parameters.AddWithValue("end_date", customerPrice.EndDate);
                     cmd.Parameters.AddWithValue("unit_price", customerPrice.UnitPrice);
                     cmd.Parameters.AddWithValue("create_by", customerPrice.CreateBy);
@@ -191,8 +191,8 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customerPrice.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("product_code", customerPrice.Product.ProductCode);
-                    cmd.Parameters.AddWithValue("start_date", customerPrice.StartDate);
-                    cmd.Parameters.AddWithValue("end_date", customerPrice.EndDate);
+                    cmd.Parameters.AddWithValue("start_date", customerPrice.StartDate );
+                    cmd.Parameters.AddWithValue("end_date", customerPrice.EndDate );
                     cmd.Parameters.AddWithValue("unit_price", customerPrice.UnitPrice);
                     cmd.Parameters.AddWithValue("modified_by", customerPrice.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();

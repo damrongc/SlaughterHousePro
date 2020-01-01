@@ -186,23 +186,17 @@ namespace SlaughterHouseLib.Models
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    //var sql = @"INSERT
-                    //            INTO customer (
-                    //                customer_code, customer_name, class_id, address, 
-                    //                ship_to, tax_id, contact_no,  start_date_class, end_date_class,
-                    //                active, create_by 
-                    //            )
-                    //            VALUES (@customer_code, @customer_name, @class_id, @address, 
-                    //                @ship_to, @tax_id, @contact_no,  @start_date_class, @end_date_class,
-                    //                @active, @create_by )";
+                    if (IsDuplicateData(customer.CustomerCode))
+                    {
+                        throw new Exception($"รหัสลูกค้า {customer.CustomerCode} มีในระบบแล้ว");
+                    }
                     var sql = @"INSERT
                                 INTO customer (
-                                    customer_code, customer_name,  address, 
-                                    ship_to, tax_id, contact_no,   
-                                    active, create_by 
-                                )
-                                VALUES (@customer_code, @customer_name,  @address, 
-                                    @ship_to, @tax_id, @contact_no, 
+                                    customer_code, customer_name,  address,
+                                    ship_to, tax_id, contact_no,
+                                    active, create_by )
+                                VALUES (@customer_code, @customer_name,  @address,
+                                    @ship_to, @tax_id, @contact_no,
                                     @active, @create_by )";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customer.CustomerCode);
@@ -219,7 +213,6 @@ namespace SlaughterHouseLib.Models
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -306,6 +299,36 @@ namespace SlaughterHouseLib.Models
                         res = Convert.ToInt32(ds.Tables[0].Rows[0]["class_id"]);
                     }
                     return res;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static bool IsDuplicateData(string customerCode)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @" SELECT customer_code
+                                FROM customer c
+                                WHERE customer_code = @customer_code  ";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("customer_code", customerCode);
+
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                        return true;
+                    else
+                        return false;
                 }
             }
             catch (Exception)

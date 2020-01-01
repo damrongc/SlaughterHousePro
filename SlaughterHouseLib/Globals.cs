@@ -34,8 +34,8 @@ namespace SlaughterHouseLib
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customerCode);
                     cmd.Parameters.AddWithValue("product_code", productCode);
-                    cmd.Parameters.AddWithValue("start_date", priceDate);
-                    cmd.Parameters.AddWithValue("end_date", priceDate);
+                    cmd.Parameters.AddWithValue("start_date", priceDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("end_date", priceDate.ToString("yyyy-MM-dd"));
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);
@@ -62,8 +62,8 @@ namespace SlaughterHouseLib
                     cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", classId);
                     cmd.Parameters.AddWithValue("product_code", productCode);
-                    cmd.Parameters.AddWithValue("start_date", priceDate);
-                    cmd.Parameters.AddWithValue("end_date", priceDate);
+                    cmd.Parameters.AddWithValue("start_date", priceDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("end_date", priceDate.ToString("yyyy-MM-dd"));
                     da = new MySqlDataAdapter(cmd);
                     ds = new DataSet();
                     da.Fill(ds);
@@ -90,8 +90,8 @@ namespace SlaughterHouseLib
                     cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", 1);
                     cmd.Parameters.AddWithValue("product_code", productCode);
-                    cmd.Parameters.AddWithValue("start_date", priceDate);
-                    cmd.Parameters.AddWithValue("end_date", priceDate);
+                    cmd.Parameters.AddWithValue("start_date", priceDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("end_date", priceDate.ToString("yyyy-MM-dd"));
                     da = new MySqlDataAdapter(cmd);
                     ds = new DataSet();
                     da.Fill(ds);
@@ -169,8 +169,8 @@ namespace SlaughterHouseLib
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customerCode);
                     cmd.Parameters.AddWithValue("product_code", productCode);
-                    cmd.Parameters.AddWithValue("start_date", priceDate);
-                    cmd.Parameters.AddWithValue("end_date", priceDate);
+                    cmd.Parameters.AddWithValue("start_date", priceDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("end_date", priceDate.ToString("yyyy-MM-dd"));
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);
@@ -191,8 +191,8 @@ namespace SlaughterHouseLib
                             order by end_date asc LIMIT 1 ";
                     cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("product_code", productCode);
-                    cmd.Parameters.AddWithValue("start_date", priceDate);
-                    cmd.Parameters.AddWithValue("end_date", priceDate);
+                    cmd.Parameters.AddWithValue("start_date", priceDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("end_date", priceDate.ToString("yyyy-MM-dd"));
                     da = new MySqlDataAdapter(cmd);
                     ds = new DataSet();
                     da.Fill(ds);
@@ -238,8 +238,8 @@ namespace SlaughterHouseLib
                             order by dis.end_date asc LIMIT 1 ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customerCode);
-                    cmd.Parameters.AddWithValue("start_date", priceDate);
-                    cmd.Parameters.AddWithValue("end_date", priceDate);
+                    cmd.Parameters.AddWithValue("start_date", priceDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("end_date", priceDate.ToString("yyyy-MM-dd"));
                     var da = new MySqlDataAdapter(cmd);
                     var ds = new DataSet();
                     da.Fill(ds);

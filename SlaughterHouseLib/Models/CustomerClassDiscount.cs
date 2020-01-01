@@ -147,8 +147,8 @@ namespace SlaughterHouseLib.Models
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", customerClassDiscount.MasterClass.ClassId);
-                    cmd.Parameters.AddWithValue("start_date", customerClassDiscount.StartDate);
-                    cmd.Parameters.AddWithValue("end_date", customerClassDiscount.EndDate);
+                    cmd.Parameters.AddWithValue("start_date", customerClassDiscount.StartDate );
+                    cmd.Parameters.AddWithValue("end_date", customerClassDiscount.EndDate );
                     cmd.Parameters.AddWithValue("discount_per", customerClassDiscount.DiscountPer);
                     cmd.Parameters.AddWithValue("create_by", customerClassDiscount.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
@@ -177,8 +177,8 @@ namespace SlaughterHouseLib.Models
                                 And start_date = @start_date";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", customerClassDiscount.MasterClass.ClassId);
-                    cmd.Parameters.AddWithValue("start_date", customerClassDiscount.StartDate);
-                    cmd.Parameters.AddWithValue("end_date", customerClassDiscount.EndDate);
+                    cmd.Parameters.AddWithValue("start_date", customerClassDiscount.StartDate );
+                    cmd.Parameters.AddWithValue("end_date", customerClassDiscount.EndDate );
                     cmd.Parameters.AddWithValue("discount_per", customerClassDiscount.DiscountPer);
                     cmd.Parameters.AddWithValue("modified_by", customerClassDiscount.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
