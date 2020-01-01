@@ -196,13 +196,13 @@ namespace SlaughterHouseServer
                 {
                     throw new Exception(ConstErrorMsg.ProductNull);
                 }
-                txtDay.Text = (int.TryParse(txtDay.Text, out int tmpDay)) ? tmpDay.ToString() : "0";
-                txtUnitPrice.Text = (int.TryParse(txtUnitPrice.Text, out int tmpUnit)) ? tmpUnit.ToString() : "0";
-                if (Convert.ToInt16(txtDay.Text) == 0)
+                txtDay.Text = (string.IsNullOrEmpty(txtDay.Text)) ? "0" : txtDay.Text;
+                txtUnitPrice.Text = (string.IsNullOrEmpty(txtUnitPrice.Text)) ? "0" : txtUnitPrice.Text;
+                if (Convert.ToInt32(txtDay.Text) == 0)
                 {
                     throw new Exception(ConstErrorMsg.DayIsZero);
                 }
-                if (Convert.ToInt16(txtUnitPrice.Text) == 0)
+                if (Convert.ToDecimal(txtUnitPrice.Text) == 0)
                 {
                     throw new Exception(ConstErrorMsg.UnitPriceIsZero);
                 }

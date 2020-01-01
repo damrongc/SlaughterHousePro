@@ -144,7 +144,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-                txtDay.Text = (int.TryParse(txtDay.Text, out int tmpDay)) ? tmpDay.ToString() : "0";
+                txtDay.Text = (string.IsNullOrEmpty(txtDay.Text)) ? "0" : txtDay.Text;
                 if (Convert.ToInt16(txtDay.Text) == 0)
                 {
                     throw new Exception(ConstErrorMsg.DayIsZero);
