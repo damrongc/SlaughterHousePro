@@ -330,9 +330,21 @@ namespace SlaughterHouseServer
                             }
                             break;
                         case "Del":
-                            dtCusClass.Rows[e.RowIndex].Delete();
-                            dtCusClass.AcceptChanges();
-                            gv.Refresh();
+                            //dtCusClass.Rows[e.RowIndex].Delete();
+                            //dtCusClass.AcceptChanges();
+                            //gv.Refresh();
+                            var frmD = new Form_CustomerDetail();
+
+                            frmD.customerCode = txtCustomerCode.Text;
+                            frmD.customerName = txtCustomerName.Text;
+                            frmD.classId = Convert.ToInt32(dtCusClass.Rows[e.RowIndex][ConstColumns.CLASS_ID]);
+                            frmD.startDate = (DateTime)dtCusClass.Rows[e.RowIndex][ConstColumns.START_DATE];
+                            frmD.flagDelete = true;
+                            if (frmD.ShowDialog() == DialogResult.OK)
+                            {
+                                Load_CustomerClass();
+                                gv.Refresh();
+                            }
                             break;
                     }
                 }

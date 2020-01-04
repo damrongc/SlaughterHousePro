@@ -142,8 +142,8 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", CustomerClass.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("customer_code", CustomerClass.Customer.CustomerCode);
-                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate );
-                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate );
+                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate);
+                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate);
                     cmd.Parameters.AddWithValue("create_by", CustomerClass.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
                 }
@@ -172,8 +172,8 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", CustomerClass.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("customer_code", CustomerClass.Customer.CustomerCode);
-                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate );
-                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate );
+                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate);
                     cmd.Parameters.AddWithValue("modified_by", CustomerClass.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
                 }
@@ -182,6 +182,28 @@ namespace SlaughterHouseLib.Models
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+        public static bool Delete(CustomerClass CustomerClass)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"delete from customer_class
+                                WHERE customer_code = @customer_code
+                                  And start_date = @start_date";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("customer_code", CustomerClass.Customer.CustomerCode);
+                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate.ToString("yyyy-MM-dd"));
+                    var affRow = cmd.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

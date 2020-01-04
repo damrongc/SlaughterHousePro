@@ -9,6 +9,7 @@ namespace SlaughterHouseServer
         public string customerCode { get; set; }
         public string customerName { get; set; }
         public DateTime startDate { get; set; }
+        public bool flagDelete { get; set; }
 
         public Form_CustomerDetail()
         {
@@ -29,6 +30,7 @@ namespace SlaughterHouseServer
 
             dtpStartDate.ValueChanged += DtpStartDate_ValueChanged;
             BtnSave.Click += BtnSave_Click;
+            BtnDelete.Click += BtnDelete_Click;
 
             this.Load += Form_CustomerDetail_Load;
             this.Shown += Form_CustomerDetail_Shown;
@@ -132,6 +134,11 @@ namespace SlaughterHouseServer
                         dtpEndDate.Value = customerClass.EndDate;
 
                         dtpStartDate.Enabled = false;
+                        if (this.flagDelete == true)
+                        {
+                            BtnDelete.Visible = true;
+                            BtnSave.Visible = false;
+                        }
                     }
                 }
             }
@@ -153,6 +160,34 @@ namespace SlaughterHouseServer
             catch
             {
                 throw;
+            }
+        }
+
+        private void BtnDelete_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                var customerClass = new CustomerClass
+                {
+                    Customer = new Customer
+                    {
+                        CustomerCode = this.customerCode
+                    },
+                    MasterClass = new MasterClass
+                    {
+                        ClassId = Convert.ToInt32(cboMasterClass.SelectedValue)
+                    },
+                    StartDate = dtpStartDate.Value,
+                    ModifiedBy = "system",
+                };
+                CustomerClassController.Delete(customerClass);
+                MessageBox.Show("ลบข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

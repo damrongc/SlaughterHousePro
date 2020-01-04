@@ -42,6 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtCustomerName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.BtnDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label9
@@ -128,7 +129,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(132, 259);
+            this.BtnSave.Location = new System.Drawing.Point(132, 256);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(173, 36);
             this.BtnSave.TabIndex = 69;
@@ -172,15 +173,33 @@
             this.label2.TabIndex = 72;
             this.label2.Text = "ชื่อลูกค้า";
             // 
+            // BtnDelete
+            // 
+            this.BtnDelete.BackColor = System.Drawing.Color.Tomato;
+            this.BtnDelete.FlatAppearance.BorderSize = 0;
+            this.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDelete.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDelete.ForeColor = System.Drawing.Color.White;
+            this.BtnDelete.Image = ((System.Drawing.Image)(resources.GetObject("BtnDelete.Image")));
+            this.BtnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnDelete.Location = new System.Drawing.Point(132, 264);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(173, 36);
+            this.BtnDelete.TabIndex = 74;
+            this.BtnDelete.Text = "ลบข้อมูล";
+            this.BtnDelete.UseVisualStyleBackColor = false;
+            this.BtnDelete.Visible = false;
+            // 
             // Form_CustomerDetail
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(719, 321);
+            this.Controls.Add(this.BtnSave);
+            this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.txtCustomerName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtCustomerCode);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.dtpEndDate);
             this.Controls.Add(this.txtDay);
@@ -215,5 +234,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCustomerName;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button BtnDelete;
     }
 }
