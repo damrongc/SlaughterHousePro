@@ -41,7 +41,7 @@ namespace SlaughterHouseLib.Models
                     }
                     sql += @" and cls.class_id = mc.class_id
                               and cls.customer_code = c.customer_code
-                             order by cls.start_date desc, cls.end_date, cls.class_id ";
+                             order by cls.start_date, cls.end_date, cls.class_id ";
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customerCode);

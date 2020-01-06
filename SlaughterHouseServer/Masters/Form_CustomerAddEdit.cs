@@ -150,9 +150,6 @@ namespace SlaughterHouseServer
                 txtCustomerName.Focus();
             }
         }
-
-
-
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
@@ -268,8 +265,6 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
         #region CustomerClass
         private void BtnAddOrderItem_Click(object sender, System.EventArgs e)
         {
@@ -284,7 +279,6 @@ namespace SlaughterHouseServer
 
             }
         }
-
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             //gv.Columns["seq"].HeaderText = "ลำดับ";

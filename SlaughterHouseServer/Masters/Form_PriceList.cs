@@ -174,7 +174,7 @@ namespace SlaughterHouseServer
         //    var coll = ProductPriceController.GetAllProductPrices(dtpStartDate.Value, cboProduct.SelectedValue.ToString());
         //    gv.DataSource = coll;
         //}
-        #endregion !!!NotUse 
+        #endregion !!!NotUse
 
         #region ### CustomerClass
         private void BtnAddCustomerClass_Click(object sender, System.EventArgs e)
@@ -252,6 +252,7 @@ namespace SlaughterHouseServer
             gvCustomerClass.Columns[ConstColumns.ClassId].Visible = false;
 
             gvCustomerClass.Columns[ConstColumns.UnitPrice].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvCustomerClass.Columns[ConstColumns.Day].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             gvCustomerClass.Columns[ConstColumns.UnitPrice].DefaultCellStyle.Format = "N2";
             gvCustomerClass.Columns[ConstColumns.Day].DefaultCellStyle.Format = "N0";
@@ -264,7 +265,7 @@ namespace SlaughterHouseServer
 
 
         }
-        #endregion 
+        #endregion
 
         #region ### Customer
         private void BtnAddCv_Click(object sender, System.EventArgs e)
@@ -340,6 +341,7 @@ namespace SlaughterHouseServer
 
 
             gvCv.Columns[ConstColumns.UnitPrice].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvCv.Columns[ConstColumns.Day].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             gvCv.Columns[ConstColumns.UnitPrice].DefaultCellStyle.Format = "N2";
             gvCv.Columns[ConstColumns.Day].DefaultCellStyle.Format = "N0";
