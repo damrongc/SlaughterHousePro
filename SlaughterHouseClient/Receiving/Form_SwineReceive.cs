@@ -628,10 +628,10 @@ namespace SlaughterHouseClient.Receiving
                 var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
-            finally
-            {
-                btnAcceptWeight.Enabled = true;
-            }
+            //finally
+            //{
+            //    btnAcceptWeight.Enabled = true;
+            //}
         }
     }
 }

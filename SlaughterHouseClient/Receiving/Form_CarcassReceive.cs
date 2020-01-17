@@ -28,6 +28,7 @@ namespace SlaughterHouseClient.Receiving
         private int stableTarget = 0;
         private int displayTime = 3;
         private int scaleDivision = 100;
+        private int captureTime = 10;
 
 
         FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
@@ -104,6 +105,7 @@ namespace SlaughterHouseClient.Receiving
                 stableTarget = MySettings["StableTarget"].ToString().ToInt16();
                 displayTime = MySettings["DisplayTime"].ToString().ToInt16();
                 scaleDivision = MySettings["Division"].ToString().ToInt16();
+                captureTime = MySettings["CaptureTime"].ToString().ToInt16();
                 if (stableTarget == 0)
                 {
                     btnAcceptWeight.Visible = true;
@@ -136,7 +138,6 @@ namespace SlaughterHouseClient.Receiving
                 double num = 0.0;
                 if (DataInvoke.Length == 40)
                 {
-
                     //int scaleDecimal = DataInvoke.Substring(20, 2).ToInt32();
                     //int scaleDivision = (int)Math.Round(Math.Pow(10.0, unchecked(scaleDecimal)));
 
@@ -155,7 +156,6 @@ namespace SlaughterHouseClient.Receiving
 
                     //double scaleDecimal = DataInvoke.Substring(22, 2).ToDouble();
                     //double scaleDivision = Math.Pow(10.0, scaleDecimal);
-
                     //string strFormatWt = scaleDecimal == 0 ? "#0" : "#0." + "0".PadRight(scaleDecimal, '0');
                     short stateOfScale = DataInvoke.Substring(6, 1).ToInt16();
                     short stableWt = DataInvoke.Substring(5, 1).ToInt16();
@@ -175,26 +175,28 @@ namespace SlaughterHouseClient.Receiving
                             num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
                         lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
-                        if (num > 0 && num > product.min_weight.ToString().ToDouble())
+                        if (isStart && isZero)
                         {
-                            if (stableWt == 0)
-                                stableCount += 1;
-                            else
-                                stableCount = 0;
-                            lblStable.Text = stableCount.ToString();
-                            lblStable.Refresh();
-
-                            if (stableCount >= stableTarget)
+                            if (num > 0 && num > product.min_weight.ToString().ToDouble())
                             {
-                                lockWeight = true;
-                                isZero = false;
+                                if (stableWt == 0)
+                                    stableCount += 1;
+                                else
+                                    stableCount = 0;
 
-                                ProcessData();
+                                lblStable.Text = stableCount.ToString();
+                                lblStable.Refresh();
+
+                                if (stableCount >= stableTarget)
+                                {
+                                    lockWeight = true;
+                                    ProcessData();
+                                }
                             }
                         }
+
                     }
                 }
-
             }
         }
 
@@ -202,41 +204,40 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                if (isStart && isZero)
+                isZero = false;
+                btnAcceptWeight.Enabled = false;
+                decimal scaleWeight = lblWeight.Text.ToDecimal();
+
+                if (scaleWeight < 0)
                 {
-                    btnAcceptWeight.Enabled = false;
-                    decimal scaleWeight = lblWeight.Text.ToDecimal();
-
-                    if (scaleWeight < 0)
-                    {
-                        throw new Exception(string.Format("น้ำหนัก น้อยกว่า 0"));
-                    }
-
-                    if (scaleWeight < product.min_weight)
-                    {
-                        throw new Exception(string.Format("น้ำหนัก น้อยกว่า Min: {0}", product.min_weight));
-                    }
-                    if (scaleWeight > product.max_weight)
-                    {
-                        throw new Exception(string.Format("น้ำหนัก มากกว่า Max: {0}", product.max_weight));
-                    }
-
-                    lblMessage.Text = Constants.PROCESSING;
-                    SaveData();
-                    var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", displayTime, Color.Green, animationMethod, animationDirection);
-                    toastNotification.Show();
-                    LoadData();
-
-                    lblLastWgh.Text = lblWeight.Text;
-                    isZero = false;
-                    //clear weight
-                    lockWeight = false;
-                    timerMinWeight.Enabled = true;
+                    throw new Exception(string.Format("น้ำหนัก น้อยกว่า 0"));
                 }
+
+                if (scaleWeight < product.min_weight)
+                {
+                    throw new Exception(string.Format("น้ำหนัก น้อยกว่า Min: {0}", product.min_weight));
+                }
+                if (scaleWeight > product.max_weight)
+                {
+                    throw new Exception(string.Format("น้ำหนัก มากกว่า Max: {0}", product.max_weight));
+                }
+
+                lblMessage.Text = Constants.PROCESSING;
+                SaveData();
+                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", displayTime, Color.Green, animationMethod, animationDirection);
+                toastNotification.Show();
+                LoadData();
+
+                lblLastWgh.Text = lblWeight.Text;
+                //clear weight
+                lockWeight = false;
+                stableCount = 0;
+                timerMinWeight.Enabled = true;
+
+
             }
             catch (Exception ex)
             {
-
                 var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
@@ -489,7 +490,23 @@ namespace SlaughterHouseClient.Receiving
                     //    && p.seq == seq).Select(p => new { p.receive_qty, p.receive_wgh }).SingleOrDefault();
 
                     seq += 1;
-                    string stock_no = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).Select(p => p.stock_no).SingleOrDefault();
+                    //string stock_no = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).Select(p => p.stock_no).SingleOrDefault();
+
+                    string stock_no = "";
+                    var stockDocument = (from p in db.document_generate where p.document_type == Constants.STK select p).SingleOrDefault();
+                    //check stock_item_running
+                    var stockItemRunning = db.stock_item_running.Where(p => p.doc_no.Equals(receive.receive_no)).SingleOrDefault();
+                    if (stockItemRunning == null)
+                    {
+                        //get new stock doc no
+                        stock_no = Constants.STK + stockDocument.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
+                    }
+                    else
+                    {
+                        stock_no = stockItemRunning.stock_no;
+
+                    }
+
 
                     using (DbContextTransaction transaction = db.Database.BeginTransaction())
                     {
@@ -553,6 +570,33 @@ namespace SlaughterHouseClient.Receiving
 
                             receive.carcass_qty += item.receive_qty;
                             receive.carcass_wgh += item.receive_wgh;
+
+
+                            if (stockItemRunning == null)
+                            {
+                                //insert stock_item_running
+                                var newStockItem = new stock_item_running
+                                {
+                                    doc_no = receive.receive_no,
+                                    stock_no = stock_no,
+                                    stock_item = 1,
+                                    create_by = item.create_by
+                                };
+
+                                db.stock_item_running.Add(newStockItem);
+
+                                //update document_generate
+                                stockDocument.running += 1;
+                                db.Entry(stockDocument).State = System.Data.Entity.EntityState.Modified;
+                            }
+                            else
+                            {
+                                //update stock_item_running
+                                stockItemRunning.stock_item += 1;
+                                db.Entry(stockItemRunning).State = System.Data.Entity.EntityState.Modified;
+                            }
+
+
                             db.SaveChanges();
                             transaction.Commit();
                         }

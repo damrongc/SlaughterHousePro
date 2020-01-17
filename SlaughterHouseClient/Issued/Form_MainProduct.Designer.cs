@@ -290,6 +290,7 @@
             this.gv.MultiSelect = false;
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
+            this.gv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv.Size = new System.Drawing.Size(994, 516);
             this.gv.TabIndex = 11;

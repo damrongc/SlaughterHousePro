@@ -43,6 +43,8 @@ namespace SlaughterHouseClient
                     cboMsgDisplayTime.Text = MySettings["DisplayTime"].ToString();
                 if (MySettings["Division"] != null)
                     cboDivision.Text = MySettings["Division"].ToString();
+                if (MySettings["CaptureTime"] != null)
+                    cboCaptureTime.Text = MySettings["CaptureTime"].ToString();
             }
         }
 
@@ -53,6 +55,7 @@ namespace SlaughterHouseClient
             MySettings["StableTarget"] = cboStableTarget.Text;
             MySettings["DisplayTime"] = cboMsgDisplayTime.Text;
             MySettings["Division"] = cboDivision.Text;
+            MySettings["CaptureTime"] = cboCaptureTime.Text;
             MySettings.Save();
 
         }

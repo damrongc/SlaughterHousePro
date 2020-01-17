@@ -145,10 +145,7 @@ namespace SlaughterHouseClient.Receiving
         {
             if (lockWeight == false)
             {
-
                 double num = 0.0;
-
-
                 if (DataInvoke.Length == 40)
                 {
 
@@ -191,24 +188,27 @@ namespace SlaughterHouseClient.Receiving
                             num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
                         lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
-                        if (num > 0 && num > product.min_weight.ToString().ToDouble())
+
+                        if (isStart && isZero)
                         {
-                            if (stableWt == 0)
-                                stableCount += 1;
-                            else
-                                stableCount = 0;
-                            lblStable.Text = stableCount.ToString();
-                            lblStable.Refresh();
+                            if (num > 0 && num > product.min_weight.ToString().ToDouble())
+                            {
+                                if (stableWt == 0)
+                                    stableCount += 1;
+                                else
+                                    stableCount = 0;
+                                lblStable.Text = stableCount.ToString();
+                                lblStable.Refresh();
 
 
+                            }
+                            if (stableCount >= Constants.STABLE_TARGET.ToInt16())
+                            {
+                                lockWeight = true;
+                                ProcessData();
+                            }
                         }
-                        if (stableCount >= Constants.STABLE_TARGET.ToInt16())
-                        {
-                            lockWeight = true;
-                            isZero = false;
 
-                            ProcessData();
-                        }
                     }
 
 
@@ -221,37 +221,35 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                if (isStart && isZero)
+                isZero = false;
+                btnAcceptWeight.Enabled = false;
+                decimal scaleWeight = lblWeight.Text.ToDecimal();
+
+                if (scaleWeight < 0)
                 {
-                    btnAcceptWeight.Enabled = false;
-                    decimal scaleWeight = lblWeight.Text.ToDecimal();
-
-                    if (scaleWeight < 0)
-                    {
-                        throw new Exception(string.Format("น้ำหนัก น้อยกว่า 0"));
-                    }
-
-                    if (scaleWeight < product.min_weight)
-                    {
-                        throw new Exception(string.Format("น้ำหนัก น้อยกว่า Min: {0}", product.min_weight));
-                    }
-                    if (scaleWeight > product.max_weight)
-                    {
-                        throw new Exception(string.Format("น้ำหนัก มากกว่า Max: {0}", product.max_weight));
-                    }
-
-                    lblMessage.Text = Constants.PROCESSING;
-                    SaveData();
-                    var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", displayTime, Color.Green, animationMethod, animationDirection);
-                    toastNotification.Show();
-                    LoadData();
-
-                    lblLastWgh.Text = lblWeight.Text;
-                    isZero = false;
-                    //clear weight
-                    lockWeight = false;
-                    timerMinWeight.Enabled = true;
+                    throw new Exception(string.Format("น้ำหนัก น้อยกว่า 0"));
                 }
+
+                if (scaleWeight < product.min_weight)
+                {
+                    throw new Exception(string.Format("น้ำหนัก น้อยกว่า Min: {0}", product.min_weight));
+                }
+                if (scaleWeight > product.max_weight)
+                {
+                    throw new Exception(string.Format("น้ำหนัก มากกว่า Max: {0}", product.max_weight));
+                }
+
+                lblMessage.Text = Constants.PROCESSING;
+                SaveData();
+                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", displayTime, Color.Green, animationMethod, animationDirection);
+                toastNotification.Show();
+                LoadData();
+
+                lblLastWgh.Text = lblWeight.Text;
+                //clear weight
+                lockWeight = false;
+                stableCount = 0;
+                timerMinWeight.Enabled = true;
 
 
             }
@@ -668,14 +666,15 @@ namespace SlaughterHouseClient.Receiving
                 btnPrint.Enabled = false;
                 DataTable dt = Helper.GetBarcode(barcode_no);
                 doc.SetDataSource(dt);
-                if (System.Diagnostics.Debugger.IsAttached)
-                {
-                    Console.WriteLine("Mode=Debug");
-                }
-                else
-                {
-                    doc.PrintToPrinter(1, true, 0, 0);
-                }
+                doc.PrintToPrinter(1, true, 0, 0);
+
+                //if (System.Diagnostics.Debugger.IsAttached)
+                //{
+                //    Console.WriteLine("Mode=Debug");
+                //}
+                //else
+                //{
+                //}
 
 
 

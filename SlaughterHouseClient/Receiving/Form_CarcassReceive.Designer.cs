@@ -368,7 +368,7 @@
             this.plSimulator.Controls.Add(this.txtSimWeight);
             this.plSimulator.Controls.Add(this.btnZero);
             this.plSimulator.Font = new System.Drawing.Font("Kanit", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.plSimulator.Location = new System.Drawing.Point(320, 391);
+            this.plSimulator.Location = new System.Drawing.Point(773, 90);
             this.plSimulator.Name = "plSimulator";
             this.plSimulator.Size = new System.Drawing.Size(238, 60);
             this.plSimulator.TabIndex = 50;

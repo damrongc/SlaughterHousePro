@@ -537,7 +537,7 @@ namespace SlaughterHouseLib
                                     byproduct_white_wgh,
                                     b.farm_name,
                                     c.breeder_name,
-                                    (SELECT std_yield from product WHERE product_code =:product_code) as std_yield,
+                                    (SELECT std_yield from product WHERE product_code =@product_code) as std_yield,
                                     (carcass_wgh + head_wgh+byproduct_red_wgh+byproduct_white_wgh) as sum_wgh,
 	                                ((carcass_wgh + head_wgh+byproduct_red_wgh+byproduct_white_wgh) *100)/factory_wgh as yield
                                 FROM
