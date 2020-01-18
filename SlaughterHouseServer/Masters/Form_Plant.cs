@@ -37,6 +37,12 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.ProductionDate].Visible = false;
             gv.Columns[ConstColumns.PlantName].HeaderText = "ชื่อโรงงาน";
             gv.Columns[ConstColumns.Address].HeaderText = "ที่อยู่";
+            gv.Columns[ConstColumns.Active].HeaderText = "ใช้งาน";
+
+            gv.Columns[ConstColumns.CreateAt].HeaderText = "วันเวลาสร้าง";
+            gv.Columns[ConstColumns.CreateBy].HeaderText = "ผู้สร้าง";
+            gv.Columns[ConstColumns.ModifiedAt].HeaderText = "วันเวลาแก้ไข";
+            gv.Columns[ConstColumns.ModifiedBy].HeaderText = "ผู้แก้ไข";
 
             gv.Columns[ConstColumns.CreateAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             gv.Columns[ConstColumns.ModifiedAt].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";

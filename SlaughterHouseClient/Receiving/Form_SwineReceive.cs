@@ -114,7 +114,6 @@ namespace SlaughterHouseClient.Receiving
             }
         }
 
-
         string InputData = String.Empty;
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -322,8 +321,12 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                if (!serialPort1.IsOpen)
-                    serialPort1.Open();
+                if (System.Diagnostics.Debugger.IsAttached == false)
+                {
+                    if (!serialPort1.IsOpen)
+                        serialPort1.Open();
+                }
+
 
                 isStart = true;
                 isZero = true;
@@ -334,7 +337,6 @@ namespace SlaughterHouseClient.Receiving
                 btnStart.Enabled = false;
                 btnStop.Enabled = true;
                 btnAcceptWeight.Enabled = true;
-                lblMessage.Text = Constants.WEIGHT_WAITING;
             }
             catch (Exception ex)
             {
@@ -348,8 +350,11 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                if (serialPort1.IsOpen)
-                    serialPort1.Close();
+                if (System.Diagnostics.Debugger.IsAttached == false)
+                {
+                    if (serialPort1.IsOpen)
+                        serialPort1.Close();
+                }
 
                 stableCount = 0;
                 isStart = false;
@@ -505,15 +510,15 @@ namespace SlaughterHouseClient.Receiving
         {
             lblWeight.Text = txtSimWeight.Text.ToDecimal().ToFormat2Decimal();
 
-            isStart = true;
-            isZero = true;
-            lblMessage.Text = Constants.WEIGHT_WAITING;
+            //isStart = true;
+            //isZero = true;
+            //lblMessage.Text = Constants.WEIGHT_WAITING;
 
-            btnReceiveNo.Enabled = false;
-            btnStart.Enabled = false;
-            btnStop.Enabled = true;
-            btnAcceptWeight.Enabled = true;
-            lblMessage.Text = Constants.WEIGHT_WAITING;
+            //btnReceiveNo.Enabled = false;
+            //btnStart.Enabled = false;
+            //btnStop.Enabled = true;
+            //btnAcceptWeight.Enabled = true;
+            //lblMessage.Text = Constants.WEIGHT_WAITING;
 
             //ProcessData();
         }
@@ -521,6 +526,7 @@ namespace SlaughterHouseClient.Receiving
         private void btnZero_Click(object sender, EventArgs e)
         {
             lblWeight.Text = 0m.ToFormat2Decimal();
+            isZero = true;
         }
 
         private void BtnTareWeight_Click(object sender, EventArgs e)
@@ -551,7 +557,7 @@ namespace SlaughterHouseClient.Receiving
                 stableCount = 0;
                 lblStable.Text = stableCount.ToString();
                 timerMinWeight.Enabled = false;
-                //btnAcceptWeight.Enabled = true;
+                btnAcceptWeight.Enabled = true;
 
                 sexFlag = "F";
                 btnFemale.BackColor = ColorTranslator.FromHtml("#459CDB");
@@ -594,11 +600,12 @@ namespace SlaughterHouseClient.Receiving
 
         private void BtnAcceptWeight_Click(object sender, EventArgs e)
         {
-            btnAcceptWeight.Enabled = false;
+
             try
             {
                 if (isStart && isZero)
                 {
+
                     decimal scaleWeight = lblWeight.Text.ToDecimal();
                     if (scaleWeight < product.min_weight)
                     {
@@ -608,7 +615,7 @@ namespace SlaughterHouseClient.Receiving
                     {
                         throw new Exception(string.Format("น้ำหนักต้อง น้อยกว่า {0}", product.max_weight));
                     }
-
+                    btnAcceptWeight.Enabled = false;
                     lblMessage.Text = Constants.PROCESSING;
                     SaveData();
                     var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำหมูออก", displayTime, Color.Green, animationMethod, animationDirection);
@@ -619,19 +626,12 @@ namespace SlaughterHouseClient.Receiving
                     lockWeight = false;
                     timerMinWeight.Enabled = true;
                 }
-
-
             }
             catch (Exception ex)
             {
-
                 var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
                 toastNotification.Show();
             }
-            //finally
-            //{
-            //    btnAcceptWeight.Enabled = true;
-            //}
         }
     }
 }

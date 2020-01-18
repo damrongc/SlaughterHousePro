@@ -183,7 +183,7 @@ namespace SlaughterHouseLib
                         Transaction = tr
                     };
                     cmd.Parameters.AddWithValue("invoice_no", Invoice.InvoiceNo);
-                    cmd.Parameters.AddWithValue("invoice_date", Invoice.InvoiceDate);
+                    cmd.Parameters.AddWithValue("invoice_date", Invoice.InvoiceDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("ref_document_no", Invoice.RefDocumentNo);
                     cmd.Parameters.AddWithValue("receipt_no", Invoice.ReceiptNo);
                     cmd.Parameters.AddWithValue("customer_code", Invoice.Customer.CustomerCode);
@@ -294,7 +294,7 @@ namespace SlaughterHouseLib
                         Transaction = tr
                     };
                     cmd.Parameters.AddWithValue("invoice_no", Invoice.InvoiceNo);
-                    cmd.Parameters.AddWithValue("invoice_date", Invoice.InvoiceDate);
+                    cmd.Parameters.AddWithValue("invoice_date", Invoice.InvoiceDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("ref_document_no", Invoice.RefDocumentNo);
                     cmd.Parameters.AddWithValue("receipt_no", Invoice.ReceiptNo);
                     cmd.Parameters.AddWithValue("customer_code", Invoice.Customer.CustomerCode);

@@ -3,13 +3,13 @@ using System;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
-    public partial class Form_CustomerPriceAddEdit : Form
+    public partial class Form_CustomerClassPriceAddEdit : Form
     {
-        public string customerCode { get; set; }
+        public int classId { get; set; }
         public string productCode { get; set; }
         public DateTime startDate { get; set; }
 
-        public Form_CustomerPriceAddEdit()
+        public Form_CustomerClassPriceAddEdit()
         {
             InitializeComponent();
             UserSettingsComponent();
@@ -21,25 +21,23 @@ namespace SlaughterHouseServer
             this.Shown += Form_Shown;
 
             //KeyDown
-            cboCustomer.KeyDown += CboCustomer_KeyDown;
+            cboCustomerClass.KeyDown += CboCustomerClass_KeyDown;
             dtpStartDate.KeyDown += DtpStartDate_KeyDown;
             txtDay.KeyDown += TxtDay_KeyDown;
             txtUnitPrice.KeyDown += TxtUnitPrice_KeyDown;
 
-
-
             txtDay.KeyPress += TxtDay_KeyPress;
-            txtUnitPrice.KeyPress += TxtDay_KeyPress;
+            txtUnitPrice.KeyPress += TxtUnitPrice_KeyPress;
             //Click
             btnLovProduct.Click += BtnLovProduct_Click;
         }
         private void Form_Shown(object sender, System.EventArgs e)
         {
-            cboCustomer.Focus();
+            cboCustomerClass.Focus();
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
-            LoadCustomer();
+            LoadCustomerClass();
             LoadData();
         }
         private void DtpStartDate_KeyDown(object sender, KeyEventArgs e)
@@ -50,15 +48,16 @@ namespace SlaughterHouseServer
             }
         }
 
-
         #region Event Focus, KeyDown
-        private void CboCustomer_KeyDown(object sender, KeyEventArgs e)
+
+        private void CboCustomerClass_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 btnLovProduct.Focus();
             }
         }
+
         private void TxtDay_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -66,7 +65,6 @@ namespace SlaughterHouseServer
                 txtUnitPrice.Focus();
             }
         }
-
         private void TxtUnitPrice_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -74,7 +72,6 @@ namespace SlaughterHouseServer
                 BtnSaveAndNew.Focus();
             }
         }
-
         private void TxtDay_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
@@ -91,14 +88,6 @@ namespace SlaughterHouseServer
                 return;
             }
         }
-        private void TxtAddress_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                BtnSaveAndNew.Focus();
-            }
-        }
-
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
 
@@ -148,7 +137,7 @@ namespace SlaughterHouseServer
                 Save();
                 MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                cboCustomer.SelectedIndex = 0;
+                cboCustomerClass.SelectedIndex = 0;
                 this.productCode = "";
                 txtProductName.Text = "";
                 txtUnitPrice.Text = "0";
@@ -166,26 +155,20 @@ namespace SlaughterHouseServer
 
         #endregion
 
-        private void LoadCustomer()
-        {
-            var coll = CustomerController.GetAllCustomers();
-            cboCustomer.DisplayMember = "CustomerName";
-            cboCustomer.ValueMember = "CustomerCode";
-            cboCustomer.DataSource = coll;
-        }
+
         private void LoadData()
         {
             if (String.IsNullOrEmpty(this.productCode) == false)
             {
                 btnLovProduct.Enabled = false;
                 txtProductName.Enabled = false;
-                cboCustomer.Enabled = false;
+                cboCustomerClass.Enabled = false;
             }
 
-            CustomerPrice customerPrice = CustomerPriceController.GetCustomerPrice(this.customerCode, this.productCode, this.startDate);
+            CustomerClassPrice customerPrice = CustomerClassPriceController.GetCustomerClassPrice(this.classId, this.productCode, this.startDate);
             if (customerPrice != null)
             {
-                cboCustomer.SelectedValue = customerPrice.Customer.CustomerCode;
+                cboCustomerClass.SelectedValue = customerPrice.MasterClass.ClassId;
 
                 this.productCode = customerPrice.Product.ProductCode;
                 txtProductName.Text = customerPrice.Product.ProductName;
@@ -196,6 +179,13 @@ namespace SlaughterHouseServer
                 dtpStartDate.Enabled = false;
                 BtnSaveAndNew.Visible = false;
             }
+        }
+
+        private void LoadCustomerClass()
+        {
+            cboCustomerClass.DataSource = MasterClassController.GetAllMasterClassCombobox();
+            cboCustomerClass.ValueMember = "ClassId";
+            cboCustomerClass.DisplayMember = "ClassName";
         }
 
         private void CheckBeforeSave()
@@ -227,11 +217,11 @@ namespace SlaughterHouseServer
         {
             try
             {
-                var customerPrice = new CustomerPrice
+                var customerClassPrice = new CustomerClassPrice
                 {
-                    Customer = new Customer
+                    MasterClass = new MasterClass
                     {
-                        CustomerCode = cboCustomer.SelectedValue.ToString()
+                        ClassId = Convert.ToInt32(cboCustomerClass.SelectedValue)
                     },
                     Product = new Product
                     {
@@ -246,13 +236,13 @@ namespace SlaughterHouseServer
                     ModifiedBy = "system"
                 };
 
-                if (btnLovProduct.Enabled == true && cboCustomer.Enabled == true)
+                if (btnLovProduct.Enabled == true && cboCustomerClass.Enabled == true)
                 {
-                    CustomerPriceController.Insert(customerPrice);
+                    CustomerClassPriceController.Insert(customerClassPrice);
                 }
                 else
                 {
-                    CustomerPriceController.Update(customerPrice);
+                    CustomerClassPriceController.Update(customerClassPrice);
                 }
             }
             catch (Exception)

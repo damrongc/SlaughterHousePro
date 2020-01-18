@@ -20,7 +20,7 @@ namespace SlaughterHouseServer
         }
         private void UserSettingsComponent()
         {
-            LoadCustomerClass();
+            LoadTruckType();
             this.Load += Form_Load;
             this.Shown += Form_Shown;
             txtDriver.KeyDown += TxtDriver_KeyDown;
@@ -115,7 +115,7 @@ namespace SlaughterHouseServer
             }
         }
 
-        private void LoadCustomerClass()
+        private void LoadTruckType()
         {
             comboxTruckType.DataSource = TruckTypeController.GetAllTruckType();
             comboxTruckType.ValueMember = "TruckTypeId";

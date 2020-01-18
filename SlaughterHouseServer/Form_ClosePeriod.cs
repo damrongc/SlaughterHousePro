@@ -18,7 +18,7 @@ namespace SlaughterHouseServer
         private void UserSettingsComponent()
         {
             //gv.CellContentClick += Gv_CellContentClick;
-             gv.DataBindingComplete += Gv_DataBindingComplete;
+            gv.DataBindingComplete += Gv_DataBindingComplete;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
             gv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
@@ -37,7 +37,7 @@ namespace SlaughterHouseServer
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             gv.Columns[ConstColumns.QTY].HeaderText = "ปริมาณ";
-            gv.Columns[ConstColumns.WGH ].HeaderText = "น้ำหนัก";
+            gv.Columns[ConstColumns.WGH].HeaderText = "น้ำหนัก";
             gv.Columns[ConstColumns.STOCK_NO].HeaderText = "เลขที่สต็อก";
             gv.Columns[ConstColumns.STOCK_ITEM].HeaderText = "ลำดับ";
             gv.Columns[ConstColumns.LOCATION_NAME].HeaderText = "คลังสินค้า";
@@ -45,7 +45,7 @@ namespace SlaughterHouseServer
             gv.Columns[ConstColumns.PRODUCT_NAME].HeaderText = "สินค้า";
             gv.Columns[ConstColumns.LOT_NO].HeaderText = "Lot No.";
 
-            gv.Columns[ConstColumns.STOCK_DATE].Visible = false ;
+            gv.Columns[ConstColumns.STOCK_DATE].Visible = false;
             gv.Columns[ConstColumns.PRODUCT_CODE].Visible = false;
 
             gv.Columns[ConstColumns.QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;

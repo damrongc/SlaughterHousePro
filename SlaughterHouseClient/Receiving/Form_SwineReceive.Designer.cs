@@ -140,7 +140,7 @@
             this.lblWeight.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblWeight.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.lblWeight.Font = new System.Drawing.Font("Kanit", 120F);
+            this.lblWeight.Font = new System.Drawing.Font("Kanit", 110F);
             this.lblWeight.Location = new System.Drawing.Point(459, 90);
             this.lblWeight.Name = "lblWeight";
             this.lblWeight.Size = new System.Drawing.Size(553, 235);

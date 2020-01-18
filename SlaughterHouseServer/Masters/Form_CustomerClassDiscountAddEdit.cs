@@ -31,7 +31,7 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
-            LoadCustomerClass();
+            LoadMasterClass();
             LoadData();
         }
         private void DtpStartDate_KeyDown(object sender, KeyEventArgs e)
@@ -120,7 +120,7 @@ namespace SlaughterHouseServer
                 txtDiscountPer.Text = "0";
                 txtDay.Text = "0";
                 dtpStartDate.Value = DateTime.Now;
-                LoadCustomerClass();
+                LoadMasterClass();
                 LoadData();
             }
             catch (System.Exception ex)
@@ -137,14 +137,14 @@ namespace SlaughterHouseServer
         {
             if (this.classId > 0)
             {
-                comboxCustomerClass.Enabled = false;
+                comboxMasterClass.Enabled = false;
                 dtpStartDate.Enabled = false;
             }
             CustomerClassDiscount customerClassDiscount = CustomerClassDiscountController.GetCustomerClassDiscount(this.classId, this.startDate);
             if (customerClassDiscount != null)
             {
-                this.classId = customerClassDiscount.CustomerClass.ClassId;
-                comboxCustomerClass.SelectedValue = customerClassDiscount.CustomerClass.ClassId;
+                this.classId = customerClassDiscount.MasterClass.ClassId;
+                comboxMasterClass.SelectedValue = customerClassDiscount.MasterClass.ClassId;
                 txtDiscountPer.Text = customerClassDiscount.DiscountPer.ToString();
                 txtDay.Text = customerClassDiscount.Day.ToString();
 
@@ -154,11 +154,11 @@ namespace SlaughterHouseServer
             }
         }
 
-        private void LoadCustomerClass()
+        private void LoadMasterClass()
         {
-            comboxCustomerClass.DataSource = CustomerClassController.GetAllCustomerClass();
-            comboxCustomerClass.ValueMember = "ClassId";
-            comboxCustomerClass.DisplayMember = "ClassName";
+            comboxMasterClass.DataSource = MasterClassController.GetAllMasterClassCombobox();
+            comboxMasterClass.ValueMember = "ClassId";
+            comboxMasterClass.DisplayMember = "ClassName";
         }
 
         private void SaveProductPrice()
@@ -167,9 +167,9 @@ namespace SlaughterHouseServer
             {
                 var customerClassDiscount = new CustomerClassDiscount
                 {
-                    CustomerClass = new CustomerClass
+                    MasterClass = new MasterClass
                     {
-                        ClassId = Convert.ToInt32(comboxCustomerClass.SelectedValue)
+                        ClassId = Convert.ToInt32(comboxMasterClass.SelectedValue)
                     },
                     StartDate = dtpStartDate.Value,
                     EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
@@ -179,7 +179,7 @@ namespace SlaughterHouseServer
                     CreateBy = "system",
                     ModifiedBy = "system"
                 };
-                if (comboxCustomerClass.Enabled == true && dtpStartDate.Enabled == true)
+                if (comboxMasterClass.Enabled == true && dtpStartDate.Enabled == true)
                 {
                     CustomerClassDiscountController.Insert(customerClassDiscount);
                 }

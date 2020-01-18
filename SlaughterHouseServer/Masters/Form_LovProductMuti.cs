@@ -11,6 +11,9 @@ namespace SlaughterHouseServer
     public partial class Form_LovProductMuti : Form
     {
         public string orderNo { get; set; }
+        public string customerCode { get; set; }
+        public int classId { get; set; }
+        public DateTime requestDate { get; set; }
         //public string productSlipNo { get; set; }
 
         DataTable dtProduct;
@@ -174,7 +177,7 @@ namespace SlaughterHouseServer
             dtProduct = new DataTable();
             if (forSaleFlag == true)
             {
-                dtProduct = ProductController.GetProductsForSale(comboxProductGroup.SelectedValue.ToString(), txtProductCode.Text, txtProductName.Text);
+                dtProduct = ProductController.GetProductsForSale(comboxProductGroup.SelectedValue.ToString(), txtProductCode.Text, txtProductName.Text, this.requestDate,this.customerCode ,this.classId );
             }
             else
             {

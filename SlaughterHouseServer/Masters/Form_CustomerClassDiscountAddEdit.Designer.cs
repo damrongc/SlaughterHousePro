@@ -38,7 +38,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtDiscountPer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboxCustomerClass = new System.Windows.Forms.ComboBox();
+            this.comboxMasterClass = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -139,13 +139,13 @@
             this.label2.TabIndex = 38;
             this.label2.Text = "ส่วนลด:";
             // 
-            // comboxCustomerClass
+            // comboxMasterClass
             // 
-            this.comboxCustomerClass.FormattingEnabled = true;
-            this.comboxCustomerClass.Location = new System.Drawing.Point(182, 21);
-            this.comboxCustomerClass.Name = "comboxCustomerClass";
-            this.comboxCustomerClass.Size = new System.Drawing.Size(215, 37);
-            this.comboxCustomerClass.TabIndex = 52;
+            this.comboxMasterClass.FormattingEnabled = true;
+            this.comboxMasterClass.Location = new System.Drawing.Point(182, 21);
+            this.comboxMasterClass.Name = "comboxMasterClass";
+            this.comboxMasterClass.Size = new System.Drawing.Size(215, 37);
+            this.comboxMasterClass.TabIndex = 52;
             // 
             // label3
             // 
@@ -161,7 +161,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(730, 267);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboxCustomerClass);
+            this.Controls.Add(this.comboxMasterClass);
             this.Controls.Add(this.txtDiscountPer);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label4);
@@ -194,7 +194,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtDiscountPer;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboxCustomerClass;
+        private System.Windows.Forms.ComboBox comboxMasterClass;
         private System.Windows.Forms.Label label3;
     }
 }

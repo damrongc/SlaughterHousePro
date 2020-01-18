@@ -217,54 +217,7 @@ namespace SlaughterHouseClient.Receiving
             }
         }
 
-        private void ProcessData()
-        {
-            try
-            {
-                isZero = false;
-                btnAcceptWeight.Enabled = false;
-                decimal scaleWeight = lblWeight.Text.ToDecimal();
 
-                if (scaleWeight < 0)
-                {
-                    throw new Exception(string.Format("น้ำหนัก น้อยกว่า 0"));
-                }
-
-                if (scaleWeight < product.min_weight)
-                {
-                    throw new Exception(string.Format("น้ำหนัก น้อยกว่า Min: {0}", product.min_weight));
-                }
-                if (scaleWeight > product.max_weight)
-                {
-                    throw new Exception(string.Format("น้ำหนัก มากกว่า Max: {0}", product.max_weight));
-                }
-
-                lblMessage.Text = Constants.PROCESSING;
-                SaveData();
-                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", displayTime, Color.Green, animationMethod, animationDirection);
-                toastNotification.Show();
-                LoadData();
-
-                lblLastWgh.Text = lblWeight.Text;
-                //clear weight
-                lockWeight = false;
-                stableCount = 0;
-                timerMinWeight.Enabled = true;
-
-
-            }
-            catch (Exception ex)
-            {
-
-                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
-                toastNotification.Show();
-            }
-            finally
-            {
-                btnAcceptWeight.Enabled = true;
-            }
-
-        }
 
         private void LoadData()
         {
@@ -339,8 +292,11 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                if (!serialPort1.IsOpen)
-                    serialPort1.Open();
+                if (System.Diagnostics.Debugger.IsAttached == false)
+                {
+                    if (!serialPort1.IsOpen)
+                        serialPort1.Open();
+                }
 
                 isStart = true;
                 isZero = true;
@@ -357,6 +313,26 @@ namespace SlaughterHouseClient.Receiving
             {
                 MessageBox.Show(ex.Message, "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+            //try
+            //{
+            //    if (!serialPort1.IsOpen)
+            //        serialPort1.Open();
+
+            //    isStart = true;
+            //    isZero = true;
+            //    lblMessage.Text = Constants.WEIGHT_WAITING;
+
+            //    lblWeight.Text = "0.00";
+            //    btnReceiveNo.Enabled = false;
+            //    btnStart.Enabled = false;
+            //    btnStop.Enabled = true;
+            //    btnAcceptWeight.Enabled = true;
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //}
 
 
         }
@@ -393,12 +369,12 @@ namespace SlaughterHouseClient.Receiving
         private void btnSetWgh_Click(object sender, EventArgs e)
         {
             lblWeight.Text = txtSimWeight.Text.ToDecimal().ToFormat2Decimal();
-            isStart = true;
-            btnReceiveNo.Enabled = false;
-            btnStart.Enabled = false;
-            btnStop.Enabled = true;
-            btnAcceptWeight.Enabled = true;
-            ProcessData();
+            //isStart = true;
+            //btnReceiveNo.Enabled = false;
+            //btnStart.Enabled = false;
+            //btnStop.Enabled = true;
+            //btnAcceptWeight.Enabled = true;
+            //ProcessData();
         }
 
         private void btnZero_Click(object sender, EventArgs e)
@@ -445,51 +421,50 @@ namespace SlaughterHouseClient.Receiving
 
         private void BtnAcceptWeight_Click(object sender, EventArgs e)
         {
-
             ProcessData();
-            //try
-            //{
 
-            //    if (isStart && isZero)
-            //    {
+        }
+        private void ProcessData()
+        {
+            try
+            {
+                isZero = false;
 
-            //        decimal scaleWeight = lblWeight.Text.ToDecimal();
+                decimal scaleWeight = lblWeight.Text.ToDecimal();
+                if (scaleWeight < 0)
+                {
+                    throw new Exception(string.Format("น้ำหนัก น้อยกว่า 0"));
+                }
 
-            //        if (scaleWeight < 0)
-            //        {
-            //            throw new Exception(string.Format("น้ำหนักไม่สามารถ น้อยกว่า 0"));
-            //        }
+                if (scaleWeight < product.min_weight)
+                {
+                    throw new Exception(string.Format("น้ำหนัก น้อยกว่า Min: {0}", product.min_weight));
+                }
+                if (scaleWeight > product.max_weight)
+                {
+                    throw new Exception(string.Format("น้ำหนัก มากกว่า Max: {0}", product.max_weight));
+                }
+                btnAcceptWeight.Enabled = false;
+                lblMessage.Text = Constants.PROCESSING;
+                SaveData();
+                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", displayTime, Color.Green, animationMethod, animationDirection);
+                toastNotification.Show();
+                LoadData();
 
-            //        if (scaleWeight < product.min_weight)
-            //        {
-            //            throw new Exception(string.Format("น้ำหนักไม่สามารถ น้อยกว่า {0}", product.min_weight));
-            //        }
-            //        if (scaleWeight > product.max_weight)
-            //        {
-            //            throw new Exception(string.Format("น้ำหนักไม่สามารถ มากกว่า {0}", product.max_weight));
-            //        }
-            //        btnAcceptWeight.Enabled = false;
-            //        lblMessage.Text = Constants.PROCESSING;
-            //        SaveData();
-            //        var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", 3, Color.Green, animationMethod, animationDirection);
-            //        toastNotification.Show();
-            //        LoadData();
-
-            //        lblLastWgh.Text = lblWeight.Text;
-            //        isZero = false;
-            //        //clear weight
-            //        lockWeight = false;
-            //        timerMinWeight.Enabled = true;
-            //    }
+                lblLastWgh.Text = lblWeight.Text;
+                //clear weight
+                lockWeight = false;
+                timerMinWeight.Enabled = true;
 
 
-            //}
-            //catch (Exception ex)
-            //{
-            //    btnAcceptWeight.Enabled = true;
-            //    var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
-            //    toastNotification.Show();
-            //}
+            }
+            catch (Exception ex)
+            {
+                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
+                toastNotification.Show();
+            }
+
+
         }
 
         private void SaveData()

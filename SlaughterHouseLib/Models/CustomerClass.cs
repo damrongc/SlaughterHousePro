@@ -1,141 +1,114 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-
 
 namespace SlaughterHouseLib.Models
 {
     public class CustomerClass
     {
-        public int ClassId { get; set; }
-        public string ClassName { get; set; }
-        public bool Active { get; set; }
+        public Customer Customer { get; set; }
+        public MasterClass MasterClass { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int Day { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateAt { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
-
-
     }
 
     public static class CustomerClassController
     {
-        public static List<CustomerClass> GetAllCustomerClass()
+
+
+        public static DataTable GetClassAllByCustomer(string customerCode, string allFlag = "N")
         {
             try
             {
-                List<CustomerClass> customerClass = new List<CustomerClass>();
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sb = new StringBuilder();
-                    sb.Append("SELECT * FROM customer_class WHERE active=1");
-                    sb.Append(" ORDER BY class_id asc");
-                    var cmd = new MySqlCommand(sb.ToString(), conn);
+                    var sql = @" SELECT cls.customer_code, c.customer_name , cls.class_id, mc.class_name, cls.start_date, cls.end_date,
+                                 cls.create_at,   cls.create_by,  cls.modified_at,   cls.modified_by 
+                                 FROM  customer_class cls, master_class mc, customer c
+                                 WHERE  cls.customer_code = @customer_code ";
+                    if (allFlag == "N")
+                    {
+                        //sql += " and cls.start_date <= DATE(SYSDATE()) ";
+                        sql += " and cls.end_date >= DATE(SYSDATE()) ";
+                    }
+                    sql += @" and cls.class_id = mc.class_id
+                              and cls.customer_code = c.customer_code
+                             order by cls.start_date, cls.end_date, cls.class_id ";
 
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("customer_code", customerCode);
                     var da = new MySqlDataAdapter(cmd);
-
                     var ds = new DataSet();
                     da.Fill(ds);
-
-                    foreach (DataRow item in ds.Tables[0].Rows)
-                    {
-                        customerClass.Add(new CustomerClass
-                        {
-                            ClassId = (int)item["class_id"],
-                            ClassName = item["class_name"].ToString(),
-                        });
-                    }
-
-
-                    return customerClass;
+                    return ds.Tables[0];
+                    //var coll = (from p in ds.Tables[0].AsEnumerable()
+                    //            select new
+                    //            {
+                    //                ClassId = p.Field<string>("class_id"),
+                    //                ClassName = p.Field<string>("class_name"),
+                    //                StartDate = p.Field<DateTime>("start_date"),
+                    //                EndDate = p.Field<DateTime>("end_date"),
+                    //                Day = (Convert.ToDateTime(p.Field<DateTime>("end_date")) - Convert.ToDateTime(p.Field<DateTime>("start_date"))).TotalDays,
+                    //                CreateAt = p.Field<DateTime?>("create_at") != null ? p.Field<DateTime?>("create_at") : null,
+                    //                CreateBy = p.Field<string>("create_by") != "" ? p.Field<string>("create_by") : "",
+                    //                ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
+                    //                ModifiedBy = p.Field<string>("modified_by") != "" ? p.Field<string>("modified_by") : "",
+                    //            }).ToList();
+                    //return coll;
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
-        public static object GetAllCustomerClass(string keyword)
+        public static CustomerClass GetClassByCustomer(int classId, string customerCode, DateTime startDate)
         {
             try
             {
-
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sb = new StringBuilder();
-                    sb.Append("select * from customer_class");
-                    if (!string.IsNullOrEmpty(keyword))
-                    {
-                        sb.Append(" where class_name like @class_name");
+                    var sql = @" SELECT cls.customer_code, c.customer_name , cls.class_id, mc.class_name, cls.start_date, cls.end_date, cls.create_at
+                                 FROM  customer_class cls, master_class mc, customer c
+                                 WHERE  cls.customer_code = @customer_code
+                                    and cls.class_id = @class_id ";
+                    sql += @" and cls.start_date = @start_date ";
+                    sql += @" and cls.class_id = mc.class_id
+                              and cls.customer_code = c.customer_code  ";
 
-                    }
-
-                    sb.Append(" order by class_id asc");
-                    var cmd = new MySqlCommand(sb.ToString(), conn);
-
-                    if (!string.IsNullOrEmpty(keyword))
-                    {
-                        cmd.Parameters.AddWithValue("class_name", string.Format("%{0}%", keyword));
-                    }
-
-
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("customer_code", customerCode);
+                    cmd.Parameters.AddWithValue("class_id", classId);
+                    cmd.Parameters.AddWithValue("start_date", startDate.ToString("yyyy-MM-dd"));
                     var da = new MySqlDataAdapter(cmd);
-
                     var ds = new DataSet();
                     da.Fill(ds);
-
-                    var coll = (from p in ds.Tables[0].AsEnumerable()
-                                select new
-                                {
-                                    ClassId = p.Field<int>("class_id"),
-                                    ClassName = p.Field<string>("class_name"),
-                                    Active = p.Field<bool>("active"),
-                                    CreateAt = p.Field<DateTime>("create_at"),
-                                }).ToList();
-
-                    return coll;
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public static CustomerClass GetCustomerClass(string class_id)
-        {
-            try
-            {
-
-                using (var conn = new MySqlConnection(Globals.CONN_STR))
-                {
-                    conn.Open();
-                    var sb = new StringBuilder();
-                    sb.Append("select * from customer_class");
-                    sb.Append(" where class_id = @class_id");
-
-                    var cmd = new MySqlCommand(sb.ToString(), conn);
-                    cmd.Parameters.AddWithValue("class_id", class_id);
-                    var da = new MySqlDataAdapter(cmd);
-
-                    var ds = new DataSet();
-                    da.Fill(ds);
-
-                    var customerClass = new CustomerClass();
                     if (ds.Tables[0].Rows.Count > 0)
                     {
                         return new CustomerClass
                         {
-
-                            ClassId = (int)ds.Tables[0].Rows[0]["class_id"],
-                            ClassName = ds.Tables[0].Rows[0]["class_name"].ToString(),
-                            Active = (bool)ds.Tables[0].Rows[0]["active"],
+                            Customer = new Customer
+                            {
+                                CustomerCode = (string)ds.Tables[0].Rows[0]["customer_code"],
+                                CustomerName = (string)ds.Tables[0].Rows[0]["customer_name"],
+                            },
+                            MasterClass = new MasterClass
+                            {
+                                ClassId = (int)ds.Tables[0].Rows[0]["class_id"],
+                                ClassName = (string)ds.Tables[0].Rows[0]["class_name"],
+                            },
+                            StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
+                            EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
+                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays + 1),
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }
@@ -147,12 +120,123 @@ namespace SlaughterHouseLib.Models
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+        public static bool Insert(CustomerClass CustomerClass)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    if (IsDuplicateData(CustomerClass))
+                    {
+                        throw new Exception($"รหัสลูกค้า {CustomerClass.Customer.CustomerCode} \n วันที่เริ่มมต้น {CustomerClass.StartDate.ToString("dd/MM/yyyy")} \n มีในระบบแล้ว");
+                    }
+                    var sql = @"INSERT INTO customer_class
+                                  (class_id, customer_code, start_date, end_date, create_by)
+                                VALUES
+                                  (@class_id, @customer_code, @start_date, @end_date,  @create_by) ";
+
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("class_id", CustomerClass.MasterClass.ClassId);
+                    cmd.Parameters.AddWithValue("customer_code", CustomerClass.Customer.CustomerCode);
+                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate);
+                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate);
+                    cmd.Parameters.AddWithValue("create_by", CustomerClass.CreateBy);
+                    var affRow = cmd.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
 
                 throw;
             }
         }
+        public static bool Update(CustomerClass CustomerClass)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"UPDATE customer_class
+                                set class_id = @class_id,
+                                  end_date =@end_date,
+                                  modified_at=CURRENT_TIMESTAMP,
+                                  modified_by=@modified_by
+                                WHERE customer_code = @customer_code 
+                                  And start_date = @start_date";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("class_id", CustomerClass.MasterClass.ClassId);
+                    cmd.Parameters.AddWithValue("customer_code", CustomerClass.Customer.CustomerCode);
+                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("end_date", CustomerClass.EndDate);
+                    cmd.Parameters.AddWithValue("modified_by", CustomerClass.ModifiedBy);
+                    var affRow = cmd.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+        public static bool Delete(CustomerClass CustomerClass)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"delete from customer_class
+                                WHERE customer_code = @customer_code
+                                  And start_date = @start_date";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("customer_code", CustomerClass.Customer.CustomerCode);
+                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate.ToString("yyyy-MM-dd"));
+                    var affRow = cmd.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static bool IsDuplicateData(CustomerClass CustomerClass)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @" SELECT customer_code, class_id, start_date
+                                FROM customer_class c
+                                WHERE customer_code = @customer_code 
+                                    and start_date = @start_date ";
+                    var cmd = new MySqlCommand(sql, conn);
 
+                    cmd.Parameters.AddWithValue("customer_code", CustomerClass.Customer.CustomerCode);
+                    cmd.Parameters.AddWithValue("start_date", CustomerClass.StartDate.ToString("yyyy-MM-dd"));
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
-
 }

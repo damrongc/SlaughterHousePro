@@ -195,66 +195,7 @@ namespace SlaughterHouseClient.Receiving
             }
         }
 
-        private void ProcessData()
-        {
-            try
-            {
-                //lblMessage.Text = Constants.PROCESSING;
-                //SaveData();
 
-                //var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", 2, Color.Green, animationMethod, animationDirection);
-                //toastNotification.Show();
-                //LoadData();
-
-                ////clear weight
-                //lockWeight = false;
-                //timerMinWeight.Enabled = true;
-                if (isStart && isZero)
-                {
-                    btnAcceptWeight.Enabled = false;
-                    decimal scaleWeight = lblWeight.Text.ToDecimal();
-
-                    if (scaleWeight < 0)
-                    {
-                        throw new Exception(string.Format("น้ำหนัก น้อยกว่า 0"));
-                    }
-
-                    if (scaleWeight < product.min_weight)
-                    {
-                        throw new Exception(string.Format("น้ำหนัก น้อยกว่า Min: {0}", product.min_weight));
-                    }
-                    if (scaleWeight > product.max_weight)
-                    {
-                        throw new Exception(string.Format("น้ำหนัก มากกว่า Max: {0}", product.max_weight));
-                    }
-
-                    lblMessage.Text = Constants.PROCESSING;
-                    SaveData();
-                    var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", 3, Color.Green, animationMethod, animationDirection);
-                    toastNotification.Show();
-                    LoadData();
-
-                    lblLastWgh.Text = lblWeight.Text;
-                    isZero = false;
-                    //clear weight
-                    lockWeight = false;
-                    timerMinWeight.Enabled = true;
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
-                toastNotification.Show();
-            }
-            finally
-            {
-                btnAcceptWeight.Enabled = true;
-            }
-
-        }
 
         private void LoadData()
         {
@@ -384,14 +325,14 @@ namespace SlaughterHouseClient.Receiving
         {
             lblWeight.Text = txtSimWeight.Text.ToDecimal().ToFormat2Decimal();
 
-            isStart = true;
-            isZero = true;
-            btnReceiveNo.Enabled = false;
-            btnStart.Enabled = false;
-            btnStop.Enabled = true;
-            btnAcceptWeight.Enabled = true;
+            //isStart = true;
+            //isZero = true;
+            //btnReceiveNo.Enabled = false;
+            //btnStart.Enabled = false;
+            //btnStop.Enabled = true;
+            //btnAcceptWeight.Enabled = true;
 
-            ProcessData();
+            //ProcessData();
         }
 
         private void btnZero_Click(object sender, EventArgs e)
@@ -439,6 +380,67 @@ namespace SlaughterHouseClient.Receiving
         {
 
             ProcessData();
+
+        }
+
+        private void ProcessData()
+        {
+            try
+            {
+                //lblMessage.Text = Constants.PROCESSING;
+                //SaveData();
+
+                //var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", 2, Color.Green, animationMethod, animationDirection);
+                //toastNotification.Show();
+                //LoadData();
+
+                ////clear weight
+                //lockWeight = false;
+                //timerMinWeight.Enabled = true;
+                if (isStart && isZero)
+                {
+
+                    decimal scaleWeight = lblWeight.Text.ToDecimal();
+
+                    if (scaleWeight < 0)
+                    {
+                        throw new Exception(string.Format("น้ำหนัก น้อยกว่า 0"));
+                    }
+
+                    if (scaleWeight < product.min_weight)
+                    {
+                        throw new Exception(string.Format("น้ำหนัก น้อยกว่า Min: {0}", product.min_weight));
+                    }
+                    if (scaleWeight > product.max_weight)
+                    {
+                        throw new Exception(string.Format("น้ำหนัก มากกว่า Max: {0}", product.max_weight));
+                    }
+                    btnAcceptWeight.Enabled = false;
+                    lblMessage.Text = Constants.PROCESSING;
+                    SaveData();
+                    var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", 3, Color.Green, animationMethod, animationDirection);
+                    toastNotification.Show();
+                    LoadData();
+
+                    lblLastWgh.Text = lblWeight.Text;
+                    isZero = false;
+                    //clear weight
+                    lockWeight = false;
+                    timerMinWeight.Enabled = true;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
+                toastNotification.Show();
+            }
+            finally
+            {
+                btnAcceptWeight.Enabled = true;
+            }
 
         }
 

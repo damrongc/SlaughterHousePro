@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\CustomerClass.cs" />
+    <Compile Include="Models\MasterClass.cs" />
     <Compile Include="Models\CustomerClassDiscount.cs" />
     <Compile Include="Models\Bom.cs" />
+    <Compile Include="Models\CustomerClassPrice.cs" />
     <Compile Include="Models\CustomerPrice.cs" />
     <Compile Include="Models\ProductSlipItem.cs" />
     <Compile Include="Models\ProductSlip.cs" />

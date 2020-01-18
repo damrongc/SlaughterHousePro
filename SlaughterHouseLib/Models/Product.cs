@@ -143,8 +143,18 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static DataTable GetProductsForSale(string productGroup, string productCode, string productName)
+        public static DataTable GetProductsForSale(string productGroup, string productCode, string productName, DateTime requestDate, string customerCode, int classId )
         {
+            //(select distinct pp.start_date, pp.end_date, pp.product_code
+            //from product_price pp
+            //Where DATE_FORMAT(sysdate(),'%Y-%m-%d')  >= pp.start_date
+            //and DATE_FORMAT(sysdate(),'%Y-%m-%d')  <= pp.end_date
+            //union
+            //select distinct cp.start_date, cp.end_date, cp.product_code
+            //from customer_price cp
+            //Where DATE_FORMAT(sysdate(),'%Y-%m-%d')  >= cp.start_date
+            //and DATE_FORMAT(sysdate(),'%Y-%m-%d')  <= cp.end_date
+            // ) as price,
             try
             {
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
@@ -152,22 +162,30 @@ namespace SlaughterHouseLib.Models
                     conn.Open();
                     var sql = @"
                                     Select distinct 0 as select_col, p.product_code, product_name,
-	                                    p.issue_unit_method, 
-	                                    p.unit_of_qty as unit_code_qty,            
+	                                    p.issue_unit_method,
+	                                    p.unit_of_qty as unit_code_qty,
 	                                    uq.unit_name as unit_name_qty,
 	                                    p.unit_of_wgh as unit_code_wgh,
 	                                    uw.unit_name as unit_name_wgh,
 	                                    p.packing_size
                                     From product p,
-	                                    (    select distinct pp.start_date, pp.end_date, pp.product_code
+	                                    (select distinct pp.start_date, pp.end_date, pp.product_code
                                         from product_price pp
-                                        Where  DATE_FORMAT(sysdate(),'%Y-%m-%d')  >= pp.start_date
-		                                    and DATE_FORMAT(sysdate(),'%Y-%m-%d')  <= pp.end_date
+                                        Where  @request_date  >= pp.start_date
+		                                    and @request_date  <= pp.end_date 
                                         union
 	                                    select distinct cp.start_date, cp.end_date, cp.product_code
                                         from customer_price cp
-	                                    Where  DATE_FORMAT(sysdate(),'%Y-%m-%d')  >= cp.start_date
-		                                    and DATE_FORMAT(sysdate(),'%Y-%m-%d')  <= cp.end_date) as price,
+	                                    Where  @request_date  >= cp.start_date
+		                                    and @request_date  <= cp.end_date
+		                                    and cp.customer_code = @customer_code
+                                        union
+	                                    select distinct cp.start_date, cp.end_date, cp.product_code
+                                        from customer_class_price cp
+	                                    Where  @request_date  >= cp.start_date
+		                                    and @request_date  <= cp.end_date 
+                                            and (cp.class_id = @class_id or cp.class_id = 1)
+                                        ) as price,
 	                                    unit_of_measurement uq,
 	                                    unit_of_measurement uw
                                     where p.product_code = price.product_code
@@ -197,10 +215,12 @@ namespace SlaughterHouseLib.Models
                     //{
                     //    cmd.Parameters.AddWithValue("product_code", productCode);
                     //}
-                    //if (String.IsNullOrEmpty(productName) == false)
-                    //{
-                    //    cmd.Parameters.AddWithValue("product_name", productName);
-                    //}
+
+                    cmd.Parameters.AddWithValue("request_date", requestDate.ToString("yyyy-MM-dd"));
+
+                    cmd.Parameters.AddWithValue("customer_code", customerCode);
+                    cmd.Parameters.AddWithValue("class_id", classId);
+
 
                     var da = new MySqlDataAdapter(cmd);
 

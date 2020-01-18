@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseServer
 {
-    partial class Form_CustomerPriceAddEdit
+    partial class Form_CustomerClassPriceAddEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_CustomerPriceAddEdit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_CustomerClassPriceAddEdit));
             this.label1 = new System.Windows.Forms.Label();
             this.txtDay = new System.Windows.Forms.TextBox();
             this.BtnSave = new System.Windows.Forms.Button();
@@ -38,10 +38,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtUnitPrice = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cboCustomer = new System.Windows.Forms.ComboBox();
             this.btnLovProduct = new System.Windows.Forms.Button();
             this.txtProductName = new System.Windows.Forms.TextBox();
+            this.cboCustomerClass = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -141,23 +141,6 @@
             this.label2.TabIndex = 38;
             this.label2.Text = "ราคา:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(105, 17);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 29);
-            this.label3.TabIndex = 40;
-            this.label3.Text = "ลูกค้า:";
-            // 
-            // cboCustomer
-            // 
-            this.cboCustomer.FormattingEnabled = true;
-            this.cboCustomer.Location = new System.Drawing.Point(182, 12);
-            this.cboCustomer.Name = "cboCustomer";
-            this.cboCustomer.Size = new System.Drawing.Size(310, 37);
-            this.cboCustomer.TabIndex = 41;
-            // 
             // btnLovProduct
             // 
             this.btnLovProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
@@ -183,14 +166,31 @@
             this.txtProductName.Size = new System.Drawing.Size(447, 36);
             this.txtProductName.TabIndex = 51;
             // 
-            // Form_CustomerPriceAddEdit
+            // cboCustomerClass
+            // 
+            this.cboCustomerClass.FormattingEnabled = true;
+            this.cboCustomerClass.Location = new System.Drawing.Point(182, 12);
+            this.cboCustomerClass.Name = "cboCustomerClass";
+            this.cboCustomerClass.Size = new System.Drawing.Size(215, 37);
+            this.cboCustomerClass.TabIndex = 54;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(72, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(104, 29);
+            this.label3.TabIndex = 53;
+            this.label3.Text = "กลุ่มมลูกค้า:";
+            // 
+            // Form_CustomerClassPriceAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(730, 294);
+            this.Controls.Add(this.cboCustomerClass);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnLovProduct);
             this.Controls.Add(this.txtProductName);
-            this.Controls.Add(this.cboCustomer);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtUnitPrice);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label4);
@@ -204,9 +204,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_CustomerPriceAddEdit";
+            this.Name = "Form_CustomerClassPriceAddEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form_CustomerPriceAddEdit";
+            this.Text = "Form_CustomerClassPriceAddEdit";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,9 +223,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtUnitPrice;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cboCustomer;
         private System.Windows.Forms.Button btnLovProduct;
         private System.Windows.Forms.TextBox txtProductName;
+        private System.Windows.Forms.ComboBox cboCustomerClass;
+        private System.Windows.Forms.Label label3;
     }
 }

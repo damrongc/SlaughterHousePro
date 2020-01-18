@@ -8,7 +8,7 @@ namespace SlaughterHouseLib.Models
 {
     public class CustomerClassDiscount
     {
-        public CustomerClass CustomerClass { get; set; }
+        public MasterClass MasterClass { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int Day { get; set; }
@@ -37,7 +37,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" dis.create_by, ");
                     sb.Append(" dis.modified_at, ");
                     sb.Append(" dis.modified_by  ");
-                    sb.Append(" FROM customer_class_discount dis, customer_class cls ");
+                    sb.Append(" FROM customer_class_discount dis, master_class cls ");
                     sb.Append(" WHERE dis.class_id = cls.class_id ");
                     sb.Append(" AND dis.start_date <= '" + startDate.ToString("yyyy-MM-dd") + "'");
                     sb.Append(" AND dis.end_date >= '" + startDate.ToString("yyyy-MM-dd") + "'");
@@ -61,7 +61,7 @@ namespace SlaughterHouseLib.Models
                                     StartDate = p.Field<DateTime>("start_date"),
                                     EndDate = p.Field<DateTime>("end_date"),
                                     DiscountPer = p.Field<decimal>("discount_per"),
-                                    Day = (Convert.ToDateTime(p.Field<DateTime>("end_date")) - Convert.ToDateTime(p.Field<DateTime>("start_date"))).TotalDays,
+                                    Day = (Convert.ToDateTime(p.Field<DateTime>("end_date")) - Convert.ToDateTime(p.Field<DateTime>("start_date"))).TotalDays +1,
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
                                     ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
@@ -92,7 +92,7 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" dis.create_by, ");
                     sb.Append(" dis.modified_at, ");
                     sb.Append(" dis.modified_by  ");
-                    sb.Append(" FROM customer_class_discount dis, customer_class cls ");
+                    sb.Append(" FROM customer_class_discount dis, master_class cls ");
                     sb.Append(" WHERE dis.class_id = cls.class_id ");
                     sb.Append(" AND dis.class_id =@class_id");
                     sb.Append(" AND dis.start_date =@start_date");
@@ -108,7 +108,7 @@ namespace SlaughterHouseLib.Models
                     {
                         return new CustomerClassDiscount
                         {
-                            CustomerClass = new CustomerClass
+                            MasterClass = new MasterClass
                             {
                                 ClassId = Convert.ToInt32(ds.Tables[0].Rows[0]["class_id"]),
                                 ClassName = (string)ds.Tables[0].Rows[0]["class_name"],
@@ -116,7 +116,7 @@ namespace SlaughterHouseLib.Models
                             StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
                             EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
                             DiscountPer = (decimal)ds.Tables[0].Rows[0]["discount_per"],
-                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays),
+                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays+1),
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }
@@ -146,9 +146,9 @@ namespace SlaughterHouseLib.Models
                                     @discount_per, @create_by) ";
 
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("class_id", customerClassDiscount.CustomerClass.ClassId);
-                    cmd.Parameters.AddWithValue("start_date", customerClassDiscount.StartDate);
-                    cmd.Parameters.AddWithValue("end_date", customerClassDiscount.EndDate);
+                    cmd.Parameters.AddWithValue("class_id", customerClassDiscount.MasterClass.ClassId);
+                    cmd.Parameters.AddWithValue("start_date", customerClassDiscount.StartDate );
+                    cmd.Parameters.AddWithValue("end_date", customerClassDiscount.EndDate );
                     cmd.Parameters.AddWithValue("discount_per", customerClassDiscount.DiscountPer);
                     cmd.Parameters.AddWithValue("create_by", customerClassDiscount.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
@@ -176,9 +176,9 @@ namespace SlaughterHouseLib.Models
                                 WHERE class_id = @class_id 
                                 And start_date = @start_date";
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("class_id", customerClassDiscount.CustomerClass.ClassId);
-                    cmd.Parameters.AddWithValue("start_date", customerClassDiscount.StartDate);
-                    cmd.Parameters.AddWithValue("end_date", customerClassDiscount.EndDate);
+                    cmd.Parameters.AddWithValue("class_id", customerClassDiscount.MasterClass.ClassId);
+                    cmd.Parameters.AddWithValue("start_date", customerClassDiscount.StartDate );
+                    cmd.Parameters.AddWithValue("end_date", customerClassDiscount.EndDate );
                     cmd.Parameters.AddWithValue("discount_per", customerClassDiscount.DiscountPer);
                     cmd.Parameters.AddWithValue("modified_by", customerClassDiscount.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();

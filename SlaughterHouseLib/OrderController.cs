@@ -82,7 +82,7 @@ namespace SlaughterHouseLib
 								order_date,
 								customer_code,
 								comments,
-								order_flag, 
+								order_flag,
 								active,
 								create_at
 								FROM orders
@@ -212,7 +212,7 @@ namespace SlaughterHouseLib
                         Transaction = tr
                     };
                     cmd.Parameters.AddWithValue("order_no", order.OrderNo);
-                    cmd.Parameters.AddWithValue("order_date", order.RequestDate);
+                    cmd.Parameters.AddWithValue("order_date", order.RequestDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("customer_code", order.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("order_flag", order.OrderFlag);
                     cmd.Parameters.AddWithValue("comments", order.Comments);
@@ -306,7 +306,7 @@ namespace SlaughterHouseLib
                         Transaction = tr
                     };
                     cmd.Parameters.AddWithValue("order_no", order.OrderNo);
-                    cmd.Parameters.AddWithValue("order_date", order.RequestDate);
+                    cmd.Parameters.AddWithValue("order_date", order.RequestDate.ToString("yyyy-MM-dd"));
                     cmd.Parameters.AddWithValue("customer_code", order.Customer.CustomerCode);
                     cmd.Parameters.AddWithValue("order_flag", order.OrderFlag);
                     cmd.Parameters.AddWithValue("comments", order.Comments);

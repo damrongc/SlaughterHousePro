@@ -42,6 +42,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControlPrice = new System.Windows.Forms.TabControl();
             this.tabPageProduct = new System.Windows.Forms.TabPage();
+            this.tabPageCustomerClass = new System.Windows.Forms.TabPage();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.gvCustomerClass = new System.Windows.Forms.DataGridView();
+            this.EditCustomerClass = new System.Windows.Forms.DataGridViewImageColumn();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.cboProductCustomerClass = new System.Windows.Forms.ComboBox();
+            this.dtpStartDateCustomerClass = new System.Windows.Forms.DateTimePicker();
+            this.BtnSearchCustomerClass = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.BtnAddCustomerClass = new System.Windows.Forms.Button();
+            this.panel11 = new System.Windows.Forms.Panel();
             this.tabPageCustomer = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.gvCv = new System.Windows.Forms.DataGridView();
@@ -56,8 +68,6 @@
             this.BtnAddCv = new System.Windows.Forms.Button();
             this.tabPageCustomerClassDis = new System.Windows.Forms.TabPage();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.gvClassDis = new System.Windows.Forms.DataGridView();
-            this.EditClassDis = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.cboClassId = new System.Windows.Forms.ComboBox();
@@ -66,19 +76,25 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.BtnAddClassDis = new System.Windows.Forms.Button();
+            this.gvClassDis = new System.Windows.Forms.DataGridView();
+            this.EditClassDis = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
             this.tabControlPrice.SuspendLayout();
             this.tabPageProduct.SuspendLayout();
+            this.tabPageCustomerClass.SuspendLayout();
+            this.panel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvCustomerClass)).BeginInit();
+            this.panel12.SuspendLayout();
             this.tabPageCustomer.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCv)).BeginInit();
             this.panel6.SuspendLayout();
             this.tabPageCustomerClassDis.SuspendLayout();
             this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvClassDis)).BeginInit();
             this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvClassDis)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -87,9 +103,9 @@
             this.label1.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(11, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(189, 29);
+            this.label1.Size = new System.Drawing.Size(178, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ข้อมูลส่วนลดกลุ่มลูกค้า";
+            this.label1.Text = "ข้อมูลราคาระดับสินค้า";
             // 
             // BtnAdd
             // 
@@ -100,7 +116,7 @@
             this.BtnAdd.ForeColor = System.Drawing.Color.White;
             this.BtnAdd.Image = ((System.Drawing.Image)(resources.GetObject("BtnAdd.Image")));
             this.BtnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnAdd.Location = new System.Drawing.Point(205, 14);
+            this.BtnAdd.Location = new System.Drawing.Point(189, 14);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(129, 36);
             this.BtnAdd.TabIndex = 2;
@@ -175,7 +191,7 @@
             // cboProduct
             // 
             this.cboProduct.FormattingEnabled = true;
-            this.cboProduct.Location = new System.Drawing.Point(571, 14);
+            this.cboProduct.Location = new System.Drawing.Point(555, 14);
             this.cboProduct.Name = "cboProduct";
             this.cboProduct.Size = new System.Drawing.Size(214, 37);
             this.cboProduct.TabIndex = 7;
@@ -184,7 +200,7 @@
             // 
             this.dtpStartDate.CustomFormat = "dd/MM/yyyy";
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpStartDate.Location = new System.Drawing.Point(340, 14);
+            this.dtpStartDate.Location = new System.Drawing.Point(324, 14);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(160, 36);
             this.dtpStartDate.TabIndex = 6;
@@ -198,7 +214,7 @@
             this.BtnSearch.ForeColor = System.Drawing.Color.White;
             this.BtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("BtnSearch.Image")));
             this.BtnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSearch.Location = new System.Drawing.Point(791, 14);
+            this.BtnSearch.Location = new System.Drawing.Point(775, 14);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(142, 36);
             this.BtnSearch.TabIndex = 4;
@@ -210,7 +226,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(506, 18);
+            this.label2.Location = new System.Drawing.Point(490, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 29);
             this.label2.TabIndex = 5;
@@ -219,6 +235,7 @@
             // tabControlPrice
             // 
             this.tabControlPrice.Controls.Add(this.tabPageProduct);
+            this.tabControlPrice.Controls.Add(this.tabPageCustomerClass);
             this.tabControlPrice.Controls.Add(this.tabPageCustomer);
             this.tabControlPrice.Controls.Add(this.tabPageCustomerClassDis);
             this.tabControlPrice.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -240,6 +257,153 @@
             this.tabPageProduct.TabIndex = 1;
             this.tabPageProduct.Text = " ราคาระดับสินค้า ";
             this.tabPageProduct.UseVisualStyleBackColor = true;
+            // 
+            // tabPageCustomerClass
+            // 
+            this.tabPageCustomerClass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPageCustomerClass.Controls.Add(this.panel10);
+            this.tabPageCustomerClass.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCustomerClass.Name = "tabPageCustomerClass";
+            this.tabPageCustomerClass.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCustomerClass.Size = new System.Drawing.Size(1392, 724);
+            this.tabPageCustomerClass.TabIndex = 3;
+            this.tabPageCustomerClass.Text = " ราคาระดับกลุ่มลูกค้า";
+            this.tabPageCustomerClass.UseVisualStyleBackColor = true;
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.Color.White;
+            this.panel10.Controls.Add(this.gvCustomerClass);
+            this.panel10.Controls.Add(this.panel12);
+            this.panel10.Controls.Add(this.panel11);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel10.Location = new System.Drawing.Point(3, 3);
+            this.panel10.Name = "panel10";
+            this.panel10.Padding = new System.Windows.Forms.Padding(6);
+            this.panel10.Size = new System.Drawing.Size(1384, 716);
+            this.panel10.TabIndex = 6;
+            // 
+            // gvCustomerClass
+            // 
+            this.gvCustomerClass.AllowUserToAddRows = false;
+            this.gvCustomerClass.AllowUserToDeleteRows = false;
+            this.gvCustomerClass.AllowUserToResizeColumns = false;
+            this.gvCustomerClass.AllowUserToResizeRows = false;
+            this.gvCustomerClass.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gvCustomerClass.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gvCustomerClass.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.gvCustomerClass.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gvCustomerClass.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvCustomerClass.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.EditCustomerClass});
+            this.gvCustomerClass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvCustomerClass.Location = new System.Drawing.Point(6, 68);
+            this.gvCustomerClass.Name = "gvCustomerClass";
+            this.gvCustomerClass.RowHeadersWidth = 10;
+            this.gvCustomerClass.Size = new System.Drawing.Size(1372, 642);
+            this.gvCustomerClass.TabIndex = 9;
+            // 
+            // EditCustomerClass
+            // 
+            this.EditCustomerClass.HeaderText = "แก้ไข";
+            this.EditCustomerClass.Image = ((System.Drawing.Image)(resources.GetObject("EditCustomerClass.Image")));
+            this.EditCustomerClass.Name = "EditCustomerClass";
+            this.EditCustomerClass.Width = 58;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.cboProductCustomerClass);
+            this.panel12.Controls.Add(this.dtpStartDateCustomerClass);
+            this.panel12.Controls.Add(this.BtnSearchCustomerClass);
+            this.panel12.Controls.Add(this.label7);
+            this.panel12.Controls.Add(this.label8);
+            this.panel12.Controls.Add(this.BtnAddCustomerClass);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel12.Location = new System.Drawing.Point(6, 7);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(1372, 61);
+            this.panel12.TabIndex = 7;
+            // 
+            // cboProductCustomerClass
+            // 
+            this.cboProductCustomerClass.FormattingEnabled = true;
+            this.cboProductCustomerClass.Location = new System.Drawing.Point(595, 14);
+            this.cboProductCustomerClass.Name = "cboProductCustomerClass";
+            this.cboProductCustomerClass.Size = new System.Drawing.Size(214, 37);
+            this.cboProductCustomerClass.TabIndex = 7;
+            // 
+            // dtpStartDateCustomerClass
+            // 
+            this.dtpStartDateCustomerClass.CustomFormat = "dd/MM/yyyy";
+            this.dtpStartDateCustomerClass.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpStartDateCustomerClass.Location = new System.Drawing.Point(364, 14);
+            this.dtpStartDateCustomerClass.Name = "dtpStartDateCustomerClass";
+            this.dtpStartDateCustomerClass.Size = new System.Drawing.Size(160, 36);
+            this.dtpStartDateCustomerClass.TabIndex = 6;
+            // 
+            // BtnSearchCustomerClass
+            // 
+            this.BtnSearchCustomerClass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnSearchCustomerClass.FlatAppearance.BorderSize = 0;
+            this.BtnSearchCustomerClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSearchCustomerClass.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSearchCustomerClass.ForeColor = System.Drawing.Color.White;
+            this.BtnSearchCustomerClass.Image = ((System.Drawing.Image)(resources.GetObject("BtnSearchCustomerClass.Image")));
+            this.BtnSearchCustomerClass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnSearchCustomerClass.Location = new System.Drawing.Point(815, 14);
+            this.BtnSearchCustomerClass.Name = "BtnSearchCustomerClass";
+            this.BtnSearchCustomerClass.Size = new System.Drawing.Size(142, 36);
+            this.BtnSearchCustomerClass.TabIndex = 4;
+            this.BtnSearchCustomerClass.Text = "แสดงข้อมูล";
+            this.BtnSearchCustomerClass.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnSearchCustomerClass.UseVisualStyleBackColor = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(530, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(59, 29);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "สินค้า:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(11, 18);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(212, 29);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "ข้อมูลราคาระดับกลุ่มลูกค้า";
+            // 
+            // BtnAddCustomerClass
+            // 
+            this.BtnAddCustomerClass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnAddCustomerClass.FlatAppearance.BorderSize = 0;
+            this.BtnAddCustomerClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddCustomerClass.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAddCustomerClass.ForeColor = System.Drawing.Color.White;
+            this.BtnAddCustomerClass.Image = ((System.Drawing.Image)(resources.GetObject("BtnAddCustomerClass.Image")));
+            this.BtnAddCustomerClass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnAddCustomerClass.Location = new System.Drawing.Point(229, 14);
+            this.BtnAddCustomerClass.Name = "BtnAddCustomerClass";
+            this.BtnAddCustomerClass.Size = new System.Drawing.Size(129, 36);
+            this.BtnAddCustomerClass.TabIndex = 2;
+            this.BtnAddCustomerClass.Text = "เพิ่มข้อมูล";
+            this.BtnAddCustomerClass.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnAddCustomerClass.UseVisualStyleBackColor = false;
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.LightGray;
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel11.Location = new System.Drawing.Point(6, 6);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(1372, 1);
+            this.panel11.TabIndex = 6;
             // 
             // tabPageCustomer
             // 
@@ -403,9 +567,9 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.White;
-            this.panel7.Controls.Add(this.gvClassDis);
             this.panel7.Controls.Add(this.panel8);
             this.panel7.Controls.Add(this.panel9);
+            this.panel7.Controls.Add(this.gvClassDis);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel7.Location = new System.Drawing.Point(3, 3);
@@ -413,33 +577,6 @@
             this.panel7.Padding = new System.Windows.Forms.Padding(6);
             this.panel7.Size = new System.Drawing.Size(1384, 716);
             this.panel7.TabIndex = 5;
-            // 
-            // gvClassDis
-            // 
-            this.gvClassDis.AllowUserToAddRows = false;
-            this.gvClassDis.AllowUserToDeleteRows = false;
-            this.gvClassDis.AllowUserToResizeColumns = false;
-            this.gvClassDis.AllowUserToResizeRows = false;
-            this.gvClassDis.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gvClassDis.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.gvClassDis.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.gvClassDis.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gvClassDis.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvClassDis.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.EditClassDis});
-            this.gvClassDis.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvClassDis.Location = new System.Drawing.Point(6, 68);
-            this.gvClassDis.Name = "gvClassDis";
-            this.gvClassDis.RowHeadersWidth = 10;
-            this.gvClassDis.Size = new System.Drawing.Size(1372, 642);
-            this.gvClassDis.TabIndex = 8;
-            // 
-            // EditClassDis
-            // 
-            this.EditClassDis.HeaderText = "แก้ไข";
-            this.EditClassDis.Image = ((System.Drawing.Image)(resources.GetObject("EditClassDis.Image")));
-            this.EditClassDis.Name = "EditClassDis";
-            this.EditClassDis.Width = 58;
             // 
             // panel8
             // 
@@ -536,6 +673,33 @@
             this.BtnAddClassDis.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnAddClassDis.UseVisualStyleBackColor = false;
             // 
+            // gvClassDis
+            // 
+            this.gvClassDis.AllowUserToAddRows = false;
+            this.gvClassDis.AllowUserToDeleteRows = false;
+            this.gvClassDis.AllowUserToResizeColumns = false;
+            this.gvClassDis.AllowUserToResizeRows = false;
+            this.gvClassDis.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gvClassDis.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gvClassDis.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.gvClassDis.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gvClassDis.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvClassDis.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.EditClassDis});
+            this.gvClassDis.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvClassDis.Location = new System.Drawing.Point(6, 6);
+            this.gvClassDis.Name = "gvClassDis";
+            this.gvClassDis.RowHeadersWidth = 10;
+            this.gvClassDis.Size = new System.Drawing.Size(1372, 704);
+            this.gvClassDis.TabIndex = 8;
+            // 
+            // EditClassDis
+            // 
+            this.EditClassDis.HeaderText = "แก้ไข";
+            this.EditClassDis.Image = ((System.Drawing.Image)(resources.GetObject("EditClassDis.Image")));
+            this.EditClassDis.Name = "EditClassDis";
+            this.EditClassDis.Width = 58;
+            // 
             // Form_PriceList
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -551,6 +715,11 @@
             this.panel2.PerformLayout();
             this.tabControlPrice.ResumeLayout(false);
             this.tabPageProduct.ResumeLayout(false);
+            this.tabPageCustomerClass.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvCustomerClass)).EndInit();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.tabPageCustomer.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvCv)).EndInit();
@@ -558,9 +727,9 @@
             this.panel6.PerformLayout();
             this.tabPageCustomerClassDis.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gvClassDis)).EndInit();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvClassDis)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -604,5 +773,17 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button BtnAddClassDis;
         private System.Windows.Forms.DataGridViewImageColumn EditClassDis;
+        private System.Windows.Forms.TabPage tabPageCustomerClass;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.DataGridView gvCustomerClass;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.ComboBox cboProductCustomerClass;
+        private System.Windows.Forms.DateTimePicker dtpStartDateCustomerClass;
+        private System.Windows.Forms.Button BtnSearchCustomerClass;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button BtnAddCustomerClass;
+        private System.Windows.Forms.DataGridViewImageColumn EditCustomerClass;
     }
 }
