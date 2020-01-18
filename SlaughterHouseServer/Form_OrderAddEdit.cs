@@ -22,6 +22,7 @@ namespace SlaughterHouseServer
             gv.CellContentClick += Gv_CellContentClick;
             gv.DataBindingComplete += Gv_DataBindingComplete;
             gv.CellEndEdit += Gv_CellEndEdit;
+            gv.CellValidating += Gv_CellValidating;
             gv.EditingControlShowing += Gv_EditingControlShowing;
             //gv.ReadOnly = true;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
@@ -88,13 +89,25 @@ namespace SlaughterHouseServer
                 txtComment.Focus();
             }
         }
-        private void ColumnNumber_KeyPress(object sender, KeyPressEventArgs e)
+        private void ColumnNumberInt_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
         }
+
+        private void ColumnNumberDec_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                if (e.KeyChar.ToString() != ".")
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
         #endregion
 
         #region Event GridView
@@ -188,44 +201,79 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Gv_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            try
+            {
+                if (gv.Columns[e.ColumnIndex].Name.ToUpper() == ConstColumns.WGH || gv.Columns[e.ColumnIndex].Name.ToUpper() == ConstColumns.QTY)
+                {
+                    decimal d;
+                    if (decimal.TryParse(e.FormattedValue.ToString(), out d))
+                    {
+                        e.Cancel = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("โปรดระบุเป็นตัวเลข");
+                        e.Cancel = true;
+                    }
+                }
+                //MessageBox.Show(e.FormattedValue.ToString() );
+            }
+            catch
+            {
+
+            }
+        }
+
         private void Gv_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             //do your checks to see RowIndex is not -1 and other good stuffs
             //var row = gv.Rows[e.RowIndex];
-            int rowIdx = e.RowIndex;
-            int colIdx = e.ColumnIndex - 1;
-            DataGridView senderGrid = (DataGridView)sender;
-            decimal packingSize = 0;
-            decimal.TryParse(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString(), out packingSize);
-
-            switch (senderGrid.Columns[e.ColumnIndex].Name)
+            try
             {
-                case "qty":
-                    dtOrderItem.Rows[rowIdx][ConstColumns.WGH] = MyExtension.ToInt32(dtOrderItem.Rows[rowIdx][ConstColumns.QTY].ToString()) * packingSize;
-                    break;
-                case "wgh":
-                    if (packingSize == 0)
-                    {
+                int rowIdx = e.RowIndex;
+                int colIdx = e.ColumnIndex - 1;
+                DataGridView senderGrid = (DataGridView)sender;
+                decimal packingSize = 0;
+                decimal.TryParse(dtOrderItem.Rows[rowIdx][ConstColumns.PACKING_SIZE].ToString(), out packingSize);
+
+                switch (senderGrid.Columns[e.ColumnIndex].Name)
+                {
+                    case "qty":
+                        dtOrderItem.Rows[rowIdx][ConstColumns.WGH] = MyExtension.ToInt32(dtOrderItem.Rows[rowIdx][ConstColumns.QTY].ToString()) * packingSize;
                         break;
-                    }
-                    dtOrderItem.Rows[rowIdx][ConstColumns.QTY] = RoundQty(MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.WGH].ToString()) / packingSize);
-                    break;
+                    case "wgh":
+                        if (packingSize == 0)
+                        {
+                            break;
+                        }
+                        dtOrderItem.Rows[rowIdx][ConstColumns.QTY] = RoundQty(MyExtension.ToDecimal(dtOrderItem.Rows[rowIdx][ConstColumns.WGH].ToString()) / packingSize);
+                        break;
+                }
+                dtOrderItem.AcceptChanges();
+                gv.Refresh();
+                //row.Cells[e.ColumnIndex].OwningColumn.Name  ##getName
             }
-            dtOrderItem.AcceptChanges();
-            gv.Refresh();
-            //row.Cells[e.ColumnIndex].OwningColumn.Name  ##getName
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
         private void Gv_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            e.Control.KeyPress -= new KeyPressEventHandler(ColumnNumber_KeyPress);
-            if (gv.CurrentCell.ColumnIndex == 4 || gv.CurrentCell.ColumnIndex == 6) //Desired Column
+            e.Control.KeyPress -= new KeyPressEventHandler(ColumnNumberInt_KeyPress);
+            if (gv.CurrentCell.ColumnIndex == 4) //Desired Column || gv.CurrentCell.ColumnIndex == 7
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
                 {
-                    tb.KeyPress += new KeyPressEventHandler(ColumnNumber_KeyPress);
+                    tb.KeyPress += new KeyPressEventHandler(ColumnNumberInt_KeyPress);
                 }
             }
+
         }
         #endregion
 
@@ -534,17 +582,26 @@ namespace SlaughterHouseServer
         private int RoundQty(decimal num)
         {
 
-            var result = (num - Math.Truncate(num)).ToString().Substring(2, 1);
-
-            int firstDecimal = Convert.ToInt32(result);
-            if (firstDecimal >= 8)
+            decimal chkDec = num % 1;
+            if (chkDec > 0 && chkDec < 1)
             {
-                int res = Convert.ToInt32(Math.Ceiling(num));
-                return res;
+                var result = (num - Math.Truncate(num)).ToString().Substring(2, 1);
+
+                int firstDecimal = Convert.ToInt32(result);
+                if (firstDecimal >= 8)
+                {
+                    int res = Convert.ToInt32(Math.Ceiling(num));
+                    return res;
+                }
+                else
+                {
+                    int res = Convert.ToInt32(Math.Floor(num));
+                    return res;
+                }
             }
             else
             {
-                int res = Convert.ToInt32(Math.Floor(num));
+                int res = Convert.ToInt32(num);
                 return res;
             }
 

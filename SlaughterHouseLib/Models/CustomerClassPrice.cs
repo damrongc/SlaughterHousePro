@@ -40,13 +40,13 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" FROM customer_class_price a, product b, master_class c");
                     sb.Append(" WHERE a.product_code = b.product_code ");
                     sb.Append(" AND a.class_id = c.class_id ");
-                    //sb.Append(" AND a.start_date <= '" + startDate.ToString("yyyy-MM-dd") + "'");
+                    sb.Append(" AND a.start_date <= '" + startDate.ToString("yyyy-MM-dd") + "'");
                     sb.Append(" AND a.end_date >= '" + startDate.ToString("yyyy-MM-dd") + "'");
                     if (!string.IsNullOrEmpty(productCode))
                         sb.Append(" AND a.product_code =@product_code");
                     sb.Append(" ORDER BY c.class_name, b.product_name, a.end_date ");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
-                    //cmd.Parameters.AddWithValue("start_date", startDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("start_date", startDate.ToString("yyyy-MM-dd"));
                     if (!string.IsNullOrEmpty(productCode))
                         cmd.Parameters.AddWithValue("product_code", productCode);
                     var da = new MySqlDataAdapter(cmd);
