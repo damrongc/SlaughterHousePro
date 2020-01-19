@@ -46,12 +46,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Del = new System.Windows.Forms.DataGridViewImageColumn();
             this.groupBoxCustomerClass = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnAddOrderItem = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Del = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.groupBoxCustomerClass.SuspendLayout();
@@ -62,7 +62,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(130, 38);
+            this.label1.Location = new System.Drawing.Point(157, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 29);
             this.label1.TabIndex = 0;
@@ -70,7 +70,7 @@
             // 
             // txtCustomerCode
             // 
-            this.txtCustomerCode.Location = new System.Drawing.Point(225, 35);
+            this.txtCustomerCode.Location = new System.Drawing.Point(252, 35);
             this.txtCustomerCode.MaxLength = 10;
             this.txtCustomerCode.Name = "txtCustomerCode";
             this.txtCustomerCode.Size = new System.Drawing.Size(215, 36);
@@ -78,15 +78,15 @@
             // 
             // txtCustomerName
             // 
-            this.txtCustomerName.Location = new System.Drawing.Point(225, 77);
+            this.txtCustomerName.Location = new System.Drawing.Point(252, 77);
             this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(573, 36);
+            this.txtCustomerName.Size = new System.Drawing.Size(594, 36);
             this.txtCustomerName.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(141, 80);
+            this.label2.Location = new System.Drawing.Point(168, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 29);
             this.label2.TabIndex = 2;
@@ -94,16 +94,16 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(225, 119);
+            this.txtAddress.Location = new System.Drawing.Point(252, 119);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(573, 93);
+            this.txtAddress.Size = new System.Drawing.Size(594, 93);
             this.txtAddress.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(173, 119);
+            this.label3.Location = new System.Drawing.Point(200, 119);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 29);
             this.label3.TabIndex = 4;
@@ -114,7 +114,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(225, 359);
+            this.chkActive.Location = new System.Drawing.Point(252, 359);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 6;
@@ -130,7 +130,7 @@
             this.BtnSave.ForeColor = System.Drawing.Color.White;
             this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
             this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSave.Location = new System.Drawing.Point(583, 411);
+            this.BtnSave.Location = new System.Drawing.Point(610, 411);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(215, 36);
             this.BtnSave.TabIndex = 7;
@@ -147,7 +147,7 @@
             this.BtnSaveAndNew.ForeColor = System.Drawing.Color.White;
             this.BtnSaveAndNew.Image = ((System.Drawing.Image)(resources.GetObject("BtnSaveAndNew.Image")));
             this.BtnSaveAndNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSaveAndNew.Location = new System.Drawing.Point(228, 411);
+            this.BtnSaveAndNew.Location = new System.Drawing.Point(255, 411);
             this.BtnSaveAndNew.Name = "BtnSaveAndNew";
             this.BtnSaveAndNew.Size = new System.Drawing.Size(202, 36);
             this.BtnSaveAndNew.TabIndex = 25;
@@ -158,17 +158,17 @@
             // 
             // txtShipTo
             // 
-            this.txtShipTo.Location = new System.Drawing.Point(225, 218);
+            this.txtShipTo.Location = new System.Drawing.Point(252, 218);
             this.txtShipTo.MaxLength = 80;
             this.txtShipTo.Multiline = true;
             this.txtShipTo.Name = "txtShipTo";
-            this.txtShipTo.Size = new System.Drawing.Size(573, 93);
+            this.txtShipTo.Size = new System.Drawing.Size(594, 93);
             this.txtShipTo.TabIndex = 27;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(86, 220);
+            this.label4.Location = new System.Drawing.Point(113, 220);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(133, 29);
             this.label4.TabIndex = 26;
@@ -176,16 +176,16 @@
             // 
             // txtTaxId
             // 
-            this.txtTaxId.Location = new System.Drawing.Point(225, 317);
+            this.txtTaxId.Location = new System.Drawing.Point(252, 317);
             this.txtTaxId.MaxLength = 13;
             this.txtTaxId.Name = "txtTaxId";
-            this.txtTaxId.Size = new System.Drawing.Size(215, 36);
+            this.txtTaxId.Size = new System.Drawing.Size(236, 36);
             this.txtTaxId.TabIndex = 29;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 320);
+            this.label5.Location = new System.Drawing.Point(64, 320);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(182, 29);
             this.label5.TabIndex = 28;
@@ -193,16 +193,16 @@
             // 
             // txtContactNo
             // 
-            this.txtContactNo.Location = new System.Drawing.Point(583, 317);
+            this.txtContactNo.Location = new System.Drawing.Point(610, 317);
             this.txtContactNo.MaxLength = 10;
             this.txtContactNo.Name = "txtContactNo";
-            this.txtContactNo.Size = new System.Drawing.Size(215, 36);
+            this.txtContactNo.Size = new System.Drawing.Size(236, 36);
             this.txtContactNo.TabIndex = 31;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(478, 320);
+            this.label6.Location = new System.Drawing.Point(510, 320);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(99, 29);
             this.label6.TabIndex = 30;
@@ -214,7 +214,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 66);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(823, 153);
+            this.panel1.Size = new System.Drawing.Size(859, 182);
             this.panel1.TabIndex = 0;
             // 
             // gv
@@ -235,8 +235,23 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(823, 153);
+            this.gv.Size = new System.Drawing.Size(859, 182);
             this.gv.TabIndex = 44;
+            // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "แก้ไข";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.Name = "Edit";
+            this.Edit.Width = 58;
+            // 
+            // Del
+            // 
+            this.Del.HeaderText = "ลบ";
+            this.Del.Image = ((System.Drawing.Image)(resources.GetObject("Del.Image")));
+            this.Del.Name = "Del";
+            this.Del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Del.Width = 42;
             // 
             // groupBoxCustomerClass
             // 
@@ -244,7 +259,7 @@
             this.groupBoxCustomerClass.Controls.Add(this.panel2);
             this.groupBoxCustomerClass.Location = new System.Drawing.Point(17, 501);
             this.groupBoxCustomerClass.Name = "groupBoxCustomerClass";
-            this.groupBoxCustomerClass.Size = new System.Drawing.Size(829, 222);
+            this.groupBoxCustomerClass.Size = new System.Drawing.Size(865, 251);
             this.groupBoxCustomerClass.TabIndex = 62;
             this.groupBoxCustomerClass.TabStop = false;
             this.groupBoxCustomerClass.Text = "ระดับของลูกค้า";
@@ -256,7 +271,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(3, 32);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(823, 34);
+            this.panel2.Size = new System.Drawing.Size(859, 34);
             this.panel2.TabIndex = 0;
             // 
             // btnAddOrderItem
@@ -269,7 +284,7 @@
             this.btnAddOrderItem.ForeColor = System.Drawing.Color.White;
             this.btnAddOrderItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddOrderItem.Image")));
             this.btnAddOrderItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddOrderItem.Location = new System.Drawing.Point(736, 0);
+            this.btnAddOrderItem.Location = new System.Drawing.Point(772, 0);
             this.btnAddOrderItem.Name = "btnAddOrderItem";
             this.btnAddOrderItem.Size = new System.Drawing.Size(87, 34);
             this.btnAddOrderItem.TabIndex = 39;
@@ -296,30 +311,15 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(17, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(829, 471);
+            this.groupBox2.Size = new System.Drawing.Size(865, 471);
             this.groupBox2.TabIndex = 63;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "ข้อมูลลูกค้า";
             // 
-            // Edit
-            // 
-            this.Edit.HeaderText = "แก้ไข";
-            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
-            this.Edit.Name = "Edit";
-            this.Edit.Width = 58;
-            // 
-            // Del
-            // 
-            this.Del.HeaderText = "ลบ";
-            this.Del.Image = ((System.Drawing.Image)(resources.GetObject("Del.Image")));
-            this.Del.Name = "Del";
-            this.Del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Del.Width = 42;
-            // 
             // Form_CustomerAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(861, 751);
+            this.ClientSize = new System.Drawing.Size(904, 764);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBoxCustomerClass);
             this.Font = new System.Drawing.Font("Kanit", 14.25F);

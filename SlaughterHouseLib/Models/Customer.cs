@@ -307,6 +307,56 @@ namespace SlaughterHouseLib.Models
             }
         }
 
+        public static CustomerClass GetCustomerClassUse(string customerCode, DateTime requestDate)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @" SELECT cls.class_id, cls.start_date, cls.end_date
+                                FROM customer c , customer_class cls
+                                WHERE c.active=1
+	                                and c.customer_code = @customer_code
+	                                and cls.start_date <= @start_date
+	                                and cls.end_date >= @end_date
+	                                and c.customer_code = cls.customer_code 
+                                order by cls.start_date desc limit 1 ";
+                    //ต้อง where เรื่อง วันนี้ start end date;
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("customer_code", customerCode);
+                    cmd.Parameters.AddWithValue("start_date", requestDate.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("end_date", requestDate.ToString("yyyy-MM-dd"));
+
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        return new CustomerClass
+                        {
+                            MasterClass = new MasterClass
+                            {
+                                ClassId = (int)ds.Tables[0].Rows[0]["class_id"], 
+                            },
+                            StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
+                            EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
+                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays + 1),
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public static bool IsDuplicateData(string customerCode)
         {
             try

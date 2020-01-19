@@ -583,9 +583,7 @@ namespace SlaughterHouseServer
             {
                 throw;
             }
-        }
-
-
+        } 
         private int RoundQty(decimal num)
         {
 
