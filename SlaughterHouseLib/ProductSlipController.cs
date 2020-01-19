@@ -300,7 +300,7 @@ namespace SlaughterHouseLib
 
     public static class ProductSlipItemController
     {
-        public static DataTable GetProductSlipItemByOrderNo(string orderNo)
+        public static DataTable GetProductSlipItemByOrderNo(string orderNo, DateTime reqDate)
         {
             try
             {
@@ -344,7 +344,7 @@ namespace SlaughterHouseLib
                             if (Convert.ToDecimal(dt.Rows[i]["QTY_WGH_LOCATION"]) == 0)
                             {
                                 int row = i;
-                                dtLocation = StockController.GetCfLocation(dt.Rows[row]["PRODUCT_CODE"].ToString());
+                                dtLocation = StockController.GetCfLocation(dt.Rows[row]["PRODUCT_CODE"].ToString(), reqDate);
                                 if (dtLocation != null && dtLocation.Rows.Count > 0)
                                 {
                                     decimal qtyWghSo = Convert.ToDecimal(dt.Rows[row]["QTY_WGH"]);

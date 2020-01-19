@@ -91,7 +91,7 @@ namespace SlaughterHouseServer
             dtCusClass = CustomerClassController.GetClassAllByCustomer(this.customerCode);
             gv.DataSource = dtCusClass;
             DateTime today = DateTime.Today;
-            CustomerClass  customerClass = CustomerController.GetCustomerClassUse(this.customerCode, today);
+            CustomerClass customerClass = CustomerController.GetCustomerClassUse(this.customerCode, today);
             foreach (DataGridViewRow row in gv.Rows)
             {
                 if ((int)row.Cells[ConstColumns.CLASS_ID].Value == customerClass.MasterClass.ClassId && (DateTime)row.Cells[ConstColumns.START_DATE].Value == customerClass.StartDate)
@@ -99,7 +99,6 @@ namespace SlaughterHouseServer
                     gv.Rows[row.Index].DefaultCellStyle.BackColor = Color.Bisque;
                 }
             }
-
         }
 
         private void TxtTaxId_KeyPress(object sender, KeyPressEventArgs e)
