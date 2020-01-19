@@ -107,7 +107,6 @@ namespace SlaughterHouseServer
                 }
             }
         }
-
         #endregion
 
         #region Event GridView
@@ -214,9 +213,9 @@ namespace SlaughterHouseServer
                         e.Cancel = false;
                     }
                     else
-                    {
-                        MessageBox.Show("โปรดระบุเป็นตัวเลข");
+                    { MessageBox.Show("โปรดระบุเป็นตัวเลข");
                         e.Cancel = true;
+                        //dtOrderItem.Rows[e.RowIndex][e.ColumnIndex] = 0;
                     }
                 }
                 //MessageBox.Show(e.FormattedValue.ToString() );
@@ -265,6 +264,7 @@ namespace SlaughterHouseServer
         private void Gv_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress -= new KeyPressEventHandler(ColumnNumberInt_KeyPress);
+            e.Control.KeyPress -= new KeyPressEventHandler(ColumnNumberDec_KeyPress);
             if (gv.CurrentCell.ColumnIndex == 4) //Desired Column || gv.CurrentCell.ColumnIndex == 7
             {
                 TextBox tb = e.Control as TextBox;
@@ -274,6 +274,14 @@ namespace SlaughterHouseServer
                 }
             }
 
+            if (gv.CurrentCell.ColumnIndex == 7) //Desired Column || gv.CurrentCell.ColumnIndex == 7
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(ColumnNumberDec_KeyPress);
+                }
+            }
         }
         #endregion
 
@@ -289,11 +297,10 @@ namespace SlaughterHouseServer
             }
             catch (System.Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void BtnSaveAndNew_Click(object sender, System.EventArgs e)
         {
             try
