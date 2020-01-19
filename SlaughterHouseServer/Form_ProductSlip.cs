@@ -256,7 +256,7 @@ namespace SlaughterHouseServer
             if (String.IsNullOrEmpty(txtProductSlipNo.Text))
             {
                 dtProductSlipItem = new DataTable("PRODUCT_SLIP_ITEM");
-                dtProductSlipItem = ProductSlipItemController.GetProductSlipItemByOrderNo(orderNo);
+                dtProductSlipItem = ProductSlipItemController.GetProductSlipItemByOrderNo(orderNo, dtpProductSlipDate.Value);
                 gv.DataSource = dtProductSlipItem;
             }
             else

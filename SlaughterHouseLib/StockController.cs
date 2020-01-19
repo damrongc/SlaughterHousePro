@@ -295,7 +295,7 @@ namespace SlaughterHouseLib
 
 
         }
-        public static DataTable GetCfLocation(string productCode, string lotNo = "")
+        public static DataTable GetCfLocation(string productCode, DateTime pDate, string lotNo = "")
         {
             try
             {
@@ -303,6 +303,7 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
+                    //and stk.stock_date = (SELECT production_date FROM slaughterhouse.plant WHERE plant_id = 1)
                     string sql = @"
                                 Select  p.product_name, stk.lot_no, loc.location_code, loc.location_name,
                                 case when p.issue_unit_method = 'W'
@@ -310,9 +311,9 @@ namespace SlaughterHouseLib
                                     else sum(case when stk.transaction_type = '1' then stk.stock_qty else stk.stock_qty*-1 end)
                                     end as qty_wgh, p.issue_unit_method
                                 From stock stk, product p, location loc
-                                where 1 = 1
-                                 and stk.stock_date = (SELECT production_date FROM slaughterhouse.plant WHERE plant_id = 1)
-                                 and stk.product_code = @product_code ";
+                                where 1 = 1 
+                                 and stk.product_code = @product_code 
+                                 and stk.stock_date = @stock_date";
                     if (lotNo != "")
                     {
                         sql += " and stk.lot_no = @lot_no ";
@@ -330,6 +331,7 @@ namespace SlaughterHouseLib
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("product_code", productCode);
+                    cmd.Parameters.AddWithValue("stock_date", pDate.ToString("yyyy-MM-dd"));
                     if (lotNo != "")
                     {
                         cmd.Parameters.AddWithValue("lot_no", lotNo);
