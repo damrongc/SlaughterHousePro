@@ -10,6 +10,7 @@ namespace SlaughterHouseClient.Receiving
     {
         //int ReceiveFlag { get; set; }
 
+        public string ReceiveNo { get; set; }
         public string ProductCode { get; set; }
         ReportDocument doc = new ReportDocument();
         public Form_Barcode()
@@ -46,18 +47,16 @@ namespace SlaughterHouseClient.Receiving
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
                 {
-
                     string barcode_no = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
-
-
                     var reportPath = Application.StartupPath;
+                    //ds.WriteXml(string.Format(path, "barcode.xml"), XmlWriteMode.WriteSchema);
+
+
                     doc.Load(reportPath + "\\Report\\Rpt\\barcode.rpt");
                     DataTable dt = Helper.GetBarcode(barcode_no.ToLong());
+                    //dt.WriteXml(reportPath + "\\Report\\Rpt\\barcode.xml");
                     doc.SetDataSource(dt);
                     doc.PrintToPrinter(1, true, 0, 0);
-
-
-
                 }
             }
             catch (Exception ex)
@@ -66,6 +65,8 @@ namespace SlaughterHouseClient.Receiving
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private void Form_Load(object sender, System.EventArgs e)
         {
@@ -77,30 +78,61 @@ namespace SlaughterHouseClient.Receiving
 
             using (var db = new SlaughterhouseEntities())
             {
-                var barcodes = db.barcodes.Where(p => p.active == true
-                    && p.product_code == ProductCode).Select(p => new
+                if (!string.IsNullOrEmpty(ReceiveNo))
+                {
+                    var barcodes = db.receive_item.Where(p => p.receive_no == ReceiveNo
+              && p.product_code == ProductCode).Select(p => new
+              {
+                  p.barcode_no,
+                  p.product.product_code,
+                  p.product.product_name,
+                  p.lot_no,
+                  p.create_at,
+                  p.receive_qty,
+                  p.receive_wgh
+              }).OrderByDescending(p => p.barcode_no).ToList();
+                    //var qry = db.receives.Where(p => (p.farm_qty - p.factory_qty) > 0).ToList();
+                    var coll = barcodes.AsEnumerable().Select(p => new
                     {
                         p.barcode_no,
-                        p.product.product_code,
-                        p.product.product_name,
-                        p.production_date,
+                        p.product_code,
+                        p.product_name,
+                        production_date = p.create_at.ToString("dd-MM-yyyy"),
                         p.lot_no,
-                        p.qty,
-                        p.wgh
-                    }).OrderByDescending(p => p.barcode_no).ToList();
-                //var qry = db.receives.Where(p => (p.farm_qty - p.factory_qty) > 0).ToList();
-                var coll = barcodes.AsEnumerable().Select(p => new
-                {
-                    p.barcode_no,
-                    p.product_code,
-                    p.product_name,
-                    production_date = p.production_date.ToString("dd-MM-yyyy"),
-                    p.lot_no,
-                    qty = p.qty.ToComma(),
-                    wgh = p.wgh.ToFormat2Decimal()
-                }).ToList();
+                        qty = p.receive_qty.ToComma(),
+                        wgh = p.receive_wgh.ToFormat2Decimal()
+                    }).ToList();
 
-                gv.DataSource = coll;
+                    gv.DataSource = coll;
+                }
+                else
+                {
+                    var barcodes = db.barcodes.Where(p => p.active == true
+                   && p.product_code == ProductCode).Select(p => new
+                   {
+                       p.barcode_no,
+                       p.product.product_code,
+                       p.product.product_name,
+                       p.production_date,
+                       p.lot_no,
+                       p.qty,
+                       p.wgh
+                   }).OrderByDescending(p => p.barcode_no).ToList();
+                    //var qry = db.receives.Where(p => (p.farm_qty - p.factory_qty) > 0).ToList();
+                    var coll = barcodes.AsEnumerable().Select(p => new
+                    {
+                        p.barcode_no,
+                        p.product_code,
+                        p.product_name,
+                        production_date = p.production_date.ToString("dd-MM-yyyy"),
+                        p.lot_no,
+                        qty = p.qty.ToComma(),
+                        wgh = p.wgh.ToFormat2Decimal()
+                    }).ToList();
+
+                    gv.DataSource = coll;
+                }
+
 
                 gv.Columns[0].HeaderText = "รหัส";
                 gv.Columns[1].HeaderText = "รหัสสินค้า";

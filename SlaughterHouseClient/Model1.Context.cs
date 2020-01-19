@@ -25,14 +25,9 @@ namespace SlaughterHouseClient
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<barcode> barcodes { get; set; }
         public virtual DbSet<bom> boms { get; set; }
         public virtual DbSet<bom_item> bom_item { get; set; }
         public virtual DbSet<breeder> breeders { get; set; }
-        public virtual DbSet<customer> customers { get; set; }
-        public virtual DbSet<customer_class> customer_class { get; set; }
-        public virtual DbSet<customer_class_discount> customer_class_discount { get; set; }
-        public virtual DbSet<customer_price> customer_price { get; set; }
         public virtual DbSet<document_generate> document_generate { get; set; }
         public virtual DbSet<farm> farms { get; set; }
         public virtual DbSet<invoice> invoices { get; set; }
@@ -59,5 +54,12 @@ namespace SlaughterHouseClient
         public virtual DbSet<group> groups { get; set; }
         public virtual DbSet<receive> receives { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<customer> customers { get; set; }
+        public virtual DbSet<customer_class> customer_class { get; set; }
+        public virtual DbSet<customer_class_discount> customer_class_discount { get; set; }
+        public virtual DbSet<customer_class_price> customer_class_price { get; set; }
+        public virtual DbSet<customer_price> customer_price { get; set; }
+        public virtual DbSet<master_class> master_class { get; set; }
+        public virtual DbSet<barcode> barcodes { get; set; }
     }
 }

@@ -14,9 +14,10 @@ namespace SlaughterHouseClient
     
     public partial class customer_class
     {
+        public string customer_code { get; set; }
+        public System.DateTime start_date { get; set; }
         public int class_id { get; set; }
-        public string class_name { get; set; }
-        public bool active { get; set; }
+        public System.DateTime end_date { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
         public Nullable<System.DateTime> modified_at { get; set; }

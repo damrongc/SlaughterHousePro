@@ -12,19 +12,16 @@ namespace SlaughterHouseClient
     using System;
     using System.Collections.Generic;
     
-    public partial class barcode
+    public partial class customer_class_price
     {
-        public long barcode_no { get; set; }
+        public int class_id { get; set; }
         public string product_code { get; set; }
-        public System.DateTime production_date { get; set; }
-        public string lot_no { get; set; }
-        public int qty { get; set; }
-        public decimal wgh { get; set; }
-        public bool active { get; set; }
+        public System.DateTime start_date { get; set; }
+        public System.DateTime end_date { get; set; }
+        public decimal unit_price { get; set; }
         public System.DateTime create_at { get; set; }
         public string create_by { get; set; }
-        public byte[] qrcode_image { get; set; }
-    
-        public virtual product product { get; set; }
+        public Nullable<System.DateTime> modified_at { get; set; }
+        public string modified_by { get; set; }
     }
 }

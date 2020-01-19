@@ -22,7 +22,6 @@ namespace SlaughterHouseClient
     
         public string customer_code { get; set; }
         public string customer_name { get; set; }
-        public int class_id { get; set; }
         public string address { get; set; }
         public string ship_to { get; set; }
         public string tax_id { get; set; }

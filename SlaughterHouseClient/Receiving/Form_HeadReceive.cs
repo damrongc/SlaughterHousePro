@@ -17,16 +17,20 @@ namespace SlaughterHouseClient.Receiving
     public partial class Form_HeadReceive : Form
     {
         const string PRODUCT_CODE = "04001";
-        SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
+        private readonly SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
         product product;
         private bool isStart = false;
         private bool isTare = false;
         private bool isZero = true;
         bool lockWeight = false;
+
         int stableCount = 0;
-        int locationCode = 8;
+        private int stableTarget = 0;
+        private int displayTime = 3;
+        private int scaleDivision = 100;
+        private readonly int locationCode = 8;
         long barcode_no = 0;
-        ReportDocument doc = new ReportDocument();
+        readonly ReportDocument doc = new ReportDocument();
 
 
         FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
@@ -101,6 +105,19 @@ namespace SlaughterHouseClient.Receiving
                 serialPort1.Parity = Parity.None;
                 serialPort1.StopBits = StopBits.One;
 
+                stableTarget = MySettings["StableTarget"].ToString().ToInt16();
+                displayTime = MySettings["DisplayTime"].ToString().ToInt16();
+                scaleDivision = MySettings["Division"].ToString().ToInt16();
+                if (stableTarget == 0)
+                {
+                    btnAcceptWeight.Visible = true;
+                }
+                else
+                {
+                    btnAcceptWeight.Visible = false;
+
+                }
+
             }
         }
 
@@ -159,34 +176,32 @@ namespace SlaughterHouseClient.Receiving
 
                         if (stateOfScale == 0)
                         {
-                            num = DataInvoke.Substring(16, 6).ToDouble() / 1000;
+                            num = DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
                         else if (stateOfScale == 1)
                         {
-                            num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / 1000;
+                            num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
                         lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
-                        //if (isStart && isZero)
-                        //{
-                        //    if (num > 0 && num > product.min_weight.ToString().ToDouble())
-                        //    {
-                        //        if (stableWt == 0)
-                        //            stableCount += 1;
-                        //        else
-                        //            stableCount = 0;
-                        //        lblStable.Text = stableCount.ToString();
-                        //        lblStable.Refresh();
+                        if (isStart && isZero)
+                        {
+                            if (num > 0 && num > product.min_weight.ToString().ToDouble())
+                            {
+                                if (stableWt == 0)
+                                    stableCount += 1;
+                                else
+                                    stableCount = 0;
+                                lblStable.Text = stableCount.ToString();
+                                lblStable.Refresh();
 
 
-                        //    }
-                        //    if (stableCount >= Constants.STABLE_TARGET.ToInt16())
-                        //    {
-                        //        lockWeight = true;
-                        //        isZero = false;
-
-                        //        ProcessData();
-                        //    }
-                        //}
+                            }
+                            if (stableCount >= stableTarget)
+                            {
+                                lockWeight = true;
+                                ProcessData();
+                            }
+                        }
                     }
 
 
@@ -194,8 +209,6 @@ namespace SlaughterHouseClient.Receiving
 
             }
         }
-
-
 
         private void LoadData()
         {
@@ -378,7 +391,6 @@ namespace SlaughterHouseClient.Receiving
 
         private void BtnAcceptWeight_Click(object sender, EventArgs e)
         {
-
             ProcessData();
 
         }
@@ -468,14 +480,21 @@ namespace SlaughterHouseClient.Receiving
                     int count = db.barcodes.Count();
                     if (count == 0)
                     {
-                        barcode_no = 1;
+                        barcode_no = string.Format("{0}0000000001", plantID).ToLong();
                     }
                     else
                     {
                         barcode_no = db.barcodes.Max(p => p.barcode_no) + 1;
+                        if (barcode_no.ToString().Length > 11)
+                        {
+                            var tempBarcode = barcode_no.ToString().TrimStart('1');
+                            var running = tempBarcode.ToLong();
+                            var code = running.ToString().PadLeft(10, '0');
+                            barcode_no = ("1" + code).ToLong();
+                        }
 
                     }
-                    //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
+
                     seq += 1;
                     var item = new receive_item
                     {
@@ -604,6 +623,7 @@ namespace SlaughterHouseClient.Receiving
             {
                 btnPrint.Enabled = false;
                 DataTable dt = Helper.GetBarcode(barcode_no);
+                lblMessage.Text = "กำลังพิมพ์สติกเกอร์...";
                 doc.SetDataSource(dt);
                 doc.PrintToPrinter(1, true, 0, 0);
             }
@@ -622,15 +642,13 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                if (barcode_no > 0)
+                if (string.IsNullOrEmpty(lblReceiveNo.Text))
+                    throw new Exception("กรุณาเลือกข้อมูล");
+                var frmBarcode = new Form_Barcode
                 {
-                    PrintBarcode();
-
-                }
-                else
-                {
-                    throw new Exception("ไม่พบรหัสบาร์โค็ด");
-                }
+                    ReceiveNo = lblReceiveNo.Text
+                };
+                frmBarcode.ShowDialog();
             }
             catch (Exception ex)
             {

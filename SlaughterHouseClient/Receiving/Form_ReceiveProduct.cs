@@ -43,7 +43,7 @@ namespace SlaughterHouseClient.Receiving
         private int scaleDivision = 100;
 
         //SerialPortManager _spManager;
-        long barcodeNo = 0;
+        long barcode_no = 0;
         string lot_no = "";
         string product_code = "";
         ReportDocument doc = new ReportDocument();
@@ -382,7 +382,7 @@ namespace SlaughterHouseClient.Receiving
                 if (stocks.Count > 0)
                 {
                     lblLastWeight.Text = stocks[stocks.Count - 1].stock_wgh.ToFormat2Decimal();
-                    barcodeNo = stocks[stocks.Count - 1].barcode_no;
+                    barcode_no = stocks[stocks.Count - 1].barcode_no;
                 }
             }
         }
@@ -563,11 +563,27 @@ namespace SlaughterHouseClient.Receiving
                     {
                         try
                         {
-                            barcodeNo = db.barcodes.Max(p => p.barcode_no) + 1;
+                            int count = db.barcodes.Count();
+                            if (count == 0)
+                            {
+                                barcode_no = string.Format("{0}0000000001", plantID).ToLong();
+                            }
+                            else
+                            {
+                                barcode_no = db.barcodes.Max(p => p.barcode_no) + 1;
+                                if (barcode_no.ToString().Length > 11)
+                                {
+                                    var tempBarcode = barcode_no.ToString().TrimStart('1');
+                                    var running = tempBarcode.ToLong();
+                                    var code = running.ToString().PadLeft(10, '0');
+                                    barcode_no = ("1" + code).ToLong();
+                                }
+
+                            }
                             //insert barcode
                             var barcode = new barcode
                             {
-                                barcode_no = barcodeNo,
+                                barcode_no = barcode_no,
                                 product_code = product_code,
                                 production_date = productionDate,
                                 lot_no = lot_no,
@@ -593,7 +609,7 @@ namespace SlaughterHouseClient.Receiving
                                 //ref_document_type = Constants.REV,
                                 lot_no = barcode.lot_no,
                                 location_code = locationCode,
-                                barcode_no = barcodeNo,
+                                barcode_no = barcode_no,
                                 transaction_type = 1,
                                 create_by = createBy
                             };
@@ -625,8 +641,9 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                DataTable dt = Helper.GetBarcode(barcodeNo);
+                DataTable dt = Helper.GetBarcode(barcode_no);
                 doc.SetDataSource(dt);
+                lblMessage.Text = "กำลังพิมพ์สติกเกอร์...";
                 doc.PrintToPrinter(1, true, 0, 0);
             }
             catch (Exception)

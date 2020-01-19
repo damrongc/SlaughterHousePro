@@ -196,10 +196,8 @@ namespace SlaughterHouseClient.Issued
                 LoadData(lblOrderNo.Text);
                 LoadLotNo();
 
-
                 //clear weight
                 lockWeight = false;
-                stableCount = 0;
                 timerMinWeight.Enabled = true;
 
 

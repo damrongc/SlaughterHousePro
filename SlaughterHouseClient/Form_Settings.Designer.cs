@@ -164,11 +164,10 @@
             this.cboStableTarget.FormattingEnabled = true;
             this.cboStableTarget.Items.AddRange(new object[] {
             "0",
+            "5",
             "10",
-            "20",
-            "30",
-            "40",
-            "50"});
+            "15",
+            "20"});
             this.cboStableTarget.Location = new System.Drawing.Point(312, 186);
             this.cboStableTarget.Name = "cboStableTarget";
             this.cboStableTarget.Size = new System.Drawing.Size(258, 43);

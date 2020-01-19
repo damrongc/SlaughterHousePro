@@ -33,10 +33,10 @@ namespace SlaughterHouseClient
         public Nullable<System.DateTime> modified_at { get; set; }
         public string modified_by { get; set; }
     
-        public virtual customer customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<orders_item> orders_item { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<product_slip> product_slip { get; set; }
+        public virtual customer customer { get; set; }
     }
 }

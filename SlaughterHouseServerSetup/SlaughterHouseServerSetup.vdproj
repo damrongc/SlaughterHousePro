@@ -99,6 +99,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_39AD901F3A5B4004BD79CC4814FDC5C9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3C24360B9A1D403CAD2BCBF9974E8337"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -112,19 +118,19 @@
         "Entry"
         {
         "MsmKey" = "8:_3CAFD5ECAAD65FDAF56BDFBF19B9DF37"
-        "OwnerKey" = "8:_EBFF49CAE8D74F0C0399940F8D47146F"
+        "OwnerKey" = "8:_DEFF74F2DD81FD89899750C3519BD07E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3CAFD5ECAAD65FDAF56BDFBF19B9DF37"
+        "OwnerKey" = "8:_CF15515E3634CFFEAB5011765A16D514"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_3CAFD5ECAAD65FDAF56BDFBF19B9DF37"
         "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3CAFD5ECAAD65FDAF56BDFBF19B9DF37"
-        "OwnerKey" = "8:_DEFF74F2DD81FD89899750C3519BD07E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -321,6 +327,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_CF15515E3634CFFEAB5011765A16D514"
+        "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D6435BB90B364A5296813265437B42F7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -393,12 +405,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EBFF49CAE8D74F0C0399940F8D47146F"
-        "OwnerKey" = "8:_FDB1ADB60D414D6C93EF5843C3924468"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_EC9C694CD36B4A7CBBF3CC80866E6B93"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -460,7 +466,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EBFF49CAE8D74F0C0399940F8D47146F"
+        "OwnerKey" = "8:_CF15515E3634CFFEAB5011765A16D514"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -651,6 +657,11 @@
                     {
                     "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:SAP.CrystalReports14.NET.2.0"
+                    {
+                    "Name" = "8:SAP Crystal Reports Runtime Engine for .NET Framework"
+                    "ProductCode" = "8:SAP.CrystalReports14.NET.2.0"
                     }
                 }
             }
@@ -936,6 +947,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_39AD901F3A5B4004BD79CC4814FDC5C9"
+            {
+            "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\swinereceive_by_date.rpt"
+            "TargetName" = "8:swinereceive_by_date.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_AD5BC544660B4049891CDFDA10B2F517"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3C24360B9A1D403CAD2BCBF9974E8337"
@@ -1606,6 +1637,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CF15515E3634CFFEAB5011765A16D514"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SlaughterHouseLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_CF15515E3634CFFEAB5011765A16D514"
+                    {
+                    "Name" = "8:SlaughterHouseLib.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:SlaughterHouseLib.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5C3790145DF94ECCAA178CDF8F2656FF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6435BB90B364A5296813265437B42F7"
             {
             "SourcePath" = "8:..\\SlaughterHouseServer\\Report\\somapinvoice.rpt"
@@ -1793,37 +1855,6 @@
                     }
                 }
             "SourcePath" = "8:EntityFramework.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_5C3790145DF94ECCAA178CDF8F2656FF"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EBFF49CAE8D74F0C0399940F8D47146F"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SlaughterHouseLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_EBFF49CAE8D74F0C0399940F8D47146F"
-                    {
-                    "Name" = "8:SlaughterHouseLib.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:SlaughterHouseLib.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5C3790145DF94ECCAA178CDF8F2656FF"
@@ -2064,7 +2095,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SlaughterHouse Server"
         "ProductCode" = "8:{9E8739FF-B260-4350-8C61-1FD33AFC8463}"
-        "PackageCode" = "8:{0D48E0A6-0E89-4AB1-807C-0879665F01E5}"
+        "PackageCode" = "8:{0F6CB23B-78F0-4038-BC16-4AC54603E4CE}"
         "UpgradeCode" = "8:{20C0DE35-33AD-4276-9DCE-1D31D65FF090}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
