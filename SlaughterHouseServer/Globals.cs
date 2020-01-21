@@ -15,7 +15,7 @@ namespace SlaughterHouseServer
     }
     public static class ConstColumns
     {
-
+        //'ZZZZZZZZZZZZZZZZZZZ
         public const string BTN_INVOICE = "BTN_INVOICE";
         public const string BTN_PRODUCT_SLIP = "BTN_PRODUCT_SLIP";
 

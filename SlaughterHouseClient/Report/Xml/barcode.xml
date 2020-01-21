@@ -28,9 +28,15 @@
     </xs:element>
   </xs:schema>
   <Barcode>
+<<<<<<< HEAD
     <barcode_no>*1000000000040*</barcode_no>
     <barcode_no_text>1000000000040</barcode_no_text>
     <barcode_info>*0000101039500*</barcode_info>
+=======
+    <barcode_no>*10000000014*</barcode_no>
+    <barcode_no_text>10000000014</barcode_no_text>
+    <barcode_info>*0000101088900*</barcode_info>
+>>>>>>> 86d61c4fb1d603f2143ca185c3aa49be0faf4038
     <product_code>00101</product_code>
     <product_name>เครื่องในแดง</product_name>
     <production_date>2019-11-27T00:00:00+07:00</production_date>

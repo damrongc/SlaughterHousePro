@@ -617,16 +617,14 @@ namespace SlaughterHouseClient.Receiving
                             db.stocks.Add(stock);
                             db.SaveChanges();
                             transaction.Commit();
+                            PrintBarcode();
                         }
                         catch (Exception)
                         {
                             transaction.Rollback();
                             throw;
                         }
-                        finally
-                        {
-                            PrintBarcode();
-                        }
+
                     }
                 }
             }

@@ -616,6 +616,7 @@ namespace SlaughterHouseClient.Receiving
                             }
                             db.SaveChanges();
                             transaction.Commit();
+                            PrintBarcode();
                         }
                         catch (Exception)
                         {
@@ -623,10 +624,7 @@ namespace SlaughterHouseClient.Receiving
                             transaction.Rollback();
                             throw;
                         }
-                        finally
-                        {
-                            PrintBarcode();
-                        }
+
 
                     }
 
