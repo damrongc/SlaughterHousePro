@@ -7,7 +7,7 @@
 *.userosscache
 *.sln.docstates
 
-App.config
+/SlaughterHouseServer/App.config
 /SlaughterHouseServer/*.config
 
 # User-specific files (MonoDevelop/Xamarin Studio)
