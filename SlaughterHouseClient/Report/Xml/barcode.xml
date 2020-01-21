@@ -27,8 +27,8 @@
     </xs:element>
   </xs:schema>
   <Barcode>
-    <barcode_no>*1000000000014*</barcode_no>
-    <barcode_no_text>1000000000014</barcode_no_text>
+    <barcode_no>*10000000014*</barcode_no>
+    <barcode_no_text>10000000014</barcode_no_text>
     <barcode_info>*0000101088900*</barcode_info>
     <product_code>00101</product_code>
     <product_name>เครื่องในแดง</product_name>
