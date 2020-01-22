@@ -17,7 +17,6 @@ namespace SlaughterHouseClient
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public product()
         {
-            this.barcodes = new HashSet<barcode>();
             this.boms = new HashSet<bom>();
             this.bom_item = new HashSet<bom_item>();
             this.invoice_item = new HashSet<invoice_item>();
@@ -27,6 +26,7 @@ namespace SlaughterHouseClient
             this.product_slip_item = new HashSet<product_slip_item>();
             this.stocks = new HashSet<stock>();
             this.transport_item = new HashSet<transport_item>();
+            this.barcodes = new HashSet<barcode>();
         }
     
         public string product_code { get; set; }
@@ -48,8 +48,6 @@ namespace SlaughterHouseClient
         public string modified_by { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<barcode> barcodes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bom> boms { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bom_item> bom_item { get; set; }
@@ -70,5 +68,7 @@ namespace SlaughterHouseClient
         public virtual ICollection<transport_item> transport_item { get; set; }
         public virtual unit_of_measurement unit_of_measurement { get; set; }
         public virtual unit_of_measurement unit_of_measurement1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<barcode> barcodes { get; set; }
     }
 }

@@ -124,9 +124,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(437, 54);
+            this.label1.Size = new System.Drawing.Size(634, 54);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ระบบบริการจัดการโรงเชือด";
+            this.label1.Text = "ระบบบริการจัดการโรงเชือด v.20.01.01";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // flowLayoutPanel1
@@ -249,7 +249,6 @@
             this.btnConfirmStock.TabIndex = 19;
             this.btnConfirmStock.Text = "รับเข้าคลังสินค้า";
             this.btnConfirmStock.UseVisualStyleBackColor = false;
-            this.btnConfirmStock.Visible = false;
             this.btnConfirmStock.Click += new System.EventHandler(this.BtnConfirmStock_Click);
             // 
             // btnIssueCarcass

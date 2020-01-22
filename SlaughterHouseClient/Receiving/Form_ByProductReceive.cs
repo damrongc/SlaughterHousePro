@@ -23,6 +23,7 @@ namespace SlaughterHouseClient.Receiving
         private bool isZero = true;
         bool lockWeight = false;
         int stableCount = 0;
+        private int plantID = 0;
         private int stableTarget = 0;
         private int displayTime = 3;
         private int scaleDivision = 100;
@@ -58,7 +59,7 @@ namespace SlaughterHouseClient.Receiving
                     lblProduct.Text = product.product_name;
                     lblCaption.Text = product.product_name;
 
-                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                    plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
                     var plant = db.plants.Find(plantID);
                     lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
                 }
@@ -202,7 +203,7 @@ namespace SlaughterHouseClient.Receiving
 
 
                             }
-                            if (stableCount >= Constants.STABLE_TARGET.ToInt16())
+                            if (stableCount >= stableTarget)
                             {
                                 lockWeight = true;
                                 ProcessData();
@@ -216,8 +217,6 @@ namespace SlaughterHouseClient.Receiving
 
             }
         }
-
-
 
         private void LoadData()
         {
@@ -475,7 +474,7 @@ namespace SlaughterHouseClient.Receiving
                 var createBy = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
-                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                    //int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
                     var productionDate = db.plants.Find(plantID).production_date;
 
                     //update receive
@@ -491,14 +490,20 @@ namespace SlaughterHouseClient.Receiving
                     int count = db.barcodes.Count();
                     if (count == 0)
                     {
-                        barcode_no = 1000000000001;
+                        barcode_no = string.Format("{0}0000000001", plantID).ToLong();
                     }
                     else
                     {
                         barcode_no = db.barcodes.Max(p => p.barcode_no) + 1;
+                        if (barcode_no.ToString().Length > 11)
+                        {
+                            var tempBarcode = barcode_no.ToString().TrimStart('1');
+                            var running = tempBarcode.ToLong();
+                            var code = running.ToString().PadLeft(10, '0');
+                            barcode_no = ("1" + code).ToLong();
+                        }
 
                     }
-
                     //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
                     seq += 1;
                     var item = new receive_item
@@ -548,12 +553,11 @@ namespace SlaughterHouseClient.Receiving
                                 qty = 1,
                                 wgh = receiveWgh,
                                 active = true,
-                                create_by = createBy
+                                create_by = createBy,
+                                //qrcode_image = Helper.GenerateQRCode()
                             };
 
                             db.barcodes.Add(barcode);
-
-
                             db.receive_item.Add(item);
 
                             //var stocks = new List<stock>();
@@ -612,6 +616,7 @@ namespace SlaughterHouseClient.Receiving
                             }
                             db.SaveChanges();
                             transaction.Commit();
+                            PrintBarcode();
                         }
                         catch (Exception)
                         {
@@ -619,10 +624,7 @@ namespace SlaughterHouseClient.Receiving
                             transaction.Rollback();
                             throw;
                         }
-                        finally
-                        {
-                            PrintBarcode();
-                        }
+
 
                     }
 
@@ -639,7 +641,9 @@ namespace SlaughterHouseClient.Receiving
             try
             {
                 btnPrint.Enabled = false;
+
                 DataTable dt = Helper.GetBarcode(barcode_no);
+                lblMessage.Text = "กำลังพิมพ์สติกเกอร์...";
                 doc.SetDataSource(dt);
                 doc.PrintToPrinter(1, true, 0, 0);
 
@@ -666,14 +670,20 @@ namespace SlaughterHouseClient.Receiving
 
         }
 
+
         private void btnPrint_Click(object sender, EventArgs e)
         {
             try
             {
-                if (barcode_no > 0)
-                    PrintBarcode();
-                else
-                    throw new Exception("ไม่พบรหัสบาร์โค็ด");
+                if (string.IsNullOrEmpty(lblReceiveNo.Text))
+                    throw new Exception("กรุณาเลือกข้อมูล");
+                var frmBarcode = new Form_Barcode
+                {
+                    ReceiveNo = lblReceiveNo.Text,
+                    ProductCode = product.product_code
+
+                };
+                frmBarcode.ShowDialog();
             }
             catch (Exception ex)
             {

@@ -5,14 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="047f3ccfdc4e407095a170dc7deac72d" Name="Diagram1">
-        <EntityTypeShape EntityType="SlaughterhouseModel.barcode" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.bom" Width="1.5" PointX="5.25" PointY="24.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.bom_item" Width="1.5" PointX="5.25" PointY="27.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.breeder" Width="1.5" PointX="6.75" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.customer" Width="1.5" PointX="1.5" PointY="31.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.customer_class" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.customer_class_discount" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SlaughterhouseModel.customer_price" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.document_generate" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.farm" Width="1.5" PointX="6.75" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.invoice" Width="1.5" PointX="6" PointY="35.625" IsExpanded="true" />
@@ -36,10 +31,8 @@
         <EntityTypeShape EntityType="SlaughterhouseModel.truck" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.truck_type" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.unit_of_measurement" Width="1.5" PointX="0.75" PointY="23.875" IsExpanded="true" />
-        <AssociationConnector Association="SlaughterhouseModel.fk_barcode_product" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_bom_product" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_bomitem_product" ManuallyRouted="false" />
-        <AssociationConnector Association="SlaughterhouseModel.fk_order_customer" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_invitem_inv" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_invoice_truck" ManuallyRouted="false" />
         <AssociationConnector Association="SlaughterhouseModel.fk_invitem_product" ManuallyRouted="false" />
@@ -69,6 +62,15 @@
         <AssociationConnector Association="SlaughterhouseModel.fk_user_group" />
         <AssociationConnector Association="SlaughterhouseModel.fk_receives_01" />
         <AssociationConnector Association="SlaughterhouseModel.fk_truck_01" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.customer" Width="1.5" PointX="1.875" PointY="31.375" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.customer_class" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.customer_class_discount" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.customer_class_price" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.customer_price" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.master_class" Width="1.5" PointX="11.75" PointY="9.75" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_order_customer" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.barcode" Width="1.5" PointX="5.25" PointY="45.75" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_barcode_product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

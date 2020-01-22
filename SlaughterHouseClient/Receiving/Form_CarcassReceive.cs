@@ -139,25 +139,7 @@ namespace SlaughterHouseClient.Receiving
                 double num = 0.0;
                 if (DataInvoke.Length == 40)
                 {
-                    //int scaleDecimal = DataInvoke.Substring(20, 2).ToInt32();
-                    //int scaleDivision = (int)Math.Round(Math.Pow(10.0, unchecked(scaleDecimal)));
 
-                    //string strFormatWt = scaleDecimal == 0 ? "#0" : "#0." + "0".PadRight(scaleDecimal, '0');
-                    //short stateOfScale = DataInvoke.Substring(2, 1).ToInt16();
-                    //short stableWt = DataInvoke.Substring(4, 1).ToInt16();
-
-                    //if (stateOfScale == 0)
-                    //{
-                    //    num = DataInvoke.Substring(14, 6).ToDouble() / scaleDivision;
-                    //}
-                    //else
-                    //{
-                    //    num = -1.0 * DataInvoke.Substring(14, 6).ToDouble() / scaleDivision;
-                    //}
-
-                    //double scaleDecimal = DataInvoke.Substring(22, 2).ToDouble();
-                    //double scaleDivision = Math.Pow(10.0, scaleDecimal);
-                    //string strFormatWt = scaleDecimal == 0 ? "#0" : "#0." + "0".PadRight(scaleDecimal, '0');
                     short stateOfScale = DataInvoke.Substring(6, 1).ToInt16();
                     short stableWt = DataInvoke.Substring(5, 1).ToInt16();
 
@@ -176,32 +158,32 @@ namespace SlaughterHouseClient.Receiving
                             num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
                         lblWeight.Text = (num).ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
-                        if (isStart && isZero)
-                        {
-                            if (num > 0 && num > product.min_weight.ToString().ToDouble())
-                            {
-                                if (stableWt == 0)
-                                    stableCount += 1;
-                                else
-                                    stableCount = 0;
 
-                                lblStable.Text = stableCount.ToString();
-                                lblStable.Refresh();
+                        //For Auto Capture
+                        //if (isStart && isZero)
+                        //{
+                        //    if (num > 0 && num > product.min_weight.ToString().ToDouble())
+                        //    {
+                        //        if (stableWt == 0)
+                        //            stableCount += 1;
+                        //        else
+                        //            stableCount = 0;
 
-                                if (stableCount >= stableTarget)
-                                {
-                                    lockWeight = true;
-                                    ProcessData();
-                                }
-                            }
-                        }
+                        //        lblStable.Text = stableCount.ToString();
+                        //        lblStable.Refresh();
+
+                        //        if (stableCount >= stableTarget)
+                        //        {
+                        //            lockWeight = true;
+                        //            ProcessData();
+                        //        }
+                        //    }
+                        //}
 
                     }
                 }
             }
         }
-
-
 
         private void LoadData()
         {

@@ -197,7 +197,6 @@
             this.txtBarcodeNo.Name = "txtBarcodeNo";
             this.txtBarcodeNo.Size = new System.Drawing.Size(228, 43);
             this.txtBarcodeNo.TabIndex = 68;
-            this.txtBarcodeNo.Text = "1000000000000";
             this.txtBarcodeNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
@@ -244,7 +243,6 @@
             this.lblLotNo.Name = "lblLotNo";
             this.lblLotNo.Size = new System.Drawing.Size(194, 43);
             this.lblLotNo.TabIndex = 64;
-            this.lblLotNo.Text = "1193301261101";
             this.lblLotNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4

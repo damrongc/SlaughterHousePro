@@ -17,7 +17,6 @@ namespace SlaughterHouseClient.Issued
 
         private int displayTime = 3;
 
-
         public Form_ByProduct()
         {
             InitializeComponent();

@@ -1,9 +1,15 @@
-﻿using System;
+﻿
+using System;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using ZXing;
+using ZXing.Common;
+using ZXing.QrCode.Internal;
+using ZXing.Rendering;
 
 namespace SlaughterHouseClient
 {
@@ -72,6 +78,7 @@ namespace SlaughterHouseClient
                     dt.Columns.Add("qty_unit", typeof(string));
                     dt.Columns.Add("wgh", typeof(double));
                     dt.Columns.Add("wgh_unit", typeof(string));
+                    dt.Columns.Add("qr_code", typeof(byte[]));
 
                     DataRow dr = dt.NewRow();
                     //string barcode_no_text = string.Format("1{0}", barcode.barcode_no.ToString().PadLeft(12, '0'));
@@ -87,6 +94,7 @@ namespace SlaughterHouseClient
                     dr["qty_unit"] = barcode.product.unit_of_measurement.unit_name;
                     dr["wgh"] = barcode.wgh;
                     dr["wgh_unit"] = barcode.product.unit_of_measurement1.unit_name;
+                    dr["qr_code"] = GenerateQRCode(barcode.barcode_no.ToString());
                     dt.Rows.Add(dr);
 
                     //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\xml\"));
@@ -102,6 +110,68 @@ namespace SlaughterHouseClient
                 throw;
             }
 
+        }
+
+        public static byte[] GenerateQRCode(string qrData)
+        {
+            BarcodeWriter barcodeWriter = new BarcodeWriter();
+            EncodingOptions encodingOptions = new EncodingOptions()
+            {
+                Width = 300,
+                Height = 300,
+                Margin = 0,
+                PureBarcode = false
+            };
+            encodingOptions.Hints.Add(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+            barcodeWriter.Renderer = new BitmapRenderer();
+            barcodeWriter.Options = encodingOptions;
+            barcodeWriter.Format = BarcodeFormat.QR_CODE;
+            Bitmap bitmap = barcodeWriter.Write(qrData);
+            return GetRGBValues(bitmap);
+
+
+        }
+
+        public static Bitmap GenerateQRCodeImage(string qrData)
+        {
+            BarcodeWriter barcodeWriter = new BarcodeWriter();
+            EncodingOptions encodingOptions = new EncodingOptions()
+            {
+                Width = 100,
+                Height = 100,
+                Margin = 0,
+                PureBarcode = false
+            };
+            encodingOptions.Hints.Add(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+            barcodeWriter.Renderer = new BitmapRenderer();
+            barcodeWriter.Options = encodingOptions;
+            barcodeWriter.Format = BarcodeFormat.QR_CODE;
+            Bitmap bitmap = barcodeWriter.Write(qrData);
+            return bitmap;
+
+
+        }
+
+        private static byte[] GetRGBValues(Bitmap bmp)
+        {
+
+            // Lock the bitmap's bits.
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            System.Drawing.Imaging.BitmapData bmpData =
+             bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadOnly,
+             bmp.PixelFormat);
+
+            // Get the address of the first line.
+            IntPtr ptr = bmpData.Scan0;
+
+            // Declare an array to hold the bytes of the bitmap.
+            int bytes = bmpData.Stride * bmp.Height;
+            byte[] rgbValues = new byte[bytes];
+
+            // Copy the RGB values into the array.
+            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes); bmp.UnlockBits(bmpData);
+
+            return rgbValues;
         }
 
 
