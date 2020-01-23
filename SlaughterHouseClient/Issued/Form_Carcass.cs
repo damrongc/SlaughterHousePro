@@ -17,6 +17,7 @@ namespace SlaughterHouseClient.Issued
     public partial class Form_Carcass : Form
     {
         private readonly SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
+        int plantID = 0;
         const string PRODUCT_CODE = "00000";
         product product;
         private string lotNo = "";
@@ -46,9 +47,9 @@ namespace SlaughterHouseClient.Issued
 
         private void UserInitialization()
         {
+            plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
             serialPort1.DataReceived += port_DataReceived;
             FormClosing += new FormClosingEventHandler(Form_FormClosing);
-            //btnStart.Enabled = false;
             btnStop.Enabled = false;
             btnAcceptWeight.Enabled = false;
 
@@ -56,9 +57,7 @@ namespace SlaughterHouseClient.Issued
             LoadProduct();
             LoadLotNo();
 
-            //lblCurrentDatetime.Text = DateTime.Today.ToString("dd.MM.yyyy");
             lblMessage.Text = Constants.CHOOSE_QUEUE;
-
             if (System.Diagnostics.Debugger.IsAttached)
                 plSimulator.Visible = true;
             else
@@ -199,7 +198,7 @@ namespace SlaughterHouseClient.Issued
                 //clear weight
                 lockWeight = false;
                 timerMinWeight.Enabled = true;
-
+                lblMessage.Text = Constants.START_WAITING;
 
             }
             catch (Exception ex)
@@ -219,6 +218,9 @@ namespace SlaughterHouseClient.Issued
         private void LoadData(string orderNo)
         {
 
+            if (string.IsNullOrEmpty(orderNo))
+                return;
+
             using (var db = new SlaughterhouseEntities())
             {
                 var order = db.orders.Where(p => p.order_no == orderNo).SingleOrDefault();
@@ -234,14 +236,13 @@ namespace SlaughterHouseClient.Issued
                 var transport = db.transports.Where(p => p.ref_document_no == order.order_no).SingleOrDefault();
                 if (transport != null)
                 {
-                    //lblTruckNo.Text = transport.truck_no;
                     cboTruckNo.SelectedValue = transport.truck_id;
                     cboTruckNo.Enabled = false;
                 }
 
 
             }
-            lblMessage.Text = Constants.START_WAITING;
+
         }
 
         private void LoadProduct()
@@ -251,7 +252,7 @@ namespace SlaughterHouseClient.Issued
                 product = db.products.Find(PRODUCT_CODE);
                 lblMinWeight.Text = product.min_weight.ToString();
                 lblMaxWeight.Text = product.max_weight.ToString();
-                int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+
                 var plant = db.plants.Find(plantID);
                 lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
 
@@ -273,9 +274,10 @@ namespace SlaughterHouseClient.Issued
             try
             {
                 var sql = @"SELECT lot_no,
-                                sum(receive_qty - chill_qty) as stock_qty,
-                                sum(receive_wgh - chill_wgh) as stock_wgh
-                                FROM slaughterhouse.receive_item where product_code='{0}'
+                                SUM(receive_qty - chill_qty) as stock_qty,
+                                SUM(receive_wgh - chill_wgh) as stock_wgh
+                                FROM receive_item
+                                WHERE product_code='{0}'
                                 AND (receive_qty - chill_qty) > 0
                                 GROUP BY lot_no
                                 ORDER BY lot_no ASC";
@@ -288,11 +290,11 @@ namespace SlaughterHouseClient.Issued
                     {
                         var btn = new Button
                         {
-                            Text = string.Format("{0}\r\n{1} : {2} kg.", item.lot_no, item.stock_qty.ToComma(), item.stock_wgh.ToFormat2Double()),
-                            Width = 200,
+                            Text = string.Format("{0}\r{1} : {2} Kg.", item.lot_no, item.stock_qty.ToComma(), item.stock_wgh.ToFormat2Double()),
+                            Width = 180,
                             Height = 80,
                             FlatStyle = FlatStyle.Flat,
-                            Font = new Font("Kanit", 16),
+                            Font = new Font("Kanit", 14),
                             BackColor = Color.WhiteSmoke,
                             Tag = item.lot_no
                         };
@@ -344,7 +346,7 @@ namespace SlaughterHouseClient.Issued
                 string createBy = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
-                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+
                     var productionDate = db.plants.Find(plantID).production_date;
 
                     var receiveItem = db.receive_item.Where(p => p.product_code == product.product_code
@@ -401,31 +403,17 @@ namespace SlaughterHouseClient.Issued
                                 else
                                 {
                                     transportNo = transport.transport_no;
-                                    //if (transport.transport_item.Count == 0)
-                                    //{
 
-                                    //}
-                                    //else
-                                    //{
-
-                                    //}
                                 }
                             }
                             else
                             {
                                 var issDoc = (from p in db.document_generate where p.document_type == Constants.ISS select p).SingleOrDefault();
-
-
                                 refDocumentNo = Constants.ISS + issDoc.running.ToString().PadLeft(10 - Constants.ISS.Length, '0');
                                 refDocumentType = Constants.ISS;
-
-
                             }
 
                             var stockGenerate = db.document_generate.Find(Constants.STK);
-
-
-
                             //check stock_item_running
                             var stockItemRunning = db.stock_item_running.Where(p => p.doc_no.Equals(refDocumentNo)).SingleOrDefault();
                             if (stockItemRunning == null)
@@ -578,7 +566,6 @@ namespace SlaughterHouseClient.Issued
 
         //    return minValue + (next * (maxValue - minValue));
         //}
-
 
         private void BtnUp_Click(object sender, EventArgs e)
         {
