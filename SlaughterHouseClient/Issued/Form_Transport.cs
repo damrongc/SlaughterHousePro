@@ -1,14 +1,19 @@
 ﻿using MySql.Data.MySqlClient;
+using nucs.JsonSettings;
 using SlaughterHouseClient.Models;
 using System;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ToastNotifications;
+
 namespace SlaughterHouseClient.Issued
 {
     public partial class Form_Transport : Form
     {
+
+        private readonly SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
         public string OrderNo { get; set; }
 
 
@@ -19,12 +24,21 @@ namespace SlaughterHouseClient.Issued
         const int STOCK_NO = 9;
         const int BOM_CODE = 10;
 
+        private int displayTime = 3;
+
+        readonly FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
+        readonly FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
+
+        private readonly int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+        private DateTime productionDate;
+
         public Form_Transport()
         {
             InitializeComponent();
 
             Load += Form_Load;
             UserSettingsComponent();
+            LoadSetting();
         }
 
         private void UserSettingsComponent()
@@ -38,6 +52,21 @@ namespace SlaughterHouseClient.Issued
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             //gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
+        }
+
+        void LoadSetting()
+        {
+            if (MySettings.Data.Count > 0)
+            {
+                displayTime = MySettings["DisplayTime"].ToString().ToInt16();
+
+            }
+        }
+
+        private void DisplayNotification(string title, string message, Color color)
+        {
+            var toastNotification = new Notification(title, message, displayTime, color, animationMethod, animationDirection);
+            toastNotification.Show();
         }
 
         private void Gv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -59,27 +88,35 @@ namespace SlaughterHouseClient.Issued
                         string stockNo = gv.Rows[e.RowIndex].Cells[STOCK_NO].Value.ToString();
                         int bomCode = gv.Rows[e.RowIndex].Cells[BOM_CODE].Value.ToString().ToInt16();
 
-
-
                         using (var db = new SlaughterhouseEntities())
                         {
-                            var productionDate = db.plants.Find(1).production_date;
                             using (DbContextTransaction transaction = db.Database.BeginTransaction())
                             {
 
                                 try
                                 {
-
                                     //update barcode
                                     var barcode = db.barcodes.Find(barcodeNo);
+                                    if (barcode == null)
+                                    {
+                                        throw new Exception("ไม่พบข้อมูลบาร์โค็ดนี้!");
+                                    }
+                                    if (barcode.active)
+                                    {
+                                        throw new Exception("ข้อมูลบาร์โค็ด ทำรายการแล้ว!");
+                                    }
+
                                     barcode.active = true;
                                     db.Entry(barcode).State = EntityState.Modified;
 
 
                                     //update transport item
-                                    var transportItem = db.transport_item.Where(p => p.transport_no == transportNo
-                                                        && p.product_code == productCode
-                                                        && p.seq == seq).SingleOrDefault();
+                                    //var transportItem = db.transport_item.Where(p => p.transport_no == transportNo
+                                    //                    && p.product_code == productCode
+                                    //                    && p.seq == seq).SingleOrDefault();
+
+
+                                    var transportItem = db.transport_item.Find(transportNo, productCode, seq);
 
                                     db.transport_item.Remove(transportItem);
 
@@ -93,25 +130,24 @@ namespace SlaughterHouseClient.Issued
                                     orderItem.unload_qty -= barcode.qty;
                                     orderItem.unload_wgh -= barcode.wgh;
 
+
                                     orderItem.modified_at = null;
                                     orderItem.modified_by = null;
                                     db.Entry(orderItem).State = EntityState.Modified;
 
                                     //remove stock
-                                    var stock = db.stocks.Where(p => p.stock_no == stockNo
-                                         && p.stock_date == productionDate
-                                         && p.stock_item == seq
-                                         && p.product_code == productCode).FirstOrDefault();
+                                    //var stock = db.stocks.Where(p => p.stock_no == stockNo
+                                    //     && p.stock_date == productionDate
+                                    //     && p.stock_item == seq
+                                    //     && p.product_code == productCode).FirstOrDefault();
 
+                                    var stock = db.stocks.Find(productionDate, stockNo, seq, productCode);
                                     db.stocks.Remove(stock);
+
                                     db.SaveChanges();
                                     transaction.Commit();
-
-
-                                    MessageBox.Show($"ยกเลิก รหัสบาร์โค็ด {barcodeNo} \r\nเรียบร้อยแล้ว.", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    DisplayNotification("Success", $"ยกเลิก บาร์โค็ด {barcodeNo} \rเรียบร้อยแล้ว.", Color.Green);
                                     LoadData();
-
-
                                 }
                                 catch (Exception)
                                 {
@@ -122,19 +158,13 @@ namespace SlaughterHouseClient.Issued
                         }
 
                     }
-
-
-
                 }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayNotification("Error", ex.Message, Color.Red);
             }
         }
-
-
 
         private void Form_Load(object sender, System.EventArgs e)
         {
@@ -145,6 +175,7 @@ namespace SlaughterHouseClient.Issued
         {
             using (var db = new SlaughterhouseEntities())
             {
+                productionDate = db.plants.Find(plantID).production_date;
                 var sql = @"SELECT
                                 item.transport_no,
                                 stock_no,
@@ -164,12 +195,11 @@ namespace SlaughterHouseClient.Issued
                                 transport_item item,
                                 product p,
                                 truck t
-                            WHERE
-                                ref_document_no = @order_no
-                                    AND hd.transport_no = item.transport_no
-                                    AND hd.truck_id = t.truck_id
-                                    AND item.product_code = p.product_code
-                                    AND barcode_no > 0
+                            WHERE ref_document_no = @order_no
+                            AND hd.transport_no = item.transport_no
+                            AND hd.truck_id = t.truck_id
+                            AND item.product_code = p.product_code
+                            AND barcode_no > 0
                             ORDER BY seq DESC";
 
                 var qry = db.Database.SqlQuery<CustomerTransport>(sql, new MySqlParameter("order_no", OrderNo)).ToList();

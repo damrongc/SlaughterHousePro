@@ -189,8 +189,7 @@ namespace SlaughterHouseLib
 	                                unit_of_measurement uq,
 	                                unit_of_measurement uw,
                                     plant pl
-                                where 1=1
-                                and DATE_FORMAT(sk.stock_date, '%Y-%m-%d') = DATE_FORMAT(@date_period, '%Y-%m-%d')
+                                where sk.stock_date= DATE_FORMAT(@date_period, '%Y-%m-%d')
                                 and sk.product_code = p.product_code
                                 and uq.unit_code = p.unit_of_qty
                                 and uw.unit_code = p.unit_of_wgh

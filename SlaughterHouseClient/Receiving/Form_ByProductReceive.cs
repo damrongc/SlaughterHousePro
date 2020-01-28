@@ -16,6 +16,8 @@ namespace SlaughterHouseClient.Receiving
 {
     public partial class Form_ByProductReceive : Form
     {
+        readonly FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
+        readonly FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
         SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
         product product;
         private bool isStart = false;
@@ -24,6 +26,7 @@ namespace SlaughterHouseClient.Receiving
         bool lockWeight = false;
         int stableCount = 0;
         private int plantID = 0;
+        private DateTime productionDate;
         private int stableTarget = 0;
         private int displayTime = 3;
         private int scaleDivision = 100;
@@ -34,10 +37,6 @@ namespace SlaughterHouseClient.Receiving
         public string ProductCode { get; set; }
         long barcode_no = 0;
         ReportDocument doc = new ReportDocument();
-
-
-        FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
-        FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
 
         delegate void SetTextCallback(string text);
         public Form_ByProductReceive()
@@ -61,7 +60,8 @@ namespace SlaughterHouseClient.Receiving
 
                     plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
                     var plant = db.plants.Find(plantID);
-                    lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
+                    productionDate = plant.production_date;
+                    lblCurrentDatetime.Text = productionDate.ToString("dd-MM-yyyy");
                 }
 
 
@@ -104,6 +104,12 @@ namespace SlaughterHouseClient.Receiving
 
         }
 
+        private void DisplayNotification(string title, string message, Color color)
+        {
+            var toastNotification = new Notification(title, message, displayTime, color, animationMethod, animationDirection);
+            toastNotification.Show();
+        }
+
         void LoadSetting()
         {
             if (MySettings.Data.Count > 0)
@@ -136,9 +142,9 @@ namespace SlaughterHouseClient.Receiving
             Thread.Sleep(100);
             if (serialPort1.IsOpen)
                 InputData = serialPort1.ReadExisting();
-            if (InputData != String.Empty)
+            if (InputData != string.Empty)
             {
-                this.BeginInvoke(new SetTextCallback(DisplayWeight), new object[] { InputData });
+                BeginInvoke(new SetTextCallback(DisplayWeight), new object[] { InputData });
             }
         }
 
@@ -283,7 +289,7 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayNotification("Error", ex.Message, Color.Red);
             }
         }
 
@@ -310,7 +316,7 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                DisplayNotification("Error", ex.Message, Color.Red);
             }
             //try
             //{
@@ -360,7 +366,7 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                DisplayNotification("Error", ex.Message, Color.Red);
             }
 
         }
@@ -423,16 +429,16 @@ namespace SlaughterHouseClient.Receiving
             ProcessData();
 
         }
+
         private void ProcessData()
         {
             try
             {
                 isZero = false;
-
                 decimal scaleWeight = lblWeight.Text.ToDecimal();
                 if (scaleWeight < 0)
                 {
-                    throw new Exception(string.Format("น้ำหนัก น้อยกว่า 0"));
+                    throw new Exception("น้ำหนัก น้อยกว่า 0");
                 }
 
                 if (scaleWeight < product.min_weight)
@@ -446,21 +452,16 @@ namespace SlaughterHouseClient.Receiving
                 btnAcceptWeight.Enabled = false;
                 lblMessage.Text = Constants.PROCESSING;
                 SaveData();
-                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", displayTime, Color.Green, animationMethod, animationDirection);
-                toastNotification.Show();
+                DisplayNotification("Success", "บันทึกข้อมูล เรียบร้อย.\rกรุณานำสินค้าออก", Color.Green);
                 LoadData();
-
                 lblLastWgh.Text = lblWeight.Text;
                 //clear weight
                 lockWeight = false;
                 timerMinWeight.Enabled = true;
-
-
             }
             catch (Exception ex)
             {
-                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
-                toastNotification.Show();
+                DisplayNotification("Error", ex.Message, Color.Red);
             }
 
 
@@ -475,35 +476,44 @@ namespace SlaughterHouseClient.Receiving
                 using (var db = new SlaughterhouseEntities())
                 {
                     //int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
-                    var productionDate = db.plants.Find(plantID).production_date;
+                    //var productionDate = db.plants.Find(plantID).production_date;
 
                     //update receive
-                    var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
-
+                    var receive = db.receives.Find(lblReceiveNo.Text);
                     int receive_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
                     if (receive.farm_qty - receive_qty == 0)
                     {
-                        throw new Exception("จำนวนรับครบแล้ว ไม่สามารถรับเพิ่มได้!");
+                        throw new Exception("จำนวนรับครบแล้ว\rไม่สามารถรับเพิ่มได้!");
                     }
                     int seq = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Count();
 
-                    int count = db.barcodes.Count();
-                    if (count == 0)
+                    var maxValue = db.barcodes.Max(x => (long?)x.barcode_no) ?? 0;
+                    if (maxValue == 0)
                     {
                         barcode_no = string.Format("{0}0000000001", plantID).ToLong();
                     }
                     else
                     {
-                        barcode_no = db.barcodes.Max(p => p.barcode_no) + 1;
-                        if (barcode_no.ToString().Length > 11)
-                        {
-                            var tempBarcode = barcode_no.ToString().TrimStart('1');
-                            var running = tempBarcode.ToLong();
-                            var code = running.ToString().PadLeft(10, '0');
-                            barcode_no = ("1" + code).ToLong();
-                        }
-
+                        barcode_no = maxValue + 1;
                     }
+
+                    //int count = db.barcodes.Count();
+                    //if (count == 0)
+                    //{
+                    //    barcode_no = string.Format("{0}0000000001", plantID).ToLong();
+                    //}
+                    //else
+                    //{
+                    //    barcode_no = db.barcodes.Max(p => p.barcode_no) + 1;
+                    //    if (barcode_no.ToString().Length > 11)
+                    //    {
+                    //        var tempBarcode = barcode_no.ToString().TrimStart('1');
+                    //        var running = tempBarcode.ToLong();
+                    //        var code = running.ToString().PadLeft(10, '0');
+                    //        barcode_no = string.Format("{0}{1}", plantID, code).ToLong();
+                    //    }
+
+                    //}
                     //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
                     seq += 1;
                     var item = new receive_item
@@ -554,7 +564,7 @@ namespace SlaughterHouseClient.Receiving
                                 wgh = receiveWgh,
                                 active = true,
                                 create_by = createBy,
-                                //qrcode_image = Helper.GenerateQRCode()
+                                qrcode_image = Helper.GenerateQRCode(barcode_no.ToString())
                             };
 
                             db.barcodes.Add(barcode);
@@ -620,7 +630,6 @@ namespace SlaughterHouseClient.Receiving
                         }
                         catch (Exception)
                         {
-
                             transaction.Rollback();
                             throw;
                         }
@@ -641,22 +650,10 @@ namespace SlaughterHouseClient.Receiving
             try
             {
                 btnPrint.Enabled = false;
-
                 DataTable dt = Helper.GetBarcode(barcode_no);
                 lblMessage.Text = "กำลังพิมพ์สติกเกอร์...";
                 doc.SetDataSource(dt);
                 doc.PrintToPrinter(1, true, 0, 0);
-
-                //if (System.Diagnostics.Debugger.IsAttached)
-                //{
-                //    Console.WriteLine("Mode=Debug");
-                //}
-                //else
-                //{
-                //}
-
-
-
 
             }
             catch (Exception)
@@ -669,7 +666,6 @@ namespace SlaughterHouseClient.Receiving
             }
 
         }
-
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
@@ -687,8 +683,7 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
-                toastNotification.Show();
+                DisplayNotification("Error", ex.Message, Color.Red);
             }
 
         }

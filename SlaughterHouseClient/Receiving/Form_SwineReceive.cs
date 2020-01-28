@@ -17,6 +17,8 @@ namespace SlaughterHouseClient.Receiving
     {
 
         SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
+        int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+        private DateTime productionDate;
         product product;
         private string sexFlag = "F";
         private bool isStart = false;
@@ -28,6 +30,8 @@ namespace SlaughterHouseClient.Receiving
         private int stableTarget = 0;
         private int displayTime = 3;
         private int scaleDivision = 100;
+        string InputData = string.Empty;
+        string createBy;
 
 
         FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
@@ -43,11 +47,12 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
+                createBy = Helper.GetLocalIPAddress();
                 using (var db = new SlaughterhouseEntities())
                 {
-                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
-                    var plant = db.plants.Find(plantID);
-                    lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
+                    //int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                    productionDate = db.plants.Find(plantID).production_date;
+                    lblCurrentDatetime.Text = productionDate.ToString("dd-MM-yyyy");
                 }
 
                 lblMessage.Text = Constants.CHOOSE_QUEUE;
@@ -88,6 +93,12 @@ namespace SlaughterHouseClient.Receiving
                 plSimulator.Visible = false;
         }
 
+        private void DisplayNotification(string title, string message, Color color)
+        {
+            var toastNotification = new Notification(title, message, displayTime, color, animationMethod, animationDirection);
+            toastNotification.Show();
+        }
+
         void LoadSetting()
         {
             if (MySettings.Data.Count > 0)
@@ -114,47 +125,46 @@ namespace SlaughterHouseClient.Receiving
             }
         }
 
-        string InputData = String.Empty;
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             Thread.Sleep(100);
             if (serialPort1.IsOpen)
                 InputData = serialPort1.ReadExisting();
-            if (InputData != String.Empty)
+            if (InputData != string.Empty)
             {
                 this.BeginInvoke(new SetTextCallback(DisplayWeightIWX), new object[] { InputData });
             }
         }
 
-        private void DisplayWeightJadever(string DataInvoke)
-        {
-            if (lockWeight == false)
-            {
-                double num = 0.0;
-                if (DataInvoke.Length == 19)
-                {
-                    string stateOfScale = DataInvoke.Substring(6, 1);
-                    string weightText = DataInvoke.Substring(7, 8);
-                    if (double.TryParse(weightText, out num))
-                    {
+        //private void DisplayWeightJadever(string DataInvoke)
+        //{
+        //    if (lockWeight == false)
+        //    {
+        //        double num = 0.0;
+        //        if (DataInvoke.Length == 19)
+        //        {
+        //            string stateOfScale = DataInvoke.Substring(6, 1);
+        //            string weightText = DataInvoke.Substring(7, 8);
+        //            if (double.TryParse(weightText, out num))
+        //            {
 
-                    }
-                    if (stateOfScale == "+")
-                    {
+        //            }
+        //            if (stateOfScale == "+")
+        //            {
 
-                        //num = weightText.ToDouble();
+        //                //num = weightText.ToDouble();
 
-                    }
-                    else
-                    {
-                        num = -1.0 * num;
-                    }
+        //            }
+        //            else
+        //            {
+        //                num = -1.0 * num;
+        //            }
 
-                    lblWeight.Text = num.ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
-                }
+        //            lblWeight.Text = num.ToFormat2Double();//ScaleHelper.GetWeightIWX(DataInvoke);
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
         private void DisplayWeightIWX(string DataInvoke)
         {
@@ -234,25 +244,51 @@ namespace SlaughterHouseClient.Receiving
 
         private void ProcessData()
         {
+
             try
             {
-                lblMessage.Text = Constants.PROCESSING;
-                SaveData();
-
-                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", 2, Color.Green, animationMethod, animationDirection);
-                toastNotification.Show();
-                LoadData();
-
-                //clear weight
-                lockWeight = false;
-                timerMinWeight.Enabled = true;
+                if (isStart && isZero)
+                {
+                    decimal scaleWeight = lblWeight.Text.ToDecimal();
+                    if (scaleWeight < product.min_weight)
+                    {
+                        throw new Exception(string.Format("น้ำหนักต้อง มากกว่า {0}", product.min_weight));
+                    }
+                    if (scaleWeight > product.max_weight)
+                    {
+                        throw new Exception(string.Format("น้ำหนักต้อง น้อยกว่า {0}", product.max_weight));
+                    }
+                    btnAcceptWeight.Enabled = false;
+                    lblMessage.Text = Constants.PROCESSING;
+                    SaveData();
+                    DisplayNotification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", Color.Green);
+                    LoadData();
+                    isZero = false;
+                    //clear weight
+                    lockWeight = false;
+                    timerMinWeight.Enabled = true;
+                }
             }
             catch (Exception ex)
             {
-
-                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
-                toastNotification.Show();
+                DisplayNotification("Error", ex.Message, Color.Red);
             }
+
+            //try
+            //{
+            //    lblMessage.Text = Constants.PROCESSING;
+            //    SaveData();
+            //    DisplayNotification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำสินค้าออก", Color.Green);
+            //    LoadData();
+
+            //    //clear weight
+            //    lockWeight = false;
+            //    timerMinWeight.Enabled = true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    DisplayNotification("Error", ex.Message, Color.Red);
+            //}
 
         }
 
@@ -382,23 +418,15 @@ namespace SlaughterHouseClient.Receiving
             try
             {
                 var weight = lblWeight.Text.ToDecimal();
-                string createBy = Helper.GetLocalIPAddress();
+
                 using (var db = new SlaughterhouseEntities())
                 {
-
-
-                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
-                    var productionDate = db.plants.Find(plantID).production_date;
-
                     //update receive
-                    var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
-
+                    var receive = db.receives.Find(lblReceiveNo.Text);
                     if (receive.farm_qty - receive.factory_qty == 0)
                     {
                         throw new Exception("ไม่สามารถรับเพิ่มได้! \rจำนวนรับครบแล้ว");
                     }
-
-
                     int seq = receive.receive_item.Count();
                     //int seq = db.receive_item.Where(p => p.receive_no == receive.receive_no).Count();
                     seq += 1;
@@ -491,7 +519,6 @@ namespace SlaughterHouseClient.Receiving
                         }
                         catch (Exception)
                         {
-
                             transaction.Rollback();
                             throw;
                         }
@@ -526,7 +553,6 @@ namespace SlaughterHouseClient.Receiving
         private void btnZero_Click(object sender, EventArgs e)
         {
             lblWeight.Text = 0m.ToFormat2Decimal();
-            isZero = true;
         }
 
         private void BtnTareWeight_Click(object sender, EventArgs e)
@@ -601,37 +627,7 @@ namespace SlaughterHouseClient.Receiving
         private void BtnAcceptWeight_Click(object sender, EventArgs e)
         {
 
-            try
-            {
-                if (isStart && isZero)
-                {
-
-                    decimal scaleWeight = lblWeight.Text.ToDecimal();
-                    if (scaleWeight < product.min_weight)
-                    {
-                        throw new Exception(string.Format("น้ำหนักต้อง มากกว่า {0}", product.min_weight));
-                    }
-                    if (scaleWeight > product.max_weight)
-                    {
-                        throw new Exception(string.Format("น้ำหนักต้อง น้อยกว่า {0}", product.max_weight));
-                    }
-                    btnAcceptWeight.Enabled = false;
-                    lblMessage.Text = Constants.PROCESSING;
-                    SaveData();
-                    var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย. \rกรุณานำหมูออก", displayTime, Color.Green, animationMethod, animationDirection);
-                    toastNotification.Show();
-                    LoadData();
-                    isZero = false;
-                    //clear weight
-                    lockWeight = false;
-                    timerMinWeight.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
-                toastNotification.Show();
-            }
+            ProcessData();
         }
     }
 }

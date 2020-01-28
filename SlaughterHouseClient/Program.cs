@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 using MySql.Data.Common;
 namespace SlaughterHouseClient
@@ -15,7 +17,8 @@ namespace SlaughterHouseClient
         {
             try
             {
-
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+                Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
 
                 //MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection();
                 //connection.ConnectionString = "Server=192.168.1.252;Database=slaughterhouse;Uid=root;Pwd=Pa$$w0rd@!9;SslMode=None;";

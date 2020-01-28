@@ -1,4 +1,5 @@
-﻿using SlaughterHouseClient.Models;
+﻿using MySql.Data.MySqlClient;
+using SlaughterHouseClient.Models;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -7,12 +8,16 @@ namespace SlaughterHouseClient.Issued
 {
     public partial class Form_Orders : Form
     {
+        readonly int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+
         public string OrderNo { get; set; }
+
 
         private readonly string _productCode;
         public Form_Orders(string productCode)
         {
             InitializeComponent();
+
 
             _productCode = productCode;
             Load += Form_Load;
@@ -64,26 +69,34 @@ namespace SlaughterHouseClient.Issued
             using (var db = new SlaughterhouseEntities())
             {
 
+                var productionDate = db.plants.Find(plantID).production_date;
                 var sql = @"select distinct ord.order_no,ord.order_date,ord.customer_code,ord.comments,cus.customer_name,cus.address
                                 from orders  as ord,orders_item  as ord_item,customer cus
                                 where ord.order_no = ord_item.order_no
                                 and ord.customer_code =cus.customer_code
                                 and ord.order_flag =0
-                                and ord_item.product_code ={0}
+                                and ord.order_date = @order_date
                                 and (ord_item.order_qty - ord_item.unload_qty)>0";
 
-                if (string.IsNullOrEmpty(_productCode))
+                //if (string.IsNullOrEmpty(_productCode))
+                //{
+                //    sql = @"select distinct ord.order_no,ord.order_date,ord.customer_code,ord.comments,cus.customer_name,cus.address
+                //                from orders  as ord,orders_item  as ord_item,customer cus
+                //                where ord.order_no = ord_item.order_no
+                //                and ord.customer_code =cus.customer_code
+                //                and ord.order_flag =0
+                //                and (ord_item.order_qty - ord_item.unload_qty)>0";
+
+                //}
+
+                //object[] parmas = new object[];
+                //MySql.Data.MySqlClient.MySqlParameterCollection mySqlParameter = new MySql.Data.MySqlClient.MySqlParameterCollection();
+
+                var parameters = new[]
                 {
-                    sql = @"select distinct ord.order_no,ord.order_date,ord.customer_code,ord.comments,cus.customer_name,cus.address
-                                from orders  as ord,orders_item  as ord_item,customer cus
-                                where ord.order_no = ord_item.order_no
-                                and ord.customer_code =cus.customer_code
-                                and ord.order_flag =0
-                                and (ord_item.order_qty - ord_item.unload_qty)>0";
-
-                }
-
-                var qry = db.Database.SqlQuery<CustomerOrder>(sql, _productCode).ToList();
+                  new MySqlParameter("@order_date",productionDate.ToString("yyyy-MM-dd")  ),
+                };
+                var qry = db.Database.SqlQuery<CustomerOrder>(sql, parameters).ToList();
 
                 //if (!string.IsNullOrEmpty(_productCode))
                 //{

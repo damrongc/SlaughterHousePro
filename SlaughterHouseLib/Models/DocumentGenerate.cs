@@ -99,51 +99,55 @@ namespace SlaughterHouseLib.Models
                     var julian_date = DateTime.Today.DayOfYear.ToString().PadLeft(3, '0');
                     var day = productionDate.ToString("dd");
                     var month = productionDate.ToString("MM");
-                    return string.Format("{0}{1}{2}{3}{4}{5}{6}", plantId, year, julian_date, queueNo, day, month, running.PadLeft(2, '0'));
+
+                    string lot_no = $"{plantId}{year}{julian_date}{queueNo.ToString().PadLeft(2, '0')}";
+                    return lot_no;
+                    //return string.Format("{0}{1}{2}{3}{4}{5}{6}", plantId, year, julian_date, queueNo, day, month, running.PadLeft(2, '0'));
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
-        public static string GetProductionLotNo(int plantId, DateTime productionDate, string estNo)
-        {
-            try
-            {
+        //public static string GetProductionLotNo(int plantId, DateTime productionDate, string estNo)
+        //{
+        //    try
+        //    {
 
-                using (var conn = new MySqlConnection(Globals.CONN_STR))
-                {
-                    conn.Open();
+        //        using (var conn = new MySqlConnection(Globals.CONN_STR))
+        //        {
+        //            conn.Open();
 
-                    //var sb = new StringBuilder();
-                    //sb.Append("select plant_id from plant");
-                    //var cmd = new MySqlCommand(sb.ToString(), conn);
-                    //var plant_id = cmd.ExecuteScalar().ToString();
+        //            //var sb = new StringBuilder();
+        //            //sb.Append("select plant_id from plant");
+        //            //var cmd = new MySqlCommand(sb.ToString(), conn);
+        //            //var plant_id = cmd.ExecuteScalar().ToString();
 
-                    var sb = new StringBuilder();
-                    sb.Append("select running from document_generate");
-                    sb.Append(" where document_type ='PDL'");
+        //            var sb = new StringBuilder();
+        //            sb.Append("select running from document_generate");
+        //            sb.Append(" where document_type ='PDL'");
 
-                    var cmd = new MySqlCommand(sb.ToString(), conn);
-                    var running = cmd.ExecuteScalar().ToString();
+        //            var cmd = new MySqlCommand(sb.ToString(), conn);
+        //            var running = cmd.ExecuteScalar().ToString();
 
-                    var year = DateTime.Today.ToString("yy");
-                    var julian_date = DateTime.Today.DayOfYear.ToString().PadLeft(3, '0');
-                    var day = productionDate.ToString("dd");
-                    var month = productionDate.ToString("MM");
-                    var documentNo = string.Format("{0}{1}{2}{3}{4}{5}", plantId, year, julian_date, estNo, day, month);
-                    return documentNo;
-                }
-            }
-            catch (Exception)
-            {
+        //            var year = DateTime.Today.ToString("yy");
+        //            var julian_date = DateTime.Today.DayOfYear.ToString().PadLeft(3, '0');
+        //            var day = productionDate.ToString("dd");
+        //            var month = productionDate.ToString("MM");
+        //            var documentNo = string.Format("{0}{1}{2}{3}{4}{5}", plantId, year, julian_date, estNo, day, month);
+        //            return documentNo;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
+
+
 
     }
 }

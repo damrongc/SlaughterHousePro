@@ -126,7 +126,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(634, 54);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ระบบบริการจัดการโรงเชือด v.20.01.01";
+            this.label1.Text = "ระบบบริการจัดการโรงเชือด v.20.01.27.01";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // flowLayoutPanel1
@@ -232,7 +232,7 @@
             this.btnReceivePart.Name = "btnReceivePart";
             this.btnReceivePart.Size = new System.Drawing.Size(285, 89);
             this.btnReceivePart.TabIndex = 14;
-            this.btnReceivePart.Text = "รับชิ้นส่วน";
+            this.btnReceivePart.Text = "รับชิ้นส่วนหลัก";
             this.btnReceivePart.UseVisualStyleBackColor = false;
             this.btnReceivePart.Click += new System.EventHandler(this.btnReceivePart_Click);
             // 
@@ -294,7 +294,7 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 406);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(30);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(1024, 362);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1024, 295);
             this.flowLayoutPanel2.TabIndex = 3;
             // 
             // btnIssueProductForSales
@@ -316,7 +316,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.ClientSize = new System.Drawing.Size(1024, 701);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panelHeader);

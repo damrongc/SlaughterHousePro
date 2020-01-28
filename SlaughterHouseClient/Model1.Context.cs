@@ -60,6 +60,7 @@ namespace SlaughterHouseClient
         public virtual DbSet<customer_class_price> customer_class_price { get; set; }
         public virtual DbSet<customer_price> customer_price { get; set; }
         public virtual DbSet<master_class> master_class { get; set; }
+        public virtual DbSet<issued_info> issued_info { get; set; }
         public virtual DbSet<barcode> barcodes { get; set; }
     }
 }
