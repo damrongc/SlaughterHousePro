@@ -81,7 +81,6 @@ namespace SlaughterHouseClient.Receiving
                     };
 
                     buttons.Add(btn);
-
                     btn.Click += Btn_Click;
                     DisplayPaging();
                 }

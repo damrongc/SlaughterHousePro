@@ -1,4 +1,5 @@
 ﻿
+using nucs.JsonSettings;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,10 +13,12 @@ namespace SlaughterHouseClient.Issued
     public partial class Form_MainProduct : Form
     {
 
-        FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
-        FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
-        int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
-
+        private readonly SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
+        readonly int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+        readonly FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
+        readonly FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
+        private int displayTime = 3;
+        private DateTime productionDate;
 
         public Form_MainProduct()
         {
@@ -36,12 +39,18 @@ namespace SlaughterHouseClient.Issued
 
         private void Form_Load(object sender, EventArgs e)
         {
+            UserInitialization();
+        }
+
+        private void UserInitialization()
+        {
+
             using (var db = new SlaughterhouseEntities())
             {
 
                 var plant = db.plants.Find(plantID);
-                lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
-
+                productionDate = plant.production_date;
+                lblCurrentDatetime.Text = productionDate.ToString("dd-MM-yyyy");
                 var trucks = db.trucks.Where(p => p.truck_type_id == 2 && p.active == true).Select(p => new
                 {
                     p.truck_id,
@@ -55,6 +64,15 @@ namespace SlaughterHouseClient.Issued
                 lblMessage.Text = Constants.CHOOSE_QUEUE;
                 btnView.Enabled = false;
             }
+
+            LoadSetting();
+        }
+
+
+        void LoadSetting()
+        {
+            if (MySettings.Data.Count > 0)
+                displayTime = MySettings["DisplayTime"].ToString().ToInt16();
         }
 
         private void TxtBarcodeNo_KeyDown(object sender, KeyEventArgs e)
@@ -86,7 +104,8 @@ namespace SlaughterHouseClient.Issued
             catch (Exception ex)
             {
                 lblOrderNo.Text = "";
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayNotification("Error", ex.Message, Color.Red);
+
             }
 
         }
@@ -188,27 +207,24 @@ namespace SlaughterHouseClient.Issued
                 //    throw new Exception("กรุณาเลือกทะเบียนรถ!");
                 //}
                 lblMessage.Text = Constants.PROCESSING;
-
                 SaveData();
-
-                var animationDirection = FormAnimator.AnimationDirection.Up;
-                var animationMethod = FormAnimator.AnimationMethod.Slide;
-                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย.", 2, Color.Green, animationMethod, animationDirection);
-                toastNotification.Show();
-
+                DisplayNotification("Success", "บันทึกข้อมูล เรียบร้อย.", Color.Green);
                 LoadOrder();
                 ClearDisplay();
             }
             catch (Exception ex)
             {
                 ClearDisplay();
-                var animationDirection = FormAnimator.AnimationDirection.Up;
-                var animationMethod = FormAnimator.AnimationMethod.Slide;
-                var toastNotification = new Notification("Error", ex.Message, 2, Color.Red, animationMethod, animationDirection);
-                toastNotification.Show();
-                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayNotification("Error", ex.Message, Color.Red);
+
             }
 
+        }
+
+        private void DisplayNotification(string title, string message, Color color)
+        {
+            var toastNotification = new Notification(title, message, displayTime, color, animationMethod, animationDirection);
+            toastNotification.Show();
         }
 
         private bool SaveData()
@@ -231,9 +247,9 @@ namespace SlaughterHouseClient.Issued
                     {
                         throw new Exception("ไม่พบข้อมูลบาร์โค็ดนี้!");
                     }
-                    if (!barcode.active)
+                    if (barcode.active == false)
                     {
-                        throw new Exception("ข้อมูลบาร์โค็ด ใช้งานแล้ว!");
+                        throw new Exception("ข้อมูลบาร์โค็ด จ่ายออกแล้ว!");
                     }
 
                     var orderItems = db.orders_item.Where(p => p.order_no == orderNo
@@ -246,13 +262,10 @@ namespace SlaughterHouseClient.Issued
                     }
                     if (orderItems.unload_qty >= orderItems.order_qty)
                     {
-                        throw new Exception("จ่ายสินค้านี้ ครบแล้ว!");
+                        throw new Exception("จ่ายสินค้า ครบแล้ว!");
                     }
 
-                    var productionDate = db.plants.Find(plantID).production_date;
                     var transport = db.transports.Where(p => p.ref_document_no == orderNo).SingleOrDefault();
-
-
                     var transportGenrate = db.document_generate.Find(Constants.TP);
                     if (transport == null)
                     {
@@ -303,7 +316,6 @@ namespace SlaughterHouseClient.Issued
                     {
                         try
                         {
-
                             //insert stock
                             var stock = new stock
                             {
@@ -337,19 +349,15 @@ namespace SlaughterHouseClient.Issued
                                     transport_flag = 0,
                                     create_at = DateTime.Now,
                                     create_by = createBy
-
-
                                 };
                                 db.transports.Add(trans);
 
                                 //update transport running
-
                                 transportGenrate.running += 1;
                                 db.Entry(transportGenrate).State = EntityState.Modified;
                             }
 
                             //insert transport item
-
                             var transItem = new transport_item
                             {
                                 transport_no = transportNo,
@@ -370,18 +378,32 @@ namespace SlaughterHouseClient.Issued
                             //var genDoc = db.document_generate.Find(Constants.STK);
 
 
-                            //set barcode
-                            barcode.active = false;
-                            db.Entry(barcode).State = EntityState.Modified;
-
                             //set unload
                             orderItems.unload_qty += barcode.qty;
                             orderItems.unload_wgh += barcode.wgh;
-
                             orderItems.modified_by = createBy;
                             orderItems.modified_at = DateTime.Now;
                             db.Entry(orderItems).State = EntityState.Modified;
 
+                            //set barcode
+                            barcode.active = false;
+                            db.Entry(barcode).State = EntityState.Modified;
+
+                            //var barcodeHis = new barcode_history();
+                            //barcodeHis.barcode_no = barcode.barcode_no;
+                            //barcodeHis.product_code = barcode.product_code;
+                            //barcodeHis.production_date = barcode.production_date;
+                            //barcodeHis.lot_no = barcode.lot_no;
+                            //barcodeHis.qty = barcode.qty;
+                            //barcodeHis.wgh = barcode.wgh;
+                            //barcodeHis.active = barcode.active;
+                            //barcodeHis.qrcode_image = barcode.qrcode_image;
+                            //barcodeHis.location_code = barcode.location_code;
+                            //barcodeHis.create_at = barcode.create_at;
+                            //barcodeHis.qrcode_image = barcode.qrcode_image;
+
+                            ////delete barcode
+                            //db.barcodes.Remove(barcode);
 
                             db.SaveChanges();
                             transaction.Commit();

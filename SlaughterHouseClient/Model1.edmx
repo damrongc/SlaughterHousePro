@@ -16,9 +16,12 @@
           <Property Name="qty" Type="int" Nullable="false" />
           <Property Name="wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="active" Type="bool" Nullable="false" />
+          <Property Name="qrcode_image" Type="longblob" />
+          <Property Name="location_code" Type="int" />
           <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="qrcode_image" Type="longblob" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="bom">
           <Key>
@@ -209,6 +212,25 @@
           <Property Name="gross_amt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="net_amt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="sale_unit_method" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="issued_info">
+          <Key>
+            <PropertyRef Name="issued_date" />
+            <PropertyRef Name="product_code" />
+            <PropertyRef Name="lot_no" />
+          </Key>
+          <Property Name="issued_date" Type="date" Nullable="false" />
+          <Property Name="product_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="lot_no" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="issued_qty" Type="int" Nullable="false" />
+          <Property Name="issued_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="usage_qty" Type="int" />
+          <Property Name="usage_wgh" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="active" Type="bool" />
           <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="modified_at" Type="datetime" Precision="0" />
@@ -953,6 +975,7 @@
           <EntitySet Name="group" EntityType="Self.group" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="invoice" EntityType="Self.invoice" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="invoice_item" EntityType="Self.invoice_item" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="issued_info" EntityType="Self.issued_info" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="location" EntityType="Self.location" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="master_class" EntityType="Self.master_class" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="slaughterhouse" store:Type="Tables" />
@@ -1992,6 +2015,7 @@
             <End Role="customer" EntitySet="customers" />
             <End Role="order" EntitySet="orders" />
           </AssociationSet>
+          <EntitySet Name="issued_info" EntityType="SlaughterhouseModel.issued_info" />
           <EntitySet Name="barcodes" EntityType="SlaughterhouseModel.barcode" />
           <AssociationSet Name="fk_barcode_product" Association="SlaughterhouseModel.fk_barcode_product">
             <End Role="product" EntitySet="products" />
@@ -2223,6 +2247,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="issued_info">
+          <Key>
+            <PropertyRef Name="issued_date" />
+            <PropertyRef Name="product_code" />
+            <PropertyRef Name="lot_no" />
+          </Key>
+          <Property Name="issued_date" Type="DateTime" Nullable="false" />
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="lot_no" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="issued_qty" Type="Int32" Nullable="false" />
+          <Property Name="issued_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="usage_qty" Type="Int32" />
+          <Property Name="usage_wgh" Type="Decimal" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="barcode">
           <Key>
             <PropertyRef Name="barcode_no" />
@@ -2234,9 +2277,12 @@
           <Property Name="qty" Type="Int32" Nullable="false" />
           <Property Name="wgh" Type="Decimal" Nullable="false" />
           <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="qrcode_image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="location_code" Type="Int32" />
           <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="qrcode_image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="product" Relationship="SlaughterhouseModel.fk_barcode_product" FromRole="barcode" ToRole="product" />
         </EntityType>
         <Association Name="fk_barcode_product">
@@ -2827,12 +2873,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="issued_info">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.issued_info">
+              <MappingFragment StoreEntitySet="issued_info">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="usage_wgh" ColumnName="usage_wgh" />
+                <ScalarProperty Name="usage_qty" ColumnName="usage_qty" />
+                <ScalarProperty Name="issued_wgh" ColumnName="issued_wgh" />
+                <ScalarProperty Name="issued_qty" ColumnName="issued_qty" />
+                <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="issued_date" ColumnName="issued_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="barcodes">
             <EntityTypeMapping TypeName="SlaughterhouseModel.barcode">
               <MappingFragment StoreEntitySet="barcode">
-                <ScalarProperty Name="qrcode_image" ColumnName="qrcode_image" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
                 <ScalarProperty Name="create_by" ColumnName="create_by" />
                 <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="location_code" ColumnName="location_code" />
+                <ScalarProperty Name="qrcode_image" ColumnName="qrcode_image" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="wgh" ColumnName="wgh" />
                 <ScalarProperty Name="qty" ColumnName="qty" />

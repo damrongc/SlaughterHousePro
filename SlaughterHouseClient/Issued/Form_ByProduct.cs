@@ -11,11 +11,14 @@ namespace SlaughterHouseClient.Issued
 {
     public partial class Form_ByProduct : Form
     {
+        readonly FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
+        readonly FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
         private readonly SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
         const string PRODUCT_CODE = "00000";
-        int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+        readonly int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
 
         private int displayTime = 3;
+        private DateTime productionDate;
 
         public Form_ByProduct()
         {
@@ -41,7 +44,8 @@ namespace SlaughterHouseClient.Issued
             {
 
                 var plant = db.plants.Find(plantID);
-                lblCurrentDatetime.Text = plant.production_date.ToString("dd-MM-yyyy");
+                productionDate = plant.production_date;
+                lblCurrentDatetime.Text = productionDate.ToString("dd-MM-yyyy");
 
                 var trucks = db.trucks.Where(p => p.active == true).Select(p => new
                 {
@@ -65,13 +69,17 @@ namespace SlaughterHouseClient.Issued
             }
         }
 
+        private void DisplayNotification(string title, string message, Color color)
+        {
+            var toastNotification = new Notification(title, message, displayTime, color, animationMethod, animationDirection);
+            toastNotification.Show();
+        }
+
         private void TxtBarcodeNo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 ProcessData();
         }
-
-
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -99,7 +107,8 @@ namespace SlaughterHouseClient.Issued
             catch (Exception ex)
             {
                 lblOrderNo.Text = "";
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayNotification("Error", ex.Message, Color.Red);
+
             }
 
         }
@@ -142,15 +151,11 @@ namespace SlaughterHouseClient.Issued
                         cboTruckNo.SelectedValue = transport.truck_id;
                         cboTruckNo.Enabled = false;
                     }
-
-
-
                     txtBarcodeNo.Focus();
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
 
@@ -161,30 +166,18 @@ namespace SlaughterHouseClient.Issued
             try
             {
                 if (string.IsNullOrEmpty(lblOrderNo.Text))
-                {
-
                     throw new Exception("กรุณาเลือกใบสั่งขาย!");
-                }
                 lblMessage.Text = Constants.PROCESSING;
 
                 SaveData();
-
-                var animationDirection = FormAnimator.AnimationDirection.Up;
-                var animationMethod = FormAnimator.AnimationMethod.Slide;
-                var toastNotification = new Notification("Success", "บันทึกข้อมูล เรียบร้อย.", displayTime, Color.Green, animationMethod, animationDirection);
-                toastNotification.Show();
-
+                DisplayNotification("Success", "บันทึกข้อมูล เรียบร้อย.", Color.Green);
                 LoadOrder();
                 ClearDisplay();
             }
             catch (Exception ex)
             {
                 ClearDisplay();
-                var animationDirection = FormAnimator.AnimationDirection.Up;
-                var animationMethod = FormAnimator.AnimationMethod.Slide;
-                var toastNotification = new Notification("Error", ex.Message, displayTime, Color.Red, animationMethod, animationDirection);
-                toastNotification.Show();
-                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayNotification("Error", ex.Message, Color.Red);
             }
 
 
@@ -212,7 +205,7 @@ namespace SlaughterHouseClient.Issued
                     }
                     if (!barcode.active)
                     {
-                        throw new Exception("ข้อมูลบาร์โค็ด ใช้งานแล้ว!");
+                        throw new Exception("ข้อมูลบาร์โค็ด จ่ายออกแล้ว!");
                     }
 
                     lblProduct.Text = barcode.product.product_name;
@@ -230,9 +223,7 @@ namespace SlaughterHouseClient.Issued
                         throw new Exception("จ่ายสินค้านี้ ครบแล้ว!");
                     }
 
-                    var productionDate = db.plants.Find(plantID).production_date;
                     var transport = db.transports.Where(p => p.ref_document_no == orderNo).SingleOrDefault();
-
                     var stockGenerate = db.document_generate.Find(Constants.STK);
                     var transportGenrate = db.document_generate.Find(Constants.TP);
                     if (transport == null)
@@ -248,7 +239,6 @@ namespace SlaughterHouseClient.Issued
                         if (transportItem.Count == 0)
                         {
                             stockNo = Constants.STK + stockGenerate.running.ToString().PadLeft(10 - Constants.STK.Length, '0');
-
                         }
                         else
                         {
@@ -296,8 +286,6 @@ namespace SlaughterHouseClient.Issued
                                     transport_flag = 0,
                                     create_at = DateTime.Now,
                                     create_by = createBy
-
-
                                 };
                                 db.transports.Add(trans);
 
@@ -356,9 +344,8 @@ namespace SlaughterHouseClient.Issued
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.ToString());
                 throw;
             }
 
@@ -366,8 +353,6 @@ namespace SlaughterHouseClient.Issued
 
         private void ClearDisplay()
         {
-            //lblProduct.Text = "";
-            //lblLotNo.Text = "";
             txtBarcodeNo.Text = "";
             txtBarcodeNo.Focus();
         }

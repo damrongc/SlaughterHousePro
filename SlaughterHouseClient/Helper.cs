@@ -127,7 +127,8 @@ namespace SlaughterHouseClient
             barcodeWriter.Options = encodingOptions;
             barcodeWriter.Format = BarcodeFormat.QR_CODE;
             Bitmap bitmap = barcodeWriter.Write(qrData);
-            return GetRGBValues(bitmap);
+            return ImgToByteConverter(bitmap);
+            //return GetRGBValues(bitmap);
 
 
         }
@@ -150,6 +151,13 @@ namespace SlaughterHouseClient
             return bitmap;
 
 
+        }
+
+        //another easy way to convert image to bytearray
+        public static byte[] ImgToByteConverter(Image inImg)
+        {
+            ImageConverter imgCon = new ImageConverter();
+            return (byte[])imgCon.ConvertTo(inImg, typeof(byte[]));
         }
 
         private static byte[] GetRGBValues(Bitmap bmp)

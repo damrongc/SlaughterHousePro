@@ -24,7 +24,7 @@ public static class Constants
     public static string MINWEIGHT_WAITING = "กรุณายกสินค้าออก";
     public static string BARCODE_WAITING = "กรุณาสแกนสินค้า";
     public static string SAVE_SUCCESS = "บันทึกน้ำหนัก เรียบร้อยแล้ว.";
-    public static string PROCESSING = "กำลังบันทึกน้ำหนัก...";
+    public static string PROCESSING = "กำลังบันทึกข้อมูล...";
 
     public static decimal MIN_WEIGHT_RESET = 0.5m;
 

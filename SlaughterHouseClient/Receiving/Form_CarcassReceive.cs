@@ -446,10 +446,7 @@ namespace SlaughterHouseClient.Receiving
                     else
                     {
                         stock_no = stockItemRunning.stock_no;
-
                     }
-
-
                     using (DbContextTransaction transaction = db.Database.BeginTransaction())
                     {
                         try
@@ -505,7 +502,7 @@ namespace SlaughterHouseClient.Receiving
                                 location_code = 2, //ห้องเย็นเก็บหมุซีก
                                 barcode_no = 0,
                                 transaction_type = 1,
-                                create_by = item.create_by
+                                create_by = createBy
                             };
 
                             db.stocks.Add(stock);
@@ -522,7 +519,7 @@ namespace SlaughterHouseClient.Receiving
                                     doc_no = receive.receive_no,
                                     stock_no = stock_no,
                                     stock_item = 1,
-                                    create_by = item.create_by
+                                    create_by = createBy
                                 };
 
                                 db.stock_item_running.Add(newStockItem);

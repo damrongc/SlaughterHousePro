@@ -102,7 +102,6 @@ namespace SlaughterHouseClient.Receiving
                         qty = p.receive_qty.ToComma(),
                         wgh = p.receive_wgh.ToFormat2Decimal()
                     }).ToList();
-
                     gv.DataSource = coll;
                 }
                 else

@@ -151,12 +151,6 @@
     <Compile Include="Issued\Form_ByProduct.Designer.cs">
       <DependentUpon>Form_ByProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Issued\Form_LookupTruck.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Issued\Form_LookupTruck.Designer.cs">
-      <DependentUpon>Form_LookupTruck.cs</DependentUpon>
-    </Compile>
     <Compile Include="Issued\Form_MainProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +180,9 @@
     </Compile>
     <Compile Include="Issued\Form_Issued.Designer.cs">
       <DependentUpon>Form_Issued.cs</DependentUpon>
+    </Compile>
+    <Compile Include="issued_info.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="location.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -270,12 +267,6 @@
     </Compile>
     <Compile Include="Receiving\Form_ByProductReceive.Designer.cs">
       <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Receiving\Form_HeadReceive.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Receiving\Form_HeadReceive.Designer.cs">
-      <DependentUpon>Form_HeadReceive.cs</DependentUpon>
     </Compile>
     <Compile Include="Receiving\Form_CarcassReceive.cs">
       <SubType>Form</SubType>
@@ -382,9 +373,6 @@
     <EmbeddedResource Include="Issued\Form_ByProduct.resx">
       <DependentUpon>Form_ByProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Issued\Form_LookupTruck.resx">
-      <DependentUpon>Form_LookupTruck.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Issued\Form_MainProduct.resx">
       <DependentUpon>Form_MainProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -411,9 +399,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_ByProductReceive.resx">
       <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_HeadReceive.resx">
-      <DependentUpon>Form_HeadReceive.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_CarcassReceive.resx">
       <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
