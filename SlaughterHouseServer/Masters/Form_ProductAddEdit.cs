@@ -19,17 +19,31 @@ namespace SlaughterHouseServer
             txtMinWgh.KeyDown += TxtMinWgh_KeyDown;
             txtMaxWgh.KeyDown += TxtMaxWgh_KeyDown;
             txtStdYield.KeyDown += TxtStdYield_KeyDown;
+            txtPackingSize.KeyDown += TxtPackingSize_KeyDown;
 
             //KeyPress
             txtMinWgh.KeyPress += TxtMinWgh_KeyPress;
             txtMaxWgh.KeyPress += TxtMaxWgh_KeyPress;
             txtStdYield.KeyPress += TxtStdYield_KeyPress;
+            txtPackingSize.KeyPress += TxtPackingSize_KeyPress;
 
 
             this.Load += Form_ProductAddEdit_Load;
             this.Shown += Form_ProductAddEdit_Shown;
         }
 
+
+        private void TxtPackingSize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            {
+                if (e.KeyChar != 46)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+        }
         private void TxtStdYield_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
@@ -89,8 +103,8 @@ namespace SlaughterHouseServer
                     txtProductCode.Enabled = false;
                     txtProductName.Text = product.ProductName;
                     comboxProductGroup.SelectedValue = product.ProductGroup.ProductGroupCode;
-                    comboxUnitQty.SelectedValue = product.UnitOfQty.UnitCode ;
-                    comboxUnitWgh.SelectedValue = product.UnitOfWgh.UnitCode ;
+                    comboxUnitQty.SelectedValue = product.UnitOfQty.UnitCode;
+                    comboxUnitWgh.SelectedValue = product.UnitOfWgh.UnitCode;
                     txtMinWgh.Text = product.MinWeight.ToString();
                     txtMaxWgh.Text = product.MaxWeight.ToString();
                     txtStdYield.Text = product.StdYield.ToString();
@@ -99,7 +113,7 @@ namespace SlaughterHouseServer
                     {
                         rdbQtySale.Checked = true;
                     }
-                    else if(product.SaleUnitMethod.ToUpper() == "W")
+                    else if (product.SaleUnitMethod.ToUpper() == "W")
                     {
                         rdbWghSale.Checked = true;
                     }
@@ -119,6 +133,7 @@ namespace SlaughterHouseServer
                 txtMinWgh.Text = "0";
                 txtMaxWgh.Text = "0";
                 txtStdYield.Text = "0";
+                txtPackingSize.Text = "0";
             }
         }
 
@@ -174,7 +189,8 @@ namespace SlaughterHouseServer
                 txtStdYield.Focus();
             }
         }
-        private void TxtStdYield_KeyDown(object sender, KeyEventArgs e)
+
+        private void TxtPackingSize_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -189,10 +205,19 @@ namespace SlaughterHouseServer
             }
         }
 
+        private void TxtStdYield_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtPackingSize.Focus();
+            }
+        }
+
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
             try
             {
+                CheckBeforeSave();
                 if (string.IsNullOrEmpty(this.productCode))
                 {
                     var product = new Product
@@ -216,8 +241,8 @@ namespace SlaughterHouseServer
                         },
                         MinWeight = Convert.ToDecimal(txtMinWgh.Text),
                         MaxWeight = Convert.ToDecimal(txtMaxWgh.Text),
-                        StdYield  = Convert.ToDecimal(txtStdYield.Text),
-                        PackingSize  = Convert.ToDecimal(txtPackingSize.Text),
+                        StdYield = Convert.ToDecimal(txtStdYield.Text),
+                        PackingSize = Convert.ToDecimal(txtPackingSize.Text),
                         SaleUnitMethod = (rdbQtySale.Checked == true) ? "Q" : "W",
                         IssueUnitMethod = (rdbQtyIssue.Checked == true) ? "Q" : "W",
                         Active = chkActive.Checked,
@@ -273,6 +298,7 @@ namespace SlaughterHouseServer
         {
             try
             {
+                CheckBeforeSave();
                 var product = new Product
                 {
                     ProductCode = txtProductCode.Text.Trim(),
@@ -310,8 +336,8 @@ namespace SlaughterHouseServer
                 comboxProductGroup.SelectedIndex = 0;
                 comboxUnitQty.SelectedIndex = 0;
                 comboxUnitWgh.SelectedIndex = 0;
-                txtMinWgh.Text   = 0.ToString();
-                txtMaxWgh.Text   = 0.ToString();
+                txtMinWgh.Text = 0.ToString();
+                txtMaxWgh.Text = 0.ToString();
                 txtStdYield.Text = 0.ToString();
                 chkActive.Checked = true;
 
@@ -321,7 +347,22 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void  FillProductGroup()
+        private void CheckBeforeSave()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtProductCode.Text) || txtProductCode.Text == "")
+                {
+                    throw new Exception($"โปรดระบุรหัสสินค้า");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void FillProductGroup()
         {
             comboxProductGroup.DataSource = ProductGroupController.GetAllProudctGroups();
             comboxProductGroup.ValueMember = "ProductGroupCode";

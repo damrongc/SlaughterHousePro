@@ -1,4 +1,5 @@
 ﻿using SlaughterHouseLib.Models;
+using System;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
@@ -72,6 +73,8 @@ namespace SlaughterHouseServer
         {
             try
             {
+                CheckBeforeSave();
+
                 if (string.IsNullOrEmpty(this.farmCode))
                 {
                     var farm = new Farm
@@ -114,7 +117,8 @@ namespace SlaughterHouseServer
         private void BtnSaveAndNew_Click(object sender, System.EventArgs e)
         {
             try
-            { 
+            {
+                CheckBeforeSave();
                 var farm = new Farm
                 {
                     FarmCode = txtFarmCode.Text.Trim(),
@@ -139,7 +143,20 @@ namespace SlaughterHouseServer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        private void CheckBeforeSave()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtFarmCode.Text) || txtFarmCode.Text == "")
+                {
+                    throw new Exception($"โปรดระบุรหัสสินค้า");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
     }
 }

@@ -163,6 +163,7 @@ namespace SlaughterHouseServer
         {
             try
             {
+                CheckBeforeSave();
                 if (string.IsNullOrEmpty(this.customerCode))
                 {
                     var customer = new Customer
@@ -244,7 +245,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-
+                CheckBeforeSave();
                 var customer = new Customer
                 {
                     CustomerCode = txtCustomerCode.Text.Trim(),
@@ -354,6 +355,21 @@ namespace SlaughterHouseServer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CheckBeforeSave()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtCustomerCode.Text) || txtCustomerCode.Text == "")
+                {
+                    throw new Exception($"โปรดระบุรหัสลูกค้า");
+                } 
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
         #endregion
