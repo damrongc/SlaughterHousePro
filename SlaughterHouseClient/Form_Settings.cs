@@ -7,8 +7,7 @@ namespace SlaughterHouseClient
 {
     public partial class Form_Settings : Form
     {
-
-        SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
+        readonly SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
 
         public Form_Settings()
         {

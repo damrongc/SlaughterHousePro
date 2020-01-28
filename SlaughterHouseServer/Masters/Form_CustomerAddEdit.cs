@@ -161,27 +161,70 @@ namespace SlaughterHouseServer
         }
         private void BtnSave_Click(object sender, System.EventArgs e)
         {
+
             try
             {
-                if (string.IsNullOrEmpty(this.customerCode))
-                {
-                    var customer = new Customer
-                    {
-                        CustomerCode = txtCustomerCode.Text.Trim(),
-                        CustomerName = txtCustomerName.Text.Trim(),
-                        Address = txtAddress.Text.Trim(),
-                        ShipTo = txtShipTo.Text.Trim(),
-                        TaxId = txtTaxId.Text.Trim(),
-                        ContactNo = txtContactNo.Text.Trim(),
-                        Active = chkActive.Checked,
-                        CreateBy = "system",
-                    };
-                    CustomerController.Insert(customer);
-                    MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SaveData();
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-                }
-                else
+        }
+        private void BtnSaveAndNew_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                SaveData();
+                Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //try
+            //{
+
+            //    var customer = new Customer
+            //    {
+            //        CustomerCode = txtCustomerCode.Text.Trim(),
+            //        CustomerName = txtCustomerName.Text.Trim(),
+            //        Address = txtAddress.Text.Trim(),
+            //        ShipTo = txtShipTo.Text.Trim(),
+            //        TaxId = txtTaxId.Text.Trim(),
+            //        ContactNo = txtContactNo.Text.Trim(),
+            //        Active = chkActive.Checked,
+            //        CreateBy = "system",
+            //    };
+            //    CustomerController.Insert(customer);
+            //    MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+        }
+
+        private void SaveData()
+        {
+
+            try
+            {
+                if (string.IsNullOrEmpty(customerCode))
                 {
+                    txtCustomerCode.Focus();
+                    throw new Exception("กรุณาระบุรหัสลูกค้า!");
+                }
+
+                if (txtCustomerCode.Enabled)
+                {
+                    //Edit
                     var customer = new Customer
                     {
                         CustomerCode = txtCustomerCode.Text.Trim(),
@@ -196,82 +239,44 @@ namespace SlaughterHouseServer
                     CustomerController.Update(customer);
                     MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                else
+                {
+                    //Add New
+                    var customer = new Customer
+                    {
+                        CustomerCode = txtCustomerCode.Text.Trim(),
+                        CustomerName = txtCustomerName.Text.Trim(),
+                        Address = txtAddress.Text.Trim(),
+                        ShipTo = txtShipTo.Text.Trim(),
+                        TaxId = txtTaxId.Text.Trim(),
+                        ContactNo = txtContactNo.Text.Trim(),
+                        Active = chkActive.Checked,
+                        CreateBy = "system",
+                    };
+                    CustomerController.Insert(customer);
+                    MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
 
-                //if (this.classId == 0 || this.customerCode == null)
-                //{
-                //    var customerClass = new CustomerClass
-                //    {
-                //        MasterClass = new MasterClass
-                //        {
-                //            ClassId = Convert.ToInt32(comboxMasterClass.SelectedValue)
-                //        },
-                //        StartDate = dtpStartDate.Value,
-                //        EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
-                //        Day = Convert.ToInt16(txtDay.Text),
-                //        CreateBy = "system",
-                //    };
-                //    CustomerClassController.Insert(customerClass);
-                //    MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //}
-                //else
-                //{
-                //    var customerClass = new CustomerClass
-                //    {
-                //        MasterClass = new MasterClass
-                //        {
-                //            ClassId = Convert.ToInt32(comboxMasterClass.SelectedValue)
-                //        },
-                //        StartDate = dtpStartDate.Value,
-                //        EndDate = dtpStartDate.Value.AddDays(Convert.ToInt16(txtDay.Text)),
-                //        Day = Convert.ToInt16(txtDay.Text),
-                //        ModifiedBy = "system",
-                //    };
-                //    CustomerClassController.Update(customerClass);
-                //    MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //}
-
-                DialogResult = DialogResult.OK;
-                Close();
             }
-            catch (System.Exception ex)
+            catch (Exception)
             {
 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
             }
         }
-        private void BtnSaveAndNew_Click(object sender, System.EventArgs e)
+
+        private void Clear()
         {
-            try
-            {
-
-                var customer = new Customer
-                {
-                    CustomerCode = txtCustomerCode.Text.Trim(),
-                    CustomerName = txtCustomerName.Text.Trim(),
-                    Address = txtAddress.Text.Trim(),
-                    ShipTo = txtShipTo.Text.Trim(),
-                    TaxId = txtTaxId.Text.Trim(),
-                    ContactNo = txtContactNo.Text.Trim(),
-                    Active = chkActive.Checked,
-                    CreateBy = "system",
-                };
-                CustomerController.Insert(customer);
-                MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                txtCustomerCode.Text = "";
-                txtCustomerCode.Focus();
-                txtCustomerName.Text = "";
-                txtAddress.Text = "";
-                txtShipTo.Text = "";
-                txtTaxId.Text = "";
-                txtContactNo.Text = "";
-                chkActive.Checked = true;
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            txtCustomerCode.Text = "";
+            txtCustomerCode.Focus();
+            txtCustomerCode.Enabled = false;
+            txtCustomerName.Text = "";
+            txtAddress.Text = "";
+            txtShipTo.Text = "";
+            txtTaxId.Text = "";
+            txtContactNo.Text = "";
+            chkActive.Checked = true;
         }
         #region CustomerClass
         private void BtnAddOrderItem_Click(object sender, System.EventArgs e)
