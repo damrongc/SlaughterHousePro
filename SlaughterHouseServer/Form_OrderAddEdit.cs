@@ -213,7 +213,8 @@ namespace SlaughterHouseServer
                         e.Cancel = false;
                     }
                     else
-                    { MessageBox.Show("โปรดระบุเป็นตัวเลข");
+                    {
+                        MessageBox.Show("โปรดระบุเป็นตัวเลข");
                         e.Cancel = true;
                         //dtOrderItem.Rows[e.RowIndex][e.ColumnIndex] = 0;
                     }
@@ -570,6 +571,10 @@ namespace SlaughterHouseServer
         {
             try
             {
+                if (dtOrderItem.Rows.Count == 0)
+                {
+                    throw new Exception($"โปรดเพิ่มสินค้าก่อนบันทึก");
+                }
                 //Check UNIT_PRICE
                 for (int i = 0; i < dtOrderItem.Rows.Count; i++)
                 {
@@ -583,7 +588,7 @@ namespace SlaughterHouseServer
             {
                 throw;
             }
-        } 
+        }
         private int RoundQty(decimal num)
         {
 
