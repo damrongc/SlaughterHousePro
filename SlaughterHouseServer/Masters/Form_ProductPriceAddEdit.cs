@@ -63,13 +63,26 @@ namespace SlaughterHouseServer
 
         private void TxtUnitPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
-                if (e.KeyChar != 46)
-                {
-                    e.Handled = true;
-                    return;
-                }
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        public void onlynumwithsinglepoint(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == '.'))
+            { e.Handled = true; }
+            TextBox txtDecimal = sender as TextBox;
+            if (e.KeyChar == '.' && txtDecimal.Text.Contains("."))
+            {
+                e.Handled = true;
             }
         }
 

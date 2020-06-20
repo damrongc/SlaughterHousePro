@@ -53,10 +53,18 @@
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine">
+      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource">
+      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared">
+      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms">
+      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Web, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.8\Assemblies\v4.5\MySql.Web.dll</HintPath>
@@ -207,6 +215,7 @@
     </Compile>
     <Compile Include="Models\CustomerOrder.cs" />
     <Compile Include="Models\CustomerTransport.cs" />
+    <Compile Include="Models\CustomProduct.cs" />
     <Compile Include="Models\StockLot.cs" />
     <Compile Include="order.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -244,6 +253,15 @@
     <Compile Include="receive_item.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="receive_item_by_product.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Receiving\Form_HeadReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_HeadReceive.Designer.cs">
+      <DependentUpon>Form_HeadReceive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receiving\Form_LookupProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,11 +274,17 @@
     <Compile Include="Receiving\Form_Barcode.Designer.cs">
       <DependentUpon>Form_Barcode.cs</DependentUpon>
     </Compile>
-    <Compile Include="Receiving\Form_ReceiveProduct.cs">
+    <Compile Include="Receiving\Form_NumericPad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Receiving\Form_ReceiveProduct.Designer.cs">
-      <DependentUpon>Form_ReceiveProduct.cs</DependentUpon>
+    <Compile Include="Receiving\Form_NumericPad.Designer.cs">
+      <DependentUpon>Form_NumericPad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Receiving\Form_ReceiveMainProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_ReceiveMainProduct.Designer.cs">
+      <DependentUpon>Form_ReceiveMainProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Receiving\Form_ByProductReceive.cs">
       <SubType>Form</SubType>
@@ -360,6 +384,7 @@
     <Compile Include="user.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utils\StockHelper.cs" />
     <Compile Include="WeightHelper.cs" />
     <EmbeddedResource Include="CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
@@ -388,14 +413,20 @@
     <EmbeddedResource Include="Issued\Form_Issued.resx">
       <DependentUpon>Form_Issued.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_HeadReceive.resx">
+      <DependentUpon>Form_HeadReceive.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_LookupProduct.resx">
       <DependentUpon>Form_LookupProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_Barcode.resx">
       <DependentUpon>Form_Barcode.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_ReceiveProduct.resx">
-      <DependentUpon>Form_ReceiveProduct.cs</DependentUpon>
+    <EmbeddedResource Include="Receiving\Form_NumericPad.resx">
+      <DependentUpon>Form_NumericPad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_ReceiveMainProduct.resx">
+      <DependentUpon>Form_ReceiveMainProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receiving\Form_ByProductReceive.resx">
       <DependentUpon>Form_ByProductReceive.cs</DependentUpon>

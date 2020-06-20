@@ -1,26 +1,19 @@
-﻿
-using SerialPortListener.Serial;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using nucs.JsonSettings;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
-using CrystalDecisions.CrystalReports.Engine;
-using System.Drawing.Printing;
-using System.Collections.Generic;
 using ToastNotifications;
-using System.IO.Ports;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using nucs.JsonSettings;
 
 namespace SlaughterHouseClient.Receiving
 {
-    public partial class Form_ReceiveProduct : Form
+    public partial class Form_ReceiveMainProduct : Form
     {
         SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
         private readonly int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
@@ -56,7 +49,7 @@ namespace SlaughterHouseClient.Receiving
 
 
         delegate void SetTextCallback(string text);
-        public Form_ReceiveProduct()
+        public Form_ReceiveMainProduct()
         {
             InitializeComponent();
             UserInitialization();
@@ -237,54 +230,6 @@ namespace SlaughterHouseClient.Receiving
             }
         }
 
-        private void ProcessData()
-        {
-            try
-            {
-
-                isZero = false;
-                decimal scaleWeight = lblWeight.Text.ToDecimal();
-                if (product == null)
-                {
-                    throw new Exception("กรุณาเลือกสินค้า!");
-                }
-                if (string.IsNullOrEmpty(lot_no))
-                {
-                    throw new Exception("กรุณาเลือก Lot!");
-                }
-                if (scaleWeight < 0)
-                {
-                    throw new Exception("น้ำหนัก น้อยกว่า 0");
-                }
-
-                if (scaleWeight < product.min_weight)
-                {
-                    throw new Exception($"น้ำหนัก น้อยกว่า Min: {product.min_weight}");
-                }
-                if (scaleWeight > product.max_weight)
-                {
-                    throw new Exception($"น้ำหนัก มากกว่า Max: {product.max_weight}");
-                }
-
-                lblMessage.Text = Constants.PROCESSING;
-                SaveData();
-                DisplayNotification("Success", "บันทึกข้อมูล เรียบร้อย.\rกรุณานำสินค้าออก", Color.Green);
-                LoadStock();
-
-
-                //clear weight
-                lblLastWeight.Text = lblWeight.Text;
-                lockWeight = false;
-                timerMinWeight.Enabled = true;
-
-            }
-            catch (Exception ex)
-            {
-                DisplayNotification("Error", ex.Message, Color.Red);
-            }
-
-        }
-
         private void LoadProduct()
         {
 
@@ -401,6 +346,7 @@ namespace SlaughterHouseClient.Receiving
                     //        btn.Click += Btn_Click;
                     //    }
                     //}
+                    Index = 0;
                     DisplayPaging();
                 }
             }
@@ -424,6 +370,48 @@ namespace SlaughterHouseClient.Receiving
             //LoadProduct();
             LoadStock();
 
+        }
+
+        private void BtnUp_Click(object sender, EventArgs e)
+        {
+            if (Index > 0)
+            {
+                Index = Index - PAGE_SIZE;
+                if (Index < 0)
+                {
+                    Index = 0;
+                }
+                DisplayPaging();
+            }
+        }
+
+        private void BtnDown_Click(object sender, EventArgs e)
+        {
+            if (Index < buttons.Count - 1)
+            {
+                Index = Index + PAGE_SIZE;
+                if (Index > buttons.Count - 1)
+                {
+                    Index = buttons.Count - 1;
+                }
+
+            }
+            DisplayPaging();
+        }
+
+        private void DisplayPaging()
+        {
+            flowLayoutPanel1.Controls.Clear();
+            for (int i = Index; i <= (Index + PAGE_SIZE); i++)
+            {
+                if (i < buttons.Count)
+                {
+                    flowLayoutPanel1.Controls.Add(buttons[i]);
+                }
+            }
+            flowLayoutPanel1.Visible = true;
+            //btnPageUp.Enabled = (Index > 0);
+            //btnPageDown.Enabled = ((Index + (PAGE_SIZE + 1)) <= (lables.Count - 1));
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -553,7 +541,56 @@ namespace SlaughterHouseClient.Receiving
 
         }
 
-        private void SaveData()
+        private void ProcessData()
+        {
+            try
+            {
+
+                isZero = false;
+                decimal scaleWeight = lblWeight.Text.ToDecimal();
+                if (product == null)
+                {
+                    throw new Exception("กรุณาเลือกสินค้า!");
+                }
+                if (string.IsNullOrEmpty(lot_no))
+                {
+                    throw new Exception("กรุณาเลือก Lot!");
+                }
+                if (scaleWeight < 0)
+                {
+                    throw new Exception("น้ำหนัก น้อยกว่า 0");
+                }
+
+                if (scaleWeight < product.min_weight)
+                {
+                    throw new Exception($"น้ำหนัก น้อยกว่า Min: {product.min_weight}");
+                }
+                if (scaleWeight > product.max_weight)
+                {
+                    throw new Exception($"น้ำหนัก มากกว่า Max: {product.max_weight}");
+                }
+
+                lblMessage.Text = Constants.PROCESSING;
+                SaveData();
+                DisplayNotification("Success", "บันทึกข้อมูล เรียบร้อย.\rกรุณานำสินค้าออก", Color.Green);
+                PrintBarcode();
+                LoadStock();
+
+
+                //clear weight
+                lblLastWeight.Text = lblWeight.Text;
+                lockWeight = false;
+                timerMinWeight.Enabled = true;
+
+            }
+            catch (Exception ex)
+            {
+                DisplayNotification("Error", ex.Message, Color.Red);
+            }
+
+        }
+
+        private bool SaveData()
         {
             try
             {
@@ -658,7 +695,7 @@ namespace SlaughterHouseClient.Receiving
                             db.stocks.Add(stock);
                             db.SaveChanges();
                             transaction.Commit();
-                            PrintBarcode();
+                            return true;
                         }
                         catch (Exception)
                         {
@@ -684,6 +721,7 @@ namespace SlaughterHouseClient.Receiving
                 doc.SetDataSource(dt);
                 lblMessage.Text = "กำลังพิมพ์สติกเกอร์...";
                 doc.PrintToPrinter(1, true, 0, 0);
+                lblMessage.Text = Constants.WEIGHT_WAITING;
             }
             catch (Exception)
             {
@@ -695,7 +733,10 @@ namespace SlaughterHouseClient.Receiving
         private void btnSetWgh_Click(object sender, EventArgs e)
         {
             lblWeight.Text = txtSimWeight.Text.ToDecimal().ToFormat2Decimal();
-            ProcessData();
+            if (stableTarget > 0)
+            {
+                ProcessData();
+            }
             //try
             //{
             //    if (product == null)
@@ -794,49 +835,6 @@ namespace SlaughterHouseClient.Receiving
         //        }
         //    }
         //}
-
-        private void BtnUp_Click(object sender, EventArgs e)
-        {
-            if (Index > 0)
-            {
-                Index = Index - PAGE_SIZE;
-                if (Index < 0)
-                {
-                    Index = 0;
-                }
-                DisplayPaging();
-            }
-        }
-
-        private void BtnDown_Click(object sender, EventArgs e)
-        {
-            if (Index < buttons.Count - 1)
-            {
-                Index = Index + PAGE_SIZE;
-                if (Index > buttons.Count - 1)
-                {
-                    Index = buttons.Count - 1;
-                }
-
-            }
-            DisplayPaging();
-        }
-
-        private void DisplayPaging()
-        {
-            flowLayoutPanel1.Controls.Clear();
-            for (int i = Index; i <= (Index + PAGE_SIZE); i++)
-            {
-                if (i < buttons.Count)
-                {
-                    flowLayoutPanel1.Controls.Add(buttons[i]);
-                }
-            }
-            flowLayoutPanel1.Visible = true;
-            //btnPageUp.Enabled = (Index > 0);
-            //btnPageDown.Enabled = ((Index + (PAGE_SIZE + 1)) <= (lables.Count - 1));
-        }
-
         private void BtnPrint_Click(object sender, EventArgs e)
         {
             try
@@ -910,13 +908,14 @@ namespace SlaughterHouseClient.Receiving
             try
             {
                 var frm = new Form_LookupProduct();
-
+                frm.ProductGroup = 9;//ชิ้นส่วนหลัก
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     product_code = frm.ProductCode;
                     LoadProduct();
                     LoadLotNo();
                     btnStart.Enabled = true;
+                    lot_no = "";
 
                     //LoadData(frm.ReceiveNo);
                     //LoadBomItem(bom.bom_code);

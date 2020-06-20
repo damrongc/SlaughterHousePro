@@ -53,6 +53,7 @@
             this.cboTruckNo = new System.Windows.Forms.ComboBox();
             this.lblOrderDate = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.btnKeyboard = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
@@ -122,7 +123,7 @@
             this.btnOrderNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrderNo.Font = new System.Drawing.Font("Kanit", 16F);
             this.btnOrderNo.ForeColor = System.Drawing.Color.White;
-            this.btnOrderNo.Location = new System.Drawing.Point(263, 90);
+            this.btnOrderNo.Location = new System.Drawing.Point(252, 90);
             this.btnOrderNo.Name = "btnOrderNo";
             this.btnOrderNo.Size = new System.Drawing.Size(91, 43);
             this.btnOrderNo.TabIndex = 7;
@@ -134,7 +135,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label5.Location = new System.Drawing.Point(12, 57);
+            this.label5.Location = new System.Drawing.Point(7, 57);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(128, 33);
             this.label5.TabIndex = 8;
@@ -147,7 +148,7 @@
             this.lblOrderNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblOrderNo.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblOrderNo.ForeColor = System.Drawing.Color.Black;
-            this.lblOrderNo.Location = new System.Drawing.Point(18, 90);
+            this.lblOrderNo.Location = new System.Drawing.Point(7, 90);
             this.lblOrderNo.Name = "lblOrderNo";
             this.lblOrderNo.Size = new System.Drawing.Size(239, 43);
             this.lblOrderNo.TabIndex = 9;
@@ -169,7 +170,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label2.Location = new System.Drawing.Point(354, 57);
+            this.label2.Location = new System.Drawing.Point(343, 57);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 33);
             this.label2.TabIndex = 33;
@@ -182,20 +183,20 @@
             this.lblCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCustomer.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblCustomer.ForeColor = System.Drawing.Color.Black;
-            this.lblCustomer.Location = new System.Drawing.Point(360, 90);
+            this.lblCustomer.Location = new System.Drawing.Point(349, 90);
             this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(388, 43);
+            this.lblCustomer.Size = new System.Drawing.Size(325, 43);
             this.lblCustomer.TabIndex = 34;
             // 
             // txtBarcodeNo
             // 
             this.txtBarcodeNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(185)))), ((int)(((byte)(0)))));
-            this.txtBarcodeNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBarcodeNo.Font = new System.Drawing.Font("Kanit", 18F);
+            this.txtBarcodeNo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBarcodeNo.Font = new System.Drawing.Font("Kanit", 20.25F);
             this.txtBarcodeNo.ForeColor = System.Drawing.Color.White;
-            this.txtBarcodeNo.Location = new System.Drawing.Point(680, 167);
+            this.txtBarcodeNo.Location = new System.Drawing.Point(680, 168);
             this.txtBarcodeNo.Name = "txtBarcodeNo";
-            this.txtBarcodeNo.Size = new System.Drawing.Size(228, 43);
+            this.txtBarcodeNo.Size = new System.Drawing.Size(228, 41);
             this.txtBarcodeNo.TabIndex = 68;
             this.txtBarcodeNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -203,7 +204,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label6.Location = new System.Drawing.Point(674, 133);
+            this.label6.Location = new System.Drawing.Point(674, 134);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 33);
             this.label6.TabIndex = 67;
@@ -216,7 +217,7 @@
             this.lblProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblProduct.Font = new System.Drawing.Font("Kanit", 20.25F);
             this.lblProduct.ForeColor = System.Drawing.Color.Black;
-            this.lblProduct.Location = new System.Drawing.Point(235, 167);
+            this.lblProduct.Location = new System.Drawing.Point(224, 167);
             this.lblProduct.Name = "lblProduct";
             this.lblProduct.Size = new System.Drawing.Size(239, 43);
             this.lblProduct.TabIndex = 66;
@@ -226,7 +227,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label8.Location = new System.Drawing.Point(229, 133);
+            this.label8.Location = new System.Drawing.Point(218, 133);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 33);
             this.label8.TabIndex = 65;
@@ -239,9 +240,9 @@
             this.lblLotNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblLotNo.Font = new System.Drawing.Font("Kanit", 20.25F);
             this.lblLotNo.ForeColor = System.Drawing.Color.Black;
-            this.lblLotNo.Location = new System.Drawing.Point(480, 167);
+            this.lblLotNo.Location = new System.Drawing.Point(469, 167);
             this.lblLotNo.Name = "lblLotNo";
-            this.lblLotNo.Size = new System.Drawing.Size(194, 43);
+            this.lblLotNo.Size = new System.Drawing.Size(205, 43);
             this.lblLotNo.TabIndex = 64;
             this.lblLotNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -249,7 +250,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label4.Location = new System.Drawing.Point(474, 133);
+            this.label4.Location = new System.Drawing.Point(463, 133);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 33);
             this.label4.TabIndex = 63;
@@ -259,7 +260,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label3.Location = new System.Drawing.Point(748, 57);
+            this.label3.Location = new System.Drawing.Point(674, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(106, 33);
             this.label3.TabIndex = 70;
@@ -268,9 +269,9 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.gv);
-            this.panel1.Location = new System.Drawing.Point(18, 216);
+            this.panel1.Location = new System.Drawing.Point(7, 216);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(994, 516);
+            this.panel1.Size = new System.Drawing.Size(1005, 516);
             this.panel1.TabIndex = 73;
             // 
             // gv
@@ -279,8 +280,8 @@
             this.gv.AllowUserToDeleteRows = false;
             this.gv.AllowUserToResizeColumns = false;
             this.gv.AllowUserToResizeRows = false;
-            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.gv.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -290,7 +291,7 @@
             this.gv.RowHeadersWidth = 10;
             this.gv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv.Size = new System.Drawing.Size(994, 516);
+            this.gv.Size = new System.Drawing.Size(1005, 516);
             this.gv.TabIndex = 11;
             // 
             // dragControl1
@@ -305,7 +306,7 @@
             this.btnView.Font = new System.Drawing.Font("Kanit", 16F);
             this.btnView.ForeColor = System.Drawing.Color.White;
             this.btnView.Image = ((System.Drawing.Image)(resources.GetObject("btnView.Image")));
-            this.btnView.Location = new System.Drawing.Point(914, 167);
+            this.btnView.Location = new System.Drawing.Point(914, 92);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(99, 43);
             this.btnView.TabIndex = 75;
@@ -316,9 +317,9 @@
             // 
             this.cboTruckNo.Font = new System.Drawing.Font("Kanit", 18F);
             this.cboTruckNo.FormattingEnabled = true;
-            this.cboTruckNo.Location = new System.Drawing.Point(754, 90);
+            this.cboTruckNo.Location = new System.Drawing.Point(680, 93);
             this.cboTruckNo.Name = "cboTruckNo";
-            this.cboTruckNo.Size = new System.Drawing.Size(258, 43);
+            this.cboTruckNo.Size = new System.Drawing.Size(228, 43);
             this.cboTruckNo.TabIndex = 85;
             // 
             // lblOrderDate
@@ -328,7 +329,7 @@
             this.lblOrderDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblOrderDate.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblOrderDate.ForeColor = System.Drawing.Color.Black;
-            this.lblOrderDate.Location = new System.Drawing.Point(18, 167);
+            this.lblOrderDate.Location = new System.Drawing.Point(7, 167);
             this.lblOrderDate.Name = "lblOrderDate";
             this.lblOrderDate.Size = new System.Drawing.Size(211, 43);
             this.lblOrderDate.TabIndex = 87;
@@ -337,17 +338,33 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label9.Location = new System.Drawing.Point(21, 133);
+            this.label9.Location = new System.Drawing.Point(7, 133);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(119, 33);
             this.label9.TabIndex = 86;
             this.label9.Text = "วันที่เอกสาร";
+            // 
+            // btnKeyboard
+            // 
+            this.btnKeyboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
+            this.btnKeyboard.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnKeyboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnKeyboard.Font = new System.Drawing.Font("Kanit", 16F);
+            this.btnKeyboard.ForeColor = System.Drawing.Color.White;
+            this.btnKeyboard.Image = ((System.Drawing.Image)(resources.GetObject("btnKeyboard.Image")));
+            this.btnKeyboard.Location = new System.Drawing.Point(914, 164);
+            this.btnKeyboard.Name = "btnKeyboard";
+            this.btnKeyboard.Size = new System.Drawing.Size(98, 46);
+            this.btnKeyboard.TabIndex = 88;
+            this.btnKeyboard.UseVisualStyleBackColor = false;
+            this.btnKeyboard.Click += new System.EventHandler(this.btnKeyboard_Click);
             // 
             // Form_MainProduct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.btnKeyboard);
             this.Controls.Add(this.lblOrderDate);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.cboTruckNo);
@@ -407,6 +424,7 @@
         private System.Windows.Forms.ComboBox cboTruckNo;
         private System.Windows.Forms.Label lblOrderDate;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnKeyboard;
     }
 }
 

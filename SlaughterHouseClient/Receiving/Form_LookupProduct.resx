@@ -182,4 +182,23 @@
         oK/QbEt/N+EA389/GGjR4n9LW9t/D9QjbvQgzusAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnKeyboard.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAANRJREFUSEvt
+        lEEOgjAQRbkAnIEV5+AOrNhhiB6GS3gW7qBLwx3cuqj/d6aGaMUYW4JJf/ICM1P+bxMgS0r6Dxlj9uAM
+        LpGgd+/CCnADV+BbHAJ6M6NgYAmoo91BBNFbIkz5EohrDQ4gV3hf/zhbDHwMFSrYzBe47gljiN4S4T/h
+        ANzbNWqv0brRevwwc88P2ttQYAzRWyKWXxrSaq+a9d5R6dp21vvqs6Am7XVSLqrTtZOUVs+eGzhhDNFb
+        IiRwzZ937nbQgxPwLQ4BvXc2LClp48qyO7kjg0Z5UKECAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnClear.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAADlSURBVEhL7ZW7CsJAEEX3KxTUQgvtBfFP7CwUf99XobZ6b2BgWfYxQ9at9sApojNzk0lCXKdT
+        kw08wdlwpGMOz3A9HBlg2Ad+4Q3uYAnWsJY9b2gKvUA2ineYC+V/rPF7uB01CyhnK6ZCY2Hs5QwTW3iF
+        /qAn3EOBNeGJPaBfYyIXWj1MiK2Mg6n/W+k+m4hdjW+46iqkQv8SRpoGNl1p04cmdmW512LUlWoGVgud
+        wvCFT60stnL2TqCaI/QHlO5PLJQz1KwgPzFs5NlqHgbWyFZekDNMsOEALathLXuWw1GnMx7nfkdUkPpz
+        aa2pAAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

@@ -143,7 +143,7 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
-        public static DataTable GetProductsForSale(string productGroup, string productCode, string productName, DateTime requestDate, string customerCode, int classId )
+        public static DataTable GetProductsForSale(string productGroup, string productCode, string productName, DateTime requestDate, string customerCode, int classId)
         {
             //(select distinct pp.start_date, pp.end_date, pp.product_code
             //from product_price pp
@@ -255,39 +255,37 @@ namespace SlaughterHouseLib.Models
                     {
                         sql = @"
                                 Select distinct 0 as select_col,  p.product_code, product_name,
-                                    p.issue_unit_method,  
-                                    p.unit_of_qty as unit_code_qty,            
+                                    p.issue_unit_method,
+                                    p.unit_of_qty as unit_code_qty,
                                     uq.unit_name as unit_name_qty,
                                     p.unit_of_wgh as unit_code_wgh,
                                     uw.unit_name as unit_name_wgh,
                                     p.packing_size
-                                From product p, 
+                                From product p,
                                     unit_of_measurement uq,
                                     unit_of_measurement uw
-                                where p.active = 1 
+                                where p.active = 1
                                     and p.unit_of_qty = uq.unit_code
                                     and p.unit_of_wgh = uw.unit_code
-                                    and p.product_code <> 'NA'
-                              ";
+                                    and p.product_code <> 'NA'";
                     }
                     else
                     {
                         sql = @"
                                 Select distinct  p.product_code, product_name,
-                                    p.issue_unit_method, 
-                                    p.unit_of_qty as unit_code_qty,            
+                                    p.issue_unit_method,
+                                    p.unit_of_qty as unit_code_qty,
                                     uq.unit_name as unit_name_qty,
                                     p.unit_of_wgh as unit_code_wgh,
                                     uw.unit_name as unit_name_wgh,
                                     p.packing_size
-                                From product p, 
+                                From product p,
                                     unit_of_measurement uq,
                                     unit_of_measurement uw
-                                where p.active = 1 
+                                where p.active = 1
                                     and p.unit_of_qty = uq.unit_code
                                     and p.unit_of_wgh = uw.unit_code
-                                    and p.product_code <> 'NA'
-                              ";
+                                    and p.product_code <> 'NA'";
                     }
                     if (String.IsNullOrEmpty(productGroup) == false)
                     {
@@ -302,7 +300,7 @@ namespace SlaughterHouseLib.Models
                     {
                         sql += $" and p.product_name like '%{productName}%' ";
                     }
-                    sql += "  order by p.product_name  ";
+                    sql += "  order by p.product_code,p.product_name asc";
                     var cmd = new MySqlCommand(sql, conn);
 
                     //if (String.IsNullOrEmpty(productCode) == false)

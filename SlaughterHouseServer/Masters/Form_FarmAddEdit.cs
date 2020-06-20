@@ -152,7 +152,7 @@ namespace SlaughterHouseServer
                     throw new Exception($"โปรดระบุรหัสสินค้า");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

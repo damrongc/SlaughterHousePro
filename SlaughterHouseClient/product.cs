@@ -27,6 +27,7 @@ namespace SlaughterHouseClient
             this.stocks = new HashSet<stock>();
             this.transport_item = new HashSet<transport_item>();
             this.barcodes = new HashSet<barcode>();
+            this.receive_item_by_product = new HashSet<receive_item_by_product>();
         }
     
         public string product_code { get; set; }
@@ -70,5 +71,7 @@ namespace SlaughterHouseClient
         public virtual unit_of_measurement unit_of_measurement1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<barcode> barcodes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<receive_item_by_product> receive_item_by_product { get; set; }
     }
 }

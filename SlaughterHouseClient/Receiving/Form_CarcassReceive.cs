@@ -1,23 +1,23 @@
-﻿using System;
+﻿//using System.IO;
+using nucs.JsonSettings;
+using System;
+using System.Data;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using System.Data;
 //using CrystalDecisions.CrystalReports.Engine;
 using ToastNotifications;
-using System.IO.Ports;
-//using System.IO;
-using nucs.JsonSettings;
-using System.Collections.Generic;
 //using System.Collections.Generic;
 
 namespace SlaughterHouseClient.Receiving
 {
     public partial class Form_CarcassReceive : Form
     {
-        const string PRODUCT_CODE = "00000";
+        const string PRODUCT_CODE = "0000A";
+        const int RECEIVE_QTY = 2;
         SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
         product product;
         private bool isStart = false;
@@ -29,6 +29,8 @@ namespace SlaughterHouseClient.Receiving
         private int displayTime = 3;
         private int scaleDivision = 100;
         private int captureTime = 10;
+
+        private plant plant;
 
 
         FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
@@ -45,12 +47,11 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
+                int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
                 using (var db = new SlaughterhouseEntities())
                 {
-                    int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
-                    var plant = db.plants.Find(plantID);
+                    plant = db.plants.Find(plantID);
                     lblProductionDate.Text = plant.production_date.ToString("dd-MM-yyyy");
-
                     product = db.products.Find(PRODUCT_CODE);
 
                 }
@@ -195,9 +196,13 @@ namespace SlaughterHouseClient.Receiving
                 lblMaxWeight.Text = product.max_weight.ToString();
 
                 var receive = db.receives.Where(p => p.receive_no == lblReceiveNo.Text).SingleOrDefault();
-                int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
-                decimal stock_wgh = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_wgh);
+                //int stock_qty = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_qty);
+                //decimal stock_wgh = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).Sum(p => p.receive_wgh);
                 var receive_item = receive.receive_item.Where(p => p.product_code.Equals(product.product_code)).LastOrDefault();
+
+                int stock_qty = Convert.ToInt16(receive.carcass_qty);
+                decimal stock_wgh = Convert.ToDecimal(receive.carcass_wgh);
+
                 int remain_qty = receive.farm_qty - stock_qty;
                 lblReceiveNo.Text = receive.receive_no;
                 lblFarm.Text = receive.farm.farm_name;
@@ -411,16 +416,15 @@ namespace SlaughterHouseClient.Receiving
         {
             try
             {
-                int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+
+
                 var receiveWgh = lblWeight.Text.ToDecimal();
                 string createBy = Helper.GetLocalIPAddress();
-
+                var productionDate = plant.production_date;
                 using (var db = new SlaughterhouseEntities())
                 {
-
-                    var productionDate = db.plants.Find(plantID).production_date;
-
                     var receive = db.receives.Where(p => p.receive_no.Equals(lblReceiveNo.Text)).SingleOrDefault();
+                    //var carcassQty = receive.carcass_qty == 0 ? receive.carcass_qty : (receive.carcass_qty / RECEIVE_QTY);
                     if (receive.farm_qty - receive.carcass_qty == 0)
                     {
                         throw new Exception("จำนวนรับครบแล้ว ไม่สามารถรับเพิ่มได้!");
@@ -447,6 +451,7 @@ namespace SlaughterHouseClient.Receiving
                     {
                         stock_no = stockItemRunning.stock_no;
                     }
+
                     using (DbContextTransaction transaction = db.Database.BeginTransaction())
                     {
                         try
@@ -459,7 +464,7 @@ namespace SlaughterHouseClient.Receiving
                                 seq = seq,
                                 lot_no = receive.lot_no,
                                 sex_flag = "",
-                                receive_qty = 1,
+                                receive_qty = RECEIVE_QTY,
                                 receive_wgh = receiveWgh,
                                 chill_qty = 0,
                                 chill_wgh = 0,
@@ -494,8 +499,8 @@ namespace SlaughterHouseClient.Receiving
                                 stock_no = stock_no,
                                 stock_item = item.seq,
                                 product_code = item.product_code,
-                                stock_qty = item.receive_qty,
-                                stock_wgh = item.receive_wgh,
+                                stock_qty = RECEIVE_QTY,
+                                stock_wgh = receiveWgh,
                                 ref_document_no = receive.receive_no,
                                 ref_document_type = Constants.REV,
                                 lot_no = receive.lot_no,
@@ -507,9 +512,8 @@ namespace SlaughterHouseClient.Receiving
 
                             db.stocks.Add(stock);
 
-                            receive.carcass_qty += item.receive_qty;
-                            receive.carcass_wgh += item.receive_wgh;
-
+                            receive.carcass_qty += 1;
+                            receive.carcass_wgh += receiveWgh;
 
                             if (stockItemRunning == null)
                             {

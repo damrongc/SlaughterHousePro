@@ -1,0 +1,48 @@
+
+//ปราจีน 
+
+ALTER TABLE `slaughterhouse`.`barcode_history` 
+ADD COLUMN `deleted_date` DATETIME NULL AFTER `modified_by`;
+
+
+DELIMITER //
+
+CREATE TRIGGER barcodes_after_delete
+AFTER DELETE
+   ON barcode FOR EACH ROW
+BEGIN
+   -- Insert record into barcode_history table
+   INSERT INTO barcode_history
+   ( barcode_no,
+     product_code,
+     production_date,
+     lot_no,
+     qty,
+     wgh,
+	 active,
+	 qrcode_image,
+	 location_code,
+	 create_at,
+	 create_by,
+	 modified_at,
+	 modified_by,
+     deleted_date)
+   VALUES
+   ( OLD.barcode_no,
+   OLD.product_code,
+   OLD.production_date,
+   OLD.lot_no,
+   OLD.qty,
+   OLD.wgh,
+   OLD.active,
+   OLD.qrcode_image,
+   OLD.location_code,
+   OLD.create_at,
+   OLD.create_by,
+   OLD.modified_at,
+   OLD.modified_by,
+   SYSDATE());
+
+END; //
+
+DELIMITER ;

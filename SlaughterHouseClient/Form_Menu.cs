@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using ToastNotifications;
 
 namespace SlaughterHouseClient
 {
@@ -45,31 +44,34 @@ namespace SlaughterHouseClient
             frm.ShowInTaskbar = false;
             frm.ShowDialog();
         }
+
         private void btnReceiveHead_Click(object sender, EventArgs e)
         {
 
 
-            //var frm = new Receiving.Form_HeadReceive();
-            //frm.ShowInTaskbar = false;
-            //frm.ShowDialog();
-
-            var frm = new Receiving.Form_ByProductReceive
-            {
-                LocationCode = 8,
-                ProductCode = "04001",
-                //var frm = new Receiving.Form_ByProduct("รับเครื่องในขาว", 3, 4);
-                ShowInTaskbar = false
-            };
+            var frm = new Receiving.Form_HeadReceive();
+            frm.ShowInTaskbar = false;
             frm.ShowDialog();
+
+            //หัวหมู
+            //var frm = new Receiving.Form_ByProductReceive
+            //{
+            //    LocationCode = 8,
+            //    BomProductCode = "04001",
+            //    //var frm = new Receiving.Form_ByProduct("รับเครื่องในขาว", 3, 4);
+            //    ShowInTaskbar = false
+            //};
+            //frm.ShowDialog();
 
         }
 
         private void btnReceiveByProductWhite_Click(object sender, EventArgs e)
         {
+            //เครื่องในขาว
             var frm = new Receiving.Form_ByProductReceive
             {
                 LocationCode = 4,
-                ProductCode = "00201",
+                CoreProductCode = "00201",
                 //var frm = new Receiving.Form_ByProduct("รับเครื่องในขาว", 3, 4);
                 ShowInTaskbar = false
             };
@@ -78,10 +80,12 @@ namespace SlaughterHouseClient
 
         private void btnReceiveByProductRed_Click(object sender, EventArgs e)
         {
+            //เครื่องในแดง
             var frm = new Receiving.Form_ByProductReceive
             {
                 LocationCode = 3,
-                ProductCode = "00101",
+                CoreProductCode = "00101",
+                ProductGroup = 8,
                 //var frm = new Receiving.Form_ByProduct("รับเครื่องในแดง", 2, 3);
                 ShowInTaskbar = false
             };
@@ -99,7 +103,7 @@ namespace SlaughterHouseClient
         private void btnReceivePart_Click(object sender, EventArgs e)
         {
             ////location code 7 :ห้องตัดแต่ง
-            var frm = new Receiving.Form_ReceiveProduct();
+            var frm = new Receiving.Form_ReceiveMainProduct();
             frm.ShowInTaskbar = false;
             frm.ShowDialog();
         }

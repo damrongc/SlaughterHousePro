@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using SlaughterHouseClient.Models;
+﻿using SlaughterHouseClient.Models;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -75,8 +74,15 @@ namespace SlaughterHouseClient.Issued
                                 where ord.order_no = ord_item.order_no
                                 and ord.customer_code =cus.customer_code
                                 and ord.order_flag =0
-                                and ord.order_date = @order_date
                                 and (ord_item.order_qty - ord_item.unload_qty)>0";
+
+                //var sql = @"select distinct ord.order_no,ord.order_date,ord.customer_code,ord.comments,cus.customer_name,cus.address
+                //                from orders  as ord,orders_item  as ord_item,customer cus
+                //                where ord.order_no = ord_item.order_no
+                //                and ord.customer_code =cus.customer_code
+                //                and ord.order_flag =0
+                //                and ord.order_date = @order_date
+                //                and (ord_item.order_qty - ord_item.unload_qty)>0";
 
                 //if (string.IsNullOrEmpty(_productCode))
                 //{
@@ -92,11 +98,11 @@ namespace SlaughterHouseClient.Issued
                 //object[] parmas = new object[];
                 //MySql.Data.MySqlClient.MySqlParameterCollection mySqlParameter = new MySql.Data.MySqlClient.MySqlParameterCollection();
 
-                var parameters = new[]
-                {
-                  new MySqlParameter("@order_date",productionDate.ToString("yyyy-MM-dd")  ),
-                };
-                var qry = db.Database.SqlQuery<CustomerOrder>(sql, parameters).ToList();
+                //var parameters = new[]
+                //{
+                //  new MySqlParameter("@order_date",productionDate.ToString("yyyy-MM-dd")  ),
+                //};
+                var qry = db.Database.SqlQuery<CustomerOrder>(sql).ToList();
 
                 //if (!string.IsNullOrEmpty(_productCode))
                 //{

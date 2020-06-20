@@ -1,7 +1,7 @@
 ﻿
 using nucs.JsonSettings;
+using SlaughterHouseClient.Receiving;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
@@ -145,7 +145,7 @@ namespace SlaughterHouseClient.Issued
                     if (transport != null)
                     {
                         cboTruckNo.SelectedValue = transport.truck_id;
-                        lblMessage.Text = Constants.BARCODE_WAITING;
+                        lblMessage.Text = Constants.PLEASE_SCAN;
                     }
                     else
                     {
@@ -199,7 +199,7 @@ namespace SlaughterHouseClient.Issued
                 if (string.IsNullOrEmpty(lblOrderNo.Text))
                 {
 
-                    throw new Exception("กรุณาเลือกเอกสาร SO!");
+                    throw new Exception("กรุณาเลือก เอกสารใบสั่งขาย!");
                 }
                 //if (string.IsNullOrEmpty(lblTruckNo.Text))
                 //{
@@ -339,7 +339,6 @@ namespace SlaughterHouseClient.Issued
                             //insert transport
                             if (transport == null)
                             {
-
                                 var trans = new transport
                                 {
                                     transport_no = transportNo,
@@ -440,6 +439,24 @@ namespace SlaughterHouseClient.Issued
             };
             frm.ShowDialog();
             LoadOrder();
+        }
+
+        private void btnKeyboard_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var frm = new Form_NumericPad();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    txtBarcodeNo.Text = frm.ReturnValue.ToString();
+                    ProcessData();
+                }
+            }
+            catch (Exception ex)
+            {
+                txtBarcodeNo.Text = "";
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         //private bool CloseJob()
         //{

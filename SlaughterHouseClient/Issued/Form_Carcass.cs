@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
-using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Threading;
@@ -32,7 +31,7 @@ namespace SlaughterHouseClient.Issued
 
         List<Button> buttons;
         private int Index;
-        private readonly int PAGE_SIZE = 15;
+        private readonly int PAGE_SIZE = 12;
         readonly FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
         readonly FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
         delegate void SetTextCallback(string text);
@@ -331,6 +330,7 @@ namespace SlaughterHouseClient.Issued
                         //flowLayoutPanel1.Controls.Add(btn);
 
                     }
+                    Index = 0;
                     DisplayPaging();
 
                 }
@@ -705,12 +705,14 @@ namespace SlaughterHouseClient.Issued
                 }
 
 
-                if (!serialPort1.IsOpen)
-                    serialPort1.Open();
+                if (System.Diagnostics.Debugger.IsAttached == false)
+                {
+                    if (!serialPort1.IsOpen)
+                        serialPort1.Open();
+                }
 
                 isStart = true;
                 isZero = true;
-
                 btnOrderNo.Enabled = false;
                 btnStart.Enabled = false;
                 btnStop.Enabled = true;

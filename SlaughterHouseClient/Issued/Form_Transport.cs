@@ -17,12 +17,19 @@ namespace SlaughterHouseClient.Issued
         public string OrderNo { get; set; }
 
 
-        const int BARCODE_NO = 0;
-        const int TRANSPORT_NO = 6;
-        const int PRODUCT_CODE = 7;
-        const int SEQ = 8;
-        const int STOCK_NO = 9;
-        const int BOM_CODE = 10;
+        const int IDX_BARCODE_NO = 0;
+        const int IDX_TRUCK_NO = 1;
+        const int IDX_PRODUCT_NAME = 2;
+        const int IDX_LOT_NO = 3;
+        const int IDX_QTY = 4;
+        const int IDX_WGH = 5;
+        const int IDX_CREATE_DATETIME = 6;
+        const int IDX_TRANSPORT_NO = 7;
+        const int IDX_PRODUCT_CODE = 8;
+        const int IDX_SEQ = 9;
+        const int IDX_STOCK_NO = 10;
+        const int IDX_BOM_CODE = 11;
+
 
         private int displayTime = 3;
 
@@ -77,16 +84,16 @@ namespace SlaughterHouseClient.Issued
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
                 {
-                    long barcodeNo = gv.Rows[e.RowIndex].Cells[BARCODE_NO].Value.ToString().ToLong();
+                    long barcodeNo = gv.Rows[e.RowIndex].Cells[IDX_BARCODE_NO].Value.ToString().ToLong();
                     if (MessageBox.Show(string.Format("ต้องการยกเลิก รหัสบาร์โค็ด \r\n{0}\r\n ใช่หรือไม่?", barcodeNo), "ยืนยัน",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        string transportNo = gv.Rows[e.RowIndex].Cells[TRANSPORT_NO].Value.ToString();
-                        string productCode = gv.Rows[e.RowIndex].Cells[PRODUCT_CODE].Value.ToString();
-                        int seq = gv.Rows[e.RowIndex].Cells[SEQ].Value.ToString().ToInt16();
-                        string stockNo = gv.Rows[e.RowIndex].Cells[STOCK_NO].Value.ToString();
-                        int bomCode = gv.Rows[e.RowIndex].Cells[BOM_CODE].Value.ToString().ToInt16();
+                        string transportNo = gv.Rows[e.RowIndex].Cells[IDX_TRANSPORT_NO].Value.ToString();
+                        string productCode = gv.Rows[e.RowIndex].Cells[IDX_PRODUCT_CODE].Value.ToString();
+                        int seq = gv.Rows[e.RowIndex].Cells[IDX_SEQ].Value.ToString().ToInt16();
+                        string stockNo = gv.Rows[e.RowIndex].Cells[IDX_STOCK_NO].Value.ToString();
+                        int bomCode = gv.Rows[e.RowIndex].Cells[IDX_BOM_CODE].Value.ToString().ToInt16();
 
                         using (var db = new SlaughterhouseEntities())
                         {
@@ -208,6 +215,7 @@ namespace SlaughterHouseClient.Issued
                     p.barcode_no,
                     p.truck_no,
                     p.product_name,
+                    p.lot_no,
                     transport_qty = p.transport_qty.ToComma(),
                     transport_wgh = p.transport_wgh.ToFormat2Decimal(),
                     create_at = p.create_at.ToString("dd-MM-yyyy HH:mm"),
@@ -221,20 +229,24 @@ namespace SlaughterHouseClient.Issued
 
                 gv.DataSource = coll;
 
-                gv.Columns[1].HeaderText = "ทะเบียนรถ";
-                gv.Columns[2].HeaderText = "สินค้า";
-                gv.Columns[3].HeaderText = "จำนวน";
-                gv.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                gv.Columns[IDX_TRUCK_NO].HeaderText = "ทะเบียนรถ";
 
-                gv.Columns[4].HeaderText = "น้ำหนัก";
-                gv.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                gv.Columns[5].HeaderText = "วันเวลาสแกน";
+                gv.Columns[IDX_PRODUCT_NAME].HeaderText = "สินค้า";
+                gv.Columns[IDX_LOT_NO].HeaderText = "Lot No.";
+                gv.Columns[IDX_QTY].HeaderText = "จำนวน";
+                gv.Columns[IDX_QTY].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-                gv.Columns[TRANSPORT_NO].Visible = false;
-                gv.Columns[PRODUCT_CODE].Visible = false;
-                gv.Columns[SEQ].Visible = false;
-                gv.Columns[STOCK_NO].Visible = false;
-                gv.Columns[BOM_CODE].Visible = false;
+                gv.Columns[IDX_WGH].HeaderText = "น้ำหนัก";
+                gv.Columns[IDX_WGH].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                gv.Columns[IDX_CREATE_DATETIME].HeaderText = "วันเวลาสแกน";
+
+
+                gv.Columns[IDX_TRANSPORT_NO].Visible = false;
+                gv.Columns[IDX_PRODUCT_CODE].Visible = false;
+                gv.Columns[IDX_SEQ].Visible = false;
+                gv.Columns[IDX_STOCK_NO].Visible = false;
+                gv.Columns[IDX_BOM_CODE].Visible = false;
+
             }
         }
 

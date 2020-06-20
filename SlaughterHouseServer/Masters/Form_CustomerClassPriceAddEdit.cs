@@ -17,8 +17,8 @@ namespace SlaughterHouseServer
         private void UserSettingsComponent()
         {
 
-            this.Load += Form_Load;
-            this.Shown += Form_Shown;
+            Load += Form_Load;
+            Shown += Form_Shown;
 
             //KeyDown
             cboCustomerClass.KeyDown += CboCustomerClass_KeyDown;
@@ -82,10 +82,15 @@ namespace SlaughterHouseServer
         }
         private void TxtUnitPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
-                return;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
             }
         }
         private void Gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

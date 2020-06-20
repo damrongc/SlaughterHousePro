@@ -116,14 +116,13 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"SELECT distinct bi.bom_code, bi.product_code, 
+                    var sql = @"SELECT distinct bi.bom_code, bi.product_code,
                                     Mutiply_Qty, Mutiply_wgh, p.issue_unit_method as issue_unit_method,
                                     p.packing_size
                                 FROM bom b, bom_item bi, product p
                                 Where b.product_code = @product_code
                                     and b.bom_code = bi.bom_code
-                                    and bi.product_code = p.product_code
-                                ";
+                                    and bi.product_code = p.product_code";
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("product_code", productCode);
@@ -186,6 +185,8 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+
+
         public static bool Insert(Bom bom)
         {
             MySqlTransaction tr = null;
@@ -232,10 +233,10 @@ namespace SlaughterHouseLib
                     sql = @"INSERT INTO slaughterhouse.bom
                                 (
                                 product_code,
-                                active, 
+                                active,
                                 create_by)
 								VALUES(
-								@product_code, 
+								@product_code,
 								@active,
 								@create_by)";
                     cmd = new MySqlCommand(sql, conn)
@@ -248,8 +249,7 @@ namespace SlaughterHouseLib
                     cmd.ExecuteNonQuery();
 
 
-                    sql = @"SELECT max(bom_code) as bom_code
-                                    FROM bom b ";
+                    sql = @"SELECT max(bom_code) as bom_code FROM bom b ";
 
                     cmd = new MySqlCommand(sql, conn);
                     var da = new MySqlDataAdapter(cmd);
@@ -266,8 +266,7 @@ namespace SlaughterHouseLib
                             (@bom_code,
                              @product_code,
                              @mutiply_qty,
-                             @mutiply_wgh)
-                          ";
+                             @mutiply_wgh)";
 
                     foreach (var item in bom.BomItems)
                     {
@@ -310,7 +309,7 @@ namespace SlaughterHouseLib
                     //    throw new Exception("ไม่สามารถบันทึกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
                     //}
                     var sql = @"UPDATE bom
-								SET product_code=@product_code, 
+								SET product_code=@product_code,
 								active=@active,
 								modified_at=CURRENT_TIMESTAMP,
 								modified_by=@modified_by
@@ -327,8 +326,7 @@ namespace SlaughterHouseLib
                     cmd.Parameters.AddWithValue("modified_by", bom.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();
 
-                    sql = @"Delete From bom_item 
-								WHERE bom_code=@bom_code";
+                    sql = @"Delete From bom_item WHERE bom_code=@bom_code";
                     cmd = new MySqlCommand(sql, conn)
                     {
                         Transaction = tr
@@ -345,8 +343,7 @@ namespace SlaughterHouseLib
                             (@bom_code,
                              @product_code,
                              @mutiply_qty,
-                             @mutiply_wgh)
-                          ";
+                             @mutiply_wgh)";
 
                     foreach (var item in bom.BomItems)
                     {
@@ -381,7 +378,7 @@ namespace SlaughterHouseLib
         //            var sql = "";
 
         //            sql = @"UPDATE boms
-        //SET  active=@active 
+        //SET  active=@active
         //WHERE bom_no=@bom_no";
         //            var cmd = new MySqlCommand(sql, conn)
         //            {
@@ -423,6 +420,63 @@ namespace SlaughterHouseLib
                     var ds = new DataSet();
                     da.Fill(ds);
                     return ds.Tables[0];
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static List<string> GetBomItemByProductCode(string productCode)
+        {
+            try
+            {
+                List<string> list = new List<string>();
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"SELECT b.product_code FROM bom a,bom_item b
+                                    WHERE a.bom_code =b.bom_code
+                                    ANd a.product_code=@product_code";
+
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_code", productCode);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    foreach (DataRow item in ds.Tables[0].Rows)
+                    {
+                        list.Add(item["product_code"].ToString());
+                    }
+                    return list;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static int GetBomItemByProductCodeCount(string productCode)
+        {
+            try
+            {
+                List<string> list = new List<string>();
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"SELECT count(1)
+                                    FROM bom a,bom_item b
+                                    WHERE a.bom_code =b.bom_code
+                                    ANd a.product_code=@product_code";
+
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("product_code", productCode);
+                    int rowCount = int.Parse(cmd.ExecuteScalar().ToString());
+
+                    return rowCount;
                 }
             }
             catch (Exception)

@@ -1,5 +1,6 @@
 ﻿
 using nucs.JsonSettings;
+using SlaughterHouseClient.Receiving;
 using System;
 using System.Data.Entity;
 using System.Drawing;
@@ -20,22 +21,109 @@ namespace SlaughterHouseClient.Issued
         private int displayTime = 3;
         private DateTime productionDate;
 
+
+
         public Form_ByProduct()
         {
             InitializeComponent();
             Load += Form_Load;
 
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
-            //gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
+            //gv.ColumnHeadersDefaultCellStyle.Font = new Font(Constants.FONT_FAMILY, Constants.FONT_SIZE);
             gv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
             gv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            //gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
+            //gv.DefaultCellStyle.Font = new Font(Constants.FONT_FAMILY, Constants.FONT_SIZE);
             gv.EnableHeadersVisualStyles = false;
+
+
+            //gvTransport.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            //gvTransport.ColumnHeadersDefaultCellStyle.Font = new Font(Constants.FONT_FAMILY, Constants.FONT_SIZE);
+            //gvTransport.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00A8E6");
+            //gvTransport.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            //gvTransport.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //gvTransport.DefaultCellStyle.Font = new Font(Constants.FONT_FAMILY, Constants.FONT_SIZE);
+            //gvTransport.EnableHeadersVisualStyles = false;
+            //gvTransport.CellContentClick += Gv_CellContentClick;
 
             txtBarcodeNo.KeyDown += TxtBarcodeNo_KeyDown;
 
         }
+
+        //private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    try
+        //    {
+        //        DataGridView senderGrid = (DataGridView)sender;
+
+        //        if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+        //        {
+        //            string barcode_no = gvTransport.Rows[e.RowIndex].Cells[0].Value.ToString();
+        //            string orderNo = lblOrderNo.Text;
+        //            if (MessageBox.Show($"ต้องการยกเลิก ข้อมูลบาร์โค็ด {barcode_no} Yes/No?", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+        //            {
+        //                return;
+        //            }
+        //            using (var db = new SlaughterhouseEntities())
+        //            {
+        //                var barcode = db.barcodes.Find(barcode_no.ToLong());
+        //                var productCode = barcode.product_code;
+        //                var barcodeQty = barcode.qty;
+        //                var barcodeWgh = barcode.wgh;
+        //                var orderItem = db.orders_item.Where(p => p.product_code == productCode &&
+        //                                                p.order_no == orderNo).SingleOrDefault();
+
+        //                var transport = db.transports.Where(p => p.ref_document_no == orderNo).SingleOrDefault();
+        //                var transportItems = db.transport_item.Where(p => p.transport_no == transport.transport_no &&
+        //                                                p.product_code == productCode &&
+        //                                                p.barcode_no == barcode.barcode_no).SingleOrDefault();
+
+        //                var stockNo = transportItems.stock_no;
+        //                var stockItem = transportItems.seq;
+        //                var stock = db.stocks.Find(productionDate, stockNo, stockItem, productCode);
+
+
+        //                using (DbContextTransaction transaction = db.Database.BeginTransaction())
+        //                {
+        //                    try
+        //                    {
+        //                        //delete stock
+        //                        db.stocks.Remove(stock);
+
+        //                        //delete transport item
+        //                        db.transport_item.Remove(transportItems);
+
+        //                        //update unload data at order item
+        //                        orderItem.unload_qty -= barcodeQty;
+        //                        orderItem.unload_wgh -= barcodeWgh;
+        //                        db.Entry(orderItem).State = EntityState.Modified;
+
+        //                        //update active at barcode
+        //                        barcode.active = true;
+        //                        db.Entry(barcode).State = EntityState.Modified;
+
+        //                        db.SaveChanges();
+        //                        transaction.Commit();
+        //                        DisplayNotification("Success", "ยกเลิกข้อมูล เรียบร้อย.", Color.Green);
+        //                        LoadOrder();
+        //                    }
+        //                    catch (Exception)
+        //                    {
+        //                        transaction.Rollback();
+        //                        throw;
+        //                    }
+        //                }
+
+        //            }
+
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         private void Form_Load(object sender, EventArgs e)
         {
@@ -102,6 +190,7 @@ namespace SlaughterHouseClient.Issued
 
                     txtBarcodeNo.Text = "";
                     txtBarcodeNo.Focus();
+                    lblMessage.Text = Constants.PLEASE_SCAN;
                 }
             }
             catch (Exception ex)
@@ -122,35 +211,86 @@ namespace SlaughterHouseClient.Issued
                     var order = db.orders.Find(lblOrderNo.Text);
                     lblOrderNo.Text = order.order_no;
                     lblCustomer.Text = order.customer.customer_name;
+                    var coll = (from or in order.orders_item
+                                join bom in db.boms on or.bom_code equals bom.bom_code
+                                join p in db.products on bom.product_code equals p.product_code
+                                select new
+                                {
+                                    or.seq,
+                                    or.product.product_name,
+                                    bom_name = p.product_name,
+                                    or.order_qty,
+                                    or.order_wgh,
+                                    or.unload_qty,
+                                    or.unload_wgh
+                                }).OrderBy(p => p.seq).ToList();
 
-                    var coll = order.orders_item.Where(p => p.product_code != PRODUCT_CODE).AsEnumerable().Select(p => new
-                    {
-                        p.product.product_name,
-                        p.order_qty,
-                        p.order_wgh,
-                        p.unload_qty,
-                        p.unload_wgh
-                    }).ToList();
 
                     gv.DataSource = coll;
-
-                    gv.Columns[0].HeaderText = "สินค้า";
-                    gv.Columns[1].HeaderText = "จำนวนสั่ง";
-                    gv.Columns[2].HeaderText = "น้ำหนักสั่ง";
-                    gv.Columns[3].HeaderText = "จำนวนจ่าย";
-                    gv.Columns[4].HeaderText = "น้ำหนักจ่าย";
+                    gv.Columns[0].HeaderText = "ลำดับ";
+                    gv.Columns[1].HeaderText = "สินค้า";
+                    gv.Columns[2].HeaderText = "ชื่อชุด";
+                    gv.Columns[3].HeaderText = "จำนวนสั่ง";
+                    gv.Columns[4].HeaderText = "น้ำหนักสั่ง";
+                    gv.Columns[5].HeaderText = "จำนวนจ่าย";
+                    gv.Columns[6].HeaderText = "น้ำหนักจ่าย";
 
                     gv.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    gv.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     gv.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     gv.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    gv.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    gv.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-                    var transport = db.transports.Where(p => p.ref_document_no == order.order_no).SingleOrDefault();
-                    if (transport != null)
-                    {
-                        cboTruckNo.SelectedValue = transport.truck_id;
-                        cboTruckNo.Enabled = false;
-                    }
+                    //var coll = order.orders_item.Where(p => p.product_code != PRODUCT_CODE).AsEnumerable().Select(p => new
+                    //{
+                    //    p.product.product_name,
+                    //    p.order_qty,
+                    //    p.order_wgh,
+                    //    p.unload_qty,
+                    //    p.unload_wgh
+                    //}).ToList();
+
+                    //gv.DataSource = coll;
+
+                    //gv.Columns[0].HeaderText = "สินค้า";
+                    //gv.Columns[1].HeaderText = "จำนวนสั่ง";
+                    //gv.Columns[2].HeaderText = "น้ำหนักสั่ง";
+                    //gv.Columns[3].HeaderText = "จำนวนจ่าย";
+                    //gv.Columns[4].HeaderText = "น้ำหนักจ่าย";
+
+                    //gv.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    //gv.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    //gv.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    //gv.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+                    //var transport = db.transports.Where(p => p.ref_document_no == order.order_no).SingleOrDefault();
+                    //if (transport != null)
+                    //{
+                    //    cboTruckNo.SelectedValue = transport.truck_id;
+                    //    cboTruckNo.Enabled = false;
+
+
+                    //    var transportItems = db.transport_item.Where(p => p.transport_no == transport.transport_no).ToList();
+                    //    var collItem = transportItems.Select(p => new
+                    //    {
+                    //        p.barcode_no,
+                    //        p.product.product_name,
+                    //        p.transport_qty,
+                    //        p.transport_wgh,
+                    //        create_at = p.create_at.ToString("dd-MM-yyyy HH:mm")
+
+                    //    }).OrderByDescending(p => p.create_at).ToList();
+
+                    //    gvTransport.DataSource = collItem;
+                    //    gvTransport.Columns[0].HeaderText = "รหัสบาร์โค็ด";
+                    //    gvTransport.Columns[1].HeaderText = "สินค้า";
+                    //    gvTransport.Columns[2].HeaderText = "จำนวน";
+                    //    gvTransport.Columns[3].HeaderText = "น้ำหนัก";
+                    //    gvTransport.Columns[4].HeaderText = "วันเวลาสแกน";
+
+                    //    gvTransport.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    //    gvTransport.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    //}
                     txtBarcodeNo.Focus();
                 }
             }
@@ -173,11 +313,13 @@ namespace SlaughterHouseClient.Issued
                 DisplayNotification("Success", "บันทึกข้อมูล เรียบร้อย.", Color.Green);
                 LoadOrder();
                 ClearDisplay();
+                lblMessage.Text = Constants.PLEASE_SCAN;
             }
             catch (Exception ex)
             {
                 ClearDisplay();
                 DisplayNotification("Error", ex.Message, Color.Red);
+                lblMessage.Text = Constants.PLEASE_SCAN;
             }
 
 
@@ -218,7 +360,12 @@ namespace SlaughterHouseClient.Issued
                     {
                         throw new Exception("ไม่พบสินค้า ในรายการจ่าย!");
                     }
-                    if (orderItems.unload_qty >= orderItems.order_qty)
+                    int remainQty = orderItems.order_qty - orderItems.unload_qty;
+                    if (barcode.qty > remainQty)
+                    {
+                        throw new Exception("จำนวนสินค้าของบาร์โค็ดนี้ มากกว่า จำนวนสั่งซื้อคงเหลือ!");
+                    }
+                    if (remainQty == 0)
                     {
                         throw new Exception("จ่ายสินค้านี้ ครบแล้ว!");
                     }
@@ -321,6 +468,7 @@ namespace SlaughterHouseClient.Issued
                                 db.Entry(stockGenerate).State = EntityState.Modified;
                             }
                             //set barcode
+                            //db.barcodes.Remove(barcode);
                             barcode.active = false;
                             db.Entry(barcode).State = EntityState.Modified;
 
@@ -355,6 +503,34 @@ namespace SlaughterHouseClient.Issued
         {
             txtBarcodeNo.Text = "";
             txtBarcodeNo.Focus();
+        }
+
+        private void btnKeyboard_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var frm = new Form_NumericPad();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    txtBarcodeNo.Text = frm.ReturnValue.ToString();
+                    ProcessData();
+                }
+            }
+            catch (Exception ex)
+            {
+                txtBarcodeNo.Text = "";
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            var frm = new Form_Transport
+            {
+                OrderNo = lblOrderNo.Text
+            };
+            frm.ShowDialog();
+            LoadOrder();
         }
 
         //private bool CloseJob()

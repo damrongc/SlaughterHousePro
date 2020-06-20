@@ -8,9 +8,10 @@ namespace SlaughterHouseClient.Receiving
     public partial class Form_LookupProduct : Form
     {
         public string ProductCode { get; set; }
+        public int ProductGroup { get; set; }
 
         private int Index;
-        private readonly int PAGE_SIZE = 20;
+        private readonly int PAGE_SIZE = 35;
         List<Button> buttons;
 
         public Form_LookupProduct()
@@ -39,15 +40,17 @@ namespace SlaughterHouseClient.Receiving
 
             using (var db = new SlaughterhouseEntities())
             {
-                var coll = db.product_group.Where(p => p.product_group_code >= 4).Select(p => new
+                var coll = db.product_group.Where(p => p.product_group_code > 3).Select(p => new
                 {
                     p.product_group_code,
                     p.product_group_name
 
                 });
+
                 ddlProductGroup.DisplayMember = "product_group_name";
                 ddlProductGroup.ValueMember = "product_group_code";
                 ddlProductGroup.DataSource = coll.ToList();
+                //ddlProductGroup.SelectedIndex = 0;
             }
         }
 
@@ -57,10 +60,13 @@ namespace SlaughterHouseClient.Receiving
             buttons = new List<Button>();
 
             int productGroupCode = ddlProductGroup.SelectedValue.ToString().ToInt16();
+            string productCode = lblProductCode.Text;
             using (var db = new SlaughterhouseEntities())
             {
 
-                var products = db.products.Where(p => p.product_group_code == productGroupCode && p.active == true)
+                var products = db.products.Where(p => p.product_group_code == productGroupCode
+                                && p.active == true
+                                && p.product_code.Contains(productCode))
                     .Select(p => new
                     {
                         p.product_code,
@@ -71,17 +77,17 @@ namespace SlaughterHouseClient.Receiving
                 {
                     var btn = new Button
                     {
-                        Text = item.product_name,
+                        Text = $"{item.product_code}\r{item.product_name}",
                         Width = 190,
                         Height = 80,
                         FlatStyle = FlatStyle.Flat,
-                        Font = new Font("Kanit", 14),
+                        Font = new Font("Kanit", 12),
                         BackColor = Color.WhiteSmoke,
                         Tag = item.product_code
                     };
-
                     buttons.Add(btn);
                     btn.Click += Btn_Click;
+                    Index = 0;
                     DisplayPaging();
                 }
 
@@ -96,6 +102,7 @@ namespace SlaughterHouseClient.Receiving
 
         private void ddlProductGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lblProductCode.Text = "";
             LoadProduct();
         }
 
@@ -159,6 +166,32 @@ namespace SlaughterHouseClient.Receiving
             flowLayoutPanel1.Visible = true;
             //btnPageUp.Enabled = (Index > 0);
             //btnPageDown.Enabled = ((Index + (PAGE_SIZE + 1)) <= (lables.Count - 1));
+        }
+
+        private void btnKeyboard_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var frm = new Form_NumericPad();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    lblProductCode.Text = frm.ReturnValue == 0 ? "" : frm.ReturnValue.ToString();
+                    LoadProduct();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                lblProductCode.Text = "";
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            lblProductCode.Text = "";
+
+            LoadProduct();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace SlaughterHouseServer
         }
         private void Form_Load(object sender, EventArgs e)
         {
-
+            btnCloseQueueReverse.Visible = false;
             BtnDelete.Visible = false;
             LoadFarm();
             LoadTruck();
@@ -45,7 +45,6 @@ namespace SlaughterHouseServer
         {
             if (e.KeyCode == Keys.Enter)
             {
-
                 cboTruckNo.Focus();
             }
         }
@@ -134,6 +133,10 @@ namespace SlaughterHouseServer
                 {
                     BtnDelete.Visible = true;
 
+                }
+                if (receive.ReceiveFlag == 2)
+                {
+                    btnCloseQueueReverse.Visible = true;
                 }
 
             }
@@ -247,14 +250,31 @@ namespace SlaughterHouseServer
             try
             {
                 ReceiveController.Delete(txtReciveNo.Text);
+                MessageBox.Show("ลบข้อมูล เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
+                Close();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private void btnCloseQueueReverse_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ReceiveController.ReverseCloseFlagSwineReceive(txtReciveNo.Text);
+                MessageBox.Show("ยกเลิก การปิดคิว เรียบร้อยแล้ว", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

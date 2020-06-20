@@ -1,6 +1,4 @@
-﻿using System;
-
-public static class Constants
+﻿public static class Constants
 {
 
     public static string INV = "INV";
@@ -10,6 +8,7 @@ public static class Constants
     public static string SO = "SO";
     public static string STK = "STK";
     public static string TP = "TP";
+    public static string DEL = "DEL";
 
     //public static string CREATE_BY = "auto";
 
@@ -22,7 +21,7 @@ public static class Constants
     public static string PRODUCT_WAITING = "กรุณาเลือกสินค้า";
     public static string WEIGHT_WAITING = "กรุณาชั่งน้ำหนัก";
     public static string MINWEIGHT_WAITING = "กรุณายกสินค้าออก";
-    public static string BARCODE_WAITING = "กรุณาสแกนสินค้า";
+    public static string PLEASE_SCAN = "กรุณาสแกนสินค้า";
     public static string SAVE_SUCCESS = "บันทึกน้ำหนัก เรียบร้อยแล้ว.";
     public static string PROCESSING = "กำลังบันทึกข้อมูล...";
 
@@ -31,6 +30,9 @@ public static class Constants
     public static string SCALEPORT = System.Configuration.ConfigurationManager.AppSettings["ScalePort"].ToString();
     public static string TWPORT = System.Configuration.ConfigurationManager.AppSettings["TowerlightPort"].ToString();
     public static string STABLE_TARGET = System.Configuration.ConfigurationManager.AppSettings["StableTarget"].ToString();
+
+    public static string FONT_FAMILY = "Kanit";
+    public static float FONT_SIZE = 12;
 
 }
 

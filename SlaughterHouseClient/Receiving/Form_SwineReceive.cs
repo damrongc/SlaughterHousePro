@@ -1,15 +1,14 @@
-﻿using System;
+﻿using nucs.JsonSettings;
+using System;
+using System.Data;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using System.Data;
-using CrystalDecisions.CrystalReports.Engine;
 using ToastNotifications;
-using System.IO.Ports;
-using System.IO;
-using nucs.JsonSettings;
 
 namespace SlaughterHouseClient.Receiving
 {
@@ -405,6 +404,7 @@ namespace SlaughterHouseClient.Receiving
                 btnStart.Enabled = true;
                 btnStop.Enabled = false;
                 btnAcceptWeight.Enabled = false;
+                lblMessage.Text = Constants.START_WAITING;
             }
             catch (IOException ex)
             {

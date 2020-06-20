@@ -449,6 +449,25 @@
           <Property Name="modified_at" Type="datetime" Precision="0" />
           <Property Name="modified_by" Type="varchar" MaxLength="45" />
         </EntityType>
+        <EntityType Name="receive_item_by_product">
+          <Key>
+            <PropertyRef Name="receive_no" />
+            <PropertyRef Name="bom_product_code" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="receive_no" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="bom_product_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="product_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="lot_no" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="target_qty" Type="int" Nullable="false" />
+          <Property Name="target_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="actual_qty" Type="int" Nullable="false" />
+          <Property Name="actual_wgh" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="create_at" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="modified_at" Type="datetime" Precision="0" />
+          <Property Name="modified_by" Type="varchar" MaxLength="45" />
+        </EntityType>
         <EntityType Name="receives">
           <Key>
             <PropertyRef Name="receive_no" />
@@ -780,6 +799,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_receive_item_by_product_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="receive_item_by_product" Type="Self.receive_item_by_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="receive_item_by_product">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_receives_01">
           <End Role="receives" Type="Self.receives" Multiplicity="1" />
           <End Role="receive_item" Type="Self.receive_item" Multiplicity="*" />
@@ -989,6 +1020,7 @@
           <EntitySet Name="production_order" EntityType="Self.production_order" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="production_order_item" EntityType="Self.production_order_item" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="receive_item" EntityType="Self.receive_item" Schema="slaughterhouse" store:Type="Tables" />
+          <EntitySet Name="receive_item_by_product" EntityType="Self.receive_item_by_product" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="receives" EntityType="Self.receives" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="stock" EntityType="Self.stock" Schema="slaughterhouse" store:Type="Tables" />
           <EntitySet Name="stock_item_running" EntityType="Self.stock_item_running" Schema="slaughterhouse" store:Type="Tables" />
@@ -1057,6 +1089,10 @@
           <AssociationSet Name="fk_product_slip_order" Association="Self.fk_product_slip_order">
             <End Role="orders" EntitySet="orders" />
             <End Role="product_slip" EntitySet="product_slip" />
+          </AssociationSet>
+          <AssociationSet Name="fk_receive_item_by_product_product" Association="Self.fk_receive_item_by_product_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="receive_item_by_product" EntitySet="receive_item_by_product" />
           </AssociationSet>
           <AssociationSet Name="fk_receives_01" Association="Self.fk_receives_01">
             <End Role="receives" EntitySet="receives" />
@@ -1343,6 +1379,7 @@
           <NavigationProperty Name="unit_of_measurement" Relationship="Self.fk_unit_qty" FromRole="product" ToRole="unit_of_measurement" />
           <NavigationProperty Name="unit_of_measurement1" Relationship="Self.fk_unit_wgh" FromRole="product" ToRole="unit_of_measurement" />
           <NavigationProperty Name="barcodes" Relationship="SlaughterhouseModel.fk_barcode_product" FromRole="product" ToRole="barcode" />
+          <NavigationProperty Name="receive_item_by_product" Relationship="SlaughterhouseModel.fk_receive_item_by_product_product" FromRole="product" ToRole="receive_item_by_product" />
         </EntityType>
         <EntityType Name="product_group">
           <Key>
@@ -2021,6 +2058,11 @@
             <End Role="product" EntitySet="products" />
             <End Role="barcode" EntitySet="barcodes" />
           </AssociationSet>
+          <EntitySet Name="receive_item_by_product" EntityType="SlaughterhouseModel.receive_item_by_product" />
+          <AssociationSet Name="fk_receive_item_by_product_product" Association="SlaughterhouseModel.fk_receive_item_by_product_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="receive_item_by_product" EntitySet="receive_item_by_product" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="group">
           <Key>
@@ -2293,6 +2335,38 @@
               <PropertyRef Name="product_code" />
             </Principal>
             <Dependent Role="barcode">
+              <PropertyRef Name="product_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="receive_item_by_product">
+          <Key>
+            <PropertyRef Name="receive_no" />
+            <PropertyRef Name="bom_product_code" />
+            <PropertyRef Name="product_code" />
+          </Key>
+          <Property Name="receive_no" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="bom_product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="product_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="lot_no" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="target_qty" Type="Int32" Nullable="false" />
+          <Property Name="target_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="actual_qty" Type="Int32" Nullable="false" />
+          <Property Name="actual_wgh" Type="Decimal" Nullable="false" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_by" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="modified_at" Type="DateTime" />
+          <Property Name="modified_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="product" Relationship="SlaughterhouseModel.fk_receive_item_by_product_product" FromRole="receive_item_by_product" ToRole="product" />
+        </EntityType>
+        <Association Name="fk_receive_item_by_product_product">
+          <End Type="SlaughterhouseModel.product" Role="product" Multiplicity="1" />
+          <End Type="SlaughterhouseModel.receive_item_by_product" Role="receive_item_by_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_code" />
+            </Principal>
+            <Dependent Role="receive_item_by_product">
               <PropertyRef Name="product_code" />
             </Dependent>
           </ReferentialConstraint>
@@ -2907,6 +2981,24 @@
                 <ScalarProperty Name="production_date" ColumnName="production_date" />
                 <ScalarProperty Name="product_code" ColumnName="product_code" />
                 <ScalarProperty Name="barcode_no" ColumnName="barcode_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="receive_item_by_product">
+            <EntityTypeMapping TypeName="SlaughterhouseModel.receive_item_by_product">
+              <MappingFragment StoreEntitySet="receive_item_by_product">
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_at" ColumnName="modified_at" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="actual_wgh" ColumnName="actual_wgh" />
+                <ScalarProperty Name="actual_qty" ColumnName="actual_qty" />
+                <ScalarProperty Name="target_wgh" ColumnName="target_wgh" />
+                <ScalarProperty Name="target_qty" ColumnName="target_qty" />
+                <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="bom_product_code" ColumnName="bom_product_code" />
+                <ScalarProperty Name="receive_no" ColumnName="receive_no" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

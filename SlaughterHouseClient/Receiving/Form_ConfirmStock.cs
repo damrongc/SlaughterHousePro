@@ -19,13 +19,13 @@ namespace SlaughterHouseClient.Receiving
         //readonly location locationSelected;
         private readonly List<int> _locations;
         private List<barcode> barcodes = new List<barcode>();
+        private Timer timer = new Timer();
         //private int Index;
         //private readonly int PAGE_SIZE = 15;
         //List<Button> buttons;
         readonly FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
         readonly FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
         private string modifiedBy = string.Empty;
-
         public Form_ConfirmStock(List<int> locations)
         {
             InitializeComponent();
@@ -78,14 +78,23 @@ namespace SlaughterHouseClient.Receiving
                     productionDate = plant.production_date;
                     lblCurrentDatetime.Text = productionDate.ToString("dd-MM-yyyy");
                 }
-                lblMessage.Text = Constants.BARCODE_WAITING;
+                lblMessage.Text = Constants.PLEASE_SCAN;
                 modifiedBy = Helper.GetLocalIPAddress();
+                //timer.Interval = 1000;
+                //timer.Enabled = true;
+                //timer.Tick += Timer_Tick;
+
 
             }
             catch (Exception ex)
             {
                 DisplayNotification("Error", ex.Message, Color.Red);
             }
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            txtBarcodeNo.Focus();
         }
 
         private void LoadLocation()
@@ -181,7 +190,7 @@ namespace SlaughterHouseClient.Receiving
             txtBarcodeNo.Text = "";
             txtBarcodeNo.Focus();
 
-            lblMessage.Text = Constants.BARCODE_WAITING;
+            lblMessage.Text = Constants.PLEASE_SCAN;
         }
 
         //private void Btn_Click(object sender, EventArgs e)
@@ -401,6 +410,11 @@ namespace SlaughterHouseClient.Receiving
                 throw;
             }
 
+        }
+
+        private void cboLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtBarcodeNo.Focus();
         }
 
         //private void BtnUp_Click(object sender, EventArgs e)

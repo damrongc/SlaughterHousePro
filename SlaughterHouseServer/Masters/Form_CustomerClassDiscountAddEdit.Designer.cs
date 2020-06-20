@@ -177,7 +177,7 @@
             this.MinimizeBox = false;
             this.Name = "Form_CustomerClassDiscountAddEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form_ClassDiscountAddEdit";
+            this.Text = "Form_CustomerClassDiscountAddEdit";
             this.ResumeLayout(false);
             this.PerformLayout();
 

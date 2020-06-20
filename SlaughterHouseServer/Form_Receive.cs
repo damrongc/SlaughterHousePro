@@ -79,7 +79,6 @@ namespace SlaughterHouseServer
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
                     string receiveNo = gv.Rows[e.RowIndex].Cells[3].Value.ToString();
@@ -106,10 +105,15 @@ namespace SlaughterHouseServer
 
                             break;
                         case "CloseFlag":
+                            if (MessageBox.Show("ต้องการปิดคิว การรับ Yes/No?", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                            {
+                                return;
+                            }
                             ReceiveController.CloseFlagSwineReceive(receiveNo, "system");
                             //StockController.InsertStockSwineReceive(receiveNo);
                             MessageBox.Show("ปิดคิว เรียบร้อยแล้ว", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LoadReceive();
+
                             break;
                     }
 
@@ -156,30 +160,29 @@ namespace SlaughterHouseServer
             var coll = ReceiveController.GetAllReceives(dtpReceiveDate.Value, cboFarm.SelectedValue.ToString());
             gv.DataSource = coll;
 
-            gv.Columns[3].HeaderText = "เลขที่ใบรับ";
-            gv.Columns[4].HeaderText = "วันที่รับ";
-            gv.Columns[5].HeaderText = "เลขที่ใบส่ง";
-            gv.Columns[6].HeaderText = "ทะเบียนรถ";
-            gv.Columns[7].HeaderText = "ฟาร์ม";
-            gv.Columns[8].HeaderText = "เล้า";
-            gv.Columns[9].HeaderText = "คิวที่";
-            gv.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gv.Columns[3].HeaderText = "เลขที่ใบรับ";
+            //gv.Columns[4].HeaderText = "วันที่รับ";
+            //gv.Columns[5].HeaderText = "เลขที่ใบส่ง";
+            //gv.Columns[6].HeaderText = "ทะเบียนรถ";
+            //gv.Columns[7].HeaderText = "ฟาร์ม";
+            //gv.Columns[8].HeaderText = "เล้า";
+            //gv.Columns[9].HeaderText = "คิวที่";
+            //gv.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            gv.Columns[10].HeaderText = "ประเภท";
+            //gv.Columns[10].HeaderText = "ประเภท";
 
-            gv.Columns[11].HeaderText = "จำนวนฟาร์ม";
-            gv.Columns[11].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[12].HeaderText = "น้ำหนักฟาร์ม";
-            gv.Columns[12].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gv.Columns[11].HeaderText = "จำนวนฟาร์ม";
+            //gv.Columns[11].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gv.Columns[12].HeaderText = "น้ำหนักฟาร์ม";
+            //gv.Columns[12].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            gv.Columns[13].HeaderText = "จำนวนรับ";
-            gv.Columns[13].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gv.Columns[14].HeaderText = "น้ำหนักรับ";
-            gv.Columns[14].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gv.Columns[13].HeaderText = "จำนวนรับ";
+            //gv.Columns[13].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //gv.Columns[14].HeaderText = "น้ำหนักรับ";
+            //gv.Columns[14].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-
-            gv.Columns[15].HeaderText = "สถานะ";
-            gv.Columns[16].HeaderText = "วันเวลาสร้าง";
+            //gv.Columns[15].HeaderText = "สถานะ";
+            //gv.Columns[16].HeaderText = "วันเวลาสร้าง";
         }
     }
 }

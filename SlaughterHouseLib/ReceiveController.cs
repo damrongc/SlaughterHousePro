@@ -58,9 +58,8 @@ namespace SlaughterHouseLib
                                 select new
                                 {
                                     ReceiveNo = p.Field<string>("receive_no"),
-                                    ReceiveDate = p.Field<DateTime>("receive_date"),
+                                    ReceiveDate = p.Field<DateTime>("receive_date").ToString("dd-MM-yyyy"),
                                     TransportDocNo = p.Field<string>("transport_doc_no"),
-                                    //TruckId = p.Field<Int32>("truck_id"),
                                     TruckNo = p.Field<string>("truck_no"),
                                     FarmName = p.Field<string>("farm_name"),
                                     CoopNo = p.Field<string>("coop_no"),
@@ -71,7 +70,7 @@ namespace SlaughterHouseLib
                                     FactoryQty = p.Field<int>("factory_qty"),
                                     FactoryWgh = p.Field<decimal>("factory_wgh"),
                                     ReceiveFlag = p.Field<int>("factory_qty") == 0 ? "New" : (p.Field<int>("receive_flag") == 1 ? "In Process" : "Close"),
-                                    CreateAt = p.Field<DateTime>("create_at"),
+                                    CreateAt = p.Field<DateTime>("create_at").ToString("dd-MM-yyyy HH:mm"),
                                 }).ToList();
 
                     return coll;
@@ -337,8 +336,6 @@ namespace SlaughterHouseLib
 
                         receive.ReceiveNo = DocumentGenerate.GetDocumentRunningFormat("REV", receive.ReceiveDate);
                         receive.LotNo = DocumentGenerate.GetSwineLotNo(plant.PlantId, receive.ReceiveDate, receive.QueueNo);
-
-
                         sql = @"INSERT INTO receives(
                                 receive_no,
                                 receive_date,
@@ -384,6 +381,67 @@ namespace SlaughterHouseLib
                         cmd.ExecuteNonQuery();
 
 
+                        sql = @"INSERT INTO receive_item_by_product(
+                                    receive_no,
+                                    bom_product_code,
+                                    product_code,
+                                    lot_no,
+                                    target_qty,
+                                    target_wgh,
+                                    actual_qty,
+                                    actual_wgh,
+                                    create_by
+                                )VALUES(
+                                    @receive_no,
+                                    @bom_product_code,
+                                    @product_code,
+                                    @lot_no,
+                                    @target_qty,
+                                    @target_wgh,
+                                    @actual_qty,
+                                    @actual_wgh,
+                                    @create_by
+                                )";
+                        //GET BOM
+                        //00101 เครื่องในแดง
+                        List<string> list = BomItemController.GetBomItemByProductCode("00101");
+                        list.Add("00101");
+                        //INSERT By PRODUCT
+                        foreach (var item in list)
+                        {
+                            int target_qty = item == "00101" ? (receive.FarmQty * (list.Count - 1)) : receive.FarmQty;
+                            cmd = new MySqlCommand(sql, conn);
+                            cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
+                            cmd.Parameters.AddWithValue("bom_product_code", "00101");
+                            cmd.Parameters.AddWithValue("product_code", item);
+                            cmd.Parameters.AddWithValue("lot_no", receive.LotNo);
+                            cmd.Parameters.AddWithValue("target_qty", target_qty == 0 ? receive.FarmQty : target_qty);
+                            cmd.Parameters.AddWithValue("target_wgh", receive.FarmWgh);
+                            cmd.Parameters.AddWithValue("actual_qty", 0);
+                            cmd.Parameters.AddWithValue("actual_wgh", 0);
+                            cmd.Parameters.AddWithValue("create_by", receive.CreateBy);
+                            cmd.ExecuteNonQuery();
+                        }
+                        list.Clear();
+                        //00201 เครื่องในขาว
+                        list = BomItemController.GetBomItemByProductCode("00201");
+                        list.Add("00201");
+                        //INSERT By PRODUCT
+                        foreach (var item in list)
+                        {
+                            int target_qty = item == "00201" ? (receive.FarmQty * (list.Count - 1)) : receive.FarmQty;
+                            cmd = new MySqlCommand(sql, conn);
+                            cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
+                            cmd.Parameters.AddWithValue("bom_product_code", "00201");
+                            cmd.Parameters.AddWithValue("product_code", item);
+                            cmd.Parameters.AddWithValue("lot_no", receive.LotNo);
+                            cmd.Parameters.AddWithValue("target_qty", target_qty == 0 ? receive.FarmQty : target_qty);
+                            cmd.Parameters.AddWithValue("target_wgh", receive.FarmWgh);
+                            cmd.Parameters.AddWithValue("actual_qty", 0);
+                            cmd.Parameters.AddWithValue("actual_wgh", 0);
+                            cmd.Parameters.AddWithValue("create_by", receive.CreateBy);
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                     else
                     {
@@ -445,11 +503,15 @@ namespace SlaughterHouseLib
 
                     //Delete All Receive
                     sql = @"DELETE FROM receive_item WHERE receive_no=@receive_no;
-                            DELETE FROM receives WHERE receive_no=@receive_no";
+                            DELETE FROM receives WHERE receive_no=@receive_no;
+                            DELETE FROM receive_item_by_product WHERE receive_no=@receive_no;
+                            ";
                     cmd = new MySqlCommand(sql, conn);
 
                     cmd.Parameters.AddWithValue("receive_no", receiveNo);
                     cmd.ExecuteNonQuery();
+
+
 
                     //Delete Receive
                     //sql = @"DELETE FROM receives WHERE receive_no=@receive_no";
@@ -789,7 +851,28 @@ namespace SlaughterHouseLib
             }
 
         }
+        public static bool ReverseCloseFlagSwineReceive(string receiveNo)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"UPDATE receives SET
+                                receive_flag=1
+                                WHERE receive_no=@receive_no";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("receive_no", receiveNo);
+                    cmd.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
+        }
 
 
     }

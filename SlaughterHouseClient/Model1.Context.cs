@@ -62,5 +62,6 @@ namespace SlaughterHouseClient
         public virtual DbSet<master_class> master_class { get; set; }
         public virtual DbSet<issued_info> issued_info { get; set; }
         public virtual DbSet<barcode> barcodes { get; set; }
+        public virtual DbSet<receive_item_by_product> receive_item_by_product { get; set; }
     }
 }

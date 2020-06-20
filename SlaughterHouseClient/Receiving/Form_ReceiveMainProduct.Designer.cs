@@ -1,6 +1,6 @@
 ﻿namespace SlaughterHouseClient.Receiving
 {
-    partial class Form_ReceiveProduct
+    partial class Form_ReceiveMainProduct
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ReceiveProduct));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ReceiveMainProduct));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblCurrentDatetime = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();

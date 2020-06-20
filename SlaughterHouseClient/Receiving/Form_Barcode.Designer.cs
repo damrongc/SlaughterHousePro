@@ -29,11 +29,20 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Barcode));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.gv = new System.Windows.Forms.DataGridView();
             this.btnBarcode = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.col_product_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_lot_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_wgh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.SuspendLayout();
@@ -93,7 +102,13 @@
             this.gv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.btnBarcode});
+            this.btnBarcode,
+            this.col_product_code,
+            this.col_product_name,
+            this.col_lot_no,
+            this.col_qty,
+            this.col_wgh,
+            this.btnDelete});
             this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv.Location = new System.Drawing.Point(0, 44);
             this.gv.MultiSelect = false;
@@ -106,9 +121,67 @@
             // btnBarcode
             // 
             this.btnBarcode.DataPropertyName = "barcode_no";
+            this.btnBarcode.Frozen = true;
             this.btnBarcode.HeaderText = "รหัส";
             this.btnBarcode.Name = "btnBarcode";
             this.btnBarcode.Width = 44;
+            // 
+            // col_product_code
+            // 
+            this.col_product_code.DataPropertyName = "product_code";
+            this.col_product_code.Frozen = true;
+            this.col_product_code.HeaderText = "รหัสสินค้า";
+            this.col_product_code.Name = "col_product_code";
+            // 
+            // col_product_name
+            // 
+            this.col_product_name.DataPropertyName = "product_name";
+            this.col_product_name.Frozen = true;
+            this.col_product_name.HeaderText = "ชื่อสินค้า";
+            this.col_product_name.Name = "col_product_name";
+            this.col_product_name.Width = 90;
+            // 
+            // col_lot_no
+            // 
+            this.col_lot_no.DataPropertyName = "lot_no";
+            this.col_lot_no.Frozen = true;
+            this.col_lot_no.HeaderText = "เลขที่ล็อต";
+            this.col_lot_no.Name = "col_lot_no";
+            this.col_lot_no.Width = 98;
+            // 
+            // col_qty
+            // 
+            this.col_qty.DataPropertyName = "qty";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.col_qty.DefaultCellStyle = dataGridViewCellStyle1;
+            this.col_qty.Frozen = true;
+            this.col_qty.HeaderText = "จำนวน";
+            this.col_qty.Name = "col_qty";
+            this.col_qty.Width = 79;
+            // 
+            // col_wgh
+            // 
+            this.col_wgh.DataPropertyName = "wgh";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.col_wgh.DefaultCellStyle = dataGridViewCellStyle2;
+            this.col_wgh.Frozen = true;
+            this.col_wgh.HeaderText = "น้ำหนัก";
+            this.col_wgh.Name = "col_wgh";
+            this.col_wgh.Width = 82;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.DataPropertyName = "barcode_no";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Red;
+            this.btnDelete.DefaultCellStyle = dataGridViewCellStyle3;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Frozen = true;
+            this.btnDelete.HeaderText = "";
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Text = "ลบบาร์โค็ด";
+            this.btnDelete.UseColumnTextForButtonValue = true;
+            this.btnDelete.Width = 5;
             // 
             // Form_Barcode
             // 
@@ -134,5 +207,11 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewButtonColumn btnBarcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_product_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_product_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_lot_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_wgh;
+        private System.Windows.Forms.DataGridViewButtonColumn btnDelete;
     }
 }

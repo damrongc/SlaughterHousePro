@@ -1,9 +1,7 @@
 ﻿using SlaughterHouseLib;
-using SlaughterHouseServer.Reports;
 using System;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
@@ -91,7 +89,8 @@ namespace SlaughterHouseServer
                 {
                     int res = StockController.GenStockBfDay(dtpPeriodDate.Value);
                     LoadProductionDate();
-                    MessageBox.Show($"สร้างสต็อกยกมาวัน {Convert.ToDateTime(dtpPeriodDate.Value).ToString(("dd/MM/yyyy"))} ทั้งหมด {res} รายการ",
+                    string periodDate = dtpPeriodDate.Value.ToString("dd/MM/yyyy");
+                    MessageBox.Show($"สร้างสต็อกยกมาวัน {periodDate} ทั้งหมด {res} รายการ",
                         "Complete",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);

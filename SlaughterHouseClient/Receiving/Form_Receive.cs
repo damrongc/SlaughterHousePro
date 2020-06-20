@@ -79,7 +79,7 @@ namespace SlaughterHouseClient.Receiving
                     p.breeder.breeder_name,
                     farm_qty = p.farm_qty.ToComma(),
                     farm_wgh = p.farm_wgh.ToFormat2Decimal()
-                }).ToList();
+                }).OrderBy(p => p.receive_no).ToList();
 
                 gv.DataSource = coll;
 

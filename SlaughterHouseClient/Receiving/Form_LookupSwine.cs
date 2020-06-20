@@ -6,6 +6,8 @@ namespace SlaughterHouseClient.Receiving
 {
     public partial class Form_LookupSwine : Form
     {
+
+        int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
         //int ReceiveFlag { get; set; }
         public string ReceiveNo { get; set; }
 
@@ -86,23 +88,23 @@ namespace SlaughterHouseClient.Receiving
 
             using (var db = new SlaughterhouseEntities())
             {
-
-
+                //var productionDate = db.plants.Find(plantID).production_date;
                 var qry = db.receives.Where(p => p.receive_flag == 1).ToList();
                 switch (ProductCode)
                 {
-                    case "00000":
+                    case "00000": //หมูซีก
                         qry = qry.Where(p => p.farm_qty > p.carcass_qty).ToList();
                         break;
-                    case "00101":
-                        qry = qry.Where(p => p.farm_qty > p.byproduct_red_qty).ToList();
-
+                    case "0000A": //หมูซีก 1 ซีก
+                        qry = qry.Where(p => p.farm_qty > p.carcass_qty).ToList();
                         break;
-                    case "00201":
-                        qry = qry.Where(p => p.farm_qty > p.byproduct_white_qty).ToList();
-
+                    case "00101"://เครื่องในแดง
+                        //qry = qry.Where(p => p.farm_qty > p.byproduct_red_qty).ToList();
                         break;
-                    case "04001":
+                    case "00201"://เครื่องในขาว
+                        //qry = qry.Where(p => p.farm_qty > p.byproduct_white_qty).ToList();
+                        break;
+                    case "04001"://หัวหมู
                         qry = qry.Where(p => p.farm_qty > p.head_qty).ToList();
                         break;
                 }

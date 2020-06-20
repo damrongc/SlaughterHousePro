@@ -1,0 +1,849 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D448FBC5-9B8A-43CB-84AD-13FF6BA12D72}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SlaughterHouseServer</RootNamespace>
+    <AssemblyName>SlaughterHouseServer</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://192.168.1.23/AppPath/</InstallUrl>
+    <UpdateUrl>http://192.168.1.23/AppPath/</UpdateUrl>
+    <SupportUrl>http://192.168.1.23/AppPath/</SupportUrl>
+    <ProductName>SlaughterHouse Server</ProductName>
+    <PublisherName>NAV Project</PublisherName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>ABD0316C5ADAF9741B0D8F48D7BA0660C6C9D9BB</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>SlaughterHouseServer_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DragControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Form_ClosePeriod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ClosePeriod.Designer.cs">
+      <DependentUpon>Form_ClosePeriod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_Breeder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Breeder.Designer.cs">
+      <DependentUpon>Form_Breeder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_BreederAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_BreederAddEdit.Designer.cs">
+      <DependentUpon>Form_BreederAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerClassDiscountAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerClassDiscountAddEdit.Designer.cs">
+      <DependentUpon>Form_CustomerClassDiscountAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerClassPriceAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerClassPriceAddEdit.Designer.cs">
+      <DependentUpon>Form_CustomerClassPriceAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerDetail.Designer.cs">
+      <DependentUpon>Form_CustomerDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_Plant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Plant.Designer.cs">
+      <DependentUpon>Form_Plant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_MasterClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_MasterClass.Designer.cs">
+      <DependentUpon>Form_MasterClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_MasterClassAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_MasterClassAddEdit.Designer.cs">
+      <DependentUpon>Form_MasterClassAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_TruckType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_TruckType.Designer.cs">
+      <DependentUpon>Form_TruckType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_Truck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Truck.Designer.cs">
+      <DependentUpon>Form_Truck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_PlantAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_PlantAddEdit.Designer.cs">
+      <DependentUpon>Form_PlantAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_TruckTypeAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_TruckTypeAddEdit.Designer.cs">
+      <DependentUpon>Form_TruckTypeAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_TruckAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_TruckAddEdit.Designer.cs">
+      <DependentUpon>Form_TruckAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_LovProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_LovProduct.Designer.cs">
+      <DependentUpon>Form_LovProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_LovProductMuti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_LovProductMuti.Designer.cs">
+      <DependentUpon>Form_LovProductMuti.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_Bom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Bom.Designer.cs">
+      <DependentUpon>Form_Bom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_BomAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_BomAddEdit.Designer.cs">
+      <DependentUpon>Form_BomAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Form_ProductSlipReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Form_ProductSlipReport.Designer.cs">
+      <DependentUpon>Form_ProductSlipReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_Customer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Customer.Designer.cs">
+      <DependentUpon>Form_Customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerAddEdit.Designer.cs">
+      <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_MasterMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_MasterMenu.Designer.cs">
+      <DependentUpon>Form_MasterMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerPriceAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_CustomerPriceAddEdit.Designer.cs">
+      <DependentUpon>Form_CustomerPriceAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_PriceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_PriceList.Designer.cs">
+      <DependentUpon>Form_PriceList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MDIMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MDIMain.Designer.cs">
+      <DependentUpon>MDIMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Form_ReportSoMapInv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductSlip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductSlip.Designer.cs">
+      <DependentUpon>Form_ProductSlip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Form_ReportSoMapInv.Designer.cs">
+      <DependentUpon>Form_ReportSoMapInv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Form_ReportSwineReceiveByDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Form_ReportSwineReceiveByDate.Designer.cs">
+      <DependentUpon>Form_ReportSwineReceiveByDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Form_ReportSwineYeild.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Form_ReportSwineYeild.Designer.cs">
+      <DependentUpon>Form_ReportSwineYeild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Form_ReportStockBalance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Form_ReportStockBalance.Designer.cs">
+      <DependentUpon>Form_ReportStockBalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Form_ReportSwineReceiveByQueue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Form_ReportSwineReceiveByQueue.Designer.cs">
+      <DependentUpon>Form_ReportSwineReceiveByQueue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Form_ReportStockMovement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Form_ReportStockMovement.Designer.cs">
+      <DependentUpon>Form_ReportStockMovement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Form_ReportDailySales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Form_ReportDailySales.Designer.cs">
+      <DependentUpon>Form_ReportDailySales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Report.Designer.cs">
+      <DependentUpon>Form_Report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Invoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Invoice.Designer.cs">
+      <DependentUpon>Form_Invoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Form_InvoiceReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Form_InvoiceReport.Designer.cs">
+      <DependentUpon>Form_InvoiceReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_InvoiceNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_InvoiceNew.Designer.cs">
+      <DependentUpon>Form_InvoiceNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_InvoiceAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_InvoiceAddEdit.Designer.cs">
+      <DependentUpon>Form_InvoiceAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_ProductPriceAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_ProductPriceAddEdit.Designer.cs">
+      <DependentUpon>Form_ProductPriceAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ProductionOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductionOrder.Designer.cs">
+      <DependentUpon>Form_ProductionOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ProductionOrderAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductionOrderAddEdit.Designer.cs">
+      <DependentUpon>Form_ProductionOrderAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ProductionOrderDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductionOrderDetail.Designer.cs">
+      <DependentUpon>Form_ProductionOrderDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_OrderDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_OrderDetail.Designer.cs">
+      <DependentUpon>Form_OrderDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_OrderAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_OrderAddEdit.Designer.cs">
+      <DependentUpon>Form_OrderAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_ProductAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_ProductAddEdit.Designer.cs">
+      <DependentUpon>Form_ProductAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_Product.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Product.Designer.cs">
+      <DependentUpon>Form_Product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_ProductGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_ProductGroup.Designer.cs">
+      <DependentUpon>Form_ProductGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_ProductGroupAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_ProductGroupAddEdit.Designer.cs">
+      <DependentUpon>Form_ProductGroupAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_ProductPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_ProductPrice.Designer.cs">
+      <DependentUpon>Form_ProductPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ReceiveCarcass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ReceiveCarcass.Designer.cs">
+      <DependentUpon>Form_ReceiveCarcass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Order.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Order.Designer.cs">
+      <DependentUpon>Form_Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_UnitAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_UnitAddEdit.Designer.cs">
+      <DependentUpon>Form_UnitAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Unit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Unit.Designer.cs">
+      <DependentUpon>Form_Unit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_Farm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Farm.Designer.cs">
+      <DependentUpon>Form_Farm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Receive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Receive.Designer.cs">
+      <DependentUpon>Form_Receive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_FarmAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_FarmAddEdit.Designer.cs">
+      <DependentUpon>Form_FarmAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Main.Designer.cs">
+      <DependentUpon>Form_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ReceiveAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ReceiveAddEdit.Designer.cs">
+      <DependentUpon>Form_ReceiveAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Globals.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\barcode.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>barcode.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\dailysales.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dailysales.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\invoice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>invoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\receipt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>receipt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\receivebarcode.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>receivebarcode.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\somapinvoice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>somapinvoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\stockbalance.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>stockbalance.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\stockmovement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>stockmovement.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\swinereceive.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>swinereceive.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\swinereceive_by_date.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>swinereceive_by_date.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\swineyield.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>swineyield.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <EmbeddedResource Include="Form_ClosePeriod.resx">
+      <DependentUpon>Form_ClosePeriod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Breeder.resx">
+      <DependentUpon>Form_Breeder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_BreederAddEdit.resx">
+      <DependentUpon>Form_BreederAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_CustomerClassDiscountAddEdit.resx">
+      <DependentUpon>Form_CustomerClassDiscountAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_CustomerClassPriceAddEdit.resx">
+      <DependentUpon>Form_CustomerClassPriceAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_CustomerDetail.resx">
+      <DependentUpon>Form_CustomerDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Plant.resx">
+      <DependentUpon>Form_Plant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_MasterClass.resx">
+      <DependentUpon>Form_MasterClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_MasterClassAddEdit.resx">
+      <DependentUpon>Form_MasterClassAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_TruckType.resx">
+      <DependentUpon>Form_TruckType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Truck.resx">
+      <DependentUpon>Form_Truck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_PlantAddEdit.resx">
+      <DependentUpon>Form_PlantAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_TruckTypeAddEdit.resx">
+      <DependentUpon>Form_TruckTypeAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_TruckAddEdit.resx">
+      <DependentUpon>Form_TruckAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_LovProduct.resx">
+      <DependentUpon>Form_LovProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_LovProductMuti.resx">
+      <DependentUpon>Form_LovProductMuti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Bom.resx">
+      <DependentUpon>Form_Bom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_BomAddEdit.resx">
+      <DependentUpon>Form_BomAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Form_ProductSlipReport.resx">
+      <DependentUpon>Form_ProductSlipReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Customer.resx">
+      <DependentUpon>Form_Customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_CustomerAddEdit.resx">
+      <DependentUpon>Form_CustomerAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_MasterMenu.resx">
+      <DependentUpon>Form_MasterMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_CustomerPriceAddEdit.resx">
+      <DependentUpon>Form_CustomerPriceAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_PriceList.resx">
+      <DependentUpon>Form_PriceList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MDIMain.resx">
+      <DependentUpon>MDIMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Form_ReportSoMapInv.resx">
+      <DependentUpon>Form_ReportSoMapInv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Form_ReportSwineReceiveByDate.resx">
+      <DependentUpon>Form_ReportSwineReceiveByDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Form_ReportSwineYeild.resx">
+      <DependentUpon>Form_ReportSwineYeild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Form_ReportStockBalance.resx">
+      <DependentUpon>Form_ReportStockBalance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProductSlip.resx">
+      <DependentUpon>Form_ProductSlip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Form_ReportSwineReceiveByQueue.resx">
+      <DependentUpon>Form_ReportSwineReceiveByQueue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Form_ReportStockMovement.resx">
+      <DependentUpon>Form_ReportStockMovement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Form_ReportDailySales.resx">
+      <DependentUpon>Form_ReportDailySales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Report.resx">
+      <DependentUpon>Form_Report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Invoice.resx">
+      <DependentUpon>Form_Invoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Form_InvoiceReport.resx">
+      <DependentUpon>Form_InvoiceReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_InvoiceNew.resx">
+      <DependentUpon>Form_InvoiceNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_InvoiceAddEdit.resx">
+      <DependentUpon>Form_InvoiceAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_ProductPriceAddEdit.resx">
+      <DependentUpon>Form_ProductPriceAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProductionOrder.resx">
+      <DependentUpon>Form_ProductionOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProductionOrderAddEdit.resx">
+      <DependentUpon>Form_ProductionOrderAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProductionOrderDetail.resx">
+      <DependentUpon>Form_ProductionOrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_OrderDetail.resx">
+      <DependentUpon>Form_OrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_OrderAddEdit.resx">
+      <DependentUpon>Form_OrderAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_ProductAddEdit.resx">
+      <DependentUpon>Form_ProductAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Product.resx">
+      <DependentUpon>Form_Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_ProductGroup.resx">
+      <DependentUpon>Form_ProductGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_ProductGroupAddEdit.resx">
+      <DependentUpon>Form_ProductGroupAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_ProductPrice.resx">
+      <DependentUpon>Form_ProductPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ReceiveCarcass.resx">
+      <DependentUpon>Form_ReceiveCarcass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Order.resx">
+      <DependentUpon>Form_Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_UnitAddEdit.resx">
+      <DependentUpon>Form_UnitAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Unit.resx">
+      <DependentUpon>Form_Unit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Farm.resx">
+      <DependentUpon>Form_Farm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Receive.resx">
+      <DependentUpon>Form_Receive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_FarmAddEdit.resx">
+      <DependentUpon>Form_FarmAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Main.resx">
+      <DependentUpon>Form_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ReceiveAddEdit.resx">
+      <DependentUpon>Form_ReceiveAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Content Include="Report\barcode.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>barcode.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\dailysales.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>dailysales.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\invoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>invoice.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\receivebarcode.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>receivebarcode.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\somapinvoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>somapinvoice.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\stockbalance.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>stockbalance.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\stockmovement.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>stockmovement.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\swinereceive.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>swinereceive.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\swineyield.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>swineyield.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\swinereceive_by_date.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>swinereceive_by_date.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Content Include="Report\productSlip.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\receipt.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>receipt.cs</LastGenOutput>
+    </Content>
+    <Content Include="Report\transport.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MySql.Data">
+      <Version>8.0.17</Version>
+    </PackageReference>
+    <PackageReference Include="MySql.Data.Entity">
+      <Version>6.10.9</Version>
+    </PackageReference>
+    <PackageReference Include="MySql.Data.EntityFramework">
+      <Version>8.0.17</Version>
+    </PackageReference>
+    <PackageReference Include="NPOI">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="QRCoder">
+      <Version>1.3.6</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Report\xml\barcode.xml" />
+    <Content Include="Report\xml\dailysales.xml" />
+    <Content Include="Report\xml\invoice.xml" />
+    <Content Include="Report\xml\receivebarcode.xml" />
+    <Content Include="Report\xml\somapinvoice.xml" />
+    <Content Include="Report\xml\stockbalance.xml" />
+    <Content Include="Report\xml\stockmovement.xml" />
+    <Content Include="Report\xml\swinereceive.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SlaughterHouseLib\SlaughterHouseLib.csproj">
+      <Project>{2cf06e33-7fa0-4347-be7d-04396863dafe}</Project>
+      <Name>SlaughterHouseLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="SAP.CrystalReports14.NET.2.0">
+      <Visible>False</Visible>
+      <ProductName>SAP Crystal Reports Runtime Engine for .NET Framework</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

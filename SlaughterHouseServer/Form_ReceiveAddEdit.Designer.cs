@@ -52,6 +52,7 @@
             this.dtpReceiveDate = new System.Windows.Forms.DateTimePicker();
             this.BtnDelete = new System.Windows.Forms.Button();
             this.cboTruckNo = new System.Windows.Forms.ComboBox();
+            this.btnCloseQueueReverse = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnSaveAndClose
@@ -284,10 +285,28 @@
             this.cboTruckNo.Size = new System.Drawing.Size(215, 37);
             this.cboTruckNo.TabIndex = 49;
             // 
+            // btnCloseQueueReverse
+            // 
+            this.btnCloseQueueReverse.BackColor = System.Drawing.Color.Tomato;
+            this.btnCloseQueueReverse.FlatAppearance.BorderSize = 0;
+            this.btnCloseQueueReverse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseQueueReverse.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseQueueReverse.ForeColor = System.Drawing.Color.White;
+            this.btnCloseQueueReverse.Image = ((System.Drawing.Image)(resources.GetObject("btnCloseQueueReverse.Image")));
+            this.btnCloseQueueReverse.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCloseQueueReverse.Location = new System.Drawing.Point(10, 434);
+            this.btnCloseQueueReverse.Name = "btnCloseQueueReverse";
+            this.btnCloseQueueReverse.Size = new System.Drawing.Size(202, 36);
+            this.btnCloseQueueReverse.TabIndex = 50;
+            this.btnCloseQueueReverse.Text = "ยกเลิกจบคิว";
+            this.btnCloseQueueReverse.UseVisualStyleBackColor = false;
+            this.btnCloseQueueReverse.Click += new System.EventHandler(this.btnCloseQueueReverse_Click);
+            // 
             // Form_ReceiveAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(807, 482);
+            this.Controls.Add(this.btnCloseQueueReverse);
             this.Controls.Add(this.cboTruckNo);
             this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.dtpReceiveDate);
@@ -348,5 +367,6 @@
         private System.Windows.Forms.DateTimePicker dtpReceiveDate;
         private System.Windows.Forms.Button BtnDelete;
         private System.Windows.Forms.ComboBox cboTruckNo;
+        private System.Windows.Forms.Button btnCloseQueueReverse;
     }
 }

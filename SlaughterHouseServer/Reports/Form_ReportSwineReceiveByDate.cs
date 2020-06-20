@@ -1,11 +1,7 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using SlaughterHouseLib;
-using SlaughterHouseLib.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer.Reports
 {
@@ -29,7 +25,16 @@ namespace SlaughterHouseServer.Reports
 
         private void BtnShowReport_Click(object sender, EventArgs e)
         {
-            LoadReport();
+            try
+            {
+                LoadReport();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadReport()

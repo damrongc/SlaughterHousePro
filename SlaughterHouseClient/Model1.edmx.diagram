@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="047f3ccfdc4e407095a170dc7deac72d" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="047f3ccfdc4e407095a170dc7deac72d" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="SlaughterhouseModel.bom" Width="1.5" PointX="5.25" PointY="24.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.bom_item" Width="1.5" PointX="5.25" PointY="27.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SlaughterhouseModel.breeder" Width="1.5" PointX="6.75" PointY="8.25" IsExpanded="true" />
@@ -72,6 +72,8 @@
         <EntityTypeShape EntityType="SlaughterhouseModel.issued_info" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="SlaughterhouseModel.barcode" Width="1.5" PointX="5.25" PointY="46.375" />
         <AssociationConnector Association="SlaughterhouseModel.fk_barcode_product" />
+        <EntityTypeShape EntityType="SlaughterhouseModel.receive_item_by_product" Width="1.5" PointX="5.25" PointY="51.625" />
+        <AssociationConnector Association="SlaughterhouseModel.fk_receive_item_by_product_product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
