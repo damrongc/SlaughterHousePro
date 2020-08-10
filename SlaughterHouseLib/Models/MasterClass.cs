@@ -260,6 +260,49 @@ namespace SlaughterHouseLib.Models
                 throw;
             }
         }
+
+        public static List<Customer> GetCustomersByClass(int classId, string currentDate)
+        {
+            try
+            {
+                List<Customer> customers = new List<Customer>();
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"SELECT a.customer_code, b.customer_name
+                                FROM
+                                    customer_class a,customer b
+                                WHERE
+                                    a.customer_code = b.customer_code
+                                        AND class_id = @class_id
+                                        AND start_date <= @current_date
+                                        AND end_date >= @current_date";
+
+
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@class_id", classId);
+                    cmd.Parameters.AddWithValue("@current_date", currentDate);
+                    var da = new MySqlDataAdapter(cmd);
+                    var ds = new DataSet();
+                    da.Fill(ds);
+
+                    foreach (DataRow item in ds.Tables[0].Rows)
+                    {
+                        customers.Add(new Customer
+                        {
+                            CustomerCode = item["customer_code"].ToString(),
+                            CustomerName = item["customer_name"].ToString()
+                        });
+                    }
+                    return customers;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 
 }

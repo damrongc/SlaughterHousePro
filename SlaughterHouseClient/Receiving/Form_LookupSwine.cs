@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SlaughterHouseEF;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -6,11 +7,9 @@ namespace SlaughterHouseClient.Receiving
 {
     public partial class Form_LookupSwine : Form
     {
-
         int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
         //int ReceiveFlag { get; set; }
         public string ReceiveNo { get; set; }
-
         readonly string ProductCode = "";
         public Form_LookupSwine(string productCode)
         {
@@ -19,9 +18,7 @@ namespace SlaughterHouseClient.Receiving
             Load += Form_Receive_Load;
             //ReceiveFlag = _receiveFlag;
             UserSettingsComponent();
-
         }
-
         private void UserSettingsComponent()
         {
             gv.CellContentClick += Gv_CellContentClick;
@@ -33,17 +30,12 @@ namespace SlaughterHouseClient.Receiving
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             //gv.DefaultCellStyle.Font = new Font("Kanit", 18);
             gv.EnableHeadersVisualStyles = false;
-
-
-
         }
-
         private void Gv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-
                 if (e.RowIndex >= 0)
                 {
                     ReceiveNo = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -53,17 +45,14 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-
                 if (e.RowIndex >= 0)
                 {
                     ReceiveNo = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -73,41 +62,37 @@ namespace SlaughterHouseClient.Receiving
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void Form_Receive_Load(object sender, System.EventArgs e)
         {
             LoadData();
         }
-
         private void LoadData()
         {
-
             using (var db = new SlaughterhouseEntities())
             {
-                //var productionDate = db.plants.Find(plantID).production_date;
-                var qry = db.receives.Where(p => p.receive_flag == 1).ToList();
-                switch (ProductCode)
-                {
-                    case "00000": //หมูซีก
-                        qry = qry.Where(p => p.farm_qty > p.carcass_qty).ToList();
-                        break;
-                    case "0000A": //หมูซีก 1 ซีก
-                        qry = qry.Where(p => p.farm_qty > p.carcass_qty).ToList();
-                        break;
-                    case "00101"://เครื่องในแดง
-                        //qry = qry.Where(p => p.farm_qty > p.byproduct_red_qty).ToList();
-                        break;
-                    case "00201"://เครื่องในขาว
-                        //qry = qry.Where(p => p.farm_qty > p.byproduct_white_qty).ToList();
-                        break;
-                    case "04001"://หัวหมู
-                        qry = qry.Where(p => p.farm_qty > p.head_qty).ToList();
-                        break;
-                }
+                var productionDate = db.plants.Find(plantID).production_date;
+                var qry = db.receives.Where(p => p.receive_flag == 1 && p.receive_date == productionDate).ToList();
+                //switch (ProductCode)
+                //{
+                //    case "00000": //หมูซีก
+                //        qry = qry.Where(p => p.farm_qty > p.carcass_qty).ToList();
+                //        break;
+                //    case "0000A": //หมูซีก 1 ซีก
+                //        qry = qry.Where(p => p.farm_qty > p.carcass_qty).ToList();
+                //        break;
+                //    case "00101"://เครื่องในแดง
+                //        //qry = qry.Where(p => p.farm_qty > p.byproduct_red_qty).ToList();
+                //        break;
+                //    case "00201"://เครื่องในขาว
+                //        //qry = qry.Where(p => p.farm_qty > p.byproduct_white_qty).ToList();
+                //        break;
+                //    case "04001"://หัวหมู
+                //        qry = qry.Where(p => p.farm_qty > p.head_qty).ToList();
+                //        break;
+                //}
                 var coll = qry.AsEnumerable().Select(p => new
                 {
                     p.receive_no,
@@ -122,30 +107,23 @@ namespace SlaughterHouseClient.Receiving
                     farm_qty = p.farm_qty.ToComma(),
                     farm_wgh = p.farm_wgh.ToFormat2Decimal()
                 }).ToList();
-
                 gv.DataSource = coll;
-
                 gv.Columns[0].HeaderText = "เลขที่ใบรับ";
                 gv.Columns[1].HeaderText = "วันที่รับ";
                 gv.Columns[2].HeaderText = "เลขที่ใบส่ง";
                 gv.Columns[3].HeaderText = "ทะเบียนรถ";
                 gv.Columns[4].HeaderText = "ฟาร์ม";
                 gv.Columns[5].HeaderText = "เล้า";
-
                 gv.Columns[6].HeaderText = "คิวที่";
                 gv.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
                 gv.Columns[7].HeaderText = "ประเภท";
                 gv.Columns[8].HeaderText = "Lot No";
-
                 gv.Columns[9].HeaderText = "จำนวน";
                 gv.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 gv.Columns[10].HeaderText = "น้ำหนัก";
                 gv.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
             }
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;

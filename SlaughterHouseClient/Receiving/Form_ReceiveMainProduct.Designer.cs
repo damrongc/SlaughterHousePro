@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +18,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -39,10 +36,6 @@
             this.btnProduct = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.lblProduct = new System.Windows.Forms.Label();
-            this.lblStockQty = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.lblStockWgh = new System.Windows.Forms.Label();
-            this.lblStockWeightCaption = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
@@ -58,8 +51,6 @@
             this.btnUp = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblLastWeight = new System.Windows.Forms.Label();
             this.timerMinWeight = new System.Windows.Forms.Timer(this.components);
             this.btnZeroWeight = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -123,7 +114,7 @@
             this.lblCaption.Name = "lblCaption";
             this.lblCaption.Size = new System.Drawing.Size(266, 54);
             this.lblCaption.TabIndex = 0;
-            this.lblCaption.Text = "รับผลได้ชิ้นส่วน-Basic";
+            this.lblCaption.Text = "รับผลได้ชิ้นส่วน";
             this.lblCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblWeight
@@ -186,56 +177,6 @@
             this.lblProduct.Size = new System.Drawing.Size(328, 130);
             this.lblProduct.TabIndex = 9;
             // 
-            // lblStockQty
-            // 
-            this.lblStockQty.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblStockQty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblStockQty.Font = new System.Drawing.Font("Kanit", 40F);
-            this.lblStockQty.ForeColor = System.Drawing.Color.Black;
-            this.lblStockQty.Location = new System.Drawing.Point(254, 632);
-            this.lblStockQty.Name = "lblStockQty";
-            this.lblStockQty.Size = new System.Drawing.Size(148, 75);
-            this.lblStockQty.TabIndex = 24;
-            this.lblStockQty.Text = "0";
-            this.lblStockQty.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label20.Font = new System.Drawing.Font("Kanit", 12F);
-            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.label20.Location = new System.Drawing.Point(252, 632);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(80, 24);
-            this.label20.TabIndex = 23;
-            this.label20.Text = "จำนวนรวม";
-            // 
-            // lblStockWgh
-            // 
-            this.lblStockWgh.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblStockWgh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblStockWgh.Font = new System.Drawing.Font("Kanit", 40F);
-            this.lblStockWgh.ForeColor = System.Drawing.Color.Black;
-            this.lblStockWgh.Location = new System.Drawing.Point(408, 632);
-            this.lblStockWgh.Name = "lblStockWgh";
-            this.lblStockWgh.Size = new System.Drawing.Size(254, 75);
-            this.lblStockWgh.TabIndex = 26;
-            this.lblStockWgh.Text = "0.00";
-            this.lblStockWgh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblStockWeightCaption
-            // 
-            this.lblStockWeightCaption.AutoSize = true;
-            this.lblStockWeightCaption.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblStockWeightCaption.Font = new System.Drawing.Font("Kanit", 12F);
-            this.lblStockWeightCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.lblStockWeightCaption.Location = new System.Drawing.Point(404, 632);
-            this.lblStockWeightCaption.Name = "lblStockWeightCaption";
-            this.lblStockWeightCaption.Size = new System.Drawing.Size(83, 24);
-            this.lblStockWeightCaption.TabIndex = 25;
-            this.lblStockWeightCaption.Text = "น้ำหนักรวม";
-            // 
             // lblMessage
             // 
             this.lblMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
@@ -255,9 +196,9 @@
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(905, 629);
+            this.btnStop.Location = new System.Drawing.Point(905, 562);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(109, 78);
+            this.btnStop.Size = new System.Drawing.Size(109, 70);
             this.btnStop.TabIndex = 38;
             this.btnStop.Text = "หยุดชั่ง";
             this.btnStop.UseVisualStyleBackColor = false;
@@ -269,9 +210,9 @@
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(905, 545);
+            this.btnStart.Location = new System.Drawing.Point(905, 486);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(109, 78);
+            this.btnStart.Size = new System.Drawing.Size(109, 70);
             this.btnStart.TabIndex = 37;
             this.btnStart.Text = "เริ่มชั่ง";
             this.btnStart.UseVisualStyleBackColor = false;
@@ -352,7 +293,7 @@
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(19, 334);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(878, 289);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(878, 374);
             this.flowLayoutPanel1.TabIndex = 51;
             // 
             // lblStable
@@ -409,37 +350,12 @@
             this.btnPrint.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnPrint.ForeColor = System.Drawing.Color.White;
             this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.Location = new System.Drawing.Point(788, 629);
+            this.btnPrint.Location = new System.Drawing.Point(905, 638);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(109, 78);
+            this.btnPrint.Size = new System.Drawing.Size(109, 70);
             this.btnPrint.TabIndex = 56;
             this.btnPrint.UseVisualStyleBackColor = false;
             this.btnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Kanit", 12F);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.label1.Location = new System.Drawing.Point(8, 632);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 24);
-            this.label1.TabIndex = 59;
-            this.label1.Text = "น้ำหนัก";
-            // 
-            // lblLastWeight
-            // 
-            this.lblLastWeight.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lblLastWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblLastWeight.Font = new System.Drawing.Font("Kanit", 40F);
-            this.lblLastWeight.ForeColor = System.Drawing.Color.Black;
-            this.lblLastWeight.Location = new System.Drawing.Point(12, 632);
-            this.lblLastWeight.Name = "lblLastWeight";
-            this.lblLastWeight.Size = new System.Drawing.Size(236, 75);
-            this.lblLastWeight.TabIndex = 60;
-            this.lblLastWeight.Text = "0.00";
-            this.lblLastWeight.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // timerMinWeight
             // 
@@ -452,9 +368,9 @@
             this.btnZeroWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZeroWeight.Font = new System.Drawing.Font("Kanit", 18F);
             this.btnZeroWeight.ForeColor = System.Drawing.Color.White;
-            this.btnZeroWeight.Location = new System.Drawing.Point(673, 629);
+            this.btnZeroWeight.Location = new System.Drawing.Point(352, 142);
             this.btnZeroWeight.Name = "btnZeroWeight";
-            this.btnZeroWeight.Size = new System.Drawing.Size(109, 78);
+            this.btnZeroWeight.Size = new System.Drawing.Size(101, 78);
             this.btnZeroWeight.TabIndex = 61;
             this.btnZeroWeight.Text = "Zero";
             this.btnZeroWeight.UseVisualStyleBackColor = false;
@@ -470,17 +386,13 @@
             // 
             this.dragControl1.SelectControl = this.panelHeader;
             // 
-            // Form_ReceiveProduct
+            // Form_ReceiveMainProduct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1024, 768);
             this.Controls.Add(this.btnZeroWeight);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblLastWeight);
             this.Controls.Add(this.btnPrint);
-            this.Controls.Add(this.lblStockWeightCaption);
-            this.Controls.Add(this.label20);
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.lblStable);
@@ -492,8 +404,6 @@
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblMessage);
-            this.Controls.Add(this.lblStockWgh);
-            this.Controls.Add(this.lblStockQty);
             this.Controls.Add(this.lblProduct);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnProduct);
@@ -504,7 +414,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_ReceiveProduct";
+            this.Name = "Form_ReceiveMainProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รับหมูเป็น";
             this.Load += new System.EventHandler(this.Form_Load);
@@ -513,11 +423,8 @@
             this.plSimulator.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.Label lblCaption;
         private DragControl dragControl1;
@@ -527,10 +434,6 @@
         private System.Windows.Forms.Button btnProduct;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblProduct;
-        private System.Windows.Forms.Label lblStockQty;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label lblStockWgh;
-        private System.Windows.Forms.Label lblStockWeightCaption;
         private System.Windows.Forms.Label lblCurrentDatetime;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Button btnStop;
@@ -547,12 +450,9 @@
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblLastWeight;
         private System.Windows.Forms.Timer timerMinWeight;
         private System.Windows.Forms.Button btnZeroWeight;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.IO.Ports.SerialPort serialPort1;
     }
 }
-

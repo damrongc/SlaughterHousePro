@@ -25,6 +25,8 @@ namespace SlaughterHouseLib.Models
         public string ModifiedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
 
+        public int SalesmanId { get; set; }
+
         //start_date_class
     }
 
@@ -39,10 +41,8 @@ namespace SlaughterHouseLib.Models
                     conn.Open();
                     var sb = new StringBuilder();
                     sb.Append(" SELECT cv.customer_code, cv.customer_name, ");
-                    //sb.Append(" cv.class_id, cls.class_name, ");
                     sb.Append(" cv.address, cv.ship_to, ");
                     sb.Append(" cv.tax_id, cv.contact_no, ");
-                    //sb.Append("  cv.start_date_class, cv.end_date_class, ");
                     sb.Append(" cv.active, cv.create_at, ");
                     sb.Append(" cv.create_by, cv.modified_at, cv.modified_by ");
                     sb.Append(" FROM customer cv  ");
@@ -54,7 +54,6 @@ namespace SlaughterHouseLib.Models
                         sb.Append(" OR customer_name LIKE @customer_name");
                         sb.Append(" OR address LIKE @address) ");
                     }
-                    //sb.Append(" and cv.class_id = cls.class_id ");
                     sb.Append(" ORDER BY customer_code asc");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
 
@@ -150,27 +149,23 @@ namespace SlaughterHouseLib.Models
 
                     var ds = new DataSet();
                     da.Fill(ds);
-
-                    var customer = new Customer();
-                    if (ds.Tables[0].Rows.Count > 0)
-                    {
-                        return new Customer
-                        {
-                            CustomerCode = ds.Tables[0].Rows[0]["customer_code"].ToString(),
-                            CustomerName = ds.Tables[0].Rows[0]["customer_name"].ToString(),
-                            Address = ds.Tables[0].Rows[0]["address"].ToString(),
-                            ShipTo = ds.Tables[0].Rows[0]["ship_to"].ToString(),
-                            TaxId = ds.Tables[0].Rows[0]["tax_id"].ToString(),
-                            ContactNo = ds.Tables[0].Rows[0]["contact_no"].ToString(),
-                            //Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date_class"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date_class"])).TotalDays),
-                            Active = (bool)ds.Tables[0].Rows[0]["active"],
-                            CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
-                        };
-                    }
-                    else
+                    if (ds.Tables[0].Rows.Count == 0)
                     {
                         return null;
                     }
+                    return new Customer
+                    {
+                        CustomerCode = ds.Tables[0].Rows[0]["customer_code"].ToString(),
+                        CustomerName = ds.Tables[0].Rows[0]["customer_name"].ToString(),
+                        Address = ds.Tables[0].Rows[0]["address"].ToString(),
+                        ShipTo = ds.Tables[0].Rows[0]["ship_to"].ToString(),
+                        TaxId = ds.Tables[0].Rows[0]["tax_id"].ToString(),
+                        ContactNo = ds.Tables[0].Rows[0]["contact_no"].ToString(),
+                        //Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date_class"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date_class"])).TotalDays),
+                        Active = (bool)ds.Tables[0].Rows[0]["active"],
+                        CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
+                        SalesmanId = ds.Tables[0].Rows[0]["salesman_code"].ToString().ToInt16()
+                    };
                 }
             }
             catch (Exception)
@@ -191,13 +186,13 @@ namespace SlaughterHouseLib.Models
                         throw new Exception($"รหัสลูกค้า {customer.CustomerCode} มีในระบบแล้ว");
                     }
                     var sql = @"INSERT
-                                INTO customer (
-                                    customer_code, customer_name,  address,
-                                    ship_to, tax_id, contact_no,
-                                    active, create_by )
-                                VALUES (@customer_code, @customer_name,  @address,
-                                    @ship_to, @tax_id, @contact_no,
-                                    @active, @create_by )";
+								INTO customer (
+									customer_code, customer_name,  address,
+									ship_to, tax_id, contact_no,
+									active, create_by,salesman_code)
+								VALUES (@customer_code, @customer_name,  @address,
+									@ship_to, @tax_id, @contact_no,
+									@active, @create_by,@salesman_code)";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customer.CustomerCode);
                     cmd.Parameters.AddWithValue("customer_name", customer.CustomerName);
@@ -207,6 +202,7 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("contact_no", customer.ContactNo);
                     cmd.Parameters.AddWithValue("active", customer.Active);
                     cmd.Parameters.AddWithValue("create_by", customer.CreateBy);
+                    cmd.Parameters.AddWithValue("salesman_code", customer.SalesmanId);
                     var affRow = cmd.ExecuteNonQuery();
                 }
                 return true;
@@ -223,31 +219,19 @@ namespace SlaughterHouseLib.Models
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    //var sql = @"UPDATE customer 
-                    //            set customer_code =@customer_code,
-                    //            customer_name=@customer_name,
-                    //            class_id=@class_id,
-                    //            address=@address,
-                    //            ship_to=@ship_to,
-                    //            tax_id=@tax_id,
-                    //            contact_no=@contact_no,
-                    //            start_date_class=@start_date_class,
-                    //            end_date_class=@end_date_class,
-                    //            active=@active, 
-                    //            modified_at=CURRENT_TIMESTAMP,
-                    //            modified_by=@modified_by 
-                    //            WHERE customer_code = @customer_code";
-                    var sql = @"UPDATE customer 
-                                set customer_code =@customer_code,
-                                customer_name=@customer_name, 
-                                address=@address,
-                                ship_to=@ship_to,
-                                tax_id=@tax_id,
-                                contact_no=@contact_no, 
-                                active=@active, 
-                                modified_at=CURRENT_TIMESTAMP,
-                                modified_by=@modified_by 
-                                WHERE customer_code = @customer_code";
+
+                    var sql = @"UPDATE customer
+								set customer_code =@customer_code,
+								customer_name=@customer_name,
+								address=@address,
+								ship_to=@ship_to,
+								tax_id=@tax_id,
+								contact_no=@contact_no,
+								active=@active,
+								modified_at=CURRENT_TIMESTAMP,
+								modified_by=@modified_by,
+								salesman_code=@salesman_code
+								WHERE customer_code = @customer_code";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customer.CustomerCode);
                     cmd.Parameters.AddWithValue("customer_name", customer.CustomerName);
@@ -257,6 +241,7 @@ namespace SlaughterHouseLib.Models
                     cmd.Parameters.AddWithValue("contact_no", customer.ContactNo);
                     cmd.Parameters.AddWithValue("active", customer.Active);
                     cmd.Parameters.AddWithValue("modified_by", customer.ModifiedBy);
+                    cmd.Parameters.AddWithValue("salesman_code", customer.SalesmanId);
                     var affRow = cmd.ExecuteNonQuery();
                 }
                 return true;
@@ -276,13 +261,13 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sql = @" SELECT cls.class_id
-                                FROM customer c , customer_class cls
-                                WHERE c.active=1
-	                                and c.customer_code = @customer_code
-	                                and cls.start_date <= @start_date
-	                                and cls.end_date >= @end_date
-	                                and c.customer_code = cls.customer_code 
-                                order by cls.start_date desc limit 1 ";
+								FROM customer c , customer_class cls
+								WHERE c.active=1
+									and c.customer_code = @customer_code
+									and cls.start_date <= @start_date
+									and cls.end_date >= @end_date
+									and c.customer_code = cls.customer_code 
+								order by cls.start_date desc limit 1 ";
                     //ต้อง where เรื่อง วันนี้ start end date;
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customerCode);
@@ -315,13 +300,13 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sql = @" SELECT cls.class_id, cls.start_date, cls.end_date
-                                FROM customer c , customer_class cls
-                                WHERE c.active=1
-	                                and c.customer_code = @customer_code
-	                                and cls.start_date <= @start_date
-	                                and cls.end_date >= @end_date
-	                                and c.customer_code = cls.customer_code 
-                                order by cls.start_date desc limit 1 ";
+								FROM customer c , customer_class cls
+								WHERE c.active=1
+									and c.customer_code = @customer_code
+									and cls.start_date <= @start_date
+									and cls.end_date >= @end_date
+									and c.customer_code = cls.customer_code 
+								order by cls.start_date desc limit 1 ";
                     //ต้อง where เรื่อง วันนี้ start end date;
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customerCode);
@@ -338,7 +323,7 @@ namespace SlaughterHouseLib.Models
                         {
                             MasterClass = new MasterClass
                             {
-                                ClassId = (int)ds.Tables[0].Rows[0]["class_id"], 
+                                ClassId = (int)ds.Tables[0].Rows[0]["class_id"],
                             },
                             StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
                             EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
@@ -365,8 +350,8 @@ namespace SlaughterHouseLib.Models
                 {
                     conn.Open();
                     var sql = @" SELECT customer_code
-                                FROM customer c
-                                WHERE customer_code = @customer_code  ";
+								FROM customer c
+								WHERE customer_code = @customer_code  ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("customer_code", customerCode);
 

@@ -81,7 +81,7 @@ namespace SlaughterHouseServer
                 DataGridView senderGrid = (DataGridView)sender;
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0)
                 {
-                    string receiveNo = gv.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    string receiveNo = gv.Rows[e.RowIndex].Cells[4].Value.ToString();
 
                     switch (senderGrid.Columns[e.ColumnIndex].Name)
                     {
@@ -96,22 +96,41 @@ namespace SlaughterHouseServer
                                 LoadReceive();
                             }
                             break;
-                        case "Print":
-                            var frmReport = new Form_ReportSwineReceiveByQueue
+                        case "colSwineReport":
+                            var frmSwineReport = new Form_ReportSwineReceiveByQueue
                             {
                                 ReceiveNo = receiveNo
                             };
-                            frmReport.ShowDialog();
+                            frmSwineReport.ShowDialog();
+                            break;
 
+                        case "colCarcassReport":
+                            var frmCarcassReport = new Form_ReportCarcassReceiveByQueue
+                            {
+                                ReceiveNo = receiveNo
+                            };
+                            frmCarcassReport.Show();
                             break;
                         case "CloseFlag":
-                            if (MessageBox.Show("ต้องการปิดคิว การรับ Yes/No?", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                            var receivedFlag = ReceiveController.GetReceiveFlag(receiveNo);
+                            switch (receivedFlag)
                             {
-                                return;
+                                case 1:
+                                    if (MessageBox.Show("ต้องการ ปิดคิว การรับ Yes/No?", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                                    {
+                                        return;
+                                    }
+                                    ReceiveController.CloseFlagSwineReceive(receiveNo, "system");
+                                    break;
+                                case 2:
+                                    if (MessageBox.Show("ต้องการ ยกเลิกปิดคิว การรับ Yes/No?", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                                    {
+                                        return;
+                                    }
+                                    ReceiveController.ReverseCloseFlagSwineReceive(receiveNo);
+                                    break;
                             }
-                            ReceiveController.CloseFlagSwineReceive(receiveNo, "system");
-                            //StockController.InsertStockSwineReceive(receiveNo);
-                            MessageBox.Show("ปิดคิว เรียบร้อยแล้ว", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("บันทึกข้อมูล เรียบร้อยแล้ว", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LoadReceive();
 
                             break;

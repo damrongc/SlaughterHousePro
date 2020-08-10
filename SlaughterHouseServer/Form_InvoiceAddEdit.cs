@@ -447,7 +447,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-                if (String.IsNullOrEmpty(txtComment.Text))
+                if (string.IsNullOrEmpty(txtComment.Text))
                 {
                     txtComment.Focus();
                     throw new Exception($"ถ้ายกเลิกเอกสาร กรุณาระบุเหตุผลที่ยกเลิก");
@@ -464,7 +464,7 @@ namespace SlaughterHouseServer
 
                 InvoiceController.Cancel(invoice);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

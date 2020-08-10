@@ -20,7 +20,7 @@ namespace SlaughterHouseServer
         private void Form_CustomerClassAddEdit_Shown(object sender, System.EventArgs e)
         {
             txtCustomerClassCode.Focus();
-            if (this.customerClassId > 0)
+            if (customerClassId > 0)
             {
                 BtnSaveAndNew.Visible = false;
             }
@@ -29,7 +29,7 @@ namespace SlaughterHouseServer
         private void Form_CustomerClassAddEdit_Load(object sender, System.EventArgs e)
         {
 
-            if (this.customerClassId > 0)
+            if (customerClassId > 0)
             {
 
                 var customerClass = MasterClassController.GetMasterClass(this.customerClassId);
@@ -63,12 +63,12 @@ namespace SlaughterHouseServer
         {
             try
             {
-                    if (this.customerClassId == null || this.customerClassId == 0)
-                    {
+                if (customerClassId == 0)
+                {
                     var customerClass = new MasterClass
                     {
                         //UnitCode = Convert.ToInt32(txtUnitCode.Text),
-                        ClassName  = txtCustomerClassName.Text.Trim(),
+                        ClassName = txtCustomerClassName.Text.Trim(),
                         Active = chkActive.Checked,
                         CreateBy = "system",
                     };

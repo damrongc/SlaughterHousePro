@@ -116,6 +116,18 @@
     <Compile Include="Form_ClosePeriod.Designer.cs">
       <DependentUpon>Form_ClosePeriod.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\Form_SalesmanAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_SalesmanAddEdit.Designer.cs">
+      <DependentUpon>Form_SalesmanAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\Form_Salesman.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\Form_Salesman.Designer.cs">
+      <DependentUpon>Form_Salesman.cs</DependentUpon>
+    </Compile>
     <Compile Include="Masters\Form_Breeder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -278,6 +290,12 @@
     <Compile Include="Reports\Form_ReportSwineReceiveByDate.Designer.cs">
       <DependentUpon>Form_ReportSwineReceiveByDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Form_ReportCarcassReceiveByQueue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Form_ReportCarcassReceiveByQueue.Designer.cs">
+      <DependentUpon>Form_ReportCarcassReceiveByQueue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Form_ReportSwineYeild.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -404,12 +422,6 @@
     <Compile Include="Masters\Form_ProductPrice.Designer.cs">
       <DependentUpon>Form_ProductPrice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_ReceiveCarcass.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_ReceiveCarcass.Designer.cs">
-      <DependentUpon>Form_ReceiveCarcass.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form_Order.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -467,6 +479,13 @@
       <DependentUpon>barcode.rpt</DependentUpon>
       <SubType>Component</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\carcassreceive.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>carcassreceive.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Report\dailysales.cs">
       <AutoGen>True</AutoGen>
@@ -539,6 +558,12 @@
     </Compile>
     <EmbeddedResource Include="Form_ClosePeriod.resx">
       <DependentUpon>Form_ClosePeriod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_SalesmanAddEdit.resx">
+      <DependentUpon>Form_SalesmanAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\Form_Salesman.resx">
+      <DependentUpon>Form_Salesman.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_Breeder.resx">
       <DependentUpon>Form_Breeder.cs</DependentUpon>
@@ -618,6 +643,9 @@
     <EmbeddedResource Include="Reports\Form_ReportSwineReceiveByDate.resx">
       <DependentUpon>Form_ReportSwineReceiveByDate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Form_ReportCarcassReceiveByQueue.resx">
+      <DependentUpon>Form_ReportCarcassReceiveByQueue.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Form_ReportSwineYeild.resx">
       <DependentUpon>Form_ReportSwineYeild.cs</DependentUpon>
     </EmbeddedResource>
@@ -683,9 +711,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Form_ProductPrice.resx">
       <DependentUpon>Form_ProductPrice.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_ReceiveCarcass.resx">
-      <DependentUpon>Form_ReceiveCarcass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Order.resx">
       <DependentUpon>Form_Order.cs</DependentUpon>
@@ -772,6 +797,11 @@
       <LastGenOutput>swinereceive_by_date.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Report\carcassreceive.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>carcassreceive.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -804,14 +834,8 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MySql.Data">
-      <Version>8.0.17</Version>
-    </PackageReference>
-    <PackageReference Include="MySql.Data.Entity">
-      <Version>6.10.9</Version>
-    </PackageReference>
-    <PackageReference Include="MySql.Data.EntityFramework">
-      <Version>8.0.17</Version>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="NPOI">
       <Version>2.4.1</Version>

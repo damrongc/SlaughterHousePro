@@ -8,13 +8,11 @@ namespace SlaughterHouseClient
     public partial class Form_Settings : Form
     {
         readonly SettingsBag MySettings = JsonSettings.Load<SettingsBag>("config.json");
-
         public Form_Settings()
         {
             InitializeComponent();
             Load += Form_Load;
         }
-
         private void Form_Load(object sender, EventArgs e)
         {
             try
@@ -23,17 +21,13 @@ namespace SlaughterHouseClient
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
-
         void LoadSetting()
         {
-
             if (MySettings.Data.Count > 0)
             {
-
                 cboComport.Text = MySettings["Comport"].ToString();
                 cboBaudrate.Text = MySettings["Baudrate"].ToString();
                 if (MySettings["StableTarget"] != null)
@@ -46,7 +40,6 @@ namespace SlaughterHouseClient
                     cboCaptureTime.Text = MySettings["CaptureTime"].ToString();
             }
         }
-
         void SaveSetting()
         {
             MySettings["Comport"] = cboComport.Text;
@@ -56,14 +49,11 @@ namespace SlaughterHouseClient
             MySettings["Division"] = cboDivision.Text;
             MySettings["CaptureTime"] = cboCaptureTime.Text;
             MySettings.Save();
-
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
         }
-
         private void BtnSave_Click(object sender, EventArgs e)
         {
             try
@@ -74,7 +64,6 @@ namespace SlaughterHouseClient
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

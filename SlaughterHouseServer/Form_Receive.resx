@@ -148,10 +148,10 @@
         4tqNynep0+yJ7RthTDF6+feOafpfv1mO8wE0K7YRgaY/qQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="Print.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colSwineReport.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="Print.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="colSwineReport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAAS9JREFUSEvt
         VjtuwkAUtKIUlDlAMD5JPodAuQCih44G7Q3WzgWSNulIRUFNRYHoOM1j3mqCEBtbeYvlyiONeH77ZsbC
@@ -160,6 +160,20 @@
         MkM9GLhkKwYevNMhPHg9V9+4/uKSGfTQDefYinEZyFYykgKLDxlobSI0QYvaHvh7Dg1UDbXpgdhA+7DW
         wDDTViD65jeNKRBb+ojPHc7SwRpIzY4e/wuMaAmMtfWB17jlK03CObDzH2ADbw3s9k9UDzuy7ASMLpyq
         VkQB5wAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="colCarcassReport.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colCarcassReport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAEvSURBVEhL7VY7bsJAFLSiFJQ5QDA+ST6HQLkAooeOBu0N1s4FkjbpSEVBTUWB6DjNY95qghAb
+        W3mL5cojjXh++2bGwruGrEenKLw85F6chaqh3A6Ii7wUsVA1lNtxEbhG/dJEnWkv0MsnW7XQmT7wbzi5
+        e3yX55GXSV7JIgSWskU9baTO6Cw0qh2W8qRedK2Bk3uINgxpgxv1pHsM3NUbB1esxykM2kp+UKvXmPYx
+        sLjUoVElr0MvcwhnXDJDPRi4ZCsGHrzTITx4PVffuP7ikhn00A3n2IpxGchWMpICiw8ZaG0iNEGL2h74
+        ew4NVA216YHYQPuw1sAw01Yg+uY3jSkQW/qIzx3O0sEaSM2OHv8LjGgJjLX1gde45StNwjmw8x9gA28N
+        7PZPVA87suwEjC6cqlZEAecAAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="CloseFlag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

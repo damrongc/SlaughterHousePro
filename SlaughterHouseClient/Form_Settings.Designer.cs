@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +18,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -215,6 +212,8 @@
             this.cboDivision.Font = new System.Drawing.Font("Kanit", 18F);
             this.cboDivision.FormattingEnabled = true;
             this.cboDivision.Items.AddRange(new object[] {
+            "1",
+            "10",
             "100",
             "1000"});
             this.cboDivision.Location = new System.Drawing.Point(312, 284);
@@ -288,11 +287,8 @@
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label1;

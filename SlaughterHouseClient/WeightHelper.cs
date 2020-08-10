@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace SlaughterHouseClient
 {
     public static class WeightHelper
@@ -16,10 +15,8 @@ namespace SlaughterHouseClient
                 double num = 0.0;
                 if (DataInvoke.Length == 40)
                 {
-
                     short stateOfScale = DataInvoke.Substring(7, 1).ToInt16();
                     short stableWt = DataInvoke.Substring(5, 1).ToInt16();
-
                     if (stableWt == 2)
                     {
                         weightText = "--.---";
@@ -35,12 +32,9 @@ namespace SlaughterHouseClient
                             num = -1.0 * DataInvoke.Substring(16, 6).ToDouble() / scaleDivision;
                         }
                         weightText = (num).ToFormat2Double();
-
                     }
                     return weightText;
-
                 }
-
             }
             return weightText;
         }

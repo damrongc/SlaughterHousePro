@@ -256,7 +256,7 @@ namespace SlaughterHouseServer
                 gv.Refresh();
                 //row.Cells[e.ColumnIndex].OwningColumn.Name  ##getName
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -537,7 +537,7 @@ namespace SlaughterHouseServer
                     OrderController.Update(order);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -562,7 +562,7 @@ namespace SlaughterHouseServer
                 };
                 OrderController.Cancel(order);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -584,7 +584,7 @@ namespace SlaughterHouseServer
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

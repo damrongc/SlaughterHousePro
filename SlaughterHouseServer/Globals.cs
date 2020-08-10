@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SlaughterHouseServer
+﻿namespace SlaughterHouseServer
 {
     public static class ConstErrorMsg
     {
@@ -31,6 +25,8 @@ namespace SlaughterHouseServer
         public const string BOM_CODE = "BOM_CODE";
         public const string BREEDER_CODE = "BREEDER_CODE";
         public const string BREEDER_NAME = "BREEDER_NAME";
+
+
         public const string CHILL_QTY = "CHILL_QTY";
         public const string CHILL_WGH = "CHILL_WGH";
         public const string COMMENTS = "COMMENTS";

@@ -47,7 +47,6 @@
             this.gvCustomerClass = new System.Windows.Forms.DataGridView();
             this.EditCustomerClass = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.cboProductCustomerClass = new System.Windows.Forms.ComboBox();
             this.dtpStartDateCustomerClass = new System.Windows.Forms.DateTimePicker();
             this.BtnSearchCustomerClass = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -78,6 +77,8 @@
             this.BtnAddClassDis = new System.Windows.Forms.Button();
             this.gvClassDis = new System.Windows.Forms.DataGridView();
             this.EditClassDis = new System.Windows.Forms.DataGridViewImageColumn();
+            this.txtProductFilter = new System.Windows.Forms.TextBox();
+            this.btnImportCustomerPrice = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.panel2.SuspendLayout();
@@ -313,7 +314,8 @@
             // 
             // panel12
             // 
-            this.panel12.Controls.Add(this.cboProductCustomerClass);
+            this.panel12.Controls.Add(this.btnImportCustomerPrice);
+            this.panel12.Controls.Add(this.txtProductFilter);
             this.panel12.Controls.Add(this.dtpStartDateCustomerClass);
             this.panel12.Controls.Add(this.BtnSearchCustomerClass);
             this.panel12.Controls.Add(this.label7);
@@ -324,14 +326,6 @@
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(1372, 61);
             this.panel12.TabIndex = 7;
-            // 
-            // cboProductCustomerClass
-            // 
-            this.cboProductCustomerClass.FormattingEnabled = true;
-            this.cboProductCustomerClass.Location = new System.Drawing.Point(595, 14);
-            this.cboProductCustomerClass.Name = "cboProductCustomerClass";
-            this.cboProductCustomerClass.Size = new System.Drawing.Size(214, 37);
-            this.cboProductCustomerClass.TabIndex = 7;
             // 
             // dtpStartDateCustomerClass
             // 
@@ -351,7 +345,7 @@
             this.BtnSearchCustomerClass.ForeColor = System.Drawing.Color.White;
             this.BtnSearchCustomerClass.Image = ((System.Drawing.Image)(resources.GetObject("BtnSearchCustomerClass.Image")));
             this.BtnSearchCustomerClass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSearchCustomerClass.Location = new System.Drawing.Point(815, 14);
+            this.BtnSearchCustomerClass.Location = new System.Drawing.Point(903, 16);
             this.BtnSearchCustomerClass.Name = "BtnSearchCustomerClass";
             this.BtnSearchCustomerClass.Size = new System.Drawing.Size(142, 36);
             this.BtnSearchCustomerClass.TabIndex = 4;
@@ -365,9 +359,9 @@
             this.label7.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(530, 18);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 29);
+            this.label7.Size = new System.Drawing.Size(146, 29);
             this.label7.TabIndex = 5;
-            this.label7.Text = "สินค้า:";
+            this.label7.Text = "รหัสหรือชื่อสินค้า:";
             // 
             // label8
             // 
@@ -409,10 +403,10 @@
             // 
             this.tabPageCustomer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPageCustomer.Controls.Add(this.panel4);
-            this.tabPageCustomer.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCustomer.Location = new System.Drawing.Point(4, 40);
             this.tabPageCustomer.Name = "tabPageCustomer";
             this.tabPageCustomer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCustomer.Size = new System.Drawing.Size(1392, 724);
+            this.tabPageCustomer.Size = new System.Drawing.Size(1392, 706);
             this.tabPageCustomer.TabIndex = 0;
             this.tabPageCustomer.Text = " ราคาระดับลูกค้า ";
             this.tabPageCustomer.UseVisualStyleBackColor = true;
@@ -428,7 +422,7 @@
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(6);
-            this.panel4.Size = new System.Drawing.Size(1384, 716);
+            this.panel4.Size = new System.Drawing.Size(1384, 698);
             this.panel4.TabIndex = 4;
             // 
             // gvCv
@@ -448,7 +442,7 @@
             this.gvCv.Location = new System.Drawing.Point(6, 68);
             this.gvCv.Name = "gvCv";
             this.gvCv.RowHeadersWidth = 10;
-            this.gvCv.Size = new System.Drawing.Size(1372, 642);
+            this.gvCv.Size = new System.Drawing.Size(1372, 624);
             this.gvCv.TabIndex = 8;
             // 
             // EditCv
@@ -556,10 +550,10 @@
             // 
             this.tabPageCustomerClassDis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPageCustomerClassDis.Controls.Add(this.panel7);
-            this.tabPageCustomerClassDis.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCustomerClassDis.Location = new System.Drawing.Point(4, 40);
             this.tabPageCustomerClassDis.Name = "tabPageCustomerClassDis";
             this.tabPageCustomerClassDis.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCustomerClassDis.Size = new System.Drawing.Size(1392, 724);
+            this.tabPageCustomerClassDis.Size = new System.Drawing.Size(1392, 706);
             this.tabPageCustomerClassDis.TabIndex = 2;
             this.tabPageCustomerClassDis.Text = "ส่วนลดกลุ่มลูกค้า";
             this.tabPageCustomerClassDis.UseVisualStyleBackColor = true;
@@ -575,7 +569,7 @@
             this.panel7.Location = new System.Drawing.Point(3, 3);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(6);
-            this.panel7.Size = new System.Drawing.Size(1384, 716);
+            this.panel7.Size = new System.Drawing.Size(1384, 698);
             this.panel7.TabIndex = 5;
             // 
             // panel8
@@ -690,7 +684,7 @@
             this.gvClassDis.Location = new System.Drawing.Point(6, 6);
             this.gvClassDis.Name = "gvClassDis";
             this.gvClassDis.RowHeadersWidth = 10;
-            this.gvClassDis.Size = new System.Drawing.Size(1372, 704);
+            this.gvClassDis.Size = new System.Drawing.Size(1372, 686);
             this.gvClassDis.TabIndex = 8;
             // 
             // EditClassDis
@@ -699,6 +693,31 @@
             this.EditClassDis.Image = ((System.Drawing.Image)(resources.GetObject("EditClassDis.Image")));
             this.EditClassDis.Name = "EditClassDis";
             this.EditClassDis.Width = 58;
+            // 
+            // txtProductFilter
+            // 
+            this.txtProductFilter.Location = new System.Drawing.Point(682, 15);
+            this.txtProductFilter.MaxLength = 10;
+            this.txtProductFilter.Name = "txtProductFilter";
+            this.txtProductFilter.Size = new System.Drawing.Size(215, 36);
+            this.txtProductFilter.TabIndex = 10;
+            // 
+            // btnImportCustomerPrice
+            // 
+            this.btnImportCustomerPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(185)))), ((int)(((byte)(0)))));
+            this.btnImportCustomerPrice.FlatAppearance.BorderSize = 0;
+            this.btnImportCustomerPrice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImportCustomerPrice.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImportCustomerPrice.ForeColor = System.Drawing.Color.White;
+            this.btnImportCustomerPrice.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImportCustomerPrice.Location = new System.Drawing.Point(1051, 15);
+            this.btnImportCustomerPrice.Name = "btnImportCustomerPrice";
+            this.btnImportCustomerPrice.Size = new System.Drawing.Size(142, 36);
+            this.btnImportCustomerPrice.TabIndex = 11;
+            this.btnImportCustomerPrice.Text = "Import Excel";
+            this.btnImportCustomerPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnImportCustomerPrice.UseVisualStyleBackColor = false;
+            this.btnImportCustomerPrice.Click += new System.EventHandler(this.btnImportCustomerPrice_Click);
             // 
             // Form_PriceList
             // 
@@ -778,12 +797,13 @@
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.DataGridView gvCustomerClass;
         private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.ComboBox cboProductCustomerClass;
         private System.Windows.Forms.DateTimePicker dtpStartDateCustomerClass;
         private System.Windows.Forms.Button BtnSearchCustomerClass;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button BtnAddCustomerClass;
         private System.Windows.Forms.DataGridViewImageColumn EditCustomerClass;
+        private System.Windows.Forms.TextBox txtProductFilter;
+        private System.Windows.Forms.Button btnImportCustomerPrice;
     }
 }

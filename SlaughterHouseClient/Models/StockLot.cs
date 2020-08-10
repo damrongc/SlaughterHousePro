@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace SlaughterHouseClient.Models
 {
     public class StockLot
@@ -12,6 +11,4 @@ namespace SlaughterHouseClient.Models
         public int stock_qty { get; set; }
         public double stock_wgh { get; set; }
     }
-
-  
 }

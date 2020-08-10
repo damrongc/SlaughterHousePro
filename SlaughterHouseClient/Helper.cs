@@ -1,7 +1,8 @@
-﻿
+﻿using SlaughterHouseEF;
 using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -9,25 +10,20 @@ using ZXing;
 using ZXing.Common;
 using ZXing.QrCode.Internal;
 using ZXing.Rendering;
-
 namespace SlaughterHouseClient
 {
     public static class Helper
     {
-
         public static string GetWeightIWX(string DataInvoke)
         {
             double num = 0.0;
             if (DataInvoke.Length == 38)
             {
-
                 int scaleDecimal = DataInvoke.Substring(20, 2).ToInt32();
                 int scaleDivision = (int)Math.Round(Math.Pow(10.0, unchecked(scaleDecimal)));
-
                 string strFormatWt = scaleDecimal == 0 ? "#0" : "#0." + "0".PadRight(scaleDecimal, '0');
                 short stateOfScale = DataInvoke.Substring(2, 1).ToInt16();
                 //short stableWt = DataInvoke.Substring(2, 1).ToInt16();
-
                 if (stateOfScale == 0)
                 {
                     num = DataInvoke.Substring(14, 6).ToDouble() / scaleDivision;
@@ -37,9 +33,7 @@ namespace SlaughterHouseClient
                     num = -1.0 * DataInvoke.Substring(14, 6).ToDouble() / scaleDivision;
                 }
                 return num.ToString(strFormatWt);
-
             }
-
             return num.ToString();
         }
         public static string GetLocalIPAddress()
@@ -54,15 +48,12 @@ namespace SlaughterHouseClient
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
         }
-
         public static DataTable GetBarcode(long barcode_no)
         {
             try
             {
-
                 using (var db = new SlaughterhouseEntities())
                 {
-
                     var barcode = db.barcodes.Where(p => p.barcode_no == barcode_no).SingleOrDefault();
                     DataTable dt = new DataTable("Barcode");
                     dt.Columns.Add("barcode_no", typeof(string));
@@ -78,12 +69,13 @@ namespace SlaughterHouseClient
                     dt.Columns.Add("wgh", typeof(double));
                     dt.Columns.Add("wgh_unit", typeof(string));
                     dt.Columns.Add("qr_code", typeof(byte[]));
-
+                    dt.Columns.Add("bar_qr_code", typeof(byte[]));
                     DataRow dr = dt.NewRow();
+                    string qrData = string.Format("00{0}{1}", barcode.product_code, Convert.ToInt64(barcode.wgh * 10000).ToString().PadLeft(6, '0'));
                     //string barcode_no_text = string.Format("1{0}", barcode.barcode_no.ToString().PadLeft(12, '0'));
                     dr["barcode_no"] = string.Format("*{0}*", barcode.barcode_no);
                     dr["barcode_no_text"] = barcode.barcode_no;
-                    dr["barcode_info"] = string.Format("*00{0}{1}*", barcode.product_code, Convert.ToInt64(barcode.wgh * 10000).ToString().PadLeft(6, '0'));
+                    dr["barcode_info"] = qrData;
                     dr["product_code"] = barcode.product_code;
                     dr["product_name"] = barcode.product.product_name;
                     dr["production_date"] = barcode.production_date;
@@ -93,31 +85,64 @@ namespace SlaughterHouseClient
                     dr["qty_unit"] = barcode.product.unit_of_measurement.unit_name;
                     dr["wgh"] = barcode.wgh;
                     dr["wgh_unit"] = barcode.product.unit_of_measurement1.unit_name;
-                    dr["qr_code"] = GenerateQRCode(barcode.barcode_no.ToString());
+                    dr["qr_code"] = GenerateQRCode(qrData);
+                    dr["bar_qr_code"] = GenerateQRCode(barcode.barcode_no.ToString());
                     dt.Rows.Add(dr);
-
-                    //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\xml\"));
-                    //dt.WriteXml(path + @"barcode.xml", XmlWriteMode.WriteSchema);
-
-
+                    string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report\xml\"));
+                    //dt.WriteXml(path + @"barcode_qr.xml", XmlWriteMode.WriteSchema);
                     return dt;
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
-
         }
-
+        public static string GetDocGenerator(string docType)
+        {
+            try
+            {
+                using (var db = new SlaughterhouseEntities())
+                {
+                    var docGenerator = db.document_generate.Find(docType);
+                    docGenerator.running += 1;
+                    var docNo = docType + docGenerator.running.ToString().PadLeft(10 - docType.Length, '0');
+                    db.SaveChanges();
+                    return docNo;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static long GetMaxBarcode()
+        {
+            try
+            {
+                int plantID = System.Configuration.ConfigurationManager.AppSettings["plantID"].ToInt16();
+                using (var db = new SlaughterhouseEntities())
+                {
+                    var barcodeGenerate = db.document_generate.Find(Constants.BAR);
+                    barcodeGenerate.running += 1;
+                    db.Entry(barcodeGenerate).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    var barString = barcodeGenerate.running.ToString().PadLeft(12, '0');
+                    return string.Format("{0}{1}", plantID, barString).ToLong();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public static byte[] GenerateQRCode(string qrData)
         {
             BarcodeWriter barcodeWriter = new BarcodeWriter();
             EncodingOptions encodingOptions = new EncodingOptions()
             {
-                Width = 300,
-                Height = 300,
+                Width = 150,
+                Height = 150,
                 Margin = 0,
                 PureBarcode = false
             };
@@ -128,10 +153,7 @@ namespace SlaughterHouseClient
             Bitmap bitmap = barcodeWriter.Write(qrData);
             return ImgToByteConverter(bitmap);
             //return GetRGBValues(bitmap);
-
-
         }
-
         public static Bitmap GenerateQRCodeImage(string qrData)
         {
             BarcodeWriter barcodeWriter = new BarcodeWriter();
@@ -148,41 +170,28 @@ namespace SlaughterHouseClient
             barcodeWriter.Format = BarcodeFormat.QR_CODE;
             Bitmap bitmap = barcodeWriter.Write(qrData);
             return bitmap;
-
-
         }
-
         //another easy way to convert image to bytearray
         public static byte[] ImgToByteConverter(Image inImg)
         {
             ImageConverter imgCon = new ImageConverter();
             return (byte[])imgCon.ConvertTo(inImg, typeof(byte[]));
         }
-
         private static byte[] GetRGBValues(Bitmap bmp)
         {
-
             // Lock the bitmap's bits.
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
             System.Drawing.Imaging.BitmapData bmpData =
              bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadOnly,
              bmp.PixelFormat);
-
             // Get the address of the first line.
             IntPtr ptr = bmpData.Scan0;
-
             // Declare an array to hold the bytes of the bitmap.
             int bytes = bmpData.Stride * bmp.Height;
             byte[] rgbValues = new byte[bytes];
-
             // Copy the RGB values into the array.
             System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes); bmp.UnlockBits(bmpData);
-
             return rgbValues;
         }
-
-
     }
-
-
 }

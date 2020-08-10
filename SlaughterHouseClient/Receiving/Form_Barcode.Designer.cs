@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +18,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -66,7 +63,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(928, 44);
             this.label1.TabIndex = 16;
-            this.label1.Text = "บาร์โค็ด";
+            this.label1.Text = "ข้อมูลบาร์โค้ด";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnClose
@@ -109,13 +106,12 @@
             this.col_qty,
             this.col_wgh,
             this.btnDelete});
-            this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gv.Location = new System.Drawing.Point(0, 44);
+            this.gv.Location = new System.Drawing.Point(0, 47);
             this.gv.MultiSelect = false;
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
             this.gv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv.Size = new System.Drawing.Size(1024, 724);
+            this.gv.Size = new System.Drawing.Size(1024, 721);
             this.gv.TabIndex = 9;
             // 
             // btnBarcode
@@ -197,11 +193,8 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
             this.ResumeLayout(false);
-
         }
-
         #endregion
-
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView gv;
         private System.Windows.Forms.Button btnClose;

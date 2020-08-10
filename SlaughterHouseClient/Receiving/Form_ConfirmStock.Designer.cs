@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +18,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -41,6 +38,7 @@
             this.cboLocation = new System.Windows.Forms.ComboBox();
             this.gv = new System.Windows.Forms.DataGridView();
             this.btnBarcode = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnKeyboard = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.SuspendLayout();
@@ -146,8 +144,9 @@
             this.txtBarcodeNo.ForeColor = System.Drawing.Color.White;
             this.txtBarcodeNo.Location = new System.Drawing.Point(462, 92);
             this.txtBarcodeNo.Name = "txtBarcodeNo";
-            this.txtBarcodeNo.Size = new System.Drawing.Size(435, 43);
+            this.txtBarcodeNo.Size = new System.Drawing.Size(228, 43);
             this.txtBarcodeNo.TabIndex = 62;
+            this.txtBarcodeNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // cboLocation
             // 
@@ -187,11 +186,27 @@
             this.btnBarcode.Name = "btnBarcode";
             this.btnBarcode.Width = 44;
             // 
+            // btnKeyboard
+            // 
+            this.btnKeyboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
+            this.btnKeyboard.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnKeyboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnKeyboard.Font = new System.Drawing.Font("Kanit", 16F);
+            this.btnKeyboard.ForeColor = System.Drawing.Color.White;
+            this.btnKeyboard.Image = ((System.Drawing.Image)(resources.GetObject("btnKeyboard.Image")));
+            this.btnKeyboard.Location = new System.Drawing.Point(696, 92);
+            this.btnKeyboard.Name = "btnKeyboard";
+            this.btnKeyboard.Size = new System.Drawing.Size(99, 42);
+            this.btnKeyboard.TabIndex = 87;
+            this.btnKeyboard.UseVisualStyleBackColor = false;
+            this.btnKeyboard.Click += new System.EventHandler(this.btnKeyboard_Click);
+            // 
             // Form_ConfirmStock
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.btnKeyboard);
             this.Controls.Add(this.gv);
             this.Controls.Add(this.cboLocation);
             this.Controls.Add(this.txtBarcodeNo);
@@ -211,11 +226,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.Label lblCaption;
         private DragControl dragControl1;
@@ -228,6 +240,6 @@
         private System.Windows.Forms.ComboBox cboLocation;
         private System.Windows.Forms.DataGridView gv;
         private System.Windows.Forms.DataGridViewButtonColumn btnBarcode;
+        private System.Windows.Forms.Button btnKeyboard;
     }
 }
-

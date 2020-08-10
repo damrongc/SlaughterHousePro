@@ -1,5 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using SlaughterHouseLib;
+using SlaughterHouseLib.Models;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -40,7 +41,19 @@ namespace SlaughterHouseServer.Reports
         }
         private void Form_Load(object sender, System.EventArgs e)
         {
-
+            FillProductGroup();
+        }
+        private void FillProductGroup()
+        {
+            var coll = ProductGroupController.GetAllProudctGroups();
+            coll.Insert(0, new ProductGroup
+            {
+                ProductGroupCode = 0,
+                ProductGroupName = "--ทั้งหมด--"
+            });
+            comboxProductGroup.ValueMember = "ProductGroupCode";
+            comboxProductGroup.DisplayMember = "ProductGroupName";
+            comboxProductGroup.DataSource = coll;
         }
 
         private void LoadReport()
@@ -59,8 +72,33 @@ namespace SlaughterHouseServer.Reports
             rptViewer.RefreshReport();
         }
 
-        private void BtnShowReport_Click_1(object sender, EventArgs e)
+        private void comboxProductGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try
+            {
+                LoadProduct();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private void LoadProduct()
+        {
+            if (comboxProductGroup.SelectedIndex > 0)
+            {
+
+                var dtProduct = ProductController.GetProductActive(comboxProductGroup.SelectedValue.ToString(), "", "");
+
+                cboProduct.ValueMember = "product_code";
+                cboProduct.DisplayMember = "product_name";
+                cboProduct.DataSource = dtProduct;
+            }
+            else
+            {
+                cboProduct.DataSource = null;
+            }
+
 
         }
     }

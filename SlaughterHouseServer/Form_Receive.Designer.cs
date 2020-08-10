@@ -45,7 +45,8 @@
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Print = new System.Windows.Forms.DataGridViewImageColumn();
+            this.colSwineReport = new System.Windows.Forms.DataGridViewImageColumn();
+            this.colCarcassReport = new System.Windows.Forms.DataGridViewImageColumn();
             this.CloseFlag = new System.Windows.Forms.DataGridViewImageColumn();
             this.colReceiveFlag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceiveNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -120,7 +121,8 @@
             this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Edit,
-            this.Print,
+            this.colSwineReport,
+            this.colCarcassReport,
             this.CloseFlag,
             this.colReceiveFlag,
             this.colReceiveNo,
@@ -218,12 +220,19 @@
             this.Edit.Name = "Edit";
             this.Edit.Width = 58;
             // 
-            // Print
+            // colSwineReport
             // 
-            this.Print.HeaderText = "พิมพ์";
-            this.Print.Image = ((System.Drawing.Image)(resources.GetObject("Print.Image")));
-            this.Print.Name = "Print";
-            this.Print.Width = 58;
+            this.colSwineReport.HeaderText = "เอกสารหมูเป็น";
+            this.colSwineReport.Image = ((System.Drawing.Image)(resources.GetObject("colSwineReport.Image")));
+            this.colSwineReport.Name = "colSwineReport";
+            this.colSwineReport.Width = 129;
+            // 
+            // colCarcassReport
+            // 
+            this.colCarcassReport.HeaderText = "เอกสารหมูซีก";
+            this.colCarcassReport.Image = ((System.Drawing.Image)(resources.GetObject("colCarcassReport.Image")));
+            this.colCarcassReport.Name = "colCarcassReport";
+            this.colCarcassReport.Width = 123;
             // 
             // CloseFlag
             // 
@@ -373,7 +382,8 @@
         private System.Windows.Forms.DateTimePicker dtpReceiveDate;
         private System.Windows.Forms.ComboBox cboFarm;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
-        private System.Windows.Forms.DataGridViewImageColumn Print;
+        private System.Windows.Forms.DataGridViewImageColumn colSwineReport;
+        private System.Windows.Forms.DataGridViewImageColumn colCarcassReport;
         private System.Windows.Forms.DataGridViewImageColumn CloseFlag;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReceiveFlag;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReceiveNo;

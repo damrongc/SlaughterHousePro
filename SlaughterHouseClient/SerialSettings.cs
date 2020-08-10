@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO.Ports;
-
 namespace SerialPortListener.Serial
 {
     /// <summary>
@@ -18,7 +17,6 @@ namespace SerialPortListener.Serial
         int _dataBits = 8;
         int[] _dataBitsCollection = new int[] { 5, 6, 7, 8 };
         StopBits _stopBits = StopBits.One;
-
         #region Properties
         /// <summary>
         /// The port to use (for example, COM1).
@@ -50,7 +48,6 @@ namespace SerialPortListener.Serial
                 }
             }
         }
-
         /// <summary>
         /// One of the Parity values.
         /// </summary>
@@ -96,7 +93,6 @@ namespace SerialPortListener.Serial
                 }
             }
         }
-
         /// <summary>
         /// Available ports on the computer
         /// </summary>
@@ -105,7 +101,6 @@ namespace SerialPortListener.Serial
             get { return _portNameCollection; }
             set { _portNameCollection = value; }
         }
-
         /// <summary>
         /// Available baud rates for current serial port
         /// </summary>
@@ -113,7 +108,6 @@ namespace SerialPortListener.Serial
         {
             get { return _baudRateCollection; }
         }
-
         /// <summary>
         /// Available databits setting
         /// </summary>
@@ -122,9 +116,7 @@ namespace SerialPortListener.Serial
             get { return _dataBitsCollection; }
             set { _dataBitsCollection = value; }
         }
-
         #endregion
-
         #region Methods
         /// <summary>
         /// Updates the range of possible baud rates for device
@@ -151,9 +143,7 @@ namespace SerialPortListener.Serial
             const int BAUD_57600 = 0x00040000;
             const int BAUD_115200 = 0x00020000;
             const int BAUD_128K = 0x00010000;
-
             _baudRateCollection.Clear();
-
             if ((possibleBaudRates & BAUD_075) > 0)
                 _baudRateCollection.Add(75);
             if ((possibleBaudRates & BAUD_110) > 0)
@@ -190,10 +180,8 @@ namespace SerialPortListener.Serial
                 _baudRateCollection.Add(115200);
             if ((possibleBaudRates & BAUD_128K) > 0)
                 _baudRateCollection.Add(128000);
-
             SendPropertyChangedEvent("BaudRateCollection");
         }
-
         /// <summary>
         /// Send a PropertyChanged event
         /// </summary>
@@ -203,7 +191,6 @@ namespace SerialPortListener.Serial
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
-
         #endregion
     }
 }

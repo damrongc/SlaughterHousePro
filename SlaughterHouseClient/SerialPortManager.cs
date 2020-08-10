@@ -2,7 +2,6 @@
 using System.IO.Ports;
 using System.Reflection;
 using System.Text;
-
 namespace SerialPortListener.Serial
 {
     /// <summary>
@@ -15,27 +14,20 @@ namespace SerialPortListener.Serial
             // Finding installed serial ports on hardware
             _currentSerialSettings.PortNameCollection = SerialPort.GetPortNames();
             _currentSerialSettings.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_currentSerialSettings_PropertyChanged);
-
             // If serial ports is found, we select the first found
             if (_currentSerialSettings.PortNameCollection.Length > 0)
                 _currentSerialSettings.PortName = _currentSerialSettings.PortNameCollection[0];
         }
-
-
         ~SerialPortManager()
         {
             Dispose(false);
         }
-
-
         #region Fields
         private SerialPort _serialPort;
         private SerialSettings _currentSerialSettings = new SerialSettings();
         private string _latestRecieved = String.Empty;
         public event EventHandler<SerialDataEventArgs> NewSerialDataRecieved;
-
         #endregion
-
         #region Properties
         /// <summary>
         /// Gets or sets the current serial port settings
@@ -45,19 +37,14 @@ namespace SerialPortListener.Serial
             get { return _currentSerialSettings; }
             set { _currentSerialSettings = value; }
         }
-
         #endregion
-
         #region Event handlers
-
         void _currentSerialSettings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             // if serial port is changed, a new baud query is issued
             if (e.PropertyName.Equals("PortName"))
                 UpdateBaudRateCollection();
         }
-
-
         void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             int dataLength = _serialPort.BytesToRead;
@@ -65,16 +52,12 @@ namespace SerialPortListener.Serial
             int nbrDataRead = _serialPort.Read(data, 0, dataLength);
             if (nbrDataRead == 0)
                 return;
-
             // Send data to whom ever interested
             if (NewSerialDataRecieved != null)
                 NewSerialDataRecieved(this, new SerialDataEventArgs(data));
         }
-
         #endregion
-
         #region Methods
-
         /// <summary>
         /// Connects to a serial port defined through the current settings
         /// </summary>
@@ -83,7 +66,6 @@ namespace SerialPortListener.Serial
             // Closing serial port if it is open
             if (_serialPort != null && _serialPort.IsOpen)
                 _serialPort.Close();
-
             // Setting serial port settings
             _serialPort = new SerialPort(
                 _currentSerialSettings.PortName,
@@ -91,12 +73,10 @@ namespace SerialPortListener.Serial
                 _currentSerialSettings.Parity,
                 _currentSerialSettings.DataBits,
                 _currentSerialSettings.StopBits);
-
             // Subscribe to event and open serial port for data
             _serialPort.DataReceived += new SerialDataReceivedEventHandler(_serialPort_DataReceived);
             _serialPort.Open();
         }
-
         /// <summary>
         /// Closes the serial port
         /// </summary>
@@ -104,19 +84,15 @@ namespace SerialPortListener.Serial
         {
             _serialPort.Close();
         }
-
-
         public void WriteData(string tx)
         {
             if (_serialPort != null && _serialPort.IsOpen)
             {
-
                 byte[] bytes = Encoding.ASCII.GetBytes(tx + " \r\n");
                 //_serialPort.WriteLine("T \r\n");
                 _serialPort.Write(bytes, 0, 1);
             }
         }
-
         /// <summary>
         /// Retrieves the current selected device's COMMPROP structure, and extracts the dwSettableBaud property
         /// </summary>
@@ -128,24 +104,19 @@ namespace SerialPortListener.Serial
                 _serialPort.Open();
                 object p = _serialPort.BaseStream.GetType().GetField("commProp", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(_serialPort.BaseStream);
                 Int32 dwSettableBaud = (Int32)p.GetType().GetField("dwSettableBaud", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).GetValue(p);
-
                 _serialPort.Close();
                 _currentSerialSettings.UpdateBaudRateCollection(dwSettableBaud);
             }
             catch (Exception)
             {
-
                 throw;
             }
-
         }
-
         // Call to release serial port
         public void Dispose()
         {
             Dispose(true);
         }
-
         // Part of basic design pattern for implementing Dispose 
         protected virtual void Dispose(bool disposing)
         {
@@ -159,16 +130,11 @@ namespace SerialPortListener.Serial
             {
                 if (_serialPort.IsOpen)
                     _serialPort.Close();
-
                 _serialPort.Dispose();
             }
         }
-
-
         #endregion
-
     }
-
     /// <summary>
     /// EventArgs used to send bytes recieved on serial port
     /// </summary>
@@ -178,7 +144,6 @@ namespace SerialPortListener.Serial
         {
             Data = dataInByteArray;
         }
-
         /// <summary>
         /// Byte array containing data from serial port
         /// </summary>

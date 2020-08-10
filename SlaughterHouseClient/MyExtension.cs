@@ -1,14 +1,10 @@
 ﻿using System;
-
-
 public static class MyExtension
 {
-
     public static double Power(this double a, double b)
     {
         return System.Math.Pow(a, b);
     }
-
     public static double ToDouble(this string a)
     {
         return double.Parse(a.Replace(" ", "").Trim());
@@ -21,17 +17,14 @@ public static class MyExtension
     {
         return int.Parse(a.Replace(" ", "").Trim());
     }
-
     public static long ToLong(this string a)
     {
         return long.Parse(a.Replace(" ", "").Trim());
     }
-
     public static decimal ToDecimal(this string a)
     {
         return decimal.Parse(a.Replace(" ", "").Trim());
     }
-
     /// <summary>
     /// format double to #.##
     /// </summary>
@@ -45,7 +38,10 @@ public static class MyExtension
     {
         return string.Format("{0: #,##0}", a);
     }
-
+    public static string ToFormatNoDouble(this double a)
+    {
+        return string.Format("{0: #,##0}", a);
+    }
     public static string ToFormat2Double(this double a)
     {
         return string.Format("{0: #,##0.00}", a);

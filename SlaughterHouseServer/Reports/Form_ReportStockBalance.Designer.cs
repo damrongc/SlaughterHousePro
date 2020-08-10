@@ -34,12 +34,20 @@
             this.dtpInvoiceDate = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rptViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.labelProductGroup = new System.Windows.Forms.Label();
+            this.comboxProductGroup = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cboProduct = new System.Windows.Forms.ComboBox();
             this.groupBoxReportName.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxReportName
             // 
+            this.groupBoxReportName.Controls.Add(this.label1);
+            this.groupBoxReportName.Controls.Add(this.cboProduct);
+            this.groupBoxReportName.Controls.Add(this.labelProductGroup);
+            this.groupBoxReportName.Controls.Add(this.comboxProductGroup);
             this.groupBoxReportName.Controls.Add(this.BtnShowReport);
             this.groupBoxReportName.Controls.Add(this.dtpInvoiceDate);
             this.groupBoxReportName.Dock = System.Windows.Forms.DockStyle.Top;
@@ -59,14 +67,14 @@
             this.BtnShowReport.ForeColor = System.Drawing.Color.White;
             this.BtnShowReport.Image = ((System.Drawing.Image)(resources.GetObject("BtnShowReport.Image")));
             this.BtnShowReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnShowReport.Location = new System.Drawing.Point(200, 35);
+            this.BtnShowReport.Location = new System.Drawing.Point(804, 38);
             this.BtnShowReport.Name = "BtnShowReport";
             this.BtnShowReport.Size = new System.Drawing.Size(157, 36);
             this.BtnShowReport.TabIndex = 14;
             this.BtnShowReport.Text = "แสดงรายงาน";
             this.BtnShowReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnShowReport.UseVisualStyleBackColor = false;
-            this.BtnShowReport.Click += new System.EventHandler(this.BtnShowReport_Click_1);
+            this.BtnShowReport.Click += new System.EventHandler(this.BtnShowReport_Click);
             // 
             // dtpInvoiceDate
             // 
@@ -99,6 +107,41 @@
             this.rptViewer.TabIndex = 3;
             this.rptViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
+            // labelProductGroup
+            // 
+            this.labelProductGroup.AutoSize = true;
+            this.labelProductGroup.Location = new System.Drawing.Point(195, 41);
+            this.labelProductGroup.Name = "labelProductGroup";
+            this.labelProductGroup.Size = new System.Drawing.Size(90, 29);
+            this.labelProductGroup.TabIndex = 29;
+            this.labelProductGroup.Text = "กลุ่มสินค้า";
+            // 
+            // comboxProductGroup
+            // 
+            this.comboxProductGroup.FormattingEnabled = true;
+            this.comboxProductGroup.Location = new System.Drawing.Point(300, 37);
+            this.comboxProductGroup.Name = "comboxProductGroup";
+            this.comboxProductGroup.Size = new System.Drawing.Size(215, 37);
+            this.comboxProductGroup.TabIndex = 28;
+            this.comboxProductGroup.SelectedIndexChanged += new System.EventHandler(this.comboxProductGroup_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(521, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 29);
+            this.label1.TabIndex = 31;
+            this.label1.Text = "สินค้า";
+            // 
+            // cboProduct
+            // 
+            this.cboProduct.FormattingEnabled = true;
+            this.cboProduct.Location = new System.Drawing.Point(583, 38);
+            this.cboProduct.Name = "cboProduct";
+            this.cboProduct.Size = new System.Drawing.Size(215, 37);
+            this.cboProduct.TabIndex = 30;
+            // 
             // Form_ReportStockBalance
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -112,6 +155,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_Report_Stock_Balance";
             this.groupBoxReportName.ResumeLayout(false);
+            this.groupBoxReportName.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -124,5 +168,9 @@
         private System.Windows.Forms.DateTimePicker dtpInvoiceDate;
         private System.Windows.Forms.Panel panel1;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer rptViewer;
+        private System.Windows.Forms.Label labelProductGroup;
+        private System.Windows.Forms.ComboBox comboxProductGroup;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cboProduct;
     }
 }

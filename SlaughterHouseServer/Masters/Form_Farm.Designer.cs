@@ -164,7 +164,7 @@
             this.ClientSize = new System.Drawing.Size(1400, 750);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Kanit", 15.75F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form_Farm";
             this.Text = "Form_Farm";
             this.panel1.ResumeLayout(false);

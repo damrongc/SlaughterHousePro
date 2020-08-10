@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using SlaughterHouseLib.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -191,7 +190,7 @@ namespace SlaughterHouseLib
                             TransportDocNo = (string)ds.Tables[0].Rows[0]["transport_doc_no"],
                             Truck = new Truck
                             {
-                                TruckId = (Int32)ds.Tables[0].Rows[0]["truck_id"],
+                                TruckId = (int)ds.Tables[0].Rows[0]["truck_id"],
                                 //TruckNo = (string)ds.Tables[0].Rows[0]["truck_no"],
                             },
                             Farm = new Farm
@@ -335,7 +334,7 @@ namespace SlaughterHouseLib
                             receive.QueueNo = queue_no.ToString().ToInt16() + 1;
 
                         receive.ReceiveNo = DocumentGenerate.GetDocumentRunningFormat("REV", receive.ReceiveDate);
-                        receive.LotNo = DocumentGenerate.GetSwineLotNo(plant.PlantId, receive.ReceiveDate, receive.QueueNo);
+                        receive.LotNo = DocumentGenerate.GetSwineLotNo(plant.PlantId, receive.QueueNo);
                         sql = @"INSERT INTO receives(
                                 receive_no,
                                 receive_date,
@@ -381,67 +380,67 @@ namespace SlaughterHouseLib
                         cmd.ExecuteNonQuery();
 
 
-                        sql = @"INSERT INTO receive_item_by_product(
-                                    receive_no,
-                                    bom_product_code,
-                                    product_code,
-                                    lot_no,
-                                    target_qty,
-                                    target_wgh,
-                                    actual_qty,
-                                    actual_wgh,
-                                    create_by
-                                )VALUES(
-                                    @receive_no,
-                                    @bom_product_code,
-                                    @product_code,
-                                    @lot_no,
-                                    @target_qty,
-                                    @target_wgh,
-                                    @actual_qty,
-                                    @actual_wgh,
-                                    @create_by
-                                )";
-                        //GET BOM
-                        //00101 เครื่องในแดง
-                        List<string> list = BomItemController.GetBomItemByProductCode("00101");
-                        list.Add("00101");
-                        //INSERT By PRODUCT
-                        foreach (var item in list)
-                        {
-                            int target_qty = item == "00101" ? (receive.FarmQty * (list.Count - 1)) : receive.FarmQty;
-                            cmd = new MySqlCommand(sql, conn);
-                            cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
-                            cmd.Parameters.AddWithValue("bom_product_code", "00101");
-                            cmd.Parameters.AddWithValue("product_code", item);
-                            cmd.Parameters.AddWithValue("lot_no", receive.LotNo);
-                            cmd.Parameters.AddWithValue("target_qty", target_qty == 0 ? receive.FarmQty : target_qty);
-                            cmd.Parameters.AddWithValue("target_wgh", receive.FarmWgh);
-                            cmd.Parameters.AddWithValue("actual_qty", 0);
-                            cmd.Parameters.AddWithValue("actual_wgh", 0);
-                            cmd.Parameters.AddWithValue("create_by", receive.CreateBy);
-                            cmd.ExecuteNonQuery();
-                        }
-                        list.Clear();
-                        //00201 เครื่องในขาว
-                        list = BomItemController.GetBomItemByProductCode("00201");
-                        list.Add("00201");
-                        //INSERT By PRODUCT
-                        foreach (var item in list)
-                        {
-                            int target_qty = item == "00201" ? (receive.FarmQty * (list.Count - 1)) : receive.FarmQty;
-                            cmd = new MySqlCommand(sql, conn);
-                            cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
-                            cmd.Parameters.AddWithValue("bom_product_code", "00201");
-                            cmd.Parameters.AddWithValue("product_code", item);
-                            cmd.Parameters.AddWithValue("lot_no", receive.LotNo);
-                            cmd.Parameters.AddWithValue("target_qty", target_qty == 0 ? receive.FarmQty : target_qty);
-                            cmd.Parameters.AddWithValue("target_wgh", receive.FarmWgh);
-                            cmd.Parameters.AddWithValue("actual_qty", 0);
-                            cmd.Parameters.AddWithValue("actual_wgh", 0);
-                            cmd.Parameters.AddWithValue("create_by", receive.CreateBy);
-                            cmd.ExecuteNonQuery();
-                        }
+                        //sql = @"INSERT INTO receive_item_by_product(
+                        //            receive_no,
+                        //            bom_product_code,
+                        //            product_code,
+                        //            lot_no,
+                        //            target_qty,
+                        //            target_wgh,
+                        //            actual_qty,
+                        //            actual_wgh,
+                        //            create_by
+                        //        )VALUES(
+                        //            @receive_no,
+                        //            @bom_product_code,
+                        //            @product_code,
+                        //            @lot_no,
+                        //            @target_qty,
+                        //            @target_wgh,
+                        //            @actual_qty,
+                        //            @actual_wgh,
+                        //            @create_by
+                        //        )";
+                        ////GET BOM
+                        ////00101 เครื่องในแดง
+                        //List<string> list = BomItemController.GetBomItemByProductCode("00101");
+                        //list.Add("00101");
+                        ////INSERT By PRODUCT
+                        //foreach (var item in list)
+                        //{
+                        //    int target_qty = item == "00101" ? (receive.FarmQty * (list.Count - 1)) : receive.FarmQty;
+                        //    cmd = new MySqlCommand(sql, conn);
+                        //    cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
+                        //    cmd.Parameters.AddWithValue("bom_product_code", "00101");
+                        //    cmd.Parameters.AddWithValue("product_code", item);
+                        //    cmd.Parameters.AddWithValue("lot_no", receive.LotNo);
+                        //    cmd.Parameters.AddWithValue("target_qty", target_qty == 0 ? receive.FarmQty : target_qty);
+                        //    cmd.Parameters.AddWithValue("target_wgh", receive.FarmWgh);
+                        //    cmd.Parameters.AddWithValue("actual_qty", 0);
+                        //    cmd.Parameters.AddWithValue("actual_wgh", 0);
+                        //    cmd.Parameters.AddWithValue("create_by", receive.CreateBy);
+                        //    cmd.ExecuteNonQuery();
+                        //}
+                        //list.Clear();
+                        ////00201 เครื่องในขาว
+                        //list = BomItemController.GetBomItemByProductCode("00201");
+                        //list.Add("00201");
+                        ////INSERT By PRODUCT
+                        //foreach (var item in list)
+                        //{
+                        //    int target_qty = item == "00201" ? (receive.FarmQty * (list.Count - 1)) : receive.FarmQty;
+                        //    cmd = new MySqlCommand(sql, conn);
+                        //    cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
+                        //    cmd.Parameters.AddWithValue("bom_product_code", "00201");
+                        //    cmd.Parameters.AddWithValue("product_code", item);
+                        //    cmd.Parameters.AddWithValue("lot_no", receive.LotNo);
+                        //    cmd.Parameters.AddWithValue("target_qty", target_qty == 0 ? receive.FarmQty : target_qty);
+                        //    cmd.Parameters.AddWithValue("target_wgh", receive.FarmWgh);
+                        //    cmd.Parameters.AddWithValue("actual_qty", 0);
+                        //    cmd.Parameters.AddWithValue("actual_wgh", 0);
+                        //    cmd.Parameters.AddWithValue("create_by", receive.CreateBy);
+                        //    cmd.ExecuteNonQuery();
+                        //}
                     }
                     else
                     {
@@ -492,20 +491,17 @@ namespace SlaughterHouseLib
                     //Check Flag
                     // 0 = New Create
                     // 1 = Next State
-                    var sql = @"SELECT receive_flag FROM receives WHERE receive_no=@receive_no";
+                    var sql = @"SELECT count(1) FROM receive_item WHERE receive_no=@receive_no";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("receive_no", receiveNo);
-                    var flag = (int)cmd.ExecuteScalar();
-                    if (flag > 0)
+                    var count = cmd.ExecuteScalar();
+                    if (count.ToString().ToInt16() > 0)
                     {
-                        throw new Exception("ไม่สามารถยกเลิกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
+                        throw new Exception("ไม่สามารถยกเลิกเอกสารได้ \n\t เนื่องจากมีการชั่งสินค้าแล้ว");
                     }
 
                     //Delete All Receive
-                    sql = @"DELETE FROM receive_item WHERE receive_no=@receive_no;
-                            DELETE FROM receives WHERE receive_no=@receive_no;
-                            DELETE FROM receive_item_by_product WHERE receive_no=@receive_no;
-                            ";
+                    sql = @"DELETE FROM receives WHERE receive_no=@receive_no";
                     cmd = new MySqlCommand(sql, conn);
 
                     cmd.Parameters.AddWithValue("receive_no", receiveNo);
@@ -533,293 +529,319 @@ namespace SlaughterHouseLib
             }
         }
 
-        public static List<ReceiveItem> GetItems(string receiveNo)
+        //public static List<ReceiveItem> GetItems(string receiveNo)
+        //{
+        //    try
+        //    {
+        //        var receiveItems = new List<ReceiveItem>();
+        //        using (var conn = new MySqlConnection(Globals.CONN_STR))
+        //        {
+        //            conn.Open();
+        //            var sql = @"select a.order_no,
+        //                        a.seq,
+        //                        receive_qty,
+        //                        receive_wgh,
+        //                        b.product_name
+        //                        from receive_item a,product b
+        //                        where a.product_code =b.product_code
+        //                        and receive_no =@receive_no
+        //                        order by queue_no,seq asc";
+
+
+        //            var cmd = new MySqlCommand(sql, conn);
+        //            cmd.Parameters.AddWithValue("receive_no", receiveNo);
+        //            var da = new MySqlDataAdapter(cmd);
+
+        //            var ds = new DataSet();
+        //            da.Fill(ds);
+
+        //            foreach (DataRow item in ds.Tables[0].Rows)
+        //            {
+        //                receiveItems.Add(new ReceiveItem
+        //                {
+        //                    ReceiveNo = (string)item["receive_no"],
+        //                    //QueueNo = (string)item["queue_no"],
+        //                    Seq = (int)item["seq"],
+        //                    //Product = new Product
+        //                    //{
+        //                    //    ProductCode = item["product_code"].ToString(),
+        //                    //    ProductName = item["product_name"].ToString(),
+        //                    //},
+        //                    SexFlag = (string)item["sex_flag"],
+        //                    ReceiveQty = (int)item["receive_qty"],
+        //                    ReceiveWgh = (decimal)item["receive_wgh"],
+
+        //                });
+        //            }
+
+        //        }
+
+        //        return receiveItems;
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
+
+        //public static bool InsertItem(ReceiveItem receiveItem)
+        //{
+        //    var conn = new MySqlConnection(Globals.CONN_STR);
+        //    MySqlTransaction transaction = null;
+        //    try
+        //    {
+
+        //        conn.Open();
+
+        //        Receive receive = GetReceive(receiveItem.ReceiveNo);
+        //        var sql = @"SELECT max(seq) as seq,sum(receive_qty) as receive_qty
+        //                        FROM receive_item 
+        //                        WHERE receive_no=@receive_no
+        //                        AND product_code=@product_code
+        //                        GROUP BY receive_no,product_code";
+        //        var cmd = new MySqlCommand(sql, conn);
+
+        //        cmd.Parameters.AddWithValue("receive_no", receiveItem.ReceiveNo);
+        //        cmd.Parameters.AddWithValue("product_code", receiveItem.ProductCode);
+        //        var da = new MySqlDataAdapter(cmd);
+        //        var ds = new DataSet();
+        //        da.Fill(ds);
+
+        //        var sumReceiveQty = 0;
+        //        if (ds.Tables[0].Rows.Count == 0)
+        //        {
+        //            receiveItem.Seq = 1;
+        //        }
+        //        else
+        //        {
+        //            sumReceiveQty = ds.Tables[0].Rows[0]["receive_qty"].ToString().ToInt16();
+        //            receiveItem.Seq += ds.Tables[0].Rows[0]["seq"].ToString().ToInt16() + 1;
+        //        }
+        //        var remainQty = receive.FactoryQty - sumReceiveQty;
+        //        if (remainQty == 0)
+        //        {
+        //            throw new Exception("ไม่สามารถรับสินค้าได้ เนื่องจากรับสินค้าครบแล้ว!");
+        //        }
+        //        transaction = conn.BeginTransaction();
+
+        //        sql = @"INSERT INTO receive_item(
+        //                        receive_no,
+        //                        product_code,
+        //                        seq,
+        //                        sex_flag,
+        //                        receive_qty,
+        //                        receive_wgh,
+        //                        create_by)
+        //                        VALUES(
+        //                        @receive_no,
+        //                        @product_code,
+        //                        @seq,
+        //                        @sex_flag,
+        //                        @receive_qty,
+        //                        @receive_wgh,
+        //                        @create_by)";
+        //        cmd = new MySqlCommand()
+        //        {
+        //            Connection = conn,
+        //            CommandText = sql,
+        //            Transaction = transaction
+        //        };
+
+        //        cmd.Parameters.Clear();
+        //        cmd.Parameters.AddWithValue("receive_no", receiveItem.ReceiveNo);
+        //        cmd.Parameters.AddWithValue("product_code", receiveItem.ProductCode);
+        //        cmd.Parameters.AddWithValue("seq", receiveItem.Seq);
+        //        cmd.Parameters.AddWithValue("sex_flag", receiveItem.SexFlag);
+        //        cmd.Parameters.AddWithValue("receive_qty", receiveItem.ReceiveQty);
+        //        cmd.Parameters.AddWithValue("receive_wgh", receiveItem.ReceiveWgh);
+        //        cmd.Parameters.AddWithValue("create_by", receiveItem.CreateBy);
+        //        cmd.ExecuteNonQuery();
+
+
+        //        if (receive.ReceiveFlag == 0)
+        //        {
+        //            //Update FactoryQty,FactoryWgh  เฉพาะการรับหมูเป็น
+        //            sql = @"UPDATE receives SET 
+        //                    factory_qty=factory_qty + @factory_qty,
+        //                    factory_wgh=factory_wgh + @factory_wgh
+        //                    WHERE receive_no=@receive_no";
+        //            cmd.CommandText = sql;
+        //            cmd.Parameters.Clear();
+        //            cmd.Parameters.AddWithValue("receive_no", receiveItem.ReceiveNo);
+        //            cmd.Parameters.AddWithValue("factory_qty", receiveItem.ReceiveQty);
+        //            cmd.Parameters.AddWithValue("factory_wgh", receiveItem.ReceiveWgh);
+        //            cmd.ExecuteNonQuery();
+        //        }
+
+        //        //Insert Stock
+        //        var plant = PlantController.GetPlant();
+        //        var stockItemRunning = StockItemRunningController.GetStockItem(receiveItem.ReceiveNo);
+
+        //        var stock = new Stock
+        //        {
+        //            StockDate = plant.ProductionDate,
+        //            StockNo = stockItemRunning.StockNo,
+        //            StockItem = stockItemRunning.StockItem,
+        //            ProductCode = receiveItem.ProductCode,
+        //            RefDocumentNo = receive.ReceiveNo,
+        //            RefDocumentType = "REV",
+        //            LotNo = DocumentGenerate.GetSwineLotNo(plant.PlantId, plant.ProductionDate, receive.QueueNo),
+        //            StockQty = receive.FactoryQty,
+        //            StockWgh = receive.FactoryWgh,
+        //            BarcodeNo = 0,
+        //            TransactionType = 1,
+        //            LocationCode = 1,
+        //            CreateBy = "system",
+        //        };
+
+
+        //        StockController.InsertStock(stock, cmd);
+        //        // Commit the transaction.
+        //        transaction.Commit();
+        //        return true;
+
+
+
+        //    }
+        //    catch (Exception)
+        //    {
+        //        if (transaction != null)
+        //            transaction.Rollback();
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //        conn.Dispose();
+        //    }
+
+        //}
+
+        //public static bool ReceiveCarcass(Receive receive)
+        //{
+        //    var conn = new MySqlConnection(Globals.CONN_STR);
+        //    MySqlTransaction transaction = null;
+        //    try
+        //    {
+
+        //        conn.Open();
+
+
+        //        var sql = @"SELECT max(seq) as seq,sum(receive_qty) as receive_qty
+        //                        FROM receive_item 
+        //                        WHERE receive_no=@receive_no
+        //                        AND product_code=@product_code
+        //                        GROUP BY receive_no,product_code";
+        //        var cmd = new MySqlCommand(sql, conn);
+
+        //        cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
+        //        cmd.Parameters.AddWithValue("product_code", receive.ReceiveItems[0].ProductCode);
+        //        var da = new MySqlDataAdapter(cmd);
+        //        var ds = new DataSet();
+        //        da.Fill(ds);
+
+        //        var sumReceiveQty = 0;
+        //        if (ds.Tables[0].Rows.Count == 0)
+        //        {
+        //            receive.ReceiveItems[0].Seq = 1;
+        //        }
+        //        else
+        //        {
+        //            sumReceiveQty = ds.Tables[0].Rows[0]["receive_qty"].ToString().ToInt16();
+        //            receive.ReceiveItems[0].Seq += ds.Tables[0].Rows[0]["seq"].ToString().ToInt16() + 1;
+        //        }
+        //        var remainQty = receive.FactoryQty - sumReceiveQty;
+        //        if (remainQty == 0)
+        //        {
+        //            throw new Exception("ไม่สามารถรับสินค้าได้ เนื่องจากรับสินค้าครบแล้ว!");
+        //        }
+        //        transaction = conn.BeginTransaction();
+        //        cmd = new MySqlCommand()
+        //        {
+        //            Connection = conn,
+        //            CommandText = sql,
+        //            Transaction = transaction
+        //        };
+
+        //        cmd.Parameters.Clear();
+        //        cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
+        //        cmd.Parameters.AddWithValue("product_code", receive.ReceiveItems[0].ProductCode);
+        //        cmd.Parameters.AddWithValue("seq", receive.ReceiveItems[0].Seq);
+        //        cmd.Parameters.AddWithValue("sex_flag", receive.ReceiveItems[0].SexFlag);
+        //        cmd.Parameters.AddWithValue("receive_qty", receive.ReceiveItems[0].ReceiveQty);
+        //        cmd.Parameters.AddWithValue("receive_wgh", receive.ReceiveItems[0].ReceiveWgh);
+        //        cmd.Parameters.AddWithValue("create_by", receive.ReceiveItems[0].CreateBy);
+        //        cmd.ExecuteNonQuery();
+
+
+
+        //        //Insert Stock
+        //        var plant = PlantController.GetPlant();
+        //        var stockItemRunning = StockItemRunningController.GetStockItem(receive.ReceiveNo);
+
+        //        var stock = new Stock
+        //        {
+        //            StockDate = plant.ProductionDate,
+        //            StockNo = stockItemRunning.StockNo,
+        //            StockItem = stockItemRunning.StockItem,
+        //            ProductCode = receive.ReceiveItems[0].ProductCode,
+        //            RefDocumentNo = receive.ReceiveNo,
+        //            RefDocumentType = "REV",
+        //            LotNo = DocumentGenerate.GetSwineLotNo(plant.PlantId, plant.ProductionDate, receive.QueueNo),
+        //            StockQty = receive.FactoryQty,
+        //            StockWgh = receive.FactoryWgh,
+        //            BarcodeNo = 0,
+        //            TransactionType = 1,
+        //            LocationCode = 2,
+        //            CreateBy = "system",
+        //        };
+
+
+        //        StockController.InsertStock(stock, cmd);
+        //        // Commit the transaction.
+        //        transaction.Commit();
+        //        return true;
+
+
+
+        //    }
+        //    catch (Exception)
+        //    {
+        //        if (transaction != null)
+        //            transaction.Rollback();
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //        conn.Dispose();
+        //    }
+
+        //}
+
+        public static int GetReceiveFlag(string receiveNo)
         {
             try
             {
-                var receiveItems = new List<ReceiveItem>();
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"select a.order_no,
-                                a.seq,
-                                receive_qty,
-                                receive_wgh,
-                                b.product_name
-                                from receive_item a,product b
-                                where a.product_code =b.product_code
-                                and receive_no =@receive_no
-                                order by queue_no,seq asc";
 
 
+                    var sql = @"select receive_flag from receives
+                                WHERE receive_no=@receive_no";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("receive_no", receiveNo);
-                    var da = new MySqlDataAdapter(cmd);
-
-                    var ds = new DataSet();
-                    da.Fill(ds);
-
-                    foreach (DataRow item in ds.Tables[0].Rows)
-                    {
-                        receiveItems.Add(new ReceiveItem
-                        {
-                            ReceiveNo = (string)item["receive_no"],
-                            //QueueNo = (string)item["queue_no"],
-                            Seq = (int)item["seq"],
-                            //Product = new Product
-                            //{
-                            //    ProductCode = item["product_code"].ToString(),
-                            //    ProductName = item["product_name"].ToString(),
-                            //},
-                            SexFlag = (string)item["sex_flag"],
-                            ReceiveQty = (int)item["receive_qty"],
-                            ReceiveWgh = (decimal)item["receive_wgh"],
-
-                        });
-                    }
-
+                    var receive_flag = cmd.ExecuteScalar();
+                    return receive_flag.ToString().ToInt16();
                 }
 
-                return receiveItems;
             }
             catch (Exception)
             {
 
                 throw;
-            }
-        }
-
-        public static bool InsertItem(ReceiveItem receiveItem)
-        {
-            var conn = new MySqlConnection(Globals.CONN_STR);
-            MySqlTransaction transaction = null;
-            try
-            {
-
-                conn.Open();
-
-                Receive receive = GetReceive(receiveItem.ReceiveNo);
-                var sql = @"SELECT max(seq) as seq,sum(receive_qty) as receive_qty
-                                FROM receive_item 
-                                WHERE receive_no=@receive_no
-                                AND product_code=@product_code
-                                GROUP BY receive_no,product_code";
-                var cmd = new MySqlCommand(sql, conn);
-
-                cmd.Parameters.AddWithValue("receive_no", receiveItem.ReceiveNo);
-                cmd.Parameters.AddWithValue("product_code", receiveItem.ProductCode);
-                var da = new MySqlDataAdapter(cmd);
-                var ds = new DataSet();
-                da.Fill(ds);
-
-                var sumReceiveQty = 0;
-                if (ds.Tables[0].Rows.Count == 0)
-                {
-                    receiveItem.Seq = 1;
-                }
-                else
-                {
-                    sumReceiveQty = ds.Tables[0].Rows[0]["receive_qty"].ToString().ToInt16();
-                    receiveItem.Seq += ds.Tables[0].Rows[0]["seq"].ToString().ToInt16() + 1;
-                }
-                var remainQty = receive.FactoryQty - sumReceiveQty;
-                if (remainQty == 0)
-                {
-                    throw new Exception("ไม่สามารถรับสินค้าได้ เนื่องจากรับสินค้าครบแล้ว!");
-                }
-                transaction = conn.BeginTransaction();
-
-                sql = @"INSERT INTO receive_item(
-                                receive_no,
-                                product_code,
-                                seq,
-                                sex_flag,
-                                receive_qty,
-                                receive_wgh,
-                                create_by)
-                                VALUES(
-                                @receive_no,
-                                @product_code,
-                                @seq,
-                                @sex_flag,
-                                @receive_qty,
-                                @receive_wgh,
-                                @create_by)";
-                cmd = new MySqlCommand()
-                {
-                    Connection = conn,
-                    CommandText = sql,
-                    Transaction = transaction
-                };
-
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("receive_no", receiveItem.ReceiveNo);
-                cmd.Parameters.AddWithValue("product_code", receiveItem.ProductCode);
-                cmd.Parameters.AddWithValue("seq", receiveItem.Seq);
-                cmd.Parameters.AddWithValue("sex_flag", receiveItem.SexFlag);
-                cmd.Parameters.AddWithValue("receive_qty", receiveItem.ReceiveQty);
-                cmd.Parameters.AddWithValue("receive_wgh", receiveItem.ReceiveWgh);
-                cmd.Parameters.AddWithValue("create_by", receiveItem.CreateBy);
-                cmd.ExecuteNonQuery();
-
-
-                if (receive.ReceiveFlag == 0)
-                {
-                    //Update FactoryQty,FactoryWgh  เฉพาะการรับหมูเป็น
-                    sql = @"UPDATE receives SET 
-                            factory_qty=factory_qty + @factory_qty,
-                            factory_wgh=factory_wgh + @factory_wgh
-                            WHERE receive_no=@receive_no";
-                    cmd.CommandText = sql;
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("receive_no", receiveItem.ReceiveNo);
-                    cmd.Parameters.AddWithValue("factory_qty", receiveItem.ReceiveQty);
-                    cmd.Parameters.AddWithValue("factory_wgh", receiveItem.ReceiveWgh);
-                    cmd.ExecuteNonQuery();
-                }
-
-                //Insert Stock
-                var plant = PlantController.GetPlant();
-                var stockItemRunning = StockItemRunningController.GetStockItem(receiveItem.ReceiveNo);
-
-                var stock = new Stock
-                {
-                    StockDate = plant.ProductionDate,
-                    StockNo = stockItemRunning.StockNo,
-                    StockItem = stockItemRunning.StockItem,
-                    ProductCode = receiveItem.ProductCode,
-                    RefDocumentNo = receive.ReceiveNo,
-                    RefDocumentType = "REV",
-                    LotNo = DocumentGenerate.GetSwineLotNo(plant.PlantId, plant.ProductionDate, receive.QueueNo),
-                    StockQty = receive.FactoryQty,
-                    StockWgh = receive.FactoryWgh,
-                    BarcodeNo = 0,
-                    TransactionType = 1,
-                    LocationCode = 1,
-                    CreateBy = "system",
-                };
-
-
-                StockController.InsertStock(stock, cmd);
-                // Commit the transaction.
-                transaction.Commit();
-                return true;
-
-
-
-            }
-            catch (Exception)
-            {
-                if (transaction != null)
-                    transaction.Rollback();
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-                conn.Dispose();
-            }
-
-        }
-
-        public static bool ReceiveCarcass(Receive receive)
-        {
-            var conn = new MySqlConnection(Globals.CONN_STR);
-            MySqlTransaction transaction = null;
-            try
-            {
-
-                conn.Open();
-
-
-                var sql = @"SELECT max(seq) as seq,sum(receive_qty) as receive_qty
-                                FROM receive_item 
-                                WHERE receive_no=@receive_no
-                                AND product_code=@product_code
-                                GROUP BY receive_no,product_code";
-                var cmd = new MySqlCommand(sql, conn);
-
-                cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
-                cmd.Parameters.AddWithValue("product_code", receive.ReceiveItems[0].ProductCode);
-                var da = new MySqlDataAdapter(cmd);
-                var ds = new DataSet();
-                da.Fill(ds);
-
-                var sumReceiveQty = 0;
-                if (ds.Tables[0].Rows.Count == 0)
-                {
-                    receive.ReceiveItems[0].Seq = 1;
-                }
-                else
-                {
-                    sumReceiveQty = ds.Tables[0].Rows[0]["receive_qty"].ToString().ToInt16();
-                    receive.ReceiveItems[0].Seq += ds.Tables[0].Rows[0]["seq"].ToString().ToInt16() + 1;
-                }
-                var remainQty = receive.FactoryQty - sumReceiveQty;
-                if (remainQty == 0)
-                {
-                    throw new Exception("ไม่สามารถรับสินค้าได้ เนื่องจากรับสินค้าครบแล้ว!");
-                }
-                transaction = conn.BeginTransaction();
-                cmd = new MySqlCommand()
-                {
-                    Connection = conn,
-                    CommandText = sql,
-                    Transaction = transaction
-                };
-
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("receive_no", receive.ReceiveNo);
-                cmd.Parameters.AddWithValue("product_code", receive.ReceiveItems[0].ProductCode);
-                cmd.Parameters.AddWithValue("seq", receive.ReceiveItems[0].Seq);
-                cmd.Parameters.AddWithValue("sex_flag", receive.ReceiveItems[0].SexFlag);
-                cmd.Parameters.AddWithValue("receive_qty", receive.ReceiveItems[0].ReceiveQty);
-                cmd.Parameters.AddWithValue("receive_wgh", receive.ReceiveItems[0].ReceiveWgh);
-                cmd.Parameters.AddWithValue("create_by", receive.ReceiveItems[0].CreateBy);
-                cmd.ExecuteNonQuery();
-
-
-
-                //Insert Stock
-                var plant = PlantController.GetPlant();
-                var stockItemRunning = StockItemRunningController.GetStockItem(receive.ReceiveNo);
-
-                var stock = new Stock
-                {
-                    StockDate = plant.ProductionDate,
-                    StockNo = stockItemRunning.StockNo,
-                    StockItem = stockItemRunning.StockItem,
-                    ProductCode = receive.ReceiveItems[0].ProductCode,
-                    RefDocumentNo = receive.ReceiveNo,
-                    RefDocumentType = "REV",
-                    LotNo = DocumentGenerate.GetSwineLotNo(plant.PlantId, plant.ProductionDate, receive.QueueNo),
-                    StockQty = receive.FactoryQty,
-                    StockWgh = receive.FactoryWgh,
-                    BarcodeNo = 0,
-                    TransactionType = 1,
-                    LocationCode = 2,
-                    CreateBy = "system",
-                };
-
-
-                StockController.InsertStock(stock, cmd);
-                // Commit the transaction.
-                transaction.Commit();
-                return true;
-
-
-
-            }
-            catch (Exception)
-            {
-                if (transaction != null)
-                    transaction.Rollback();
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-                conn.Dispose();
             }
 
         }
@@ -832,6 +854,8 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
+
+
                     var sql = @"UPDATE receives SET
                                 receive_flag=2,
                                 modified_at=CURRENT_TIMESTAMP,
@@ -859,7 +883,9 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = @"UPDATE receives SET
-                                receive_flag=1
+                                receive_flag=1,
+                                modified_at=null,
+                                modified_by=null
                                 WHERE receive_no=@receive_no";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("receive_no", receiveNo);

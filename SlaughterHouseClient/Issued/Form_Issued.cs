@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SlaughterHouseEF;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,10 +14,8 @@ namespace SlaughterHouseClient.Issued
             Load += Form_Load;
             UserSettingsComponent();
         }
-
         private void UserSettingsComponent()
         {
-
             gv.CellClick += Gv_CellClick;
             gv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             //gv.ColumnHeadersDefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE);
@@ -25,43 +24,30 @@ namespace SlaughterHouseClient.Issued
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             //gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
-
-
-
         }
-
         private void Gv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-
                 if (e.RowIndex >= 0)
                 {
                     ProductionNo = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
                     DialogResult = DialogResult.OK;
                     Close();
-
-
                 }
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
         private void Form_Load(object sender, System.EventArgs e)
         {
             LoadData();
         }
-
         private void LoadData()
         {
-
             using (var db = new SlaughterhouseEntities())
             {
                 var qry = db.production_order.Where(p => p.po_flag == 0).ToList();
@@ -71,14 +57,12 @@ namespace SlaughterHouseClient.Issued
                     p.po_date,
                     p.comments,
                 }).ToList();
-
                 gv.DataSource = coll;
                 gv.Columns[0].HeaderText = "เลขที่เอกสาร";
                 gv.Columns[1].HeaderText = "วันที่เอกสาร";
                 gv.Columns[2].HeaderText = "หมายเหตุ";
             }
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;

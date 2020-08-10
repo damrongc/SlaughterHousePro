@@ -52,6 +52,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnAddOrderItem = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cboSalesman = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
             this.groupBoxCustomerClass.SuspendLayout();
@@ -114,7 +116,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Checked = true;
             this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(252, 359);
+            this.chkActive.Location = new System.Drawing.Point(610, 359);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(79, 33);
             this.chkActive.TabIndex = 6;
@@ -294,6 +296,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cboSalesman);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.txtCustomerCode);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.chkActive);
@@ -316,10 +320,27 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "ข้อมูลลูกค้า";
             // 
+            // cboSalesman
+            // 
+            this.cboSalesman.FormattingEnabled = true;
+            this.cboSalesman.Location = new System.Drawing.Point(252, 359);
+            this.cboSalesman.Name = "cboSalesman";
+            this.cboSalesman.Size = new System.Drawing.Size(236, 37);
+            this.cboSalesman.TabIndex = 54;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(136, 362);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(110, 29);
+            this.label7.TabIndex = 53;
+            this.label7.Text = "พนักงานขาย";
+            // 
             // Form_CustomerAddEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(904, 764);
+            this.ClientSize = new System.Drawing.Size(904, 701);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBoxCustomerClass);
             this.Font = new System.Drawing.Font("Kanit", 14.25F);
@@ -364,5 +385,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Del;
+        private System.Windows.Forms.ComboBox cboSalesman;
+        private System.Windows.Forms.Label label7;
     }
 }

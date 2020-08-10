@@ -31,7 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CustomCustomerClassPrice.cs" />
+    <Compile Include="Models\Salesman.cs" />
     <Compile Include="Models\CustomerClass.cs" />
     <Compile Include="Models\MasterClass.cs" />
     <Compile Include="Models\CustomerClassDiscount.cs" />
@@ -83,17 +87,6 @@
     <Compile Include="IssueController.cs" />
     <Compile Include="StockController.cs" />
     <Compile Include="ReceiveController.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="MySql.Data">
-      <Version>8.0.17</Version>
-    </PackageReference>
-    <PackageReference Include="MySql.Data.Entity">
-      <Version>6.10.9</Version>
-    </PackageReference>
-    <PackageReference Include="MySql.Data.EntityFramework">
-      <Version>8.0.17</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

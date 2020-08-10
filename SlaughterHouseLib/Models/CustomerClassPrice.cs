@@ -22,7 +22,7 @@ namespace SlaughterHouseLib.Models
 
     public static class CustomerClassPriceController
     {
-        public static object GetAllCustomerClassPrices(DateTime startDate, string productCode = "")
+        public static object GetAllCustomerClassPrices(DateTime startDate, string productFilter)
         {
             try
             {
@@ -42,13 +42,13 @@ namespace SlaughterHouseLib.Models
                     sb.Append(" AND a.class_id = c.class_id ");
                     sb.Append(" AND a.start_date <= '" + startDate.ToString("yyyy-MM-dd") + "'");
                     sb.Append(" AND a.end_date >= '" + startDate.ToString("yyyy-MM-dd") + "'");
-                    if (!string.IsNullOrEmpty(productCode))
-                        sb.Append(" AND a.product_code =@product_code");
-                    sb.Append(" ORDER BY c.class_name, b.product_name, a.end_date ");
+                    if (!string.IsNullOrEmpty(productFilter))
+                        sb.Append(" AND (a.product_code like @product_filter OR b.product_name like @product_filter)");
+                    sb.Append(" ORDER BY c.class_id, b.product_code, a.start_date");
                     var cmd = new MySqlCommand(sb.ToString(), conn);
                     cmd.Parameters.AddWithValue("start_date", startDate.ToString("yyyy-MM-dd"));
-                    if (!string.IsNullOrEmpty(productCode))
-                        cmd.Parameters.AddWithValue("product_code", productCode);
+                    if (!string.IsNullOrEmpty(productFilter))
+                        cmd.Parameters.AddWithValue("product_filter", string.Format("%{0}%", productFilter));
                     var da = new MySqlDataAdapter(cmd);
 
                     var ds = new DataSet();
@@ -64,7 +64,7 @@ namespace SlaughterHouseLib.Models
                                     StartDate = p.Field<DateTime>("start_date"),
                                     EndDate = p.Field<DateTime>("end_date"),
                                     UnitPrice = p.Field<decimal>("unit_price"),
-                                    Day = (Convert.ToDateTime(p.Field<DateTime>("end_date")) - Convert.ToDateTime(p.Field<DateTime>("start_date"))).TotalDays + 1,
+                                    Day = (Convert.ToDateTime(p.Field<DateTime>("end_date")) - Convert.ToDateTime(p.Field<DateTime>("start_date"))).TotalDays,
                                     CreateAt = p.Field<DateTime>("create_at"),
                                     CreateBy = p.Field<string>("create_by"),
                                     ModifiedAt = p.Field<DateTime?>("modified_at") != null ? p.Field<DateTime?>("modified_at") : null,
@@ -127,7 +127,7 @@ namespace SlaughterHouseLib.Models
                             StartDate = (DateTime)ds.Tables[0].Rows[0]["start_date"],
                             EndDate = (DateTime)ds.Tables[0].Rows[0]["end_date"],
                             UnitPrice = (decimal)ds.Tables[0].Rows[0]["unit_price"],
-                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays+1),
+                            Day = Convert.ToInt32((Convert.ToDateTime(ds.Tables[0].Rows[0]["end_date"]) - Convert.ToDateTime(ds.Tables[0].Rows[0]["start_date"])).TotalDays),
                             CreateAt = (DateTime)ds.Tables[0].Rows[0]["create_at"],
                         };
                     }
@@ -159,8 +159,8 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", customerClassPrice.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("product_code", customerClassPrice.Product.ProductCode);
-                    cmd.Parameters.AddWithValue("start_date", customerClassPrice.StartDate );
-                    cmd.Parameters.AddWithValue("end_date", customerClassPrice.EndDate );
+                    cmd.Parameters.AddWithValue("start_date", customerClassPrice.StartDate);
+                    cmd.Parameters.AddWithValue("end_date", customerClassPrice.EndDate);
                     cmd.Parameters.AddWithValue("unit_price", customerClassPrice.UnitPrice);
                     cmd.Parameters.AddWithValue("create_by", customerClassPrice.CreateBy);
                     var affRow = cmd.ExecuteNonQuery();
@@ -191,8 +191,8 @@ namespace SlaughterHouseLib.Models
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("class_id", customerClassPrice.MasterClass.ClassId);
                     cmd.Parameters.AddWithValue("product_code", customerClassPrice.Product.ProductCode);
-                    cmd.Parameters.AddWithValue("start_date", customerClassPrice.StartDate );
-                    cmd.Parameters.AddWithValue("end_date", customerClassPrice.EndDate );
+                    cmd.Parameters.AddWithValue("start_date", customerClassPrice.StartDate);
+                    cmd.Parameters.AddWithValue("end_date", customerClassPrice.EndDate);
                     cmd.Parameters.AddWithValue("unit_price", customerClassPrice.UnitPrice);
                     cmd.Parameters.AddWithValue("modified_by", customerClassPrice.ModifiedBy);
                     var affRow = cmd.ExecuteNonQuery();

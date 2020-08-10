@@ -1,5 +1,6 @@
 ﻿
 using SerialPortListener.Serial;
+using SlaughterHouseEF;
 using System;
 using System.Collections.Generic;
 using System.Data;

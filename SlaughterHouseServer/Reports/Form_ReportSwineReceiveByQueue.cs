@@ -8,6 +8,7 @@ namespace SlaughterHouseServer.Reports
     public partial class Form_ReportSwineReceiveByQueue : Form
     {
         public string ReceiveNo { get; set; }
+        const string PRODUCT_CODE = "00-0000";
 
         public Form_ReportSwineReceiveByQueue()
         {
@@ -48,14 +49,14 @@ namespace SlaughterHouseServer.Reports
             try
             {
                 ReportDocument doc = new ReportDocument();
-                DataSet ds = ReportController.GetDataReportSwineReceive(ReceiveNo);
+                DataSet ds = ReportController.GetDataReportSwineReceive(ReceiveNo, PRODUCT_CODE);
                 //string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\Report"));
 
                 //ds.WriteXml(path + @"\xml\swinereceive.xml", XmlWriteMode.WriteSchema);
                 //doc.Load(path + @"\swinereceive.rpt");
 
                 var reportPath = Application.StartupPath;
-                doc.Load(reportPath + @"\Report\swinereceive.rpt");
+                doc.Load(reportPath + @"\Report\swinereceive_1.rpt");
                 doc.SetDataSource(ds);
 
                 rptViewer.ReportSource = doc;

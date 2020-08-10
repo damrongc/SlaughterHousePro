@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Truck));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_TruckType));
             this.label1 = new System.Windows.Forms.Label();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -51,9 +51,9 @@
             this.label1.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(62, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 29);
+            this.label1.Size = new System.Drawing.Size(158, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ข้อมูลรถ";
+            this.label1.Text = "ข้อมูลประเภทรถรถ";
             // 
             // BtnAdd
             // 
@@ -64,7 +64,7 @@
             this.BtnAdd.ForeColor = System.Drawing.Color.White;
             this.BtnAdd.Image = ((System.Drawing.Image)(resources.GetObject("BtnAdd.Image")));
             this.BtnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnAdd.Location = new System.Drawing.Point(146, 11);
+            this.BtnAdd.Location = new System.Drawing.Point(226, 11);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(129, 36);
             this.BtnAdd.TabIndex = 2;
@@ -149,7 +149,7 @@
             // 
             this.TxtFilter.BackColor = System.Drawing.Color.WhiteSmoke;
             this.TxtFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtFilter.Location = new System.Drawing.Point(281, 11);
+            this.TxtFilter.Location = new System.Drawing.Point(361, 11);
             this.TxtFilter.Name = "TxtFilter";
             this.TxtFilter.Size = new System.Drawing.Size(215, 36);
             this.TxtFilter.TabIndex = 8;
@@ -163,7 +163,7 @@
             this.BtnSearch.ForeColor = System.Drawing.Color.White;
             this.BtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("BtnSearch.Image")));
             this.BtnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnSearch.Location = new System.Drawing.Point(502, 11);
+            this.BtnSearch.Location = new System.Drawing.Point(582, 11);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(129, 36);
             this.BtnSearch.TabIndex = 7;
@@ -171,14 +171,14 @@
             this.BtnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnSearch.UseVisualStyleBackColor = false;
             // 
-            // Form_Truck
+            // Form_TruckType
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1400, 750);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Kanit", 15.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form_Truck";
+            this.Name = "Form_TruckType";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Form_Farm";
             this.panel1.ResumeLayout(false);

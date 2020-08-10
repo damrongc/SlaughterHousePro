@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using SlaughterHouseLib.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -79,14 +78,14 @@ namespace SlaughterHouseLib
                 {
                     conn.Open();
                     var sql = @"SELECT order_no,
-								order_date,
-								customer_code,
-								comments,
-								order_flag,
-								active,
-								create_at
-								FROM orders
-								WHERE order_no =@order_no";
+                                order_date,
+                                customer_code,
+                                comments,
+                                order_flag,
+                                active,
+                                create_at
+                                FROM orders
+                                WHERE order_no =@order_no";
 
 
                     var cmd = new MySqlCommand(sql, conn);
@@ -187,28 +186,32 @@ namespace SlaughterHouseLib
             MySqlTransaction tr = null;
             try
             {
+                order.OrderNo = DocumentGenerate.GetDocumentRunningFormat("SO", order.RequestDate);
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
-                    order.OrderNo = DocumentGenerate.GetDocumentRunningFormat("SO", order.RequestDate);
+
                     conn.Open();
                     tr = conn.BeginTransaction();
                     var sql = @"INSERT INTO orders
-								(order_no,
-								order_date,
-								customer_code,
-								order_flag,
-								comments,
-								active,
-								create_by)
-								VALUES(@order_no,
-								@order_date,
-								@customer_code,
-								@order_flag,
-								@comments,
-								@active,
-								@create_by)";
-                    var cmd = new MySqlCommand(sql, conn)
+                                (order_no,
+                                order_date,
+                                customer_code,
+                                order_flag,
+                                comments,
+                                active,
+                                create_by)
+                                VALUES(@order_no,
+                                @order_date,
+                                @customer_code,
+                                @order_flag,
+                                @comments,
+                                @active,
+                                @create_by)";
+
+                    var cmd = new MySqlCommand()
                     {
+                        CommandText = sql,
+                        Connection = conn,
                         Transaction = tr
                     };
                     cmd.Parameters.AddWithValue("order_no", order.OrderNo);
@@ -221,30 +224,32 @@ namespace SlaughterHouseLib
                     cmd.ExecuteNonQuery();
 
                     sql = @"INSERT INTO orders_item
-								(order_no,
-								product_code,
-								seq,
-								order_qty,
-								order_wgh,
-								bom_code,
-								order_set_qty,
-								order_set_wgh,
-								create_by)
-								VALUES(
-								@order_no,
-								@product_code,
-								@seq,
-								@order_qty,
-								@order_wgh,
-								@bom_code,
-								@order_set_qty,
-								@order_set_wgh,
-								@create_by)";
+                                (order_no,
+                                product_code,
+                                seq,
+                                order_qty,
+                                order_wgh,
+                                bom_code,
+                                order_set_qty,
+                                order_set_wgh,
+                                create_by)
+                                VALUES(
+                                @order_no,
+                                @product_code,
+                                @seq,
+                                @order_qty,
+                                @order_wgh,
+                                @bom_code,
+                                @order_set_qty,
+                                @order_set_wgh,
+                                @create_by)";
 
                     foreach (var item in order.OrderItems)
                     {
-                        cmd = new MySqlCommand(sql, conn)
+                        cmd = new MySqlCommand()
                         {
+                            CommandText = sql,
+                            Connection = conn,
                             Transaction = tr
                         };
                         cmd.Parameters.AddWithValue("order_no", order.OrderNo);
@@ -293,14 +298,14 @@ namespace SlaughterHouseLib
                         throw new Exception("ไม่สามารถบันทึกเอกสารได้ \n\t เนื่องจากเอกสารได้นำไปใช้งานแล้ว");
                     }
                     sql = @"UPDATE orders
-								SET order_date=@order_date,
-								customer_code=@customer_code,
-								order_flag=@order_flag,
-								comments=@comments,
-								active=@active,
-								modified_at=CURRENT_TIMESTAMP,
-								modified_by=@modified_by
-								WHERE order_no=@order_no";
+                                SET order_date=@order_date,
+                                customer_code=@customer_code,
+                                order_flag=@order_flag,
+                                comments=@comments,
+                                active=@active,
+                                modified_at=CURRENT_TIMESTAMP,
+                                modified_by=@modified_by
+                                WHERE order_no=@order_no";
                     cmd = new MySqlCommand(sql, conn)
                     {
                         Transaction = tr
@@ -315,7 +320,7 @@ namespace SlaughterHouseLib
                     var affRow = cmd.ExecuteNonQuery();
 
                     sql = @"Delete From orders_item 
-								WHERE order_no=@order_no";
+                                WHERE order_no=@order_no";
                     cmd = new MySqlCommand(sql, conn)
                     {
                         Transaction = tr
@@ -324,25 +329,25 @@ namespace SlaughterHouseLib
                     cmd.ExecuteNonQuery();
 
                     sql = @"INSERT INTO orders_item
-								(order_no,
-								product_code,
-								seq,
-								order_qty,
-								order_wgh,
-								bom_code,
-								order_set_qty,
-								order_set_wgh,
-								create_by)
-								VALUES(
-								@order_no,
-								@product_code,
-								@seq,
-								@order_qty,
-								@order_wgh,
-								@bom_code,
-								@order_set_qty,
-								@order_set_wgh,
-								@create_by)";
+                                (order_no,
+                                product_code,
+                                seq,
+                                order_qty,
+                                order_wgh,
+                                bom_code,
+                                order_set_qty,
+                                order_set_wgh,
+                                create_by)
+                                VALUES(
+                                @order_no,
+                                @product_code,
+                                @seq,
+                                @order_qty,
+                                @order_wgh,
+                                @bom_code,
+                                @order_set_qty,
+                                @order_set_wgh,
+                                @create_by)";
 
                     foreach (var item in order.OrderItems)
                     {
@@ -395,8 +400,8 @@ namespace SlaughterHouseLib
                     }
 
                     sql = @"UPDATE orders
-								SET  active=@active 
-								WHERE order_no=@order_no";
+                                SET  active=@active 
+                                WHERE order_no=@order_no";
                     cmd = new MySqlCommand(sql, conn)
                     {
                         Transaction = tr
@@ -460,63 +465,63 @@ namespace SlaughterHouseLib
                     if (showProductSet == "Y")
                     {
                         sql = @"SELECT  distinct 
-							0 as seq,
-							p.product_code,
-							p.product_name, 
-							case when a.bom_code = 0 then a.order_qty else a.order_set_qty end as qty,
-							uq.unit_code as unit_code_qty,
-							uq.unit_name as unit_name_qty,
-							case when a.bom_code = 0 then a.order_wgh else a.order_set_wgh end as wgh,
-							uw.unit_code as unit_code_wgh,
-							uw.unit_name as unit_name_wgh,  
-							0 as unload_qty,
-							0 as unload_wgh,
+                            0 as seq,
+                            p.product_code,
+                            p.product_name, 
+                            case when a.bom_code = 0 then a.order_qty else a.order_set_qty end as qty,
+                            uq.unit_code as unit_code_qty,
+                            uq.unit_name as unit_name_qty,
+                            case when a.bom_code = 0 then a.order_wgh else a.order_set_wgh end as wgh,
+                            uw.unit_code as unit_code_wgh,
+                            uw.unit_name as unit_name_wgh,  
+                            0 as unload_qty,
+                            0 as unload_wgh,
                             p.issue_unit_method,
                             p.packing_size
-						FROM
-							orders_item a,
-							product p,
-							unit_of_measurement uq,
-							unit_of_measurement uw,
-							bom bm
-						WHERE
-							a.order_no = @order_no 
-							and a.bom_code = bm.bom_code
-							and p.product_code = case when a.bom_code = 0 then a.product_code else bm.product_code end 
-							and p.unit_of_wgh = uw.unit_code 
-							and p.unit_of_qty = uq.unit_code 
+                        FROM
+                            orders_item a,
+                            product p,
+                            unit_of_measurement uq,
+                            unit_of_measurement uw,
+                            bom bm
+                        WHERE
+                            a.order_no = @order_no 
+                            and a.bom_code = bm.bom_code
+                            and p.product_code = case when a.bom_code = 0 then a.product_code else bm.product_code end 
+                            and p.unit_of_wgh = uw.unit_code 
+                            and p.unit_of_qty = uq.unit_code 
                         ";
                     }
                     else
                     {
                         sql = @"select a.order_no,
-							    0 as seq,
-							    a.product_code,
-							    p.product_name,
+                                0 as seq,
+                                a.product_code,
+                                p.product_name,
                                 sum(a.order_qty) as qty,
-							    uq.unit_code as unit_code_qty,
-							    uq.unit_name as unit_name_qty,
+                                uq.unit_code as unit_code_qty,
+                                uq.unit_name as unit_name_qty,
                                 sum(a.order_wgh) as wgh,  
-							    uw.unit_code as unit_code_wgh,
-							    uw.unit_name as unit_name_wgh, 
-							    sum(unload_qty) as unload_qty,
-							    sum(unload_wgh) as unload_wgh,
+                                uw.unit_code as unit_code_wgh,
+                                uw.unit_name as unit_name_wgh, 
+                                sum(unload_qty) as unload_qty,
+                                sum(unload_wgh) as unload_wgh,
                                 p.issue_unit_method,
                                 p.packing_size
-							from orders_item a,product p, 
-							    unit_of_measurement uq,
-							    unit_of_measurement uw
-							where a.product_code =p.product_code
-							    and p.unit_of_qty = uq.unit_code
-							    and p.unit_of_wgh = uw.unit_code
-							    and a.order_no =@order_no 
-							group by a.product_code,
-								p.product_name, 
-								uq.unit_code,
-								uq.unit_name,
+                            from orders_item a,product p, 
+                                unit_of_measurement uq,
+                                unit_of_measurement uw
+                            where a.product_code =p.product_code
+                                and p.unit_of_qty = uq.unit_code
+                                and p.unit_of_wgh = uw.unit_code
+                                and a.order_no =@order_no 
+                            group by a.product_code,
+                                p.product_name, 
+                                uq.unit_code,
+                                uq.unit_name,
                                 uw.unit_code,
-								uw.unit_name
-							order by seq asc";
+                                uw.unit_name
+                            order by seq asc";
                     }
                     //case when a.bom_code = 0 then 0 else 1 end as product_set
                     var cmd = new MySqlCommand(sql, conn);
@@ -557,31 +562,31 @@ namespace SlaughterHouseLib
                     conn.Open();
                     var sql = "";
                     sql = @"SELECT    
-							0 as seq,
-							p.product_code,
-							p.product_name, 
-							p.sale_unit_method, 
-							case when a.bom_code = 0 then sum(a.unload_qty) else CEILING(sum(a.unload_qty) / sum(bmt.mutiply_qty)) end as qty,
-							sum(a.unload_wgh) as wgh,
-								0.00 as unit_price_current, 
-								0.00 as disc_per, 
-								0.00 as unit_price,  
+                            0 as seq,
+                            p.product_code,
+                            p.product_name, 
+                            p.sale_unit_method, 
+                            case when a.bom_code = 0 then sum(a.unload_qty) else CEILING(sum(a.unload_qty) / sum(bmt.mutiply_qty)) end as qty,
+                            sum(a.unload_wgh) as wgh,
+                                0.00 as unit_price_current, 
+                                0.00 as disc_per, 
+                                0.00 as unit_price,  
                                 0.00 as unit_disc, 
                                 0.00 as disc_amt,
-								0.00 as gross_amt
-						FROM
-							orders_item a,
-							product p, 
-							bom bm,
-							bom_item bmt
-						WHERE
-							a.order_no = @order_no
-							and a.bom_code = bm.bom_code
-							and bm.bom_code = bmt.bom_code
+                                0.00 as gross_amt
+                        FROM
+                            orders_item a,
+                            product p, 
+                            bom bm,
+                            bom_item bmt
+                        WHERE
+                            a.order_no = @order_no
+                            and a.bom_code = bm.bom_code
+                            and bm.bom_code = bmt.bom_code
                             and a.product_code = case when a.bom_code = 0 then a.product_code else bmt.product_code end
-							and p.product_code = case when a.bom_code = 0 then a.product_code else bm.product_code end
-						group by p.product_code,
-							p.product_name,
+                            and p.product_code = case when a.bom_code = 0 then a.product_code else bm.product_code end
+                        group by p.product_code,
+                            p.product_name,
                             p.sale_unit_method, 
                             a.bom_code ";
                     var cmd = new MySqlCommand(sql, conn);
@@ -618,7 +623,7 @@ namespace SlaughterHouseLib
                             from orders_item a , product p
                             where a.order_no = @order_no
                             and a.product_code = p.product_code  
-							";
+                            ";
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("order_no", orderNo);
 

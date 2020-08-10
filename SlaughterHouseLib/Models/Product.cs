@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
 
 namespace SlaughterHouseLib.Models
@@ -162,38 +161,38 @@ namespace SlaughterHouseLib.Models
                     conn.Open();
                     var sql = @"
                                     Select distinct 0 as select_col, p.product_code, product_name,
-	                                    p.issue_unit_method,
-	                                    p.unit_of_qty as unit_code_qty,
-	                                    uq.unit_name as unit_name_qty,
-	                                    p.unit_of_wgh as unit_code_wgh,
-	                                    uw.unit_name as unit_name_wgh,
-	                                    p.packing_size
+                                        p.issue_unit_method,
+                                        p.unit_of_qty as unit_code_qty,
+                                        uq.unit_name as unit_name_qty,
+                                        p.unit_of_wgh as unit_code_wgh,
+                                        uw.unit_name as unit_name_wgh,
+                                        p.packing_size
                                     From product p,
-	                                    (select distinct pp.start_date, pp.end_date, pp.product_code
+                                        (select distinct pp.start_date, pp.end_date, pp.product_code
                                         from product_price pp
                                         Where  @request_date  >= pp.start_date
-		                                    and @request_date  <= pp.end_date 
+                                            and @request_date  <= pp.end_date 
                                         union
-	                                    select distinct cp.start_date, cp.end_date, cp.product_code
+                                        select distinct cp.start_date, cp.end_date, cp.product_code
                                         from customer_price cp
-	                                    Where  @request_date  >= cp.start_date
-		                                    and @request_date  <= cp.end_date
-		                                    and cp.customer_code = @customer_code
+                                        Where  @request_date  >= cp.start_date
+                                            and @request_date  <= cp.end_date
+                                            and cp.customer_code = @customer_code
                                         union
-	                                    select distinct cp.start_date, cp.end_date, cp.product_code
+                                        select distinct cp.start_date, cp.end_date, cp.product_code
                                         from customer_class_price cp
-	                                    Where  @request_date  >= cp.start_date
-		                                    and @request_date  <= cp.end_date 
+                                        Where  @request_date  >= cp.start_date
+                                            and @request_date  <= cp.end_date 
                                             and (cp.class_id = @class_id or cp.class_id = 1)
                                         ) as price,
-	                                    unit_of_measurement uq,
-	                                    unit_of_measurement uw
+                                        unit_of_measurement uq,
+                                        unit_of_measurement uw
                                     where p.product_code = price.product_code
-	                                    and DATE_FORMAT(sysdate(),'%Y-%m-%d')  >= price.start_date
-	                                    and DATE_FORMAT(sysdate(),'%Y-%m-%d')  <= price.end_date
-	                                    and p.active = 1 
-	                                    and p.unit_of_qty = uq.unit_code
-	                                    and p.unit_of_wgh = uw.unit_code
+                                        and DATE_FORMAT(sysdate(),'%Y-%m-%d')  >= price.start_date
+                                        and DATE_FORMAT(sysdate(),'%Y-%m-%d')  <= price.end_date
+                                        and p.active = 1 
+                                        and p.unit_of_qty = uq.unit_code
+                                        and p.unit_of_wgh = uw.unit_code
                               ";
                     if (String.IsNullOrEmpty(productGroup) == false)
                     {
@@ -461,10 +460,10 @@ namespace SlaughterHouseLib.Models
                                 product_group_code=@product_group_code,
                                 unit_of_qty=@unit_of_qty,
                                 unit_of_wgh=@unit_of_wgh,
-                                min_weight=@min_weight, 
-                                max_weight=@max_weight, 
+                                min_weight=@min_weight,
+                                max_weight=@max_weight,
                                 std_yield=@std_yield,
-                                sale_unit_method = @sale_unit_method, 
+                                sale_unit_method = @sale_unit_method,
                                 issue_unit_method = @issue_unit_method,
                                 active=@active,
                                 packing_size=@packing_size,

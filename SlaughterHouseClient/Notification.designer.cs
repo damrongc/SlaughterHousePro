@@ -6,7 +6,6 @@ namespace ToastNotifications
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +18,7 @@ namespace ToastNotifications
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -46,9 +43,9 @@ namespace ToastNotifications
             this.labelTitle.Font = new System.Drawing.Font("Kanit", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.ForeColor = System.Drawing.Color.White;
             this.labelTitle.Location = new System.Drawing.Point(0, 0);
-            this.labelTitle.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelTitle.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(512, 47);
+            this.labelTitle.Size = new System.Drawing.Size(698, 37);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "title goes here";
             this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
@@ -57,31 +54,32 @@ namespace ToastNotifications
             // 
             this.labelBody.BackColor = System.Drawing.Color.Transparent;
             this.labelBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelBody.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBody.Font = new System.Drawing.Font("Kanit", 30.25F);
             this.labelBody.ForeColor = System.Drawing.Color.White;
-            this.labelBody.Location = new System.Drawing.Point(0, 47);
-            this.labelBody.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelBody.Location = new System.Drawing.Point(0, 37);
+            this.labelBody.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.labelBody.Name = "labelBody";
-            this.labelBody.Size = new System.Drawing.Size(512, 178);
+            this.labelBody.Size = new System.Drawing.Size(698, 281);
             this.labelBody.TabIndex = 1;
-            this.labelBody.Text = "Body goes here and here and here and here and here";
+            this.labelBody.Text = "Body goes here and here and here and here and here lkjdflkdsjfsdf   lksdjlksdfjsd" +
+    ";lfsdf";
             this.labelBody.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Notification
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 41F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(512, 225);
+            this.ClientSize = new System.Drawing.Size(698, 318);
             this.ControlBox = false;
             this.Controls.Add(this.labelBody);
             this.Controls.Add(this.labelTitle);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.Font = new System.Drawing.Font("Kanit", 20F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.Margin = new System.Windows.Forms.Padding(8, 10, 8, 10);
             this.Name = "Notification";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -93,11 +91,8 @@ namespace ToastNotifications
             this.Shown += new System.EventHandler(this.Notification_Shown);
             this.Click += new System.EventHandler(this.Notification_Click);
             this.ResumeLayout(false);
-
         }
-
         #endregion
-
         private System.Windows.Forms.Timer lifeTimer;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Label labelBody;

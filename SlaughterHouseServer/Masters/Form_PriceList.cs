@@ -1,7 +1,11 @@
-﻿using SlaughterHouseLib;
+﻿using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using SlaughterHouseLib;
 using SlaughterHouseLib.Models;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
@@ -89,9 +93,9 @@ namespace SlaughterHouseServer
             cboProduct.ValueMember = "ProductCode";
             cboProduct.DataSource = coll;
 
-            cboProductCustomerClass.DisplayMember = "ProductName";
-            cboProductCustomerClass.ValueMember = "ProductCode";
-            cboProductCustomerClass.DataSource = coll;
+            //cboProductCustomerClass.DisplayMember = "ProductName";
+            //cboProductCustomerClass.ValueMember = "ProductCode";
+            //cboProductCustomerClass.DataSource = coll;
 
             cboProductCv.DisplayMember = "ProductName";
             cboProductCv.ValueMember = "ProductCode";
@@ -233,10 +237,10 @@ namespace SlaughterHouseServer
         }
         private void LoadCustomerClassPrice()
         {
-            var coll = CustomerClassPriceController.GetAllCustomerClassPrices(dtpStartDateCustomerClass.Value, cboProductCustomerClass.SelectedValue.ToString());
+            var coll = CustomerClassPriceController.GetAllCustomerClassPrices(dtpStartDateCustomerClass.Value, txtProductFilter.Text);
             gvCustomerClass.DataSource = coll;
             gvCustomerClass.Columns[ConstColumns.ClassId].HeaderText = "รหัสระดับลูกค้า";
-            gvCustomerClass.Columns[ConstColumns.ClassName].HeaderText = "ชื่อระดับลูกค้า";
+            gvCustomerClass.Columns[ConstColumns.ClassName].HeaderText = "กลุ่มลูกค้า";
             gvCustomerClass.Columns[ConstColumns.ProductCode].HeaderText = "รหัสสินค้า";
             gvCustomerClass.Columns[ConstColumns.ProductName].HeaderText = "ชื่อสินค้า";
             gvCustomerClass.Columns[ConstColumns.StartDate].HeaderText = "วันที่เริ่มต้น";
@@ -356,6 +360,7 @@ namespace SlaughterHouseServer
         }
 
 
+
         #endregion
 
         #region ### CustomerClassDiscount !!!NotUse
@@ -451,6 +456,101 @@ namespace SlaughterHouseServer
         //}
         #endregion
 
+        private void btnImportCustomerPrice_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ReadExcel();
+                MessageBox.Show("Import Customer Price is success.", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadCustomerClassPrice();
 
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        static void ReadExcel()
+        {
+            try
+            {
+                OpenFileDialog openDlg = new OpenFileDialog
+                {
+                    Filter = "Excel file (* .xlsx) | * .xlsx"
+                };
+                if (openDlg.ShowDialog() == DialogResult.OK)
+                {
+                    var filename = openDlg.FileName;
+                    XSSFWorkbook hssfwb;
+                    using (FileStream file = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                    {
+                        hssfwb = new XSSFWorkbook(file);
+                    }
+
+                    ISheet sheet = hssfwb.GetSheet("product_class_price");
+
+                    var classPrices = new List<CustomCustomerClassPrice>();
+                    var productCode = new List<string>();
+                    var productName = new List<string>();
+                    var price1 = new List<double>();
+                    var price2 = new List<double>();
+                    var price3 = new List<double>();
+                    var startDate = new List<string>();
+                    var durations = new List<double>();
+                    for (int row = 1; row <= sheet.LastRowNum; row++)
+                    {
+                        if (sheet.GetRow(row) != null) //null is when the row only contains empty cells
+                        {
+                            productCode.Add(sheet.GetRow(row).GetCell(0).StringCellValue);
+                            productName.Add(sheet.GetRow(row).GetCell(1).StringCellValue);
+                            price1.Add(sheet.GetRow(row).GetCell(2).NumericCellValue);
+                            price2.Add(sheet.GetRow(row).GetCell(3).NumericCellValue);
+                            price3.Add(sheet.GetRow(row).GetCell(4).NumericCellValue);
+                            startDate.Add(sheet.GetRow(row).GetCell(5).StringCellValue);
+                            durations.Add(sheet.GetRow(row).GetCell(6).NumericCellValue);
+                            //MessageBox.Show(string.Format("Row {0} = {1}", row, sheet.GetRow(row).GetCell(0).StringCellValue));
+                        }
+                    }
+
+                    for (int i = 0; i < productCode.Count; i++)
+                    {
+                        var class1 = new CustomCustomerClassPrice
+                        {
+                            ClassId = 1,
+                            ProductCode = productCode[i],
+                            Price = price1[i],
+                            StartDate = DateTime.Parse(startDate[i]),
+                            EndDate = DateTime.Parse(startDate[i]).AddDays(durations[i])
+                        };
+                        classPrices.Add(class1);
+                        var class2 = new CustomCustomerClassPrice
+                        {
+                            ClassId = 2,
+                            ProductCode = productCode[i],
+                            Price = price2[i],
+                            StartDate = DateTime.Parse(startDate[i]),
+                            EndDate = DateTime.Parse(startDate[i]).AddDays(durations[i])
+                        };
+                        classPrices.Add(class2);
+                        var class3 = new CustomCustomerClassPrice
+                        {
+                            ClassId = 3,
+                            ProductCode = productCode[i],
+                            Price = price3[i],
+                            StartDate = DateTime.Parse(startDate[i]),
+                            EndDate = DateTime.Parse(startDate[i]).AddDays(durations[i])
+                        };
+                        classPrices.Add(class3);
+                    }
+                    InvoiceController.ImportCustomerClassPrice(classPrices);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

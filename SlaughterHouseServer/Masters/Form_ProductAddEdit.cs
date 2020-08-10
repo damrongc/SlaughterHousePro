@@ -218,7 +218,7 @@ namespace SlaughterHouseServer
             try
             {
                 CheckBeforeSave();
-                if (string.IsNullOrEmpty(this.productCode))
+                if (string.IsNullOrEmpty(productCode))
                 {
                     var product = new Product
                     {
@@ -356,7 +356,7 @@ namespace SlaughterHouseServer
                     throw new Exception($"โปรดระบุรหัสสินค้า");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

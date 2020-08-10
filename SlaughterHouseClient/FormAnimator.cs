@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-
 namespace ToastNotifications
 {
     /// <summary>
@@ -16,7 +15,6 @@ namespace ToastNotifications
     public sealed class FormAnimator
     {
         #region Types
-
         /// <summary>
         /// The methods of animation available.
         /// </summary>
@@ -45,7 +43,6 @@ namespace ToastNotifications
             /// </summary>
             Fade = 0x80000
         }
-
         /// <summary>
         /// The directions in which the Roll and Slide animations can be shown
         /// </summary>
@@ -72,11 +69,8 @@ namespace ToastNotifications
             /// </summary>
             Up = 0x8
         }
-
         #endregion // Types
-
         #region Constants
-
         /// <summary>
         /// Hide the form
         /// </summary>
@@ -89,11 +83,8 @@ namespace ToastNotifications
         /// The number of milliseconds over which the animation occurs if no value is specified
         /// </summary>
         private const int DefaultDuration = 250;
-
         #endregion // Constants
-
         #region Variables
-
         /// <summary>
         /// The form to be animated
         /// </summary>
@@ -110,11 +101,8 @@ namespace ToastNotifications
         /// The number of milliseconds over which the animation is played
         /// </summary>
         private int _duration;
-
         #endregion // Variables
-
         #region Properties
-
         /// <summary>
         /// Gets or sets the animation method used to show and hide the form
         /// </summary>
@@ -135,7 +123,6 @@ namespace ToastNotifications
                 _method = value;
             }
         }
-
         /// <summary>
         /// Gets or Sets the direction in which the animation is performed
         /// </summary>
@@ -156,7 +143,6 @@ namespace ToastNotifications
                 _direction = value;
             }
         }
-
         /// <summary>
         /// Gets or Sets the number of milliseconds over which the animation is played
         /// </summary>
@@ -174,7 +160,6 @@ namespace ToastNotifications
                 _duration = value;
             }
         }
-
         /// <summary>
         /// Gets the form to be animated
         /// </summary>
@@ -188,11 +173,8 @@ namespace ToastNotifications
                 return _form;
             }
         }
-
         #endregion // Properties
-
         #region Constructors
-
         /// <summary>
         /// Creates a new <b>FormAnimator</b> object for the specified form
         /// </summary>
@@ -205,14 +187,11 @@ namespace ToastNotifications
         public FormAnimator(Form form)
         {
             _form = form;
-
             _form.Load += Form_Load;
             _form.VisibleChanged += Form_VisibleChanged;
             _form.Closing += Form_Closing;
-
             _duration = DefaultDuration;
         }
-
         /// <summary>
         /// Creates a new <b>FormAnimator</b> object for the specified form using the specified method over the specified duration
         /// </summary>
@@ -233,7 +212,6 @@ namespace ToastNotifications
             _method = method;
             _duration = duration;
         }
-
         /// <summary>
         /// Creates a new <b>FormAnimator</b> object for the specified form using the specified method in the specified direction over the specified duration
         /// </summary>
@@ -257,11 +235,8 @@ namespace ToastNotifications
         {
             _direction = direction;
         }
-
         #endregion // Constructors
-
         #region Event Handlers
-
         /// <summary>
         /// Animates the form automatically when it is loaded
         /// </summary>
@@ -273,7 +248,6 @@ namespace ToastNotifications
                 NativeMethods.AnimateWindow(_form.Handle, _duration, AwActivate | (int)_method | (int)_direction);
             }
         }
-
         /// <summary>
         /// Animates the form automatically when it is shown or hidden
         /// </summary>
@@ -283,7 +257,6 @@ namespace ToastNotifications
             if (_form.MdiParent == null)
             {
                 int flags = (int)_method | (int)_direction;
-
                 if (_form.Visible)
                 {
                     flags = flags | AwActivate;
@@ -292,11 +265,9 @@ namespace ToastNotifications
                 {
                     flags = flags | AwHide;
                 }
-
                 NativeMethods.AnimateWindow(_form.Handle, _duration, flags);
             }
         }
-
         /// <summary>
         /// Animates the form automatically when it closes
         /// </summary>
@@ -311,7 +282,6 @@ namespace ToastNotifications
                 }
             }
         }
-
         #endregion // Event Handlers
     }
 }

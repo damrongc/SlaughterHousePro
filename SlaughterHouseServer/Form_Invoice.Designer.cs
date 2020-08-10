@@ -31,11 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Invoice));
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.gvDt = new System.Windows.Forms.DataGridView();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.gv = new System.Windows.Forms.DataGridView();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Print = new System.Windows.Forms.DataGridViewImageColumn();
             this.INVOICE_NO = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.gvDt = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnRefSo = new System.Windows.Forms.Button();
@@ -43,14 +45,13 @@
             this.dtpInvoiceDate = new System.Windows.Forms.DateTimePicker();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.btnExport = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDt)).BeginInit();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -75,8 +76,44 @@
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(6);
-            this.panel1.Size = new System.Drawing.Size(1378, 730);
+            this.panel1.Size = new System.Drawing.Size(1264, 681);
             this.panel1.TabIndex = 3;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.gvDt);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(6, 360);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1252, 315);
+            this.panel5.TabIndex = 12;
+            // 
+            // gvDt
+            // 
+            this.gvDt.AllowUserToAddRows = false;
+            this.gvDt.AllowUserToDeleteRows = false;
+            this.gvDt.AllowUserToResizeColumns = false;
+            this.gvDt.AllowUserToResizeRows = false;
+            this.gvDt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gvDt.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvDt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvDt.Location = new System.Drawing.Point(0, 0);
+            this.gvDt.Name = "gvDt";
+            this.gvDt.RowHeadersWidth = 10;
+            this.gvDt.Size = new System.Drawing.Size(1252, 315);
+            this.gvDt.TabIndex = 10;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.gv);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(6, 68);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1252, 292);
+            this.panel4.TabIndex = 11;
             // 
             // gv
             // 
@@ -97,7 +134,7 @@
             this.gv.Location = new System.Drawing.Point(0, 0);
             this.gv.Name = "gv";
             this.gv.RowHeadersWidth = 10;
-            this.gv.Size = new System.Drawing.Size(1366, 292);
+            this.gv.Size = new System.Drawing.Size(1252, 292);
             this.gv.TabIndex = 9;
             // 
             // Edit
@@ -123,35 +160,18 @@
             this.INVOICE_NO.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.INVOICE_NO.Width = 110;
             // 
-            // gvDt
-            // 
-            this.gvDt.AllowUserToAddRows = false;
-            this.gvDt.AllowUserToDeleteRows = false;
-            this.gvDt.AllowUserToResizeColumns = false;
-            this.gvDt.AllowUserToResizeRows = false;
-            this.gvDt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.gvDt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.gvDt.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.gvDt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gvDt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvDt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvDt.Location = new System.Drawing.Point(0, 0);
-            this.gvDt.Name = "gvDt";
-            this.gvDt.RowHeadersWidth = 10;
-            this.gvDt.Size = new System.Drawing.Size(1366, 364);
-            this.gvDt.TabIndex = 10;
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.LightGray;
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(6, 67);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1366, 1);
+            this.panel3.Size = new System.Drawing.Size(1252, 1);
             this.panel3.TabIndex = 6;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnExport);
             this.panel2.Controls.Add(this.BtnRefSo);
             this.panel2.Controls.Add(this.cboCustomer);
             this.panel2.Controls.Add(this.dtpInvoiceDate);
@@ -161,7 +181,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(6, 6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1366, 61);
+            this.panel2.Size = new System.Drawing.Size(1252, 61);
             this.panel2.TabIndex = 5;
             // 
             // BtnRefSo
@@ -226,28 +246,26 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "ลูกค้า:";
             // 
-            // panel4
+            // btnExport
             // 
-            this.panel4.Controls.Add(this.gv);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(6, 68);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1366, 292);
-            this.panel4.TabIndex = 11;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.gvDt);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(6, 360);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1366, 364);
-            this.panel5.TabIndex = 12;
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(185)))), ((int)(((byte)(0)))));
+            this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.ForeColor = System.Drawing.Color.White;
+            this.btnExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExport.Location = new System.Drawing.Point(934, 11);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(142, 36);
+            this.btnExport.TabIndex = 9;
+            this.btnExport.Text = "Export";
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // Form_Invoice
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1398, 750);
+            this.ClientSize = new System.Drawing.Size(1284, 701);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Kanit", 15.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -255,12 +273,12 @@
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Form_Farm";
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
+            this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvDt)).EndInit();
+            this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -283,5 +301,6 @@
         private System.Windows.Forms.DataGridViewLinkColumn INVOICE_NO;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnExport;
     }
 }

@@ -116,11 +116,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(75, 24);
+            this.label4.Location = new System.Drawing.Point(86, 24);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 29);
+            this.label4.Size = new System.Drawing.Size(93, 29);
             this.label4.TabIndex = 35;
-            this.label4.Text = "กลุ่มมลูกค้า";
+            this.label4.Text = "กลุ่มลูกค้า:";
             // 
             // txtDiscountPer
             // 

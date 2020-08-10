@@ -1,0 +1,264 @@
+﻿namespace SlaughterHouseServer
+{
+    partial class Form_Salesman
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Salesman));
+            this.label1 = new System.Windows.Forms.Label();
+            this.BtnAdd = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.gv = new System.Windows.Forms.DataGridView();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.TxtFilter = new System.Windows.Forms.TextBox();
+            this.BtnSearch = new System.Windows.Forms.Button();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.col_salesman_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_salesman_name = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.col_active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col_create_at = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_create_by = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_modified_at = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_modified_by = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(11, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(123, 29);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "พนักงานขาย";
+            // 
+            // BtnAdd
+            // 
+            this.BtnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnAdd.FlatAppearance.BorderSize = 0;
+            this.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAdd.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAdd.ForeColor = System.Drawing.Color.White;
+            this.BtnAdd.Image = ((System.Drawing.Image)(resources.GetObject("BtnAdd.Image")));
+            this.BtnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnAdd.Location = new System.Drawing.Point(140, 12);
+            this.BtnAdd.Name = "BtnAdd";
+            this.BtnAdd.Size = new System.Drawing.Size(129, 36);
+            this.BtnAdd.TabIndex = 2;
+            this.BtnAdd.Text = "เพิ่มข้อมูล";
+            this.BtnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnAdd.UseVisualStyleBackColor = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.gv);
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.Location = new System.Drawing.Point(10, 10);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(6);
+            this.panel1.Size = new System.Drawing.Size(1264, 681);
+            this.panel1.TabIndex = 3;
+            // 
+            // gv
+            // 
+            this.gv.AllowUserToAddRows = false;
+            this.gv.AllowUserToDeleteRows = false;
+            this.gv.AllowUserToResizeColumns = false;
+            this.gv.AllowUserToResizeRows = false;
+            this.gv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.gv.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.gv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Edit,
+            this.col_salesman_code,
+            this.col_salesman_name,
+            this.col_active,
+            this.col_create_at,
+            this.col_create_by,
+            this.col_modified_at,
+            this.col_modified_by});
+            this.gv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gv.Location = new System.Drawing.Point(6, 65);
+            this.gv.Name = "gv";
+            this.gv.RowHeadersWidth = 10;
+            this.gv.Size = new System.Drawing.Size(1252, 610);
+            this.gv.TabIndex = 8;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.LightGray;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(6, 64);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1252, 1);
+            this.panel3.TabIndex = 6;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.TxtFilter);
+            this.panel2.Controls.Add(this.BtnSearch);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.BtnAdd);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(6, 6);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1252, 58);
+            this.panel2.TabIndex = 5;
+            // 
+            // TxtFilter
+            // 
+            this.TxtFilter.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.TxtFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtFilter.Location = new System.Drawing.Point(275, 12);
+            this.TxtFilter.Name = "TxtFilter";
+            this.TxtFilter.Size = new System.Drawing.Size(215, 36);
+            this.TxtFilter.TabIndex = 3;
+            // 
+            // BtnSearch
+            // 
+            this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(154)))), ((int)(((byte)(223)))));
+            this.BtnSearch.FlatAppearance.BorderSize = 0;
+            this.BtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSearch.Font = new System.Drawing.Font("Kanit", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSearch.ForeColor = System.Drawing.Color.White;
+            this.BtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("BtnSearch.Image")));
+            this.BtnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnSearch.Location = new System.Drawing.Point(496, 12);
+            this.BtnSearch.Name = "BtnSearch";
+            this.BtnSearch.Size = new System.Drawing.Size(129, 36);
+            this.BtnSearch.TabIndex = 4;
+            this.BtnSearch.Text = "ค้นข้อมูล";
+            this.BtnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnSearch.UseVisualStyleBackColor = false;
+            // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "แก้ไข";
+            this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
+            this.Edit.Name = "Edit";
+            this.Edit.Width = 58;
+            // 
+            // col_salesman_code
+            // 
+            this.col_salesman_code.DataPropertyName = "salesman_code";
+            this.col_salesman_code.HeaderText = "salesman_code";
+            this.col_salesman_code.Name = "col_salesman_code";
+            this.col_salesman_code.Width = 167;
+            // 
+            // col_salesman_name
+            // 
+            this.col_salesman_name.DataPropertyName = "salesman_name";
+            this.col_salesman_name.HeaderText = "ชื่อพนักงานขาย";
+            this.col_salesman_name.Name = "col_salesman_name";
+            this.col_salesman_name.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_salesman_name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.col_salesman_name.Width = 157;
+            // 
+            // col_active
+            // 
+            this.col_active.DataPropertyName = "active";
+            this.col_active.HeaderText = "ใช้งาน";
+            this.col_active.Name = "col_active";
+            this.col_active.Width = 66;
+            // 
+            // col_create_at
+            // 
+            this.col_create_at.DataPropertyName = "create_at";
+            this.col_create_at.HeaderText = "วันเวลาสร้าง";
+            this.col_create_at.Name = "col_create_at";
+            this.col_create_at.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_create_at.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.col_create_at.Width = 114;
+            // 
+            // col_create_by
+            // 
+            this.col_create_by.DataPropertyName = "create_by";
+            this.col_create_by.HeaderText = "ผู้สร้าง";
+            this.col_create_by.Name = "col_create_by";
+            this.col_create_by.Width = 91;
+            // 
+            // col_modified_at
+            // 
+            this.col_modified_at.DataPropertyName = "modified_at";
+            this.col_modified_at.HeaderText = "วันเวลาแก้ไข";
+            this.col_modified_at.Name = "col_modified_at";
+            this.col_modified_at.Width = 131;
+            // 
+            // col_modified_by
+            // 
+            this.col_modified_by.DataPropertyName = "modified_by";
+            this.col_modified_by.HeaderText = "ผู้แก้ไข";
+            this.col_modified_by.Name = "col_modified_by";
+            this.col_modified_by.Width = 89;
+            // 
+            // Form_Salesman
+            // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(1284, 701);
+            this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("Kanit", 15.75F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Name = "Form_Salesman";
+            this.Padding = new System.Windows.Forms.Padding(10);
+            this.Text = "Form_Salesman";
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gv)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button BtnAdd;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox TxtFilter;
+        private System.Windows.Forms.Button BtnSearch;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataGridView gv;
+        private System.Windows.Forms.DataGridViewImageColumn Edit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_salesman_code;
+        private System.Windows.Forms.DataGridViewLinkColumn col_salesman_name;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn col_active;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_create_at;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_create_by;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_modified_at;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_modified_by;
+    }
+}

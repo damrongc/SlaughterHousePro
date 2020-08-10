@@ -65,11 +65,12 @@
     <Reference Include="CrystalDecisions.Windows.Forms">
       <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Web, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="SlaughterHouseEF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.8\Assemblies\v4.5\MySql.Web.dll</HintPath>
+      <HintPath>..\..\SlaughterHouseEF\bin\Debug\SlaughterHouseEF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.DirectoryServices" />
@@ -88,48 +89,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="barcode.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="bom.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="bom_item.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="breeder.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="constants.cs" />
-    <Compile Include="customer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="customer_class.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="customer_class_discount.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="customer_class_price.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="customer_price.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="CustomMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CustomMessageBox.Designer.cs">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="document_generate.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="DragControl.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="farm.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -138,20 +106,30 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAnimator.cs" />
+    <Compile Include="Form_Lot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Lot.Designer.cs">
+      <DependentUpon>Form_Lot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Menu.Designer.cs">
+      <DependentUpon>Form_Menu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Settings.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_Settings.Designer.cs">
       <DependentUpon>Form_Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="group.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Helper.cs" />
+    <Compile Include="Issued\Form_SpecialProductForSales.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="invoice.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="invoice_item.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Issued\Form_SpecialProductForSales.Designer.cs">
+      <DependentUpon>Form_SpecialProductForSales.cs</DependentUpon>
     </Compile>
     <Compile Include="Issued\Form_ByProduct.cs">
       <SubType>Form</SubType>
@@ -159,11 +137,11 @@
     <Compile Include="Issued\Form_ByProduct.Designer.cs">
       <DependentUpon>Form_ByProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Issued\Form_MainProduct.cs">
+    <Compile Include="Issued\Form_CarcassForSales.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Issued\Form_MainProduct.Designer.cs">
-      <DependentUpon>Form_MainProduct.cs</DependentUpon>
+    <Compile Include="Issued\Form_CarcassForSales.Designer.cs">
+      <DependentUpon>Form_CarcassForSales.cs</DependentUpon>
     </Compile>
     <Compile Include="Issued\Form_Carcass.cs">
       <SubType>Form</SubType>
@@ -171,11 +149,23 @@
     <Compile Include="Issued\Form_Carcass.Designer.cs">
       <DependentUpon>Form_Carcass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Issued\Form_Transport.cs">
+    <Compile Include="Issued\Form_Issued.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Issued\Form_Transport.Designer.cs">
-      <DependentUpon>Form_Transport.cs</DependentUpon>
+    <Compile Include="Issued\Form_Issued.Designer.cs">
+      <DependentUpon>Form_Issued.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Issued\Form_LookupTruck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Issued\Form_LookupTruck.Designer.cs">
+      <DependentUpon>Form_LookupTruck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Issued\Form_MainProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Issued\Form_MainProduct.Designer.cs">
+      <DependentUpon>Form_MainProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Issued\Form_Orders.cs">
       <SubType>Form</SubType>
@@ -183,108 +173,44 @@
     <Compile Include="Issued\Form_Orders.Designer.cs">
       <DependentUpon>Form_Orders.cs</DependentUpon>
     </Compile>
-    <Compile Include="Issued\Form_Issued.cs">
+    <Compile Include="Issued\Form_StockIssued.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Issued\Form_Issued.Designer.cs">
-      <DependentUpon>Form_Issued.cs</DependentUpon>
+    <Compile Include="Issued\Form_StockIssued.Designer.cs">
+      <DependentUpon>Form_StockIssued.cs</DependentUpon>
     </Compile>
-    <Compile Include="issued_info.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Issued\Form_Transport.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="location.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="master_class.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <Compile Include="Issued\Form_Transport.Designer.cs">
+      <DependentUpon>Form_Transport.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerOrder.cs" />
     <Compile Include="Models\CustomerTransport.cs" />
     <Compile Include="Models\CustomProduct.cs" />
+    <Compile Include="Models\RMIssuedInfo.cs" />
     <Compile Include="Models\StockLot.cs" />
-    <Compile Include="order.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="orders_item.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="plant.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="product.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="production_order.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="production_order_item.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="product_group.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="product_price.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="product_slip.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="product_slip_item.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="receive.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="receive_item.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="receive_item_by_product.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Receiving\Form_HeadReceive.cs">
+    <Compile Include="MyExtension.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="Notification.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Receiving\Form_HeadReceive.Designer.cs">
-      <DependentUpon>Form_HeadReceive.cs</DependentUpon>
+    <Compile Include="Notification.designer.cs">
+      <DependentUpon>Notification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Receiving\Form_LookupProduct.cs">
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Receiving\Form_BarcodeProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Receiving\Form_LookupProduct.Designer.cs">
-      <DependentUpon>Form_LookupProduct.cs</DependentUpon>
+    <Compile Include="Receiving\Form_BarcodeProduct.Designer.cs">
+      <DependentUpon>Form_BarcodeProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Receiving\Form_Barcode.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Receiving\Form_Barcode.Designer.cs">
       <DependentUpon>Form_Barcode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Receiving\Form_NumericPad.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Receiving\Form_NumericPad.Designer.cs">
-      <DependentUpon>Form_NumericPad.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Receiving\Form_ReceiveMainProduct.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Receiving\Form_ReceiveMainProduct.Designer.cs">
-      <DependentUpon>Form_ReceiveMainProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Receiving\Form_ByProductReceive.cs">
       <SubType>Form</SubType>
@@ -298,29 +224,29 @@
     <Compile Include="Receiving\Form_CarcassReceive.Designer.cs">
       <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
     </Compile>
-    <Compile Include="Receiving\Form_SwineReceive.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Receiving\Form_SwineReceive.Designer.cs">
-      <DependentUpon>Form_SwineReceive.cs</DependentUpon>
-    </Compile>
     <Compile Include="Receiving\Form_ConfirmStock.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Receiving\Form_ConfirmStock.Designer.cs">
       <DependentUpon>Form_ConfirmStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Lot.cs">
+    <Compile Include="Receiving\Form_HeadReceive.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Lot.Designer.cs">
-      <DependentUpon>Form_Lot.cs</DependentUpon>
+    <Compile Include="Receiving\Form_HeadReceive.Designer.cs">
+      <DependentUpon>Form_HeadReceive.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Menu.cs">
+    <Compile Include="Receiving\Form_LookupProductIssued.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Menu.Designer.cs">
-      <DependentUpon>Form_Menu.cs</DependentUpon>
+    <Compile Include="Receiving\Form_LookupProductIssued.Designer.cs">
+      <DependentUpon>Form_LookupProductIssued.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Receiving\Form_LookupProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_LookupProduct.Designer.cs">
+      <DependentUpon>Form_LookupProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Receiving\Form_LookupSwine.cs">
       <SubType>Form</SubType>
@@ -328,62 +254,50 @@
     <Compile Include="Receiving\Form_LookupSwine.Designer.cs">
       <DependentUpon>Form_LookupSwine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Receiving\Form_NumericPad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_NumericPad.Designer.cs">
+      <DependentUpon>Form_NumericPad.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receiving\Form_Receive.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Receiving\Form_Receive.Designer.cs">
       <DependentUpon>Form_Receive.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyExtension.cs" />
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="Notification.cs">
+    <Compile Include="Receiving\Form_ReceiveSpecialProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Notification.designer.cs">
-      <DependentUpon>Notification.cs</DependentUpon>
+    <Compile Include="Receiving\Form_ReceiveSpecialProduct.Designer.cs">
+      <DependentUpon>Form_ReceiveSpecialProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Receiving\Form_ReceiveReturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_ReceiveReturn.Designer.cs">
+      <DependentUpon>Form_ReceiveReturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Receiving\Form_ReceiveMainProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_ReceiveMainProduct.Designer.cs">
+      <DependentUpon>Form_ReceiveMainProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Receiving\Form_SwineReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receiving\Form_SwineReceive.Designer.cs">
+      <DependentUpon>Form_SwineReceive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\Form_Barcode.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Report\Form_Barcode.Designer.cs">
       <DependentUpon>Form_Barcode.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report\Rpt\barcode.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>barcode.rpt</DependentUpon>
-      <SubType>Component</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Helper.cs" />
     <Compile Include="SerialPortManager.cs" />
     <Compile Include="SerialSettings.cs" />
-    <Compile Include="stock.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="stock_item_running.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="transport.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="transport_item.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="truck.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="truck_type.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="unit_of_measurement.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="user.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Utils\StockHelper.cs" />
     <Compile Include="WeightHelper.cs" />
     <EmbeddedResource Include="CustomMessageBox.resx">
@@ -392,65 +306,44 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Settings.resx">
-      <DependentUpon>Form_Settings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Issued\Form_ByProduct.resx">
-      <DependentUpon>Form_ByProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Issued\Form_MainProduct.resx">
-      <DependentUpon>Form_MainProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Issued\Form_Carcass.resx">
-      <DependentUpon>Form_Carcass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Issued\Form_Transport.resx">
-      <DependentUpon>Form_Transport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Issued\Form_Orders.resx">
-      <DependentUpon>Form_Orders.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Issued\Form_Issued.resx">
-      <DependentUpon>Form_Issued.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_HeadReceive.resx">
-      <DependentUpon>Form_HeadReceive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_LookupProduct.resx">
-      <DependentUpon>Form_LookupProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_Barcode.resx">
-      <DependentUpon>Form_Barcode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_NumericPad.resx">
-      <DependentUpon>Form_NumericPad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_ReceiveMainProduct.resx">
-      <DependentUpon>Form_ReceiveMainProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_ByProductReceive.resx">
-      <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_CarcassReceive.resx">
-      <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_SwineReceive.resx">
-      <DependentUpon>Form_SwineReceive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_ConfirmStock.resx">
-      <DependentUpon>Form_ConfirmStock.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form_Lot.resx">
       <DependentUpon>Form_Lot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Menu.resx">
       <DependentUpon>Form_Menu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_LookupSwine.resx">
-      <DependentUpon>Form_LookupSwine.cs</DependentUpon>
+    <EmbeddedResource Include="Form_Settings.resx">
+      <DependentUpon>Form_Settings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Receiving\Form_Receive.resx">
-      <DependentUpon>Form_Receive.cs</DependentUpon>
+    <EmbeddedResource Include="Issued\Form_SpecialProductForSales.resx">
+      <DependentUpon>Form_SpecialProductForSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_ByProduct.resx">
+      <DependentUpon>Form_ByProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_CarcassForSales.resx">
+      <DependentUpon>Form_CarcassForSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_Carcass.resx">
+      <DependentUpon>Form_Carcass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_Issued.resx">
+      <DependentUpon>Form_Issued.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_LookupTruck.resx">
+      <DependentUpon>Form_LookupTruck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_MainProduct.resx">
+      <DependentUpon>Form_MainProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_Orders.resx">
+      <DependentUpon>Form_Orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_StockIssued.resx">
+      <DependentUpon>Form_StockIssued.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Issued\Form_Transport.resx">
+      <DependentUpon>Form_Transport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Notification.resx">
       <DependentUpon>Notification.cs</DependentUpon>
@@ -465,22 +358,55 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Receiving\Form_BarcodeProduct.resx">
+      <DependentUpon>Form_BarcodeProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_Barcode.resx">
+      <DependentUpon>Form_Barcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_ByProductReceive.resx">
+      <DependentUpon>Form_ByProductReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_CarcassReceive.resx">
+      <DependentUpon>Form_CarcassReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_ConfirmStock.resx">
+      <DependentUpon>Form_ConfirmStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_HeadReceive.resx">
+      <DependentUpon>Form_HeadReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_LookupProductIssued.resx">
+      <DependentUpon>Form_LookupProductIssued.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_LookupProduct.resx">
+      <DependentUpon>Form_LookupProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_LookupSwine.resx">
+      <DependentUpon>Form_LookupSwine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_NumericPad.resx">
+      <DependentUpon>Form_NumericPad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_Receive.resx">
+      <DependentUpon>Form_Receive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_ReceiveSpecialProduct.resx">
+      <DependentUpon>Form_ReceiveSpecialProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_ReceiveReturn.resx">
+      <DependentUpon>Form_ReceiveReturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_ReceiveMainProduct.resx">
+      <DependentUpon>Form_ReceiveMainProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receiving\Form_SwineReceive.resx">
+      <DependentUpon>Form_SwineReceive.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Form_Barcode.resx">
       <DependentUpon>Form_Barcode.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\Rpt\barcode.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>barcode.cs</LastGenOutput>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Include=".editorconfig" />
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -496,16 +422,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
-    <Content Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Content Include="Sounds\cityscape.wav" />
     <Content Include="Sounds\festival.wav" />
     <Content Include="Sounds\garden.wav" />
@@ -520,23 +436,21 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Report\Rpt\" />
     <Folder Include="Report\Xml\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EntityFramework">
-      <Version>6.2.0</Version>
+      <Version>6.4.4</Version>
     </PackageReference>
     <PackageReference Include="MySql.Data">
-      <Version>8.0.17</Version>
+      <Version>8.0.20</Version>
     </PackageReference>
     <PackageReference Include="MySql.Data.Entity">
       <Version>6.10.9</Version>
     </PackageReference>
     <PackageReference Include="MySql.Data.EntityFramework">
-      <Version>8.0.17</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.2</Version>
+      <Version>8.0.20</Version>
     </PackageReference>
     <PackageReference Include="nucs.JsonSettings">
       <Version>1.0.7</Version>

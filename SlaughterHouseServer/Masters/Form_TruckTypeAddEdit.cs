@@ -1,16 +1,12 @@
-﻿using SlaughterHouseLib;
-using SlaughterHouseLib.Models;
+﻿using SlaughterHouseLib.Models;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
     public partial class Form_TruckTypeAddEdit : Form
     {
-        public Int32 truckTypeId { get; set; }
-        string productCode { get; set; }
+        public int truckTypeId { get; set; }
+        //string productCode { get; set; }
 
 
         public Form_TruckTypeAddEdit()
@@ -102,11 +98,11 @@ namespace SlaughterHouseServer
             {
 
 
-                if (this.truckTypeId == null || this.truckTypeId == 0)
+                if (truckTypeId == 0)
                 {
                     var truckType = new TruckType
                     {
-                        TruckTypeId = this.truckTypeId,
+                        TruckTypeId = truckTypeId,
                         TruckTypeDesc = txtTruckTypeName.Text.Trim(),
                         Active = chkActive.Checked,
                         CreateBy = "system",

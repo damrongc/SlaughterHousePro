@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
-
 namespace SlaughterHouseClient.Receiving
 {
-
-
     public partial class Form_NumericPad : Form
     {
         public int ReturnValue { get; set; }
         public string DefaultValue { get; set; }
-
         private bool firstTime = true;
         public Form_NumericPad()
         {
@@ -26,9 +22,6 @@ namespace SlaughterHouseClient.Receiving
             btn8.Click += Btn_Click;
             btn9.Click += Btn_Click;
         }
-
-
-
         private void Btn_Click(object sender, EventArgs e)
         {
             var btn = (Button)sender;
@@ -46,22 +39,17 @@ namespace SlaughterHouseClient.Receiving
                 else
                 {
                     txtNumeric.Text = txtNumeric.Text + btn.Text;
-
                 }
             }
-
         }
-
         private void Form_Load(object sender, EventArgs e)
         {
             txtNumeric.Text = DefaultValue;
         }
-
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtNumeric.Text = "";
         }
-
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtNumeric.Text))
@@ -73,7 +61,6 @@ namespace SlaughterHouseClient.Receiving
                     DialogResult = DialogResult.OK;
                     Close();
                 }
-
             }
             else
             {
@@ -81,9 +68,7 @@ namespace SlaughterHouseClient.Receiving
                 DialogResult = DialogResult.OK;
                 Close();
             }
-
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             ReturnValue = 0;

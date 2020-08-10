@@ -1,9 +1,5 @@
-﻿using SlaughterHouseLib;
-using SlaughterHouseLib.Models;
+﻿using SlaughterHouseLib.Models;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
 namespace SlaughterHouseServer
 {
@@ -106,7 +102,7 @@ namespace SlaughterHouseServer
                     chkActive.Checked = truck.Active;
                     comboxTruckType.SelectedValue = truck.TruckType.TruckTypeId;
                     BtnSaveAndNew.Visible = false;
-                    //txtTruckNo.Enabled = false;
+                    txtTruckNo.Enabled = false;
                 }
             }
             catch (Exception)
@@ -139,7 +135,7 @@ namespace SlaughterHouseServer
                     CreateBy = "system",
                 };
 
-                if (this.truckId == null || this.truckId == 0)
+                if (truckId == 0)
                 {
                     TruckController.Insert(truck);
                 }

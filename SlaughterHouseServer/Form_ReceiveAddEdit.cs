@@ -212,6 +212,18 @@ namespace SlaughterHouseServer
         {
             try
             {
+                if (string.IsNullOrEmpty(txtCoopNo.Text))
+                {
+                    throw new Exception("กรุณา ระบุข้อมูลเล้า");
+                }
+                if (string.IsNullOrEmpty(txtFarmQty.Text))
+                {
+                    throw new Exception("กรุณา ระบุข้อมูล จำนวนตัวฟาร์ม");
+                }
+                if (string.IsNullOrEmpty(txtFarmWgh.Text))
+                {
+                    throw new Exception("กรุณา ระบุข้อมูล น้ำหนักฟาร์ม");
+                }
                 var receive = new Receive
                 {
                     ReceiveNo = txtReciveNo.Text,

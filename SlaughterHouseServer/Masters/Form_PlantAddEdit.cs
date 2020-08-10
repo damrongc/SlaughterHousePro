@@ -1,9 +1,6 @@
-﻿using SlaughterHouseLib;
-using SlaughterHouseLib.Models;
+﻿using SlaughterHouseLib.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -11,9 +8,9 @@ namespace SlaughterHouseServer
 {
     public partial class Form_PlantAddEdit : Form
     {
-        public Int32 plantId { get; set; }
-        string productCode { get; set; }
-        DataTable dtTruckItem;
+        public int plantId { get; set; }
+        //string productCode { get; set; }
+        //DataTable dtTruckItem;
 
         public Form_PlantAddEdit()
         {
@@ -108,7 +105,7 @@ namespace SlaughterHouseServer
                     //txtTruckNo.Enabled = false;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

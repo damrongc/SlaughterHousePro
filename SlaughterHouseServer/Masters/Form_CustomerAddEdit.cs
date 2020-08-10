@@ -36,8 +36,8 @@ namespace SlaughterHouseServer
 
             btnAddOrderItem.Click += BtnAddOrderItem_Click;
 
-            this.Load += Form_CustomerAddEdit_Load;
-            this.Shown += Form_CustomerAddEdit_Shown;
+            Load += Form_CustomerAddEdit_Load;
+            Shown += Form_CustomerAddEdit_Shown;
 
 
         }
@@ -54,10 +54,11 @@ namespace SlaughterHouseServer
         {
             try
             {
-                if (!string.IsNullOrEmpty(this.customerCode))
+                Load_Salesman();
+                if (!string.IsNullOrEmpty(customerCode))
                 {
 
-                    var customer = CustomerController.GetCustomer(this.customerCode);
+                    var customer = CustomerController.GetCustomer(customerCode);
                     if (customer != null)
                     {
                         txtCustomerCode.Text = customer.CustomerCode;
@@ -68,6 +69,7 @@ namespace SlaughterHouseServer
                         txtShipTo.Text = customer.ShipTo;
                         txtTaxId.Text = customer.TaxId;
                         txtContactNo.Text = customer.ContactNo;
+                        cboSalesman.SelectedValue = customer.SalesmanId;
                         chkActive.Checked = customer.Active;
 
                         Load_CustomerClass();
@@ -100,6 +102,29 @@ namespace SlaughterHouseServer
                 }
             }
         }
+
+        private void Load_Salesman()
+        {
+            try
+            {
+                var salesmans = SalesmanController.GetAllSalesmans();
+                //salesmans.Insert(0, new Salesman
+                //{
+                //    SalesmanCode = 0,
+                //    SalesmanName = "--เลือก--"
+                //});
+                cboSalesman.DataSource = salesmans;
+                cboSalesman.ValueMember = "SalesmanCode";
+                cboSalesman.DisplayMember = "SalesmanName";
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
 
         private void TxtTaxId_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -163,7 +188,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-                CheckBeforeSave();
+                ValidateData();
                 if (string.IsNullOrEmpty(customerCode))
                 {
                     var customer = new Customer
@@ -176,6 +201,7 @@ namespace SlaughterHouseServer
                         ContactNo = txtContactNo.Text.Trim(),
                         Active = chkActive.Checked,
                         CreateBy = "system",
+                        SalesmanId = cboSalesman.SelectedValue.ToString().ToInt16()
                     };
                     CustomerController.Insert(customer);
                     MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -193,6 +219,7 @@ namespace SlaughterHouseServer
                         ContactNo = txtContactNo.Text.Trim(),
                         Active = chkActive.Checked,
                         ModifiedBy = "system",
+                        SalesmanId = cboSalesman.SelectedValue.ToString().ToInt16()
                     };
                     CustomerController.Update(customer);
                     MessageBox.Show("บันทึกข้อมูลเรียบร้อย.", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -245,7 +272,7 @@ namespace SlaughterHouseServer
         {
             try
             {
-                CheckBeforeSave();
+                ValidateData();
                 var customer = new Customer
                 {
                     CustomerCode = txtCustomerCode.Text.Trim(),
@@ -358,16 +385,36 @@ namespace SlaughterHouseServer
             }
         }
 
-        private void CheckBeforeSave()
+        private void ValidateData()
         {
             try
             {
-                if (string.IsNullOrEmpty(txtCustomerCode.Text) || txtCustomerCode.Text == "")
+                if (string.IsNullOrEmpty(txtCustomerCode.Text.Trim()))
                 {
-                    throw new Exception($"โปรดระบุรหัสลูกค้า");
+                    txtCustomerCode.Focus();
+                    throw new Exception("กรุณาระบุ รหัสลูกค้า");
                 }
+                if (string.IsNullOrEmpty(txtCustomerName.Text.Trim()))
+                {
+                    txtCustomerName.Focus();
+                    throw new Exception("กรุณาระบุ ชื่อลูกค้า");
+                }
+                if (string.IsNullOrEmpty(txtAddress.Text.Trim()))
+                {
+                    txtAddress.Focus();
+                    throw new Exception("กรุณาระบุ ที่อยู่");
+                }
+                if (string.IsNullOrEmpty(txtShipTo.Text.Trim()))
+                {
+                    txtShipTo.Focus();
+                    throw new Exception("กรุณาระบุ สถานที่ส่งสินค้า");
+                }
+                //if (cboSalesman.SelectedValue.ToString() == "0")
+                //{
+                //    throw new Exception("กรุณาระบุ พนักงานขาย");
+                //}
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

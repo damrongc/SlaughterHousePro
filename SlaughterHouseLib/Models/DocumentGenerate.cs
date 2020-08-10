@@ -76,34 +76,38 @@ namespace SlaughterHouseLib.Models
             }
         }
 
-        public static string GetSwineLotNo(int plantId, DateTime productionDate, int queueNo)
+        public static string GetSwineLotNo(int plantId, int queueNo)
         {
             try
             {
+                var year = DateTime.Today.ToString("yy");
+                var julian_date = DateTime.Today.DayOfYear.ToString().PadLeft(3, '0');
+                string lot_no = $"{plantId}{year}{julian_date}{queueNo.ToString().PadLeft(2, '0')}";
+                return lot_no;
 
-                using (var conn = new MySqlConnection(Globals.CONN_STR))
-                {
-                    conn.Open();
-                    //var sb = new StringBuilder();
-                    //sb.Append("select plant_id from plant");
-                    //var cmd = new MySqlCommand(sb.ToString(), conn);
-                    //var plant_id = cmd.ExecuteScalar().ToString();
+                //using (var conn = new MySqlConnection(Globals.CONN_STR))
+                //{
+                //    conn.Open();
+                //    //var sb = new StringBuilder();
+                //    //sb.Append("select plant_id from plant");
+                //    //var cmd = new MySqlCommand(sb.ToString(), conn);
+                //    //var plant_id = cmd.ExecuteScalar().ToString();
 
-                    var sb = new StringBuilder();
-                    sb.Append("select running from document_generate");
-                    sb.Append(" where document_type ='SWL'");
-                    var cmd = new MySqlCommand(sb.ToString(), conn);
-                    var running = cmd.ExecuteScalar().ToString();
+                //    //var sb = new StringBuilder();
+                //    //sb.Append("select running from document_generate");
+                //    //sb.Append(" where document_type ='SWL'");
+                //    //var cmd = new MySqlCommand(sb.ToString(), conn);
+                //    //var running = cmd.ExecuteScalar().ToString();
 
-                    var year = DateTime.Today.ToString("yy");
-                    var julian_date = DateTime.Today.DayOfYear.ToString().PadLeft(3, '0');
-                    var day = productionDate.ToString("dd");
-                    var month = productionDate.ToString("MM");
+                //    var year = DateTime.Today.ToString("yy");
+                //    var julian_date = DateTime.Today.DayOfYear.ToString().PadLeft(3, '0');
+                //    //var day = productionDate.ToString("dd");
+                //    //var month = productionDate.ToString("MM");
 
-                    string lot_no = $"{plantId}{year}{julian_date}{queueNo.ToString().PadLeft(2, '0')}";
-                    return lot_no;
-                    //return string.Format("{0}{1}{2}{3}{4}{5}{6}", plantId, year, julian_date, queueNo, day, month, running.PadLeft(2, '0'));
-                }
+                //    string lot_no = $"{plantId}{year}{julian_date}{queueNo.ToString().PadLeft(2, '0')}";
+                //    return lot_no;
+                //    //return string.Format("{0}{1}{2}{3}{4}{5}{6}", plantId, year, julian_date, queueNo, day, month, running.PadLeft(2, '0'));
+                //}
             }
             catch (Exception)
             {

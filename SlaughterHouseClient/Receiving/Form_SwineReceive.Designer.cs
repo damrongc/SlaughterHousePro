@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +18,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -145,7 +142,7 @@
             this.lblWeight.Name = "lblWeight";
             this.lblWeight.Size = new System.Drawing.Size(553, 235);
             this.lblWeight.TabIndex = 5;
-            this.lblWeight.Text = "0.00";
+            this.lblWeight.Text = "0";
             this.lblWeight.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
@@ -234,11 +231,11 @@
             // 
             this.btnStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStop.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnStop.Font = new System.Drawing.Font("Kanit", 26F);
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(734, 480);
+            this.btnStop.Location = new System.Drawing.Point(601, 450);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(136, 70);
+            this.btnStop.Size = new System.Drawing.Size(164, 125);
             this.btnStop.TabIndex = 38;
             this.btnStop.Text = "หยุดชั่ง";
             this.btnStop.UseVisualStyleBackColor = false;
@@ -248,11 +245,11 @@
             // 
             this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnStart.Font = new System.Drawing.Font("Kanit", 26F);
             this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(592, 480);
+            this.btnStart.Location = new System.Drawing.Point(459, 450);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(136, 70);
+            this.btnStart.Size = new System.Drawing.Size(136, 125);
             this.btnStart.TabIndex = 37;
             this.btnStart.Text = "เริ่มชั่ง";
             this.btnStart.UseVisualStyleBackColor = false;
@@ -355,11 +352,11 @@
             // 
             this.btnMale.BackColor = System.Drawing.Color.Silver;
             this.btnMale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMale.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnMale.Font = new System.Drawing.Font("Kanit", 30F);
             this.btnMale.ForeColor = System.Drawing.Color.White;
-            this.btnMale.Location = new System.Drawing.Point(159, 480);
+            this.btnMale.Location = new System.Drawing.Point(159, 450);
             this.btnMale.Name = "btnMale";
-            this.btnMale.Size = new System.Drawing.Size(136, 70);
+            this.btnMale.Size = new System.Drawing.Size(136, 125);
             this.btnMale.TabIndex = 65;
             this.btnMale.Text = "ผู้";
             this.btnMale.UseVisualStyleBackColor = false;
@@ -369,11 +366,11 @@
             // 
             this.btnUndified.BackColor = System.Drawing.Color.Silver;
             this.btnUndified.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUndified.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnUndified.Font = new System.Drawing.Font("Kanit", 30F);
             this.btnUndified.ForeColor = System.Drawing.Color.White;
-            this.btnUndified.Location = new System.Drawing.Point(301, 480);
+            this.btnUndified.Location = new System.Drawing.Point(301, 450);
             this.btnUndified.Name = "btnUndified";
-            this.btnUndified.Size = new System.Drawing.Size(136, 70);
+            this.btnUndified.Size = new System.Drawing.Size(136, 125);
             this.btnUndified.TabIndex = 64;
             this.btnUndified.Text = "ไม่ระบุ";
             this.btnUndified.UseVisualStyleBackColor = false;
@@ -383,7 +380,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label2.Location = new System.Drawing.Point(11, 444);
+            this.label2.Location = new System.Drawing.Point(11, 414);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 33);
             this.label2.TabIndex = 63;
@@ -393,11 +390,11 @@
             // 
             this.btnFemale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(107)))), ((int)(((byte)(188)))));
             this.btnFemale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFemale.Font = new System.Drawing.Font("Kanit", 20F);
+            this.btnFemale.Font = new System.Drawing.Font("Kanit", 30F);
             this.btnFemale.ForeColor = System.Drawing.Color.White;
-            this.btnFemale.Location = new System.Drawing.Point(17, 480);
+            this.btnFemale.Location = new System.Drawing.Point(17, 450);
             this.btnFemale.Name = "btnFemale";
-            this.btnFemale.Size = new System.Drawing.Size(136, 70);
+            this.btnFemale.Size = new System.Drawing.Size(136, 125);
             this.btnFemale.TabIndex = 62;
             this.btnFemale.Text = "เมีย";
             this.btnFemale.UseVisualStyleBackColor = false;
@@ -503,11 +500,11 @@
             // 
             this.btnAcceptWeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(83)))));
             this.btnAcceptWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAcceptWeight.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnAcceptWeight.Font = new System.Drawing.Font("Kanit", 32F);
             this.btnAcceptWeight.ForeColor = System.Drawing.Color.White;
-            this.btnAcceptWeight.Location = new System.Drawing.Point(876, 480);
+            this.btnAcceptWeight.Location = new System.Drawing.Point(771, 450);
             this.btnAcceptWeight.Name = "btnAcceptWeight";
-            this.btnAcceptWeight.Size = new System.Drawing.Size(136, 70);
+            this.btnAcceptWeight.Size = new System.Drawing.Size(239, 125);
             this.btnAcceptWeight.TabIndex = 74;
             this.btnAcceptWeight.Text = "ตกลง";
             this.btnAcceptWeight.UseVisualStyleBackColor = false;
@@ -542,7 +539,7 @@
             this.lblBreeder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblBreeder.Font = new System.Drawing.Font("Kanit", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lblBreeder.ForeColor = System.Drawing.Color.Black;
-            this.lblBreeder.Location = new System.Drawing.Point(17, 383);
+            this.lblBreeder.Location = new System.Drawing.Point(17, 362);
             this.lblBreeder.Name = "lblBreeder";
             this.lblBreeder.Size = new System.Drawing.Size(248, 43);
             this.lblBreeder.TabIndex = 78;
@@ -551,7 +548,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Kanit", 16F);
-            this.label12.Location = new System.Drawing.Point(11, 350);
+            this.label12.Location = new System.Drawing.Point(11, 329);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(81, 33);
             this.label12.TabIndex = 77;
@@ -633,9 +630,7 @@
             this.PerformLayout();
 
         }
-
         #endregion
-
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.Label lblCaption;
         private DragControl dragControl1;
@@ -682,4 +677,3 @@
         private System.Windows.Forms.Label lblTruckNo;
     }
 }
-

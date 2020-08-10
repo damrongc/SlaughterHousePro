@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +18,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -54,8 +51,6 @@
             this.lblCustomer = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnUp = new System.Windows.Forms.Button();
-            this.btnDown = new System.Windows.Forms.Button();
             this.plSimulator = new System.Windows.Forms.GroupBox();
             this.btnSetWgh = new System.Windows.Forms.Button();
             this.txtSimWeight = new System.Windows.Forms.TextBox();
@@ -74,6 +69,8 @@
             this.btnShowTruck = new System.Windows.Forms.Button();
             this.dragControl1 = new DragControl();
             this.cboTruckNo = new System.Windows.Forms.ComboBox();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.plSimulator.SuspendLayout();
             this.SuspendLayout();
@@ -319,7 +316,7 @@
             this.lblMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblMessage.Font = new System.Drawing.Font("Kanit", 16F);
             this.lblMessage.ForeColor = System.Drawing.Color.White;
-            this.lblMessage.Location = new System.Drawing.Point(0, 735);
+            this.lblMessage.Location = new System.Drawing.Point(0, 668);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(1024, 33);
             this.lblMessage.TabIndex = 28;
@@ -366,34 +363,6 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(800, 277);
             this.flowLayoutPanel1.TabIndex = 52;
-            // 
-            // btnUp
-            // 
-            this.btnUp.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUp.Font = new System.Drawing.Font("Kanit", 18F);
-            this.btnUp.ForeColor = System.Drawing.Color.White;
-            this.btnUp.Image = ((System.Drawing.Image)(resources.GetObject("btnUp.Image")));
-            this.btnUp.Location = new System.Drawing.Point(824, 321);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(73, 70);
-            this.btnUp.TabIndex = 57;
-            this.btnUp.UseVisualStyleBackColor = false;
-            this.btnUp.Click += new System.EventHandler(this.BtnUp_Click);
-            // 
-            // btnDown
-            // 
-            this.btnDown.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDown.Font = new System.Drawing.Font("Kanit", 18F);
-            this.btnDown.ForeColor = System.Drawing.Color.White;
-            this.btnDown.Image = ((System.Drawing.Image)(resources.GetObject("btnDown.Image")));
-            this.btnDown.Location = new System.Drawing.Point(823, 528);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(73, 70);
-            this.btnDown.TabIndex = 56;
-            this.btnDown.UseVisualStyleBackColor = false;
-            this.btnDown.Click += new System.EventHandler(this.BtnDown_Click);
             // 
             // plSimulator
             // 
@@ -578,11 +547,41 @@
             this.cboTruckNo.Size = new System.Drawing.Size(198, 43);
             this.cboTruckNo.TabIndex = 84;
             // 
+            // btnUp
+            // 
+            this.btnUp.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUp.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnUp.ForeColor = System.Drawing.Color.White;
+            this.btnUp.Image = ((System.Drawing.Image)(resources.GetObject("btnUp.Image")));
+            this.btnUp.Location = new System.Drawing.Point(821, 321);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(77, 70);
+            this.btnUp.TabIndex = 86;
+            this.btnUp.UseVisualStyleBackColor = false;
+            this.btnUp.Click += new System.EventHandler(this.BtnUp_Click);
+            // 
+            // btnDown
+            // 
+            this.btnDown.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDown.Font = new System.Drawing.Font("Kanit", 18F);
+            this.btnDown.ForeColor = System.Drawing.Color.White;
+            this.btnDown.Image = ((System.Drawing.Image)(resources.GetObject("btnDown.Image")));
+            this.btnDown.Location = new System.Drawing.Point(821, 528);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(77, 70);
+            this.btnDown.TabIndex = 85;
+            this.btnDown.UseVisualStyleBackColor = false;
+            this.btnDown.Click += new System.EventHandler(this.BtnDown_Click);
+            // 
             // Form_Carcass
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.ClientSize = new System.Drawing.Size(1024, 701);
+            this.Controls.Add(this.btnUp);
+            this.Controls.Add(this.btnDown);
             this.Controls.Add(this.cboTruckNo);
             this.Controls.Add(this.btnShowTruck);
             this.Controls.Add(this.lblTruckNo);
@@ -594,8 +593,6 @@
             this.Controls.Add(this.btnAcceptWeight);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.btnUp);
-            this.Controls.Add(this.btnDown);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.lblCustomer);
             this.Controls.Add(this.label6);
@@ -628,11 +625,8 @@
             this.plSimulator.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.Label label1;
         private DragControl dragControl1;
@@ -658,8 +652,6 @@
         private System.Windows.Forms.Label lblCustomer;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnUp;
-        private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.GroupBox plSimulator;
         private System.Windows.Forms.Button btnSetWgh;
         private System.Windows.Forms.TextBox txtSimWeight;
@@ -677,6 +669,7 @@
         private System.Windows.Forms.Label lblTruckNo;
         private System.Windows.Forms.Button btnShowTruck;
         private System.Windows.Forms.ComboBox cboTruckNo;
+        private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnDown;
     }
 }
-

@@ -1,4 +1,5 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
+using SlaughterHouseEF;
 using System;
 using System.Data;
 using System.Data.Entity;
@@ -11,7 +12,6 @@ namespace SlaughterHouseClient.Receiving
     public partial class Form_Barcode : Form
     {
         //int ReceiveFlag { get; set; }
-
         readonly FormAnimator.AnimationDirection animationDirection = FormAnimator.AnimationDirection.Up;
         readonly FormAnimator.AnimationMethod animationMethod = FormAnimator.AnimationMethod.Slide;
         private int displayTime = 3;
@@ -19,15 +19,18 @@ namespace SlaughterHouseClient.Receiving
         public string ProductCode { get; set; }
         public string CoreProductCode { get; set; }
         ReportDocument doc = new ReportDocument();
-
         public Form_Barcode()
         {
             InitializeComponent();
             Load += Form_Load;
+            Shown += Form_Shown;
             //ReceiveFlag = _receiveFlag;
             UserSettingsComponent();
         }
-
+        private void Form_Shown(object sender, EventArgs e)
+        {
+            //txtBarcodeNo.Focus();
+        }
         private void UserSettingsComponent()
         {
             gv.CellContentClick += Gv_CellContentClick;
@@ -38,18 +41,16 @@ namespace SlaughterHouseClient.Receiving
             gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             //gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             gv.EnableHeadersVisualStyles = false;
+            //txtBarcodeNo.KeyDown += TxtBarcodeNo_KeyDown;
         }
-
         private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 DataGridView senderGrid = (DataGridView)sender;
-
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
                 {
                     string barcode_no = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
-
                     if (senderGrid.Columns[e.ColumnIndex].Name == "btnDelete")
                     {
                         if (MessageBox.Show($"ต้องการลบข้อมูล บาร์โค็ด {barcode_no} Yes/No?", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
@@ -68,7 +69,6 @@ namespace SlaughterHouseClient.Receiving
                             {
                                 try
                                 {
-
                                     var stock = db.stocks.Where(p => p.stock_date == barcode.production_date &&
                                                     p.product_code == barcode.product_code &&
                                                     p.ref_document_no == receive.receive_no &&
@@ -97,15 +97,10 @@ namespace SlaughterHouseClient.Receiving
                                     //    transaction_type = 2,
                                     //    create_by = createBy
                                     //};
-
                                     //db.stocks.Add(stock);
                                     //stockGenerate.running += 1;
                                     //db.Entry(stockGenerate).State = System.Data.Entity.EntityState.Modified;
-
                                     //update qty,weight
-
-
-
                                     db.stocks.Remove(stock);
                                     switch (CoreProductCode)
                                     {
@@ -136,25 +131,21 @@ namespace SlaughterHouseClient.Receiving
                                 {
                                     transaction.Rollback();
                                     throw;
-
                                 }
-
                             }
                         }
                     }
                     else
                     {
-                        var reportPath = Application.StartupPath;
+                        //var reportPath = Application.StartupPath;
                         //ds.WriteXml(string.Format(path, "barcode.xml"), XmlWriteMode.WriteSchema);
-
-
-                        doc.Load(reportPath + "\\Report\\Rpt\\barcode.rpt");
+                        doc.Load(Constants.REPORT_FILE);
+                        //doc.Load(reportPath + $"\\Report\\Rpt\\{Constants.REPORT_FILE}");
                         DataTable dt = Helper.GetBarcode(barcode_no.ToLong());
                         //dt.WriteXml(reportPath + "\\Report\\Rpt\\barcode.xml");
                         doc.SetDataSource(dt);
                         doc.PrintToPrinter(1, true, 0, 0);
                     }
-
                 }
             }
             catch (Exception ex)
@@ -162,17 +153,12 @@ namespace SlaughterHouseClient.Receiving
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
         private void Form_Load(object sender, System.EventArgs e)
         {
             LoadData();
         }
-
         private void LoadData()
         {
-
             using (var db = new SlaughterhouseEntities())
             {
                 if (!string.IsNullOrEmpty(ReceiveNo))
@@ -231,21 +217,17 @@ namespace SlaughterHouseClient.Receiving
                 //gv.Columns[2].HeaderText = "ชื่อสินค้า";
                 //gv.Columns[3].HeaderText = "วันที่ผลิต";
                 //gv.Columns[4].HeaderText = "Lot No.";
-
                 //gv.Columns[5].HeaderText = "จำนวน";
                 //gv.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
                 //gv.Columns[6].HeaderText = "น้ำหนัก(กิโลกรัม)";
                 //gv.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
         private void DisplayNotification(string title, string message, Color color)
         {
             var toastNotification = new Notification(title, message, displayTime, color, animationMethod, animationDirection);

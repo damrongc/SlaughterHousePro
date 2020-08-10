@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SlaughterHouseEF;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,22 +10,16 @@ namespace SlaughterHouseClient.Issued
     {
         //int ReceiveFlag { get; set; }
         public string TruckNo { get; set; }
-
         private int Index;
         private int PAGE_SIZE = 20;
         List<Button> buttons;
-
         public Form_LookupTruck()
         {
             InitializeComponent();
             Load += Form_Load;
-
             //ReceiveFlag = _receiveFlag;
-
             UserSettingsComponent();
-
         }
-
         private void UserSettingsComponent()
         {
             //gv.CellContentClick += Gv_CellContentClick;
@@ -35,49 +30,34 @@ namespace SlaughterHouseClient.Issued
             //gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             ////gv.DefaultCellStyle.Font = new Font(Globals.FONT_FAMILY, Globals.FONT_SIZE - 2);
             //gv.EnableHeadersVisualStyles = false;
-
-
-
         }
-
         //private void Gv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         //{
         //    try
         //    {
         //        DataGridView senderGrid = (DataGridView)sender;
-
         //        if (e.RowIndex >= 0)
         //        {
         //            ProductCode = gv.Rows[e.RowIndex].Cells[0].Value.ToString();
         //            DialogResult = DialogResult.OK;
         //            Close();
-
-
         //        }
         //    }
         //    catch (Exception ex)
         //    {
-
         //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         //    }
         //}
-
         private void Form_Load(object sender, System.EventArgs e)
         {
             LoadTruck();
         }
-
-
-
         private void LoadTruck()
         {
             flowLayoutPanel1.Controls.Clear();
             buttons = new List<Button>();
-
-
             using (var db = new SlaughterhouseEntities())
             {
-
                 var trucks = db.trucks.Where(p => p.active == true).Select(p => new
                 {
                     p.truck_no,
@@ -95,28 +75,19 @@ namespace SlaughterHouseClient.Issued
                         BackColor = Color.WhiteSmoke,
                         Tag = item.truck_no
                     };
-
                     buttons.Add(btn);
-
                     btn.Click += Btn_Click;
                     DisplayPaging();
                 }
-
             }
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
-
-
         private void Btn_Click(object sender, EventArgs e)
         {
-
-
             foreach (Control ctrl in flowLayoutPanel1.Controls)
             {
                 var b = (Button)ctrl;
@@ -129,10 +100,7 @@ namespace SlaughterHouseClient.Issued
             TruckNo = btn.Tag.ToString();
             DialogResult = DialogResult.OK;
             Close();
-
         }
-
-
         private void BtnUp_Click(object sender, EventArgs e)
         {
             if (Index > 0)
@@ -145,7 +113,6 @@ namespace SlaughterHouseClient.Issued
                 DisplayPaging();
             }
         }
-
         private void BtnDown_Click(object sender, EventArgs e)
         {
             if (Index < buttons.Count - 1)
@@ -155,11 +122,9 @@ namespace SlaughterHouseClient.Issued
                 {
                     Index = buttons.Count - 1;
                 }
-
             }
             DisplayPaging();
         }
-
         private void DisplayPaging()
         {
             flowLayoutPanel1.Controls.Clear();

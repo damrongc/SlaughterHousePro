@@ -65,276 +65,686 @@
     </xs:element>
   </xs:schema>
   <Table>
-    <receive_no>REV0000003</receive_no>
-    <receive_date>2019-09-23T00:00:00+07:00</receive_date>
-    <transport_doc_no>TS20190923</transport_doc_no>
-    <truck_no>1234</truck_no>
-    <farm_code>003</farm_code>
-    <coop_no>A1</coop_no>
+    <receive_no>REV2008100197</receive_no>
+    <receive_date>2020-08-10T00:00:00+07:00</receive_date>
+    <transport_doc_no>33/1613/14</transport_doc_no>
+    <truck_no>82-0601</truck_no>
+    <farm_code>FARM0001</farm_code>
+    <coop_no>9</coop_no>
     <queue_no>1</queue_no>
-    <lot_no>11926612309</lot_no>
-    <farm_qty>5</farm_qty>
-    <farm_wgh>500.00</farm_wgh>
-    <factory_qty>5</factory_qty>
-    <factory_wgh>5.96</factory_wgh>
-    <farm_name>ฟาร์มทดสอบ</farm_name>
-    <address>ปปปปปปป</address>
+    <lot_no>12022301</lot_no>
+    <farm_qty>190</farm_qty>
+    <farm_wgh>17531.00</farm_wgh>
+    <factory_qty>190</factory_qty>
+    <factory_wgh>17215.00</factory_wgh>
+    <farm_name>บ่อนอก</farm_name>
+    <address>95 หมู่2 ต.บางบริบูร์ อ.เมือง จ.ปราจีนบุรี  25000</address>
     <breeder_name>หมูขาว</breeder_name>
   </Table>
   <TableItem>
     <SeqNo1>1</SeqNo1>
     <SexFlag1>F</SexFlag1>
-    <NetWeight1>1.19</NetWeight1>
-    <SeqNo2>31</SeqNo2>
-    <SeqNo3>61</SeqNo3>
-    <SeqNo4>91</SeqNo4>
-    <SeqNo5>121</SeqNo5>
-    <SeqNo6>151</SeqNo6>
+    <NetWeight1>92.00</NetWeight1>
+    <SeqNo2>36</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>85.00</NetWeight2>
+    <SeqNo3>71</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>96.00</NetWeight3>
+    <SeqNo4>106</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>88.00</NetWeight4>
+    <SeqNo5>141</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>85.00</NetWeight5>
+    <SeqNo6>176</SeqNo6>
+    <SexFlag6>M</SexFlag6>
+    <NetWeight6>81.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>2</SeqNo1>
     <SexFlag1>F</SexFlag1>
-    <NetWeight1>1.19</NetWeight1>
-    <SeqNo2>32</SeqNo2>
-    <SeqNo3>62</SeqNo3>
-    <SeqNo4>92</SeqNo4>
-    <SeqNo5>122</SeqNo5>
-    <SeqNo6>152</SeqNo6>
+    <NetWeight1>93.00</NetWeight1>
+    <SeqNo2>37</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>89.00</NetWeight2>
+    <SeqNo3>72</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>94.00</NetWeight3>
+    <SeqNo4>107</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>95.00</NetWeight4>
+    <SeqNo5>142</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>98.00</NetWeight5>
+    <SeqNo6>177</SeqNo6>
+    <SexFlag6>F</SexFlag6>
+    <NetWeight6>90.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>3</SeqNo1>
     <SexFlag1>M</SexFlag1>
-    <NetWeight1>1.19</NetWeight1>
-    <SeqNo2>33</SeqNo2>
-    <SeqNo3>63</SeqNo3>
-    <SeqNo4>93</SeqNo4>
-    <SeqNo5>123</SeqNo5>
-    <SeqNo6>153</SeqNo6>
+    <NetWeight1>96.00</NetWeight1>
+    <SeqNo2>38</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>81.00</NetWeight2>
+    <SeqNo3>73</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>89.00</NetWeight3>
+    <SeqNo4>108</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>102.00</NetWeight4>
+    <SeqNo5>143</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>84.00</NetWeight5>
+    <SeqNo6>178</SeqNo6>
+    <SexFlag6>M</SexFlag6>
+    <NetWeight6>97.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>4</SeqNo1>
     <SexFlag1>M</SexFlag1>
-    <NetWeight1>1.19</NetWeight1>
-    <SeqNo2>34</SeqNo2>
-    <SeqNo3>64</SeqNo3>
-    <SeqNo4>94</SeqNo4>
-    <SeqNo5>124</SeqNo5>
-    <SeqNo6>154</SeqNo6>
+    <NetWeight1>105.00</NetWeight1>
+    <SeqNo2>39</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>91.00</NetWeight2>
+    <SeqNo3>74</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>90.00</NetWeight3>
+    <SeqNo4>109</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>90.00</NetWeight4>
+    <SeqNo5>144</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>95.00</NetWeight5>
+    <SeqNo6>179</SeqNo6>
+    <SexFlag6>F</SexFlag6>
+    <NetWeight6>84.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>5</SeqNo1>
     <SexFlag1>M</SexFlag1>
-    <NetWeight1>1.20</NetWeight1>
-    <SeqNo2>35</SeqNo2>
-    <SeqNo3>65</SeqNo3>
-    <SeqNo4>95</SeqNo4>
-    <SeqNo5>125</SeqNo5>
-    <SeqNo6>155</SeqNo6>
+    <NetWeight1>97.00</NetWeight1>
+    <SeqNo2>40</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>84.00</NetWeight2>
+    <SeqNo3>75</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>106.00</NetWeight3>
+    <SeqNo4>110</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>83.00</NetWeight4>
+    <SeqNo5>145</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>89.00</NetWeight5>
+    <SeqNo6>180</SeqNo6>
+    <SexFlag6>F</SexFlag6>
+    <NetWeight6>94.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>6</SeqNo1>
-    <SeqNo2>36</SeqNo2>
-    <SeqNo3>66</SeqNo3>
-    <SeqNo4>96</SeqNo4>
-    <SeqNo5>126</SeqNo5>
-    <SeqNo6>156</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>96.00</NetWeight1>
+    <SeqNo2>41</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>87.00</NetWeight2>
+    <SeqNo3>76</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>88.00</NetWeight3>
+    <SeqNo4>111</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>79.00</NetWeight4>
+    <SeqNo5>146</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>88.00</NetWeight5>
+    <SeqNo6>181</SeqNo6>
+    <SexFlag6>F</SexFlag6>
+    <NetWeight6>85.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>7</SeqNo1>
-    <SeqNo2>37</SeqNo2>
-    <SeqNo3>67</SeqNo3>
-    <SeqNo4>97</SeqNo4>
-    <SeqNo5>127</SeqNo5>
-    <SeqNo6>157</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>93.00</NetWeight1>
+    <SeqNo2>42</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>93.00</NetWeight2>
+    <SeqNo3>77</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>94.00</NetWeight3>
+    <SeqNo4>112</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>83.00</NetWeight4>
+    <SeqNo5>147</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>90.00</NetWeight5>
+    <SeqNo6>182</SeqNo6>
+    <SexFlag6>F</SexFlag6>
+    <NetWeight6>92.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>8</SeqNo1>
-    <SeqNo2>38</SeqNo2>
-    <SeqNo3>68</SeqNo3>
-    <SeqNo4>98</SeqNo4>
-    <SeqNo5>128</SeqNo5>
-    <SeqNo6>158</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>92.00</NetWeight1>
+    <SeqNo2>43</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>85.00</NetWeight2>
+    <SeqNo3>78</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>88.00</NetWeight3>
+    <SeqNo4>113</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>84.00</NetWeight4>
+    <SeqNo5>148</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>99.00</NetWeight5>
+    <SeqNo6>183</SeqNo6>
+    <SexFlag6>M</SexFlag6>
+    <NetWeight6>82.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>9</SeqNo1>
-    <SeqNo2>39</SeqNo2>
-    <SeqNo3>69</SeqNo3>
-    <SeqNo4>99</SeqNo4>
-    <SeqNo5>129</SeqNo5>
-    <SeqNo6>159</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>98.00</NetWeight1>
+    <SeqNo2>44</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>87.00</NetWeight2>
+    <SeqNo3>79</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>97.00</NetWeight3>
+    <SeqNo4>114</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>84.00</NetWeight4>
+    <SeqNo5>149</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>86.00</NetWeight5>
+    <SeqNo6>184</SeqNo6>
+    <SexFlag6>M</SexFlag6>
+    <NetWeight6>87.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>10</SeqNo1>
-    <SeqNo2>40</SeqNo2>
-    <SeqNo3>70</SeqNo3>
-    <SeqNo4>100</SeqNo4>
-    <SeqNo5>130</SeqNo5>
-    <SeqNo6>160</SeqNo6>
+    <SexFlag1>M</SexFlag1>
+    <NetWeight1>99.00</NetWeight1>
+    <SeqNo2>45</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>93.00</NetWeight2>
+    <SeqNo3>80</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>94.00</NetWeight3>
+    <SeqNo4>115</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>82.00</NetWeight4>
+    <SeqNo5>150</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>81.00</NetWeight5>
+    <SeqNo6>185</SeqNo6>
+    <SexFlag6>M</SexFlag6>
+    <NetWeight6>97.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>11</SeqNo1>
-    <SeqNo2>41</SeqNo2>
-    <SeqNo3>71</SeqNo3>
-    <SeqNo4>101</SeqNo4>
-    <SeqNo5>131</SeqNo5>
-    <SeqNo6>161</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>72.00</NetWeight1>
+    <SeqNo2>46</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>93.00</NetWeight2>
+    <SeqNo3>81</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>91.00</NetWeight3>
+    <SeqNo4>116</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>92.00</NetWeight4>
+    <SeqNo5>151</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>97.00</NetWeight5>
+    <SeqNo6>186</SeqNo6>
+    <SexFlag6>M</SexFlag6>
+    <NetWeight6>95.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>12</SeqNo1>
-    <SeqNo2>42</SeqNo2>
-    <SeqNo3>72</SeqNo3>
-    <SeqNo4>102</SeqNo4>
-    <SeqNo5>132</SeqNo5>
-    <SeqNo6>162</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>92.00</NetWeight1>
+    <SeqNo2>47</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>90.00</NetWeight2>
+    <SeqNo3>82</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>94.00</NetWeight3>
+    <SeqNo4>117</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>85.00</NetWeight4>
+    <SeqNo5>152</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>84.00</NetWeight5>
+    <SeqNo6>187</SeqNo6>
+    <SexFlag6>F</SexFlag6>
+    <NetWeight6>86.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>13</SeqNo1>
-    <SeqNo2>43</SeqNo2>
-    <SeqNo3>73</SeqNo3>
-    <SeqNo4>103</SeqNo4>
-    <SeqNo5>133</SeqNo5>
-    <SeqNo6>163</SeqNo6>
+    <SexFlag1>M</SexFlag1>
+    <NetWeight1>91.00</NetWeight1>
+    <SeqNo2>48</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>92.00</NetWeight2>
+    <SeqNo3>83</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>94.00</NetWeight3>
+    <SeqNo4>118</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>85.00</NetWeight4>
+    <SeqNo5>153</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>98.00</NetWeight5>
+    <SeqNo6>188</SeqNo6>
+    <SexFlag6>F</SexFlag6>
+    <NetWeight6>86.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>14</SeqNo1>
-    <SeqNo2>44</SeqNo2>
-    <SeqNo3>74</SeqNo3>
-    <SeqNo4>104</SeqNo4>
-    <SeqNo5>134</SeqNo5>
-    <SeqNo6>164</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>89.00</NetWeight1>
+    <SeqNo2>49</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>90.00</NetWeight2>
+    <SeqNo3>84</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>76.00</NetWeight3>
+    <SeqNo4>119</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>94.00</NetWeight4>
+    <SeqNo5>154</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>89.00</NetWeight5>
+    <SeqNo6>189</SeqNo6>
+    <SexFlag6>F</SexFlag6>
+    <NetWeight6>86.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>15</SeqNo1>
-    <SeqNo2>45</SeqNo2>
-    <SeqNo3>75</SeqNo3>
-    <SeqNo4>105</SeqNo4>
-    <SeqNo5>135</SeqNo5>
-    <SeqNo6>165</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>93.00</NetWeight1>
+    <SeqNo2>50</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>92.00</NetWeight2>
+    <SeqNo3>85</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>85.00</NetWeight3>
+    <SeqNo4>120</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>95.00</NetWeight4>
+    <SeqNo5>155</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>93.00</NetWeight5>
+    <SeqNo6>190</SeqNo6>
+    <SexFlag6>F</SexFlag6>
+    <NetWeight6>98.00</NetWeight6>
   </TableItem>
   <TableItem>
     <SeqNo1>16</SeqNo1>
-    <SeqNo2>46</SeqNo2>
-    <SeqNo3>76</SeqNo3>
-    <SeqNo4>106</SeqNo4>
-    <SeqNo5>136</SeqNo5>
-    <SeqNo6>166</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>89.00</NetWeight1>
+    <SeqNo2>51</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>98.00</NetWeight2>
+    <SeqNo3>86</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>94.00</NetWeight3>
+    <SeqNo4>121</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>59.00</NetWeight4>
+    <SeqNo5>156</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>92.00</NetWeight5>
+    <SeqNo6>191</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>17</SeqNo1>
-    <SeqNo2>47</SeqNo2>
-    <SeqNo3>77</SeqNo3>
-    <SeqNo4>107</SeqNo4>
-    <SeqNo5>137</SeqNo5>
-    <SeqNo6>167</SeqNo6>
+    <SexFlag1>M</SexFlag1>
+    <NetWeight1>96.00</NetWeight1>
+    <SeqNo2>52</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>93.00</NetWeight2>
+    <SeqNo3>87</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>87.00</NetWeight3>
+    <SeqNo4>122</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>87.00</NetWeight4>
+    <SeqNo5>157</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>88.00</NetWeight5>
+    <SeqNo6>192</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>18</SeqNo1>
-    <SeqNo2>48</SeqNo2>
-    <SeqNo3>78</SeqNo3>
-    <SeqNo4>108</SeqNo4>
-    <SeqNo5>138</SeqNo5>
-    <SeqNo6>168</SeqNo6>
+    <SexFlag1>M</SexFlag1>
+    <NetWeight1>95.00</NetWeight1>
+    <SeqNo2>53</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>98.00</NetWeight2>
+    <SeqNo3>88</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>90.00</NetWeight3>
+    <SeqNo4>123</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>80.00</NetWeight4>
+    <SeqNo5>158</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>88.00</NetWeight5>
+    <SeqNo6>193</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>19</SeqNo1>
-    <SeqNo2>49</SeqNo2>
-    <SeqNo3>79</SeqNo3>
-    <SeqNo4>109</SeqNo4>
-    <SeqNo5>139</SeqNo5>
-    <SeqNo6>169</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>90.00</NetWeight1>
+    <SeqNo2>54</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>84.00</NetWeight2>
+    <SeqNo3>89</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>87.00</NetWeight3>
+    <SeqNo4>124</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>94.00</NetWeight4>
+    <SeqNo5>159</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>95.00</NetWeight5>
+    <SeqNo6>194</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>20</SeqNo1>
-    <SeqNo2>50</SeqNo2>
-    <SeqNo3>80</SeqNo3>
-    <SeqNo4>110</SeqNo4>
-    <SeqNo5>140</SeqNo5>
-    <SeqNo6>170</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>94.00</NetWeight1>
+    <SeqNo2>55</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>89.00</NetWeight2>
+    <SeqNo3>90</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>86.00</NetWeight3>
+    <SeqNo4>125</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>88.00</NetWeight4>
+    <SeqNo5>160</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>94.00</NetWeight5>
+    <SeqNo6>195</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>21</SeqNo1>
-    <SeqNo2>51</SeqNo2>
-    <SeqNo3>81</SeqNo3>
-    <SeqNo4>111</SeqNo4>
-    <SeqNo5>141</SeqNo5>
-    <SeqNo6>171</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>89.00</NetWeight1>
+    <SeqNo2>56</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>89.00</NetWeight2>
+    <SeqNo3>91</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>84.00</NetWeight3>
+    <SeqNo4>126</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>92.00</NetWeight4>
+    <SeqNo5>161</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>91.00</NetWeight5>
+    <SeqNo6>196</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>22</SeqNo1>
-    <SeqNo2>52</SeqNo2>
-    <SeqNo3>82</SeqNo3>
-    <SeqNo4>112</SeqNo4>
-    <SeqNo5>142</SeqNo5>
-    <SeqNo6>172</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>94.00</NetWeight1>
+    <SeqNo2>57</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>94.00</NetWeight2>
+    <SeqNo3>92</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>102.00</NetWeight3>
+    <SeqNo4>127</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>93.00</NetWeight4>
+    <SeqNo5>162</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>81.00</NetWeight5>
+    <SeqNo6>197</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>23</SeqNo1>
-    <SeqNo2>53</SeqNo2>
-    <SeqNo3>83</SeqNo3>
-    <SeqNo4>113</SeqNo4>
-    <SeqNo5>143</SeqNo5>
-    <SeqNo6>173</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>88.00</NetWeight1>
+    <SeqNo2>58</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>97.00</NetWeight2>
+    <SeqNo3>93</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>96.00</NetWeight3>
+    <SeqNo4>128</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>103.00</NetWeight4>
+    <SeqNo5>163</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>87.00</NetWeight5>
+    <SeqNo6>198</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>24</SeqNo1>
-    <SeqNo2>54</SeqNo2>
-    <SeqNo3>84</SeqNo3>
-    <SeqNo4>114</SeqNo4>
-    <SeqNo5>144</SeqNo5>
-    <SeqNo6>174</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>85.00</NetWeight1>
+    <SeqNo2>59</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>90.00</NetWeight2>
+    <SeqNo3>94</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>85.00</NetWeight3>
+    <SeqNo4>129</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>99.00</NetWeight4>
+    <SeqNo5>164</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>93.00</NetWeight5>
+    <SeqNo6>199</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>25</SeqNo1>
-    <SeqNo2>55</SeqNo2>
-    <SeqNo3>85</SeqNo3>
-    <SeqNo4>115</SeqNo4>
-    <SeqNo5>145</SeqNo5>
-    <SeqNo6>175</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>91.00</NetWeight1>
+    <SeqNo2>60</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>95.00</NetWeight2>
+    <SeqNo3>95</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>87.00</NetWeight3>
+    <SeqNo4>130</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>106.00</NetWeight4>
+    <SeqNo5>165</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>86.00</NetWeight5>
+    <SeqNo6>200</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>26</SeqNo1>
-    <SeqNo2>56</SeqNo2>
-    <SeqNo3>86</SeqNo3>
-    <SeqNo4>116</SeqNo4>
-    <SeqNo5>146</SeqNo5>
-    <SeqNo6>176</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>94.00</NetWeight1>
+    <SeqNo2>61</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>92.00</NetWeight2>
+    <SeqNo3>96</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>93.00</NetWeight3>
+    <SeqNo4>131</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>84.00</NetWeight4>
+    <SeqNo5>166</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>90.00</NetWeight5>
+    <SeqNo6>201</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>27</SeqNo1>
-    <SeqNo2>57</SeqNo2>
-    <SeqNo3>87</SeqNo3>
-    <SeqNo4>117</SeqNo4>
-    <SeqNo5>147</SeqNo5>
-    <SeqNo6>177</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>100.00</NetWeight1>
+    <SeqNo2>62</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>86.00</NetWeight2>
+    <SeqNo3>97</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>86.00</NetWeight3>
+    <SeqNo4>132</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>88.00</NetWeight4>
+    <SeqNo5>167</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>85.00</NetWeight5>
+    <SeqNo6>202</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>28</SeqNo1>
-    <SeqNo2>58</SeqNo2>
-    <SeqNo3>88</SeqNo3>
-    <SeqNo4>118</SeqNo4>
-    <SeqNo5>148</SeqNo5>
-    <SeqNo6>178</SeqNo6>
+    <SexFlag1>M</SexFlag1>
+    <NetWeight1>98.00</NetWeight1>
+    <SeqNo2>63</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>115.00</NetWeight2>
+    <SeqNo3>98</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>90.00</NetWeight3>
+    <SeqNo4>133</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>92.00</NetWeight4>
+    <SeqNo5>168</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>79.00</NetWeight5>
+    <SeqNo6>203</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>29</SeqNo1>
-    <SeqNo2>59</SeqNo2>
-    <SeqNo3>89</SeqNo3>
-    <SeqNo4>119</SeqNo4>
-    <SeqNo5>149</SeqNo5>
-    <SeqNo6>179</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>95.00</NetWeight1>
+    <SeqNo2>64</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>70.00</NetWeight2>
+    <SeqNo3>99</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>94.00</NetWeight3>
+    <SeqNo4>134</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>87.00</NetWeight4>
+    <SeqNo5>169</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>94.00</NetWeight5>
+    <SeqNo6>204</SeqNo6>
   </TableItem>
   <TableItem>
     <SeqNo1>30</SeqNo1>
-    <SeqNo2>60</SeqNo2>
-    <SeqNo3>90</SeqNo3>
-    <SeqNo4>120</SeqNo4>
-    <SeqNo5>150</SeqNo5>
-    <SeqNo6>180</SeqNo6>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>96.00</NetWeight1>
+    <SeqNo2>65</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>88.00</NetWeight2>
+    <SeqNo3>100</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>86.00</NetWeight3>
+    <SeqNo4>135</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>93.00</NetWeight4>
+    <SeqNo5>170</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>91.00</NetWeight5>
+    <SeqNo6>205</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>31</SeqNo1>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>87.00</NetWeight1>
+    <SeqNo2>66</SeqNo2>
+    <SexFlag2>F</SexFlag2>
+    <NetWeight2>88.00</NetWeight2>
+    <SeqNo3>101</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>86.00</NetWeight3>
+    <SeqNo4>136</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>88.00</NetWeight4>
+    <SeqNo5>171</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>83.00</NetWeight5>
+    <SeqNo6>206</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>32</SeqNo1>
+    <SexFlag1>M</SexFlag1>
+    <NetWeight1>101.00</NetWeight1>
+    <SeqNo2>67</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>91.00</NetWeight2>
+    <SeqNo3>102</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>81.00</NetWeight3>
+    <SeqNo4>137</SeqNo4>
+    <SexFlag4>F</SexFlag4>
+    <NetWeight4>89.00</NetWeight4>
+    <SeqNo5>172</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>98.00</NetWeight5>
+    <SeqNo6>207</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>33</SeqNo1>
+    <SexFlag1>M</SexFlag1>
+    <NetWeight1>94.00</NetWeight1>
+    <SeqNo2>68</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>100.00</NetWeight2>
+    <SeqNo3>103</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>96.00</NetWeight3>
+    <SeqNo4>138</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>91.00</NetWeight4>
+    <SeqNo5>173</SeqNo5>
+    <SexFlag5>M</SexFlag5>
+    <NetWeight5>99.00</NetWeight5>
+    <SeqNo6>208</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>34</SeqNo1>
+    <SexFlag1>F</SexFlag1>
+    <NetWeight1>96.00</NetWeight1>
+    <SeqNo2>69</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>93.00</NetWeight2>
+    <SeqNo3>104</SeqNo3>
+    <SexFlag3>F</SexFlag3>
+    <NetWeight3>89.00</NetWeight3>
+    <SeqNo4>139</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>89.00</NetWeight4>
+    <SeqNo5>174</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>95.00</NetWeight5>
+    <SeqNo6>209</SeqNo6>
+  </TableItem>
+  <TableItem>
+    <SeqNo1>35</SeqNo1>
+    <SexFlag1>M</SexFlag1>
+    <NetWeight1>90.00</NetWeight1>
+    <SeqNo2>70</SeqNo2>
+    <SexFlag2>M</SexFlag2>
+    <NetWeight2>93.00</NetWeight2>
+    <SeqNo3>105</SeqNo3>
+    <SexFlag3>M</SexFlag3>
+    <NetWeight3>92.00</NetWeight3>
+    <SeqNo4>140</SeqNo4>
+    <SexFlag4>M</SexFlag4>
+    <NetWeight4>91.00</NetWeight4>
+    <SeqNo5>175</SeqNo5>
+    <SexFlag5>F</SexFlag5>
+    <NetWeight5>94.00</NetWeight5>
+    <SeqNo6>210</SeqNo6>
   </TableItem>
   <TableFooter>
-    <SumWeight>5.96</SumWeight>
-    <StartDatetime>16:26</StartDatetime>
-    <EndDatetime>16:29</EndDatetime>
-    <UsageTime>3</UsageTime>
+    <SumWeight>17215.00</SumWeight>
+    <StartDatetime>09:31</StartDatetime>
+    <EndDatetime>10:28</EndDatetime>
+    <UsageTime>57</UsageTime>
   </TableFooter>
 </NewDataSet>

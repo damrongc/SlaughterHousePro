@@ -247,7 +247,7 @@ namespace SlaughterHouseLib
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 tr.Rollback();
                 throw;
@@ -500,11 +500,11 @@ namespace SlaughterHouseLib
 	                            i.vat_rate as vat_rate_hd,
 	                            i.vat_amt as vat_amt_hd,
 	                            i.net_amt as net_amt_hd,
-	                            i.invoice_flag,	i.comments, itm.product_code, 
+	                            i.invoice_flag,	i.comments, itm.product_code,
 	                            p.product_name, u.unit_name, itm.seq,
 	                            case when itm.sale_unit_method = 'Q' then itm.qty else itm.wgh end qty_wgh,
 	                            itm.qty, itm.wgh, itm.unit_price,
-	                            itm.gross_amt, c.customer_name, c.address, 
+	                            itm.gross_amt, c.customer_name, c.address,
 	                            c.ship_to, c.tax_id, c.contact_no,
                                 tk.truck_no, tk.driver,
 	                            pl.plant_name, pl.address as plant_address, i.active,
@@ -514,7 +514,7 @@ namespace SlaughterHouseLib
 	                            and i.invoice_no = itm.invoice_no
 	                            and itm.product_code = p.product_code
 	                            and c.customer_code = i.customer_code
-	                            and case when itm.sale_unit_method = 'Q' then p.unit_of_qty else unit_of_wgh end = u.unit_code 
+	                            and case when itm.sale_unit_method = 'Q' then p.unit_of_qty else unit_of_wgh end = u.unit_code
 	                            and pl.plant_id = 1
                                 and i.truck_id = tk.truck_id
 								";
@@ -539,7 +539,7 @@ namespace SlaughterHouseLib
                 using (var conn = new MySqlConnection(Globals.CONN_STR))
                 {
                     conn.Open();
-                    var sql = @"SELECT 
+                    var sql = @"SELECT
                                         t.transport_no,
                                         t.transport_date,
                                         t.ref_document_no,
@@ -567,13 +567,13 @@ namespace SlaughterHouseLib
                                         ti.transport_qty,
                                         ti.transport_wgh,
                                         0 AS unit_price,
-                                        0 AS gross_amt, 
+                                        0 AS gross_amt,
                                         c.address,
                                         c.ship_to,
                                         c.tax_id,
                                         c.contact_no,
                                         pl.plant_name,
-                                        pl.address AS plant_address 
+                                        pl.address AS plant_address
                                     FROM
                                         orders o,
                                         transport t,
@@ -601,6 +601,115 @@ namespace SlaughterHouseLib
                     var ds = new DataSet();
                     da.Fill(ds);
                     return ds;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static List<InvoiceInformation> GetInvoiceForExport()
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    var sql = @"SELECT
+                        invoice_no,
+                        invoice_date,
+                        invoice.customer_code,
+                        customer.customer_name,
+                        net_amt
+                    FROM
+                        invoice,
+                        customer
+                    WHERE
+                        invoice.customer_code = customer.customer_code
+                    ORDER BY invoice_no";
+                    var cmd = new MySqlCommand(sql, conn);
+                    //cmd.Parameters.AddWithValue("invoice_date", invoiceDate);
+                    var da = new MySqlDataAdapter(cmd);
+
+                    var ds = new DataSet();
+                    da.Fill(ds);
+                    if (ds.Tables[0].Rows.Count == 0)
+                    {
+                        return null;
+                    }
+                    var invoices = new List<InvoiceInformation>();
+                    var seq = 1;
+                    foreach (DataRow item in ds.Tables[0].Rows)
+                    {
+                        invoices.Add(new InvoiceInformation()
+                        {
+                            Seq = seq,
+                            InvoiceNo = item["invoice_no"].ToString(),
+                            InvoiceDate = DateTime.Parse(item["invoice_date"].ToString()).ToString("dd-MM-yyyy"),
+                            CustomerCode = item["customer_code"].ToString(),
+                            CustomerName = item["customer_name"].ToString(),
+                            Amount = item["net_amt"].ToString().ToDecimal(),
+                            DocumantStatus = "",
+                            Remark = "",
+                        });
+                        seq += 1;
+                    }
+                    return invoices;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public static void ImportCustomerClassPrice(List<CustomCustomerClassPrice> customerClassPrices)
+        {
+            try
+            {
+                var sqlDelete = @"DELETE FROM customer_class_price";
+                var sqlInsert = @"INSERT into customer_class_price(class_id,product_code,start_date,end_date,unit_price,create_at,create_by)
+                                        VALUES(@class_id,@product_code,@start_date,@end_date,@unit_price,@create_at,@create_by);";
+                using (var conn = new MySqlConnection(Globals.CONN_STR))
+                {
+                    conn.Open();
+                    using (MySqlTransaction trans = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            var cmd = new MySqlCommand(sqlDelete, conn, trans)
+                            {
+                                CommandType = CommandType.Text
+                            };
+                            cmd.ExecuteNonQuery();
+
+                            cmd = new MySqlCommand(sqlInsert, conn, trans)
+                            {
+                                CommandType = CommandType.Text
+                            };
+
+                            foreach (var item in customerClassPrices)
+                            {
+                                cmd.Parameters.Clear();
+                                cmd.Parameters.AddWithValue("@class_id", item.ClassId);
+                                cmd.Parameters.AddWithValue("@product_code", item.ProductCode);
+                                cmd.Parameters.AddWithValue("@start_date", item.StartDate);
+                                cmd.Parameters.AddWithValue("@end_date", item.EndDate);
+                                cmd.Parameters.AddWithValue("@unit_price", item.Price);
+                                cmd.Parameters.AddWithValue("@create_at", DateTime.Now);
+                                cmd.Parameters.AddWithValue("@create_by", "system");
+                                cmd.ExecuteNonQuery();
+                            }
+                            trans.Commit();
+
+                        }
+                        catch (Exception)
+                        {
+                            trans.Rollback();
+                            throw;
+                        }
+                    }
                 }
             }
             catch (Exception)
@@ -649,5 +758,18 @@ namespace SlaughterHouseLib
                 throw;
             }
         }
+    }
+
+    public class InvoiceInformation
+    {
+        public int Seq { get; set; }
+        public string InvoiceDate { get; set; }
+        public string InvoiceNo { get; set; }
+
+        public string CustomerCode { get; set; }
+        public string CustomerName { get; set; }
+        public decimal Amount { get; set; }
+        public string DocumantStatus { get; set; }
+        public string Remark { get; set; }
     }
 }

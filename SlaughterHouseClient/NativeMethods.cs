@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-
 namespace ToastNotifications
 {
     internal static class NativeMethods
@@ -13,7 +12,6 @@ namespace ToastNotifications
         /// </returns>
         [DllImport("user32")]
         internal static extern IntPtr GetForegroundWindow();
-
         /// <summary>
         /// Activates the specified window.
         /// </summary>
@@ -25,13 +23,11 @@ namespace ToastNotifications
         /// </returns>
         [DllImport("user32")]
         internal static extern bool SetForegroundWindow(IntPtr hWnd);
-
         /// <summary>
         /// Windows API function to animate a window.
         /// </summary>
         [DllImport("user32")]
         internal extern static bool AnimateWindow(IntPtr hWnd, int dwTime, int dwFlags);
-
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         internal static extern IntPtr CreateRoundRectRgn
         (
