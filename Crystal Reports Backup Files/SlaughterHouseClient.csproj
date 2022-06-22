@@ -518,7 +518,7 @@
       <Version>8.0.17</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.2</Version>
+      <Version>13.0.1</Version>
     </PackageReference>
     <PackageReference Include="nucs.JsonSettings">
       <Version>1.0.7</Version>
